@@ -184,9 +184,9 @@
                 <label class="block text-xs font-bold text-slate-700 mb-1">Model Google Gemini AI Utama</label>
                 <select x-model="aiModel"
                         class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none cursor-pointer">
-                    <option value="gemini-2.0-flash">⚡ Google Gemini 2.0 Flash (Paling Cepat & Responsif - Direkomendasikan)</option>
-                    <option value="gemini-1.5-flash">🚀 Google Gemini 1.5 Flash (Stabil & Efisien Kuota)</option>
-                    <option value="gemini-1.5-pro">🧠 Google Gemini 1.5 Pro (Kemampuan Penalaran & Multi-Modal Tinggi)</option>
+                    @foreach($aiModels as $m)
+                        <option value="{{ $m['id'] }}">{{ $m['name'] }}</option>
+                    @endforeach
                 </select>
             </div>
 

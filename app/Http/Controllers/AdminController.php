@@ -1291,6 +1291,29 @@ class AdminController extends Controller
     {
         $admin = Auth::user() ?? User::whereIn('role', ['admin', 'teacher'])->first();
 
+        $aiModels = [
+            [
+                'id' => 'gemini-3.5-flash',
+                'name' => '⚡ Google Gemini 3.5 Flash (Paling Cepat & Responsif - Direkomendasikan)',
+                'badge' => 'Ultra Fast',
+            ],
+            [
+                'id' => 'gemini-3.5-flash-lite',
+                'name' => '🚀 Google Gemini 3.5 Flash-Lite (Sangat Ringan & Efisien)',
+                'badge' => 'Lite',
+            ],
+            [
+                'id' => 'gemini-flash-latest',
+                'name' => '✨ Google Gemini Flash Latest (Model Flash Terbaru)',
+                'badge' => 'Latest',
+            ],
+            [
+                'id' => 'gemini-3.1-flash-lite',
+                'name' => '🧠 Google Gemini 3.1 Flash-Lite (Stabil)',
+                'badge' => 'Standard',
+            ],
+        ];
+
         $adminProfile = [
             'name' => $admin ? $admin->name : 'Pak Guru Iqbal, S.Pd.',
             'username' => $admin ? $admin->username : 'pak_guru_iqbal',
@@ -1300,11 +1323,11 @@ class AdminController extends Controller
             'phone' => $admin && $admin->phone ? $admin->phone : '0812-3456-7890',
             'avatar_initials' => $admin ? strtoupper(substr($admin->name, 0, 2)) : 'GI',
             'last_login' => $admin && $admin->last_login_at ? $admin->last_login_at->format('d M Y, H:i').' WIB' : date('d M Y, H:i').' WIB',
-            'ai_model_preference' => 'gemini-2.0-flash',
-            'api_key_configured' => ! empty(env('GEMINI_API_KEY')),
+            'ai_model_preference' => config('services.gemini.model', 'gemini-3.5-flash'),
+            'api_key_configured' => ! empty(config('gemini.api_key') ?: env('GEMINI_API_KEY')),
         ];
 
-        return view('pages.admin.profile', compact('adminProfile'));
+        return view('pages.admin.profile', compact('adminProfile', 'aiModels'));
     }
 
     /**
