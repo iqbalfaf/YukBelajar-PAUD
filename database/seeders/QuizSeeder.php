@@ -4697,33 +4697,665 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 1 - TOPIK 9: BENDERA NEGARA DUNIA (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (INDONESIA & NEGARA SAHABAT ASIA TENGGARA) ---
             [
                 'category_slug' => 'bendera',
-                'title' => 'Tebak Bendera Sahabat Dunia',
-                'slug' => 'tebak-bendera',
-                'icon_emoji' => '🚩',
-                'target_age' => 4,
-                'total_questions' => 2,
+                'level_number' => 1,
+                'title' => 'Sang Saka Merah Putih & Sahabat Serumpun',
+                'slug' => 'kuis-bendera-l1-merah-putih-serumpun',
+                'icon_emoji' => '🇮🇩',
+                'target_age' => 3,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Manakah bendera negara kita tercinta, Indonesia?',
-                        'audio' => 'Manakah bendera negara kita tercinta, Indonesia?',
+                        'text' => 'Bendera negara kita tercinta Indonesia memiliki dua warna utama, yaitu warna...?',
+                        'audio' => 'Bendera negara kita tercinta Indonesia memiliki dua warna utama yaitu warna apa?',
                         'emoji' => '🇮🇩',
                         'options' => [
-                            ['emoji' => '🇮🇩', 'text' => 'Merah Putih (Indonesia)', 'is_correct' => true],
-                            ['emoji' => '🇯🇵', 'text' => 'Jepang', 'is_correct' => false],
-                            ['emoji' => '🇲🇾', 'text' => 'Malaysia', 'is_correct' => false],
+                            ['emoji' => '🇮🇩', 'text' => 'Merah di atas dan Putih di bawah', 'is_correct' => true],
+                            ['emoji' => '🇯🇵', 'text' => 'Putih dengan lingkaran merah', 'is_correct' => false],
+                            ['emoji' => '🇸🇦', 'text' => 'Hijau dengan tulisan putih', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Bendera negara manakah yang berwarna putih dengan lingkaran merah di tengah?',
-                        'audio' => 'Bendera negara manakah yang berwarna putih dengan lingkaran merah di tengah?',
+                        'text' => 'Bendera negara Palestina memiliki segitiga merah di sebelah kiri serta tiga garis warna...?',
+                        'audio' => 'Bendera negara Palestina memiliki segitiga merah di sebelah kiri serta tiga garis warna apa?',
+                        'emoji' => '🇵🇸',
+                        'options' => [
+                            ['emoji' => '🇵🇸', 'text' => 'Hitam, Putih, dan Hijau', 'is_correct' => true],
+                            ['emoji' => '🇸🇬', 'text' => 'Merah dan Putih saja', 'is_correct' => false],
+                            ['emoji' => '🇲🇾', 'text' => 'Kuning dan Biru saja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara tetangga kita Malaysia memiliki lambang di sudut kiri atas berbentuk...?',
+                        'audio' => 'Bendera negara tetangga kita Malaysia memiliki lambang di sudut kiri atas berbentuk apa?',
+                        'emoji' => '🇲🇾',
+                        'options' => [
+                            ['emoji' => '🇲🇾', 'text' => 'Bulan Sabit & Bintang Kuning', 'is_correct' => true],
+                            ['emoji' => '🇯🇵', 'text' => 'Lingkaran Matahari Merah', 'is_correct' => false],
+                            ['emoji' => '🇮🇩', 'text' => 'Polos Merah Putih', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bendera',
+                'level_number' => 1,
+                'title' => 'Mengenal Singapura, Brunei & Arab Saudi',
+                'slug' => 'kuis-bendera-l1-singapura-brunei-saudi',
+                'icon_emoji' => '🇸🇦',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Bendera negara Singapura berwarna merah putih dengan lambang bulan sabit dan berapa bintang putih?',
+                        'audio' => 'Bendera negara Singapura berwarna merah putih dengan lambang bulan sabit dan berapa bintang putih?',
+                        'emoji' => '🇸🇬',
+                        'options' => [
+                            ['emoji' => '🇸🇬', 'text' => '5 Bintang Putih Kecil', 'is_correct' => true],
+                            ['emoji' => '🇯🇵', 'text' => '1 Lingkaran Merah', 'is_correct' => false],
+                            ['emoji' => '🇲🇾', 'text' => '1 Bintang Kuning Besar', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Brunei Darussalam memiliki warna dasar dominan yang cerah, yaitu warna...?',
+                        'audio' => 'Bendera negara Brunei Darussalam memiliki warna dasar dominan yang cerah yaitu warna apa?',
+                        'emoji' => '🇧🇳',
+                        'options' => [
+                            ['emoji' => '🇧🇳', 'text' => 'Kuning Cerah Keemasan', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Merah Menyala', 'is_correct' => false],
+                            ['emoji' => '🔵', 'text' => 'Biru Langit', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Arab Saudi tempat berdirinya Ka\'bah di kota Mekkah berwarna dasar...?',
+                        'audio' => 'Bendera negara Arab Saudi tempat berdirinya Kabah di kota Mekkah berwarna dasar apa?',
+                        'emoji' => '🇸🇦',
+                        'options' => [
+                            ['emoji' => '🇸🇦', 'text' => 'Hijau Zamrud dengan Tulisan Kalimat Suci', 'is_correct' => true],
+                            ['emoji' => '🇯🇵', 'text' => 'Putih Polos', 'is_correct' => false],
+                            ['emoji' => '🇮🇩', 'text' => 'Merah dan Putih', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bendera',
+                'level_number' => 1,
+                'title' => 'Bendera Matahari Terbit & Harmoni Ceria',
+                'slug' => 'kuis-bendera-l1-jepang-merah-putih',
+                'icon_emoji' => '🇯🇵',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Bendera negara Jepang berwarna putih bersih dengan gambar lingkaran berwarna...?',
+                        'audio' => 'Bendera negara Jepang berwarna putih bersih dengan gambar lingkaran berwarna apa?',
                         'emoji' => '🇯🇵',
                         'options' => [
+                            ['emoji' => '🇯🇵', 'text' => 'Lingkaran Merah Matahari Terbit', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Lingkaran Biru Laut', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Lingkaran Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa jumlah warna yang ada pada bendera Sang Saka Merah Putih Indonesia?',
+                        'audio' => 'Berapa jumlah warna yang ada pada bendera Sang Saka Merah Putih Indonesia?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '🇮🇩', 'text' => '2 Warna (Merah dan Putih)', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '3 Warna', 'is_correct' => false],
+                            ['emoji' => '4️⃣', 'text' => '4 Warna', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa arti makna dari warna MERAH pada bendera negara Indonesia?',
+                        'audio' => 'Apa arti makna dari warna MERAH pada bendera negara Indonesia?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '💪', 'text' => 'Berani dan Semangat Juang', 'is_correct' => true],
+                            ['emoji' => '🕊️', 'text' => 'Suci dan Bersih', 'is_correct' => false],
+                            ['emoji' => '🌲', 'text' => 'Subur Makmur', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (NEGARA SAHABAT ASIA & TIMUR TENGAH) ---
+            [
+                'category_slug' => 'bendera',
+                'level_number' => 2,
+                'title' => 'Bendera Turki, Korea Selatan & Qatar',
+                'slug' => 'kuis-bendera-l2-turki-korea-qatar',
+                'icon_emoji' => '🇹🇷',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Bendera negara Turki berwarna merah cerah dengan lambang langit berupa...?',
+                        'audio' => 'Bendera negara Turki berwarna merah cerah dengan lambang langit berupa apa?',
+                        'emoji' => '🇹🇷',
+                        'options' => [
+                            ['emoji' => '🇹🇷', 'text' => 'Bulan Sabit dan Bintang Putih', 'is_correct' => true],
+                            ['emoji' => '🇯🇵', 'text' => 'Lingkaran Merah Saja', 'is_correct' => false],
+                            ['emoji' => '🇰🇷', 'text' => 'Lingkaran Yin-Yang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Korea Selatan memiliki lingkaran lambang Taegeuk di tengahnya yang berwarna...?',
+                        'audio' => 'Bendera negara Korea Selatan memiliki lingkaran lambang Taegeuk di tengahnya yang berwarna apa?',
+                        'emoji' => '🇰🇷',
+                        'options' => [
+                            ['emoji' => '🇰🇷', 'text' => 'Merah di atas dan Biru di bawah', 'is_correct' => true],
+                            ['emoji' => '🟢', 'text' => 'Hijau dan Kuning', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Hitam dan Putih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Qatar memiliki warna merah marun dan putih yang dipisahkan oleh garis berbentuk...?',
+                        'audio' => 'Bendera negara Qatar memiliki warna merah marun dan putih yang dipisahkan oleh garis berbentuk apa?',
+                        'emoji' => '🇶🇦',
+                        'options' => [
+                            ['emoji' => '🇶🇦', 'text' => 'Pola Gerigi Sembilan Sudut Runcing', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Lingkaran Bulat Halus', 'is_correct' => false],
+                            ['emoji' => '🔺', 'text' => 'Satu Segitiga Saja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Mesir memiliki tiga garis mendatar (Merah, Putih, Hitam) dengan lambang emas bergambar...?',
+                        'audio' => 'Bendera negara Mesir memiliki tiga garis mendatar merah putih hitam dengan lambang emas bergambar apa?',
+                        'emoji' => '🇪🇬',
+                        'options' => [
+                            ['emoji' => '🇪🇬', 'text' => 'Burung Elang Emas Salahuddin', 'is_correct' => true],
+                            ['emoji' => '🦁', 'text' => 'Singa Gagah', 'is_correct' => false],
+                            ['emoji' => '🐬', 'text' => 'Lumba-Lumba Cerdas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera Uni Emirat Arab (UEA) memiliki garis tegak merah serta tiga garis mendatar berwarna...?',
+                        'audio' => 'Bendera Uni Emirat Arab memiliki garis tegak merah serta tiga garis mendatar berwarna apa?',
+                        'emoji' => '🇦🇪',
+                        'options' => [
+                            ['emoji' => '🇦🇪', 'text' => 'Hijau, Putih, dan Hitam', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Merah, Kuning, dan Hijau', 'is_correct' => false],
+                            ['emoji' => '🔵', 'text' => 'Biru, Putih, dan Merah', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bendera',
+                'level_number' => 2,
+                'title' => 'Eksplorasi Thailand, Filipina & Asia Ceria',
+                'slug' => 'kuis-bendera-l2-thailand-filipina-asia',
+                'icon_emoji' => '🇹🇭',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Bendera negara Thailand memiliki lima garis warna mendatar dengan warna garis paling tengah berupa...?',
+                        'audio' => 'Bendera negara Thailand memiliki lima garis warna mendatar dengan warna garis paling tengah berupa apa?',
+                        'emoji' => '🇹🇭',
+                        'options' => [
+                            ['emoji' => '🇹🇭', 'text' => 'Garis Biru Tua Tebal', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Garis Merah', 'is_correct' => false],
+                            ['emoji' => '⚪', 'text' => 'Garis Putih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Filipina memiliki segitiga putih di sebelah kiri dengan gambar...?',
+                        'audio' => 'Bendera negara Filipina memiliki segitiga putih di sebelah kiri dengan gambar apa?',
+                        'emoji' => '🇵🇭',
+                        'options' => [
+                            ['emoji' => '🇵🇭', 'text' => 'Matahari Kuning 8 Sinar dan 3 Bintang', 'is_correct' => true],
+                            ['emoji' => '🌙', 'text' => 'Bulan Sabit Saja', 'is_correct' => false],
+                            ['emoji' => '🦅', 'text' => 'Burung Elang Emas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa arti makna dari warna PUTIH pada bendera Sang Saka Merah Putih Indonesia?',
+                        'audio' => 'Apa arti makna dari warna PUTIH pada bendera Sang Saka Merah Putih Indonesia?',
+                        'emoji' => '🕊️',
+                        'options' => [
+                            ['emoji' => '🕊️', 'text' => 'Suci, Bersih, dan Tulus', 'is_correct' => true],
+                            ['emoji' => '💪', 'text' => 'Berani Berperang', 'is_correct' => false],
+                            ['emoji' => '🌊', 'text' => 'Lautan Dalam', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah negara sahabat yang benderanya berwarna hijau zamrud dengan tulisan suci dan pedang?',
+                        'audio' => 'Manakah negara sahabat yang benderanya berwarna hijau zamrud dengan tulisan suci dan pedang?',
+                        'emoji' => '🇸🇦',
+                        'options' => [
+                            ['emoji' => '🇸🇦', 'text' => 'Arab Saudi', 'is_correct' => true],
+                            ['emoji' => '🇹🇷', 'text' => 'Turki', 'is_correct' => false],
+                            ['emoji' => '🇯🇵', 'text' => 'Jepang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana sikap yang benar saat lagu Indonesia Raya dinyanyikan dan bendera Merah Putih dikibarkan?',
+                        'audio' => 'Bagaimana sikap yang benar saat lagu Indonesia Raya dinyanyikan dan bendera Merah Putih dikibarkan?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '🇮🇩', 'text' => 'Berdiri tegak, tertib, dan memberi hormat dengan bangga', 'is_correct' => true],
+                            ['emoji' => '🏃‍♂️', 'text' => 'Berlari-lari kesana kemari', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Duduk santai sambil mengantuk', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bendera',
+                'level_number' => 2,
+                'title' => 'Petualangan Warna & Lambang Bendera Dunia',
+                'slug' => 'kuis-bendera-l2-warna-lambang-dunia',
+                'icon_emoji' => '🚩',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok negara yang benderanya sama-sama memiliki lambang Bulan Sabit dan Bintang?',
+                        'audio' => 'Manakah kelompok negara yang benderanya sama-sama memiliki lambang Bulan Sabit dan Bintang?',
+                        'emoji' => '🌙',
+                        'options' => [
+                            ['emoji' => '🇹🇷', 'text' => 'Turki, Malaysia & Singapura', 'is_correct' => true],
+                            ['emoji' => '🇯🇵', 'text' => 'Jepang & Indonesia', 'is_correct' => false],
+                            ['emoji' => '🇰🇷', 'text' => 'Korea Selatan & Thailand', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah bendera yang memiliki warna simpel berupa lingkaran merah di atas kain putih polos?',
+                        'audio' => 'Manakah bendera yang memiliki warna simpel berupa lingkaran merah di atas kain putih polos?',
+                        'emoji' => '🇯🇵',
+                        'options' => [
+                            ['emoji' => '🇯🇵', 'text' => 'Bendera Jepang', 'is_correct' => true],
+                            ['emoji' => '🇰🇷', 'text' => 'Korea Selatan', 'is_correct' => false],
+                            ['emoji' => '🇵🇭', 'text' => 'Filipina', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera manakah yang memiliki lambang burung elang emas di bagian tengahnya?',
+                        'audio' => 'Bendera manakah yang memiliki lambang burung elang emas di bagian tengahnya?',
+                        'emoji' => '🇪🇬',
+                        'options' => [
+                            ['emoji' => '🇪🇬', 'text' => 'Bendera Mesir', 'is_correct' => true],
                             ['emoji' => '🇸🇦', 'text' => 'Arab Saudi', 'is_correct' => false],
-                            ['emoji' => '🇯🇵', 'text' => 'Jepang', 'is_correct' => true],
-                            ['emoji' => '🇵🇸', 'text' => 'Palestina', 'is_correct' => false],
+                            ['emoji' => '🇧🇳', 'text' => 'Brunei Darussalam', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di manakah biasanya bendera Sang Saka Merah Putih dipasang saat perayaan 17 Agustus?',
+                        'audio' => 'Di manakah biasanya bendera Sang Saka Merah Putih dipasang saat perayaan 17 Agustus?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '🇮🇩', 'text' => 'Di depan halaman rumah dan tiang bendera sekolah', 'is_correct' => true],
+                            ['emoji' => '🗑️', 'text' => 'Di dalam lemari tertutup', 'is_correct' => false],
+                            ['emoji' => '🌊', 'text' => 'Dihanyutkan ke sungai', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa setiap negara di dunia memiliki bendera kebangsaan yang berbeda-beda?',
+                        'audio' => 'Mengapa setiap negara di dunia memiliki bendera kebangsaan yang berbeda-beda?',
+                        'emoji' => '🌍',
+                        'options' => [
+                            ['emoji' => '🌍', 'text' => 'Sebagai identitas, lambang kehormatan, dan pemersatu bangsa', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Hanya untuk hiasan mainan saja', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak memiliki arti apa pun', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (BENUA DUNIA & SAHABAT INTERNASIONAL) ---
+            [
+                'category_slug' => 'bendera',
+                'level_number' => 3,
+                'title' => 'Juara Benua Eropa, Australia & Amerika',
+                'slug' => 'kuis-bendera-l3-eropa-australia-amerika',
+                'icon_emoji' => '🇬🇧',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Bendera negara Inggris (United Kingdom) yang terkenal dengan sebutan Union Jack memiliki corak...?',
+                        'audio' => 'Bendera negara Inggris yang terkenal dengan sebutan Union Jack memiliki corak apa?',
+                        'emoji' => '🇬🇧',
+                        'options' => [
+                            ['emoji' => '🇬🇧', 'text' => 'Salib Merah dan Salib Putih di atas kain Biru', 'is_correct' => true],
+                            ['emoji' => '🇫🇷', 'text' => 'Tiga Garis Tegak Biru Putih Merah', 'is_correct' => false],
+                            ['emoji' => '🇩🇪', 'text' => 'Tiga Garis Mendatar Hitam Merah Emas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Jerman memiliki tiga garis warna mendatar dari atas ke bawah yaitu...?',
+                        'audio' => 'Bendera negara Jerman memiliki tiga garis warna mendatar dari atas ke bawah yaitu apa?',
+                        'emoji' => '🇩🇪',
+                        'options' => [
+                            ['emoji' => '🇩🇪', 'text' => 'Hitam, Merah, dan Emas Kuning', 'is_correct' => true],
+                            ['emoji' => '🇫🇷', 'text' => 'Biru, Putih, dan Merah', 'is_correct' => false],
+                            ['emoji' => '🇮🇹', 'text' => 'Hijau, Putih, dan Merah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Prancis terdiri dari tiga garis warna tegak (Triwarna) berurutan dari kiri ke kanan yaitu...?',
+                        'audio' => 'Bendera negara Prancis terdiri dari tiga garis warna tegak berurutan dari kiri ke kanan yaitu apa?',
+                        'emoji' => '🇫🇷',
+                        'options' => [
+                            ['emoji' => '🇫🇷', 'text' => 'Biru, Putih, dan Merah', 'is_correct' => true],
+                            ['emoji' => '🇮🇹', 'text' => 'Hijau, Putih, dan Merah', 'is_correct' => false],
+                            ['emoji' => '🇩🇪', 'text' => 'Hitam, Merah, dan Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Italia memiliki tiga garis tegak yang mirip dengan Prancis, namun warna paling kirinya adalah...?',
+                        'audio' => 'Bendera negara Italia memiliki tiga garis tegak yang mirip dengan Prancis namun warna paling kirinya adalah apa?',
+                        'emoji' => '🇮🇹',
+                        'options' => [
+                            ['emoji' => '🇮🇹', 'text' => 'Warna Hijau Segar', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Warna Biru Laut', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Australia berwarna biru dengan lambang Union Jack di sudut kiri serta gambar...?',
+                        'audio' => 'Bendera negara Australia berwarna biru dengan lambang Union Jack di sudut kiri serta gambar apa?',
+                        'emoji' => '🇦🇺',
+                        'options' => [
+                            ['emoji' => '🇦🇺', 'text' => 'Gugusan Bintang Salib Selatan (Southern Cross)', 'is_correct' => true],
+                            ['emoji' => '🦘', 'text' => 'Gambar Kangguru Saja', 'is_correct' => false],
+                            ['emoji' => '☀️', 'text' => 'Matahari Terbit', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara Brasil dari Amerika Selatan berwarna hijau tropis dengan belah ketupat kuning dan di tengahnya ada...?',
+                        'audio' => 'Bendera negara Brasil dari Amerika Selatan berwarna hijau tropis dengan belah ketupat kuning dan di tengahnya ada apa?',
+                        'emoji' => '🇧🇷',
+                        'options' => [
+                            ['emoji' => '🇧🇷', 'text' => 'Bola Biru Langit Berbintang dan Pita Putih', 'is_correct' => true],
+                            ['emoji' => '⚽', 'text' => 'Bola Sepak Hitam Putih', 'is_correct' => false],
+                            ['emoji' => '🌴', 'text' => 'Gambar Pohon Kelapa', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah warna garis tegak pada bendera negara Prancis dan Italia?',
+                        'audio' => 'Berapakah jumlah warna garis tegak pada bendera negara Prancis dan Italia?',
+                        'emoji' => '🇫🇷',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => '3 Garis Warna Tegak', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Garis Warna', 'is_correct' => false],
+                            ['emoji' => '5️⃣', 'text' => '5 Garis Warna', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara manakah yang memiliki lambang empat Trigram hitam di keempat sudutnya?',
+                        'audio' => 'Bendera negara manakah yang memiliki lambang empat Trigram hitam di keempat sudutnya?',
+                        'emoji' => '🇰🇷',
+                        'options' => [
+                            ['emoji' => '🇰🇷', 'text' => 'Korea Selatan', 'is_correct' => true],
+                            ['emoji' => '🇯🇵', 'text' => 'Jepang', 'is_correct' => false],
+                            ['emoji' => '🇨🇳', 'text' => 'Tiongkok', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Negara manakah yang benderanya memiliki warna merah marun dan gerigi putih sembilan sudut?',
+                        'audio' => 'Negara manakah yang benderanya memiliki warna merah marun dan gerigi putih sembilan sudut?',
+                        'emoji' => '🇶🇦',
+                        'options' => [
+                            ['emoji' => '🇶🇦', 'text' => 'Qatar', 'is_correct' => true],
+                            ['emoji' => '🇸🇦', 'text' => 'Arab Saudi', 'is_correct' => false],
+                            ['emoji' => '🇹🇷', 'text' => 'Turki', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara manakah yang memiliki warna dasar hijau subur melambangkan hutan tropis Amazon?',
+                        'audio' => 'Bendera negara manakah yang memiliki warna dasar hijau subur melambangkan hutan tropis Amazon?',
+                        'emoji' => '🇧🇷',
+                        'options' => [
+                            ['emoji' => '🇧🇷', 'text' => 'Brasil', 'is_correct' => true],
+                            ['emoji' => '🇩🇪', 'text' => 'Jerman', 'is_correct' => false],
+                            ['emoji' => '🇬🇧', 'text' => 'Inggris', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bendera',
+                'level_number' => 3,
+                'title' => 'Cerdas Mengelompokkan Corak & Warna Bendera Sahabat',
+                'slug' => 'kuis-bendera-l3-corak-warna-sahabat',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok bendera yang memiliki kombinasi warna dominan MERAH dan PUTIH saja?',
+                        'audio' => 'Manakah kelompok bendera yang memiliki kombinasi warna dominan MERAH dan PUTIH saja?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '🇮🇩', 'text' => 'Indonesia, Jepang, Turki & Singapura', 'is_correct' => true],
+                            ['emoji' => '🇸🇦', 'text' => 'Arab Saudi, Brasil, Australia', 'is_correct' => false],
+                            ['emoji' => '🇩🇪', 'text' => 'Jerman, Prancis, Inggris', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok negara yang benderanya memiliki 3 garis warna tegak (vertikal)?',
+                        'audio' => 'Manakah kelompok negara yang benderanya memiliki 3 garis warna tegak vertikal?',
+                        'emoji' => '🇫🇷',
+                        'options' => [
+                            ['emoji' => '🇫🇷', 'text' => 'Prancis & Italia', 'is_correct' => true],
+                            ['emoji' => '🇩🇪', 'text' => 'Jerman & Mesir', 'is_correct' => false],
+                            ['emoji' => '🇮🇩', 'text' => 'Indonesia & Malaysia', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok negara yang benderanya memiliki 3 garis warna mendatar (horizontal)?',
+                        'audio' => 'Manakah kelompok negara yang benderanya memiliki 3 garis warna mendatar horizontal?',
+                        'emoji' => '🇩🇪',
+                        'options' => [
+                            ['emoji' => '🇩🇪', 'text' => 'Jerman & Mesir', 'is_correct' => true],
+                            ['emoji' => '🇫🇷', 'text' => 'Prancis & Italia', 'is_correct' => false],
+                            ['emoji' => '🇯🇵', 'text' => 'Jepang & Korea Selatan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lambang apakah yang terdapat di dalam lingkaran merah biru pada bendera Korea Selatan?',
+                        'audio' => 'Lambang apakah yang terdapat di dalam lingkaran merah biru pada bendera Korea Selatan?',
+                        'emoji' => '🇰🇷',
+                        'options' => [
+                            ['emoji' => '🇰🇷', 'text' => 'Lambang Keseimbangan Taegeuk', 'is_correct' => true],
+                            ['emoji' => '☀️', 'text' => 'Matahari 8 Sinar', 'is_correct' => false],
+                            ['emoji' => '🦅', 'text' => 'Burung Elang Emas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara sahabat manakah yang memiliki segitiga merah di sisi kiri benderanya?',
+                        'audio' => 'Bendera negara sahabat manakah yang memiliki segitiga merah di sisi kiri benderanya?',
+                        'emoji' => '🇵🇸',
+                        'options' => [
+                            ['emoji' => '🇵🇸', 'text' => 'Palestina', 'is_correct' => true],
+                            ['emoji' => '🇯🇵', 'text' => 'Jepang', 'is_correct' => false],
+                            ['emoji' => '🇸🇦', 'text' => 'Arab Saudi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang terletak paling atas pada bendera negara Jerman?',
+                        'audio' => 'Warna apakah yang terletak paling atas pada bendera negara Jerman?',
+                        'emoji' => '🇩🇪',
+                        'options' => [
+                            ['emoji' => '🇩🇪', 'text' => 'Warna Hitam', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Warna Emas Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang membuat bendera Arab Saudi sangat unik dibandingkan bendera negara lain?',
+                        'audio' => 'Apa yang membuat bendera Arab Saudi sangat unik dibandingkan bendera negara lain?',
+                        'emoji' => '🇸🇦',
+                        'options' => [
+                            ['emoji' => '🇸🇦', 'text' => 'Memiliki tulisan kalimat suci dan pedang di atas warna hijau zamrud', 'is_correct' => true],
+                            ['emoji' => '⚪', 'text' => 'Berwarna putih polos tanpa gambar', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Hanya ada lingkaran merah di tengah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pada tanggal berapakah bangsa Indonesia selalu merayakan hari kemerdekaan dan mengibarkan bendera?',
+                        'audio' => 'Pada tanggal berapakah bangsa Indonesia selalu merayakan hari kemerdekaan dan mengibarkan bendera?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '🇮🇩', 'text' => '17 Agustus', 'is_correct' => true],
+                            ['emoji' => '📅', 'text' => '1 Januari', 'is_correct' => false],
+                            ['emoji' => '📅', 'text' => '25 Desember', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita harus menghormati bendera negara sahabat saat acara pesta olahraga dunia?',
+                        'audio' => 'Mengapa kita harus menghormati bendera negara sahabat saat acara pesta olahraga dunia?',
+                        'emoji' => '🤝',
+                        'options' => [
+                            ['emoji' => '🤝', 'text' => 'Untuk menjaga persahabatan, perdamaian, dan saling menghargai', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Karena disuruh tidur', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak perlu menghargai orang lain', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sebutan kehormatan apakah yang diberikan untuk bendera kebangsaan negara Indonesia tercinta?',
+                        'audio' => 'Sebutan kehormatan apakah yang diberikan untuk bendera kebangsaan negara Indonesia tercinta?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '🇮🇩', 'text' => 'Sang Saka Merah Putih', 'is_correct' => true],
+                            ['emoji' => '🟡', 'text' => 'Jalur Gemilang', 'is_correct' => false],
+                            ['emoji' => '🇬🇧', 'text' => 'Union Jack', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bendera',
+                'level_number' => 3,
+                'title' => 'Grand Champion Duta Sahabat Bendera Dunia',
+                'slug' => 'kuis-bendera-l3-grand-master-duta-dunia',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Manakah bendera kebanggaan tanah air kita Indonesia tercinta?',
+                        'audio' => 'Manakah bendera kebanggaan tanah air kita Indonesia tercinta?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '🇮🇩', 'text' => 'Sang Saka Merah Putih', 'is_correct' => true],
+                            ['emoji' => '🇲🇾', 'text' => 'Jalur Gemilang', 'is_correct' => false],
+                            ['emoji' => '🇯🇵', 'text' => 'Hinomaru Matahari Terbit', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera manakah yang memiliki lambang matahari bersinar delapan arah di atas segitiga putih?',
+                        'audio' => 'Bendera manakah yang memiliki lambang matahari bersinar delapan arah di atas segitiga putih?',
+                        'emoji' => '🇵🇭',
+                        'options' => [
+                            ['emoji' => '🇵🇭', 'text' => 'Filipina', 'is_correct' => true],
+                            ['emoji' => '🇹🇭', 'text' => 'Thailand', 'is_correct' => false],
+                            ['emoji' => '🇧🇳', 'text' => 'Brunei Darussalam', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera manakah yang memiliki julukan terkenal "Union Jack"?',
+                        'audio' => 'Bendera manakah yang memiliki julukan terkenal Union Jack?',
+                        'emoji' => '🇬🇧',
+                        'options' => [
+                            ['emoji' => '🇬🇧', 'text' => 'Inggris (United Kingdom)', 'is_correct' => true],
+                            ['emoji' => '🇫🇷', 'text' => 'Prancis', 'is_correct' => false],
+                            ['emoji' => '🇩🇪', 'text' => 'Jerman', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lambang bulan sabit dan bintang pada bendera Turki melambangkan...?',
+                        'audio' => 'Lambang bulan sabit dan bintang pada bendera Turki melambangkan apa?',
+                        'emoji' => '🇹🇷',
+                        'options' => [
+                            ['emoji' => '🇹🇷', 'text' => 'Keindahan cahaya langit malam dan harapan cerah', 'is_correct' => true],
+                            ['emoji' => '☀️', 'text' => 'Siang hari yang panas', 'is_correct' => false],
+                            ['emoji' => '🌊', 'text' => 'Ombak laut samudra', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna hijau pada bendera Brasil melambangkan kekayaan alam berupa...?',
+                        'audio' => 'Warna hijau pada bendera Brasil melambangkan kekayaan alam berupa apa?',
+                        'emoji' => '🇧🇷',
+                        'options' => [
+                            ['emoji' => '🇧🇷', 'text' => 'Hutan dan alam tropis Amazon yang subur luas', 'is_correct' => true],
+                            ['emoji' => '❄️', 'text' => 'Salju kutub yang dingin', 'is_correct' => false],
+                            ['emoji' => '🏜️', 'text' => 'Padang pasir gersang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera negara manakah yang memiliki lambang negara di atas kain kuning keemasan megah?',
+                        'audio' => 'Bendera negara manakah yang memiliki lambang negara di atas kain kuning keemasan megah?',
+                        'emoji' => '🇧🇳',
+                        'options' => [
+                            ['emoji' => '🇧🇳', 'text' => 'Brunei Darussalam', 'is_correct' => true],
+                            ['emoji' => '🇸🇬', 'text' => 'Singapura', 'is_correct' => false],
+                            ['emoji' => '🇮🇩', 'text' => 'Indonesia', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bendera manakah yang memiliki warna Merah, Putih, Hitam dengan Elang Emas di tengahnya?',
+                        'audio' => 'Bendera manakah yang memiliki warna Merah Putih Hitam dengan Elang Emas di tengahnya?',
+                        'emoji' => '🇪🇬',
+                        'options' => [
+                            ['emoji' => '🇪🇬', 'text' => 'Mesir', 'is_correct' => true],
+                            ['emoji' => '🇶🇦', 'text' => 'Qatar', 'is_correct' => false],
+                            ['emoji' => '🇦🇪', 'text' => 'Uni Emirat Arab', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana sikap anak Indonesia yang hebat saat berkenalan dengan sahabat dari berbagai negara?',
+                        'audio' => 'Bagaimana sikap anak Indonesia yang hebat saat berkenalan dengan sahabat dari berbagai negara?',
+                        'emoji' => '🤝',
+                        'options' => [
+                            ['emoji' => '🤝', 'text' => 'Ramah, sopan, bersahabat, dan saling menghargai', 'is_correct' => true],
+                            ['emoji' => '😡', 'text' => 'Mengejek warna benderanya', 'is_correct' => false],
+                            ['emoji' => '🏃‍♂️', 'text' => 'Menjauhi dan menolak berteman', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa belajar mengenal bendera negara dunia membuat kita berwawasan luas?',
+                        'audio' => 'Mengapa belajar mengenal bendera negara dunia membuat kita berwawasan luas?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena kita jadi mengenal keberagaman sahabat di seluruh dunia', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar kita cepat mengantuk', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada gunanya sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apakah yang pantas untuk anak pintar yang menguasai bendera negara di dunia dengan hebat?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak pintar yang menguasai bendera negara di dunia dengan hebat?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Duta Cilik Persahabatan & Penjelajah Bendera Dunia!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Mengantuk di Kamar', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Tiang yang Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
