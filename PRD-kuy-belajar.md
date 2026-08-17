@@ -63,7 +63,7 @@ Platform membagi seluruh materi dan kuis ke dalam **3 Pilar / Zona Petualangan**
 | 6 | 🎨 **Warna & Bentuk Geometri** | `warna` | Merah, Biru, Hijau, Lingkaran, Segitiga, Persegi |
 | 7 | 🚗 **Jenis Kendaraan** | `kendaraan` | Mobil, Kereta Api, Pesawat Terbang, Kapal Laut |
 | 8 | 🧸 **Benda di Sekitar Kita** | `benda` | Meja, Kursi, Buku, Pensil, Sepatu, Bola |
-| 9 | 🇮🇩 **Bendera Negara** | `bendera` | Indonesia 🇮🇩, Palestina 🇵🇸, Arab Saudi 🇸🇦, Malaysia 🇲🇾, Jepang 🇯🇵, dll. |
+| 9 | 🚩 **Bendera Negara Dunia** | `bendera` | Bendera Merah Putih Indonesia, Palestina, Arab Saudi, Malaysia, Jepang, dll. |
 | 10 | 👀 **Anggota Tubuh & Panca Indra** | `tubuh` | Mata (Melihat), Telinga (Mendengar), Hidung (Mencium), Tangan, Kaki |
 
 ---

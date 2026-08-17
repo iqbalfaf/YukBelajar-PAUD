@@ -319,7 +319,7 @@ class QuizSeeder extends Seeder
                 'category_slug' => 'bendera',
                 'title' => 'Tebak Bendera Sahabat Dunia',
                 'slug' => 'tebak-bendera',
-                'icon_emoji' => '🇮🇩',
+                'icon_emoji' => '🚩',
                 'target_age' => 4,
                 'total_questions' => 2,
                 'stars_reward' => 3,

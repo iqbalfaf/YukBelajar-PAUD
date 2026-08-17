@@ -48,7 +48,7 @@
                  'warna': lvl == 1 ? 'Mengenal Warna Dasar Cerah 🎨' : (lvl == 2 ? 'Bentuk Geometri Lingkaran & Segitiga ⭕' : 'Bintang & Bentuk Campuran ⭐'),
                  'kendaraan': lvl == 1 ? 'Mobil & Sepeda Roda Dua 🚗' : (lvl == 2 ? 'Kereta Api & Kapal Laut 🚆' : 'Pesawat Terbang & Helikopter ✈️'),
                  'benda': lvl == 1 ? 'Peralatan Sekolah & Belajar 📚' : (lvl == 2 ? 'Benda-benda di Rumah 🧸' : 'Peralatan Makan & Kebersihan 🪑'),
-                 'bendera': lvl == 1 ? 'Bendera Merah Putih Indonesia 🇮🇩' : (lvl == 2 ? 'Bendera Negara Sahabat Dunia 🇯🇵' : 'Mengenal Ragam Bendera Internasional 🇸🇦'),
+                 'bendera': lvl == 1 ? 'Bendera Merah Putih Indonesia 🚩' : (lvl == 2 ? 'Bendera Negara Sahabat Dunia 🚩' : 'Mengenal Ragam Bendera Internasional 🚩'),
                  'tubuh': lvl == 1 ? 'Mengenal Mata, Hidung, & Telinga 👀' : (lvl == 2 ? 'Tangan Terampil & Kaki Kuat ✋' : 'Merawat Kebersihan Gigi & Tubuh 👄'),
                  
                  'huruf-vokal': lvl == 1 ? 'Membunyikan Vokal A I U E O 🅰️' : 'Kombinasi Vokal & Benda Ceria 🎵',

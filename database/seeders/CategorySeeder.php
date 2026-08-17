@@ -140,7 +140,7 @@ class CategorySeeder extends Seeder
                 'pillar' => 'mengenal',
                 'name' => 'Bendera Negara Dunia',
                 'slug' => 'bendera',
-                'icon_emoji' => '🇮🇩',
+                'icon_emoji' => '🚩',
                 'color_theme' => 'rose',
                 'bg_gradient' => 'from-red-400 to-rose-600',
                 'border_color' => '#e11d48',
