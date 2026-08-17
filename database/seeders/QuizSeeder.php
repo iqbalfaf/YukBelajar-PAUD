@@ -4033,33 +4033,665 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 1 - TOPIK 8: BENDA DI SEKITAR KITA (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (PERLENGKAPAN BELAJAR & SEKOLAH CERIA) ---
             [
                 'category_slug' => 'benda',
-                'title' => 'Tebak Benda di Sekitar Kita',
-                'slug' => 'tebak-benda',
-                'icon_emoji' => '🧸',
-                'target_age' => 4,
-                'total_questions' => 2,
+                'level_number' => 1,
+                'title' => 'Sahabat Belajar & Buku Cerita Ceria',
+                'slug' => 'kuis-benda-l1-buku-alat-tulis',
+                'icon_emoji' => '📚',
+                'target_age' => 3,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Benda apakah yang digunakan untuk menulis dan menggambar cita-cita?',
-                        'audio' => 'Benda apakah yang digunakan untuk menulis dan menggambar cita-cita?',
-                        'emoji' => '✏️',
+                        'text' => 'Benda jendela ilmu yang memiliki lembaran cerita bergambar dan menambah wawasan adalah...?',
+                        'audio' => 'Benda jendela ilmu yang memiliki lembaran cerita bergambar dan menambah wawasan adalah apa?',
+                        'emoji' => '📚',
                         'options' => [
-                            ['emoji' => '✏️', 'text' => 'Pensil', 'is_correct' => true],
-                            ['emoji' => '👟', 'text' => 'Sepatu', 'is_correct' => false],
-                            ['emoji' => '🪑', 'text' => 'Kursi', 'is_correct' => false],
+                            ['emoji' => '📚', 'text' => 'Buku Cerita Bergambar', 'is_correct' => true],
+                            ['emoji' => '✂️', 'text' => 'Gunting Kertas', 'is_correct' => false],
+                            ['emoji' => '🎒', 'text' => 'Tas Ransel', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Benda apakah yang berisi lembaran cerita bergambar yang seru?',
-                        'audio' => 'Benda apakah yang berisi lembaran cerita bergambar yang seru?',
+                        'text' => 'Alat tulis bergagang kayu yang digunakan untuk menulis kata dan menggambar adalah...?',
+                        'audio' => 'Alat tulis bergagang kayu yang digunakan untuk menulis kata dan menggambar adalah apa?',
+                        'emoji' => '✏️',
+                        'options' => [
+                            ['emoji' => '✏️', 'text' => 'Pensil Menulis Ceria', 'is_correct' => true],
+                            ['emoji' => '📏', 'text' => 'Penggaris Lurus', 'is_correct' => false],
+                            ['emoji' => '🖍️', 'text' => 'Krayon Warna', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Tempat yang kita gendong di punggung untuk membawa buku dan bekal ke sekolah adalah...?',
+                        'audio' => 'Tempat yang kita gendong di punggung untuk membawa buku dan bekal ke sekolah adalah apa?',
+                        'emoji' => '🎒',
+                        'options' => [
+                            ['emoji' => '🎒', 'text' => 'Tas Ransel Sekolah', 'is_correct' => true],
+                            ['emoji' => '👝', 'text' => 'Kotak Pensil', 'is_correct' => false],
+                            ['emoji' => '✂️', 'text' => 'Gunting Kertas', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'benda',
+                'level_number' => 1,
+                'title' => 'Krayon Warna & Gunting Kertas Aman',
+                'slug' => 'kuis-benda-l1-krayon-gunting-aman',
+                'icon_emoji' => '🖍️',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Batangan lilin warna-warni cerah yang digunakan anak-anak untuk mewarnai gambar adalah...?',
+                        'audio' => 'Batangan lilin warna warni cerah yang digunakan anak anak untuk mewarnai gambar adalah apa?',
+                        'emoji' => '🖍️',
+                        'options' => [
+                            ['emoji' => '🖍️', 'text' => 'Krayon Warna-Warni', 'is_correct' => true],
+                            ['emoji' => '📏', 'text' => 'Penggaris Lurus', 'is_correct' => false],
+                            ['emoji' => '📚', 'text' => 'Buku Cerita', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat berbilah dengan pegangan dua jari yang digunakan untuk memotong pola kertas adalah...?',
+                        'audio' => 'Alat berbilah dengan pegangan dua jari yang digunakan untuk memotong pola kertas adalah apa?',
+                        'emoji' => '✂️',
+                        'options' => [
+                            ['emoji' => '✂️', 'text' => 'Gunting Kertas Aman', 'is_correct' => true],
+                            ['emoji' => '✏️', 'text' => 'Pensil Kayu', 'is_correct' => false],
+                            ['emoji' => '🎒', 'text' => 'Tas Ransel', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat bergaris angka yang digunakan untuk membuat garis lurus rapi adalah...?',
+                        'audio' => 'Alat bergaris angka yang digunakan untuk membuat garis lurus rapi adalah apa?',
+                        'emoji' => '📏',
+                        'options' => [
+                            ['emoji' => '📏', 'text' => 'Penggaris Lurus Rapi', 'is_correct' => true],
+                            ['emoji' => '🖍️', 'text' => 'Krayon Warna', 'is_correct' => false],
+                            ['emoji' => '👝', 'text' => 'Kotak Pensil', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'benda',
+                'level_number' => 1,
+                'title' => 'Kotak Pensil & Merapikan Alat Sekolah',
+                'slug' => 'kuis-benda-l1-kotak-pensil-rapi',
+                'icon_emoji' => '👝',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Wadah praktis beresleting atau klip untuk menyimpan pensil, penghapus, dan rautan adalah...?',
+                        'audio' => 'Wadah praktis beresleting atau klip untuk menyimpan pensil penghapus dan rautan adalah apa?',
+                        'emoji' => '👝',
+                        'options' => [
+                            ['emoji' => '👝', 'text' => 'Kotak Pensil Praktis', 'is_correct' => true],
+                            ['emoji' => '🎒', 'text' => 'Tas Besar', 'is_correct' => false],
+                            ['emoji' => '📚', 'text' => 'Buku Cerita', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah yang kita gunakan saat ingin mewarnai gambar pemandangan di buku gambar?',
+                        'audio' => 'Benda apakah yang kita gunakan saat ingin mewarnai gambar pemandangan di buku gambar?',
+                        'emoji' => '🖍️',
+                        'options' => [
+                            ['emoji' => '🖍️', 'text' => 'Krayon Warna-Warni', 'is_correct' => true],
+                            ['emoji' => '✂️', 'text' => 'Gunting Kertas Saja', 'is_correct' => false],
+                            ['emoji' => '📏', 'text' => 'Penggaris Plastik', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang harus kita lakukan pada semua alat tulis setelah selesai belajar di rumah?',
+                        'audio' => 'Apa yang harus kita lakukan pada semua alat tulis setelah selesai belajar di rumah?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '👝', 'text' => 'Merapikan dan memasukkannya ke kotak pensil', 'is_correct' => true],
+                            ['emoji' => '🗑️', 'text' => 'Membiarkannya berserakan di lantai', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Melemparnya sembarangan', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (BENDA RUMAH TANGGA & PERAWATAN DIRI) ---
+            [
+                'category_slug' => 'benda',
+                'level_number' => 2,
+                'title' => 'Sepatu Melangkah & Jam Penunjuk Waktu',
+                'slug' => 'kuis-benda-l2-sepatu-jam-dinding',
+                'icon_emoji' => '👟',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Benda beralas empuk yang kita pakai di kedua kaki untuk melindungi kaki saat berjalan dan berlari adalah...?',
+                        'audio' => 'Benda beralas empuk yang kita pakai di kedua kaki untuk melindungi kaki saat berjalan dan berlari adalah apa?',
+                        'emoji' => '👟',
+                        'options' => [
+                            ['emoji' => '👟', 'text' => 'Sepatu Nyaman Melangkah', 'is_correct' => true],
+                            ['emoji' => '☂️', 'text' => 'Payung Hujan', 'is_correct' => false],
+                            ['emoji' => '🪥', 'text' => 'Sikat Gigi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda di dinding rumah yang berdetak tik-tok untuk menunjukkan waktu dan jam adalah...?',
+                        'audio' => 'Benda di dinding rumah yang berdetak tik-tok untuk menunjukkan waktu dan jam adalah apa?',
+                        'emoji' => '⏰',
+                        'options' => [
+                            ['emoji' => '⏰', 'text' => 'Jam Dinding Penunjuk Waktu', 'is_correct' => true],
+                            ['emoji' => '💡', 'text' => 'Lampu Belajar', 'is_correct' => false],
+                            ['emoji' => '🥛', 'text' => 'Gelas Minum', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda berbulu halus yang digunakan bersama pasta gigi untuk membersihkan gigi dari kuman adalah...?',
+                        'audio' => 'Benda berbulu halus yang digunakan bersama pasta gigi untuk membersihkan gigi dari kuman adalah apa?',
+                        'emoji' => '🪥',
+                        'options' => [
+                            ['emoji' => '🪥', 'text' => 'Sikat Gigi & Pasta Sehat', 'is_correct' => true],
+                            ['emoji' => '🍴', 'text' => 'Sendok Makan', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'Payung Hujan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda berkubah kain anti air yang dibuka di atas kepala untuk melindungi tubuh dari guyuran hujan adalah...?',
+                        'audio' => 'Benda berkubah kain anti air yang dibuka di atas kepala untuk melindungi tubuh dari guyuran hujan adalah apa?',
+                        'emoji' => '☂️',
+                        'options' => [
+                            ['emoji' => '☂️', 'text' => 'Payung Pelindung Hujan', 'is_correct' => true],
+                            ['emoji' => '👟', 'text' => 'Sepatu Karet', 'is_correct' => false],
+                            ['emoji' => '💡', 'text' => 'Lampu Tidur', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda makan yang digunakan berpasangan untuk menyuap nasi dan menusuk lauk pauk adalah...?',
+                        'audio' => 'Benda makan yang digunakan berpasangan untuk menyuap nasi dan menusuk lauk pauk adalah apa?',
+                        'emoji' => '🍴',
+                        'options' => [
+                            ['emoji' => '🍴', 'text' => 'Sendok & Garpu Makan', 'is_correct' => true],
+                            ['emoji' => '🥛', 'text' => 'Gelas Bening', 'is_correct' => false],
+                            ['emoji' => '🪥', 'text' => 'Sikat Gigi', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'benda',
+                'level_number' => 2,
+                'title' => 'Gelas Bening & Lampu Belajar Terang',
+                'slug' => 'kuis-benda-l2-gelas-lampu-belajar',
+                'icon_emoji' => '💡',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Wadah bersih yang digunakan untuk menuang dan meminum air putih sehat setiap hari adalah...?',
+                        'audio' => 'Wadah bersih yang digunakan untuk menuang dan meminum air putih sehat setiap hari adalah apa?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            ['emoji' => '🥛', 'text' => 'Gelas Minum Bening', 'is_correct' => true],
+                            ['emoji' => '🍴', 'text' => 'Sendok Garpu', 'is_correct' => false],
+                            ['emoji' => '👟', 'text' => 'Sepatu Olahraga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda sumber cahaya listrik yang dinyalakan agar meja belajar terang benderang saat malam hari adalah...?',
+                        'audio' => 'Benda sumber cahaya listrik yang dinyalakan agar meja belajar terang benderang saat malam hari adalah apa?',
+                        'emoji' => '💡',
+                        'options' => [
+                            ['emoji' => '💡', 'text' => 'Lampu Belajar Terang', 'is_correct' => true],
+                            ['emoji' => '⏰', 'text' => 'Jam Dinding', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'Payung Hujan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa kali minimal kita disarankan menggosok gigi dengan sikat gigi setiap hari?',
+                        'audio' => 'Berapa kali minimal kita disarankan menggosok gigi dengan sikat gigi setiap hari?',
+                        'emoji' => '🪥',
+                        'options' => [
+                            ['emoji' => '🪥', 'text' => 'Minimal 2 kali sehari (pagi dan sebelum tidur)', 'is_correct' => true],
+                            ['emoji' => '🚫', 'text' => 'Satu minggu sekali saja', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Tidak perlu menggosok gigi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jam dinding atau jam beker yang berdering nyaring di pagi hari berfungsi untuk...?',
+                        'audio' => 'Jam dinding atau jam beker yang berdering nyaring di pagi hari berfungsi untuk apa?',
+                        'emoji' => '⏰',
+                        'options' => [
+                            ['emoji' => '⏰', 'text' => 'Membangunkan kita agar bangun tepat waktu dan segar', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Membuat kita malas bangun tidur', 'is_correct' => false],
+                            ['emoji' => '🎮', 'text' => 'Untuk bermain game saja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sebelum makan menggunakan sendok dan garpu, apa yang harus selalu kita lakukan terlebih dahulu?',
+                        'audio' => 'Sebelum makan menggunakan sendok dan garpu apa yang harus selalu kita lakukan terlebih dahulu?',
+                        'emoji' => '🧼',
+                        'options' => [
+                            ['emoji' => '🧼', 'text' => 'Mencuci tangan dengan sabun bersih dan berdoa', 'is_correct' => true],
+                            ['emoji' => '🏃‍♂️', 'text' => 'Langsung menyuap makanan tanpa cuci tangan', 'is_correct' => false],
+                            ['emoji' => '🗑️', 'text' => 'Membuang makanan ke lantai', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'benda',
+                'level_number' => 2,
+                'title' => 'Eksplorasi Benda Rumah Tangga & Kebiasaan Mandiri',
+                'slug' => 'kuis-benda-l2-eksplorasi-kebiasaan-mandiri',
+                'icon_emoji' => '🍴',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok benda yang digunakan saat kita sedang makan di meja makan?',
+                        'audio' => 'Manakah kelompok benda yang digunakan saat kita sedang makan di meja makan?',
+                        'emoji' => '🍽️',
+                        'options' => [
+                            ['emoji' => '🍴', 'text' => 'Sendok, Garpu & Gelas Minum', 'is_correct' => true],
+                            ['emoji' => '👟', 'text' => 'Sepatu & Payung Hujan', 'is_correct' => false],
+                            ['emoji' => '🪥', 'text' => 'Sikat Gigi & Jam Dinding', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah benda yang melindungi tubuh kita saat cuaca sedang hujan lebat turun?',
+                        'audio' => 'Manakah benda yang melindungi tubuh kita saat cuaca sedang hujan lebat turun?',
+                        'emoji' => '☂️',
+                        'options' => [
+                            ['emoji' => '☂️', 'text' => 'Payung Pelindung Hujan', 'is_correct' => true],
+                            ['emoji' => '💡', 'text' => 'Lampu Belajar', 'is_correct' => false],
+                            ['emoji' => '🍴', 'text' => 'Garpu Makan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita harus memakai sepatu beralas nyaman saat bermain di luar rumah?',
+                        'audio' => 'Mengapa kita harus memakai sepatu beralas nyaman saat bermain di luar rumah?',
+                        'emoji' => '🛡️',
+                        'options' => [
+                            ['emoji' => '👟', 'text' => 'Agar telapak kaki terlindung dari benda tajam dan kotoran', 'is_correct' => true],
+                            ['emoji' => '🪽', 'text' => 'Agar kita bisa terbang tinggi', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Agar kita cepat mengantuk', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang harus kita lakukan saat lampu kamar menyala tetapi hari sudah siang terang benderang?',
+                        'audio' => 'Apa yang harus kita lakukan saat lampu kamar menyala tetapi hari sudah siang terang benderang?',
+                        'emoji' => '💡',
+                        'options' => [
+                            ['emoji' => '💡', 'text' => 'Mematikan saklar lampu untuk hemat energi listrik', 'is_correct' => true],
+                            ['emoji' => '🚫', 'text' => 'Membiarkannya menyala terus seharian', 'is_correct' => false],
+                            ['emoji' => '🔦', 'text' => 'Menyalakan semua lampu lainnya', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah yang kita gunakan untuk mengukur panjang buku dan kertas dengan angka-angka cm?',
+                        'audio' => 'Benda apakah yang kita gunakan untuk mengukur panjang buku dan kertas dengan angka-angka cm?',
+                        'emoji' => '📏',
+                        'options' => [
+                            ['emoji' => '📏', 'text' => 'Penggaris Lurus Rapi', 'is_correct' => true],
+                            ['emoji' => '🥛', 'text' => 'Gelas Minum', 'is_correct' => false],
+                            ['emoji' => '👟', 'text' => 'Sepatu Olahraga', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (PERABOT RUMAH, KEBERSIHAN & KEMANDIRIAN) ---
+            [
+                'category_slug' => 'benda',
+                'level_number' => 3,
+                'title' => 'Perabot Kamar, Rumah Nyaman & Mainan Lucu',
+                'slug' => 'kuis-benda-l3-perabot-kamar-boneka',
+                'icon_emoji' => '🧸',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Perabot kayu tempat kita meletakkan buku dan belajar dengan posisi duduk tegak adalah...?',
+                        'audio' => 'Perabot kayu tempat kita meletakkan buku dan belajar dengan posisi duduk tegak adalah apa?',
+                        'emoji' => '🪑',
+                        'options' => [
+                            ['emoji' => '🪑', 'text' => 'Meja Belajar Kayu', 'is_correct' => true],
+                            ['emoji' => '🚪', 'text' => 'Pintu Rumah', 'is_correct' => false],
+                            ['emoji' => '🧹', 'text' => 'Sapu Lantai', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Tempat empuk beralas kasur, bantal, dan selimut hangat untuk kita beristirahat tidur malam adalah...?',
+                        'audio' => 'Tempat empuk beralas kasur bantal dan selimut hangat untuk kita beristirahat tidur malam adalah apa?',
+                        'emoji' => '🛏️',
+                        'options' => [
+                            ['emoji' => '🛏️', 'text' => 'Tempat Tidur Nyaman', 'is_correct' => true],
+                            ['emoji' => '🪞', 'text' => 'Cermin Kaca', 'is_correct' => false],
+                            ['emoji' => '🪑', 'text' => 'Meja Kayu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kaca bening yang memantulkan bayangan diri kita saat menyisir rambut dan merapikan baju adalah...?',
+                        'audio' => 'Kaca bening yang memantulkan bayangan diri kita saat menyisir rambut dan merapikan baju adalah apa?',
+                        'emoji' => '🪞',
+                        'options' => [
+                            ['emoji' => '🪞', 'text' => 'Cermin Kaca Bening', 'is_correct' => true],
+                            ['emoji' => '🚪', 'text' => 'Pintu Rumah', 'is_correct' => false],
+                            ['emoji' => '🛏️', 'text' => 'Tempat Tidur', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pintu kokoh berengsel yang selalu diketuk dengan sopan sebelum kita memasukinya adalah...?',
+                        'audio' => 'Pintu kokoh berengsel yang selalu diketuk dengan sopan sebelum kita memasukinya adalah apa?',
+                        'emoji' => '🚪',
+                        'options' => [
+                            ['emoji' => '🚪', 'text' => 'Pintu Rumah Kokoh', 'is_correct' => true],
+                            ['emoji' => '🧹', 'text' => 'Sapu Ijuk', 'is_correct' => false],
+                            ['emoji' => '🪞', 'text' => 'Cermin Kaca', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat bertangkai dengan ijuk yang digunakan untuk menyapu debu dan kotoran di lantai adalah...?',
+                        'audio' => 'Alat bertangkai dengan ijuk yang digunakan untuk menyapu debu dan kotoran di lantai adalah apa?',
+                        'emoji' => '🧹',
+                        'options' => [
+                            ['emoji' => '🧹', 'text' => 'Sapu Pembersih Lantai', 'is_correct' => true],
+                            ['emoji' => '🛏️', 'text' => 'Kasur Bantal', 'is_correct' => false],
+                            ['emoji' => '🪑', 'text' => 'Meja Belajar', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sahabat main berbulu lembut yang empuk dipeluk dan menemani waktu tidur anak adalah...?',
+                        'audio' => 'Sahabat main berbulu lembut yang empuk dipeluk dan menemani waktu tidur anak adalah apa?',
+                        'emoji' => '🧸',
+                        'options' => [
+                            ['emoji' => '🧸', 'text' => 'Boneka Beruang Lucu', 'is_correct' => true],
+                            ['emoji' => '🚪', 'text' => 'Pintu Kayu', 'is_correct' => false],
+                            ['emoji' => '🧹', 'text' => 'Sapu Lantai', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang harus dilakukan sebelum masuk ke dalam rumah orang lain atau ruangan kelas?',
+                        'audio' => 'Apa yang harus dilakukan sebelum masuk ke dalam rumah orang lain atau ruangan kelas?',
+                        'emoji' => '🚪',
+                        'options' => [
+                            ['emoji' => '🚪', 'text' => 'Mengetuk pintu dengan sopan dan mengucapkan salam', 'is_correct' => true],
+                            ['emoji' => '🏃‍♂️', 'text' => 'Langsung menerobos masuk tanpa permisi', 'is_correct' => false],
+                            ['emoji' => '🔊', 'text' => 'Berteriak-teriak keras di depan pintu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang harus kita lakukan pada tempat tidur kita setiap kali bangun pagi?',
+                        'audio' => 'Apa yang harus kita lakukan pada tempat tidur kita setiap kali bangun pagi?',
+                        'emoji' => '🛏️',
+                        'options' => [
+                            ['emoji' => '🛏️', 'text' => 'Merapikan selimut, menepuk bantal, dan menata kasur rapi', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Membiarkannya berantakan kotor', 'is_correct' => false],
+                            ['emoji' => '🗑️', 'text' => 'Membuang bantal ke lantai', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa lantai rumah harus rajin disapu dengan sapu setiap hari?',
+                        'audio' => 'Mengapa lantai rumah harus rajin disapu dengan sapu setiap hari?',
+                        'emoji' => '🧹',
+                        'options' => [
+                            ['emoji' => '🧹', 'text' => 'Agar lantai selalu bersih, sehat, serta bebas debu dan kuman', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar ruangan menjadi kotor', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada gunanya sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sikap apakah yang baik saat kita selesai bermain dengan boneka atau mainan di kamar?',
+                        'audio' => 'Sikap apakah yang baik saat kita selesai bermain dengan boneka atau mainan di kamar?',
+                        'emoji' => '🧸',
+                        'options' => [
+                            ['emoji' => '🧸', 'text' => 'Mengembalikan dan menata mainan di tempat mainan', 'is_correct' => true],
+                            ['emoji' => '🏃‍♂️', 'text' => 'Meninggalkannya berserakan di jalan', 'is_correct' => false],
+                            ['emoji' => '🗑️', 'text' => 'Merusak dan membuangnya', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'benda',
+                'level_number' => 3,
+                'title' => 'Cerdas Mengelompokkan Fungsi Benda Sehari-Hari',
+                'slug' => 'kuis-benda-l3-fungsi-benda-sehari-hari',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok benda yang semuanya termasuk perlengkapan belajar di sekolah?',
+                        'audio' => 'Manakah kelompok benda yang semuanya termasuk perlengkapan belajar di sekolah?',
+                        'emoji' => '🎒',
+                        'options' => [
+                            ['emoji' => '📚', 'text' => 'Buku Cerita, Pensil Tulis, Tas Ransel', 'is_correct' => true],
+                            ['emoji' => '🛏️', 'text' => 'Tempat Tidur, Pintu, Sapu Lantai', 'is_correct' => false],
+                            ['emoji' => '🍴', 'text' => 'Sendok Makan, Gelas, Sikat Gigi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok benda yang digunakan untuk menjaga kebersihan diri dan rumah?',
+                        'audio' => 'Manakah kelompok benda yang digunakan untuk menjaga kebersihan diri dan rumah?',
+                        'emoji' => '🪥',
+                        'options' => [
+                            ['emoji' => '🪥', 'text' => 'Sikat Gigi, Pasta Gigi & Sapu Lantai', 'is_correct' => true],
+                            ['emoji' => '📚', 'text' => 'Buku, Krayon, Penggaris', 'is_correct' => false],
+                            ['emoji' => '🧸', 'text' => 'Boneka Beruang, Meja, Kasur', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah benda yang kita gunakan untuk melihat kerapian wajah dan pakaian seragam kita?',
+                        'audio' => 'Manakah benda yang kita gunakan untuk melihat kerapian wajah dan pakaian seragam kita?',
+                        'emoji' => '🪞',
+                        'options' => [
+                            ['emoji' => '🪞', 'text' => 'Cermin Kaca Bening', 'is_correct' => true],
+                            ['emoji' => '🚪', 'text' => 'Pintu Rumah Kayu', 'is_correct' => false],
+                            ['emoji' => '🧹', 'text' => 'Sapu Lantai', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah yang berbunyi kring-kring dan memiliki jarum penunjuk detik, menit, dan jam?',
+                        'audio' => 'Benda apakah yang berbunyi kring-kring dan memiliki jarum penunjuk detik menit dan jam?',
+                        'emoji' => '⏰',
+                        'options' => [
+                            ['emoji' => '⏰', 'text' => 'Jam Dinding & Jam Beker', 'is_correct' => true],
+                            ['emoji' => '💡', 'text' => 'Lampu Belajar', 'is_correct' => false],
+                            ['emoji' => '🥛', 'text' => 'Gelas Minum', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda manakah yang membutuhkan aliran listrik untuk menghasilkan cahaya terang benderang?',
+                        'audio' => 'Benda manakah yang membutuhkan aliran listrik untuk menghasilkan cahaya terang benderang?',
+                        'emoji' => '💡',
+                        'options' => [
+                            ['emoji' => '💡', 'text' => 'Lampu Belajar Terang', 'is_correct' => true],
+                            ['emoji' => '📚', 'text' => 'Buku Tulis', 'is_correct' => false],
+                            ['emoji' => '📏', 'text' => 'Penggaris Plastik', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika ingin menuang dan meminum air putih segar pelepas dahaga, benda apakah yang kita gunakan?',
+                        'audio' => 'Jika ingin menuang dan meminum air putih segar pelepas dahaga benda apakah yang kita gunakan?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            ['emoji' => '🥛', 'text' => 'Gelas Minum Bening', 'is_correct' => true],
+                            ['emoji' => '👝', 'text' => 'Kotak Pensil', 'is_correct' => false],
+                            ['emoji' => '👟', 'text' => 'Sepatu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa buku sering disebut sebagai "Jendela Dunia"?',
+                        'audio' => 'Mengapa buku sering disebut sebagai jendela dunia?',
                         'emoji' => '📚',
                         'options' => [
-                            ['emoji' => '🎒', 'text' => 'Tas', 'is_correct' => false],
-                            ['emoji' => '📚', 'text' => 'Buku Cerita', 'is_correct' => true],
-                            ['emoji' => '⏰', 'text' => 'Jam Dinding', 'is_correct' => false],
+                            ['emoji' => '📚', 'text' => 'Karena dengan membaca buku kita belajar banyak ilmu baru yang hebat', 'is_correct' => true],
+                            ['emoji' => '🪟', 'text' => 'Karena bentuknya menyerupai kaca jendela rumah', 'is_correct' => false],
+                            ['emoji' => '🧱', 'text' => 'Karena buku terbuat dari batu bata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat apakah yang digunakan untuk memotong tali atau pola kertas kerajinan tangan?',
+                        'audio' => 'Alat apakah yang digunakan untuk memotong tali atau pola kertas kerajinan tangan?',
+                        'emoji' => '✂️',
+                        'options' => [
+                            ['emoji' => '✂️', 'text' => 'Gunting Kertas Aman', 'is_correct' => true],
+                            ['emoji' => '📏', 'text' => 'Penggaris', 'is_correct' => false],
+                            ['emoji' => '✏️', 'text' => 'Pensil', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di manakah tempat yang tepat untuk meletakkan sepatu saat kita sudah masuk ke dalam rumah?',
+                        'audio' => 'Di manakah tempat yang tepat untuk meletakkan sepatu saat kita sudah masuk ke dalam rumah?',
+                        'emoji' => '👟',
+                        'options' => [
+                            ['emoji' => '👟', 'text' => 'Di rak sepatu tertata dengan rapi', 'is_correct' => true],
+                            ['emoji' => '🛏️', 'text' => 'Di atas tempat tidur', 'is_correct' => false],
+                            ['emoji' => '🍽️', 'text' => 'Di atas meja makan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa anak hebat selalu mandiri merapikan barang-barang miliknya sendiri?',
+                        'audio' => 'Mengapa anak hebat selalu mandiri merapikan barang-barang miliknya sendiri?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena menjadi anak disiplin, teratur, dan membanggakan orang tua', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar rumah menjadi berantakan', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada manfaatnya', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'benda',
+                'level_number' => 3,
+                'title' => 'Grand Champion Ahli Benda & Kemandirian Cilik',
+                'slug' => 'kuis-benda-l3-grand-master-kemandirian',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Benda apakah yang kita gunakan untuk menulis nama kita sendiri di atas buku tulis?',
+                        'audio' => 'Benda apakah yang kita gunakan untuk menulis nama kita sendiri di atas buku tulis?',
+                        'emoji' => '✏️',
+                        'options' => [
+                            ['emoji' => '✏️', 'text' => 'Pensil Menulis Ceria', 'is_correct' => true],
+                            ['emoji' => '✂️', 'text' => 'Gunting Kertas', 'is_correct' => false],
+                            ['emoji' => '🧹', 'text' => 'Sapu Lantai', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah yang paling kita butuhkan saat langit tiba-tiba mendung gelap dan hujan deras turun?',
+                        'audio' => 'Benda apakah yang paling kita butuhkan saat langit tiba-tiba mendung gelap dan hujan deras turun?',
+                        'emoji' => '☂️',
+                        'options' => [
+                            ['emoji' => '☂️', 'text' => 'Payung Pelindung Hujan', 'is_correct' => true],
+                            ['emoji' => '🪞', 'text' => 'Cermin Kaca', 'is_correct' => false],
+                            ['emoji' => '🪑', 'text' => 'Meja Belajar', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah yang membuat kita tahu bahwa sekarang sudah pukul 07.00 pagi waktu masuk sekolah?',
+                        'audio' => 'Benda apakah yang membuat kita tahu bahwa sekarang sudah pukul 07.00 pagi waktu masuk sekolah?',
+                        'emoji' => '⏰',
+                        'options' => [
+                            ['emoji' => '⏰', 'text' => 'Jam Dinding Penunjuk Waktu', 'is_correct' => true],
+                            ['emoji' => '🥛', 'text' => 'Gelas Minum', 'is_correct' => false],
+                            ['emoji' => '👟', 'text' => 'Sepatu Sekolah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah yang menemani kita tidur malam dengan bulu lembut dan bentuk yang lucu?',
+                        'audio' => 'Benda apakah yang menemani kita tidur malam dengan bulu lembut dan bentuk yang lucu?',
+                        'emoji' => '🧸',
+                        'options' => [
+                            ['emoji' => '🧸', 'text' => 'Boneka Beruang Lucu', 'is_correct' => true],
+                            ['emoji' => '✂️', 'text' => 'Gunting Kertas', 'is_correct' => false],
+                            ['emoji' => '🚪', 'text' => 'Pintu Rumah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah posisi yang benar saat kita sedang belajar menulis di atas meja belajar?',
+                        'audio' => 'Bagaimanakah posisi yang benar saat kita sedang belajar menulis di atas meja belajar?',
+                        'emoji' => '🪑',
+                        'options' => [
+                            ['emoji' => '🪑', 'text' => 'Duduk tegak di kursi dengan penerangan lampu yang cukup', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Tiduran di lantai yang gelap', 'is_correct' => false],
+                            ['emoji' => '🏃‍♂️', 'text' => 'Sambil melompat-lompat di atas kasur', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah yang digunakan untuk menyapu daun-daun kering yang jatuh di halaman rumah?',
+                        'audio' => 'Benda apakah yang digunakan untuk menyapu daun-daun kering yang jatuh di halaman rumah?',
+                        'emoji' => '🧹',
+                        'options' => [
+                            ['emoji' => '🧹', 'text' => 'Sapu Pembersih Halaman', 'is_correct' => true],
+                            ['emoji' => '🍴', 'text' => 'Sendok Makan', 'is_correct' => false],
+                            ['emoji' => '📚', 'text' => 'Buku Cerita', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Wadah apakah yang kita pakai untuk membawa kotak bekal makanan dan buku ke sekolah?',
+                        'audio' => 'Wadah apakah yang kita pakai untuk membawa kotak bekal makanan dan buku ke sekolah?',
+                        'emoji' => '🎒',
+                        'options' => [
+                            ['emoji' => '🎒', 'text' => 'Tas Ransel Sekolah', 'is_correct' => true],
+                            ['emoji' => '👝', 'text' => 'Kotak Pensil Kecil', 'is_correct' => false],
+                            ['emoji' => '👟', 'text' => 'Sepatu Olahraga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah yang membuat gigi kita selalu putih, bersih, dan bebas kuman karies?',
+                        'audio' => 'Benda apakah yang membuat gigi kita selalu putih bersih dan bebas kuman karies?',
+                        'emoji' => '🪥',
+                        'options' => [
+                            ['emoji' => '🪥', 'text' => 'Sikat Gigi & Pasta Gigi Sehat', 'is_correct' => true],
+                            ['emoji' => '🖍️', 'text' => 'Krayon Warna', 'is_correct' => false],
+                            ['emoji' => '📏', 'text' => 'Penggaris Lurus', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana perasaan anak pintar saat kamarnya selalu bersih dan barang-barangnya tertata rapi?',
+                        'audio' => 'Bagaimana perasaan anak pintar saat kamarnya selalu bersih dan barang-barangnya tertata rapi?',
+                        'emoji' => '😊',
+                        'options' => [
+                            ['emoji' => '😊', 'text' => 'Sangat senang, nyaman, dan bangga', 'is_correct' => true],
+                            ['emoji' => '😢', 'text' => 'Sedih dan menangis', 'is_correct' => false],
+                            ['emoji' => '😡', 'text' => 'Marah-marah tanpa alasan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apakah yang pantas untuk anak hebat yang pandai merawat dan merapikan semua benda miliknya?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak hebat yang pandai merawat dan merapikan semua benda miliknya?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Juara Cilik Mandiri & Sahabat Benda Ceria!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Kamar Berantakan', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Kamar yang Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
