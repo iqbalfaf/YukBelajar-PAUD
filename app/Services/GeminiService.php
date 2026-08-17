@@ -15,7 +15,7 @@ class GeminiService
     public function __construct()
     {
         $this->apiKey = config('services.gemini.api_key') ?: env('GEMINI_API_KEY');
-        $this->defaultModel = config('services.gemini.model', 'gemini-2.0-flash');
+        $this->defaultModel = config('services.gemini.model', 'gemini-3.5-flash');
     }
 
     /**

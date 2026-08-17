@@ -616,19 +616,24 @@ class AdminController extends Controller
 
         $aiModels = [
             [
-                'id' => 'gemini-2.0-flash',
-                'name' => '⚡ Google Gemini 2.0 Flash (Paling Cepat & Responsif - Direkomendasikan)',
+                'id' => 'gemini-3.5-flash',
+                'name' => '⚡ Google Gemini 3.5 Flash (Paling Cepat & Responsif - Direkomendasikan)',
                 'badge' => 'Ultra Fast',
             ],
             [
-                'id' => 'gemini-1.5-flash',
-                'name' => '🚀 Google Gemini 1.5 Flash (Stabil & Efisien Kuota)',
-                'badge' => 'Standard',
+                'id' => 'gemini-3.5-flash-lite',
+                'name' => '🚀 Google Gemini 3.5 Flash-Lite (Sangat Ringan & Efisien)',
+                'badge' => 'Lite',
             ],
             [
-                'id' => 'gemini-1.5-pro',
-                'name' => '🧠 Google Gemini 1.5 Pro (Penalaran & Multi-Modal Mendalam)',
-                'badge' => 'Advanced',
+                'id' => 'gemini-flash-latest',
+                'name' => '✨ Google Gemini Flash Latest (Model Flash Terbaru)',
+                'badge' => 'Latest',
+            ],
+            [
+                'id' => 'gemini-3.1-flash-lite',
+                'name' => '🧠 Google Gemini 3.1 Flash-Lite (Stabil)',
+                'badge' => 'Standard',
             ],
         ];
 
@@ -636,7 +641,7 @@ class AdminController extends Controller
 
         $adminData = [
             'is_configured' => $isGeminiConfigured,
-            'default_model' => config('services.gemini.model', 'gemini-2.0-flash'),
+            'default_model' => config('services.gemini.model', 'gemini-3.5-flash'),
             'sample_ai_preview' => [
                 'category_slug' => 'hewan',
                 'category_name' => 'Pulau Hewan 🦁',
