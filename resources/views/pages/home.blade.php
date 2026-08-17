@@ -194,52 +194,58 @@
         <!-- Pillar 1: Mengenal -->
         <button type="button" 
                 @click="switchPillar('mengenal')"
-                class="card-bubbly p-4 sm:p-5 rounded-3xl border-4 flex items-center gap-4 transition-all cursor-pointer text-left relative overflow-hidden"
-                :class="activePillar === 'mengenal' ? 'border-emerald-400 bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md scale-[1.02]' : 'border-slate-200 bg-white hover:border-emerald-300 text-slate-800'">
+                class="p-4 sm:p-5 rounded-3xl border-4 flex items-center gap-4 transition-all cursor-pointer text-left relative overflow-hidden shadow-xs hover:shadow-md"
+                :class="activePillar === 'mengenal' ? 'border-emerald-500 bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg ring-4 ring-emerald-200 scale-[1.02]' : 'border-slate-200 bg-white hover:border-emerald-300 text-slate-800 hover:bg-emerald-50/40'">
             <span class="text-5xl shrink-0 animate-bounce-slow">🌟</span>
             <div>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide"
-                      :class="activePillar === 'mengenal' ? 'bg-white/20 text-white' : 'bg-emerald-100 text-emerald-800'">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide inline-block"
+                      :class="activePillar === 'mengenal' ? 'bg-white/25 text-white border border-white/40' : 'bg-emerald-100 text-emerald-800 border border-emerald-200'">
                     10 Topik Eksplorasi
                 </span>
-                <h3 class="text-lg sm:text-xl font-black font-heading leading-tight mt-1">Zona Mengenal</h3>
-                <p class="text-xs font-semibold opacity-90 line-clamp-1">Hewan, Buah, Bendera, Tubuh, dll.</p>
+                <h3 class="text-lg sm:text-xl font-black font-heading leading-tight mt-1"
+                    :class="activePillar === 'mengenal' ? 'text-white' : 'text-slate-800'">Zona Mengenal</h3>
+                <p class="text-xs font-bold line-clamp-1 mt-0.5"
+                   :class="activePillar === 'mengenal' ? 'text-emerald-50' : 'text-slate-500'">Hewan, Buah, Bendera, Tubuh, dll.</p>
             </div>
-            <div x-show="activePillar === 'mengenal'" class="absolute -right-4 -bottom-4 text-6xl opacity-15">⭐</div>
+            <div x-show="activePillar === 'mengenal'" class="absolute -right-4 -bottom-4 text-6xl opacity-20 text-white pointer-events-none">⭐</div>
         </button>
 
         <!-- Pillar 2: Membaca -->
         <button type="button" 
                 @click="switchPillar('membaca')"
-                class="card-bubbly p-4 sm:p-5 rounded-3xl border-4 flex items-center gap-4 transition-all cursor-pointer text-left relative overflow-hidden"
-                :class="activePillar === 'membaca' ? 'border-sky-400 bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-md scale-[1.02]' : 'border-slate-200 bg-white hover:border-sky-300 text-slate-800'">
+                class="p-4 sm:p-5 rounded-3xl border-4 flex items-center gap-4 transition-all cursor-pointer text-left relative overflow-hidden shadow-xs hover:shadow-md"
+                :class="activePillar === 'membaca' ? 'border-sky-500 bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg ring-4 ring-sky-200 scale-[1.02]' : 'border-slate-200 bg-white hover:border-sky-300 text-slate-800 hover:bg-sky-50/40'">
             <span class="text-5xl shrink-0 animate-bounce-slow">📖</span>
             <div>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide"
-                      :class="activePillar === 'membaca' ? 'bg-white/20 text-white' : 'bg-sky-100 text-sky-800'">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide inline-block"
+                      :class="activePillar === 'membaca' ? 'bg-white/25 text-white border border-white/40' : 'bg-sky-100 text-sky-800 border border-sky-200'">
                     5 Topik Literasi
                 </span>
-                <h3 class="text-lg sm:text-xl font-black font-heading leading-tight mt-1">Zona Membaca</h3>
-                <p class="text-xs font-semibold opacity-90 line-clamp-1">Vokal, 2 Suku Kata, Cerita Pendek</p>
+                <h3 class="text-lg sm:text-xl font-black font-heading leading-tight mt-1"
+                    :class="activePillar === 'membaca' ? 'text-white' : 'text-slate-800'">Zona Membaca</h3>
+                <p class="text-xs font-bold line-clamp-1 mt-0.5"
+                   :class="activePillar === 'membaca' ? 'text-sky-50' : 'text-slate-500'">Vokal, 2 Suku Kata, Cerita Pendek</p>
             </div>
-            <div x-show="activePillar === 'membaca'" class="absolute -right-4 -bottom-4 text-6xl opacity-15">📚</div>
+            <div x-show="activePillar === 'membaca'" class="absolute -right-4 -bottom-4 text-6xl opacity-20 text-white pointer-events-none">📚</div>
         </button>
 
         <!-- Pillar 3: Menghitung -->
         <button type="button" 
                 @click="switchPillar('menghitung')"
-                class="card-bubbly p-4 sm:p-5 rounded-3xl border-4 flex items-center gap-4 transition-all cursor-pointer text-left relative overflow-hidden"
-                :class="activePillar === 'menghitung' ? 'border-purple-400 bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-md scale-[1.02]' : 'border-slate-200 bg-white hover:border-purple-300 text-slate-800'">
+                class="p-4 sm:p-5 rounded-3xl border-4 flex items-center gap-4 transition-all cursor-pointer text-left relative overflow-hidden shadow-xs hover:shadow-md"
+                :class="activePillar === 'menghitung' ? 'border-purple-500 bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg ring-4 ring-purple-200 scale-[1.02]' : 'border-slate-200 bg-white hover:border-purple-300 text-slate-800 hover:bg-purple-50/40'">
             <span class="text-5xl shrink-0 animate-bounce-slow">🧮</span>
             <div>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide"
-                      :class="activePillar === 'menghitung' ? 'bg-white/20 text-white' : 'bg-purple-100 text-purple-800'">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide inline-block"
+                      :class="activePillar === 'menghitung' ? 'bg-white/25 text-white border border-white/40' : 'bg-purple-100 text-purple-800 border border-purple-200'">
                     5 Topik Numerasi
                 </span>
-                <h3 class="text-lg sm:text-xl font-black font-heading leading-tight mt-1">Zona Menghitung</h3>
-                <p class="text-xs font-semibold opacity-90 line-clamp-1">Membilang, Tambah, Kurang & Pola</p>
+                <h3 class="text-lg sm:text-xl font-black font-heading leading-tight mt-1"
+                    :class="activePillar === 'menghitung' ? 'text-white' : 'text-slate-800'">Zona Menghitung</h3>
+                <p class="text-xs font-bold line-clamp-1 mt-0.5"
+                   :class="activePillar === 'menghitung' ? 'text-purple-50' : 'text-slate-500'">Membilang, Tambah, Kurang & Pola</p>
             </div>
-            <div x-show="activePillar === 'menghitung'" class="absolute -right-4 -bottom-4 text-6xl opacity-15">🎈</div>
+            <div x-show="activePillar === 'menghitung'" class="absolute -right-4 -bottom-4 text-6xl opacity-20 text-white pointer-events-none">🎈</div>
         </button>
 
     </div>
