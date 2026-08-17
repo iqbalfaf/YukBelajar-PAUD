@@ -7988,33 +7988,665 @@ class QuizSeeder extends Seeder
             // =========================================================================
             // PILAR 2: ZONA BELAJAR MEMBACA
             // =========================================================================
+            // =========================================================================
+            // PILAR 2 - TOPIK 1: HURUF VOKAL & FONIK CERIA (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (PENGENALAN 5 VOKAL DASAR A, I, U, E, O) ---
             [
                 'category_slug' => 'huruf-vokal',
-                'title' => 'Tebak Bunyi Huruf Vokal',
-                'slug' => 'kuis-huruf-vokal',
+                'level_number' => 1,
+                'title' => 'Vokal A, I & Bentuk Mulut Terbuka Ceria',
+                'slug' => 'kuis-vokal-l1-a-i-mulut-ceria',
                 'icon_emoji' => '🅰️',
-                'target_age' => 4,
-                'total_questions' => 2,
+                'target_age' => 3,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Huruf vokal apakah yang dibunyikan dengan tersenyum lebar: Iii?',
-                        'audio' => 'Huruf vokal apakah yang dibunyikan dengan tersenyum lebar: Iii?',
+                        'text' => 'Huruf vokal apakah yang dibunyikan dengan membuka mulut lebar: Aaaa seperti pada kata Apel?',
+                        'audio' => 'Huruf vokal apakah yang dibunyikan dengan membuka mulut lebar: Aaaa seperti pada kata Apel?',
+                        'emoji' => '🅰️',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Huruf Vokal A', 'is_correct' => true],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Huruf O', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal apakah yang dibunyikan dengan menarik senyum lebar: Iiii seperti pada kata Ikan?',
+                        'audio' => 'Huruf vokal apakah yang dibunyikan dengan menarik senyum lebar: Iiii seperti pada kata Ikan?',
                         'emoji' => 'ℹ️',
                         'options' => [
-                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => true],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf Vokal I', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'Huruf U', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gambar buah segar apakah yang diawali oleh huruf vokal A?',
+                        'audio' => 'Gambar buah segar apakah yang diawali oleh huruf vokal A?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '🍎', 'text' => 'Buah Apel Merah', 'is_correct' => true],
+                            ['emoji' => '🍌', 'text' => 'Pisang', 'is_correct' => false],
+                            ['emoji' => '🍇', 'text' => 'Anggur', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'huruf-vokal',
+                'level_number' => 1,
+                'title' => 'Vokal U, E & O Bibir Membulat',
+                'slug' => 'kuis-vokal-l1-u-e-o-bulat',
+                'icon_emoji' => '☂️',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Huruf vokal apakah yang dibunyikan dengan memajukan bibir ke depan: Uuuu seperti pada kata Unta?',
+                        'audio' => 'Huruf vokal apakah yang dibunyikan dengan memajukan bibir ke depan: Uuuu seperti pada kata Unta?',
+                        'emoji' => '☂️',
+                        'options' => [
+                            ['emoji' => '☂️', 'text' => 'Huruf Vokal U', 'is_correct' => true],
+                            ['emoji' => '📧', 'text' => 'Huruf E', 'is_correct' => false],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal apakah yang dibunyikan santai seperti pada kata Ember dan Es Krim?',
+                        'audio' => 'Huruf vokal apakah yang dibunyikan santai seperti pada kata Ember dan Es Krim?',
+                        'emoji' => '📧',
+                        'options' => [
+                            ['emoji' => '📧', 'text' => 'Huruf Vokal E', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Huruf O', 'is_correct' => false],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal apakah yang berbentuk bulat sempurna dan dibunyikan: Oooo seperti pada kata Obat?',
+                        'audio' => 'Huruf vokal apakah yang berbentuk bulat sempurna dan dibunyikan: Oooo seperti pada kata Obat?',
+                        'emoji' => '⭕',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Huruf Vokal O', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'Huruf U', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'huruf-vokal',
+                'level_number' => 1,
+                'title' => 'Paduan 5 Huruf Vokal A-I-U-E-O Cilik',
+                'slug' => 'kuis-vokal-l1-paduan-aiueo',
+                'icon_emoji' => '🎶',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Berapakah total jumlah huruf vokal utama dalam abjad bahasa Indonesia?',
+                        'audio' => 'Berapakah total jumlah huruf vokal utama dalam abjad bahasa Indonesia?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '5️⃣', 'text' => '5 Huruf Vokal (A, I, U, E, O)', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '3 Huruf Vokal', 'is_correct' => false],
+                            ['emoji' => '🔟', 'text' => '10 Huruf Vokal', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal manakah yang terdapat pada kata "IBU"?',
+                        'audio' => 'Huruf vokal manakah yang terdapat pada kata "IBU"?',
+                        'emoji' => '👩',
+                        'options' => [
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I dan Huruf U', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A saja', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Huruf O saja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gambar hewan laut apakah yang diawali oleh huruf vokal U?',
+                        'audio' => 'Gambar hewan laut apakah yang diawali oleh huruf vokal U?',
+                        'emoji' => '🦐',
+                        'options' => [
+                            ['emoji' => '🦐', 'text' => 'Udang Segar', 'is_correct' => true],
+                            ['emoji' => '🦁', 'text' => 'Singa', 'is_correct' => false],
+                            ['emoji' => '🐘', 'text' => 'Gajah', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (PASANGAN VOKAL, ARTIKULASI & FONIK) ---
+            [
+                'category_slug' => 'huruf-vokal',
+                'level_number' => 2,
+                'title' => 'Pasangan Vokal A-I & U-E Ceria',
+                'slug' => 'kuis-vokal-l2-pasangan-ai-ue',
+                'icon_emoji' => '🍎',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Huruf vokal pertama pada kata "A-P-I" (Api) adalah...?',
+                        'audio' => 'Huruf vokal pertama pada kata Api adalah apa?',
+                        'emoji' => '🔥',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Huruf Vokal A', 'is_correct' => true],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'Huruf U', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal kedua pada kata "A-I-R" (Air) adalah...?',
+                        'audio' => 'Huruf vokal kedua pada kata Air adalah apa?',
+                        'emoji' => '💧',
+                        'options' => [
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf Vokal I', 'is_correct' => true],
                             ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
                             ['emoji' => '⭕', 'text' => 'Huruf O', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Huruf vokal apakah yang dibunyikan dengan bibir membulat ke depan: Uuu?',
-                        'audio' => 'Huruf vokal apakah yang dibunyikan dengan bibir membulat ke depan: Uuu?',
-                        'emoji' => '☂️',
+                        'text' => 'Kata benda "E-M-B-E-R" diawali oleh huruf vokal...?',
+                        'audio' => 'Kata benda Ember diawali oleh huruf vokal apa?',
+                        'emoji' => '🪣',
                         'options' => [
-                            ['emoji' => '📧', 'text' => 'Huruf E', 'is_correct' => false],
-                            ['emoji' => '☂️', 'text' => 'Huruf U', 'is_correct' => true],
+                            ['emoji' => '📧', 'text' => 'Huruf Vokal E', 'is_correct' => true],
                             ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'Huruf U', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan melata "U-L-A-R" diawali oleh huruf vokal...?',
+                        'audio' => 'Hewan melata Ular diawali oleh huruf vokal apa?',
+                        'emoji' => '🐍',
+                        'options' => [
+                            ['emoji' => '☂️', 'text' => 'Huruf Vokal U', 'is_correct' => true],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Huruf O', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gerakan mulut seperti apakah saat kita membunyikan huruf vokal O?',
+                        'audio' => 'Gerakan mulut seperti apakah saat kita membunyikan huruf vokal O?',
+                        'emoji' => '⭕',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Bibir membulat seperti lingkaran bulat', 'is_correct' => true],
+                            ['emoji' => '👄', 'text' => 'Mulut tertutup rapat', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Menguap tidur', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'huruf-vokal',
+                'level_number' => 2,
+                'title' => 'Pasangan Vokal O-A & Senam Artikulasi Fonik',
+                'slug' => 'kuis-vokal-l2-pasangan-oa-artikulasi',
+                'icon_emoji' => '🏐',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Kata "O-B-O-R" memiliki dua huruf vokal yang sama, yaitu huruf...?',
+                        'audio' => 'Kata Obor memiliki dua huruf vokal yang sama yaitu huruf apa?',
+                        'emoji' => '🕯️',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Huruf Vokal O', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kata "A-W-A-N" di langit cerah diawali oleh huruf vokal...?',
+                        'audio' => 'Kata Awan di langit cerah diawali oleh huruf vokal apa?',
+                        'emoji' => '☁️',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Huruf Vokal A', 'is_correct' => true],
+                            ['emoji' => '☂️', 'text' => 'Huruf U', 'is_correct' => false],
+                            ['emoji' => '📧', 'text' => 'Huruf E', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara kata-kata berikut, manakah yang DIAWALI huruf vokal I?',
+                        'audio' => 'Di antara kata-kata berikut manakah yang diawali huruf vokal I?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '🐟', 'text' => 'Ikan Berenang', 'is_correct' => true],
+                            ['emoji' => '🐱', 'text' => 'Kucing', 'is_correct' => false],
+                            ['emoji' => '🐶', 'text' => 'Anjing', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara kata-kata berikut, manakah yang DIAWALI huruf vokal E?',
+                        'audio' => 'Di antara kata-kata berikut manakah yang diawali huruf vokal E?',
+                        'emoji' => '🦅',
+                        'options' => [
+                            ['emoji' => '🦅', 'text' => 'Elang Terbang', 'is_correct' => true],
+                            ['emoji' => '🐅', 'text' => 'Harimau', 'is_correct' => false],
+                            ['emoji' => '🐒', 'text' => 'Monyet', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Urutan lima huruf vokal yang benar dari awal adalah...?',
+                        'audio' => 'Urutan lima huruf vokal yang benar dari awal adalah apa?',
+                        'emoji' => '🎶',
+                        'options' => [
+                            ['emoji' => '🎶', 'text' => 'A - I - U - E - O', 'is_correct' => true],
+                            ['emoji' => '🔤', 'text' => 'O - E - U - I - A', 'is_correct' => false],
+                            ['emoji' => '🔡', 'text' => 'B - C - D - F - G', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'huruf-vokal',
+                'level_number' => 2,
+                'title' => 'Irama Melodi & Petualangan Bunyi Vokal',
+                'slug' => 'kuis-vokal-l2-irama-melodi-bunyi',
+                'icon_emoji' => '🎤',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Huruf vokal manakah yang ada di dalam kata "B-O-L-A"?',
+                        'audio' => 'Huruf vokal manakah yang ada di dalam kata BOLA?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Huruf O dan Huruf A', 'is_correct' => true],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I saja', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'Huruf U saja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal manakah yang ada di dalam kata "B-U-K-U"?',
+                        'audio' => 'Huruf vokal manakah yang ada di dalam kata BUKU?',
+                        'emoji' => '📖',
+                        'options' => [
+                            ['emoji' => '☂️', 'text' => 'Huruf U (Dua Huruf U)', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => '📧', 'text' => 'Huruf E', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal manakah yang ada di dalam kata "S-A-P-I"?',
+                        'audio' => 'Huruf vokal manakah yang ada di dalam kata SAPI?',
+                        'emoji' => '🐄',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Huruf A dan Huruf I', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Huruf O', 'is_correct' => false],
+                            ['emoji' => '📧', 'text' => 'Huruf E', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal manakah yang ada di dalam kata "M-E-J-A"?',
+                        'audio' => 'Huruf vokal manakah yang ada di dalam kata MEJA?',
+                        'emoji' => '🪑',
+                        'options' => [
+                            ['emoji' => '📧', 'text' => 'Huruf E dan Huruf A', 'is_correct' => true],
+                            ['emoji' => '☂️', 'text' => 'Huruf U', 'is_correct' => false],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita harus membunyikan huruf vokal dengan jelas saat belajar membaca?',
+                        'audio' => 'Mengapa kita harus membunyikan huruf vokal dengan jelas saat belajar membaca?',
+                        'emoji' => '🗣️',
+                        'options' => [
+                            ['emoji' => '🗣️', 'text' => 'Agar kata terdengar jelas, benar, dan mudah dipahami orang lain', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar cepat mengantuk', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak perlu jelas', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (AWALAN, AKHIRAN & MERANGKAI KATA VOKAL) ---
+            [
+                'category_slug' => 'huruf-vokal',
+                'level_number' => 3,
+                'title' => 'Awalan & Akhiran Kata Huruf Vokal',
+                'slug' => 'kuis-vokal-l3-awalan-akhiran-vokal',
+                'icon_emoji' => '✨',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok kata yang SEMUANYA diawali oleh huruf vokal?',
+                        'audio' => 'Manakah kelompok kata yang semuanya diawali oleh huruf vokal?',
+                        'emoji' => '🅰️',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Apel, Ikan, Udang, Ember, Obor', 'is_correct' => true],
+                            ['emoji' => '⚽', 'text' => 'Bola, Buku, Kuda', 'is_correct' => false],
+                            ['emoji' => '🚗', 'text' => 'Mobil, Sepeda, Kereta', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal apakah yang terletak di awal kata "U-D-A-R-A"?',
+                        'audio' => 'Huruf vokal apakah yang terletak di awal kata UDARA?',
+                        'emoji' => '💨',
+                        'options' => [
+                            ['emoji' => '☂️', 'text' => 'Huruf Vokal U', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal apakah yang terletak di akhir kata "S-E-P-A-T-U"?',
+                        'audio' => 'Huruf vokal apakah yang terletak di akhir kata SEPATU?',
+                        'emoji' => '👟',
+                        'options' => [
+                            ['emoji' => '☂️', 'text' => 'Huruf Vokal U', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => '📧', 'text' => 'Huruf E', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal apakah yang terletak di akhir kata "C-E-L-A-N-A"?',
+                        'audio' => 'Huruf vokal apakah yang terletak di akhir kata CELANA?',
+                        'emoji' => '👖',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Huruf Vokal A', 'is_correct' => true],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Huruf O', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal apakah yang terletak di akhir kata "P-I-A-N-O"?',
+                        'audio' => 'Huruf vokal apakah yang terletak di akhir kata PIANO?',
+                        'emoji' => '🎹',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Huruf Vokal O', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf vokal apakah yang terletak di akhir kata "T-O-P-I"?',
+                        'audio' => 'Huruf vokal apakah yang terletak di akhir kata TOPI?',
+                        'emoji' => '🧢',
+                        'options' => [
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf Vokal I', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'Huruf U', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah huruf vokal pada kata "S-E-M-A-N-G-A-T"?',
+                        'audio' => 'Berapakah jumlah huruf vokal pada kata SEMANGAT?',
+                        'emoji' => '💪',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => '3 Huruf Vokal (E, A, A)', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Huruf Vokal', 'is_correct' => false],
+                            ['emoji' => '5️⃣', 'text' => '5 Huruf Vokal', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah huruf vokal pada kata "I-N-D-O-N-E-S-I-A"?',
+                        'audio' => 'Berapakah jumlah huruf vokal pada kata INDONESIA?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '5️⃣', 'text' => '5 Huruf Vokal (I, O, E, I, A)', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Huruf Vokal', 'is_correct' => false],
+                            ['emoji' => '3️⃣', 'text' => '3 Huruf Vokal', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara kata-kata berikut, manakah yang berakhiran huruf vokal E?',
+                        'audio' => 'Di antara kata-kata berikut manakah yang berakhiran huruf vokal E?',
+                        'emoji' => '☕',
+                        'options' => [
+                            ['emoji' => '☕', 'text' => 'Jahe Manis', 'is_correct' => true],
+                            ['emoji' => '🍎', 'text' => 'Apel', 'is_correct' => false],
+                            ['emoji' => '🐟', 'text' => 'Ikan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa huruf vokal sangat penting dalam setiap kata yang kita ucapkan?',
+                        'audio' => 'Mengapa huruf vokal sangat penting dalam setiap kata yang kita ucapkan?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena huruf vokal memberi suara hidup pada huruf konsonan agar bisa dibaca', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Tidak ada gunanya', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Hanya hiasan huruf', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'huruf-vokal',
+                'level_number' => 3,
+                'title' => 'Eksplorasi Vokal Rangkap & Suku Kata Dasar',
+                'slug' => 'kuis-vokal-l3-vokal-rangkap-suku-kata',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Dua huruf vokal yang berdampingan pada kata "T-U-P-A-I" adalah...?',
+                        'audio' => 'Dua huruf vokal yang berdampingan pada kata TUPAI adalah apa?',
+                        'emoji' => '🐿️',
+                        'options' => [
+                            ['emoji' => '🐿️', 'text' => 'Huruf A dan I (Ai)', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Huruf O dan U', 'is_correct' => false],
+                            ['emoji' => '📧', 'text' => 'Huruf E dan O', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Dua huruf vokal yang berdampingan pada kata "D-A-U-N" adalah...?',
+                        'audio' => 'Dua huruf vokal yang berdampingan pada kata DAUN adalah apa?',
+                        'emoji' => '🍃',
+                        'options' => [
+                            ['emoji' => '🍃', 'text' => 'Huruf A dan U (Au)', 'is_correct' => true],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I dan E', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Huruf O dan A', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Dua huruf vokal yang berdampingan pada kata "K-O-B-O-I" adalah...?',
+                        'audio' => 'Dua huruf vokal yang berdampingan pada kata KOBOI adalah apa?',
+                        'emoji' => '🤠',
+                        'options' => [
+                            ['emoji' => '🤠', 'text' => 'Huruf O dan I (Oi)', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A dan U', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'Huruf U dan E', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata dari huruf B yang digabung dengan huruf vokal A dibaca...?',
+                        'audio' => 'Suku kata dari huruf B yang digabung dengan huruf vokal A dibaca apa?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'BA', 'is_correct' => true],
+                            ['emoji' => 'ℹ️', 'text' => 'BI', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'BU', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata dari huruf B yang digabung dengan huruf vokal I dibaca...?',
+                        'audio' => 'Suku kata dari huruf B yang digabung dengan huruf vokal I dibaca apa?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => 'ℹ️', 'text' => 'BI', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'BA', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'BO', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata dari huruf B yang digabung dengan huruf vokal U dibaca...?',
+                        'audio' => 'Suku kata dari huruf B yang digabung dengan huruf vokal U dibaca apa?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => '☂️', 'text' => 'BU', 'is_correct' => true],
+                            ['emoji' => '📧', 'text' => 'BE', 'is_correct' => false],
+                            ['emoji' => '🅰️', 'text' => 'BA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata dari huruf B yang digabung dengan huruf vokal E dibaca...?',
+                        'audio' => 'Suku kata dari huruf B yang digabung dengan huruf vokal E dibaca apa?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => '📧', 'text' => 'BE', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'BO', 'is_correct' => false],
+                            ['emoji' => 'ℹ️', 'text' => 'BI', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata dari huruf B yang digabung dengan huruf vokal O dibaca...?',
+                        'audio' => 'Suku kata dari huruf B yang digabung dengan huruf vokal O dibaca apa?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'BO', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'BA', 'is_correct' => false],
+                            ['emoji' => '☂️', 'text' => 'BU', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "BA" digabung dengan suku kata "JU", akan membentuk kata...?',
+                        'audio' => 'Jika suku kata BA digabung dengan suku kata JU akan membentuk kata apa?',
+                        'emoji' => '👕',
+                        'options' => [
+                            ['emoji' => '👕', 'text' => 'BAJU', 'is_correct' => true],
+                            ['emoji' => '⚽', 'text' => 'BOLA', 'is_correct' => false],
+                            ['emoji' => '📖', 'text' => 'BUKU', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "GI" digabung dengan suku kata "GI", akan membentuk kata...?',
+                        'audio' => 'Jika suku kata GI digabung dengan suku kata GI akan membentuk kata apa?',
+                        'emoji' => '🦷',
+                        'options' => [
+                            ['emoji' => '🦷', 'text' => 'GIGI', 'is_correct' => true],
+                            ['emoji' => '👃', 'text' => 'HIDUNG', 'is_correct' => false],
+                            ['emoji' => '👀', 'text' => 'MATA', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'huruf-vokal',
+                'level_number' => 3,
+                'title' => 'Grand Champion Ahli Fonik & Huruf Vokal Cilik',
+                'slug' => 'kuis-vokal-l3-grand-master-vokal',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Sebutkan 5 huruf vokal utama secara berurutan dan lengkap!',
+                        'audio' => 'Sebutkan 5 huruf vokal utama secara berurutan dan lengkap!',
+                        'emoji' => '🎶',
+                        'options' => [
+                            ['emoji' => '🎶', 'text' => 'A, I, U, E, O', 'is_correct' => true],
+                            ['emoji' => '🔤', 'text' => 'B, C, D, F, G', 'is_correct' => false],
+                            ['emoji' => '🔡', 'text' => 'K, L, M, N, P', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kata "A-P-E-L" memiliki dua huruf vokal yaitu huruf...?',
+                        'audio' => 'Kata APEL memiliki dua huruf vokal yaitu huruf apa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '🍎', 'text' => 'Huruf A dan Huruf E', 'is_correct' => true],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I dan Huruf U', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Huruf O dan Huruf A', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kata "G-U-R-U" memiliki dua huruf vokal yang sama yaitu huruf...?',
+                        'audio' => 'Kata GURU memiliki dua huruf vokal yang sama yaitu huruf apa?',
+                        'emoji' => '👩‍🏫',
+                        'options' => [
+                            ['emoji' => '☂️', 'text' => 'Huruf U dan Huruf U', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A dan Huruf A', 'is_correct' => false],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I dan Huruf I', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kata benda yang diawali huruf vokal O?',
+                        'audio' => 'Manakah kata benda yang diawali huruf vokal O?',
+                        'emoji' => '🕯️',
+                        'options' => [
+                            ['emoji' => '🕯️', 'text' => 'Obor Terang', 'is_correct' => true],
+                            ['emoji' => '👓', 'text' => 'Kacamata', 'is_correct' => false],
+                            ['emoji' => '👟', 'text' => 'Sepatu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah hewan lucu yang namanya diawali huruf vokal U?',
+                        'audio' => 'Manakah hewan lucu yang namanya diawali huruf vokal U?',
+                        'emoji' => '🐛',
+                        'options' => [
+                            ['emoji' => '🐛', 'text' => 'Ulat Bulu Ceria', 'is_correct' => true],
+                            ['emoji' => '🐘', 'text' => 'Gajah', 'is_correct' => false],
+                            ['emoji' => '🦒', 'text' => 'Jerapah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah hewan unggas yang namanya diawali huruf vokal A?',
+                        'audio' => 'Manakah hewan unggas yang namanya diawali huruf vokal A?',
+                        'emoji' => '🐔',
+                        'options' => [
+                            ['emoji' => '🐔', 'text' => 'Ayam Jago', 'is_correct' => true],
+                            ['emoji' => '🐱', 'text' => 'Kucing', 'is_correct' => false],
+                            ['emoji' => '🐶', 'text' => 'Anjing', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah hewan air yang namanya diawali huruf vokal I?',
+                        'audio' => 'Manakah hewan air yang namanya diawali huruf vokal I?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '🐟', 'text' => 'Ikan Emas', 'is_correct' => true],
+                            ['emoji' => '🐎', 'text' => 'Kuda', 'is_correct' => false],
+                            ['emoji' => '🐄', 'text' => 'Sapi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah burung perkasa yang namanya diawali huruf vokal E?',
+                        'audio' => 'Manakah burung perkasa yang namanya diawali huruf vokal E?',
+                        'emoji' => '🦅',
+                        'options' => [
+                            ['emoji' => '🦅', 'text' => 'Burung Elang', 'is_correct' => true],
+                            ['emoji' => '🐧', 'text' => 'Pinguin', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Bebek', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa anak yang mahir mengenali bunyi huruf vokal akan lebih cepat membaca buku cerita?',
+                        'audio' => 'Mengapa anak yang mahir mengenali bunyi huruf vokal akan lebih cepat membaca buku cerita?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena huruf vokal adalah pondasi utama dalam mengeja dan membaca seluruh kata', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Tidak ada pengaruhnya', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Hanya buang waktu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apakah yang pantas untuk anak pintar yang sudah menguasai seluruh bunyi dan bentuk huruf vokal?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak pintar yang sudah menguasai seluruh bunyi dan bentuk huruf vokal?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Bintang Cilik Ahli Fonik & Sahabat Huruf Vokal!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Malas Mengeja', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Huruf yang Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
