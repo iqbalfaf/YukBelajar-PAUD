@@ -136,7 +136,7 @@
 
                         <a href="{{ route('admin.ai-generator') }}" @click="mobileSidebarOpen = false"
                            class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all {{ request()->routeIs('admin.ai-generator') ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-700 hover:bg-purple-50 hover:text-purple-700' }}">
-                            <x-gemini-icon class="w-5 h-5 shrink-0" />
+                            <span class="text-lg">✨</span>
                             <div class="flex items-center justify-between flex-1">
                                 <span>AI Gemini Studio</span>
                                 <span class="px-1.5 py-0.5 bg-purple-200 text-purple-900 rounded text-[9px] font-black uppercase">AI</span>
@@ -211,7 +211,7 @@
 
                 <a href="{{ route('admin.ai-generator') }}" 
                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm transition-all {{ request()->routeIs('admin.ai-generator') ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-600 hover:bg-purple-50 hover:text-purple-700' }}">
-                    <x-gemini-icon class="w-5 h-5 shrink-0" />
+                    <span class="text-lg">✨</span>
                     <div class="flex items-center justify-between flex-1">
                         <span>AI Gemini Studio</span>
                         <span class="px-1.5 py-0.5 bg-purple-200 text-purple-900 rounded text-[9px] font-black uppercase">AI</span>

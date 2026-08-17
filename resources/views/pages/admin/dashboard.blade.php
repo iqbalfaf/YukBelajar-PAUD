@@ -68,7 +68,7 @@
 
             <a href="{{ route('admin.ai-generator') }}" 
                class="py-3 px-4 bg-yellow-400 hover:bg-yellow-300 text-yellow-950 font-black text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 hover:shadow-md hover:-translate-y-0.5">
-                <x-gemini-icon class="w-4 h-4 shrink-0" />
+                <span class="text-sm">✨</span>
                 <span class="truncate">1-Click AI Studio</span>
             </a>
         </div>
@@ -265,17 +265,22 @@
 
         <!-- Right 5 Cols: Category Mastery Distribution Progress Bars -->
         <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-xs flex flex-col justify-between">
-            <div class="mb-3">
-                <h3 class="text-lg font-bold font-heading text-slate-800 flex items-center gap-2">
-                    <span>🎯</span>
-                    <span>Tingkat Ketuntasan per Kategori</span>
-                </h3>
+            <div class="mb-2">
+                <div class="flex items-center justify-between gap-2">
+                    <h3 class="text-lg font-bold font-heading text-slate-800 flex items-center gap-2">
+                        <span>🎯</span>
+                        <span>Tingkat Ketuntasan per Kategori</span>
+                    </h3>
+                    <span class="px-2.5 py-0.5 bg-sky-50 text-sky-700 border border-sky-200 rounded-full text-[11px] font-black shrink-0"
+                          x-text="(chartAnalytics.category_distribution ? chartAnalytics.category_distribution.length : 0) + ' Topik'"></span>
+                </div>
                 <p class="text-xs font-bold text-slate-400 mt-0.5">Rerata skor kuis dan materi aktif yang diselesaikan siswa.</p>
             </div>
 
-            <div class="flex flex-col gap-3 my-auto">
+            <!-- Scrollable Category List with Fixed Max Height Matching the Left Chart (No Stretched Layout) -->
+            <div class="flex flex-col gap-2 my-2 h-56 overflow-y-auto pr-1.5 space-y-1">
                 <template x-for="(cat, idx) in chartAnalytics.category_distribution" :key="idx">
-                    <div class="flex flex-col gap-1">
+                    <div class="flex flex-col gap-1 bg-slate-50/80 hover:bg-slate-100/80 transition-colors p-2 rounded-xl border border-slate-200/60">
                         <div class="flex items-center justify-between text-xs font-bold">
                             <span class="text-slate-800 flex items-center gap-1.5 truncate">
                                 <span x-text="cat.icon"></span>
@@ -285,7 +290,7 @@
                                   x-text="cat.pct + '% (' + cat.quizzes + ' Kuis, ' + cat.materials + ' Kartu)'">
                             </span>
                         </div>
-                        <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                        <div class="w-full bg-slate-200/80 rounded-full h-2 overflow-hidden">
                             <div class="h-full rounded-full transition-all duration-500"
                                  :class="cat.bg_bar"
                                  :style="'width: ' + Math.max(4, cat.pct) + '%;'">
@@ -296,8 +301,8 @@
             </div>
 
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-700">
-                <span>Kategori Terpopuler: <b class="text-slate-800" x-text="chartAnalytics.category_distribution[0] ? chartAnalytics.category_distribution[0].name : '-'"></b></span>
-                <a href="{{ route('admin.quizzes') }}" class="hover:underline">Kelola Kuis →</a>
+                <span class="truncate">Kategori Terpopuler: <b class="text-slate-800" x-text="chartAnalytics.category_distribution[0] ? chartAnalytics.category_distribution[0].name : '-'"></b></span>
+                <a href="{{ route('admin.quizzes') }}" class="hover:underline shrink-0 ml-2">Kelola Kuis →</a>
             </div>
         </div>
 

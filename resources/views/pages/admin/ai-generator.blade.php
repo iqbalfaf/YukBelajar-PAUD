@@ -152,7 +152,7 @@
     <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-sm border border-purple-800 flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
             <div class="flex items-center gap-2 mb-2">
-                <x-gemini-icon class="w-8 h-8 shrink-0 animate-bounce-slow" />
+                <span class="text-3xl shrink-0 animate-bounce-slow">✨</span>
                 <span class="px-3 py-1 bg-purple-500/30 border border-purple-400/40 text-purple-200 rounded-full text-xs font-black uppercase tracking-wider">
                     Fitur Eksklusif Multi-Modal Gemini AI
                 </span>
@@ -303,7 +303,7 @@
                 class="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold text-base rounded-2xl shadow-md transition-all flex items-center justify-center gap-3 cursor-pointer hover:shadow-lg disabled:opacity-50">
             <template x-if="!isGenerating">
                 <div class="flex items-center gap-2">
-                    <x-gemini-icon class="w-6 h-6 shrink-0" />
+                    <span class="text-xl">✨</span>
                     <span>GENERATE MATERI & KUIS LENGKAP (TEKS + GAMBAR AI + AUDIO NARASI)</span>
                 </div>
             </template>
