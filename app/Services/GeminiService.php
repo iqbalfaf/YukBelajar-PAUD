@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Exception;
-use Illuminate\Support\Facades\Http;
+use Gemini\Laravel\Facades\Gemini;
 use Illuminate\Support\Facades\Log;
 
 class GeminiService
@@ -14,7 +14,7 @@ class GeminiService
 
     public function __construct()
     {
-        $this->apiKey = config('services.gemini.api_key') ?: env('GEMINI_API_KEY');
+        $this->apiKey = config('gemini.api_key') ?: (config('services.gemini.api_key') ?: env('GEMINI_API_KEY'));
         $this->defaultModel = config('services.gemini.model', 'gemini-3.5-flash');
     }
 
@@ -27,7 +27,7 @@ class GeminiService
     }
 
     /**
-     * Generate Paket Kuis & Materi Multi-Modal Ramah Anak PAUD via Google Gemini AI.
+     * Generate Paket Kuis & Materi Multi-Modal Ramah Anak PAUD via Paket Laravel google-gemini-php/laravel.
      */
     public function generateQuizContent(
         string $categorySlug,
@@ -51,7 +51,7 @@ class GeminiService
                     ];
                 }
             } catch (Exception $e) {
-                Log::warning("Gemini AI API Error: {$e->getMessage()}. Menggunakan mode fallback kurasi cerdas.");
+                Log::warning("Gemini AI API Error via google-gemini-php: {$e->getMessage()}. Menggunakan mode fallback kurasi cerdas.");
             }
         }
 
@@ -64,7 +64,7 @@ class GeminiService
     }
 
     /**
-     * Panggilan langsung ke REST API Google Gemini 2.0 / 1.5.
+     * Panggilan langsung melalui Facade resmi Gemini Laravel Package.
      */
     protected function callGeminiApi(
         string $categorySlug,
@@ -75,8 +75,6 @@ class GeminiService
         int $questionsCount,
         string $model
     ): ?array {
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$this->apiKey}";
-
         $systemInstruction = "Anda adalah Asisten Pedagogis Ahli Kurikulum Pendidikan Anak Usia Dini (PAUD/TK) Indonesia untuk aplikasi 'YukBelajar PAUD'. "
             ."Tugas Anda adalah merancang soal kuis pilihan ganda bergambar yang sangat ramah anak usia {$targetAge} tahun. "
             .'Gunakan bahasa Indonesia yang riang, santun, ceria, dan mudah dimengerti anak. '
@@ -97,32 +95,20 @@ class GeminiService
             ."      {\"label\": \"Pilihan Salah 2 dengan Emoji\", \"is_correct\": false}\n"
             ."    ]\n"
             ."  }\n"
-            .']';
+            ."]\n\n"
+            .'Keluarkan HANYA JSON murni tanpa pembuka/penutup markdown.';
 
-        $response = Http::timeout(25)->post($url, [
-            'contents' => [
-                [
-                    'role' => 'user',
-                    'parts' => [
-                        ['text' => $systemInstruction."\n\n".$prompt],
-                    ],
-                ],
-            ],
-            'generationConfig' => [
-                'temperature' => 0.7,
-                'responseMimeType' => 'application/json',
-            ],
-        ]);
+        $fullPrompt = $systemInstruction."\n\n".$prompt;
 
-        if ($response->successful()) {
-            $data = $response->json();
-            $rawText = $data['candidates'][0]['content']['parts'][0]['text'] ?? '';
-            $decoded = json_decode($rawText, true);
+        $response = Gemini::generativeModel(model: $model)->generateContent($fullPrompt);
+        $rawText = $response->text();
 
-            if (is_array($decoded)) {
-                // Pastikan format array of questions
-                return isset($decoded['questions']) ? $decoded['questions'] : $decoded;
-            }
+        // Bersihkan format markdown jika ada
+        $cleanJson = trim(preg_replace('/^```(?:json)?|```$/m', '', $rawText));
+        $decoded = json_decode($cleanJson, true);
+
+        if (is_array($decoded)) {
+            return isset($decoded['questions']) ? $decoded['questions'] : $decoded;
         }
 
         return null;
