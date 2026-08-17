@@ -5361,33 +5361,665 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 1 - TOPIK 10: MENGENAL ANGGOTA TUBUH & PANCA INDRA (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (PANCA INDRA UTAMA & WAJAH CERIA) ---
             [
                 'category_slug' => 'tubuh',
-                'title' => 'Tebak Anggota Tubuh Pintar',
-                'slug' => 'tebak-tubuh',
+                'level_number' => 1,
+                'title' => 'Panca Indra: Mata, Telinga & Hidung Cilik',
+                'slug' => 'kuis-tubuh-l1-mata-telinga-hidung',
                 'icon_emoji' => '👀',
-                'target_age' => 4,
-                'total_questions' => 2,
+                'target_age' => 3,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Bagian tubuh manakah yang kita gunakan untuk melihat pemandangan indah?',
-                        'audio' => 'Bagian tubuh manakah yang kita gunakan untuk melihat pemandangan indah?',
+                        'text' => 'Bagian wajah yang berjumlah dua dan kita gunakan untuk melihat warna-warni dunia adalah...?',
+                        'audio' => 'Bagian wajah yang berjumlah dua dan kita gunakan untuk melihat warna-warni dunia adalah apa?',
                         'emoji' => '👀',
                         'options' => [
-                            ['emoji' => '👀', 'text' => 'Dua Mata', 'is_correct' => true],
+                            ['emoji' => '👀', 'text' => 'Dua Mata Indah', 'is_correct' => true],
                             ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
                             ['emoji' => '👃', 'text' => 'Hidung', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Bagian tubuh manakah yang memiliki sepuluh jari untuk bertepuk tangan?',
-                        'audio' => 'Bagian tubuh manakah yang memiliki sepuluh jari untuk bertepuk tangan?',
+                        'text' => 'Bagian kepala di sebelah kanan dan kiri yang berfungsi untuk mendengar suara dan nasehat baik adalah...?',
+                        'audio' => 'Bagian kepala di sebelah kanan dan kiri yang berfungsi untuk mendengar suara dan nasehat baik adalah apa?',
+                        'emoji' => '👂',
+                        'options' => [
+                            ['emoji' => '👂', 'text' => 'Dua Telinga', 'is_correct' => true],
+                            ['emoji' => '👀', 'text' => 'Dua Mata', 'is_correct' => false],
+                            ['emoji' => '👄', 'text' => 'Mulut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian indra di tengah wajah yang digunakan untuk mencium wangi bunga dan bernapas adalah...?',
+                        'audio' => 'Bagian indra di tengah wajah yang digunakan untuk mencium wangi bunga dan bernapas adalah apa?',
+                        'emoji' => '👃',
+                        'options' => [
+                            ['emoji' => '👃', 'text' => 'Hidung Bersih', 'is_correct' => true],
+                            ['emoji' => '👅', 'text' => 'Lidah', 'is_correct' => false],
+                            ['emoji' => '🦷', 'text' => 'Gigi', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tubuh',
+                'level_number' => 1,
+                'title' => 'Lidah Pengecap, Tangan & Mulut Senyum',
+                'slug' => 'kuis-tubuh-l1-lidah-tangan-mulut',
+                'icon_emoji' => '👅',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Bagian indra di dalam mulut yang berfungsi untuk merasakan manisnya madu dan lezatnya buah adalah...?',
+                        'audio' => 'Bagian indra di dalam mulut yang berfungsi untuk merasakan manisnya madu dan lezatnya buah adalah apa?',
+                        'emoji' => '👅',
+                        'options' => [
+                            ['emoji' => '👅', 'text' => 'Lidah Pengecap Rasa', 'is_correct' => true],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                            ['emoji' => '👀', 'text' => 'Mata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian tubuh yang memiliki sepuluh jari terampil untuk meraba, memegang pensil, dan tos adalah...?',
+                        'audio' => 'Bagian tubuh yang memiliki sepuluh jari terampil untuk meraba memegang pensil dan tos adalah apa?',
                         'emoji' => '✋',
                         'options' => [
+                            ['emoji' => '✋', 'text' => 'Dua Tangan Terampil', 'is_correct' => true],
                             ['emoji' => '🦵', 'text' => 'Kaki', 'is_correct' => false],
-                            ['emoji' => '✋', 'text' => 'Dua Tangan', 'is_correct' => true],
-                            ['emoji' => '👄', 'text' => 'Mulut', 'is_correct' => false],
+                            ['emoji' => '👃', 'text' => 'Hidung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian wajah yang kita gunakan untuk berbicara kata sopan dan tersenyum manis ceria adalah...?',
+                        'audio' => 'Bagian wajah yang kita gunakan untuk berbicara kata sopan dan tersenyum manis ceria adalah apa?',
+                        'emoji' => '👄',
+                        'options' => [
+                            ['emoji' => '👄', 'text' => 'Mulut & Bibir Senyum', 'is_correct' => true],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                            ['emoji' => '👃', 'text' => 'Hidung', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tubuh',
+                'level_number' => 1,
+                'title' => 'Gigi Bersih & Merawat Kebersihan Indra',
+                'slug' => 'kuis-tubuh-l1-gigi-kebersihan-indra',
+                'icon_emoji' => '🦷',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Bagian putih dan kuat di dalam mulut yang digunakan untuk mengunyah makanan adalah...?',
+                        'audio' => 'Bagian putih dan kuat di dalam mulut yang digunakan untuk mengunyah makanan adalah apa?',
+                        'emoji' => '🦷',
+                        'options' => [
+                            ['emoji' => '🦷', 'text' => 'Gigi Putih Bersih', 'is_correct' => true],
+                            ['emoji' => '👅', 'text' => 'Lidah Saja', 'is_correct' => false],
+                            ['emoji' => '👄', 'text' => 'Bibir', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah yang kita gunakan setiap hari untuk membersihkan gigi dari kuman sisa makanan?',
+                        'audio' => 'Benda apakah yang kita gunakan setiap hari untuk membersihkan gigi dari kuman sisa makanan?',
+                        'emoji' => '🪥',
+                        'options' => [
+                            ['emoji' => '🪥', 'text' => 'Sikat Gigi dan Pasta Gigi', 'is_correct' => true],
+                            ['emoji' => '📏', 'text' => 'Penggaris', 'is_correct' => false],
+                            ['emoji' => '✂️', 'text' => 'Gunting Kertas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita harus rajin mencuci tangan dengan sabun setelah bermain di luar?',
+                        'audio' => 'Mengapa kita harus rajin mencuci tangan dengan sabun setelah bermain di luar?',
+                        'emoji' => '🧼',
+                        'options' => [
+                            ['emoji' => '🧼', 'text' => 'Agar tangan bersih, bebas kuman, dan tidak mudah sakit', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar tangan menjadi kotor', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada gunanya', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (ANGGOTA GERAK, KEPALA & KEKUATAN TUBUH) ---
+            [
+                'category_slug' => 'tubuh',
+                'level_number' => 2,
+                'title' => 'Kaki Kuat Melangkah & Otot Perkasa',
+                'slug' => 'kuis-tubuh-l2-kaki-otot-perkasa',
+                'icon_emoji' => '🦵',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Bagian tubuh bawah yang sangat kuat dan kita gunakan untuk berjalan, berlari, dan melompat adalah...?',
+                        'audio' => 'Bagian tubuh bawah yang sangat kuat dan kita gunakan untuk berjalan berlari dan melompat adalah apa?',
+                        'emoji' => '🦵',
+                        'options' => [
+                            ['emoji' => '🦵', 'text' => 'Dua Kaki Kuat', 'is_correct' => true],
+                            ['emoji' => '✋', 'text' => 'Tangan', 'is_correct' => false],
+                            ['emoji' => '👀', 'text' => 'Mata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian paling bawah dari kaki yang bersentuhan langsung dengan tanah dan beralaskan sepatu adalah...?',
+                        'audio' => 'Bagian paling bawah dari kaki yang bersentuhan langsung dengan tanah dan beralaskan sepatu adalah apa?',
+                        'emoji' => '🦶',
+                        'options' => [
+                            ['emoji' => '🦶', 'text' => 'Telapak Kaki Berpijak', 'is_correct' => true],
+                            ['emoji' => '🦵', 'text' => 'Lutut Kaki', 'is_correct' => false],
+                            ['emoji' => '👃', 'text' => 'Hidung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian lengan yang jika dilatih membuat kita bertenaga dan kuat mengangkat benda adalah...?',
+                        'audio' => 'Bagian lengan yang jika dilatih membuat kita bertenaga dan kuat mengangkat benda adalah apa?',
+                        'emoji' => '💪',
+                        'options' => [
+                            ['emoji' => '💪', 'text' => 'Otot Lengan Perkasa', 'is_correct' => true],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                            ['emoji' => '👅', 'text' => 'Lidah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah jari yang ada pada satu telapak tangan kita?',
+                        'audio' => 'Berapakah jumlah jari yang ada pada satu telapak tangan kita?',
+                        'emoji' => '✋',
+                        'options' => [
+                            ['emoji' => '5️⃣', 'text' => '5 Jari Tangan', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '3 Jari Tangan', 'is_correct' => false],
+                            ['emoji' => '🔟', 'text' => '10 Jari Tangan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gerakan tangan apakah yang kita lakukan saat bertepuk tangan memberikan semangat gembira?',
+                        'audio' => 'Gerakan tangan apakah yang kita lakukan saat bertepuk tangan memberikan semangat gembira?',
+                        'emoji' => '👏',
+                        'options' => [
+                            ['emoji' => '👏', 'text' => 'Bertepuk Dua Telapak Tangan (Prok-prok)', 'is_correct' => true],
+                            ['emoji' => '🦵', 'text' => 'Menendang Kaki', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Menutup Mata Tidur', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tubuh',
+                'level_number' => 2,
+                'title' => 'Kepala Cerdas, Rambut & Jempol Hebat',
+                'slug' => 'kuis-tubuh-l2-kepala-rambut-jempol',
+                'icon_emoji' => '👶',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Bagian atas tubuh tempat beradanya mata, hidung, mulut, telinga, dan otak adalah...?',
+                        'audio' => 'Bagian atas tubuh tempat beradanya mata hidung mulut telinga dan otak adalah apa?',
+                        'emoji' => '👶',
+                        'options' => [
+                            ['emoji' => '👶', 'text' => 'Kepala & Wajah Ceria', 'is_correct' => true],
+                            ['emoji' => '🦵', 'text' => 'Kaki', 'is_correct' => false],
+                            ['emoji' => '🦶', 'text' => 'Telapak Kaki', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mahkota di atas kepala yang halus dan harus rajin disisir serta dicuci keramas adalah...?',
+                        'audio' => 'Mahkota di atas kepala yang halus dan harus rajin disisir serta dicuci keramas adalah apa?',
+                        'emoji' => '💇',
+                        'options' => [
+                            ['emoji' => '💇', 'text' => 'Rambut Kepala Rapi', 'is_correct' => true],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                            ['emoji' => '🦷', 'text' => 'Gigi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jari tangan yang diacungkan ke atas sebagai simbol pujian untuk anak yang hebat dan juara adalah...?',
+                        'audio' => 'Jari tangan yang diacungkan ke atas sebagai simbol pujian untuk anak yang hebat dan juara adalah apa?',
+                        'emoji' => '👍',
+                        'options' => [
+                            ['emoji' => '👍', 'text' => 'Ibu Jari Jempol Hebat', 'is_correct' => true],
+                            ['emoji' => '🖐️', 'text' => 'Jari Kelingking', 'is_correct' => false],
+                            ['emoji' => '🦵', 'text' => 'Kaki', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Rasa apakah yang biasanya dirasakan oleh lidah saat kita memakan es krim manis?',
+                        'audio' => 'Rasa apakah yang biasanya dirasakan oleh lidah saat kita memakan es krim manis?',
+                        'emoji' => '🍦',
+                        'options' => [
+                            ['emoji' => '🍦', 'text' => 'Rasa Manis Lezat', 'is_correct' => true],
+                            ['emoji' => '🧂', 'text' => 'Rasa Asin Gurih', 'is_correct' => false],
+                            ['emoji' => '🌶️', 'text' => 'Rasa Pedas Sekali', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa kali minimal kita disarankan menggosok gigi dengan sikat gigi setiap hari?',
+                        'audio' => 'Berapa kali minimal kita disarankan menggosok gigi dengan sikat gigi setiap hari?',
+                        'emoji' => '🦷',
+                        'options' => [
+                            ['emoji' => '🦷', 'text' => '2 Kali Sehari (Pagi & Sebelum Tidur)', 'is_correct' => true],
+                            ['emoji' => '🗓️', 'text' => '1 Bulan Sekali', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Tidak Pernah Menggosok Gigi', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tubuh',
+                'level_number' => 2,
+                'title' => 'Harmoni Panca Indra & Kebiasaan Sehat Ceria',
+                'slug' => 'kuis-tubuh-l2-harmoni-panca-indra',
+                'icon_emoji' => '🛡️',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok berikut yang semuanya termasuk ke dalam 5 Panca Indra manusia?',
+                        'audio' => 'Manakah kelompok berikut yang semuanya termasuk ke dalam 5 Panca Indra manusia?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '👀', 'text' => 'Mata, Telinga, Hidung, Lidah, Kulit Peraba', 'is_correct' => true],
+                            ['emoji' => '👟', 'text' => 'Sepatu, Tas, Buku, Pensil', 'is_correct' => false],
+                            ['emoji' => '🚗', 'text' => 'Mobil, Sepeda, Kereta Api, Bus', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Indra manakah yang kita gunakan saat mendengarkan dongeng cerita ayah dan bunda?',
+                        'audio' => 'Indra manakah yang kita gunakan saat mendengarkan dongeng cerita ayah dan bunda?',
+                        'emoji' => '👂',
+                        'options' => [
+                            ['emoji' => '👂', 'text' => 'Telinga (Indra Pendengaran)', 'is_correct' => true],
+                            ['emoji' => '👃', 'text' => 'Hidung', 'is_correct' => false],
+                            ['emoji' => '👅', 'text' => 'Lidah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Indra manakah yang kita gunakan saat mencium harum wangi sabun mandi?',
+                        'audio' => 'Indra manakah yang kita gunakan saat mencium harum wangi sabun mandi?',
+                        'emoji' => '👃',
+                        'options' => [
+                            ['emoji' => '👃', 'text' => 'Hidung (Indra Penciuman)', 'is_correct' => true],
+                            ['emoji' => '👀', 'text' => 'Mata', 'is_correct' => false],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita tidak boleh membaca buku di tempat yang gelap gulita?',
+                        'audio' => 'Mengapa kita tidak boleh membaca buku di tempat yang gelap gulita?',
+                        'emoji' => '👀',
+                        'options' => [
+                            ['emoji' => '👀', 'text' => 'Agar mata kita tetap sehat dan tidak cepat lelah', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar kita cepat tertidur', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada pengaruhnya', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sikap apakah yang baik saat kita bertemu teman baru di sekolah untuk menunjukkan persahabatan?',
+                        'audio' => 'Sikap apakah yang baik saat kita bertemu teman baru di sekolah untuk menunjukkan persahabatan?',
+                        'emoji' => '🤝',
+                        'options' => [
+                            ['emoji' => '🤝', 'text' => 'Berjabat tangan ramah dan tersenyum', 'is_correct' => true],
+                            ['emoji' => '😡', 'text' => 'Membuang muka dan cemberut', 'is_correct' => false],
+                            ['emoji' => '🏃‍♂️', 'text' => 'Menendang dan lari menjauh', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (ORGAN DALAM & RANGKA TUBUH KOKOH) ---
+            [
+                'category_slug' => 'tubuh',
+                'level_number' => 3,
+                'title' => 'Organ Dalam Menakjubkan & Rangka Tubuh Kokoh',
+                'slug' => 'kuis-tubuh-l3-organ-dalam-rangka',
+                'icon_emoji' => '🧠',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Organ penting di dalam kepala yang kita gunakan untuk berpikir, mengingat, dan belajar adalah...?',
+                        'audio' => 'Organ penting di dalam kepala yang kita gunakan untuk berpikir mengingat dan belajar adalah apa?',
+                        'emoji' => '🧠',
+                        'options' => [
+                            ['emoji' => '🧠', 'text' => 'Otak Cerdas Berpikir', 'is_correct' => true],
+                            ['emoji' => '🫀', 'text' => 'Jantung', 'is_correct' => false],
+                            ['emoji' => '🦴', 'text' => 'Tulang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Organ di dalam dada yang berdetak deg-deg dan bertugas memompa darah ke seluruh tubuh adalah...?',
+                        'audio' => 'Organ di dalam dada yang berdetak deg-deg dan bertugas memompa darah ke seluruh tubuh adalah apa?',
+                        'emoji' => '🫀',
+                        'options' => [
+                            ['emoji' => '🫀', 'text' => 'Jantung Pemompa Darah', 'is_correct' => true],
+                            ['emoji' => '🧠', 'text' => 'Otak', 'is_correct' => false],
+                            ['emoji' => '🫁', 'text' => 'Paru-paru', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sepasang organ di dalam rongga dada yang bekerja saat kita menghirup udara segar beroksigen adalah...?',
+                        'audio' => 'Sepasang organ di dalam rongga dada yang bekerja saat kita menghirup udara segar beroksigen adalah apa?',
+                        'emoji' => '🫁',
+                        'options' => [
+                            ['emoji' => '🫁', 'text' => 'Paru-Paru Pernapasan', 'is_correct' => true],
+                            ['emoji' => '🫀', 'text' => 'Jantung', 'is_correct' => false],
+                            ['emoji' => '🦴', 'text' => 'Tulang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian tubuh yang keras di dalam daging yang membentuk kerangka kokoh penopang tubuh adalah...?',
+                        'audio' => 'Bagian tubuh yang keras di dalam daging yang membentuk kerangka kokoh penopang tubuh adalah apa?',
+                        'emoji' => '🦴',
+                        'options' => [
+                            ['emoji' => '🦴', 'text' => 'Tulang Rangka Kokoh', 'is_correct' => true],
+                            ['emoji' => '🧠', 'text' => 'Otak', 'is_correct' => false],
+                            ['emoji' => '👅', 'text' => 'Lidah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jejak apakah yang tertinggal di atas pasir saat kita melangkah berjalan tanpa alas kaki?',
+                        'audio' => 'Jejak apakah yang tertinggal di atas pasir saat kita melangkah berjalan tanpa alas kaki?',
+                        'emoji' => '👣',
+                        'options' => [
+                            ['emoji' => '👣', 'text' => 'Jejak Langkah Kaki Cilik', 'is_correct' => true],
+                            ['emoji' => '✋', 'text' => 'Jejak Tangan', 'is_correct' => false],
+                            ['emoji' => '🚗', 'text' => 'Jejak Mobil', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sentuhan tangan seperti apakah yang melambangkan janji persahabatan dan saling memaafkan?',
+                        'audio' => 'Sentuhan tangan seperti apakah yang melambangkan janji persahabatan dan saling memaafkan?',
+                        'emoji' => '🤝',
+                        'options' => [
+                            ['emoji' => '🤝', 'text' => 'Jabat Tangan Sahabat Hangat', 'is_correct' => true],
+                            ['emoji' => '🤜', 'text' => 'Memukul Teman', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Mengabaikan Orang Lain', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah total jumlah jari tangan kanan dan jari tangan kiri kita jika digabungkan?',
+                        'audio' => 'Berapakah total jumlah jari tangan kanan dan jari tangan kiri kita jika digabungkan?',
+                        'emoji' => '✋',
+                        'options' => [
+                            ['emoji' => '🔟', 'text' => '10 Jari Tangan', 'is_correct' => true],
+                            ['emoji' => '5️⃣', 'text' => '5 Jari Tangan', 'is_correct' => false],
+                            ['emoji' => '2️⃣0️⃣', 'text' => '20 Jari Tangan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Minuman apakah yang kaya akan kalsium untuk membuat tulang dan gigi kita tumbuh kuat?',
+                        'audio' => 'Minuman apakah yang kaya akan kalsium untuk membuat tulang dan gigi kita tumbuh kuat?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            ['emoji' => '🥛', 'text' => 'Susu Sehat Segar', 'is_correct' => true],
+                            ['emoji' => '🍭', 'text' => 'Air Permen Manis', 'is_correct' => false],
+                            ['emoji' => '🥤', 'text' => 'Minuman Bersoda', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang terjadi pada detak jantung kita saat kita selesai berlari kencang di lapangan?',
+                        'audio' => 'Apa yang terjadi pada detak jantung kita saat kita selesai berlari kencang di lapangan?',
+                        'emoji' => '🫀',
+                        'options' => [
+                            ['emoji' => '🫀', 'text' => 'Berdetak lebih cepat memompa darah segar', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Berhenti berdetak', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak mengalami perubahan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita harus bersyukur kepada Tuhan atas tubuh sehat dan panca indra yang lengkap?',
+                        'audio' => 'Mengapa kita harus bersyukur kepada Tuhan atas tubuh sehat dan panca indra yang lengkap?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena tubuh sehat adalah anugerah luar biasa untuk belajar dan berbuat baik', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Tidak perlu bersyukur', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Biasa saja tidak ada gunanya', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tubuh',
+                'level_number' => 3,
+                'title' => 'Cerdas Mengelompokkan Fungsi Anggota Tubuh & Indra',
+                'slug' => 'kuis-tubuh-l3-fungsi-tubuh-indra',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Bagian tubuh manakah yang merupakan indra penglihatan kita?',
+                        'audio' => 'Bagian tubuh manakah yang merupakan indra penglihatan kita?',
+                        'emoji' => '👀',
+                        'options' => [
+                            ['emoji' => '👀', 'text' => 'Sepasang Mata', 'is_correct' => true],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                            ['emoji' => '👃', 'text' => 'Hidung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian tubuh manakah yang merupakan indra pendengaran kita?',
+                        'audio' => 'Bagian tubuh manakah yang merupakan indra pendengaran kita?',
+                        'emoji' => '👂',
+                        'options' => [
+                            ['emoji' => '👂', 'text' => 'Sepasang Telinga', 'is_correct' => true],
+                            ['emoji' => '👀', 'text' => 'Mata', 'is_correct' => false],
+                            ['emoji' => '👅', 'text' => 'Lidah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian tubuh manakah yang merupakan indra pembau dan penciuman kita?',
+                        'audio' => 'Bagian tubuh manakah yang merupakan indra pembau dan penciuman kita?',
+                        'emoji' => '👃',
+                        'options' => [
+                            ['emoji' => '👃', 'text' => 'Hidung Bersih', 'is_correct' => true],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                            ['emoji' => '✋', 'text' => 'Kulit', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian tubuh manakah yang merupakan indra pengecap aneka rasa makanan?',
+                        'audio' => 'Bagian tubuh manakah yang merupakan indra pengecap aneka rasa makanan?',
+                        'emoji' => '👅',
+                        'options' => [
+                            ['emoji' => '👅', 'text' => 'Lidah Pengecap', 'is_correct' => true],
+                            ['emoji' => '🦷', 'text' => 'Gigi', 'is_correct' => false],
+                            ['emoji' => '👄', 'text' => 'Bibir', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian tubuh manakah yang merupakan indra peraba untuk merasakan panas, dingin, halus, dan kasar?',
+                        'audio' => 'Bagian tubuh manakah yang merupakan indra peraba untuk merasakan panas dingin halus dan kasar?',
+                        'emoji' => '✋',
+                        'options' => [
+                            ['emoji' => '✋', 'text' => 'Kulit dan Telapak Tangan', 'is_correct' => true],
+                            ['emoji' => '👀', 'text' => 'Mata', 'is_correct' => false],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Anggota tubuh manakah yang paling utama kita gunakan saat menendang bola ke gawang sepak bola?',
+                        'audio' => 'Anggota tubuh manakah yang paling utama kita gunakan saat menendang bola ke gawang sepak bola?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            ['emoji' => '🦵', 'text' => 'Kaki dan Telapak Kaki', 'is_correct' => true],
+                            ['emoji' => '✋', 'text' => 'Tangan', 'is_correct' => false],
+                            ['emoji' => '👃', 'text' => 'Hidung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Anggota tubuh manakah yang kita gunakan saat menulis catatan di atas buku tulis?',
+                        'audio' => 'Anggota tubuh manakah yang kita gunakan saat menulis catatan di atas buku tulis?',
+                        'emoji' => '✍️',
+                        'options' => [
+                            ['emoji' => '✋', 'text' => 'Jari-Jari Tangan Terampil', 'is_correct' => true],
+                            ['emoji' => '🦵', 'text' => 'Kaki', 'is_correct' => false],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian tubuh manakah yang kita anggukkan saat menyetujui sesuatu dengan sopan?',
+                        'audio' => 'Bagian tubuh manakah yang kita anggukkan saat menyetujui sesuatu dengan sopan?',
+                        'emoji' => '👶',
+                        'options' => [
+                            ['emoji' => '👶', 'text' => 'Kepala', 'is_correct' => true],
+                            ['emoji' => '🦵', 'text' => 'Kaki', 'is_correct' => false],
+                            ['emoji' => '🦶', 'text' => 'Telapak Kaki', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Organ manakah yang paling terlindungi di dalam tempurung tengkorak kepala yang keras?',
+                        'audio' => 'Organ manakah yang paling terlindungi di dalam tempurung tengkorak kepala yang keras?',
+                        'emoji' => '🧠',
+                        'options' => [
+                            ['emoji' => '🧠', 'text' => 'Otak Cerdas', 'is_correct' => true],
+                            ['emoji' => '🫀', 'text' => 'Jantung', 'is_correct' => false],
+                            ['emoji' => '🫁', 'text' => 'Paru-paru', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah cara terbaik menjaga kesehatan paru-paru pernapasan kita?',
+                        'audio' => 'Bagaimanakah cara terbaik menjaga kesehatan paru-paru pernapasan kita?',
+                        'emoji' => '🫁',
+                        'options' => [
+                            ['emoji' => '🫁', 'text' => 'Menghirup udara bersih di alam dan rajin berolahraga', 'is_correct' => true],
+                            ['emoji' => '💨', 'text' => 'Menghirup asap pembakaran sampah', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Hanya tidur dan tidak pernah bergerak', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tubuh',
+                'level_number' => 3,
+                'title' => 'Grand Champion Dokter Cilik & Ahli Tubuh Pintar',
+                'slug' => 'kuis-tubuh-l3-grand-master-dokter-cilik',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Bagian tubuh manakah yang membuat kita bisa melihat indahnya pemandangan alam semesta?',
+                        'audio' => 'Bagian tubuh manakah yang membuat kita bisa melihat indahnya pemandangan alam semesta?',
+                        'emoji' => '👀',
+                        'options' => [
+                            ['emoji' => '👀', 'text' => 'Sepasang Mata Indah', 'is_correct' => true],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                            ['emoji' => '👃', 'text' => 'Hidung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian tubuh manakah yang membuat kita bisa mendengarkan lagu merdu dan nasehat guru?',
+                        'audio' => 'Bagian tubuh manakah yang membuat kita bisa mendengarkan lagu merdu dan nasehat guru?',
+                        'emoji' => '👂',
+                        'options' => [
+                            ['emoji' => '👂', 'text' => 'Sepasang Telinga Cermat', 'is_correct' => true],
+                            ['emoji' => '👃', 'text' => 'Hidung', 'is_correct' => false],
+                            ['emoji' => '👅', 'text' => 'Lidah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian tubuh manakah yang digunakan untuk mengunyah buah apel yang renyah dan sehat?',
+                        'audio' => 'Bagian tubuh manakah yang digunakan untuk mengunyah buah apel yang renyah dan sehat?',
+                        'emoji' => '🦷',
+                        'options' => [
+                            ['emoji' => '🦷', 'text' => 'Gigi yang Kuat dan Bersih', 'is_correct' => true],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                            ['emoji' => '👀', 'text' => 'Mata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang harus kita lakukan setiap kali tangan kita kotor terkena debu atau tanah?',
+                        'audio' => 'Apa yang harus kita lakukan setiap kali tangan kita kotor terkena debu atau tanah?',
+                        'emoji' => '🧼',
+                        'options' => [
+                            ['emoji' => '🧼', 'text' => 'Mencuci tangan dengan air bersih mengalir dan sabun', 'is_correct' => true],
+                            ['emoji' => '👕', 'text' => 'Mengusapnya di baju seragam', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Membiarkannya kotor begitu saja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Organ tubuh apakah yang berdetak memompa darah ke seluruh tubuh di dalam dada kita?',
+                        'audio' => 'Organ tubuh apakah yang berdetak memompa darah ke seluruh tubuh di dalam dada kita?',
+                        'emoji' => '🫀',
+                        'options' => [
+                            ['emoji' => '🫀', 'text' => 'Jantung yang Kuat dan Sehat', 'is_correct' => true],
+                            ['emoji' => '🧠', 'text' => 'Otak', 'is_correct' => false],
+                            ['emoji' => '🦴', 'text' => 'Tulang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jari manakah yang kita acungkan saat memberikan apresiasi anak hebat jempolan?',
+                        'audio' => 'Jari manakah yang kita acungkan saat memberikan apresiasi anak hebat jempolan?',
+                        'emoji' => '👍',
+                        'options' => [
+                            ['emoji' => '👍', 'text' => 'Ibu Jari Jempol Hebat', 'is_correct' => true],
+                            ['emoji' => '🖐️', 'text' => 'Jari Manis', 'is_correct' => false],
+                            ['emoji' => '🦵', 'text' => 'Kaki', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah total jumlah panca indra yang dimiliki oleh manusia?',
+                        'audio' => 'Berapakah total jumlah panca indra yang dimiliki oleh manusia?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '5️⃣', 'text' => '5 Panca Indra', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '3 Panca Indra', 'is_correct' => false],
+                            ['emoji' => '🔟', 'text' => '10 Panca Indra', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa anak hebat harus tidur cukup selama 8-10 jam setiap malam?',
+                        'audio' => 'Mengapa anak hebat harus tidur cukup selama 8-10 jam setiap malam?',
+                        'emoji' => '😴',
+                        'options' => [
+                            ['emoji' => '😴', 'text' => 'Agar otak dan seluruh organ tubuh bisa beristirahat dan bertumbuh sehat', 'is_correct' => true],
+                            ['emoji' => '🎮', 'text' => 'Agar bisa begadang bermain terus', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada manfaatnya sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana cara anak pintar merawat seluruh anggota tubuhnya setiap hari?',
+                        'audio' => 'Bagaimana cara anak pintar merawat seluruh anggota tubuhnya setiap hari?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Mandi teratur, makan makanan bergizi, berolahraga, dan menjaga kebersihan', 'is_correct' => true],
+                            ['emoji' => '🍟', 'text' => 'Hanya makan permen manis dan tidak mandi', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Hanya tidur seharian tanpa beraktivitas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apakah yang pantas untuk anak hebat yang pandai mengenali dan merawat seluruh tubuhnya?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak hebat yang pandai mengenali dan merawat seluruh tubuhnya?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Dokter Cilik Juara & Sahabat Tubuh Sehat!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Malas Mandi', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Patung yang Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
