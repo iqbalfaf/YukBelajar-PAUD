@@ -21,6 +21,18 @@
          chartAnalytics: {{ Js::from($adminData['chart_analytics']) }},
          systemHealth: {{ Js::from($adminData['system_health'] ?? []) }},
          auditLogs: {{ Js::from($adminData['audit_logs'] ?? []) }},
+         studentsStatusList: {{ Js::from($adminData['students_status_list'] ?? []) }},
+         studentOnlineFilter: 'all', // 'all', 'online', 'offline'
+
+         get filteredStudents() {
+             if (this.studentOnlineFilter === 'online') {
+                 return this.studentsStatusList.filter(s => s.is_online);
+             }
+             if (this.studentOnlineFilter === 'offline') {
+                 return this.studentsStatusList.filter(s => !s.is_online);
+             }
+             return this.studentsStatusList;
+         },
 
          get currentScaffoldingCategories() {
              if (this.scaffoldingPillar === 'all') return this.categories;
@@ -314,7 +326,111 @@
 
     </div>
 
-    <!-- RECENT AUDIT LOGS & ACTIVITY STREAM (PROFESSIONAL FEATURE) -->
+    <!-- DETAIL USER SISWA ONLINE & AKTIF BELAJAR (LIVE STUDENT MONITOR) -->
+    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-xs flex flex-col gap-5">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">👥</span>
+                    <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-800">
+                        Detail Siswa & Status Keaktifan Belajar
+                    </h3>
+                </div>
+                <p class="text-xs font-bold text-slate-400 mt-0.5">
+                    Monitoring keaktifan siswa yang sedang online belajar di platform secara real-time.
+                </p>
+            </div>
+
+            <!-- Filter Chips & Online Count Badge -->
+            <div class="flex items-center gap-2 flex-wrap self-stretch sm:self-auto">
+                <div class="inline-flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+                    <button type="button" @click="studentOnlineFilter = 'all'"
+                            class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer"
+                            :class="studentOnlineFilter === 'all' ? 'bg-white text-slate-900 shadow-xs font-extrabold' : 'text-slate-600 hover:text-slate-900'">
+                        <span>Semua (<span x-text="studentsStatusList.length"></span>)</span>
+                    </button>
+                    <button type="button" @click="studentOnlineFilter = 'online'"
+                            class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5"
+                            :class="studentOnlineFilter === 'online' ? 'bg-emerald-500 text-white shadow-xs font-extrabold' : 'text-slate-600 hover:text-emerald-700'">
+                        <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
+                        <span>Online (<span x-text="studentsStatusList.filter(s => s.is_online).length"></span>)</span>
+                    </button>
+                    <button type="button" @click="studentOnlineFilter = 'offline'"
+                            class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5"
+                            :class="studentOnlineFilter === 'offline' ? 'bg-slate-700 text-white shadow-xs font-extrabold' : 'text-slate-600 hover:text-slate-900'">
+                        <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+                        <span>Offline (<span x-text="studentsStatusList.filter(s => !s.is_online).length"></span>)</span>
+                    </button>
+                </div>
+
+                <a href="{{ route('admin.users') }}"
+                   class="px-3 py-1.5 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 rounded-xl text-xs font-bold transition-all flex items-center gap-1">
+                    <span>Kelola Semua Siswa →</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Student Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5">
+            <template x-for="st in filteredStudents" :key="st.id">
+                <div class="p-4 rounded-2xl border transition-all flex flex-col justify-between gap-3 hover:shadow-md"
+                     :class="st.is_online ? 'bg-emerald-50/40 border-emerald-300 ring-2 ring-emerald-100' : 'bg-slate-50 border-slate-200'">
+                    
+                    <div>
+                        <!-- Header Card: Avatar & Online Status Badge -->
+                        <div class="flex items-start justify-between gap-2 mb-2.5">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-11 h-11 rounded-2xl bg-white border-2 flex items-center justify-center text-2xl shadow-xs shrink-0"
+                                     :class="st.is_online ? 'border-emerald-300' : 'border-slate-200'">
+                                    <span class="emoji-icon" x-text="st.avatar_emoji"></span>
+                                </div>
+                                <div class="truncate">
+                                    <h4 class="font-extrabold text-sm text-slate-900 truncate" x-text="st.name"></h4>
+                                    <span class="text-[11px] text-slate-500 font-mono" x-text="'@' + st.username"></span>
+                                </div>
+                            </div>
+
+                            <!-- Online/Offline Badge -->
+                            <span class="inline-flex items-center gap-1 text-[10px] font-black px-2 py-0.5 rounded-full shrink-0"
+                                  :class="st.is_online ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-700'">
+                                <span class="w-2 h-2 rounded-full shrink-0" :class="st.is_online ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'"></span>
+                                <span x-text="st.is_online ? 'Online' : 'Offline'"></span>
+                            </span>
+                        </div>
+
+                        <!-- Meta Info Strip -->
+                        <div class="flex items-center justify-between text-[11px] font-bold text-slate-600 bg-white/80 p-2 rounded-xl border border-slate-200/80 mb-2">
+                            <span>👶 Usia: <b class="text-slate-800" x-text="st.age + ' Thn'"></b></span>
+                            <span class="text-amber-600 font-black flex items-center gap-0.5">
+                                <span>⭐</span>
+                                <span x-text="st.total_stars"></span>
+                            </span>
+                        </div>
+
+                        <!-- Recent Activity / Status -->
+                        <div class="text-[11px] font-semibold text-slate-600 bg-white/60 p-2 rounded-xl border border-slate-200/60 flex flex-col gap-0.5">
+                            <span class="text-[9px] font-black text-slate-400 uppercase tracking-wider">Aktivitas Terkini:</span>
+                            <span class="text-slate-800 line-clamp-1 font-bold" x-text="st.last_activity"></span>
+                        </div>
+                    </div>
+
+                    <!-- Footer: Login Time -->
+                    <div class="pt-2 border-t border-slate-200/60 flex items-center justify-between text-[10px] text-slate-400 font-semibold">
+                        <span>Terakhir Masuk:</span>
+                        <span class="font-bold text-slate-600" x-text="st.last_login_time"></span>
+                    </div>
+
+                </div>
+            </template>
+        </div>
+
+        <template x-if="filteredStudents.length === 0">
+            <div class="p-8 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl text-center text-slate-400">
+                <span class="text-3xl block mb-1">🔍</span>
+                <span class="text-xs font-bold">Tidak ada data siswa yang cocok dengan filter yang dipilih.</span>
+            </div>
+        </template>
+    </div>
     <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-xs">
         <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
             <div>

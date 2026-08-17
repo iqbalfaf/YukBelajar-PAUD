@@ -103,9 +103,10 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Username Admin (Permanen)</label>
-                    <input type="text" x-model="username" readonly disabled
-                           class="w-full p-3.5 text-sm font-bold bg-slate-100 border-2 border-slate-200 rounded-2xl outline-none font-mono text-slate-500 cursor-not-allowed">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Username Admin</label>
+                    <input type="text" name="username" x-model="username" required
+                           class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none font-mono lowercase">
+                    <span class="text-[11px] text-slate-400 mt-1 block">Digunakan untuk login (huruf kecil, angka, garis bawah)</span>
                 </div>
             </div>
 

@@ -249,7 +249,50 @@ class AdminController extends Controller
         $parentGatePct = $totalStudents > 0 ? round(($studentsWithPin / $totalStudents) * 100) : 100;
         $parentGateText = "{$studentsWithPin}/{$totalStudents} Siswa ({$parentGatePct}%)";
 
-        // 7. Bungkus data lengkap ke dalam $adminData
+        // 7. Ambil detail data siswa yang sedang online / riwayat aktivitas terkini
+        $onlineThreshold = Carbon::now()->subMinutes(15);
+        $studentsStatusList = User::where('role', 'student')
+            ->with(['quizAttempts' => fn ($q) => $q->latest()->take(1)->with('quiz')])
+            ->orderByDesc('last_login_at')
+            ->take(12)
+            ->get()
+            ->map(function ($u) use ($onlineThreshold) {
+                $isOnline = $u->is_active && $u->last_login_at && $u->last_login_at->greaterThanOrEqualTo($onlineThreshold);
+                $latestAttempt = $u->quizAttempts->first();
+                $lastActivity = $latestAttempt && $latestAttempt->quiz
+                    ? "Mengerjakan {$latestAttempt->quiz->title} (Skor {$latestAttempt->score})"
+                    : 'Menjelajahi Taman Belajar PAUD';
+
+                $avatarEmoji = match ($u->avatar_icon) {
+                    'kucing' => '🐱',
+                    'singa' => '🦁',
+                    'kelinci' => '🐰',
+                    'panda' => '🐼',
+                    'beruang' => '🐻',
+                    'gajah' => '🐘',
+                    'koala' => '🐨',
+                    default => '🦖',
+                };
+
+                return [
+                    'id' => $u->id,
+                    'name' => $u->name,
+                    'username' => $u->username,
+                    'avatar_icon' => $u->avatar_icon ?: 'dino',
+                    'avatar_emoji' => $avatarEmoji,
+                    'age' => $u->age ?? 4,
+                    'school_name' => $u->school_name ?: 'TK & PAUD Ceria Nusantara',
+                    'total_stars' => (int) $u->total_stars,
+                    'is_online' => $isOnline,
+                    'is_active' => (bool) $u->is_active,
+                    'last_login_time' => $u->last_login_at ? $u->last_login_at->diffForHumans() : 'Belum login',
+                    'last_activity' => $lastActivity,
+                ];
+            })->toArray();
+
+        $onlineStudentsCount = collect($studentsStatusList)->where('is_online', true)->count();
+
+        // 8. Bungkus data lengkap ke dalam $adminData
         $adminData = [
             'stats' => [
                 'total_materials' => $totalMaterials,
@@ -260,7 +303,9 @@ class AdminController extends Controller
                 'avg_completion_rate' => $avgCompletionRate,
                 'stars_this_week' => $starsThisWeek,
                 'most_popular_category' => $topCatName,
+                'online_students_count' => $onlineStudentsCount,
             ],
+            'students_status_list' => $studentsStatusList,
             'categorized_materials' => $categorizedMaterials,
             'chart_analytics' => [
                 'weekly_activity' => $weeklyActivity,
@@ -1479,13 +1524,20 @@ class AdminController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:100',
+            'username' => 'nullable|string|alpha_dash|max:50|unique:users,username,'.$admin->id,
             'email' => 'required|email|max:100|unique:users,email,'.$admin->id,
             'school_name' => 'nullable|string|max:150',
             'phone' => 'nullable|string|max:30',
             'password' => 'nullable|string|min:4|confirmed',
+        ], [
+            'username.unique' => 'Username ini sudah digunakan oleh akun lain.',
+            'username.alpha_dash' => 'Username hanya boleh berisi huruf, angka, tanda strip, dan garis bawah.',
         ]);
 
         $admin->name = $validated['name'];
+        if (! empty($validated['username'])) {
+            $admin->username = strtolower($validated['username']);
+        }
         $admin->email = $validated['email'];
         if (isset($validated['school_name'])) {
             $admin->school_name = $validated['school_name'];

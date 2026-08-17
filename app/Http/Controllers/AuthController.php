@@ -70,7 +70,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             if (in_array($user->role, ['admin', 'teacher'])) {
-                return redirect()->intended(route('admin.dashboard'))->with('success', "Selamat datang kembali, {$user->name}!");
+                return redirect()->route('admin.dashboard')->with('success', "Selamat datang kembali, {$user->name}!");
             }
 
             return redirect()->intended(route('home'))->with('success', "Halo {$user->name}! Selamat datang kembali di Taman Petualangan!");

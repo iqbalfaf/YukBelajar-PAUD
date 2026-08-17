@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         // 1. Admin & Guru Utama
         $admin = User::updateOrCreate(
-            ['username' => 'pak_guru_iqbal'],
+            ['username' => 'iqbal'],
             [
                 'name' => 'Pak Guru Iqbal, S.Pd.',
                 'email' => 'guru@kuybelajar.id',

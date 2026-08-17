@@ -139,10 +139,18 @@
                                     <div class="flex items-center gap-1.5">
                                         <h4 class="font-black font-heading text-base sm:text-lg text-slate-900 leading-tight" x-text="f.name"></h4>
                                         <template x-if="f.is_online">
-                                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" title="Sedang Aktif"></span>
+                                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0 ring-2 ring-emerald-200" title="Sedang Aktif"></span>
+                                        </template>
+                                        <template x-if="!f.is_online">
+                                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0 ring-2 ring-rose-200" title="Sedang Offline"></span>
                                         </template>
                                     </div>
-                                    <span class="text-[11px] sm:text-xs font-bold text-slate-500" x-text="f.age + ' Tahun • ' + f.badge"></span>
+                                    <div class="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-slate-500 mt-0.5 flex-wrap">
+                                        <span x-text="f.age + ' Tahun • ' + f.badge"></span>
+                                        <span class="text-[10px] px-1.5 py-0.5 rounded-full font-black"
+                                              :class="f.is_online ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-700'"
+                                              x-text="f.is_online ? 'Aktif' : 'Offline'"></span>
+                                    </div>
                                 </div>
                             </div>
 

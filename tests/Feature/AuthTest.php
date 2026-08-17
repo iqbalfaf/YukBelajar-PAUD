@@ -38,14 +38,16 @@ test('guru atau admin dapat login menggunakan email pada form tunggal dan diarah
 });
 
 test('guru atau admin dapat login menggunakan username pada form tunggal dan diarahkan ke dashboard admin', function () {
+    $admin = User::where('role', 'admin')->first();
+
     $response = $this->post(route('login.post'), [
-        'login' => 'pak_guru_iqbal',
+        'login' => $admin->username,
         'password' => 'password123',
     ]);
 
     $response->assertRedirect(route('admin.dashboard'));
     expect(Auth::check())->toBeTrue();
-    expect(Auth::user()->username)->toBe('pak_guru_iqbal');
+    expect(Auth::user()->username)->toBe($admin->username);
     expect(Auth::user()->role)->toBe('admin');
 });
 

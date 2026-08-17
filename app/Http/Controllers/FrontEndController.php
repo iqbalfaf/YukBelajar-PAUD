@@ -745,6 +745,7 @@ class FrontEndController extends Controller
 
             $isCurrentUser = $u->id === $authId;
             $displayName = $isCurrentUser ? "Kamu ({$u->name})" : $u->name;
+            $isOnline = $isCurrentUser || ($u->is_active && $u->last_login_at && $u->last_login_at->greaterThanOrEqualTo(now()->subMinutes(15)));
 
             return [
                 'id' => $u->id,
@@ -760,7 +761,7 @@ class FrontEndController extends Controller
                 'claps_count' => max(10, (($u->id * 7) % 25) + 12),
                 'balloons_count' => max(8, (($u->id * 5) % 20) + 9),
                 'stars_given' => max(15, (($u->id * 9) % 35) + 16),
-                'is_online' => true,
+                'is_online' => $isOnline,
             ];
         })->toArray();
 

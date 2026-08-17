@@ -181,6 +181,13 @@ test('admin dapat memperbarui informasi profil dan sekolah di database', functio
     $admin->refresh();
     expect($admin->name)->toBe('Pak Guru Iqbal M.Pd.');
     expect($admin->school_name)->toBe('TK Pembina Ceria Bangsa');
+
+    // Restore name
+    $admin->update([
+        'name' => 'Pak Guru Iqbal, S.Pd.',
+        'username' => 'pak_guru_iqbal',
+        'email' => 'guru@kuybelajar.id',
+    ]);
 });
 
 test('admin dapat menambahkan materi flashcard baru ke database', function () {
@@ -559,4 +566,44 @@ test('admin dapat menambahkan, mengedit, dan menghapus topik pembelajaran baru 3
     $delResponse = $this->actingAs($admin)->delete(route('admin.topics.delete', $topic->id));
     $delResponse->assertRedirect();
     expect(Category::find($topic->id))->toBeNull();
+});
+
+test('dashboard admin menampilkan data monitoring siswa online dan offline', function () {
+    $admin = User::where('role', 'admin')->first();
+
+    $response = $this->actingAs($admin)->get(route('admin.dashboard'));
+
+    $response->assertStatus(200);
+    $response->assertSee('Detail Siswa');
+    $response->assertSee('Monitoring keaktifan siswa yang sedang online');
+    $response->assertViewHas('adminData', function ($data) {
+        return isset($data['students_status_list']) && is_array($data['students_status_list']);
+    });
+});
+
+test('admin dapat memperbarui username dan profil pada halaman profil admin', function () {
+    $admin = User::where('role', 'admin')->first();
+
+    $response = $this->actingAs($admin)->post(route('admin.profile.update'), [
+        'name' => 'Pak Guru Iqbal Juara, M.Pd.',
+        'username' => 'guru_iqbal_baru',
+        'email' => 'guru_baru@kuybelajar.id',
+        'school_name' => 'TK & PAUD Bintang Juara',
+        'phone' => '0812-9999-8888',
+    ]);
+
+    $response->assertRedirect(route('admin.profile'));
+    $response->assertSessionHas('success');
+
+    $admin->refresh();
+    expect($admin->name)->toBe('Pak Guru Iqbal Juara, M.Pd.');
+    expect($admin->username)->toBe('guru_iqbal_baru');
+    expect($admin->email)->toBe('guru_baru@kuybelajar.id');
+
+    // Kembalikan ke nilai seeder agar konsisten
+    $admin->update([
+        'name' => 'Pak Guru Iqbal, S.Pd.',
+        'username' => 'pak_guru_iqbal',
+        'email' => 'guru@kuybelajar.id',
+    ]);
 });
