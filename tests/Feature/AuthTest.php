@@ -26,7 +26,7 @@ test('siswa dapat login menggunakan username dan password yang benar pada form t
     expect(Auth::user()->username)->toBe('alif_ceria');
 });
 
-test('guru atau admin dapat login menggunakan email atau username pada form tunggal dan diarahkan ke dashboard admin', function () {
+test('guru atau admin dapat login menggunakan email pada form tunggal dan diarahkan ke dashboard admin', function () {
     $response = $this->post(route('login.post'), [
         'login' => 'guru@kuybelajar.id',
         'password' => 'password123',
@@ -35,6 +35,29 @@ test('guru atau admin dapat login menggunakan email atau username pada form tung
     $response->assertRedirect(route('admin.dashboard'));
     expect(Auth::check())->toBeTrue();
     expect(Auth::user()->role)->toBe('admin');
+});
+
+test('guru atau admin dapat login menggunakan username pada form tunggal dan diarahkan ke dashboard admin', function () {
+    $response = $this->post(route('login.post'), [
+        'login' => 'pak_guru_iqbal',
+        'password' => 'password123',
+    ]);
+
+    $response->assertRedirect(route('admin.dashboard'));
+    expect(Auth::check())->toBeTrue();
+    expect(Auth::user()->username)->toBe('pak_guru_iqbal');
+    expect(Auth::user()->role)->toBe('admin');
+});
+
+test('siswa dapat login menggunakan email pada form tunggal dan diarahkan ke home', function () {
+    $response = $this->post(route('login.post'), [
+        'login' => 'ortu.alif@gmail.com',
+        'password' => 'password123',
+    ]);
+
+    $response->assertRedirect(route('home'));
+    expect(Auth::check())->toBeTrue();
+    expect(Auth::user()->username)->toBe('alif_ceria');
 });
 
 test('login gagal jika kredensial salah dan menampilkan error session', function () {

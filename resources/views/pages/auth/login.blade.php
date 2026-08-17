@@ -63,7 +63,7 @@
                     <span>Username atau Email</span>
                 </label>
                 <input type="text" id="login_input" name="login" value="{{ old('login') }}" required autofocus
-                       placeholder="Contoh: alif_ceria atau guru@sekolah.id"
+                       placeholder="Masukkan username atau email Anda..."
                        class="w-full p-3.5 sm:p-4 text-sm sm:text-base font-extrabold bg-slate-50 border-3 border-slate-300 focus:border-amber-400 focus:bg-white rounded-2xl outline-none transition-all placeholder:text-slate-400 placeholder:font-medium">
             </div>
 
@@ -105,14 +105,17 @@
 
         </form>
 
-        <!-- Bottom Link to Register -->
-        <div class="mt-6 pt-5 border-t border-slate-100 text-center">
-            <p class="text-xs sm:text-sm font-bold text-slate-600">
-                Belum punya akun belajar?
-                <a href="{{ route('register') }}" class="text-sky-600 hover:text-sky-700 font-black underline ml-1">
-                    Daftar Akun Baru! ✨
-                </a>
-            </p>
+        <!-- Bottom Action: Register 3D Button -->
+        <div class="mt-6 pt-5 border-t border-slate-100 flex flex-col items-center gap-3 text-center">
+            <span class="text-xs sm:text-sm font-bold text-slate-600">
+                Belum punya akun petualang?
+            </span>
+            <a href="{{ route('register') }}" 
+               @click="if(window.soundEngine) window.soundEngine.playClick()"
+               class="w-full py-3.5 btn-3d btn-3d-sky rounded-2xl text-sm sm:text-base font-black text-white shadow-md flex items-center justify-center gap-2 hover:scale-102 transition-transform">
+                <span class="emoji-icon text-lg animate-bounce-slow">✨</span>
+                <span>Daftar Akun Baru (+10 ⭐)</span>
+            </a>
         </div>
 
     </div>

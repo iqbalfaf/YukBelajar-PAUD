@@ -51,28 +51,20 @@ class AuthController extends Controller
             ]);
         }
 
-        // Tentukan apakah input berupa email atau username
-        $isEmail = filter_var($loginInput, FILTER_VALIDATE_EMAIL);
-        $field = $isEmail ? 'email' : 'username';
+        // Tentukan input dan cari user berdasarkan username atau email
+        $user = User::where('username', $loginInput)
+            ->orWhere('email', $loginInput)
+            ->first();
 
-        // Coba autentikasi
-        $attemptSuccess = Auth::attempt([$field => $loginInput, 'password' => $password], $remember);
-
-        // Jika login dengan field utama belum berhasil, coba field alternatif (fallback)
-        if (! $attemptSuccess && ! $isEmail) {
-            $attemptSuccess = Auth::attempt(['email' => $loginInput, 'password' => $password], $remember);
-        }
-
-        if ($attemptSuccess) {
-            RateLimiter::clear($throttleKey);
-            $user = Auth::user();
-
+        if ($user && Hash::check($password, $user->password)) {
             if (! $user->is_active) {
-                Auth::logout();
                 throw ValidationException::withMessages([
                     'login' => 'Akun Anda saat ini sedang dinonaktifkan. Silakan hubungi pengajar atau administrator.',
                 ]);
             }
+
+            Auth::login($user, $remember);
+            RateLimiter::clear($throttleKey);
 
             $user->update(['last_login_at' => now()]);
             $request->session()->regenerate();
