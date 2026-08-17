@@ -94,6 +94,7 @@ class FrontEndController extends Controller
         $categories = $categoriesModel->map(function ($cat) {
             return [
                 'id' => $cat->id,
+                'pillar' => $cat->pillar ?? 'mengenal',
                 'slug' => $cat->slug,
                 'name' => $cat->name,
                 'subtitle' => $cat->subtitle,
@@ -126,9 +127,46 @@ class FrontEndController extends Controller
             'total_stars' => (int) User::where('role', 'student')->sum('total_stars'),
         ];
 
+        // Sample real materials for interactive playground demo on landing page
+        $demoMaterials = Material::with('level.category')->inRandomOrder()->limit(4)->get()->map(function ($m) {
+            $cat = $m->level?->category;
+
+            return [
+                'id' => $m->id,
+                'title' => $m->title,
+                'subtitle' => $m->subtitle,
+                'icon_emoji' => $m->icon_emoji ?? '🍎',
+                'speech_text' => $m->speech_text ?? ($m->title.'. '.$m->subtitle),
+                'sound_effect_text' => $m->sound_effect,
+                'category_name' => $cat?->name ?? 'Materi Belajar',
+                'color_theme' => $cat?->color_theme ?? 'amber',
+            ];
+        })->toArray();
+
+        // Sample real quiz question for interactive playground demo
+        $sampleQuiz = Quiz::with('questions.options')->inRandomOrder()->first();
+        $sampleQuestion = $sampleQuiz && $sampleQuiz->questions->isNotEmpty() ? $sampleQuiz->questions->first() : null;
+
+        $demoQuiz = [
+            'title' => $sampleQuiz ? $sampleQuiz->title : 'Kuis Tebak Suara Hewan',
+            'question_text' => $sampleQuestion ? $sampleQuestion->question_text : 'Manakah hewan kucing yang suka bersuara meong-meong? 🐱',
+            'question_audio' => $sampleQuestion ? $sampleQuestion->question_audio : 'Manakah hewan kucing lucu?',
+            'options' => $sampleQuestion && $sampleQuestion->options->isNotEmpty() ? $sampleQuestion->options->map(function ($opt) {
+                return [
+                    'text' => $opt->option_text,
+                    'emoji' => $opt->option_emoji,
+                    'is_correct' => (bool) $opt->is_correct,
+                ];
+            })->toArray() : [
+                ['text' => 'Kucing Lucu', 'emoji' => '🐱', 'is_correct' => true],
+                ['text' => 'Batu Kali', 'emoji' => '🪨', 'is_correct' => false],
+                ['text' => 'Pohon Rindang', 'emoji' => '🌳', 'is_correct' => false],
+            ],
+        ];
+
         $avatars = $this->getAvatarsList();
 
-        return view('pages.landing', compact('categories', 'stickers', 'platformStats', 'avatars'));
+        return view('pages.landing', compact('categories', 'stickers', 'platformStats', 'avatars', 'demoMaterials', 'demoQuiz'));
     }
 
     /**

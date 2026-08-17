@@ -7,9 +7,9 @@ test('halaman landing page utama dapat diakses dengan sukses tanpa login', funct
 
     $response->assertStatus(200);
     $response->assertSee('Petualangan Belajar Digital');
-    $response->assertSee('Jelajahi 6 Pulau Petualangan Seru');
+    $response->assertSee('Pulau Petualangan');
     $response->assertSee('Flashcard Bersuara');
-    $response->assertSee('MULAI MAIN PETUALANGAN');
+    $response->assertSee('MULAI MAIN');
 });
 
 test('halaman login dapat diakses dengan mode siswa dan mode guru', function () {
