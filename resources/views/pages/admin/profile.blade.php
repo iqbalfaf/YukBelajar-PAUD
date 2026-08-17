@@ -12,18 +12,10 @@
          schoolName: '{{ $adminProfile['school_name'] }}',
          phone: '{{ $adminProfile['phone'] }}',
          aiModel: '{{ $adminProfile['ai_model_preference'] }}',
-         oldPassword: '',
          newPassword: '',
          confirmPassword: '',
-         showAlert: false,
-         alertMessage: '',
-
-         saveProfile() {
-             this.alertMessage = '✨ Data profil dan pengaturan admin berhasil diperbarui!';
-             this.showAlert = true;
-             if (window.soundEngine) window.soundEngine.playVictory();
-             setTimeout(() => this.showAlert = false, 4000);
-         }
+         showAlert: {{ session('success') ? 'true' : 'false' }},
+         alertMessage: '{{ session('success') ?? '✨ Data profil dan pengaturan admin berhasil diperbarui!' }}'
      }">
 
     <!-- Top Greeting Hero -->
@@ -54,14 +46,24 @@
     </div>
 
     <!-- Alert Notification -->
-    <div x-show="showAlert" x-cloak
-         class="p-4 bg-emerald-100 border-2 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
+    @if(session('success'))
+    <div class="p-4 bg-emerald-100 border-2 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
         <div class="flex items-center gap-3">
             <span class="text-2xl">✨</span>
-            <span x-text="alertMessage"></span>
+            <span>{{ session('success') }}</span>
         </div>
-        <button @click="showAlert = false" class="text-emerald-800 hover:text-emerald-950 font-black">✖</button>
     </div>
+    @endif
+
+    @if($errors->any())
+    <div class="p-4 bg-rose-100 border-2 border-rose-400 text-rose-950 font-bold text-sm rounded-2xl shadow-xs">
+        <ul class="list-disc list-inside">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
     <!-- Tabs Header -->
     <div class="bg-white p-2 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-1.5 overflow-x-auto">
@@ -90,45 +92,46 @@
     <!-- TAB 1: DATA DIRI & PROFIL -->
     <div x-show="activeTab === 'admin_info'" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs flex flex-col gap-6">
         
-        <form @submit.prevent="saveProfile()" class="flex flex-col gap-5">
+        <form action="{{ route('admin.profile.update') }}" method="POST" class="flex flex-col gap-5">
+            @csrf
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap & Gelar</label>
-                    <input type="text" x-model="name" required
+                    <input type="text" name="name" x-model="name" required
                            class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Username Admin</label>
-                    <input type="text" x-model="username" required
-                           class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none font-mono">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Username Admin (Permanen)</label>
+                    <input type="text" x-model="username" readonly disabled
+                           class="w-full p-3.5 text-sm font-bold bg-slate-100 border-2 border-slate-200 rounded-2xl outline-none font-mono text-slate-500 cursor-not-allowed">
                 </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Email Resmi</label>
-                    <input type="email" x-model="email" required
+                    <input type="email" name="email" x-model="email" required
                            class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Nomor Kontak / WhatsApp</label>
-                    <input type="text" x-model="phone"
+                    <input type="text" name="phone" x-model="phone"
                            class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none">
                 </div>
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-700 mb-1">Nama Sekolah / Lembaga PAUD</label>
-                <input type="text" x-model="schoolName" required
+                <input type="text" name="school_name" x-model="schoolName" required
                        class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none">
             </div>
 
             <button type="submit"
                     class="btn-3d btn-3d-sky w-full py-4 rounded-2xl font-bold text-sm text-white mt-2">
-                Simpan Perubahan Profil Pengajar
+                Simpan Perubahan Profil Pengajar ke Database
             </button>
 
         </form>
@@ -138,35 +141,34 @@
     <!-- TAB 2: KEAMANAN & PASSWORD ADMIN -->
     <div x-show="activeTab === 'security'" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs flex flex-col gap-6">
         
-        <form @submit.prevent="saveProfile()" class="flex flex-col gap-5">
+        <form action="{{ route('admin.profile.update') }}" method="POST" class="flex flex-col gap-5">
+            @csrf
+            <input type="hidden" name="name" :value="name">
+            <input type="hidden" name="email" :value="email">
+            <input type="hidden" name="school_name" :value="schoolName">
+            <input type="hidden" name="phone" :value="phone">
             
             <div class="p-4 bg-sky-50 border border-sky-200 rounded-2xl text-xs text-sky-900 font-semibold leading-relaxed">
-                💡 Untuk keamanan akun pengajar, gunakan kata sandi yang memiliki kombinasi huruf besar, huruf kecil, dan angka minimal 8 karakter.
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1">Kata Sandi Saat Ini</label>
-                <input type="password" x-model="oldPassword" placeholder="Masukkan kata sandi lama.."
-                       class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none">
+                💡 Untuk keamanan akun pengajar, gunakan kata sandi yang memiliki kombinasi huruf dan angka minimal 6 karakter.
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Kata Sandi Baru</label>
-                    <input type="password" x-model="newPassword" placeholder="Minimal 8 karakter.."
+                    <input type="password" name="password" x-model="newPassword" required placeholder="Minimal 6 karakter.."
                            class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Konfirmasi Kata Sandi Baru</label>
-                    <input type="password" x-model="confirmPassword" placeholder="Ulangi kata sandi baru.."
+                    <input type="password" name="password_confirmation" x-model="confirmPassword" required placeholder="Ulangi kata sandi baru.."
                            class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none">
                 </div>
             </div>
 
             <button type="submit"
                     class="btn-3d btn-3d-yellow w-full py-4 rounded-2xl font-bold text-sm text-amber-950 mt-2">
-                Perbarui Kata Sandi Admin
+                Perbarui Kata Sandi Admin ke Database
             </button>
 
         </form>
@@ -176,7 +178,7 @@
     <!-- TAB 3: KONFIGURASI AI & SISTEM -->
     <div x-show="activeTab === 'ai_settings'" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs flex flex-col gap-6">
         
-        <form @submit.prevent="saveProfile()" class="flex flex-col gap-5">
+        <div class="flex flex-col gap-5">
             
             <div>
                 <label class="block text-xs font-bold text-slate-700 mb-1">Model Google Gemini AI Utama</label>
@@ -201,12 +203,13 @@
                 </span>
             </div>
 
-            <button type="submit"
-                    class="btn-3d btn-3d-purple w-full py-4 rounded-2xl font-bold text-sm text-white mt-2">
-                Simpan Konfigurasi AI
-            </button>
+            <a href="{{ route('admin.ai-generator') }}" 
+               class="btn-3d btn-3d-purple w-full py-4 rounded-2xl font-bold text-sm text-white mt-2 text-center flex items-center justify-center gap-2">
+                <span>🚀</span>
+                <span>Buka Studio 1-Click Gemini AI Generator</span>
+            </a>
 
-        </form>
+        </div>
 
     </div>
 

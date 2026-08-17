@@ -82,3 +82,102 @@ test('audit log sistem dapat mencatat riwayat aktivitas baru', function () {
     expect($log->id)->not->toBeNull();
     expect($admin->auditLogs)->toHaveCount(User::where('role', 'admin')->first()->auditLogs()->count());
 });
+
+test('admin dapat menambahkan pengguna baru ke database', function () {
+    $admin = User::where('role', 'admin')->first();
+
+    $response = $this->actingAs($admin)->post(route('admin.users.store'), [
+        'name' => 'Bintang Baru',
+        'username' => 'bintang_baru',
+        'email' => 'bintang@kuybelajar.test',
+        'role' => 'student',
+        'age' => 4,
+        'avatar_icon' => 'kelinci',
+        'parent_pin' => '1234',
+        'password' => 'secret123',
+    ]);
+
+    $response->assertRedirect(route('admin.users'));
+    $response->assertSessionHas('success');
+
+    $newUser = User::where('username', 'bintang_baru')->first();
+    expect($newUser)->not->toBeNull();
+    expect($newUser->name)->toBe('Bintang Baru');
+    expect($newUser->role)->toBe('student');
+});
+
+test('admin dapat memperbarui profil pengguna di database', function () {
+    $admin = User::where('role', 'admin')->first();
+    $targetUser = User::where('username', 'bintang_baru')->first() ?? User::where('role', 'student')->first();
+
+    $response = $this->actingAs($admin)->put(route('admin.users.update', $targetUser->id), [
+        'name' => 'Bintang Terang Juara',
+        'email' => $targetUser->email,
+        'role' => 'student',
+        'age' => 5,
+        'avatar_icon' => 'singa',
+        'is_active' => true,
+    ]);
+
+    $response->assertRedirect(route('admin.users'));
+    $response->assertSessionHas('success');
+
+    $targetUser->refresh();
+    expect($targetUser->name)->toBe('Bintang Terang Juara');
+    expect($targetUser->age)->toBe(5);
+});
+
+test('admin dapat mereset PIN parental pengguna', function () {
+    $admin = User::where('role', 'admin')->first();
+    $targetUser = User::where('username', 'bintang_baru')->first() ?? User::where('role', 'student')->first();
+    $targetUser->parent_pin = '9999';
+    $targetUser->save();
+
+    $response = $this->actingAs($admin)->post(route('admin.users.reset-pin', $targetUser->id));
+
+    $response->assertRedirect(route('admin.users'));
+    $response->assertSessionHas('success');
+
+    $targetUser->refresh();
+    expect($targetUser->parent_pin)->toBe('1234');
+});
+
+test('admin dapat menghapus akun pengguna dari database', function () {
+    $admin = User::where('role', 'admin')->first();
+    $userToDelete = User::where('username', 'bintang_baru')->first();
+
+    if (! $userToDelete) {
+        $userToDelete = User::create([
+            'name' => 'User Hapus Test',
+            'username' => 'user_hapus_test',
+            'role' => 'student',
+            'password' => bcrypt('password'),
+        ]);
+    }
+
+    $userId = $userToDelete->id;
+    $response = $this->actingAs($admin)->delete(route('admin.users.delete', $userId));
+
+    $response->assertRedirect(route('admin.users'));
+    $response->assertSessionHas('success');
+
+    expect(User::find($userId))->toBeNull();
+});
+
+test('admin dapat memperbarui informasi profil dan sekolah di database', function () {
+    $admin = User::where('role', 'admin')->first();
+
+    $response = $this->actingAs($admin)->post(route('admin.profile.update'), [
+        'name' => 'Pak Guru Iqbal M.Pd.',
+        'email' => $admin->email,
+        'school_name' => 'TK Pembina Ceria Bangsa',
+        'phone' => '081299998888',
+    ]);
+
+    $response->assertRedirect(route('admin.profile'));
+    $response->assertSessionHas('success');
+
+    $admin->refresh();
+    expect($admin->name)->toBe('Pak Guru Iqbal M.Pd.');
+    expect($admin->school_name)->toBe('TK Pembina Ceria Bangsa');
+});

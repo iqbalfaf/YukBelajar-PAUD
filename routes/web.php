@@ -45,5 +45,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', EnsureAdminOrTeacher
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/ai-generator', [AdminController::class, 'aiGenerator'])->name('ai-generator');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
+    Route::put('/users/{id}', [AdminController::class, 'updateUser'])->name('users.update');
+    Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('users.delete');
+    Route::post('/users/{id}/reset-pin', [AdminController::class, 'resetUserPin'])->name('users.reset-pin');
     Route::get('/profil', [AdminController::class, 'profile'])->name('profile');
+    Route::post('/profil', [AdminController::class, 'updateAdminProfile'])->name('profile.update');
 });

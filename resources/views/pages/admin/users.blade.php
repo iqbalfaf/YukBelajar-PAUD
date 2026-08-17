@@ -12,8 +12,8 @@
          showResetModal: false,
          modalMode: 'create', // 'create' or 'edit'
          activeUser: null,
-         alertMessage: '',
-         showAlert: false,
+         showAlert: {{ session('success') ? 'true' : 'false' }},
+         alertMessage: '{{ session('success') ?? '' }}',
          
          users: {{ Js::from($usersData['users']) }},
          avatars: {{ Js::from($avatars) }},
@@ -34,7 +34,7 @@
          get filteredUsers() {
              return this.users.filter(u => {
                  const matchesRole = this.roleFilter === 'all' || u.role === this.roleFilter || (this.roleFilter === 'teacher' && (u.role === 'teacher' || u.role === 'admin'));
-                 const matchesStatus = this.statusFilter === 'all' || u.status === this.statusFilter;
+                 const matchesStatus = this.statusFilter === 'all' || (this.statusFilter === 'active' ? u.is_active : !u.is_active);
                  const q = this.searchQuery.toLowerCase();
                  const matchesSearch = !q || u.name.toLowerCase().includes(q) || u.username.toLowerCase().includes(q) || (u.email && u.email.toLowerCase().includes(q));
                  return matchesRole && matchesStatus && matchesSearch;
@@ -44,7 +44,7 @@
          openCreateModal() {
              this.modalMode = 'create';
              this.formData = {
-                 id: Date.now(),
+                 id: null,
                  name: '',
                  username: '',
                  email: '',
@@ -53,80 +53,30 @@
                  avatar: 'dino',
                  status: 'active',
                  parent_name: '',
-                 password: '••••'
+                 password: '1234'
              };
              this.showModal = true;
          },
 
          openEditModal(user) {
              this.modalMode = 'edit';
-             this.formData = { ...user };
+             this.formData = { 
+                 id: user.id,
+                 name: user.name,
+                 username: user.username,
+                 email: user.email === '-' ? '' : user.email,
+                 role: user.role,
+                 age: user.age,
+                 avatar: user.avatar_key,
+                 status: user.is_active ? 'active' : 'inactive',
+                 password: ''
+             };
              this.showModal = true;
          },
 
          openResetModal(user) {
              this.activeUser = user;
              this.showResetModal = true;
-         },
-
-         saveUser() {
-             if (!this.formData.name || !this.formData.username) {
-                 alert('Nama dan Username wajib diisi!');
-                 return;
-             }
-
-             const selectedAvatarObj = this.avatars.find(a => a.key === this.formData.avatar);
-             const emoji = selectedAvatarObj ? selectedAvatarObj.emoji : '👶';
-
-             if (this.modalMode === 'create') {
-                 this.users.unshift({
-                     ...this.formData,
-                     id: Date.now(),
-                     avatar_emoji: emoji,
-                     accessory: '👑',
-                     role_label: this.formData.role === 'student' ? 'Siswa PAUD' : (this.formData.role === 'parent' ? 'Orang Tua' : 'Guru / Admin'),
-                     stars_count: this.formData.role === 'student' ? 10 : 0,
-                     quizzes_count: 0,
-                     created_at: 'Hari Ini'
-                 });
-                 this.triggerAlert('Pengguna baru berhasil didaftarkan ke sistem!');
-             } else {
-                 const idx = this.users.findIndex(u => u.id === this.formData.id);
-                 if (idx !== -1) {
-                     this.users[idx] = {
-                         ...this.users[idx],
-                         ...this.formData,
-                         avatar_emoji: emoji
-                     };
-                     this.triggerAlert('Data pengguna berhasil diperbarui!');
-                 }
-             }
-
-             this.showModal = false;
-         },
-
-         deleteUser(id, name) {
-             if (confirm(`Yakin ingin menghapus akun '${name}'? Data bintang dan pencapaian anak akan ikut terhapus.`)) {
-                 this.users = this.users.filter(u => u.id !== id);
-                 this.triggerAlert(`Akun '${name}' berhasil dihapus dari sistem.`);
-             }
-         },
-
-         toggleStatus(user) {
-             user.status = user.status === 'active' ? 'inactive' : 'active';
-             this.triggerAlert(`Status akun '${user.name}' diubah menjadi ${user.status === 'active' ? 'Aktif' : 'Non-aktif'}.`);
-         },
-
-         confirmResetPin() {
-             this.showResetModal = false;
-             this.triggerAlert(`PIN / Password untuk akun '${this.activeUser.name}' berhasil direset ke default: '1234'.`);
-         },
-
-         triggerAlert(msg) {
-             this.alertMessage = msg;
-             this.showAlert = true;
-             if (window.soundEngine) window.soundEngine.playClick();
-             setTimeout(() => this.showAlert = false, 4000);
          }
      }">
 
@@ -151,7 +101,7 @@
         </button>
     </div>
 
-    <!-- Overview Stats Metrics -->
+    <!-- Overview Stats Metrics (Pure Database Counts) -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
             <div class="flex items-center justify-between mb-2">
@@ -182,23 +132,33 @@
 
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
             <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Aktif Belajar Hari Ini</span>
-                <span class="text-2xl">🔥</span>
+                <span class="text-xs font-bold text-slate-500">Akun Aktif</span>
+                <span class="text-2xl">🟢</span>
             </div>
             <div class="text-3xl font-extrabold font-heading text-slate-800">{{ $usersData['stats']['active_today'] }}</div>
-            <span class="text-xs font-semibold text-amber-600">Online & Bermain</span>
+            <span class="text-xs font-semibold text-emerald-600">Siap Belajar</span>
         </div>
     </div>
 
-    <!-- Alert Notification -->
-    <div x-show="showAlert" x-cloak
-         class="p-4 bg-emerald-100 border-2 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
+    <!-- Alert Success Notification -->
+    @if(session('success'))
+    <div class="p-4 bg-emerald-100 border-2 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
         <div class="flex items-center gap-3">
             <span class="text-2xl">✨</span>
-            <span x-text="alertMessage"></span>
+            <span>{{ session('success') }}</span>
         </div>
-        <button @click="showAlert = false" class="text-emerald-800 hover:text-emerald-950 font-black">✖</button>
     </div>
+    @endif
+
+    @if($errors->any())
+    <div class="p-4 bg-rose-100 border-2 border-rose-400 text-rose-950 font-bold text-sm rounded-2xl shadow-xs">
+        <ul class="list-disc list-inside">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
     <!-- Table Container & Filters -->
     <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs flex flex-col gap-6">
@@ -211,22 +171,22 @@
                 <button @click="roleFilter = 'all'"
                         class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
                         :class="roleFilter === 'all' ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                    Semua User
+                    Semua User ({{ count($usersData['users']) }})
                 </button>
                 <button @click="roleFilter = 'student'"
                         class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
                         :class="roleFilter === 'student' ? 'bg-emerald-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                    👶 Siswa Cilik
+                    👶 Siswa Cilik ({{ $usersData['stats']['total_students'] }})
                 </button>
                 <button @click="roleFilter = 'parent'"
                         class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
                         :class="roleFilter === 'parent' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                    👨‍👩‍👧 Orang Tua
+                    👨‍👩‍👧 Orang Tua ({{ $usersData['stats']['total_parents'] }})
                 </button>
                 <button @click="roleFilter = 'teacher'"
                         class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
                         :class="roleFilter === 'teacher' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                    🦁 Guru / Admin
+                    🦁 Guru / Admin ({{ $usersData['stats']['total_teachers'] }})
                 </button>
             </div>
 
@@ -272,13 +232,9 @@
                                 <div class="flex items-center gap-3">
                                     <div class="w-10 h-10 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-2xl shrink-0 shadow-xs relative">
                                         <span x-text="u.avatar_emoji"></span>
-                                        <template x-if="u.accessory">
-                                            <span class="absolute -top-1.5 -right-1 text-xs" x-text="u.accessory"></span>
-                                        </template>
                                     </div>
                                     <div>
                                         <p class="font-extrabold text-slate-900 text-sm" x-text="u.name"></p>
-                                        <p class="text-[11px] text-slate-400 font-semibold" x-text="u.parent_name"></p>
                                     </div>
                                 </div>
                             </td>
@@ -296,7 +252,7 @@
                                           :class="u.role === 'student' ? 'bg-emerald-100 text-emerald-800' : (u.role === 'parent' ? 'bg-amber-100 text-amber-900' : 'bg-purple-100 text-purple-900')"
                                           x-text="u.role_label">
                                     </span>
-                                    <template x-if="u.age">
+                                    <template x-if="u.age && u.role === 'student'">
                                         <span class="px-2 py-0.5 bg-sky-100 text-sky-800 font-bold rounded-md text-[10px]" x-text="u.age + ' Thn'"></span>
                                     </template>
                                 </div>
@@ -307,8 +263,7 @@
                                 <template x-if="u.role === 'student'">
                                     <div class="flex items-center gap-1 font-extrabold text-amber-700">
                                         <span class="text-sm">⭐</span>
-                                        <span class="text-sm" x-text="u.stars_count"></span>
-                                        <span class="text-[10px] text-slate-400 font-normal" x-text="'(' + u.quizzes_count + ' Kuis)'"></span>
+                                        <span class="text-sm" x-text="u.stars"></span>
                                     </div>
                                 </template>
                                 <template x-if="u.role !== 'student'">
@@ -318,16 +273,15 @@
 
                             <!-- Status Toggle -->
                             <td class="p-4">
-                                <button type="button" @click="toggleStatus(u)"
-                                        class="px-2.5 py-1 rounded-full font-bold text-[10px] flex items-center gap-1 cursor-pointer transition-all"
-                                        :class="u.status === 'active' ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-slate-200 text-slate-600 hover:bg-slate-300'">
-                                    <span class="w-1.5 h-1.5 rounded-full" :class="u.status === 'active' ? 'bg-emerald-500' : 'bg-slate-400'"></span>
-                                    <span x-text="u.status === 'active' ? 'Aktif' : 'Nonaktif'"></span>
-                                </button>
+                                <span class="px-2.5 py-1 rounded-full font-bold text-[10px] inline-flex items-center gap-1"
+                                      :class="u.is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'">
+                                    <span class="w-1.5 h-1.5 rounded-full" :class="u.is_active ? 'bg-emerald-500' : 'bg-slate-400'"></span>
+                                    <span x-text="u.is_active ? 'Aktif' : 'Nonaktif'"></span>
+                                </span>
                             </td>
 
                             <!-- Registered Date -->
-                            <td class="p-4 text-slate-500 font-semibold" x-text="u.created_at"></td>
+                            <td class="p-4 text-slate-500 font-semibold" x-text="u.registered_date"></td>
 
                             <!-- Actions -->
                             <td class="p-4 text-right">
@@ -340,10 +294,17 @@
                                             class="p-2 bg-slate-100 hover:bg-amber-100 text-slate-600 hover:text-amber-700 rounded-xl transition-all font-bold cursor-pointer">
                                         🔑
                                     </button>
-                                    <button type="button" @click="deleteUser(u.id, u.name)" title="Hapus Pengguna"
-                                            class="p-2 bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-700 rounded-xl transition-all font-bold cursor-pointer">
-                                        🗑️
-                                    </button>
+                                    
+                                    <!-- Delete Form -->
+                                    <form :action="'{{ url('admin/users') }}/' + u.id" method="POST" 
+                                          onsubmit="return confirm('Yakin ingin menghapus akun ini secara permanen dari database?')" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title="Hapus Pengguna"
+                                                class="p-2 bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-700 rounded-xl transition-all font-bold cursor-pointer">
+                                            🗑️
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
 
@@ -355,15 +316,9 @@
 
     </div>
 
-    <!-- MODAL FORM: TAMBAH / EDIT USER (CRUD) -->
-    <div x-show="showModal" x-cloak
-         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 scale-95"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-95">
+    <!-- MODAL FORM: TAMBAH USER BARU (REAL DATABASE POST) -->
+    <div x-show="showModal && modalMode === 'create'" x-cloak
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
         
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-4 border-sky-400 shadow-2xl relative my-8"
              @click.away="showModal = false">
@@ -374,22 +329,24 @@
             </button>
 
             <div class="flex items-center gap-3 mb-4">
-                <span class="text-3xl" x-text="modalMode === 'create' ? '➕' : '✏️'"></span>
+                <span class="text-3xl">➕</span>
                 <div>
-                    <h3 class="text-xl font-black font-heading text-slate-800"
-                        x-text="modalMode === 'create' ? 'Daftarkan Pengguna Baru' : 'Edit Profil Pengguna'">
+                    <h3 class="text-xl font-black font-heading text-slate-800">
+                        Daftarkan Pengguna Baru ke Database
                     </h3>
-                    <p class="text-xs font-bold text-slate-500">Kelola akun dan kredensial akses pengguna.</p>
+                    <p class="text-xs font-bold text-slate-500">Kredensial login akan langsung aktif.</p>
                 </div>
             </div>
 
-            <form @submit.prevent="saveUser()" class="flex flex-col gap-4">
+            <form action="{{ route('admin.users.store') }}" method="POST" class="flex flex-col gap-4">
+                @csrf
+                <input type="hidden" name="avatar_icon" :value="formData.avatar">
                 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Peran Akun (Role)</label>
-                        <select x-model="formData.role"
-                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none">
+                        <select name="role" x-model="formData.role"
+                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
                             <option value="student">👶 Siswa PAUD</option>
                             <option value="parent">👨‍👩‍👧 Orang Tua</option>
                             <option value="teacher">🦁 Guru / Admin</option>
@@ -398,34 +355,40 @@
 
                     <div x-show="formData.role === 'student'">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Usia Belajar Anak</label>
-                        <select x-model="formData.age"
-                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none">
-                            <option value="3">3 Tahun (Level 1: Dasar)</option>
-                            <option value="4">4 Tahun (Level 2: Menengah)</option>
-                            <option value="5">5 Tahun (Level 3: Pra-SD)</option>
-                            <option value="6">6 Tahun (Level 3: Siap SD)</option>
+                        <select name="age" x-model="formData.age"
+                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
+                            <option :value="3">3 Tahun (Level 1: Dasar)</option>
+                            <option :value="4">4 Tahun (Level 2: Menengah)</option>
+                            <option :value="5">5 Tahun (Level 3: Pra-SD)</option>
+                            <option :value="6">6 Tahun (Level 3: Siap SD)</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap</label>
-                    <input type="text" x-model="formData.name" required placeholder="Contoh: Alif Rahman"
+                    <input type="text" name="name" x-model="formData.name" required placeholder="Contoh: Alif Rahman"
                            class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Username Unik</label>
-                        <input type="text" x-model="formData.username" required placeholder="alif_ceria"
-                               class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                        <input type="text" name="username" x-model="formData.username" required placeholder="alif_ceria"
+                               class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none font-mono">
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Email / Kontak</label>
-                        <input type="email" x-model="formData.email" placeholder="alif@student.com"
+                        <input type="email" name="email" x-model="formData.email" placeholder="alif@student.com"
                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
                     </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Kata Sandi / PIN Awal</label>
+                    <input type="password" name="password" required placeholder="Minimal 4 karakter"
+                           class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
                 </div>
 
                 <!-- Avatar Selector for Student -->
@@ -445,12 +408,111 @@
 
                 <div class="flex gap-3 mt-2">
                     <button type="button" @click="showModal = false"
-                            class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl">
+                            class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl cursor-pointer">
                         Batal
                     </button>
                     <button type="submit"
-                            class="flex-1 py-3 bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-xs rounded-xl shadow-xs">
-                        Simpan Pengguna
+                            class="flex-1 py-3 bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-xs rounded-xl shadow-xs cursor-pointer">
+                        Simpan ke Database
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MODAL FORM: EDIT USER (REAL DATABASE PUT) -->
+    <div x-show="showModal && modalMode === 'edit'" x-cloak
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+        
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-4 border-amber-400 shadow-2xl relative my-8"
+             @click.away="showModal = false">
+            
+            <button @click="showModal = false"
+                    class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-black text-xl cursor-pointer">
+                ✖
+            </button>
+
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-3xl">✏️</span>
+                <div>
+                    <h3 class="text-xl font-black font-heading text-slate-800">
+                        Edit Profil Pengguna di Database
+                    </h3>
+                    <p class="text-xs font-bold text-slate-500">Perubahan akan langsung diperbarui.</p>
+                </div>
+            </div>
+
+            <form :action="'{{ url('admin/users') }}/' + formData.id" method="POST" class="flex flex-col gap-4">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="avatar_icon" :value="formData.avatar">
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Peran Akun (Role)</label>
+                        <select name="role" x-model="formData.role"
+                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
+                            <option value="student">👶 Siswa PAUD</option>
+                            <option value="parent">👨‍👩‍👧 Orang Tua</option>
+                            <option value="teacher">🦁 Guru / Admin</option>
+                        </select>
+                    </div>
+
+                    <div x-show="formData.role === 'student'">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Usia Belajar Anak</label>
+                        <select name="age" x-model="formData.age"
+                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
+                            <option :value="3">3 Tahun (Level 1: Dasar)</option>
+                            <option :value="4">4 Tahun (Level 2: Menengah)</option>
+                            <option :value="5">5 Tahun (Level 3: Pra-SD)</option>
+                            <option :value="6">6 Tahun (Level 3: Siap SD)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap</label>
+                    <input type="text" name="name" x-model="formData.name" required
+                           class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Email Resmi</label>
+                    <input type="email" name="email" x-model="formData.email"
+                           class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Ganti Password (Opsional)</label>
+                    <input type="password" name="password" placeholder="Biarkan kosong jika tidak diganti"
+                           class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                </div>
+
+                <!-- Avatar Selector for Student -->
+                <div x-show="formData.role === 'student'">
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Pilih Karakter Avatar</label>
+                    <div class="grid grid-cols-4 gap-2">
+                        <template x-for="av in avatars" :key="av.key">
+                            <button type="button" @click="formData.avatar = av.key"
+                                    class="p-2 rounded-xl border-2 flex flex-col items-center gap-1 transition-all cursor-pointer"
+                                    :class="formData.avatar === av.key ? 'bg-amber-100 border-amber-400 scale-105 shadow-xs' : 'bg-slate-50 border-slate-200'">
+                                <span class="text-2xl" x-text="av.emoji"></span>
+                                <span class="text-[9px] font-bold text-slate-700" x-text="av.name.split(' ')[0]"></span>
+                            </button>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 mt-2">
+                    <button type="button" @click="showModal = false"
+                            class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit"
+                            class="flex-1 py-3 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs rounded-xl shadow-xs cursor-pointer">
+                        Simpan Perubahan ke Database
                     </button>
                 </div>
 
@@ -461,13 +523,7 @@
 
     <!-- MODAL RESET PIN/PASSWORD -->
     <div x-show="showResetModal" x-cloak
-         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 scale-95"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-95">
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
         
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full border-4 border-amber-400 shadow-2xl relative my-8 text-center"
              @click.away="showResetModal = false">
@@ -480,23 +536,24 @@
                 Reset PIN / Password
             </h3>
             <p class="text-xs font-bold text-slate-500 mb-4">
-                Atur ulang kata sandi untuk akun <b class="text-slate-800" x-text="activeUser ? activeUser.name : ''"></b>?
+                Atur ulang kata sandi / PIN untuk akun <b class="text-slate-800" x-text="activeUser ? activeUser.name : ''"></b>?
             </p>
 
             <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 mb-6 text-xs text-amber-950 font-semibold">
                 Password / PIN akan direset menjadi default: <b class="font-mono text-sm bg-white px-2 py-0.5 rounded border">1234</b>
             </div>
 
-            <div class="flex gap-3">
+            <form :action="'{{ url('admin/users') }}/' + (activeUser ? activeUser.id : '') + '/reset-pin'" method="POST" class="flex gap-3">
+                @csrf
                 <button type="button" @click="showResetModal = false"
-                        class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl">
+                        class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl cursor-pointer">
                     Batal
                 </button>
-                <button type="button" @click="confirmResetPin()"
-                        class="flex-1 py-3 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs rounded-xl shadow-xs">
-                    Konfirmasi Reset
+                <button type="submit"
+                        class="flex-1 py-3 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs rounded-xl shadow-xs cursor-pointer">
+                    Konfirmasi Reset PIN
                 </button>
-            </div>
+            </form>
 
         </div>
     </div>

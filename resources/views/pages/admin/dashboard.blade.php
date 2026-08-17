@@ -161,11 +161,11 @@
         </div>
 
         <a href="{{ route('admin.users') }}" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1 underline decoration-dotted">
-            <span>👥 Kelola 120 Siswa Terdaftar →</span>
+            <span>👥 Kelola {{ $adminData['stats']['total_students'] }} Siswa Terdaftar →</span>
         </a>
     </div>
 
-    <!-- Quick Stats Grid -->
+    <!-- Quick Stats Grid (Real Database Counts) -->
     <div class="grid grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4">
         
         <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
@@ -174,7 +174,7 @@
                 <span class="text-xl">📚</span>
             </div>
             <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['total_materials'] }}</div>
-            <span class="text-[11px] font-semibold text-emerald-600">6 Pulau Belajar</span>
+            <span class="text-[11px] font-semibold text-emerald-600">{{ count($categories) }} Pulau Belajar</span>
         </div>
 
         <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
@@ -183,7 +183,7 @@
                 <span class="text-xl">🎯</span>
             </div>
             <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['total_quizzes'] }}</div>
-            <span class="text-[11px] font-semibold text-sky-600">28 Modul Kuis</span>
+            <span class="text-[11px] font-semibold text-sky-600">{{ $adminData['stats']['total_quizzes'] }} Modul Kuis</span>
         </div>
 
         <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
@@ -201,7 +201,7 @@
                 <span class="text-xl">⭐</span>
             </div>
             <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['total_stars_awarded'] }}</div>
-            <span class="text-[11px] font-semibold text-amber-600">+320 Pekan Ini</span>
+            <span class="text-[11px] font-semibold text-amber-600">+{{ $adminData['stats']['stars_this_week'] }} Pekan Ini</span>
         </div>
 
         <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
@@ -271,8 +271,8 @@
             </div>
             
             <div class="flex items-center justify-between text-xs text-slate-400 pt-3 font-semibold">
-                <span>Puncak Belajar: <b>Sabtu (100 Kuis / 300 ⭐)</b></span>
-                <span>Total Pekan Ini: <b>550 Kuis Selesai</b></span>
+                <span>Puncak Belajar: <b>{{ $adminData['chart_analytics']['peak_day'] }} ({{ $adminData['chart_analytics']['peak_quizzes'] }} Kuis / {{ $adminData['chart_analytics']['peak_stars'] }} ⭐)</b></span>
+                <span>Total Pekan Ini: <b>{{ $adminData['chart_analytics']['total_quizzes_weekly'] }} Kuis Selesai</b></span>
             </div>
         </div>
 
@@ -307,7 +307,7 @@
             </div>
 
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-700">
-                <span>Kategori Terpopuler: 🦁 Pulau Hewan (88%)</span>
+                <span>Kategori Terpopuler: <b>{{ $adminData['stats']['most_popular_category'] }}</b></span>
                 <a href="{{ route('admin.ai-generator') }}" class="hover:underline">Tambah Materi AI →</a>
             </div>
         </div>
