@@ -892,11 +892,11 @@ class QuizSeeder extends Seeder
                     [
                         'text' => 'Angka 10 ditambah 1 menghasilkan angka berapa?',
                         'audio' => 'Angka 10 ditambah 1 menghasilkan angka berapa?',
-                        'emoji' => '1️⃣',
+                        'emoji' => '1️⃣1️⃣',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '11 (Sebelas)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '12 (Dua Belas)', 'is_correct' => false],
-                            ['emoji' => '2️⃣', 'text' => '20 (Dua Puluh)', 'is_correct' => false],
+                            ['emoji' => '1️⃣1️⃣', 'text' => '11 (Sebelas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣2️⃣', 'text' => '12 (Dua Belas)', 'is_correct' => false],
+                            ['emoji' => '2️⃣0️⃣', 'text' => '20 (Dua Puluh)', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -904,19 +904,19 @@ class QuizSeeder extends Seeder
                         'audio' => 'Berapakah jumlah bulan dalam satu tahun kalender?',
                         'emoji' => '🗓️',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '12 Bulan (Dua Belas)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '10 Bulan', 'is_correct' => false],
+                            ['emoji' => '1️⃣2️⃣', 'text' => '12 Bulan (Dua Belas)', 'is_correct' => true],
+                            ['emoji' => '🔟', 'text' => '10 Bulan', 'is_correct' => false],
                             ['emoji' => '7️⃣', 'text' => '7 Bulan', 'is_correct' => false],
                         ],
                     ],
                     [
                         'text' => 'Angka belasan yang terdiri dari angka 1 dan angka 3 adalah...?',
                         'audio' => 'Angka belasan yang terdiri dari angka 1 dan angka 3 adalah apa?',
-                        'emoji' => '🔢',
+                        'emoji' => '1️⃣3️⃣',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '13 (Tiga Belas)', 'is_correct' => true],
-                            ['emoji' => '3️⃣', 'text' => '31 (Tiga Puluh Satu)', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '11 (Sebelas)', 'is_correct' => false],
+                            ['emoji' => '1️⃣3️⃣', 'text' => '13 (Tiga Belas)', 'is_correct' => true],
+                            ['emoji' => '3️⃣1️⃣', 'text' => '31 (Tiga Puluh Satu)', 'is_correct' => false],
+                            ['emoji' => '1️⃣1️⃣', 'text' => '11 (Sebelas)', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -924,9 +924,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Hitung jumlah bebek berikut: sepuluh ditambah dua sama dengan berapa?',
                         'emoji' => '🦆',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '12 Ekor Bebek', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '11 Ekor', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '15 Ekor', 'is_correct' => false],
+                            ['emoji' => '1️⃣2️⃣', 'text' => '12 Ekor Bebek', 'is_correct' => true],
+                            ['emoji' => '1️⃣1️⃣', 'text' => '11 Ekor', 'is_correct' => false],
+                            ['emoji' => '1️⃣5️⃣', 'text' => '15 Ekor', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -934,9 +934,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Angka berapakah yang berada tepat di antara angka 11 dan 13?',
                         'emoji' => '🔢',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => 'Angka 12 (11 - 12 - 13)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 10', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 14', 'is_correct' => false],
+                            ['emoji' => '1️⃣2️⃣', 'text' => 'Angka 12 (11 - 12 - 13)', 'is_correct' => true],
+                            ['emoji' => '🔟', 'text' => 'Angka 10', 'is_correct' => false],
+                            ['emoji' => '1️⃣4️⃣', 'text' => 'Angka 14', 'is_correct' => false],
                         ],
                     ],
                 ],
@@ -958,7 +958,7 @@ class QuizSeeder extends Seeder
                         'emoji' => '🔢',
                         'options' => [
                             ['emoji' => '🔟', 'text' => 'Angka 10', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 11', 'is_correct' => false],
+                            ['emoji' => '1️⃣1️⃣', 'text' => 'Angka 11', 'is_correct' => false],
                             ['emoji' => '6️⃣', 'text' => 'Angka 6', 'is_correct' => false],
                         ],
                     ],
@@ -967,8 +967,8 @@ class QuizSeeder extends Seeder
                         'audio' => 'Lanjutan dari urutan angka berikut: 10, 11, 12, lalu angka berapa?',
                         'emoji' => '🔢',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => 'Angka 13', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 14', 'is_correct' => false],
+                            ['emoji' => '1️⃣3️⃣', 'text' => 'Angka 13', 'is_correct' => true],
+                            ['emoji' => '1️⃣4️⃣', 'text' => 'Angka 14', 'is_correct' => false],
                             ['emoji' => '9️⃣', 'text' => 'Angka 9', 'is_correct' => false],
                         ],
                     ],
@@ -977,7 +977,7 @@ class QuizSeeder extends Seeder
                         'audio' => 'Manakah angka yang nilainya paling besar antara 8, 10, dan 13?',
                         'emoji' => '🏆',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => 'Angka 13 (Paling Besar)', 'is_correct' => true],
+                            ['emoji' => '1️⃣3️⃣', 'text' => 'Angka 13 (Paling Besar)', 'is_correct' => true],
                             ['emoji' => '🔟', 'text' => 'Angka 10', 'is_correct' => false],
                             ['emoji' => '8️⃣', 'text' => 'Angka 8', 'is_correct' => false],
                         ],
@@ -997,8 +997,8 @@ class QuizSeeder extends Seeder
                         'audio' => 'Sebutan populer untuk jumlah 12 buah benda adalah apa?',
                         'emoji' => '📦',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '1 Lusin (12 Buah)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '1 Ratus', 'is_correct' => false],
+                            ['emoji' => '1️⃣2️⃣', 'text' => '1 Lusin (12 Buah)', 'is_correct' => true],
+                            ['emoji' => '1️⃣0️⃣0️⃣', 'text' => '1 Ratus', 'is_correct' => false],
                             ['emoji' => '5️⃣', 'text' => 'Setengah', 'is_correct' => false],
                         ],
                     ],
@@ -1021,9 +1021,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Angka belasan yang terdiri dari angka 1 dan angka 4 adalah apa?',
                         'emoji' => '🍒',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '14 (Empat Belas)', 'is_correct' => true],
-                            ['emoji' => '4️⃣', 'text' => '41', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '15', 'is_correct' => false],
+                            ['emoji' => '1️⃣4️⃣', 'text' => '14 (Empat Belas)', 'is_correct' => true],
+                            ['emoji' => '4️⃣1️⃣', 'text' => '41', 'is_correct' => false],
+                            ['emoji' => '1️⃣5️⃣', 'text' => '15', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1031,9 +1031,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Angka pertengahan antara 10 dan 20 adalah apa?',
                         'emoji' => '🐟',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '15 (Lima Belas)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '12', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '18', 'is_correct' => false],
+                            ['emoji' => '1️⃣5️⃣', 'text' => '15 (Lima Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣2️⃣', 'text' => '12', 'is_correct' => false],
+                            ['emoji' => '1️⃣8️⃣', 'text' => '18', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1041,9 +1041,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Angka belasan yang terdiri dari angka 1 dan angka 6 adalah apa?',
                         'emoji' => '🍓',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '16 (Enam Belas)', 'is_correct' => true],
-                            ['emoji' => '6️⃣', 'text' => '61', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '19', 'is_correct' => false],
+                            ['emoji' => '1️⃣6️⃣', 'text' => '16 (Enam Belas)', 'is_correct' => true],
+                            ['emoji' => '6️⃣1️⃣', 'text' => '61', 'is_correct' => false],
+                            ['emoji' => '1️⃣9️⃣', 'text' => '19', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1051,9 +1051,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Angka istimewa tanggal kemerdekaan Indonesia di bulan Agustus adalah berapa?',
                         'emoji' => '🇮🇩',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '17 (Tujuh Belas)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '15', 'is_correct' => false],
-                            ['emoji' => '2️⃣', 'text' => '20', 'is_correct' => false],
+                            ['emoji' => '1️⃣7️⃣', 'text' => '17 (Tujuh Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣5️⃣', 'text' => '15', 'is_correct' => false],
+                            ['emoji' => '2️⃣0️⃣', 'text' => '20', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1061,9 +1061,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Angka belasan yang terdiri dari angka 1 dan angka 8 adalah apa?',
                         'emoji' => '🦋',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '18 (Delapan Belas)', 'is_correct' => true],
-                            ['emoji' => '8️⃣', 'text' => '81', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '13', 'is_correct' => false],
+                            ['emoji' => '1️⃣8️⃣', 'text' => '18 (Delapan Belas)', 'is_correct' => true],
+                            ['emoji' => '8️⃣1️⃣', 'text' => '81', 'is_correct' => false],
+                            ['emoji' => '1️⃣3️⃣', 'text' => '13', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1071,9 +1071,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Angka belasan tertinggi sebelum angka dua puluh adalah apa?',
                         'emoji' => '✨',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '19 (Sembilan Belas)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '18', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '17', 'is_correct' => false],
+                            ['emoji' => '1️⃣9️⃣', 'text' => '19 (Sembilan Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣8️⃣', 'text' => '18', 'is_correct' => false],
+                            ['emoji' => '1️⃣7️⃣', 'text' => '17', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1081,9 +1081,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Berapakah jumlah gabungan 10 jari tangan dan 10 jari kaki kita?',
                         'emoji' => '🦶',
                         'options' => [
-                            ['emoji' => '2️⃣', 'text' => '20 (Dua Puluh)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '10', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '15', 'is_correct' => false],
+                            ['emoji' => '2️⃣0️⃣', 'text' => '20 (Dua Puluh)', 'is_correct' => true],
+                            ['emoji' => '🔟', 'text' => '10', 'is_correct' => false],
+                            ['emoji' => '1️⃣5️⃣', 'text' => '15', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1091,9 +1091,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Urutan angka yang berada tepat setelah angka 15 adalah berapa?',
                         'emoji' => '🔢',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => 'Angka 16', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 14', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 17', 'is_correct' => false],
+                            ['emoji' => '1️⃣6️⃣', 'text' => 'Angka 16', 'is_correct' => true],
+                            ['emoji' => '1️⃣4️⃣', 'text' => 'Angka 14', 'is_correct' => false],
+                            ['emoji' => '1️⃣7️⃣', 'text' => 'Angka 17', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1101,9 +1101,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Urutan angka yang berada tepat sebelum angka 20 adalah berapa?',
                         'emoji' => '🔢',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => 'Angka 19', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 18', 'is_correct' => false],
-                            ['emoji' => '2️⃣', 'text' => 'Angka 21', 'is_correct' => false],
+                            ['emoji' => '1️⃣9️⃣', 'text' => 'Angka 19', 'is_correct' => true],
+                            ['emoji' => '1️⃣8️⃣', 'text' => 'Angka 18', 'is_correct' => false],
+                            ['emoji' => '2️⃣1️⃣', 'text' => 'Angka 21', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1144,9 +1144,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Lanjutkan pola lompat 5 angka berikut: 5, 10, 15, lalu angka berapa?',
                         'emoji' => '🧮',
                         'options' => [
-                            ['emoji' => '2️⃣', 'text' => 'Angka 20', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 16', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 18', 'is_correct' => false],
+                            ['emoji' => '2️⃣0️⃣', 'text' => 'Angka 20', 'is_correct' => true],
+                            ['emoji' => '1️⃣6️⃣', 'text' => 'Angka 16', 'is_correct' => false],
+                            ['emoji' => '1️⃣8️⃣', 'text' => 'Angka 18', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1154,9 +1154,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Hitung: 10 jari tangan ditambah 5 jari kaki sama dengan berapa jari?',
                         'emoji' => '🖐️',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '15 Jari', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '12 Jari', 'is_correct' => false],
-                            ['emoji' => '2️⃣', 'text' => '20 Jari', 'is_correct' => false],
+                            ['emoji' => '1️⃣5️⃣', 'text' => '15 Jari', 'is_correct' => true],
+                            ['emoji' => '1️⃣2️⃣', 'text' => '12 Jari', 'is_correct' => false],
+                            ['emoji' => '2️⃣0️⃣', 'text' => '20 Jari', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1164,9 +1164,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Hitung: 10 buah apel ditambah 10 buah apel sama dengan berapa?',
                         'emoji' => '🍎',
                         'options' => [
-                            ['emoji' => '2️⃣', 'text' => '20 Apel', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '15 Apel', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '10 Apel', 'is_correct' => false],
+                            ['emoji' => '2️⃣0️⃣', 'text' => '20 Apel', 'is_correct' => true],
+                            ['emoji' => '1️⃣5️⃣', 'text' => '15 Apel', 'is_correct' => false],
+                            ['emoji' => '🔟', 'text' => '10 Apel', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1194,9 +1194,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Ada 20 bintang, 1 bintang tertutup awan. Sisa berapa bintang?',
                         'emoji' => '✨',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '19 Bintang', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '18 Bintang', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '15 Bintang', 'is_correct' => false],
+                            ['emoji' => '1️⃣9️⃣', 'text' => '19 Bintang', 'is_correct' => true],
+                            ['emoji' => '1️⃣8️⃣', 'text' => '18 Bintang', 'is_correct' => false],
+                            ['emoji' => '1️⃣5️⃣', 'text' => '15 Bintang', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1204,9 +1204,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Ada 13 balon, ditiup 2 balon lagi. Berapa total balon sekarang?',
                         'emoji' => '🎈',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '15 Balon', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '14 Balon', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '16 Balon', 'is_correct' => false],
+                            ['emoji' => '1️⃣5️⃣', 'text' => '15 Balon', 'is_correct' => true],
+                            ['emoji' => '1️⃣4️⃣', 'text' => '14 Balon', 'is_correct' => false],
+                            ['emoji' => '1️⃣6️⃣', 'text' => '16 Balon', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1214,9 +1214,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Angka genap manakah yang terletak di antara 15 dan 17?',
                         'emoji' => '🔢',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '16 (Enam Belas)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '14', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '18', 'is_correct' => false],
+                            ['emoji' => '1️⃣6️⃣', 'text' => '16 (Enam Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣4️⃣', 'text' => '14', 'is_correct' => false],
+                            ['emoji' => '1️⃣8️⃣', 'text' => '18', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1224,9 +1224,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Berapakah hasil dari 9 ditambah 9?',
                         'emoji' => '🧮',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '18 (Delapan Belas)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '17', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '19', 'is_correct' => false],
+                            ['emoji' => '1️⃣8️⃣', 'text' => '18 (Delapan Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣7️⃣', 'text' => '17', 'is_correct' => false],
+                            ['emoji' => '1️⃣9️⃣', 'text' => '19', 'is_correct' => false],
                         ],
                     ],
                 ],
@@ -1255,11 +1255,11 @@ class QuizSeeder extends Seeder
                     [
                         'text' => 'Angka terbesar dalam materi berhitung 1 sampai 20 adalah...?',
                         'audio' => 'Angka terbesar dalam materi berhitung 1 sampai 20 adalah apa?',
-                        'emoji' => '2️⃣',
+                        'emoji' => '2️⃣0️⃣',
                         'options' => [
-                            ['emoji' => '2️⃣', 'text' => 'Angka 20 (Dua Puluh)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 19', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 15', 'is_correct' => false],
+                            ['emoji' => '2️⃣0️⃣', 'text' => 'Angka 20 (Dua Puluh)', 'is_correct' => true],
+                            ['emoji' => '1️⃣9️⃣', 'text' => 'Angka 19', 'is_correct' => false],
+                            ['emoji' => '1️⃣5️⃣', 'text' => 'Angka 15', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1267,8 +1267,8 @@ class QuizSeeder extends Seeder
                         'audio' => 'Berapakah total seluruh angka yang kita pelajari dari 1 sampai 20?',
                         'emoji' => '🔢',
                         'options' => [
-                            ['emoji' => '2️⃣', 'text' => '20 Angka Lengkap', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '10 Angka', 'is_correct' => false],
+                            ['emoji' => '2️⃣0️⃣', 'text' => '20 Angka Lengkap', 'is_correct' => true],
+                            ['emoji' => '🔟', 'text' => '10 Angka', 'is_correct' => false],
                             ['emoji' => '5️⃣', 'text' => '5 Angka', 'is_correct' => false],
                         ],
                     ],
@@ -1287,9 +1287,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Angka belasan manakah yang melambangkan 10 ditambah 7?',
                         'emoji' => '🇮🇩',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '17 (Tujuh Belas)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '16', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '18', 'is_correct' => false],
+                            ['emoji' => '1️⃣7️⃣', 'text' => '17 (Tujuh Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣6️⃣', 'text' => '16', 'is_correct' => false],
+                            ['emoji' => '1️⃣8️⃣', 'text' => '18', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -1315,10 +1315,10 @@ class QuizSeeder extends Seeder
                     [
                         'text' => 'Angka berapakah yang terdiri dari angka 2 diikuti angka 0?',
                         'audio' => 'Angka berapakah yang terdiri dari angka 2 diikuti angka 0?',
-                        'emoji' => '2️⃣',
+                        'emoji' => '2️⃣0️⃣',
                         'options' => [
-                            ['emoji' => '2️⃣', 'text' => '20 (Dua Puluh)', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '10 (Sepuluh)', 'is_correct' => false],
+                            ['emoji' => '2️⃣0️⃣', 'text' => '20 (Dua Puluh)', 'is_correct' => true],
+                            ['emoji' => '🔟', 'text' => '10 (Sepuluh)', 'is_correct' => false],
                             ['emoji' => '2️⃣', 'text' => '2 (Dua)', 'is_correct' => false],
                         ],
                     ],
@@ -1327,9 +1327,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'Lanjutan dari urutan angka berikut: 16, 17, 18, lalu angka berapa?',
                         'emoji' => '🔢',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => 'Angka 19', 'is_correct' => true],
-                            ['emoji' => '2️⃣', 'text' => 'Angka 20', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => 'Angka 15', 'is_correct' => false],
+                            ['emoji' => '1️⃣9️⃣', 'text' => 'Angka 19', 'is_correct' => true],
+                            ['emoji' => '2️⃣0️⃣', 'text' => 'Angka 20', 'is_correct' => false],
+                            ['emoji' => '1️⃣5️⃣', 'text' => 'Angka 15', 'is_correct' => false],
                         ],
                     ],
                     [
