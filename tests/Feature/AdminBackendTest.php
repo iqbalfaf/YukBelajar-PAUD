@@ -286,3 +286,115 @@ test('admin dapat mempublikasikan materi dan kuis hasil AI langsung ke tabel dat
     expect($quiz->questions)->toHaveCount(1);
     expect($quiz->questions->first()->options)->toHaveCount(2);
 });
+
+test('halaman bank soal admin menampilkan daftar kuis nyata dari database', function () {
+    $admin = User::where('role', 'admin')->first();
+    $response = $this->actingAs($admin)->get(route('admin.quizzes'));
+
+    $response->assertStatus(200);
+    $response->assertViewHas('quizzesData');
+    $response->assertViewHas('categories');
+
+    $quizzesData = $response->viewData('quizzesData');
+    expect($quizzesData['stats']['total_quizzes'])->toBeGreaterThan(0);
+    expect($quizzesData['quizzes'])->not->toBeEmpty();
+});
+
+test('admin dapat menambahkan kuis baru beserta butir soal secara manual ke database', function () {
+    $admin = User::where('role', 'admin')->first();
+    $category = Category::first();
+
+    $response = $this->actingAs($admin)->post(route('admin.quizzes.store'), [
+        'category_id' => $category->id,
+        'title' => 'Kuis Manual Burung Cerdas',
+        'icon_emoji' => '🦅',
+        'target_age' => 4,
+        'stars_reward' => 3,
+        'questions' => [
+            [
+                'question_text' => 'Manakah burung elang yang terbang tinggi di angkasa? 🦅',
+                'question_audio' => 'Sentuh gambar burung elang yang gagah ya!',
+                'options' => [
+                    ['option_text' => 'Burung Elang 🦅', 'option_emoji' => '🦅', 'is_correct' => 1],
+                    ['option_text' => 'Kelinci Putih 🐰', 'option_emoji' => '🐰', 'is_correct' => 0],
+                    ['option_text' => 'Ikan Mas 🐟', 'option_emoji' => '🐟', 'is_correct' => 0],
+                ],
+            ],
+        ],
+    ]);
+
+    $response->assertRedirect(route('admin.quizzes'));
+    $response->assertSessionHas('success');
+
+    $quiz = Quiz::where('title', 'Kuis Manual Burung Cerdas')->first();
+    expect($quiz)->not->toBeNull();
+    expect($quiz->questions)->toHaveCount(1);
+    expect($quiz->questions->first()->options)->toHaveCount(3);
+});
+
+test('admin dapat menambahkan butir soal baru ke kuis yang sudah ada', function () {
+    $admin = User::where('role', 'admin')->first();
+    $quiz = Quiz::where('title', 'Kuis Manual Burung Cerdas')->first() ?? Quiz::first();
+
+    $response = $this->actingAs($admin)->post(route('admin.quizzes.questions.store', $quiz->id), [
+        'question_text' => 'Manakah burung hantu yang matanya bulat besar? 🦉',
+        'question_audio' => 'Pilih burung hantu yang suka melek malam hari!',
+        'options' => [
+            ['option_text' => 'Burung Hantu 🦉', 'option_emoji' => '🦉', 'is_correct' => 1],
+            ['option_text' => 'Kambing Gunung 🐐', 'option_emoji' => '🐐', 'is_correct' => 0],
+        ],
+    ]);
+
+    $response->assertRedirect(route('admin.quizzes'));
+    $response->assertSessionHas('success');
+
+    $question = Question::where('question_text', 'like', '%Burung Hantu%')->first();
+    expect($question)->not->toBeNull();
+    expect($question->options)->toHaveCount(2);
+});
+
+test('admin dapat menghapus butir soal kuis dari database', function () {
+    $admin = User::where('role', 'admin')->first();
+    $question = Question::where('question_text', 'like', '%Burung Hantu%')->first();
+
+    if (! $question) {
+        $quiz = Quiz::first();
+        $question = Question::create([
+            'quiz_id' => $quiz->id,
+            'question_text' => 'Soal Hapus Test',
+        ]);
+    }
+
+    $qId = $question->id;
+    $response = $this->actingAs($admin)->delete(route('admin.questions.delete', $qId));
+
+    $response->assertRedirect(route('admin.quizzes'));
+    $response->assertSessionHas('success');
+
+    expect(Question::find($qId))->toBeNull();
+});
+
+test('admin dapat menghapus modul kuis dari database', function () {
+    $admin = User::where('role', 'admin')->first();
+    $quiz = Quiz::where('title', 'Kuis Manual Burung Cerdas')->first();
+
+    if (! $quiz) {
+        $category = Category::first();
+        $quiz = Quiz::create([
+            'category_id' => $category->id,
+            'title' => 'Kuis Hapus Test',
+            'slug' => 'kuis-hapus-test-'.time(),
+            'target_age' => 4,
+            'total_questions' => 1,
+            'stars_reward' => 3,
+        ]);
+    }
+
+    $quizId = $quiz->id;
+    $response = $this->actingAs($admin)->delete(route('admin.quizzes.delete', $quizId));
+
+    $response->assertRedirect(route('admin.quizzes'));
+    $response->assertSessionHas('success');
+
+    expect(Quiz::find($quizId))->toBeNull();
+});

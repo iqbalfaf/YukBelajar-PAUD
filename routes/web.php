@@ -49,6 +49,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', EnsureAdminOrTeacher
     Route::get('/ai-generator', [AdminController::class, 'aiGenerator'])->name('ai-generator');
     Route::post('/ai-generator/generate', [AdminController::class, 'generateAiContent'])->name('ai-generator.generate');
     Route::post('/ai-generator/publish', [AdminController::class, 'publishAiContent'])->name('ai-generator.publish');
+    Route::get('/quizzes', [AdminController::class, 'quizzes'])->name('quizzes');
+    Route::post('/quizzes', [AdminController::class, 'storeQuiz'])->name('quizzes.store');
+    Route::put('/quizzes/{id}', [AdminController::class, 'updateQuiz'])->name('quizzes.update');
+    Route::delete('/quizzes/{id}', [AdminController::class, 'deleteQuiz'])->name('quizzes.delete');
+    Route::post('/quizzes/{quizId}/questions', [AdminController::class, 'storeQuestion'])->name('quizzes.questions.store');
+    Route::delete('/questions/{id}', [AdminController::class, 'deleteQuestion'])->name('questions.delete');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
     Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
     Route::put('/users/{id}', [AdminController::class, 'updateUser'])->name('users.update');

@@ -43,6 +43,12 @@
                 <span>Tambah Materi Manual</span>
             </button>
 
+            <a href="{{ route('admin.quizzes') }}"
+               class="px-4 py-3 bg-purple-500 hover:bg-purple-400 text-white font-extrabold text-xs rounded-2xl shadow-md transition-all flex items-center gap-2 cursor-pointer">
+                <span>🎯</span>
+                <span>Bank Soal & Input Manual</span>
+            </a>
+
             <button @click="showExportModal = true"
                     class="px-4 py-3 bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold text-xs rounded-2xl shadow-md transition-all flex items-center gap-2 cursor-pointer">
                 <span>📊</span>
@@ -131,7 +137,7 @@
                 <span class="text-xl">🎯</span>
             </div>
             <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['total_quizzes'] }}</div>
-            <span class="text-[11px] font-semibold text-sky-600">{{ $adminData['stats']['total_quizzes'] }} Modul Kuis</span>
+            <a href="{{ route('admin.quizzes') }}" class="text-[11px] font-bold text-sky-600 hover:underline">Kelola {{ $adminData['stats']['total_quizzes'] }} Modul Kuis →</a>
         </div>
 
         <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
