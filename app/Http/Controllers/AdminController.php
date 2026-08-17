@@ -10,6 +10,7 @@ use App\Models\Question;
 use App\Models\QuestionOption;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
+use App\Models\Sticker;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
@@ -267,6 +268,57 @@ class AdminController extends Controller
     }
 
     /**
+     * Halaman Manajemen Flashcard & Materi Kurikulum Admin (Real Data Database).
+     */
+    public function materials(Request $request): View
+    {
+        $categoriesModel = Category::with(['levels.materials'])->orderBy('sort_order')->get();
+
+        $categories = $categoriesModel->map(function ($cat) {
+            return [
+                'id' => $cat->id,
+                'name' => $cat->name,
+                'slug' => $cat->slug,
+                'icon_emoji' => $cat->icon_emoji,
+                'levels' => $cat->levels->map(function ($lvl) {
+                    return [
+                        'id' => $lvl->id,
+                        'level_num' => $lvl->level_number,
+                        'level_title' => $lvl->title,
+                        'cards_count' => $lvl->materials->count(),
+                        'items' => $lvl->materials->map(function ($mat) {
+                            return [
+                                'id' => $mat->id,
+                                'title' => $mat->title,
+                                'subtitle' => $mat->subtitle,
+                                'icon_emoji' => $mat->icon_emoji ?? '📄',
+                                'speech_text' => $mat->speech_text,
+                                'sound_effect' => $mat->sound_effect,
+                                'parent_note' => $mat->parent_note,
+                            ];
+                        })->toArray(),
+                    ];
+                })->toArray(),
+            ];
+        })->toArray();
+
+        $totalMaterials = Material::count();
+        $totalCategories = Category::count();
+        $totalLevels = LearningLevel::count();
+
+        $materialsData = [
+            'stats' => [
+                'total_materials' => $totalMaterials,
+                'total_categories' => $totalCategories,
+                'total_levels' => $totalLevels,
+            ],
+            'categories' => $categories,
+        ];
+
+        return view('pages.admin.materials', compact('materialsData', 'categories'));
+    }
+
+    /**
      * Tambah Materi Flashcard Manual (Database MySQL).
      */
     public function storeMaterial(Request $request): RedirectResponse
@@ -304,7 +356,34 @@ class AdminController extends Controller
             'description' => "Menambahkan kartu materi baru: {$material->title} ke {$category->name} (Level {$level->level_number})",
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', "Kartu materi '{$material->title}' berhasil disimpan ke database!");
+        return back()->with('success', "Kartu materi '{$material->title}' berhasil disimpan ke database!");
+    }
+
+    /**
+     * Perbarui Data Kartu Flashcard (Database MySQL).
+     */
+    public function updateMaterial(Request $request, int $id): RedirectResponse
+    {
+        $material = Material::findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:100',
+            'subtitle' => 'nullable|string|max:150',
+            'speech_text' => 'nullable|string|max:255',
+            'sound_effect' => 'nullable|string|max:100',
+            'parent_note' => 'nullable|string|max:255',
+            'icon_emoji' => 'nullable|string|max:10',
+        ]);
+
+        $material->update($validated);
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'UPDATE_MATERIAL',
+            'description' => "Memperbarui kartu materi: {$material->title}",
+        ]);
+
+        return back()->with('success', "Kartu materi '{$material->title}' berhasil diperbarui!");
     }
 
     /**
@@ -322,7 +401,126 @@ class AdminController extends Controller
             'description' => "Menghapus kartu materi: {$title}",
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', "Kartu materi '{$title}' berhasil dihapus dari database!");
+        return back()->with('success', "Kartu materi '{$title}' berhasil dihapus dari database!");
+    }
+
+    /**
+     * Halaman Manajemen Stiker & Hadiah Prestasi Admin (Real Data Database).
+     */
+    public function stickers(Request $request): View
+    {
+        $stickers = Sticker::withCount('users')->get();
+        $totalStickers = $stickers->count();
+        $totalClaimed = User::whereHas('stickers')->count();
+
+        $stickersData = [
+            'stats' => [
+                'total_stickers' => $totalStickers,
+                'total_claimed' => $totalClaimed,
+            ],
+            'stickers' => $stickers->map(function ($s) {
+                return [
+                    'id' => $s->id,
+                    'name' => $s->name,
+                    'category' => ucfirst($s->category),
+                    'icon_emoji' => $s->emoji,
+                    'rarity' => $s->rarity ?? 'common',
+                    'is_special' => $s->rarity === 'legendary' || $s->rarity === 'rare',
+                    'description' => $s->description,
+                    'claimed_count' => $s->users_count,
+                ];
+            })->toArray(),
+        ];
+
+        return view('pages.admin.stickers', compact('stickersData'));
+    }
+
+    /**
+     * Tambah Stiker Baru (Database MySQL).
+     */
+    public function storeSticker(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'category' => 'required|string|max:50',
+            'icon_emoji' => 'nullable|string|max:16',
+            'emoji' => 'nullable|string|max:16',
+            'rarity' => 'nullable|string|max:20',
+            'description' => 'nullable|string|max:255',
+            'is_special' => 'nullable|boolean',
+        ]);
+
+        $emoji = $validated['icon_emoji'] ?? $validated['emoji'] ?? '🏆';
+        $rarity = ! empty($validated['is_special']) ? 'legendary' : ($validated['rarity'] ?? 'common');
+
+        $sticker = Sticker::create([
+            'name' => $validated['name'],
+            'category' => strtolower($validated['category']),
+            'emoji' => $emoji,
+            'rarity' => $rarity,
+            'description' => $validated['description'] ?? "Stiker hadiah prestasi {$validated['name']}",
+        ]);
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'CREATE_STICKER',
+            'description' => "Menambahkan stiker hadiah baru: {$sticker->name}",
+        ]);
+
+        return back()->with('success', "Stiker '{$sticker->name}' berhasil ditambahkan ke database!");
+    }
+
+    /**
+     * Perbarui Data Stiker (Database MySQL).
+     */
+    public function updateSticker(Request $request, int $id): RedirectResponse
+    {
+        $sticker = Sticker::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'category' => 'required|string|max:50',
+            'icon_emoji' => 'nullable|string|max:16',
+            'emoji' => 'nullable|string|max:16',
+            'rarity' => 'nullable|string|max:20',
+            'description' => 'nullable|string|max:255',
+            'is_special' => 'nullable|boolean',
+        ]);
+
+        $sticker->name = $validated['name'];
+        $sticker->category = strtolower($validated['category']);
+        if (! empty($validated['icon_emoji']) || ! empty($validated['emoji'])) {
+            $sticker->emoji = $validated['icon_emoji'] ?? $validated['emoji'];
+        }
+        $sticker->rarity = ! empty($validated['is_special']) ? 'legendary' : ($validated['rarity'] ?? 'common');
+        $sticker->description = $validated['description'] ?? $sticker->description;
+        $sticker->save();
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'UPDATE_STICKER',
+            'description' => "Memperbarui stiker hadiah: {$sticker->name}",
+        ]);
+
+        return back()->with('success', "Stiker '{$sticker->name}' berhasil diperbarui!");
+    }
+
+    /**
+     * Hapus Stiker (Database MySQL).
+     */
+    public function deleteSticker(int $id): RedirectResponse
+    {
+        $sticker = Sticker::findOrFail($id);
+        $name = $sticker->name;
+        $sticker->delete();
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'DELETE_STICKER',
+            'description' => "Menghapus stiker hadiah: {$name}",
+        ]);
+
+        return back()->with('success', "Stiker '{$name}' berhasil dihapus dari database!");
     }
 
     /**

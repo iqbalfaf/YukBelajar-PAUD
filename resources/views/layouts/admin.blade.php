@@ -76,22 +76,22 @@
                     </div>
                 </a>
 
-                <a href="{{ route('materials', 'hewan') }}" 
-                   class="flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm text-slate-600 hover:bg-slate-100 transition-all">
+                <a href="{{ route('admin.materials') }}" 
+                   class="flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all {{ request()->routeIs('admin.materials*') ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100' }}">
                     <span class="text-base sm:text-lg">📚</span>
-                    <span>Flashcard</span>
+                    <span>Flashcard & Materi</span>
                 </a>
 
                 <a href="{{ route('admin.quizzes') }}" 
-                   class="flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all {{ request()->routeIs('admin.quizzes') ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100' }}">
+                   class="flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all {{ request()->routeIs('admin.quizzes*') ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100' }}">
                     <span class="text-base sm:text-lg">🎯</span>
                     <span>Bank Soal & Kuis</span>
                 </a>
 
-                <a href="{{ route('stickers') }}" 
-                   class="flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm text-slate-600 hover:bg-slate-100 transition-all">
+                <a href="{{ route('admin.stickers') }}" 
+                   class="flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all {{ request()->routeIs('admin.stickers*') ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100' }}">
                     <span class="text-base sm:text-lg">🏆</span>
-                    <span>Stiker</span>
+                    <span>Stiker & Reward</span>
                 </a>
 
                 <a href="{{ route('admin.users') }}" 

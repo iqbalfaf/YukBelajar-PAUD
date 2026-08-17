@@ -185,17 +185,19 @@ test('admin dapat memperbarui informasi profil dan sekolah di database', functio
 test('admin dapat menambahkan materi flashcard baru ke database', function () {
     $admin = User::where('role', 'admin')->first();
 
-    $response = $this->actingAs($admin)->post(route('admin.materials.store'), [
-        'category_slug' => 'hewan',
-        'level_number' => 2,
-        'title' => 'Kura-kura Hijau 🐢',
-        'subtitle' => 'Mengenal kura-kura yang berjalan lambat dan membawa tempurung',
-        'speech_text' => 'Kura-kura membawa rumah tempurung!',
-        'sound_effect' => 'Kecipak Air',
-        'parent_note' => 'Ajak anak menirukan gerakan berjalan lambat.',
-    ]);
+    $response = $this->actingAs($admin)
+        ->from(route('admin.materials'))
+        ->post(route('admin.materials.store'), [
+            'category_slug' => 'hewan',
+            'level_number' => 2,
+            'title' => 'Kura-kura Hijau 🐢',
+            'subtitle' => 'Mengenal kura-kura yang berjalan lambat dan membawa tempurung',
+            'speech_text' => 'Kura-kura membawa rumah tempurung!',
+            'sound_effect' => 'Kecipak Air',
+            'parent_note' => 'Ajak anak menirukan gerakan berjalan lambat.',
+        ]);
 
-    $response->assertRedirect(route('admin.dashboard'));
+    $response->assertRedirect(route('admin.materials'));
     $response->assertSessionHas('success');
 
     $material = Material::where('title', 'Kura-kura Hijau 🐢')->first();
@@ -218,9 +220,11 @@ test('admin dapat menghapus kartu flashcard dari database', function () {
     }
 
     $matId = $material->id;
-    $response = $this->actingAs($admin)->delete(route('admin.materials.delete', $matId));
+    $response = $this->actingAs($admin)
+        ->from(route('admin.materials'))
+        ->delete(route('admin.materials.delete', $matId));
 
-    $response->assertRedirect(route('admin.dashboard'));
+    $response->assertRedirect(route('admin.materials'));
     $response->assertSessionHas('success');
 
     expect(Material::find($matId))->toBeNull();
@@ -397,4 +401,109 @@ test('admin dapat menghapus modul kuis dari database', function () {
     $response->assertSessionHas('success');
 
     expect(Quiz::find($quizId))->toBeNull();
+});
+
+test('halaman manajemen flashcard admin menampilkan seluruh materi dan tingkatan level', function () {
+    $admin = User::where('role', 'admin')->first();
+    $response = $this->actingAs($admin)->get(route('admin.materials'));
+
+    $response->assertStatus(200);
+    $response->assertViewHas('materialsData');
+    $response->assertViewHas('categories');
+
+    $materialsData = $response->viewData('materialsData');
+    expect($materialsData['stats']['total_materials'])->toBeGreaterThan(0);
+});
+
+test('admin dapat memperbarui flashcard dari database', function () {
+    $admin = User::where('role', 'admin')->first();
+    $material = Material::first();
+
+    $response = $this->actingAs($admin)->put(route('admin.materials.update', $material->id), [
+        'title' => 'Singa Si Raja Hutan Diedit',
+        'subtitle' => 'Si-nga Hebat',
+        'speech_text' => 'Singa mengaum sangat keras!',
+        'sound_effect' => 'Roaaar Kuat',
+        'parent_note' => 'Ajak anak menirukan surai singa.',
+        'icon_emoji' => '🦁',
+    ]);
+
+    $response->assertRedirect();
+    $response->assertSessionHas('success');
+
+    $material->refresh();
+    expect($material->title)->toBe('Singa Si Raja Hutan Diedit');
+});
+
+test('halaman manajemen stiker admin menampilkan seluruh stiker hadiah', function () {
+    $admin = User::where('role', 'admin')->first();
+    $response = $this->actingAs($admin)->get(route('admin.stickers'));
+
+    $response->assertStatus(200);
+    $response->assertViewHas('stickersData');
+
+    $stickersData = $response->viewData('stickersData');
+    expect($stickersData['stats']['total_stickers'])->toBeGreaterThan(0);
+});
+
+test('admin dapat menambahkan stiker baru ke database', function () {
+    $admin = User::where('role', 'admin')->first();
+
+    $response = $this->actingAs($admin)->post(route('admin.stickers.store'), [
+        'name' => 'Stiker Lumba-Lumba Terbang',
+        'category' => 'Hewan',
+        'icon_emoji' => '🐬',
+        'description' => 'Membuka stiker petualangan laut ceria.',
+        'is_special' => 1,
+    ]);
+
+    $response->assertRedirect();
+    $response->assertSessionHas('success');
+
+    $sticker = Sticker::where('name', 'Stiker Lumba-Lumba Terbang')->first();
+    expect($sticker)->not->toBeNull();
+    expect($sticker->emoji)->toBe('🐬');
+    expect($sticker->rarity)->toBe('legendary');
+});
+
+test('admin dapat memperbarui stiker di database', function () {
+    $admin = User::where('role', 'admin')->first();
+    $sticker = Sticker::where('name', 'Stiker Lumba-Lumba Terbang')->first() ?? Sticker::first();
+
+    $response = $this->actingAs($admin)->put(route('admin.stickers.update', $sticker->id), [
+        'name' => 'Stiker Lumba Emas Super',
+        'category' => 'Hewan',
+        'icon_emoji' => '🐬',
+        'description' => 'Edisi terbatas untuk penjelajah laut.',
+        'is_special' => 1,
+    ]);
+
+    $response->assertRedirect();
+    $response->assertSessionHas('success');
+
+    $sticker->refresh();
+    expect($sticker->name)->toBe('Stiker Lumba Emas Super');
+    expect($sticker->rarity)->toBe('legendary');
+});
+
+test('admin dapat menghapus stiker dari database', function () {
+    $admin = User::where('role', 'admin')->first();
+    $sticker = Sticker::where('name', 'Stiker Lumba Emas Super')->first();
+
+    if (! $sticker) {
+        $sticker = Sticker::create([
+            'name' => 'Stiker Hapus Test',
+            'category' => 'prestasi',
+            'emoji' => '🏆',
+            'rarity' => 'common',
+        ]);
+    }
+
+    $stId = $sticker->id;
+    $response = $this->actingAs($admin)->delete(route('admin.stickers.delete', $stId));
+
+    $response->assertRedirect();
+    $response->assertSessionHas('success');
+
+    expect(Sticker::find($stId))->toBeNull();
 });

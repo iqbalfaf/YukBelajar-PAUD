@@ -43,8 +43,14 @@ Route::middleware('auth')->group(function () {
 // Rute Dashboard Khusus Admin / Guru (Terproteksi Middleware Auth + EnsureAdminOrTeacher)
 Route::prefix('admin')->name('admin.')->middleware(['auth', EnsureAdminOrTeacher::class])->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/materials', [AdminController::class, 'materials'])->name('materials');
     Route::post('/materials', [AdminController::class, 'storeMaterial'])->name('materials.store');
+    Route::put('/materials/{id}', [AdminController::class, 'updateMaterial'])->name('materials.update');
     Route::delete('/materials/{id}', [AdminController::class, 'deleteMaterial'])->name('materials.delete');
+    Route::get('/stickers', [AdminController::class, 'stickers'])->name('stickers');
+    Route::post('/stickers', [AdminController::class, 'storeSticker'])->name('stickers.store');
+    Route::put('/stickers/{id}', [AdminController::class, 'updateSticker'])->name('stickers.update');
+    Route::delete('/stickers/{id}', [AdminController::class, 'deleteSticker'])->name('stickers.delete');
     Route::post('/export-report', [AdminController::class, 'exportReport'])->name('export-report');
     Route::get('/ai-generator', [AdminController::class, 'aiGenerator'])->name('ai-generator');
     Route::post('/ai-generator/generate', [AdminController::class, 'generateAiContent'])->name('ai-generator.generate');
