@@ -242,4 +242,20 @@ class User extends Authenticatable
             'unlocked_rare_sticker' => $unlockedRareSticker,
         ];
     }
+
+    /**
+     * Hadiah Bintang yang Diterima Siswa dari Guru.
+     */
+    public function receivedStarGifts(): HasMany
+    {
+        return $this->hasMany(StarGift::class, 'recipient_id');
+    }
+
+    /**
+     * Hadiah Bintang yang Dikirim oleh Guru/Admin.
+     */
+    public function sentStarGifts(): HasMany
+    {
+        return $this->hasMany(StarGift::class, 'sender_id');
+    }
 }

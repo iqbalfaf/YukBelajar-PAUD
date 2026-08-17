@@ -171,6 +171,12 @@
                             <span>Manajemen Pengguna</span>
                         </a>
 
+                        <a href="{{ route('admin.star-gifts') }}" @click="mobileSidebarOpen = false"
+                           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all {{ request()->routeIs('admin.star-gifts*') ? 'bg-amber-500 text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100' }}">
+                            <span class="text-lg">🎁</span>
+                            <span>Hadiah Bintang Guru</span>
+                        </a>
+
                         <a href="{{ route('admin.profile') }}" @click="mobileSidebarOpen = false"
                            class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all {{ request()->routeIs('admin.profile') ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-700 hover:bg-slate-100' }}">
                             <span class="text-lg">⚙️</span>
@@ -244,6 +250,12 @@
                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm transition-all {{ request()->routeIs('admin.users') ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
                     <span class="text-lg">👥</span>
                     <span>Manajemen Pengguna</span>
+                </a>
+
+                <a href="{{ route('admin.star-gifts') }}" 
+                   class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm transition-all {{ request()->routeIs('admin.star-gifts*') ? 'bg-amber-500 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
+                    <span class="text-lg">🎁</span>
+                    <span>Hadiah Bintang Guru</span>
                 </a>
 
                 <a href="{{ route('admin.profile') }}" 

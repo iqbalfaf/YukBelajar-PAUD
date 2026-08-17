@@ -312,6 +312,62 @@
                 </div>
             </div>
 
+            <!-- CATATAN APRESIASI GURU & HADIAH BINTANG (TEACHER'S PRAISE NOTES) -->
+            <div class="bg-gradient-to-br from-amber-50 to-orange-50 border-3 border-amber-300 rounded-3xl p-6 shadow-xs flex flex-col gap-4">
+                <div class="flex items-center justify-between border-b border-amber-200/80 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="text-2xl">💌</span>
+                        <div>
+                            <h4 class="text-lg font-black font-heading text-amber-950">
+                                Catatan Apresiasi & Hadiah Bintang dari Guru
+                            </h4>
+                            <p class="text-xs font-semibold text-amber-800">
+                                Penghargaan langsung dari guru atas keaktifan dan prestasi ananda di sekolah.
+                            </p>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 bg-amber-200 text-amber-950 rounded-full font-black text-xs">
+                        ⭐ {{ count($parentData['teacher_appreciations'] ?? []) }} Catatan
+                    </span>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    @forelse($parentData['teacher_appreciations'] ?? [] as $apprec)
+                    <div class="p-4 rounded-2xl bg-white border-2 border-amber-200 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-2xl shrink-0">
+                                {{ $apprec['category_emoji'] }}
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-extrabold text-xs text-amber-900 uppercase tracking-wide">
+                                        {{ $apprec['category_label'] }}
+                                    </span>
+                                    <span class="text-[10px] text-slate-400">• {{ $apprec['relative_time'] }}</span>
+                                </div>
+                                <p class="text-xs font-bold text-slate-800 italic mt-0.5">
+                                    “{{ $apprec['reason'] }}”
+                                </p>
+                                <span class="text-[11px] font-bold text-sky-800 block mt-1">
+                                    🦁 Oleh {{ $apprec['sender_name'] }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="shrink-0 self-end sm:self-center">
+                            <span class="px-3 py-1 bg-amber-400 border border-amber-500 text-amber-950 rounded-full font-black text-xs shadow-2xs">
+                                ⭐ +{{ $apprec['stars_count'] }} Bintang
+                            </span>
+                        </div>
+                    </div>
+                    @empty
+                    <div class="p-5 text-center text-amber-900/80 bg-white/70 rounded-2xl border border-amber-200 font-bold text-xs">
+                        <p>Belum ada catatan apresiasi khusus dari guru.</p>
+                        <p class="text-[11px] text-amber-700 mt-0.5">Guru dapat mengirimkan bintang hadiah dan catatan motivasi kapan saja!</p>
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+
             <!-- Recent Activity Timeline (Real Data MySQL Quiz Attempts) -->
             <div class="bg-white border-3 border-slate-200 rounded-3xl p-6 shadow-xs">
                 <h4 class="text-lg font-bold font-heading text-slate-800 mb-4 flex items-center gap-2">

@@ -10,6 +10,7 @@ use App\Models\Question;
 use App\Models\QuestionOption;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
+use App\Models\StarGift;
 use App\Models\Sticker;
 use App\Models\User;
 use App\Services\GeminiService;
@@ -1589,5 +1590,156 @@ class AdminController extends Controller
         ]);
 
         return redirect()->route('admin.profile')->with('success', '✨ Profil Admin berhasil diperbarui ke database!');
+    }
+
+    /**
+     * Halaman Manajemen Hadiah Bintang Guru (Teacher Star Gift).
+     */
+    public function starGifts(Request $request): View
+    {
+        $students = User::where('role', 'student')
+            ->where('is_active', true)
+            ->orderBy('name', 'asc')
+            ->get()
+            ->map(fn ($s) => [
+                'id' => $s->id,
+                'name' => $s->name,
+                'username' => $s->username,
+                'avatar_emoji' => $s->avatar_emoji,
+                'age' => $s->age ?? 4,
+                'total_stars' => $s->total_stars ?? 0,
+                'parent_name' => $s->parent_name ?? '-',
+                'parent_display_title' => $s->parent_display_title,
+                'phone' => $s->phone ?? '-',
+            ])
+            ->toArray();
+
+        $recentGiftsQuery = StarGift::with(['sender', 'recipient'])->latest();
+        if ($request->filled('category') && $request->input('category') !== 'all') {
+            $recentGiftsQuery->where('category', $request->input('category'));
+        }
+        $recentGifts = $recentGiftsQuery->take(50)->get()->map(fn ($g) => [
+            'id' => $g->id,
+            'recipient_name' => $g->recipient ? $g->recipient->name : 'Siswa',
+            'recipient_avatar' => $g->recipient ? $g->recipient->avatar_emoji : '🦖',
+            'recipient_username' => $g->recipient ? $g->recipient->username : '-',
+            'sender_name' => $g->sender ? $g->sender->name : 'Guru PAUD',
+            'stars_count' => $g->stars_count,
+            'reason' => $g->reason,
+            'category' => $g->category,
+            'category_emoji' => $g->category_emoji,
+            'category_label' => $g->category_label,
+            'is_claimed' => $g->is_claimed,
+            'created_at' => $g->created_at ? $g->created_at->format('d M Y, H:i') : '-',
+            'relative_time' => $g->created_at ? $g->created_at->diffForHumans() : '-',
+        ])->toArray();
+
+        $totalStarsGifted = (int) StarGift::sum('stars_count');
+        $totalGiftsCount = StarGift::count();
+        $totalStudentsReached = StarGift::distinct('recipient_id')->count('recipient_id');
+        $thisMonthCount = StarGift::where('created_at', '>=', now()->startOfMonth())->count();
+
+        $stats = [
+            'total_stars_gifted' => $totalStarsGifted,
+            'total_gifts_count' => $totalGiftsCount,
+            'total_students_reached' => $totalStudentsReached,
+            'this_month_count' => $thisMonthCount,
+        ];
+
+        $categories = [
+            ['key' => 'keaktifan', 'label' => 'Keaktifan Belajar', 'emoji' => '⚡'],
+            ['key' => 'prestasi', 'label' => 'Prestasi & Kuis', 'emoji' => '🏆'],
+            ['key' => 'kreativitas', 'label' => 'Karya & Mewarnai', 'emoji' => '🎨'],
+            ['key' => 'karakter_baik', 'label' => 'Sopan & Ramah', 'emoji' => '🤝'],
+            ['key' => 'ulang_tahun', 'label' => 'Hadiah Ulang Tahun', 'emoji' => '🎂'],
+            ['key' => 'spesial', 'label' => 'Apresiasi Spesial', 'emoji' => '🌟'],
+        ];
+
+        $presetReasons = [
+            'Luar biasa aktif dan semangat saat sesi belajar flashcard hari ini! 🌟',
+            'Hebat sekali sudah menyelesaikan kartu materi & kuis dengan skor sempurna! 🏆',
+            'Sangat kreatif dan teliti saat aktivitas menggambar & mewarnai! 🎨',
+            'Anak baik yang ramah dan suka membantu teman-teman di kelas! 🤝',
+            'Selamat ulang tahun! Semoga semakin pintar, ceria, dan terus berprestasi! 🎂',
+            'Semangat belajar terus ya! Guru bangga dengan kemajuan belajarmu! ✨',
+        ];
+
+        $starGiftsData = [
+            'students' => $students,
+            'recent_gifts' => $recentGifts,
+            'stats' => $stats,
+            'categories' => $categories,
+            'preset_reasons' => $presetReasons,
+        ];
+
+        return view('pages.admin.star-gifts', compact('starGiftsData'));
+    }
+
+    /**
+     * Kirim Hadiah Bintang Guru ke Siswa / Seluruh Siswa (Database MySQL).
+     */
+    public function sendStarGift(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'target_type' => 'required|string|in:single,all',
+            'recipient_id' => 'required_if:target_type,single|nullable|exists:users,id',
+            'stars_count' => 'required|integer|min:1|max:500',
+            'category' => 'required|string|in:keaktifan,prestasi,kreativitas,karakter_baik,ulang_tahun,spesial',
+            'reason' => 'required|string|max:255',
+        ]);
+
+        $starsCount = (int) $validated['stars_count'];
+        $senderId = Auth::id();
+
+        if ($validated['target_type'] === 'all') {
+            $students = User::where('role', 'student')->where('is_active', true)->get();
+            $count = $students->count();
+
+            if ($count === 0) {
+                return redirect()->route('admin.star-gifts')->withErrors(['error' => 'Tidak ditemukan siswa aktif untuk dikirimi hadiah!']);
+            }
+
+            foreach ($students as $student) {
+                $student->increment('total_stars', $starsCount);
+
+                StarGift::create([
+                    'sender_id' => $senderId,
+                    'recipient_id' => $student->id,
+                    'stars_count' => $starsCount,
+                    'reason' => $validated['reason'],
+                    'category' => $validated['category'],
+                    'is_claimed' => false,
+                ]);
+            }
+
+            AuditLog::create([
+                'user_id' => $senderId,
+                'action_type' => 'GIFT_STARS_BULK',
+                'description' => "Menghadiahkan {$starsCount} Bintang Emas ke seluruh ({$count}) siswa aktif. Alasan: {$validated['reason']}",
+            ]);
+
+            return redirect()->back()->with('success', "🎉 Hore! Berhasil membagikan {$starsCount} Bintang Emas ke seluruh {$count} siswa petualang!");
+        }
+
+        // Single student
+        $student = User::findOrFail($validated['recipient_id']);
+        $student->increment('total_stars', $starsCount);
+
+        StarGift::create([
+            'sender_id' => $senderId,
+            'recipient_id' => $student->id,
+            'stars_count' => $starsCount,
+            'reason' => $validated['reason'],
+            'category' => $validated['category'],
+            'is_claimed' => false,
+        ]);
+
+        AuditLog::create([
+            'user_id' => $senderId,
+            'action_type' => 'GIFT_STARS_SINGLE',
+            'description' => "Menghadiahkan {$starsCount} Bintang Emas untuk {$student->name} (@{$student->username}). Alasan: {$validated['reason']}",
+        ]);
+
+        return redirect()->back()->with('success', "🎉 Hore! Berhasil menghadiahkan {$starsCount} Bintang Emas untuk {$student->name}!");
     }
 }

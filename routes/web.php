@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/sahabat', [FrontEndController::class, 'community'])->name('community');
     Route::get('/orang-tua', [FrontEndController::class, 'parents'])->name('parents');
     Route::get('/pilih-avatar', [FrontEndController::class, 'authAvatar'])->name('auth.avatar');
+    Route::post('/petualangan/claim-gift/{id}', [FrontEndController::class, 'claimStarGift'])->name('star-gifts.claim');
 });
 
 // Rute Dashboard Khusus Admin / Guru (Terproteksi Middleware Auth + EnsureAdminOrTeacher)
@@ -71,6 +72,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', EnsureAdminOrTeacher
     Route::put('/users/{id}', [AdminController::class, 'updateUser'])->name('users.update');
     Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('users.delete');
     Route::post('/users/{id}/reset-pin', [AdminController::class, 'resetUserPin'])->name('users.reset-pin');
+    Route::get('/gift-bintang', [AdminController::class, 'starGifts'])->name('star-gifts');
+    Route::post('/gift-bintang', [AdminController::class, 'sendStarGift'])->name('star-gifts.send');
     Route::get('/profil', [AdminController::class, 'profile'])->name('profile');
     Route::post('/profil', [AdminController::class, 'updateAdminProfile'])->name('profile.update');
 });

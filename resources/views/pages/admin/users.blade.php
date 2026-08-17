@@ -10,8 +10,13 @@
          statusFilter: 'all', // 'all', 'active', 'inactive'
          showModal: false,
          showResetModal: false,
+         showGiftModal: false,
          modalMode: 'create', // 'create' or 'edit'
          activeUser: null,
+         giftStudent: null,
+         giftStars: 10,
+         giftCategory: 'prestasi',
+         giftReason: 'Hebat sekali sudah aktif belajar dan menyelesaikan kuis dengan baik! 🌟',
          showAlert: {{ session('success') ? 'true' : 'false' }},
          alertMessage: '{{ session('success') ?? '' }}',
          
@@ -95,6 +100,14 @@
          openResetModal(user) {
              this.activeUser = user;
              this.showResetModal = true;
+         },
+
+         openGiftModal(user) {
+             this.giftStudent = user;
+             this.giftStars = 10;
+             this.giftCategory = 'prestasi';
+             this.giftReason = 'Hebat sekali sudah aktif belajar dan menyelesaikan tugas dengan baik! 🌟';
+             this.showGiftModal = true;
          }
      }">
 
@@ -337,6 +350,13 @@
                             <!-- Actions -->
                             <td class="p-4 text-right">
                                 <div class="flex items-center justify-end gap-1.5">
+                                    <!-- Quick Gift Stars for Students -->
+                                    <template x-if="u.role === 'student'">
+                                        <button type="button" @click="openGiftModal(u)" title="Hadiahkan Bintang Guru"
+                                                class="p-2 bg-amber-100 hover:bg-amber-200 text-amber-950 rounded-xl transition-all font-black text-xs cursor-pointer shadow-2xs">
+                                            🎁
+                                        </button>
+                                    </template>
                                     <button type="button" @click="openEditModal(u)" title="Edit Profil"
                                             class="p-2 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded-xl transition-all font-bold cursor-pointer">
                                         ✏️
@@ -680,6 +700,109 @@
                         class="flex-1 py-3 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs rounded-xl shadow-xs cursor-pointer">
                     Konfirmasi Reset PIN
                 </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MODAL FORM: HADIAHKAN BINTANG GURU (REAL DATABASE POST) -->
+    <div x-show="showGiftModal" x-cloak
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+        
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full border-4 border-amber-400 shadow-2xl relative my-8"
+             @click.away="showGiftModal = false">
+            
+            <button @click="showGiftModal = false"
+                    class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-black text-xl cursor-pointer">
+                ✖
+            </button>
+
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-3xl shrink-0">
+                    🎁
+                </div>
+                <div>
+                    <h3 class="text-lg font-black font-heading text-slate-800">
+                        Kirim Hadiah Bintang Guru
+                    </h3>
+                    <p class="text-xs font-bold text-slate-500">
+                        Penerima: <span class="text-amber-900 font-black" x-text="giftStudent ? giftStudent.name : ''"></span>
+                    </p>
+                </div>
+            </div>
+
+            <form action="{{ route('admin.star-gifts.send') }}" method="POST" class="flex flex-col gap-4">
+                @csrf
+                <input type="hidden" name="target_type" value="single">
+                <input type="hidden" name="recipient_id" :value="giftStudent ? giftStudent.id : ''">
+
+                <div>
+                    <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">
+                        Pilih Jumlah Bintang (⭐):
+                    </label>
+                    <div class="grid grid-cols-4 gap-2 mb-2">
+                        <button type="button" @click="giftStars = 5"
+                                class="py-2 px-1 rounded-xl border-2 font-black text-xs transition-all flex flex-col items-center"
+                                :class="giftStars === 5 ? 'bg-amber-400 border-amber-500 text-amber-950 scale-105' : 'bg-slate-50 border-slate-200 text-slate-700'">
+                            <span>⭐ +5</span>
+                        </button>
+                        <button type="button" @click="giftStars = 10"
+                                class="py-2 px-1 rounded-xl border-2 font-black text-xs transition-all flex flex-col items-center"
+                                :class="giftStars === 10 ? 'bg-amber-400 border-amber-500 text-amber-950 scale-105' : 'bg-slate-50 border-slate-200 text-slate-700'">
+                            <span>⭐ +10</span>
+                        </button>
+                        <button type="button" @click="giftStars = 20"
+                                class="py-2 px-1 rounded-xl border-2 font-black text-xs transition-all flex flex-col items-center"
+                                :class="giftStars === 20 ? 'bg-amber-400 border-amber-500 text-amber-950 scale-105' : 'bg-slate-50 border-slate-200 text-slate-700'">
+                            <span>⭐ +20</span>
+                        </button>
+                        <button type="button" @click="giftStars = 50"
+                                class="py-2 px-1 rounded-xl border-2 font-black text-xs transition-all flex flex-col items-center"
+                                :class="giftStars === 50 ? 'bg-amber-400 border-amber-500 text-amber-950 scale-105' : 'bg-slate-50 border-slate-200 text-slate-700'">
+                            <span>⭐ +50</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] font-bold text-slate-500">Kustom:</span>
+                        <input type="number" name="stars_count" x-model="giftStars" min="1" max="500" required
+                               class="w-24 p-2 text-center text-sm font-black bg-slate-50 border-2 border-slate-300 rounded-xl outline-none">
+                        <span class="text-xs font-bold text-amber-800">Bintang</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">
+                        Kategori Apresiasi:
+                    </label>
+                    <select name="category" x-model="giftCategory"
+                            class="w-full p-2.5 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
+                        <option value="keaktifan">⚡ Keaktifan Belajar</option>
+                        <option value="prestasi">🏆 Prestasi & Kuis</option>
+                        <option value="kreativitas">🎨 Karya & Mewarnai</option>
+                        <option value="karakter_baik">🤝 Sopan & Ramah</option>
+                        <option value="ulang_tahun">🎂 Hadiah Ulang Tahun</option>
+                        <option value="spesial">🌟 Apresiasi Spesial</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">
+                        Pesan Motivasi Guru:
+                    </label>
+                    <textarea name="reason" x-model="giftReason" rows="2" required placeholder="Tuliskan ucapan penyemangat..."
+                              class="w-full p-2.5 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none"></textarea>
+                </div>
+
+                <div class="flex gap-3 mt-1">
+                    <button type="button" @click="showGiftModal = false"
+                            class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit"
+                            class="flex-1 py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold text-xs rounded-xl shadow-xs cursor-pointer">
+                        Kirim Hadiah Bintang 🚀
+                    </button>
+                </div>
             </form>
 
         </div>

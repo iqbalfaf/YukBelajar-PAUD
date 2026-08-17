@@ -78,58 +78,92 @@ h1, h2, h3, h4, .font-heading {
     border-bottom-width: 2px !important;
 }
 
-.btn-3d-sky {
-    background-color: #38bdf8;
-    color: #0c4a6e;
-    border-bottom: 6px solid #0284c7;
-    box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.3);
-}
-.btn-3d-sky:active {
-    border-bottom-width: 2px !important;
-}
-
-.btn-3d-green {
-    background-color: #4ade80;
-    color: #14532d;
-    border-bottom: 6px solid #16a34a;
-    box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.3);
-}
-.btn-3d-green:active {
-    border-bottom-width: 2px !important;
-}
-
-.btn-3d-pink {
-    background-color: #f472b6;
-    color: #831843;
-    border-bottom: 6px solid #db2777;
-    box-shadow: 0 4px 6px -1px rgba(219, 39, 119, 0.3);
-}
-.btn-3d-pink:active {
-    border-bottom-width: 2px !important;
-}
-
-.btn-3d-purple {
-    background-color: #c084fc;
-    color: #581c87;
-    border-bottom: 6px solid #9333ea;
-    box-shadow: 0 4px 6px -1px rgba(147, 51, 234, 0.3);
-}
-.btn-3d-purple:active {
-    border-bottom-width: 2px !important;
-}
-
+.btn-3d-amber,
 .btn-3d-orange {
     background-color: #fb923c;
     color: #7c2d12;
     border-bottom: 6px solid #ea580c;
     box-shadow: 0 4px 6px -1px rgba(234, 88, 12, 0.3);
 }
+.btn-3d-amber:active,
 .btn-3d-orange:active {
     border-bottom-width: 2px !important;
 }
 
+.btn-3d-sky,
+.btn-3d-blue {
+    background-color: #38bdf8;
+    color: #0c4a6e;
+    border-bottom: 6px solid #0284c7;
+    box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.3);
+}
+.btn-3d-sky:active,
+.btn-3d-blue:active {
+    border-bottom-width: 2px !important;
+}
+
+.btn-3d-cyan,
+.btn-3d-teal {
+    background-color: #22d3ee;
+    color: #164e63;
+    border-bottom: 6px solid #0891b2;
+    box-shadow: 0 4px 6px -1px rgba(8, 145, 178, 0.3);
+}
+.btn-3d-cyan:active,
+.btn-3d-teal:active {
+    border-bottom-width: 2px !important;
+}
+
+.btn-3d-emerald,
+.btn-3d-green {
+    background-color: #4ade80;
+    color: #14532d;
+    border-bottom: 6px solid #16a34a;
+    box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.3);
+}
+.btn-3d-emerald:active,
+.btn-3d-green:active {
+    border-bottom-width: 2px !important;
+}
+
+.btn-3d-rose,
+.btn-3d-pink,
+.btn-3d-red {
+    background-color: #fb7185;
+    color: #881337;
+    border-bottom: 6px solid #e11d48;
+    box-shadow: 0 4px 6px -1px rgba(225, 29, 72, 0.3);
+}
+.btn-3d-rose:active,
+.btn-3d-pink:active,
+.btn-3d-red:active {
+    border-bottom-width: 2px !important;
+}
+
+.btn-3d-purple,
+.btn-3d-violet {
+    background-color: #c084fc;
+    color: #581c87;
+    border-bottom: 6px solid #9333ea;
+    box-shadow: 0 4px 6px -1px rgba(147, 51, 234, 0.3);
+}
+.btn-3d-purple:active,
+.btn-3d-violet:active {
+    border-bottom-width: 2px !important;
+}
+
+.btn-3d-indigo {
+    background-color: #818cf8;
+    color: #312e81;
+    border-bottom: 6px solid #4f46e5;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+}
+.btn-3d-indigo:active {
+    border-bottom-width: 2px !important;
+}
+
 .btn-3d-white {
-    background-color: #ffffff;
+    background-color: #f1f5f9;
     color: #334155;
     border-bottom: 6px solid #cbd5e1;
     box-shadow: 0 4px 6px -1px rgba(100, 116, 139, 0.2);

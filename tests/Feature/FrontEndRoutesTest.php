@@ -25,7 +25,7 @@ test('halaman register dapat diakses dengan form avatar gamified', function () {
     $response = $this->get(route('register'));
 
     $response->assertStatus(200);
-    $response->assertSee('DAFTAR AKUN PETUALANG CILIK');
+    $response->assertSee('DAFTAR AKUN KELUARGA PETUALANG');
     $response->assertSee('10 Bintang Emas Pertama');
     $response->assertSee('BUAT AKUN');
 });
@@ -150,6 +150,6 @@ test('halaman profil akun siswa dan pengaturan orang tua dapat diakses', functio
     $response->assertSee('Profil Akun Siswa');
     $response->assertSee('Alif');
     $response->assertSee('Profil Anak');
-    $response->assertSee('Keamanan Akun');
+    $response->assertSee('Data Orang Tua');
     $response->assertSee('Suara & Efek Animasi', false);
 });

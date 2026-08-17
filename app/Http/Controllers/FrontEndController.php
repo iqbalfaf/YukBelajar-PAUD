@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Material;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
+use App\Models\StarGift;
 use App\Models\Sticker;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -294,7 +295,28 @@ class FrontEndController extends Controller
             ];
         })->toArray();
 
-        return view('pages.home', compact('user', 'categories', 'unlockedLevels', 'defaultAgeFilter'));
+        $unclaimedGift = null;
+        if ($authUser) {
+            $gift = StarGift::where('recipient_id', $authUser->id)
+                ->where('is_claimed', false)
+                ->with('sender')
+                ->latest()
+                ->first();
+
+            if ($gift) {
+                $unclaimedGift = [
+                    'id' => $gift->id,
+                    'stars_count' => $gift->stars_count,
+                    'reason' => $gift->reason,
+                    'category' => $gift->category,
+                    'category_emoji' => $gift->category_emoji,
+                    'category_label' => $gift->category_label,
+                    'sender_name' => $gift->sender ? $gift->sender->name : 'Pak Guru Iqbal',
+                ];
+            }
+        }
+
+        return view('pages.home', compact('user', 'categories', 'unlockedLevels', 'defaultAgeFilter', 'unclaimedGift'));
     }
 
     /**
@@ -959,6 +981,27 @@ class FrontEndController extends Controller
             ? "{$favoriteCategory['name']} {$favoriteCategory['icon']}"
             : 'Pulau Satwa Ceria 🦁';
 
+        $teacherAppreciations = [];
+        if ($authUser) {
+            $teacherAppreciations = StarGift::where('recipient_id', $authUser->id)
+                ->with('sender')
+                ->latest()
+                ->take(10)
+                ->get()
+                ->map(fn ($g) => [
+                    'id' => $g->id,
+                    'stars_count' => $g->stars_count,
+                    'reason' => $g->reason,
+                    'category' => $g->category,
+                    'category_emoji' => $g->category_emoji,
+                    'category_label' => $g->category_label,
+                    'sender_name' => $g->sender ? $g->sender->name : 'Pak Guru Iqbal',
+                    'date' => $g->created_at ? $g->created_at->format('d M Y, H:i') : '-',
+                    'relative_time' => $g->created_at ? $g->created_at->diffForHumans() : '-',
+                ])
+                ->toArray();
+        }
+
         $parentData = [
             'child_profile' => $user,
             'parent_profile' => [
@@ -979,6 +1022,7 @@ class FrontEndController extends Controller
                 'longest_streak_days' => $authUser ? ($authUser->longest_streak_days ?? 1) : 1,
                 'favorite_topic' => $favoriteTopicName,
             ],
+            'teacher_appreciations' => $teacherAppreciations,
             'recent_activities' => $recentActivities,
             'topic_mastery' => $topicMastery,
             'categories' => $categoriesList,
@@ -988,6 +1032,33 @@ class FrontEndController extends Controller
         ];
 
         return view('pages.parents', compact('user', 'parentData'));
+    }
+
+    /**
+     * Siswa Mengklaim & Merayakan Hadiah Bintang dari Guru (AJAX/Fetch).
+     */
+    public function claimStarGift(int $id): JsonResponse
+    {
+        $user = Auth::user();
+        if (! $user) {
+            return response()->json(['success' => false, 'message' => 'Unauthorized'], 401);
+        }
+
+        $gift = StarGift::where('id', $id)
+            ->where('recipient_id', $user->id)
+            ->first();
+
+        if ($gift) {
+            $gift->is_claimed = true;
+            $gift->claimed_at = now();
+            $gift->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Hadiah bintang berhasil dirayakan!',
+            'total_stars' => $user->fresh()->total_stars,
+        ]);
     }
 
     /**

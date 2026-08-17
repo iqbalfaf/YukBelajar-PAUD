@@ -18,6 +18,8 @@
          userStars: {{ (int) $user['stars_count'] }},
          completedMaterials: {},
          allCategories: {{ Js::from($categories) }},
+         unclaimedGift: {{ Js::from($unclaimedGift ?? null) }},
+         showGiftCelebrationModal: {{ !empty($unclaimedGift) ? 'true' : 'false' }},
 
          get filteredCategories() {
              return this.allCategories.filter(c => c.pillar === this.activePillar);
@@ -203,8 +205,44 @@
                  if (window.soundEngine) window.soundEngine.playWrong();
                  alert('Yuk coba lagi teman pintar!');
              }
+         },
+
+         claimTeacherGift() {
+             if (!this.unclaimedGift) {
+                 this.showGiftCelebrationModal = false;
+                 return;
+             }
+             const giftId = this.unclaimedGift.id;
+             const bonusStars = this.unclaimedGift.stars_count;
+             this.userStars += bonusStars;
+             this.showGiftCelebrationModal = false;
+
+             fetch('{{ url('/petualangan/claim-gift') }}/' + giftId, {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json',
+                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                 }
+             }).catch(err => console.error(err));
+
+             if (window.soundEngine) {
+                 window.soundEngine.playVictory();
+                 window.soundEngine.speak('Bintang emas berhasil ditambahkan! Ayo lanjut berpetualang!');
+             }
+             if (window.triggerConfetti) window.triggerConfetti(0.8);
          }
-     }">
+     }"
+     x-init="
+        if (unclaimedGift) {
+            setTimeout(() => {
+                if (window.soundEngine) {
+                    window.soundEngine.playVictory();
+                    window.soundEngine.speak('Hore! Ada hadiah ' + unclaimedGift.stars_count + ' bintang emas dari ' + unclaimedGift.sender_name + '! ' + unclaimedGift.reason);
+                }
+                if (window.triggerConfetti) window.triggerConfetti(0.8);
+            }, 800);
+        }
+    ">
 
     <!-- Welcome Hero Banner with Mascot "Kiki si Kucing Pintar" -->
     <section class="bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-200 border-4 border-amber-400 rounded-3xl p-5 sm:p-7 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-5">
@@ -416,8 +454,8 @@
                         <div class="flex flex-col gap-2 pt-4 mt-3 border-t border-slate-100">
                             <button type="button" 
                                     @click.stop="selectCategory(cat)"
-                                    class="btn-3d py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm sm:text-base font-extrabold shadow-sm w-full"
-                                    :class="`btn-3d-${cat.color_theme}`">
+                                    class="btn-3d py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm sm:text-base font-extrabold shadow-sm w-full transition-transform hover:scale-101"
+                                    :class="'btn-3d-' + (cat.color_theme || 'yellow')">
                                 <span class="text-xl">🏝️</span>
                                 <span>Buka & Lihat Seluruh Materi ➔</span>
                             </button>
@@ -858,6 +896,67 @@
                     class="mt-6 text-xs text-slate-400 hover:text-slate-600 font-bold underline cursor-pointer">
                 Nanti saja, saya ingin belajar kartu flashcard dulu
             </button>
+        </div>
+    </div>
+
+    <!-- TEACHER STAR GIFT CELEBRATION MODAL (POP-UP INTERAKTIF GURU) -->
+    <div x-show="showGiftCelebrationModal && unclaimedGift" x-cloak
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/75 backdrop-blur-md overflow-y-auto"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-90"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-90">
+        
+        <div class="bg-gradient-to-b from-amber-100 via-white to-orange-50 rounded-3xl p-6 sm:p-8 max-w-lg w-full border-4 border-amber-400 shadow-2xl text-center relative overflow-hidden my-8"
+             @click.away="claimTeacherGift()">
+            
+            <!-- Confetti Blast Banner -->
+            <div class="text-4xl animate-bounce-slow mb-1">🎁 🌟 🎉 🏆</div>
+
+            <!-- Mascot Kiki Avatar with Speech Bubble -->
+            <div class="relative inline-block my-2">
+                <div class="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-tr from-amber-300 via-yellow-200 to-orange-300 rounded-full flex items-center justify-center mx-auto text-5xl sm:text-6xl border-4 border-white shadow-lg animate-wiggle">
+                    🐱
+                </div>
+                <span class="absolute -bottom-2 -right-2 bg-amber-500 border-2 border-white px-2.5 py-0.5 rounded-full text-xs font-black text-white shadow-xs">
+                    Kiki si Kucing
+                </span>
+            </div>
+
+            <!-- Big Star Reward Badge -->
+            <div class="my-3">
+                <span class="inline-block px-3 py-1 bg-amber-100 border border-amber-300 text-amber-950 rounded-full text-xs font-black uppercase tracking-wider mb-2"
+                      x-text="(unclaimedGift ? unclaimedGift.category_emoji + ' ' + unclaimedGift.category_label : '🌟 Apresiasi Guru')">
+                </span>
+                
+                <h3 class="text-2xl sm:text-3xl font-black font-heading text-amber-950 mb-1">
+                    "Hore! Kamu Dapat Hadiah Bintang!"
+                </h3>
+
+                <div class="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-amber-400 to-yellow-300 border-3 border-amber-500 text-amber-950 rounded-2xl shadow-md text-2xl sm:text-3xl font-black font-heading my-2 animate-pulse">
+                    <span>⭐</span>
+                    <span x-text="unclaimedGift ? '+' + unclaimedGift.stars_count + ' Bintang Emas' : '+10 Bintang'"></span>
+                </div>
+            </div>
+
+            <!-- Dialogue Speech Bubble from Teacher -->
+            <div class="bg-white border-3 border-amber-300 rounded-3xl p-4 sm:p-5 shadow-xs mb-5 text-center relative mt-2">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t-3 border-l-3 border-amber-300 rotate-45"></div>
+                
+                <p class="text-xs font-black text-amber-800 uppercase tracking-wide mb-1"
+                   x-text="'Pesan dari ' + (unclaimedGift ? unclaimedGift.sender_name : 'Pak Guru') + ':'"></p>
+                <p class="text-sm sm:text-base font-extrabold text-slate-800 leading-relaxed italic"
+                   x-text="unclaimedGift ? '“' + unclaimedGift.reason + '”' : '“Semangat terus belajarnya ya anak hebat!”'"></p>
+            </div>
+
+            <button type="button" @click="claimTeacherGift()"
+                    class="btn-3d btn-3d-yellow w-full py-4 rounded-2xl text-amber-950 font-black text-base sm:text-lg shadow-lg flex items-center justify-center gap-2.5 cursor-pointer">
+                <span>⭐</span>
+                <span>Terima Hadiah Bintang & Lanjut Belajar! 🚀</span>
+            </button>
+
         </div>
     </div>
 
