@@ -7,7 +7,8 @@
      x-data="{
          viewMode: 'catalog', // 'carousel' (mode belajar), 'catalog' (katalog materi), 'quiz_bank' (bank soal & kuis)
          currentLevelFilter: 1, // 1, 2, 3
-         unlockedLevels: { '3': false },
+         userStars: {{ (int) $user['stars_count'] }},
+         unlockedLevels: { '3': {{ (int) $user['stars_count'] >= 25 ? 'true' : 'false' }} },
          allCards: {{ Js::from($materialData['cards']) }},
          categoryQuizzes: {{ Js::from($materialData['category_quizzes'] ?? []) }},
          currentIndex: 0,
@@ -20,7 +21,8 @@
          },
 
          get isLevelLocked() {
-             if (this.currentLevelFilter === 3 && !this.unlockedLevels['3']) return true;
+             if (this.currentLevelFilter === 2 && this.userStars < 10) return true;
+             if (this.currentLevelFilter === 3 && this.userStars < 25 && !this.unlockedLevels['3']) return true;
              return false;
          },
 
@@ -104,12 +106,31 @@
              }
          },
 
-         markCompleted(cardId) {
+         async markCompleted(cardId) {
              const id = cardId || (this.currentCard() ? this.currentCard().id : null);
              if (id) {
                  this.isCompletedList[id] = true;
+                 try {
+                     const response = await fetch('{{ route('materials.complete-card') }}', {
+                         method: 'POST',
+                         headers: {
+                             'Content-Type': 'application/json',
+                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                             'Accept': 'application/json'
+                         },
+                         body: JSON.stringify({ material_id: id })
+                     });
+                     const res = await response.json();
+                     if (res.success) {
+                         this.userStars = res.total_stars;
+                     }
+                 } catch (e) {
+                     console.error(e);
+                 }
+
                  if (window.soundEngine) {
                      window.soundEngine.playCorrect();
+                     window.soundEngine.playStar();
                      window.triggerConfetti(0.7);
                  }
              }

@@ -5,11 +5,11 @@
 @section('content')
 <div class="flex flex-col gap-8 pb-12" 
      x-data="{
-         currentAgeFilter: 'all', // 'all', '3-4', '4-5', '5-6'
+         currentAgeFilter: '{{ $defaultAgeFilter ?? '3-4' }}', // 'all', '3-4', '4-5', '5-6'
          unlockedLevels: {{ Js::from($unlockedLevels ?? []) }},
          showSmartUnlockModal: false,
          unlockTarget: { slug: '', name: '', level: 3, reqStars: 25, question: '', options: [] },
-         userStars: {{ $user['stars_count'] }},
+         userStars: {{ (int) $user['stars_count'] }},
          
          speakGreeting() {
              if (window.soundEngine) {
@@ -86,9 +86,12 @@
 
         <!-- Quick Voice Play Button & User Stars & Profile Button -->
         <div class="flex items-center gap-2 z-10 shrink-0 flex-wrap justify-center w-full md:w-auto">
-            <div class="bg-white/90 border-2 border-amber-400 px-3 py-2 rounded-2xl flex items-center gap-1.5 shadow-xs">
-                <span class="text-xl">⭐</span>
-                <span class="font-black text-amber-900 text-sm sm:text-base">{{ $user['stars_count'] }} Bintang</span>
+            <div class="bg-white/90 border-2 border-amber-400 px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-xs">
+                <span class="text-2xl animate-pop-star">⭐</span>
+                <div>
+                    <span class="block text-[10px] font-black uppercase text-amber-700 leading-none">Tabungan Bintang</span>
+                    <span class="font-black text-amber-950 text-base sm:text-lg leading-tight" x-text="`${userStars} ⭐`"></span>
+                </div>
             </div>
 
             <button @click="speakGreeting()"
@@ -110,6 +113,60 @@
         <div class="absolute right-1/4 -top-8 text-6xl sm:text-7xl opacity-15 pointer-events-none">🎈</div>
     </section>
 
+    <!-- DUOLINGO-STYLE STAR PROGRESSION & LEVEL UNLOCK BAR -->
+    <div class="bg-gradient-to-r from-sky-50 via-indigo-50 to-purple-50 border-3 border-sky-300 rounded-3xl p-4 sm:p-6 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3 text-center md:text-left">
+            <div class="w-12 h-12 rounded-2xl bg-sky-500 text-white flex items-center justify-center text-2xl shadow-sm shrink-0">
+                🚀
+            </div>
+            <div>
+                <h4 class="font-extrabold text-sm sm:text-base text-slate-800 font-heading">
+                    Tingkatan Level & Target Bintang Pembuka:
+                </h4>
+                <p class="text-xs text-slate-600 font-medium">
+                    Isi kuis dan pelajari materi untuk mengumpulkan bintang. Bintang akan membuka level dan materi usia yang lebih tinggi!
+                </p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-4 flex-wrap justify-center w-full md:w-auto">
+            <!-- Level 1 Badge -->
+            <div class="px-3 py-2 rounded-2xl border-2 flex items-center gap-2 {{ $user['stars_count'] >= 0 ? 'bg-emerald-100 border-emerald-400 text-emerald-950 font-bold' : 'bg-slate-100 border-slate-300 text-slate-400' }}">
+                <span>🌱</span>
+                <div class="text-left text-xs">
+                    <span class="block font-black">Level 1 (3-4 Thn)</span>
+                    <span class="text-[10px] text-emerald-700">🔓 Selalu Terbuka</span>
+                </div>
+            </div>
+
+            <!-- Level 2 Badge -->
+            <div class="px-3 py-2 rounded-2xl border-2 flex items-center gap-2 {{ $user['stars_count'] >= 10 ? 'bg-amber-100 border-amber-400 text-amber-950 font-bold' : 'bg-slate-100 border-slate-300 text-slate-500' }}">
+                <span>⭐</span>
+                <div class="text-left text-xs">
+                    <span class="block font-black">Level 2 (4-5 Thn)</span>
+                    @if($user['stars_count'] >= 10)
+                        <span class="text-[10px] text-emerald-700 font-extrabold">🔓 Terbuka (≥10 ⭐)</span>
+                    @else
+                        <span class="text-[10px] text-amber-800 font-bold">🔒 Butuh 10 ⭐</span>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Level 3 Badge -->
+            <div class="px-3 py-2 rounded-2xl border-2 flex items-center gap-2 {{ $user['stars_count'] >= 25 ? 'bg-purple-100 border-purple-400 text-purple-950 font-bold' : 'bg-slate-100 border-slate-300 text-slate-500' }}">
+                <span>🏆</span>
+                <div class="text-left text-xs">
+                    <span class="block font-black">Level 3 (5-6 Thn)</span>
+                    @if($user['stars_count'] >= 25)
+                        <span class="text-[10px] text-emerald-700 font-extrabold">🔓 Terbuka (≥25 ⭐)</span>
+                    @else
+                        <span class="text-[10px] text-purple-800 font-bold">🔒 Butuh 25 ⭐</span>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- AGE SELECTION FILTER & LEVEL NAVIGATION -->
     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 bg-white p-3.5 sm:p-5 rounded-3xl border-3 border-sky-200 shadow-xs">
         <div class="flex items-center gap-2.5">
@@ -118,7 +175,9 @@
                 <h3 class="text-sm sm:text-base font-black font-heading text-slate-800 leading-tight">
                     Filter Usia & Tingkatan Belajar:
                 </h3>
-                <p class="text-[11px] sm:text-xs font-bold text-slate-500">Sesuaikan tantangan materi dengan kesiapan belajar si kecil.</p>
+                <p class="text-[11px] sm:text-xs font-bold text-slate-500">
+                    Otomatis disesuaikan dengan usia anak (<span class="text-sky-700 font-extrabold">{{ $user['age'] }} Tahun</span>). Anda dapat mengubah filter kapan saja.
+                </p>
             </div>
         </div>
 
@@ -203,6 +262,51 @@
                         @endforeach
                     </div>
                 </div>
+
+                <!-- ALL AVAILABLE QUIZZES IN THIS CATEGORY (Real Dynamic List from MySQL) -->
+                @if(!empty($category['quizzes_list']))
+                <div class="bg-amber-50/80 border border-amber-200 rounded-2xl p-3 mb-4 flex flex-col gap-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-black uppercase text-amber-900 tracking-wider flex items-center gap-1">
+                            <span>🎯</span>
+                            <span>Pilihan Kuis ({{ count($category['quizzes_list']) }} Kuis):</span>
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col gap-1.5 max-h-40 overflow-y-auto pr-1">
+                        @foreach($category['quizzes_list'] as $qz)
+                        <a href="{{ route('quiz', $qz['slug']) }}" 
+                           @click="if(window.soundEngine) window.soundEngine.playClick()"
+                           class="p-2 bg-white hover:bg-amber-100 border border-amber-200 hover:border-amber-400 rounded-xl flex items-center justify-between gap-2 transition-all group/q shadow-2xs">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="text-lg shrink-0">{{ $qz['icon_emoji'] }}</span>
+                                <div class="truncate text-left">
+                                    <h5 class="text-xs font-extrabold text-slate-800 group-hover/q:text-amber-950 truncate">
+                                        {{ $qz['title'] }}
+                                    </h5>
+                                    <span class="text-[10px] text-slate-500 font-semibold">
+                                        {{ $qz['total_questions'] }} Soal • {{ $qz['target_age'] }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="shrink-0 flex items-center gap-1">
+                                @if($qz['best_stars'] > 0)
+                                    <span class="px-2 py-0.5 bg-amber-100 text-amber-900 border border-amber-300 rounded-lg text-[10px] font-black flex items-center gap-0.5">
+                                        <span>⭐</span>
+                                        <span>{{ $qz['best_stars'] }}</span>
+                                    </span>
+                                @else
+                                    <span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-200 rounded-lg text-[10px] font-bold">
+                                        Mulai ▶
+                                    </span>
+                                @endif
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
             </div>
 
             <!-- Action Buttons for Kids -->
@@ -219,7 +323,7 @@
                        @click="if(window.soundEngine) window.soundEngine.playClick()"
                        class="btn-3d btn-3d-yellow py-3 px-3 rounded-2xl flex items-center justify-center gap-1.5 text-xs font-extrabold shadow-xs">
                         <span>🎯</span>
-                        <span>Main Kuis</span>
+                        <span>Kuis Utama</span>
                     </a>
 
                     <!-- Smart Fast Unlock Button -->

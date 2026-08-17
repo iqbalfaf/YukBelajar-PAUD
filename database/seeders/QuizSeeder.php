@@ -194,7 +194,7 @@ class QuizSeeder extends Seeder
             ],
             [
                 'category_slug' => 'warna',
-                'title' => 'Tebak Warna Pelangi Ceria',
+                'title' => 'Tebak Warna Indah Ceria',
                 'slug' => 'tebak-warna',
                 'icon_emoji' => '🎨',
                 'target_age' => 4,

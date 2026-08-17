@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profil', [FrontEndController::class, 'profile'])->name('profile');
     Route::post('/profil', [FrontEndController::class, 'updateProfile'])->name('profile.update');
     Route::get('/materi/{category?}', [FrontEndController::class, 'materials'])->name('materials');
+    Route::post('/materi/complete-card', [FrontEndController::class, 'completeMaterialCard'])->name('materials.complete-card');
     Route::get('/kuis/{quiz?}', [FrontEndController::class, 'quiz'])->name('quiz');
+    Route::post('/kuis/{quiz}/submit', [FrontEndController::class, 'submitQuizAttempt'])->name('quiz.submit');
     Route::get('/buku-stiker', [FrontEndController::class, 'stickers'])->name('stickers');
     Route::get('/prestasi', [FrontEndController::class, 'achievements'])->name('achievements');
     Route::get('/sahabat', [FrontEndController::class, 'community'])->name('community');

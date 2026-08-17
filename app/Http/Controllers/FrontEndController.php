@@ -10,6 +10,7 @@ use App\Models\QuizAttempt;
 use App\Models\Sticker;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -140,9 +141,10 @@ class FrontEndController extends Controller
         $categoriesModel = Category::with(['levels.materials', 'quizzes.questions.options'])->orderBy('sort_order')->get();
 
         $unlockedLevels = [];
+        $userAge = (int) ($user['age'] ?? 4);
+        $defaultAgeFilter = $userAge <= 4 ? '3-4' : ($userAge === 5 ? '4-5' : '5-6');
 
-        $categories = $categoriesModel->map(function ($cat) use ($userStars, &$unlockedLevels) {
-            $quiz = $cat->quizzes->first();
+        $categories = $categoriesModel->map(function ($cat) use ($userStars, $authUser, &$unlockedLevels) {
             $materialsCount = $cat->levels->flatMap->materials->count();
 
             $levelsProgress = $cat->levels->map(function ($lvl) use ($userStars, $cat, &$unlockedLevels) {
@@ -158,9 +160,28 @@ class FrontEndController extends Controller
                     'completed' => $isUnlocked ? min($lvl->materials->count(), 2) : 0,
                     'is_unlocked' => $isUnlocked,
                     'req_stars' => $lvl->unlock_stars_required,
-                    'unlock_hint' => "Kumpulkan {$lvl->unlock_stars_required} ⭐",
+                    'unlock_hint' => $lvl->unlock_stars_required === 0 ? 'Terbuka' : "Kumpulkan {$lvl->unlock_stars_required} ⭐",
                 ];
             })->toArray();
+
+            // Daftar seluruh kuis di bawah kategori ini (termasuk yang baru dibuat via AI Generator / Admin)
+            $quizzesList = $cat->quizzes->map(function ($q) use ($authUser) {
+                $bestStars = $authUser ? (QuizAttempt::where('user_id', $authUser->id)->where('quiz_id', $q->id)->max('stars_earned') ?? 0) : 0;
+
+                return [
+                    'id' => $q->id,
+                    'slug' => $q->slug,
+                    'title' => $q->title,
+                    'icon_emoji' => $q->icon_emoji ?: '🎯',
+                    'target_age' => "{$q->target_age} Thn",
+                    'total_questions' => $q->total_questions ?: $q->questions->count(),
+                    'stars_reward' => $q->stars_reward ?: 3,
+                    'best_stars' => (int) $bestStars,
+                    'is_completed' => $bestStars > 0,
+                ];
+            })->toArray();
+
+            $primaryQuiz = $cat->quizzes->first();
 
             // Soal tantangan anak cerdas dari kuis kategori
             $challengeQuestion = 'Tantangan Anak Cerdas: Sentuh jawaban yang benar untuk membuka level!';
@@ -169,8 +190,8 @@ class FrontEndController extends Controller
                 ['text' => '🪨 Batu Kali', 'isCorrect' => false],
             ];
 
-            if ($quiz && $quiz->questions->isNotEmpty()) {
-                $firstQ = $quiz->questions->first();
+            if ($primaryQuiz && $primaryQuiz->questions->isNotEmpty()) {
+                $firstQ = $primaryQuiz->questions->first();
                 $challengeQuestion = "Tantangan Anak Cerdas: {$firstQ->question_text}";
                 $challengeOptions = $firstQ->options->take(2)->map(function ($opt) {
                     return [
@@ -190,7 +211,9 @@ class FrontEndController extends Controller
                 'bg_gradient' => $cat->bg_gradient,
                 'border_color' => $cat->border_color,
                 'materials_count' => $materialsCount,
-                'quiz_id' => $quiz ? $quiz->slug : 'tebak-hewan',
+                'quiz_id' => $primaryQuiz ? $primaryQuiz->slug : 'tebak-hewan',
+                'quizzes_list' => $quizzesList,
+                'quizzes_count' => count($quizzesList),
                 'recommended_age' => $cat->recommended_age,
                 'age_min' => $cat->age_min,
                 'levels_progress' => $levelsProgress,
@@ -199,7 +222,7 @@ class FrontEndController extends Controller
             ];
         })->toArray();
 
-        return view('pages.home', compact('user', 'categories', 'unlockedLevels'));
+        return view('pages.home', compact('user', 'categories', 'unlockedLevels', 'defaultAgeFilter'));
     }
 
     /**
@@ -208,6 +231,9 @@ class FrontEndController extends Controller
     public function materials(string $category = 'hewan'): View
     {
         $user = $this->getCurrentUserData();
+        $authUser = Auth::user();
+        $userStars = $authUser ? $authUser->total_stars : $user['stars_count'];
+
         $catModel = Category::where('slug', $category)->with(['levels.materials', 'quizzes.questions'])->first()
             ?? Category::with(['levels.materials', 'quizzes.questions'])->first();
 
@@ -224,6 +250,7 @@ class FrontEndController extends Controller
         $cards = [];
         if ($catModel) {
             foreach ($catModel->levels as $lvl) {
+                $isLevelUnlocked = $userStars >= $lvl->unlock_stars_required;
                 foreach ($lvl->materials as $mat) {
                     $cards[] = [
                         'id' => $mat->id,
@@ -235,6 +262,8 @@ class FrontEndController extends Controller
                         'sound_mimic' => $mat->sound_effect,
                         'parent_note' => $mat->parent_note,
                         'badge' => "Level {$lvl->level_number} • {$lvl->title}",
+                        'is_unlocked' => $isLevelUnlocked,
+                        'req_stars' => $lvl->unlock_stars_required,
                         'is_completed' => true,
                     ];
                 }
@@ -244,14 +273,17 @@ class FrontEndController extends Controller
         $quizzes = [];
         if ($catModel) {
             foreach ($catModel->quizzes as $q) {
+                $bestAttempt = $authUser ? (QuizAttempt::where('user_id', $authUser->id)->where('quiz_id', $q->id)->max('stars_earned') ?? 0) : 0;
                 $quizzes[] = [
                     'id' => $q->id,
                     'slug' => $q->slug,
                     'title' => $q->title,
-                    'icon_emoji' => $q->icon_emoji,
+                    'icon_emoji' => $q->icon_emoji ?: '🎯',
                     'target_age' => "{$q->target_age} Tahun",
-                    'total_questions' => $q->total_questions,
-                    'stars_reward' => $q->stars_reward,
+                    'total_questions' => $q->total_questions ?: $q->questions->count(),
+                    'stars_reward' => $q->stars_reward ?: 3,
+                    'best_stars' => (int) $bestAttempt,
+                    'is_completed' => $bestAttempt > 0,
                     'questions_preview' => $q->questions->map(function ($qs) {
                         return [
                             'question' => $qs->question_text,
@@ -279,6 +311,7 @@ class FrontEndController extends Controller
     public function quiz(string $quiz = 'tebak-hewan'): View
     {
         $user = $this->getCurrentUserData();
+        $authUser = Auth::user();
         $quizModel = Quiz::where('slug', $quiz)->with(['category', 'questions.options'])->first()
             ?? Quiz::with(['category', 'questions.options'])->first();
 
@@ -330,6 +363,10 @@ class FrontEndController extends Controller
             }
         }
 
+        $previousBestStars = ($authUser && $quizModel)
+            ? (QuizAttempt::where('user_id', $authUser->id)->where('quiz_id', $quizModel->id)->max('stars_earned') ?? 0)
+            : 0;
+
         $quizData = [
             'id' => $quizModel ? $quizModel->id : 1,
             'slug' => $quizModel ? $quizModel->slug : 'tebak-hewan',
@@ -338,7 +375,9 @@ class FrontEndController extends Controller
             'category_slug' => $quizModel && $quizModel->category ? $quizModel->category->slug : 'hewan',
             'cover_emoji' => $quizModel ? $quizModel->icon_emoji : '🦁',
             'color_theme' => $quizModel && $quizModel->category ? $quizModel->category->color_theme : 'orange',
-            'total_questions' => $quizModel ? $quizModel->total_questions : count($questionsArr),
+            'total_questions' => $quizModel ? ($quizModel->total_questions ?: count($questionsArr)) : count($questionsArr),
+            'previous_best_stars' => (int) $previousBestStars,
+            'current_user_stars' => $authUser ? $authUser->total_stars : $user['stars_count'],
             'reward_sticker' => [
                 'name' => 'Bintang Emas Juara ⭐',
                 'emoji' => '⭐',
@@ -349,6 +388,93 @@ class FrontEndController extends Controller
         ];
 
         return view('pages.quiz', compact('user', 'quizData', 'allCategories'));
+    }
+
+    /**
+     * Endpoint API Submit Jawaban Kuis Siswa dengan Sistem Skor Tertinggi & Akumulasi Bintang (Duolingo Style).
+     */
+    public function submitQuizAttempt(Request $request, string $quiz): JsonResponse
+    {
+        $authUser = Auth::user();
+        if (! $authUser) {
+            return response()->json(['success' => false, 'message' => 'Silakan login terlebih dahulu.'], 401);
+        }
+
+        $quizModel = Quiz::where('slug', $quiz)->firstOrFail();
+
+        $validated = $request->validate([
+            'total_correct' => 'required|integer|min:0',
+            'total_questions' => 'required|integer|min:1',
+        ]);
+
+        $totalCorrect = $validated['total_correct'];
+        $totalQuestions = $validated['total_questions'];
+        $score = round(($totalCorrect / max(1, $totalQuestions)) * 100);
+
+        // Bintang diperoleh dari total jawaban benar (1 benar = 1 bintang, maks total_questions)
+        $starsEarned = $totalCorrect;
+
+        // Ambil rekor bintang terbaik siswa untuk kuis ini sebelumnya
+        $previousBest = QuizAttempt::where('user_id', $authUser->id)
+            ->where('quiz_id', $quizModel->id)
+            ->max('stars_earned') ?? 0;
+
+        // Catat riwayat pengerjaan kuis ke database
+        QuizAttempt::create([
+            'user_id' => $authUser->id,
+            'quiz_id' => $quizModel->id,
+            'score' => $score,
+            'total_correct' => $totalCorrect,
+            'total_questions' => $totalQuestions,
+            'stars_earned' => $starsEarned,
+            'completed_at' => now(),
+        ]);
+
+        $newStarsAwarded = 0;
+        if ($starsEarned > $previousBest) {
+            $newStarsAwarded = $starsEarned - $previousBest;
+            $authUser->increment('total_stars', $newStarsAwarded);
+            $message = "🎉 Luar Biasa! Kamu memecahkan rekor baru ({$starsEarned}/{$totalQuestions} Benar) dan dapat +{$newStarsAwarded} Bintang Emas baru! ⭐";
+        } else {
+            $message = "✨ Hebat! Rekor bintang terbaikmu ({$previousBest}/{$totalQuestions} ⭐) tetap tersimpan aman!";
+        }
+
+        $authUser->refresh();
+
+        return response()->json([
+            'success' => true,
+            'score' => $score,
+            'stars_earned' => $starsEarned,
+            'previous_best_stars' => $previousBest,
+            'best_stars' => max($starsEarned, $previousBest),
+            'new_stars_awarded' => $newStarsAwarded,
+            'total_stars' => $authUser->total_stars,
+            'message' => $message,
+        ]);
+    }
+
+    /**
+     * Endpoint API Selesai Mendengarkan Kartu Flashcard (+1 Bintang Emas Apresiasi).
+     */
+    public function completeMaterialCard(Request $request): JsonResponse
+    {
+        $authUser = Auth::user();
+        if (! $authUser) {
+            return response()->json(['success' => false], 401);
+        }
+
+        $validated = $request->validate([
+            'material_id' => 'required|integer|exists:materials,id',
+        ]);
+
+        $authUser->increment('total_stars', 1);
+        $authUser->refresh();
+
+        return response()->json([
+            'success' => true,
+            'total_stars' => $authUser->total_stars,
+            'message' => '⭐ Hore! Kamu dapat +1 Bintang Emas karena rajin mendengarkan materi!',
+        ]);
     }
 
     /**

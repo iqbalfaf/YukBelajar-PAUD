@@ -14,6 +14,12 @@
          scoreCorrect: 0,
          isFinished: false,
          starsEarned: 0,
+         previousBestStars: {{ (int) ($quizData['previous_best_stars'] ?? 0) }},
+         currentUserStars: {{ (int) ($quizData['current_user_stars'] ?? 0) }},
+         newStarsAwarded: 0,
+         bestStars: {{ (int) ($quizData['previous_best_stars'] ?? 0) }},
+         submissionMessage: '',
+         isSubmitting: false,
          init() {
              // Acak urutan kartu pilihan jawaban di setiap butir soal agar interaksi tidak monoton
              if (this.questions && this.questions.length > 0) {
@@ -50,7 +56,7 @@
                  window.triggerConfetti(0.5);
              } else {
                  this.isCorrect = false;
-                 this.feedbackMessage = 'Hampir benar! Yuk coba sekali lagi! 😊';
+                 this.feedbackMessage = 'Hampir benar! Tetap semangat ya! 😊';
                  if (window.soundEngine) {
                      window.soundEngine.playWrong();
                  }
@@ -69,23 +75,48 @@
                  this.finishQuiz();
              }
          },
-         finishQuiz() {
+         async finishQuiz() {
              this.isFinished = true;
-             const pct = (this.scoreCorrect / this.questions.length) * 100;
-             if (pct === 100) {
-                 this.starsEarned = 3;
-             } else if (pct >= 60) {
-                 this.starsEarned = 2;
-             } else {
-                 this.starsEarned = 1;
+             this.starsEarned = this.scoreCorrect;
+             this.isSubmitting = true;
+
+             try {
+                 const response = await fetch('{{ route('quiz.submit', $quizData['slug']) }}', {
+                     method: 'POST',
+                     headers: {
+                         'Content-Type': 'application/json',
+                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                         'Accept': 'application/json'
+                     },
+                     body: JSON.stringify({
+                         total_correct: this.scoreCorrect,
+                         total_questions: this.questions.length
+                     })
+                 });
+
+                 const res = await response.json();
+                 if (res.success) {
+                     this.newStarsAwarded = res.new_stars_awarded || 0;
+                     this.bestStars = res.best_stars || this.scoreCorrect;
+                     this.currentUserStars = res.total_stars || (this.currentUserStars + this.newStarsAwarded);
+                     this.submissionMessage = res.message || '';
+                 }
+             } catch (err) {
+                 console.error('Submit Quiz Error:', err);
+                 this.bestStars = Math.max(this.scoreCorrect, this.previousBestStars);
+             } finally {
+                 this.isSubmitting = false;
              }
 
              if (window.soundEngine) {
                  window.soundEngine.playVictory();
-                 window.soundEngine.speak('Hore! Kamu hebat sudah menyelesaikan kuis! Dapat ' + this.starsEarned + ' bintang emas!');
+                 const speech = this.newStarsAwarded > 0 
+                     ? `Hore! Kamu memecahkan rekor baru! Dapat tambahan ${this.newStarsAwarded} bintang emas baru!`
+                     : `Hebat! Kamu berhasil menyelesaikan kuis! Bintang terbaikmu ${this.bestStars} bintang tetap tersimpan!`;
+                 window.soundEngine.speak(speech);
              }
-             window.triggerConfetti(0.4);
-             setTimeout(() => window.triggerConfetti(0.6), 600);
+             window.triggerConfetti(0.5);
+             setTimeout(() => window.triggerConfetti(0.7), 600);
          },
          restartQuiz() {
              this.currentIndex = 0;
@@ -95,8 +126,9 @@
              this.scoreCorrect = 0;
              this.isFinished = false;
              this.starsEarned = 0;
+             this.newStarsAwarded = 0;
              this.feedbackMessage = '';
-             this.playCurrentQuestionVoice();
+             this.init();
          }
      }">
 
@@ -138,44 +170,47 @@
                     </div>
                 </div>
 
-                <!-- Replay Audio Button -->
-                <button @click="playCurrentQuestionVoice()" 
-                        title="Putar Ulang Suara Soal"
-                        class="btn-3d btn-3d-yellow px-5 py-3.5 rounded-2xl flex items-center gap-2 text-sm font-black shrink-0">
+                <button @click="playCurrentQuestionVoice()"
+                        class="btn-3d btn-3d-yellow px-5 py-3.5 rounded-2xl flex items-center gap-2 text-sm font-black shrink-0 shadow-sm cursor-pointer"
+                        title="Dengarkan Ulang Suara Soal">
                     <span class="text-2xl animate-wiggle">🔊</span>
                     <span>Ulangi Suara</span>
                 </button>
             </div>
 
-            <!-- Picture Options Grid for Kids -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full mb-8">
-                <template x-for="opt in currentQuestion().options" :key="opt.id">
-                    <button @click="selectAnswer(opt)"
+            <!-- Answer Options Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full mb-8">
+                <template x-for="(opt, idx) in currentQuestion().options" :key="idx">
+                    <button type="button"
+                            @click="selectAnswer(opt)"
                             :disabled="isAnswered"
-                            class="card-bubbly p-6 sm:p-8 flex flex-col items-center justify-center gap-4 border-4 transition-all relative overflow-hidden group cursor-pointer"
-                            :class="{
-                                'border-amber-200 hover:border-amber-400 hover:scale-105': !isAnswered,
-                                'border-emerald-500 bg-emerald-50 scale-105 shadow-lg ring-4 ring-emerald-300': isAnswered && opt.is_correct,
-                                'border-rose-400 bg-rose-50 opacity-60': isAnswered && !opt.is_correct && selectedOption?.id === opt.id,
-                                'opacity-40 border-slate-200': isAnswered && !opt.is_correct && selectedOption?.id !== opt.id
-                            }">
+                            class="card-bubbly p-6 rounded-3xl border-4 text-center flex flex-col items-center justify-center gap-3 transition-all relative overflow-hidden group cursor-pointer"
+                            :class="[
+                                isAnswered && opt.is_correct ? 'border-emerald-500 bg-emerald-50 ring-4 ring-emerald-300 scale-105' : '',
+                                isAnswered && selectedOption === opt && !opt.is_correct ? 'border-rose-500 bg-rose-50 ring-4 ring-rose-300 opacity-75' : '',
+                                !isAnswered ? 'border-slate-200 hover:border-yellow-400 bg-gradient-to-b from-white to-slate-50 hover:to-yellow-50 hover:scale-105' : ''
+                            ]">
                         
-                        <!-- Big Picture Illustration Emoji -->
-                        <span class="text-7xl sm:text-8xl group-hover:scale-110 transition-transform select-none drop-shadow-sm"
+                        <!-- Option Single Emoji -->
+                        <span class="text-6xl sm:text-7xl group-hover:scale-110 transition-transform drop-shadow-xs"
                               x-text="opt.emoji">
                         </span>
 
-                        <!-- Option Label -->
+                        <!-- Clean Option Text -->
                         <span class="text-xl sm:text-2xl font-extrabold font-heading text-slate-800"
                               x-text="opt.label">
                         </span>
 
-                        <!-- Correct/Wrong Instant Icon Stamp -->
+                        <!-- Choice Indicator Badge -->
                         <template x-if="isAnswered && opt.is_correct">
-                            <span class="absolute top-3 right-3 text-3xl animate-pop-star">⭐</span>
+                            <span class="absolute top-2 right-2 bg-emerald-500 text-white rounded-full p-1 text-xs font-black shadow-xs">
+                                ✓
+                            </span>
                         </template>
-                        <template x-if="isAnswered && !opt.is_correct && selectedOption?.id === opt.id">
-                            <span class="absolute top-3 right-3 text-3xl">❌</span>
+                        <template x-if="isAnswered && selectedOption === opt && !opt.is_correct">
+                            <span class="absolute top-2 right-2 bg-rose-500 text-white rounded-full p-1 text-xs font-black shadow-xs">
+                                ✗
+                            </span>
                         </template>
                     </button>
                 </template>
@@ -205,7 +240,7 @@
         </div>
     </template>
 
-    <!-- Quiz Completed Screen (Celebration & Rewards) -->
+    <!-- Quiz Completed Screen (Celebration & Duolingo High-Score Records) -->
     <template x-if="isFinished">
         <div class="card-bubbly p-8 sm:p-12 border-6 border-yellow-400 shadow-2xl flex flex-col items-center text-center bg-gradient-to-b from-white via-amber-50 to-yellow-100 relative overflow-hidden">
             
@@ -217,18 +252,51 @@
             <h2 class="text-3xl sm:text-5xl font-black font-heading text-amber-950 mb-2">
                 HORE! KUIS SELESAI! 🎉
             </h2>
-            <p class="text-base sm:text-lg font-bold text-amber-900 mb-6">
+            <p class="text-base sm:text-lg font-bold text-amber-900 mb-4">
                 Kamu menjawab benar <span class="text-2xl font-black text-emerald-700" x-text="scoreCorrect"></span> dari <span class="text-2xl font-black text-slate-800" x-text="questions.length"></span> soal!
             </p>
 
-            <!-- Star Rating Badges (⭐⭐⭐) -->
-            <div class="flex items-center justify-center gap-3 sm:gap-6 mb-8">
-                <template x-for="i in 3" :key="i">
+            <!-- Star Rating Badges Matching Total Questions -->
+            <div class="flex items-center justify-center gap-2 sm:gap-4 mb-6 flex-wrap">
+                <template x-for="i in questions.length" :key="i">
                     <div class="flex flex-col items-center gap-1">
-                        <span class="text-6xl sm:text-7xl transition-all duration-500 drop-shadow-md"
-                              :class="i <= starsEarned ? 'text-amber-400 animate-pop-star' : 'text-slate-300 grayscale opacity-40'"
-                              x-text="i <= starsEarned ? '⭐' : '⭐'">
+                        <span class="text-5xl sm:text-6xl transition-all duration-500 drop-shadow-md"
+                              :class="i <= scoreCorrect ? 'text-amber-400 animate-pop-star' : 'text-slate-300 grayscale opacity-40'">
+                            ⭐
                         </span>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Gamified High-Score / Star Bank Box -->
+            <div class="w-full max-w-md bg-white border-3 border-amber-300 rounded-3xl p-5 mb-6 shadow-sm flex flex-col gap-3">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                    <span class="text-xs font-extrabold uppercase text-slate-600">Rekor Bintang Kuis Ini:</span>
+                    <span class="font-black text-sm text-amber-600 flex items-center gap-1">
+                        <span>⭐</span>
+                        <span x-text="`${bestStars} / ${questions.length} Bintang Maksimal`"></span>
+                    </span>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-extrabold uppercase text-slate-600">Total Bintang Akunmu:</span>
+                    <span class="font-black text-base text-emerald-600 flex items-center gap-1">
+                        <span>⭐</span>
+                        <span x-text="`${currentUserStars} Bintang Emas`"></span>
+                    </span>
+                </div>
+
+                <template x-if="newStarsAwarded > 0">
+                    <div class="p-3 bg-emerald-50 border border-emerald-300 rounded-2xl text-xs text-emerald-900 font-extrabold flex items-center justify-center gap-2 animate-bounce-slow">
+                        <span>🎉</span>
+                        <span x-text="`Rekor baru! Kamu dapat +${newStarsAwarded} Bintang Emas tambahan!`"></span>
+                    </div>
+                </template>
+
+                <template x-if="newStarsAwarded === 0 && previousBestStars > 0">
+                    <div class="p-3 bg-sky-50 border border-sky-200 rounded-2xl text-xs text-sky-900 font-bold flex items-center justify-center gap-2">
+                        <span>✨</span>
+                        <span>Rekor terbaikmu sebelumnya tetap tersimpan aman tanpa berkurang!</span>
                     </div>
                 </template>
             </div>
@@ -248,21 +316,15 @@
             <!-- Bottom Navigation Actions -->
             <div class="flex flex-wrap items-center justify-center gap-4 w-full">
                 <button @click="restartQuiz()"
-                        class="btn-3d btn-3d-white px-6 py-3.5 rounded-2xl font-extrabold text-base flex items-center gap-2 border-2">
+                        class="btn-3d btn-3d-yellow px-6 py-3.5 rounded-2xl font-extrabold text-base flex items-center gap-2">
                     <span>🔄</span>
-                    <span>Main Lagi</span>
+                    <span>Ulangi Kuis (Tingkatkan Bintang)</span>
                 </button>
-
-                <a href="{{ route('stickers') }}"
-                   class="btn-3d btn-3d-purple px-6 py-3.5 rounded-2xl font-extrabold text-base text-white flex items-center gap-2">
-                    <span>🏆</span>
-                    <span>Buka Buku Stiker</span>
-                </a>
 
                 <a href="{{ route('home') }}"
                    class="btn-3d btn-3d-sky px-6 py-3.5 rounded-2xl font-extrabold text-base text-white flex items-center gap-2">
                     <span>🗺️</span>
-                    <span>Pilih Pulau Lain</span>
+                    <span>Kembali ke Pulau Petualangan</span>
                 </a>
             </div>
 
