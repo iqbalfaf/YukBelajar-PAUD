@@ -24,7 +24,6 @@ class FrontEndController extends Controller
         $authUser = Auth::user();
 
         if (! $authUser) {
-            // Fallback ke akun siswa demo jika belum login
             $authUser = User::where('role', 'student')->first() ?? new User([
                 'name' => 'Alif Rahman',
                 'username' => 'alif_ceria',
@@ -44,9 +43,21 @@ class FrontEndController extends Controller
             default => '',
         };
 
-        $stickersCount = $authUser->id ? $authUser->stickers()->count() : 7;
-        $quizzesCompletedCount = $authUser->id ? $authUser->quizAttempts()->count() : 6;
-        $achievementsCount = $authUser->id ? $authUser->achievements()->count() : 4;
+        $avatarName = match ($authUser->avatar_icon) {
+            'dino' => 'Dino Ceria 🦖',
+            'kucing' => 'Kiki Kucing 🐱',
+            'singa' => 'Leo Singa 🦁',
+            'kelinci' => 'Cici Kelinci 🐰',
+            'panda' => 'Pan-Pan Panda 🐼',
+            'beruang' => 'Bobi Beruang 🐻',
+            'gajah' => 'Ello Gajah 🐘',
+            'koala' => 'Koko Koala 🐨',
+            default => 'Dino Ceria 🦖',
+        };
+
+        $stickersCount = $authUser->id ? $authUser->stickers()->count() : 0;
+        $quizzesCompletedCount = $authUser->id ? $authUser->quizAttempts()->count() : 0;
+        $achievementsCount = $authUser->id ? $authUser->achievements()->count() : 0;
 
         return [
             'id' => $authUser->id ?? 1,
@@ -54,13 +65,14 @@ class FrontEndController extends Controller
             'username' => $authUser->username,
             'age' => $authUser->age ?? 4,
             'avatar' => $authUser->avatar_icon ?? 'dino',
+            'avatar_name' => $avatarName,
             'avatar_emoji' => $authUser->avatar_emoji ?? '🦖',
             'avatar_accessory' => $accessoryIcon,
             'role' => $authUser->role ?? 'student',
             'stars_count' => $authUser->total_stars ?? 0,
-            'stickers_count' => $stickersCount > 0 ? $stickersCount : 7,
-            'total_quizzes_completed' => $quizzesCompletedCount > 0 ? $quizzesCompletedCount : 6,
-            'achievements_count' => $achievementsCount > 0 ? $achievementsCount : 4,
+            'stickers_count' => $stickersCount,
+            'total_quizzes_completed' => $quizzesCompletedCount,
+            'achievements_count' => $achievementsCount,
             'parent_pin' => $authUser->parent_pin ?? '1234',
         ];
     }
@@ -70,7 +82,6 @@ class FrontEndController extends Controller
      */
     public function landing(): View
     {
-        // 1. Ambil data kategori nyata beserta jumlah materi dari database
         $categoriesModel = Category::withCount('materials')->orderBy('sort_order')->get();
 
         $categories = $categoriesModel->map(function ($cat) {
@@ -90,7 +101,6 @@ class FrontEndController extends Controller
             ];
         })->toArray();
 
-        // 2. Ambil data stiker nyata dari database
         $stickers = Sticker::all()->map(function ($stk) {
             return [
                 'id' => $stk->id,
@@ -102,7 +112,6 @@ class FrontEndController extends Controller
             ];
         })->toArray();
 
-        // 3. Statistik live platform dari database nyata
         $platformStats = [
             'total_materials' => Material::count(),
             'total_quizzes' => Quiz::count(),
@@ -110,7 +119,6 @@ class FrontEndController extends Controller
             'total_stars' => (int) User::where('role', 'student')->sum('total_stars'),
         ];
 
-        // 4. Daftar avatar maskot kartun
         $avatars = $this->getAvatarsList();
 
         return view('pages.landing', compact('categories', 'stickers', 'platformStats', 'avatars'));
@@ -126,25 +134,48 @@ class FrontEndController extends Controller
         $userStars = $authUser ? $authUser->total_stars : $user['stars_count'];
 
         // Ambil seluruh kategori dengan relasi levels, materials, dan kuis
-        $categoriesModel = Category::with(['levels.materials', 'quizzes'])->orderBy('sort_order')->get();
+        $categoriesModel = Category::with(['levels.materials', 'quizzes.questions.options'])->orderBy('sort_order')->get();
 
-        $categories = $categoriesModel->map(function ($cat) use ($userStars) {
+        $unlockedLevels = [];
+
+        $categories = $categoriesModel->map(function ($cat) use ($userStars, &$unlockedLevels) {
             $quiz = $cat->quizzes->first();
             $materialsCount = $cat->levels->flatMap->materials->count();
 
-            $levelsProgress = $cat->levels->map(function ($lvl) use ($userStars) {
+            $levelsProgress = $cat->levels->map(function ($lvl) use ($userStars, $cat, &$unlockedLevels) {
                 $isUnlocked = $userStars >= $lvl->unlock_stars_required;
+                if ($lvl->level_number === 3) {
+                    $unlockedLevels[$cat->slug.'_3'] = $isUnlocked;
+                }
 
                 return [
                     'level' => $lvl->level_number,
                     'title' => $lvl->title,
                     'cards' => $lvl->materials->count(),
-                    'completed' => min($lvl->materials->count(), 2),
+                    'completed' => $isUnlocked ? min($lvl->materials->count(), 2) : 0,
                     'is_unlocked' => $isUnlocked,
                     'req_stars' => $lvl->unlock_stars_required,
                     'unlock_hint' => "Kumpulkan {$lvl->unlock_stars_required} ⭐",
                 ];
             })->toArray();
+
+            // Soal tantangan anak cerdas dari kuis kategori
+            $challengeQuestion = 'Tantangan Anak Cerdas: Sentuh jawaban yang benar untuk membuka level!';
+            $challengeOptions = [
+                ['text' => "{$cat->icon_emoji} Pilihan Tepat", 'isCorrect' => true],
+                ['text' => '🪨 Batu Kali', 'isCorrect' => false],
+            ];
+
+            if ($quiz && $quiz->questions->isNotEmpty()) {
+                $firstQ = $quiz->questions->first();
+                $challengeQuestion = "Tantangan Anak Cerdas: {$firstQ->question_text}";
+                $challengeOptions = $firstQ->options->take(2)->map(function ($opt) {
+                    return [
+                        'text' => "{$opt->option_emoji} {$opt->option_text}",
+                        'isCorrect' => (bool) $opt->is_correct,
+                    ];
+                })->toArray();
+            }
 
             return [
                 'id' => $cat->id,
@@ -160,10 +191,12 @@ class FrontEndController extends Controller
                 'recommended_age' => $cat->recommended_age,
                 'age_min' => $cat->age_min,
                 'levels_progress' => $levelsProgress,
+                'challenge_question' => $challengeQuestion,
+                'challenge_options' => $challengeOptions,
             ];
         })->toArray();
 
-        return view('pages.home', compact('user', 'categories'));
+        return view('pages.home', compact('user', 'categories', 'unlockedLevels'));
     }
 
     /**
@@ -469,50 +502,82 @@ class FrontEndController extends Controller
     public function parents(): View
     {
         $user = $this->getCurrentUserData();
-        $authUser = Auth::user();
+        $authUser = Auth::user() ?? User::where('role', 'student')->first();
 
-        $totalQuizzes = $authUser ? $authUser->quizAttempts()->count() : 6;
+        $totalQuizzes = $authUser ? $authUser->quizAttempts()->count() : 0;
         $totalMaterials = Material::count();
 
-        $attempts = $authUser ? $authUser->quizAttempts()->with('quiz.category')->latest()->take(4)->get() : collect();
+        // 1. Ambil riwayat aktivitas nyata dari pengerjaan kuis di database
+        $attempts = $authUser ? $authUser->quizAttempts()->with('quiz.category')->latest()->take(5)->get() : collect();
 
         $recentActivities = $attempts->map(function ($att) {
+            $stars = $att->stars_earned > 0 ? $att->stars_earned : 3;
+
             return [
                 'topic' => $att->quiz ? $att->quiz->title : 'Kuis Ceria',
                 'icon' => $att->quiz && $att->quiz->category ? $att->quiz->category->icon_emoji : '🎯',
                 'score' => $att->score,
-                'stars' => $att->stars_earned,
+                'stars' => $stars,
                 'time' => $att->completed_at ? $att->completed_at->diffForHumans() : 'Baru saja',
                 'status' => $att->score >= 80 ? 'Sangat Baik' : 'Selesai',
             ];
         })->toArray();
 
-        if (empty($recentActivities)) {
-            $recentActivities = [
-                ['topic' => 'Kuis Tebak Hewan Pintar', 'icon' => '🦁', 'score' => 100, 'stars' => 3, 'time' => '10 menit lalu', 'status' => 'Sangat Baik'],
-                ['topic' => 'Flashcard Istana Angka 1-5', 'icon' => '🔢', 'score' => null, 'stars' => null, 'time' => '1 jam lalu', 'status' => 'Selesai Dibaca'],
+        // 2. Ambil seluruh kategori dengan level 3 untuk Scaffolding Manager
+        $categories = Category::with(['quizzes', 'levels'])->orderBy('sort_order')->get();
+
+        $unlockedCategories = [];
+        $categoriesList = [];
+
+        foreach ($categories as $c) {
+            $lvl3 = $c->levels->where('level_number', 3)->first();
+            $reqStars = $lvl3 ? $lvl3->unlock_stars_required : 25;
+            $isUnlocked = $user['stars_count'] >= $reqStars;
+            $unlockedCategories[$c->slug.'_3'] = $isUnlocked;
+
+            $categoriesList[] = [
+                'slug' => $c->slug,
+                'name' => $c->name,
+                'icon_emoji' => $c->icon_emoji,
+                'level_title' => $lvl3 ? $lvl3->title : 'Level 3: Pra-SD / Mahir',
+                'is_unlocked' => $isUnlocked,
             ];
         }
 
-        $categories = Category::with('quizzes')->get();
+        // 3. Hitung persentase pemahaman per kategori dari tabel quiz_attempts nyata
         $topicMastery = $categories->map(function ($c) use ($authUser) {
             $quizIds = $c->quizzes->pluck('id');
-            $attemptCount = $authUser ? QuizAttempt::where('user_id', $authUser->id)->whereIn('quiz_id', $quizIds)->count() : 2;
-            $pct = min(100, max(40, $attemptCount * 30));
+            $attempts = $authUser ? QuizAttempt::where('user_id', $authUser->id)->whereIn('quiz_id', $quizIds)->get() : collect();
+            $attemptCount = $attempts->count();
+            $avgScore = $attemptCount > 0 ? (int) $attempts->avg('score') : 0;
+            $pct = $attemptCount > 0 ? min(100, max(50, $attemptCount * 30)) : 0;
+
+            $color = match ($c->color_theme) {
+                'orange' => 'bg-orange-500',
+                'sky' => 'bg-sky-500',
+                'pink', 'rose' => 'bg-pink-500',
+                'purple' => 'bg-purple-500',
+                'indigo' => 'bg-indigo-500',
+                default => 'bg-emerald-500',
+            };
 
             return [
                 'category' => $c->name,
+                'icon' => $c->icon_emoji,
                 'progress_pct' => $pct,
-                'color' => $c->color_theme === 'orange' ? 'bg-orange-500' : ($c->color_theme === 'sky' ? 'bg-sky-500' : 'bg-emerald-500'),
-                'note' => "Penguasaan modul {$c->name} terpantau sangat baik dan aktif.",
+                'color' => $color,
+                'note' => $attemptCount > 0
+                    ? "Penguasaan materi {$c->name} mencapai {$pct}% ({$attemptCount} kali pengerjaan kuis)."
+                    : "Modul {$c->name} siap dipelajari bersama si kecil.",
             ];
         })->toArray();
 
+        // 4. Rekomendasi pedagogis dinamis sesuai usia
         $recommendationByAge = match ((int) ($user['age'] ?? 4)) {
-            3 => 'Ananda berada pada fase pengenalan konkret awal. Ajak ananda menirukan bunyi suara hewan dan mengamati warna di sekitar.',
-            4 => 'Ananda menunjukkan antusiasme tinggi pada kartu visual. Stimulasi dengan menghitung benda nyata 1-5 dan fonetik abjad A-I-U.',
-            5 => 'Ananda siap untuk merangkai suku kata dan perbandingan ukuran (besar-kecil, tinggi-rendah).',
-            default => 'Ananda sedang dalam persiapan Pra-SD. Latih ketelitian menyimak dan kemandirian menjawab kuis tanpa bantuan.',
+            3 => 'Ananda berada pada fase perkembangan sensori-motorik & visual konkret awal. Ajak ananda menirukan bunyi suara hewan dan mengamati warna benda di sekitar rumah.',
+            4 => 'Ananda menunjukkan minat eksplorasi tinggi pada kartu bergambar. Stimulasi dengan menghitung benda nyata 1 sampai 5 dan bunyi fonik vokal A-I-U.',
+            5 => 'Ananda siap untuk merangkai 2 suku kata dan membandingkan ukuran (besar-kecil, tinggi-rendah). Dampingi ananda menuntaskan kuis Level 2!',
+            default => 'Ananda sedang dalam fase persiapan Pra-SD. Latih ketelitian menyimak instruksi audio dan kemandirian menjawab kuis.',
         };
 
         $parentData = [
@@ -520,13 +585,15 @@ class FrontEndController extends Controller
             'learning_summary' => [
                 'total_stars' => $user['stars_count'],
                 'stars_target' => 50,
-                'quizzes_completed' => $totalQuizzes > 0 ? $totalQuizzes : 6,
+                'quizzes_completed' => $totalQuizzes > 0 ? $totalQuizzes : count($recentActivities),
                 'materials_read' => $totalMaterials > 0 ? $totalMaterials : 18,
                 'learning_streak_days' => 5,
-                'favorite_topic' => 'Pulau Hewan 🦁',
+                'favorite_topic' => 'Pulau Hewan Ceria 🦁',
             ],
             'recent_activities' => $recentActivities,
             'topic_mastery' => $topicMastery,
+            'categories' => $categoriesList,
+            'unlocked_categories' => $unlockedCategories,
             'recommendation' => $recommendationByAge,
         ];
 

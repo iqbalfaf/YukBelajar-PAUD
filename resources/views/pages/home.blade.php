@@ -6,9 +6,9 @@
 <div class="flex flex-col gap-8 pb-12" 
      x-data="{
          currentAgeFilter: 'all', // 'all', '3-4', '4-5', '5-6'
-         unlockedLevels: { 'hewan_3': false, 'angka_3': false, 'abjad_3': false, 'buah_3': false, 'warna_3': false, 'kendaraan_3': false },
+         unlockedLevels: {{ Js::from($unlockedLevels ?? []) }},
          showSmartUnlockModal: false,
-         unlockTarget: { slug: '', name: '', level: 3, reqStars: 40, question: '', options: [], correctIdx: 0 },
+         unlockTarget: { slug: '', name: '', level: 3, reqStars: 25, question: '', options: [] },
          userStars: {{ $user['stars_count'] }},
          
          speakGreeting() {
@@ -31,11 +31,11 @@
                  slug: cat.slug,
                  name: cat.name,
                  level: 3,
-                 reqStars: 40,
-                 question: 'Tantangan Anak Cerdas: Manakah gambar buah Apel Merah yang manis? 🍎',
-                 options: [
-                     { text: 'Apel Merah 🍎', isCorrect: true },
-                     { text: 'Batu Kali 🪨', isCorrect: false }
+                 reqStars: 25,
+                 question: cat.challenge_question || 'Tantangan Anak Cerdas: Manakah jawaban yang tepat?',
+                 options: cat.challenge_options || [
+                     { text: `${cat.icon_emoji} Pilihan Tepat`, isCorrect: true },
+                     { text: '🪨 Batu Kali', isCorrect: false }
                  ]
              };
              this.showSmartUnlockModal = true;

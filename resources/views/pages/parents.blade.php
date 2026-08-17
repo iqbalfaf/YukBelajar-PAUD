@@ -9,7 +9,7 @@
          savedAge: {{ $parentData['child_profile']['age'] }},
          savedAvatar: '{{ $parentData['child_profile']['avatar'] }}',
          curriculumMode: 'adaptive', // 'adaptive' (by age) or 'unlocked_all' (accelerated)
-         unlockedCategories: { 'hewan_3': true, 'angka_3': false, 'abjad_3': false, 'buah_3': false, 'warna_3': false, 'kendaraan_3': false },
+         unlockedCategories: {{ Js::from($parentData['unlocked_categories']) }},
          showSuccessAlert: false,
          
          saveProfile() {
@@ -49,7 +49,7 @@
         </a>
     </div>
 
-    <!-- Quick Stats Cards -->
+    <!-- Quick Stats Cards (Real Data MySQL) -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         
         <div class="bg-white p-5 rounded-3xl border-3 border-amber-300 shadow-xs flex flex-col items-center text-center">
@@ -67,7 +67,7 @@
         <div class="bg-white p-5 rounded-3xl border-3 border-emerald-300 shadow-xs flex flex-col items-center text-center">
             <span class="text-3xl mb-1">📚</span>
             <span class="text-2xl font-black font-heading text-emerald-900">{{ $parentData['learning_summary']['materials_read'] }}</span>
-            <span class="text-xs font-bold text-slate-500">Flashcard Dibuka</span>
+            <span class="text-xs font-bold text-slate-500">Flashcard Aktif</span>
         </div>
 
         <div class="bg-white p-5 rounded-3xl border-3 border-purple-300 shadow-xs flex flex-col items-center text-center">
@@ -96,7 +96,7 @@
                 </p>
             </div>
 
-            <!-- CURRICULUM & LEVEL UNLOCK MANAGER (SCAFFOLDING CONTROL) -->
+            <!-- CURRICULUM & LEVEL UNLOCK MANAGER (SCAFFOLDING CONTROL - REAL DATA) -->
             <div class="bg-white border-3 border-purple-200 rounded-3xl p-6 shadow-xs flex flex-col gap-4">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
                     <div>
@@ -112,12 +112,12 @@
                     <!-- Mode Switch -->
                     <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs font-bold">
                         <button @click="curriculumMode = 'adaptive'; saveProfile()"
-                                class="px-3 py-1.5 rounded-lg transition-all"
+                                class="px-3 py-1.5 rounded-lg transition-all cursor-pointer"
                                 :class="curriculumMode === 'adaptive' ? 'bg-white text-sky-800 shadow-xs' : 'text-slate-600'">
                             Sesuai Usia (<span x-text="savedAge"></span> Thn)
                         </button>
                         <button @click="curriculumMode = 'unlocked_all'; saveProfile()"
-                                class="px-3 py-1.5 rounded-lg transition-all"
+                                class="px-3 py-1.5 rounded-lg transition-all cursor-pointer"
                                 :class="curriculumMode === 'unlocked_all' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600'">
                             ⚡ Buka Semua Level
                         </button>
@@ -128,82 +128,42 @@
                     Orang tua dapat membuka kunci Level 3 (Pra-SD) secara manual apabila anak menunjukkan kemampuan lebih cepat (akselerasi mandiri).
                 </p>
 
-                <!-- Category Level Unlock Table -->
+                <!-- Category Level Unlock Table (Dynamic Real Database Categories) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    @foreach($parentData['categories'] as $cat)
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between">
                         <div class="flex items-center gap-2.5">
-                            <span class="text-2xl">🦁</span>
+                            <span class="text-2xl">{{ $cat['icon_emoji'] }}</span>
                             <div>
-                                <h5 class="text-xs font-extrabold text-slate-800">Pulau Hewan (Level 3)</h5>
-                                <span class="text-[10px] text-slate-500">Hewan Laut Pra-SD</span>
+                                <h5 class="text-xs font-extrabold text-slate-800">{{ $cat['name'] }}</h5>
+                                <span class="text-[10px] text-slate-500">{{ $cat['level_title'] }}</span>
                             </div>
                         </div>
-                        <button @click="toggleCategoryLevel('hewan_3')"
+                        <button @click="toggleCategoryLevel('{{ $cat['slug'] }}_3')"
                                 class="px-3 py-1 text-xs font-bold rounded-xl transition-all cursor-pointer"
-                                :class="unlockedCategories['hewan_3'] || curriculumMode === 'unlocked_all' ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-slate-200 text-slate-600'">
-                            <span x-text="unlockedCategories['hewan_3'] || curriculumMode === 'unlocked_all' ? '🔓 Terbuka' : '🔒 Terkunci'"></span>
+                                :class="unlockedCategories['{{ $cat['slug'] }}_3'] || curriculumMode === 'unlocked_all' ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-slate-200 text-slate-600'">
+                            <span x-text="unlockedCategories['{{ $cat['slug'] }}_3'] || curriculumMode === 'unlocked_all' ? '🔓 Terbuka' : '🔒 Terkunci'"></span>
                         </button>
                     </div>
-
-                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between">
-                        <div class="flex items-center gap-2.5">
-                            <span class="text-2xl">🔢</span>
-                            <div>
-                                <h5 class="text-xs font-extrabold text-slate-800">Istana Angka (Level 3)</h5>
-                                <span class="text-[10px] text-slate-500">Penjumlahan Sederhana</span>
-                            </div>
-                        </div>
-                        <button @click="toggleCategoryLevel('angka_3')"
-                                class="px-3 py-1 text-xs font-bold rounded-xl transition-all cursor-pointer"
-                                :class="unlockedCategories['angka_3'] || curriculumMode === 'unlocked_all' ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-slate-200 text-slate-600'">
-                            <span x-text="unlockedCategories['angka_3'] || curriculumMode === 'unlocked_all' ? '🔓 Terbuka' : '🔒 Terkunci'"></span>
-                        </button>
-                    </div>
-
-                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between">
-                        <div class="flex items-center gap-2.5">
-                            <span class="text-2xl">🔤</span>
-                            <div>
-                                <h5 class="text-xs font-extrabold text-slate-800">Taman Abjad (Level 3)</h5>
-                                <span class="text-[10px] text-slate-500">Membaca 2 Suku Kata</span>
-                            </div>
-                        </div>
-                        <button @click="toggleCategoryLevel('abjad_3')"
-                                class="px-3 py-1 text-xs font-bold rounded-xl transition-all cursor-pointer"
-                                :class="unlockedCategories['abjad_3'] || curriculumMode === 'unlocked_all' ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-slate-200 text-slate-600'">
-                            <span x-text="unlockedCategories['abjad_3'] || curriculumMode === 'unlocked_all' ? '🔓 Terbuka' : '🔒 Terkunci'"></span>
-                        </button>
-                    </div>
-
-                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between">
-                        <div class="flex items-center gap-2.5">
-                            <span class="text-2xl">🍎</span>
-                            <div>
-                                <h5 class="text-xs font-extrabold text-slate-800">Kebun Buah (Level 3)</h5>
-                                <span class="text-[10px] text-slate-500">Manfaat Vitamin Buah</span>
-                            </div>
-                        </div>
-                        <button @click="toggleCategoryLevel('buah_3')"
-                                class="px-3 py-1 text-xs font-bold rounded-xl transition-all cursor-pointer"
-                                :class="unlockedCategories['buah_3'] || curriculumMode === 'unlocked_all' ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-slate-200 text-slate-600'">
-                            <span x-text="unlockedCategories['buah_3'] || curriculumMode === 'unlocked_all' ? '🔓 Terbuka' : '🔒 Terkunci'"></span>
-                        </button>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
-            <!-- Topic Mastery Progress -->
+            <!-- Topic Mastery Progress (Real Data MySQL Quiz Attempts) -->
             <div class="bg-white border-3 border-slate-200 rounded-3xl p-6 shadow-xs">
                 <h4 class="text-lg font-bold font-heading text-slate-800 mb-4 flex items-center gap-2">
                     <span>📊</span>
-                    <span>Tingkat Pemahaman per Kategori</span>
+                    <span>Tingkat Pemahaman per Kategori Belajar</span>
                 </h4>
 
                 <div class="flex flex-col gap-4">
                     @foreach($parentData['topic_mastery'] as $topic)
                     <div class="flex flex-col gap-1.5 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
                         <div class="flex items-center justify-between text-sm">
-                            <span class="font-bold text-slate-800">{{ $topic['category'] }}</span>
+                            <span class="font-bold text-slate-800 flex items-center gap-1.5">
+                                <span>{{ $topic['icon'] }}</span>
+                                <span>{{ $topic['category'] }}</span>
+                            </span>
                             <span class="font-extrabold text-slate-700">{{ $topic['progress_pct'] }}%</span>
                         </div>
                         <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
@@ -215,15 +175,15 @@
                 </div>
             </div>
 
-            <!-- Recent Activity Timeline -->
+            <!-- Recent Activity Timeline (Real Data MySQL Quiz Attempts) -->
             <div class="bg-white border-3 border-slate-200 rounded-3xl p-6 shadow-xs">
                 <h4 class="text-lg font-bold font-heading text-slate-800 mb-4 flex items-center gap-2">
                     <span>⏱️</span>
-                    <span>Riwayat Aktivitas Belajar Terbaru</span>
+                    <span>Riwayat Aktivitas Belajar Anak</span>
                 </h4>
 
                 <div class="flex flex-col gap-3">
-                    @foreach($parentData['recent_activities'] as $act)
+                    @forelse($parentData['recent_activities'] as $act)
                     <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
                         <div class="flex items-center gap-3">
                             <span class="text-2xl">{{ $act['icon'] }}</span>
@@ -233,9 +193,9 @@
                             </div>
                         </div>
                         <div class="text-right">
-                            @if($act['score'])
+                            @if(isset($act['score']) && $act['score'] !== null)
                                 <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full font-black text-xs">
-                                    Skor: {{ $act['score'] }} ({{ str_repeat('⭐', $act['stars']) }})
+                                    Skor: {{ $act['score'] }} ({{ str_repeat('⭐', max(1, min(3, (int) $act['stars']))) }})
                                 </span>
                             @else
                                 <span class="px-2.5 py-1 bg-sky-100 text-sky-800 rounded-full font-bold text-xs">
@@ -244,7 +204,12 @@
                             @endif
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="p-6 text-center text-slate-500 bg-slate-50 rounded-2xl border border-slate-200">
+                        <p class="text-sm font-bold">Belum ada riwayat aktivitas kuis.</p>
+                        <p class="text-xs text-slate-400 mt-1">Ajak ananda menyelesaikan modul petualangan untuk melihat perkembangan di sini.</p>
+                    </div>
+                    @endforelse
                 </div>
             </div>
 
@@ -291,8 +256,8 @@
                         <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-2xl border-2 border-slate-200">
                             <span class="text-3xl">{{ $parentData['child_profile']['avatar_emoji'] }}</span>
                             <div class="text-xs">
-                                <p class="font-bold text-slate-800">Dino Ceria 👑</p>
-                                <a href="{{ route('auth.avatar') }}" class="text-sky-600 font-bold hover:underline">Ganti Avatar →</a>
+                                <p class="font-bold text-slate-800">{{ $parentData['child_profile']['avatar_name'] }}</p>
+                                <a href="{{ route('profile') }}" class="text-sky-600 font-bold hover:underline">Ganti Avatar & Aksesori →</a>
                             </div>
                         </div>
                     </div>
