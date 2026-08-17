@@ -9980,33 +9980,713 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 2 - TOPIK 4: KATA BERAKHIRAN KONSONAN (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (RUMAH, AYAM, IKAN, BURUNG, POHON, KUCING, GAJAH) ---
             [
                 'category_slug' => 'akhiran-konsonan',
-                'title' => 'Tebak Kata Berakhiran',
-                'slug' => 'kuis-akhiran-konsonan',
-                'icon_emoji' => '🧩',
+                'level_number' => 1,
+                'title' => 'Membaca Ru-mah, A-yam & I-kan',
+                'slug' => 'kuis-akhiran-l1-rumah-ayam-ikan',
+                'icon_emoji' => '🏠',
                 'target_age' => 5,
-                'total_questions' => 2,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'R-U Ru, M-A-H Mah. Kata ini dibaca apa?',
-                        'audio' => 'R-U Ru, M-A-H Mah. Kata ini dibaca apa?',
+                        'text' => 'R-U Ru, M-A-H Mah. Tempat tinggal nyaman kita ini dibaca apa?',
+                        'audio' => 'R-U Ru, M-A-H Mah. Tempat tinggal nyaman kita ini dibaca apa?',
                         'emoji' => '🏠',
                         'options' => [
-                            ['emoji' => '🏠', 'text' => 'Ru-mah', 'is_correct' => true],
-                            ['emoji' => '🐔', 'text' => 'A-yam', 'is_correct' => false],
-                            ['emoji' => '🐟', 'text' => 'I-kan', 'is_correct' => false],
+                            ['emoji' => '🏠', 'text' => 'Ru - mah (Rumah)', 'is_correct' => true],
+                            ['emoji' => '🐔', 'text' => 'A - yam', 'is_correct' => false],
+                            ['emoji' => '🐟', 'text' => 'I - kan', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'I, K-A-N Kan. Kata ini dibaca apa?',
-                        'audio' => 'I, K-A-N Kan. Kata ini dibaca apa?',
+                        'text' => 'A, Y-A-M Yam. Unggas berkokok pagi ini dibaca apa?',
+                        'audio' => 'A, Y-A-M Yam. Unggas berkokok pagi ini dibaca apa?',
+                        'emoji' => '🐔',
+                        'options' => [
+                            ['emoji' => '🐔', 'text' => 'A - yam (Ayam)', 'is_correct' => true],
+                            ['emoji' => '🐦', 'text' => 'Bu - rung', 'is_correct' => false],
+                            ['emoji' => '🐘', 'text' => 'Ga - jah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'I, K-A-N Kan. Hewan berenang di air jernih ini dibaca apa?',
+                        'audio' => 'I, K-A-N Kan. Hewan berenang di air jernih ini dibaca apa?',
                         'emoji' => '🐟',
                         'options' => [
-                            ['emoji' => '🐦', 'text' => 'Bu-rung', 'is_correct' => false],
-                            ['emoji' => '🐟', 'text' => 'I-kan', 'is_correct' => true],
-                            ['emoji' => '🌳', 'text' => 'Po-hon', 'is_correct' => false],
+                            ['emoji' => '🐟', 'text' => 'I - kan (Ikan)', 'is_correct' => true],
+                            ['emoji' => '🌳', 'text' => 'Po - hon', 'is_correct' => false],
+                            ['emoji' => '🏠', 'text' => 'Ru - mah', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'akhiran-konsonan',
+                'level_number' => 1,
+                'title' => 'Membaca Bu-rung, Po-hon & Ku-cing',
+                'slug' => 'kuis-akhiran-l1-burung-pohon-kucing',
+                'icon_emoji' => '🐦',
+                'target_age' => 5,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'B-U Bu, R-U-N-G Rung. Hewan bersayap merdu ini dibaca apa?',
+                        'audio' => 'B-U Bu, R-U-N-G Rung. Hewan bersayap merdu ini dibaca apa?',
+                        'emoji' => '🐦',
+                        'options' => [
+                            ['emoji' => '🐦', 'text' => 'Bu - rung (Burung)', 'is_correct' => true],
+                            ['emoji' => '🐱', 'text' => 'Ku - cing', 'is_correct' => false],
+                            ['emoji' => '🌳', 'text' => 'Po - hon', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'P-O Po, H-O-N Hon. Tanaman rindang dan sejuk ini dibaca apa?',
+                        'audio' => 'P-O Po, H-O-N Hon. Tanaman rindang dan sejuk ini dibaca apa?',
+                        'emoji' => '🌳',
+                        'options' => [
+                            ['emoji' => '🌳', 'text' => 'Po - hon (Pohon)', 'is_correct' => true],
+                            ['emoji' => '🐟', 'text' => 'I - kan', 'is_correct' => false],
+                            ['emoji' => '🏠', 'text' => 'Ru - mah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'K-U Ku, C-I-N-G Cing. Hewan lucu berbulu halus ini dibaca apa?',
+                        'audio' => 'K-U Ku, C-I-N-G Cing. Hewan lucu berbulu halus ini dibaca apa?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            ['emoji' => '🐱', 'text' => 'Ku - cing (Kucing)', 'is_correct' => true],
+                            ['emoji' => '🐦', 'text' => 'Bu - rung', 'is_correct' => false],
+                            ['emoji' => '🐔', 'text' => 'A - yam', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'akhiran-konsonan',
+                'level_number' => 1,
+                'title' => 'Membaca Ga-jah & Mengenal Huruf Akhir',
+                'slug' => 'kuis-akhiran-l1-gajah-huruf-akhir',
+                'icon_emoji' => '🐘',
+                'target_age' => 5,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'G-A Ga, J-A-H Jah. Hewan berbelalai panjang ini dibaca apa?',
+                        'audio' => 'G-A Ga, J-A-H Jah. Hewan berbelalai panjang ini dibaca apa?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '🐘', 'text' => 'Ga - jah (Gajah)', 'is_correct' => true],
+                            ['emoji' => '🏠', 'text' => 'Ru - mah', 'is_correct' => false],
+                            ['emoji' => '🐔', 'text' => 'A - yam', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "Ru - mah"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Rumah?',
+                        'emoji' => '🏠',
+                        'options' => [
+                            ['emoji' => '🅷', 'text' => 'Huruf H', 'is_correct' => true],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "I - kan"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Ikan?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => true],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                            ['emoji' => '🅷', 'text' => 'Huruf H', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (EMBER, BEBEK, BERAS, PASIR, LUMUT, SABUN, MANGKUK) ---
+            [
+                'category_slug' => 'akhiran-konsonan',
+                'level_number' => 2,
+                'title' => 'Membaca Em-ber, Be-bek & Be-ras',
+                'slug' => 'kuis-akhiran-l2-ember-bebek-beras',
+                'icon_emoji' => '🪣',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'E-M Em, B-E-R Ber. Wadah air bersih ini dibaca apa?',
+                        'audio' => 'E-M Em, B-E-R Ber. Wadah air bersih ini dibaca apa?',
+                        'emoji' => '🪣',
+                        'options' => [
+                            ['emoji' => '🪣', 'text' => 'Em - ber (Ember)', 'is_correct' => true],
+                            ['emoji' => '🦆', 'text' => 'Be - bek', 'is_correct' => false],
+                            ['emoji' => '🌾', 'text' => 'Be - ras', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'B-E Be, B-E-K Bek. Unggas berenang kwek-kwek ini dibaca apa?',
+                        'audio' => 'B-E Be, B-E-K Bek. Unggas berenang kwek-kwek ini dibaca apa?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            ['emoji' => '🦆', 'text' => 'Be - bek (Bebek)', 'is_correct' => true],
+                            ['emoji' => '🪣', 'text' => 'Em - ber', 'is_correct' => false],
+                            ['emoji' => '🥣', 'text' => 'Mang - kuk', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'B-E Be, R-A-S Ras. Butir putih dimasak jadi nasi ini dibaca apa?',
+                        'audio' => 'B-E Be, R-A-S Ras. Butir putih dimasak jadi nasi ini dibaca apa?',
+                        'emoji' => '🌾',
+                        'options' => [
+                            ['emoji' => '🌾', 'text' => 'Be - ras (Beras)', 'is_correct' => true],
+                            ['emoji' => '🏖️', 'text' => 'Pa - sir', 'is_correct' => false],
+                            ['emoji' => '🧼', 'text' => 'Sa - bun', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "Em - ber"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Ember?',
+                        'emoji' => '🪣',
+                        'options' => [
+                            ['emoji' => '🇷', 'text' => 'Huruf R', 'is_correct' => true],
+                            ['emoji' => '🅺', 'text' => 'Huruf K', 'is_correct' => false],
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "Be - bek"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Bebek?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            ['emoji' => '🅺', 'text' => 'Huruf K', 'is_correct' => true],
+                            ['emoji' => '🇷', 'text' => 'Huruf R', 'is_correct' => false],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'akhiran-konsonan',
+                'level_number' => 2,
+                'title' => 'Membaca Pa-sir, Lu-mut & Sa-bun',
+                'slug' => 'kuis-akhiran-l2-pasir-lumut-sabun',
+                'icon_emoji' => '🏖️',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'P-A Pa, S-I-R Sir. Butiran lembut di pantai ini dibaca apa?',
+                        'audio' => 'P-A Pa, S-I-R Sir. Butiran lembut di pantai ini dibaca apa?',
+                        'emoji' => '🏖️',
+                        'options' => [
+                            ['emoji' => '🏖️', 'text' => 'Pa - sir (Pasir)', 'is_correct' => true],
+                            ['emoji' => '🌾', 'text' => 'Be - ras', 'is_correct' => false],
+                            ['emoji' => '🌱', 'text' => 'Lu - mut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'L-U Lu, M-U-T Mut. Tanaman hijau lembut di bebatuan ini dibaca apa?',
+                        'audio' => 'L-U Lu, M-U-T Mut. Tanaman hijau lembut di bebatuan ini dibaca apa?',
+                        'emoji' => '🌱',
+                        'options' => [
+                            ['emoji' => '🌱', 'text' => 'Lu - mut (Lumut)', 'is_correct' => true],
+                            ['emoji' => '🧼', 'text' => 'Sa - bun', 'is_correct' => false],
+                            ['emoji' => '🥣', 'text' => 'Mang - kuk', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'S-A Sa, B-U-N Bun. Pembersih wangi berbusa ini dibaca apa?',
+                        'audio' => 'S-A Sa, B-U-N Bun. Pembersih wangi berbusa ini dibaca apa?',
+                        'emoji' => '🧼',
+                        'options' => [
+                            ['emoji' => '🧼', 'text' => 'Sa - bun (Sabun)', 'is_correct' => true],
+                            ['emoji' => '🎈', 'text' => 'Ba - lon', 'is_correct' => false],
+                            ['emoji' => '🌳', 'text' => 'Po - hon', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "Lu - mut"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Lumut?',
+                        'emoji' => '🌱',
+                        'options' => [
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => true],
+                            ['emoji' => '🇷', 'text' => 'Huruf R', 'is_correct' => false],
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "Be - ras"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Beras?',
+                        'emoji' => '🌾',
+                        'options' => [
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => true],
+                            ['emoji' => '🇷', 'text' => 'Huruf R', 'is_correct' => false],
+                            ['emoji' => '🅺', 'text' => 'Huruf K', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'akhiran-konsonan',
+                'level_number' => 2,
+                'title' => 'Membaca Mang-kuk, Ba-lon & Al-pu-kat',
+                'slug' => 'kuis-akhiran-l2-mangkuk-balon-alpukat',
+                'icon_emoji' => '🥣',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'M-A-N-G Mang, K-U-K Kuk. Wadah sup lezat ini dibaca apa?',
+                        'audio' => 'M-A-N-G Mang, K-U-K Kuk. Wadah sup lezat ini dibaca apa?',
+                        'emoji' => '🥣',
+                        'options' => [
+                            ['emoji' => '🥣', 'text' => 'Mang - kuk (Mangkuk)', 'is_correct' => true],
+                            ['emoji' => '🪣', 'text' => 'Em - ber', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Be - bek', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'B-A Ba, L-O-N Lon. Mainan karet melayang ini dibaca apa?',
+                        'audio' => 'B-A Ba, L-O-N Lon. Mainan karet melayang ini dibaca apa?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            ['emoji' => '🎈', 'text' => 'Ba - lon (Balon)', 'is_correct' => true],
+                            ['emoji' => '🧼', 'text' => 'Sa - bun', 'is_correct' => false],
+                            ['emoji' => '🌳', 'text' => 'Po - hon', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'A-L Al, P-U Pu, K-A-T Kat. Buah hijau kaya nutrisi ini dibaca apa?',
+                        'audio' => 'A-L Al, P-U Pu, K-A-T Kat. Buah hijau kaya nutrisi ini dibaca apa?',
+                        'emoji' => '🥑',
+                        'options' => [
+                            ['emoji' => '🥑', 'text' => 'Al - pu - kat (Alpukat)', 'is_correct' => true],
+                            ['emoji' => '🎺', 'text' => 'Te - rom - pet', 'is_correct' => false],
+                            ['emoji' => '🌱', 'text' => 'Lu - mut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "Mang - kuk"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Mangkuk?',
+                        'emoji' => '🥣',
+                        'options' => [
+                            ['emoji' => '🅺', 'text' => 'Huruf K', 'is_correct' => true],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                            ['emoji' => '🇷', 'text' => 'Huruf R', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "Ba - lon"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Balon?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => true],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (TEROMPET, OMBAK, BINTANG, PINTAR, PENGELOMPOKKAN & GRAND MASTER) ---
+            [
+                'category_slug' => 'akhiran-konsonan',
+                'level_number' => 3,
+                'title' => 'Membaca Te-rom-pet, O-mbak & Bin-tang',
+                'slug' => 'kuis-akhiran-l3-terompet-ombak-bintang',
+                'icon_emoji' => '🎺',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'T-E Te, R-O-M Rom, P-E-T Pet. Alat musik tiup lantang ini dibaca apa?',
+                        'audio' => 'T-E Te, R-O-M Rom, P-E-T Pet. Alat musik tiup lantang ini dibaca apa?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '🎺', 'text' => 'Te - rom - pet (Terompet)', 'is_correct' => true],
+                            ['emoji' => '🥑', 'text' => 'Al - pu - kat', 'is_correct' => false],
+                            ['emoji' => '⭐', 'text' => 'Bin - tang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'O, M-B-A-K Mbak. Deburan air laut di pantai ini dibaca apa?',
+                        'audio' => 'O, M-B-A-K Mbak. Deburan air laut di pantai ini dibaca apa?',
+                        'emoji' => '🌊',
+                        'options' => [
+                            ['emoji' => '🌊', 'text' => 'O - mbak (Ombak)', 'is_correct' => true],
+                            ['emoji' => '🦆', 'text' => 'Be - bek', 'is_correct' => false],
+                            ['emoji' => '🥣', 'text' => 'Mang - kuk', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'B-I-N Bin, T-A-N-G Tang. Benda langit bersinar malam ini dibaca apa?',
+                        'audio' => 'B-I-N Bin, T-A-N-G Tang. Benda langit bersinar malam ini dibaca apa?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            ['emoji' => '⭐', 'text' => 'Bin - tang (Bintang)', 'is_correct' => true],
+                            ['emoji' => '🐦', 'text' => 'Bu - rung', 'is_correct' => false],
+                            ['emoji' => '🐱', 'text' => 'Ku - cing', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'P-I-N Pin, T-A-R Tar. Anak rajin belajar yang berprestasi ini dibaca apa?',
+                        'audio' => 'P-I-N Pin, T-A-R Tar. Anak rajin belajar yang berprestasi ini dibaca apa?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => 'Pin - tar (Pintar)', 'is_correct' => true],
+                            ['emoji' => '🏖️', 'text' => 'Pa - sir', 'is_correct' => false],
+                            ['emoji' => '🪣', 'text' => 'Em - ber', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "Te - rom - pet"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Terompet?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => true],
+                            ['emoji' => '🇷', 'text' => 'Huruf R', 'is_correct' => false],
+                            ['emoji' => '🅺', 'text' => 'Huruf K', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "O - mbak"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Ombak?',
+                        'emoji' => '🌊',
+                        'options' => [
+                            ['emoji' => '🅺', 'text' => 'Huruf K', 'is_correct' => true],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bunyi sengau apakah yang berada di AKHIR kata "Bin - tang"?',
+                        'audio' => 'Bunyi sengau apakah yang berada di akhir kata Bintang?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            ['emoji' => '🆖', 'text' => 'Huruf NG', 'is_correct' => true],
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => false],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang berada di AKHIR kata "Pin - tar"?',
+                        'audio' => 'Huruf konsonan apakah yang berada di akhir kata Pintar?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🇷', 'text' => 'Huruf R', 'is_correct' => true],
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => false],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kata manakah yang sama-sama berakhiran huruf konsonan R?',
+                        'audio' => 'Kata manakah yang sama-sama berakhiran huruf konsonan R?',
+                        'emoji' => '🏖️',
+                        'options' => [
+                            ['emoji' => '🏖️', 'text' => 'Em-ber, Pa-sir, Pin-tar', 'is_correct' => true],
+                            ['emoji' => '🦆', 'text' => 'Be-bek, Mang-kuk, O-mbak', 'is_correct' => false],
+                            ['emoji' => '🏠', 'text' => 'Ru-mah, Ga-jah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kata manakah yang sama-sama berakhiran huruf konsonan K?',
+                        'audio' => 'Kata manakah yang sama-sama berakhiran huruf konsonan K?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            ['emoji' => '🦆', 'text' => 'Be-bek, Mang-kuk, O-mbak', 'is_correct' => true],
+                            ['emoji' => '🐟', 'text' => 'I-kan, Po-hon, Sa-bun', 'is_correct' => false],
+                            ['emoji' => '⭐', 'text' => 'Bin-tang, Bu-rung, Ku-cing', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'akhiran-konsonan',
+                'level_number' => 3,
+                'title' => 'Cerdas Mengelompokkan Huruf Konsonan Akhir',
+                'slug' => 'kuis-akhiran-l3-kelompok-konsonan-akhir',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Kelompok kata manakah yang semuanya berakhiran konsonan H?',
+                        'audio' => 'Kelompok kata manakah yang semuanya berakhiran konsonan H?',
+                        'emoji' => '🏠',
+                        'options' => [
+                            ['emoji' => '🏠', 'text' => 'Ru-mah dan Ga-jah', 'is_correct' => true],
+                            ['emoji' => '🐔', 'text' => 'A-yam dan I-kan', 'is_correct' => false],
+                            ['emoji' => '🌳', 'text' => 'Po-hon dan Bu-rung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelompok kata manakah yang semuanya berakhiran konsonan N?',
+                        'audio' => 'Kelompok kata manakah yang semuanya berakhiran konsonan N?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '🐟', 'text' => 'I-kan, Po-hon, Sa-bun, Ba-lon', 'is_correct' => true],
+                            ['emoji' => '🪣', 'text' => 'Em-ber, Pa-sir, Pin-tar', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Be-bek, Mang-kuk', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelompok kata manakah yang semuanya berakhiran bunyi sengau NG?',
+                        'audio' => 'Kelompok kata manakah yang semuanya berakhiran bunyi sengau NG?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            ['emoji' => '⭐', 'text' => 'Bu-rung, Ku-cing, Bin-tang', 'is_correct' => true],
+                            ['emoji' => '🐔', 'text' => 'A-yam, Ru-mah, Ga-jah', 'is_correct' => false],
+                            ['emoji' => '🌾', 'text' => 'Be-ras, Lu-mut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelompok kata manakah yang semuanya berakhiran konsonan T?',
+                        'audio' => 'Kelompok kata manakah yang semuanya berakhiran konsonan T?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '🎺', 'text' => 'Lu-mut, Al-pu-kat, Te-rom-pet', 'is_correct' => true],
+                            ['emoji' => '🏖️', 'text' => 'Pa-sir, Em-ber, Pin-tar', 'is_correct' => false],
+                            ['emoji' => '🌊', 'text' => 'O-mbak, Be-bek', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah suku kata pada kata "Al - pu - kat"?',
+                        'audio' => 'Berapakah jumlah suku kata pada kata Alpukat?',
+                        'emoji' => '🥑',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => '3 Suku Kata', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Suku Kata', 'is_correct' => false],
+                            ['emoji' => '4️⃣', 'text' => '4 Suku Kata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah suku kata pada kata "Te - rom - pet"?',
+                        'audio' => 'Berapakah jumlah suku kata pada kata Terompet?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => '3 Suku Kata', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Suku Kata', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '1 Suku Kata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah suku kata pada kata "Bin - tang"?',
+                        'audio' => 'Berapakah jumlah suku kata pada kata Bintang?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '2 Suku Kata', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '3 Suku Kata', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '1 Suku Kata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah suku kata pada kata "Mang - kuk"?',
+                        'audio' => 'Berapakah jumlah suku kata pada kata Mangkuk?',
+                        'emoji' => '🥣',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '2 Suku Kata', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '3 Suku Kata', 'is_correct' => false],
+                            ['emoji' => '4️⃣', 'text' => '4 Suku Kata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah suku kata pada kata "Ga - jah"?',
+                        'audio' => 'Berapakah jumlah suku kata pada kata Gajah?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '2 Suku Kata', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '1 Suku Kata', 'is_correct' => false],
+                            ['emoji' => '3️⃣', 'text' => '3 Suku Kata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita harus membunyikan huruf konsonan akhir dengan jelas?',
+                        'audio' => 'Mengapa kita harus membunyikan huruf konsonan akhir dengan jelas?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Agar kata terdengar tepat, sempurna, dan maknanya tidak tertukar', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Biar cepat mengantuk', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak penting sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'akhiran-konsonan',
+                'level_number' => 3,
+                'title' => 'Grand Champion Ahli Kata Berakhiran Konsonan',
+                'slug' => 'kuis-akhiran-l3-grand-master-akhiran',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'R-U Ru, M-A-H Mah dibaca apa?',
+                        'audio' => 'R-U Ru, M-A-H Mah dibaca apa?',
+                        'emoji' => '🏠',
+                        'options' => [
+                            ['emoji' => '🏠', 'text' => 'Rumah', 'is_correct' => true],
+                            ['emoji' => '🐔', 'text' => 'Ayam', 'is_correct' => false],
+                            ['emoji' => '🐟', 'text' => 'Ikan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'A, Y-A-M Yam dibaca apa?',
+                        'audio' => 'A, Y-A-M Yam dibaca apa?',
+                        'emoji' => '🐔',
+                        'options' => [
+                            ['emoji' => '🐔', 'text' => 'Ayam', 'is_correct' => true],
+                            ['emoji' => '🐦', 'text' => 'Burung', 'is_correct' => false],
+                            ['emoji' => '🐱', 'text' => 'Kucing', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'E-M Em, B-E-R Ber dibaca apa?',
+                        'audio' => 'E-M Em, B-E-R Ber dibaca apa?',
+                        'emoji' => '🪣',
+                        'options' => [
+                            ['emoji' => '🪣', 'text' => 'Ember', 'is_correct' => true],
+                            ['emoji' => '🦆', 'text' => 'Bebek', 'is_correct' => false],
+                            ['emoji' => '🌾', 'text' => 'Beras', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'B-E Be, B-E-K Bek dibaca apa?',
+                        'audio' => 'B-E Be, B-E-K Bek dibaca apa?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            ['emoji' => '🦆', 'text' => 'Bebek', 'is_correct' => true],
+                            ['emoji' => '🪣', 'text' => 'Ember', 'is_correct' => false],
+                            ['emoji' => '🥣', 'text' => 'Mangkuk', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'P-A Pa, S-I-R Sir dibaca apa?',
+                        'audio' => 'P-A Pa, S-I-R Sir dibaca apa?',
+                        'emoji' => '🏖️',
+                        'options' => [
+                            ['emoji' => '🏖️', 'text' => 'Pasir', 'is_correct' => true],
+                            ['emoji' => '🌱', 'text' => 'Lumut', 'is_correct' => false],
+                            ['emoji' => '🧼', 'text' => 'Sabun', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'L-U Lu, M-U-T Mut dibaca apa?',
+                        'audio' => 'L-U Lu, M-U-T Mut dibaca apa?',
+                        'emoji' => '🌱',
+                        'options' => [
+                            ['emoji' => '🌱', 'text' => 'Lumut', 'is_correct' => true],
+                            ['emoji' => '🏖️', 'text' => 'Pasir', 'is_correct' => false],
+                            ['emoji' => '🌾', 'text' => 'Beras', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'S-A Sa, B-U-N Bun dibaca apa?',
+                        'audio' => 'S-A Sa, B-U-N Bun dibaca apa?',
+                        'emoji' => '🧼',
+                        'options' => [
+                            ['emoji' => '🧼', 'text' => 'Sabun', 'is_correct' => true],
+                            ['emoji' => '🎈', 'text' => 'Balon', 'is_correct' => false],
+                            ['emoji' => '🌳', 'text' => 'Pohon', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'B-I-N Bin, T-A-N-G Tang dibaca apa?',
+                        'audio' => 'B-I-N Bin, T-A-N-G Tang dibaca apa?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            ['emoji' => '⭐', 'text' => 'Bintang', 'is_correct' => true],
+                            ['emoji' => '🐦', 'text' => 'Burung', 'is_correct' => false],
+                            ['emoji' => '🐱', 'text' => 'Kucing', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'P-I-N Pin, T-A-R Tar dibaca apa?',
+                        'audio' => 'P-I-N Pin, T-A-R Tar dibaca apa?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => 'Pintar', 'is_correct' => true],
+                            ['emoji' => '🏖️', 'text' => 'Pasir', 'is_correct' => false],
+                            ['emoji' => '🪣', 'text' => 'Ember', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apakah yang pantas untuk anak pintar yang lancar membaca seluruh kata berakhiran konsonan?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak pintar yang lancar membaca seluruh kata berakhiran konsonan?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Grand Champion Ahli Kata Berakhiran Konsonan!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Malas Mengeja', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Patung yang Diam', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // =========================================================================
+            // PILAR 2 - TOPIK 5: CERITA PENDEK BERGAMBAR (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (BUDI, KUCING, BURUNG, SEPEDAN, IKAN, BUNGA, BOLA) ---
+            [
+                'category_slug' => 'cerita-pendek',
+                'level_number' => 1,
+                'title' => 'Memahami Cerita: Budi Suka Apel & Kucing Minum Susu',
+                'slug' => 'kuis-cerita-l1-budi-kucing',
+                'icon_emoji' => '🍎',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Cerita: "Budi suka makan apel merah." Buah apa yang disukai Budi?',
+                        'audio' => 'Cerita: Budi suka makan apel merah. Buah apa yang disukai Budi?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '🍎', 'text' => 'Apel Merah yang Manis', 'is_correct' => true],
+                            ['emoji' => '🍌', 'text' => 'Pisang', 'is_correct' => false],
+                            ['emoji' => '🍇', 'text' => 'Anggur', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Kucing putih minum susu hangat." Apa yang diminum kucing putih?',
+                        'audio' => 'Cerita: Kucing putih minum susu hangat. Apa yang diminum kucing putih?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            ['emoji' => '🥛', 'text' => 'Susu Hangat Segar', 'is_correct' => true],
+                            ['emoji' => '☕', 'text' => 'Teh Manis', 'is_correct' => false],
+                            ['emoji' => '🧃', 'text' => 'Jus Jeruk', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Setelah minum susu dan kenyang, apa yang dilakukan kucing putih?',
+                        'audio' => 'Setelah minum susu dan kenyang, apa yang dilakukan kucing putih?',
+                        'emoji' => '😴',
+                        'options' => [
+                            ['emoji' => '😴', 'text' => 'Tidur pulas di sofa', 'is_correct' => true],
+                            ['emoji' => '🏃', 'text' => 'Berlari kencang', 'is_correct' => false],
+                            ['emoji' => '🏊', 'text' => 'Berenang di sungai', 'is_correct' => false],
                         ],
                     ],
                 ],
@@ -10014,31 +10694,615 @@ class QuizSeeder extends Seeder
 
             [
                 'category_slug' => 'cerita-pendek',
-                'title' => 'Kuis Cerita Pendek Bergambar',
-                'slug' => 'kuis-cerita-pendek',
-                'icon_emoji' => '📖',
-                'target_age' => 5,
-                'total_questions' => 2,
+                'level_number' => 1,
+                'title' => 'Memahami Cerita: Burung Terbang & Sepeda Dika',
+                'slug' => 'kuis-cerita-l1-burung-sepeda',
+                'icon_emoji' => '🕊️',
+                'target_age' => 4,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Cerita: "Budi suka makan apel merah." Siapa yang suka makan apel merah?',
-                        'audio' => 'Cerita: Budi suka makan apel merah. Siapa yang suka makan apel merah?',
+                        'text' => 'Cerita: "Burung kecil terbang tinggi di langit biru." Di mana burung terbang?',
+                        'audio' => 'Cerita: Burung kecil terbang tinggi di langit biru. Di mana burung terbang?',
+                        'emoji' => '🕊️',
+                        'options' => [
+                            ['emoji' => '☁️', 'text' => 'Di langit biru cerah', 'is_correct' => true],
+                            ['emoji' => '🌊', 'text' => 'Di dalam dasar laut', 'is_correct' => false],
+                            ['emoji' => '🕳️', 'text' => 'Di dalam lubang tanah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Dika memiliki sepeda roda dua warna biru." Apa warna sepeda Dika?',
+                        'audio' => 'Cerita: Dika memiliki sepeda roda dua warna biru. Apa warna sepeda Dika?',
+                        'emoji' => '🚲',
+                        'options' => [
+                            ['emoji' => '🔵', 'text' => 'Warna Biru', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kapan dan di mana Dika bermain sepeda bersama teman-temannya?',
+                        'audio' => 'Kapan dan di mana Dika bermain sepeda bersama teman-temannya?',
+                        'emoji' => '🌳',
+                        'options' => [
+                            ['emoji' => '🌳', 'text' => 'Di sore hari di taman', 'is_correct' => true],
+                            ['emoji' => '🌙', 'text' => 'Di tengah malam di jalan raya', 'is_correct' => false],
+                            ['emoji' => '🏠', 'text' => 'Di dalam kamar tidur', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'cerita-pendek',
+                'level_number' => 1,
+                'title' => 'Memahami Cerita: Ikan Emas, Bunga Mawar & Bola',
+                'slug' => 'kuis-cerita-l1-ikan-bunga-bola',
+                'icon_emoji' => '🐟',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Cerita: "Ada lima ekor ikan emas di kolam kakek." Berapa jumlah ikan emas kakek?',
+                        'audio' => 'Cerita: Ada lima ekor ikan emas di kolam kakek. Berapa jumlah ikan emas kakek?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '5️⃣', 'text' => '5 Ekor Ikan Emas', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Ekor', 'is_correct' => false],
+                            ['emoji' => '🔟', 'text' => '10 Ekor', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Siti rajin menyiram bunga mawar." Bunga apa yang dirawat Siti?',
+                        'audio' => 'Cerita: Siti rajin menyiram bunga mawar. Bunga apa yang dirawat Siti?',
+                        'emoji' => '🌸',
+                        'options' => [
+                            ['emoji' => '🌸', 'text' => 'Bunga Mawar Merah yang Harum', 'is_correct' => true],
+                            ['emoji' => '🌻', 'text' => 'Bunga Matahari', 'is_correct' => false],
+                            ['emoji' => '🌵', 'text' => 'Kaktus', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Ali menendang bola masuk ke gawang." Apa yang terjadi?',
+                        'audio' => 'Cerita: Ali menendang bola masuk ke gawang. Apa yang terjadi?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            ['emoji' => '⚽', 'text' => 'Gol! Ali dan teman bersorak gembira', 'is_correct' => true],
+                            ['emoji' => '😭', 'text' => 'Ali menangis sedih', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Semua tidur', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (CUCI TANGAN, GOSOK GIGI, SEKOLAH, GAJAH, KUPU-KUPU, SARAPAN, TANAM POHON) ---
+            [
+                'category_slug' => 'cerita-pendek',
+                'level_number' => 2,
+                'title' => 'Memahami Cerita: Cuci Tangan, Gosok Gigi & Sekolah',
+                'slug' => 'kuis-cerita-l2-cuci-tangan-gigi-sekolah',
+                'icon_emoji' => '🧼',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Cerita: "Sebelum makan siang, Rina mencuci tangan dengan air dan sabun." Mengapa Rina cuci tangan?',
+                        'audio' => 'Mengapa Rina mencuci tangan sebelum makan siang?',
+                        'emoji' => '🧼',
+                        'options' => [
+                            ['emoji' => '🧼', 'text' => 'Agar tangan bersih, wangi, dan bebas kuman', 'is_correct' => true],
+                            ['emoji' => '🎨', 'text' => 'Biar tangan berwarna-warni', 'is_correct' => false],
+                            ['emoji' => '🥶', 'text' => 'Biar tangan terasa kedinginan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Beni tidak pernah lupa menggosok gigi sebelum tidur." Kapan Beni menggosok gigi?',
+                        'audio' => 'Kapan Beni menggosok giginya?',
+                        'emoji' => '🦷',
+                        'options' => [
+                            ['emoji' => '🌙', 'text' => 'Sebelum tidur malam', 'is_correct' => true],
+                            ['emoji' => '🏊', 'text' => 'Saat sedang berenang', 'is_correct' => false],
+                            ['emoji' => '⚽', 'text' => 'Saat sedang main bola', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana kondisi gigi Beni yang rajin digosok setiap malam?',
+                        'audio' => 'Bagaimana kondisi gigi Beni yang rajin digosok setiap malam?',
+                        'emoji' => '🦷',
+                        'options' => [
+                            ['emoji' => '🦷', 'text' => 'Putih berkilau, kuat, dan sehat', 'is_correct' => true],
+                            ['emoji' => '🖤', 'text' => 'Hitam dan berlubang sakit', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Patah semua', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Doni memakai seragam rapi dan berpamitan pada ibu." Ke mana Doni pergi?',
+                        'audio' => 'Ke mana Doni pergi setelah berpamitan pada ibu?',
+                        'emoji' => '🎒',
+                        'options' => [
+                            ['emoji' => '🏫', 'text' => 'Berangkat ke sekolah untuk belajar', 'is_correct' => true],
+                            ['emoji' => '🏖️', 'text' => 'Pergi ke pantai', 'is_correct' => false],
+                            ['emoji' => '⛺', 'text' => 'Pergi berkemah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang dilakukan Doni kepada ibu sebelum berangkat sekolah?',
+                        'audio' => 'Apa yang dilakukan Doni kepada ibu sebelum berangkat sekolah?',
+                        'emoji' => '🤝',
+                        'options' => [
+                            ['emoji' => '🤝', 'text' => 'Bersalaman dan berpamitan dengan santun', 'is_correct' => true],
+                            ['emoji' => '🏃', 'text' => 'Langsung lari tanpa bicara', 'is_correct' => false],
+                            ['emoji' => '😭', 'text' => 'Menangis berteriak', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'cerita-pendek',
+                'level_number' => 2,
+                'title' => 'Memahami Cerita: Gajah Mandi, Kupu-Kupu & Roti',
+                'slug' => 'kuis-cerita-l2-gajah-kupu-roti',
+                'icon_emoji' => '🐘',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Cerita: "Gajah besar menyemprotkan air dengan belalainya." Di mana gajah mandi?',
+                        'audio' => 'Di mana gajah mandi dalam cerita?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '🌊', 'text' => 'Di sungai yang jernih dan segar', 'is_correct' => true],
+                            ['emoji' => '🏠', 'text' => 'Di dalam kamar tidur', 'is_correct' => false],
+                            ['emoji' => '🚗', 'text' => 'Di dalam mobil', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Dengan apa gajah menyemprotkan air segar ke punggungnya?',
+                        'audio' => 'Dengan apa gajah menyemprotkan air segar ke punggungnya?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '🐘', 'text' => 'Dengan belalai panjangnya', 'is_correct' => true],
+                            ['emoji' => '🪣', 'text' => 'Dengan gayung plastik', 'is_correct' => false],
+                            ['emoji' => '🥄', 'text' => 'Dengan sendok makan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Kupu-kupu bersayap kuning hinggap di atas bunga melati." Apa yang diisap kupu-kupu?',
+                        'audio' => 'Apa yang diisap kupu-kupu di atas bunga melati?',
+                        'emoji' => '🦋',
+                        'options' => [
+                            ['emoji' => '🍯', 'text' => 'Madu manis bunga (nektar)', 'is_correct' => true],
+                            ['emoji' => '🌶️', 'text' => 'Cabai pedas', 'is_correct' => false],
+                            ['emoji' => '🧂', 'text' => 'Garam asin', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Ibu menyiapkan roti panggang dan susu cokelat hangat." Kapan mereka sarapan?',
+                        'audio' => 'Kapan keluarga menikmati roti panggang dan susu cokelat?',
+                        'emoji' => '🍞',
+                        'options' => [
+                            ['emoji' => '🌅', 'text' => 'Di pagi hari saat sarapan', 'is_correct' => true],
+                            ['emoji' => '🌙', 'text' => 'Di tengah malam saat tidur', 'is_correct' => false],
+                            ['emoji' => '⏰', 'text' => 'Hanya setahun sekali', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana suasana keluarga saat menikmati sarapan pagi bersama?',
+                        'audio' => 'Bagaimana suasana keluarga saat menikmati sarapan pagi bersama?',
+                        'emoji' => '👨‍👩‍👧',
+                        'options' => [
+                            ['emoji' => '😊', 'text' => 'Hangat, rukun, dan gembira', 'is_correct' => true],
+                            ['emoji' => '😡', 'text' => 'Marah-marah dan bertengkar', 'is_correct' => false],
+                            ['emoji' => '😭', 'text' => 'Menangis ketakutan', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'cerita-pendek',
+                'level_number' => 2,
+                'title' => 'Memahami Cerita: Menanam Pohon & Sahabat Sejati',
+                'slug' => 'kuis-cerita-l2-tanam-pohon-sahabat',
+                'icon_emoji' => '🌱',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Cerita: "Ayah dan Doni menanam bibit pohon mangga di halaman." Mengapa mereka menanam pohon?',
+                        'audio' => 'Mengapa Ayah dan Doni menanam pohon di halaman?',
+                        'emoji' => '🌱',
+                        'options' => [
+                            ['emoji' => '🌳', 'text' => 'Agar halaman rindang, sejuk, dan menghasilkan buah lebat', 'is_correct' => true],
+                            ['emoji' => '🗑️', 'text' => 'Biar halaman jadi kotor', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tanpa tujuan sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang harus dilakukan agar bibit pohon tumbuh subur dan besar?',
+                        'audio' => 'Apa yang harus dilakukan agar bibit pohon tumbuh subur dan besar?',
+                        'emoji' => '💧',
+                        'options' => [
+                            ['emoji' => '💧', 'text' => 'Disiram air dan dirawat secara teratur', 'is_correct' => true],
+                            ['emoji' => '✂️', 'text' => 'Dipotong-potong sampai habis', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Dibiarkan kering tanpa air', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Ketika Rani terjatuh di taman, Nina segera membantu berdiri." Sikap baik apa yang ditunjukkan Nina?',
+                        'audio' => 'Sikap baik apa yang ditunjukkan Nina kepada Rani?',
+                        'emoji' => '🤝',
+                        'options' => [
+                            ['emoji' => '🤝', 'text' => 'Suka tolong-menolong dan peduli teman', 'is_correct' => true],
+                            ['emoji' => '😆', 'text' => 'Menertawakan teman yang jatuh', 'is_correct' => false],
+                            ['emoji' => '🏃', 'text' => 'Meninggalkan teman sendirian', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana perasaan teman kita jika kita tolong saat mereka sedang kesusahan?',
+                        'audio' => 'Bagaimana perasaan teman kita jika kita tolong saat mereka sedang kesusahan?',
+                        'emoji' => '❤️',
+                        'options' => [
+                            ['emoji' => '❤️', 'text' => 'Merasa senang, tenang, dan bersyukur', 'is_correct' => true],
+                            ['emoji' => '😡', 'text' => 'Marah besar', 'is_correct' => false],
+                            ['emoji' => '😭', 'text' => 'Kecewa', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa sebutan yang tepat untuk dua orang teman yang saling menyayangi dan membantu?',
+                        'audio' => 'Apa sebutan yang tepat untuk dua orang teman yang saling menyayangi dan membantu?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Sahabat Sejati yang Rukun', 'is_correct' => true],
+                            ['emoji' => '🥊', 'text' => 'Musuh bebuyutan', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Orang yang tidak kenal', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (MEMBACA BUKU, KERJA BAKTI, BERBAGI, BERKEMAH, JUARA & GRAND MASTER) ---
+            [
+                'category_slug' => 'cerita-pendek',
+                'level_number' => 3,
+                'title' => 'Memahami Cerita: Gemar Membaca, Bersih Rumah & Berbagi Bekal',
+                'slug' => 'kuis-cerita-l3-membaca-bersih-berbagi',
+                'icon_emoji' => '📚',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Cerita: "Dika sangat suka membaca buku cerita di perpustakaan." Di mana Dika membaca buku?',
+                        'audio' => 'Di mana Dika suka membaca buku cerita?',
+                        'emoji' => '📚',
+                        'options' => [
+                            ['emoji' => '📚', 'text' => 'Di perpustakaan yang tenang', 'is_correct' => true],
+                            ['emoji' => '🚗', 'text' => 'Di jalan raya yang ramai', 'is_correct' => false],
+                            ['emoji' => '🏊', 'text' => 'Di kolam renang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa membaca buku disebut sebagai "jendela ilmu pengetahuan dunia"?',
+                        'audio' => 'Mengapa membaca buku disebut sebagai jendela ilmu pengetahuan dunia?',
+                        'emoji' => '🌍',
+                        'options' => [
+                            ['emoji' => '🌍', 'text' => 'Karena membaca memberi kita wawasan, pengetahuan, dan hal baru', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Biar kita cepat mengantuk', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Hanya istilah tanpa arti', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Hari Minggu keluarga bekerja bakti membersihkan rumah." Apa yang dilakukan keluarga?',
+                        'audio' => 'Apa yang dilakukan keluarga di hari Minggu?',
+                        'emoji' => '🧹',
+                        'options' => [
+                            ['emoji' => '🧹', 'text' => 'Kerja bakti membersihkan rumah bersama', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Tidur seharian tanpa bergerak', 'is_correct' => false],
+                            ['emoji' => '📺', 'text' => 'Menonton TV terus menerus', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa manfaat jika rumah selalu dirawat bersih, rapi, dan harum?',
+                        'audio' => 'Apa manfaat jika rumah selalu dirawat bersih, rapi, dan harum?',
+                        'emoji' => '🏠',
+                        'options' => [
+                            ['emoji' => '🏠', 'text' => 'Semua anggota keluarga menjadi sehat, nyaman, dan bahagia', 'is_correct' => true],
+                            ['emoji' => '🦟', 'text' => 'Banyak nyamuk dan kuman datang', 'is_correct' => false],
+                            ['emoji' => '🗑️', 'text' => 'Rumah jadi bau sampah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana cara anak pintar membantu orang tua merapikan rumah?',
+                        'audio' => 'Bagaimana cara anak pintar membantu orang tua merapikan rumah?',
+                        'emoji' => '🧸',
+                        'options' => [
+                            ['emoji' => '🧸', 'text' => 'Merapikan mainan sendiri dan membuang sampah pada tempatnya', 'is_correct' => true],
+                            ['emoji' => '💥', 'text' => 'Menghamburkan mainan ke seluruh lantai', 'is_correct' => false],
+                            ['emoji' => '🎨', 'text' => 'Mencoret-coret tembok rumah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Saat jam istirahat, Ali membagi kue bolunya kepada teman." Apa yang dilakukan Ali?',
+                        'audio' => 'Apa yang dilakukan Ali saat jam istirahat sekolah?',
+                        'emoji' => '🍲',
+                        'options' => [
+                            ['emoji' => '🍲', 'text' => 'Berbagi bekal kue lezat dengan sahabatnya', 'is_correct' => true],
+                            ['emoji' => '😋', 'text' => 'Makan sendirian sambil sembunyi', 'is_correct' => false],
+                            ['emoji' => '🗑️', 'text' => 'Membuang kuenya ke tempat sampah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana perasaan orang yang suka berbagi dengan sesama teman?',
+                        'audio' => 'Bagaimana perasaan orang yang suka berbagi dengan sesama teman?',
+                        'emoji' => '❤️',
+                        'options' => [
+                            ['emoji' => '❤️', 'text' => 'Hati merasa senang, lapang, dan bahagia', 'is_correct' => true],
+                            ['emoji' => '😡', 'text' => 'Merasa rugi dan kesal', 'is_correct' => false],
+                            ['emoji' => '😭', 'text' => 'Menangis sedih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa ungkapan mutiara yang menggambarkan kebiasaan suka memberi makanan pada teman?',
+                        'audio' => 'Apa ungkapan mutiara yang menggambarkan kebiasaan suka memberi makanan pada teman?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '✨', 'text' => '"Berbagi itu Indah dan Penuh Berkah"', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => '"Makan sendiri lebih kenyang"', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => '"Jangan pernah menolong siapa pun"', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika ada teman di kelas yang tidak membawa pensil, apa yang sebaiknya kita lakukan?',
+                        'audio' => 'Jika ada teman di kelas yang tidak membawa pensil apa yang sebaiknya kita lakukan?',
+                        'emoji' => '✏️',
+                        'options' => [
+                            ['emoji' => '✏️', 'text' => 'Meminjamkan pensil cadangan kita dengan ramah', 'is_correct' => true],
+                            ['emoji' => '😆', 'text' => 'Mengejeknya di depan kelas', 'is_correct' => false],
+                            ['emoji' => '🙈', 'text' => 'Pura-pura tidak melihat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Nilai budi pekerti apa yang kita pelajari dari ketiga cerita di atas?',
+                        'audio' => 'Nilai budi pekerti apa yang kita pelajari dari cerita di atas?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => 'Rajin belajar, menjaga kebersihan, dan suka tolong-menolong', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Malas belajar dan suka bertengkar', 'is_correct' => false],
+                            ['emoji' => '🎮', 'text' => 'Hanya bermain game tanpa henti', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'cerita-pendek',
+                'level_number' => 3,
+                'title' => 'Memahami Cerita: Berkemah di Danau & Juara Berbudi',
+                'slug' => 'kuis-cerita-l3-kemah-juara-berbudi',
+                'icon_emoji' => '🏕️',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Cerita: "Keluarga mendirikan tenda kemah di tepi danau." Di mana keluarga berkemah?',
+                        'audio' => 'Di mana keluarga berkemah dalam cerita?',
+                        'emoji' => '🏕️',
+                        'options' => [
+                            ['emoji' => '🏕️', 'text' => 'Di tepi danau alam yang indah', 'is_correct' => true],
+                            ['emoji' => '🏢', 'text' => 'Di dalam gedung perkantoran', 'is_correct' => false],
+                            ['emoji' => '🚗', 'text' => 'Di atas atap mobil', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang dilihat keluarga di langit pada malam hari saat berkemah?',
+                        'audio' => 'Apa yang dilihat keluarga di langit pada malam hari saat berkemah?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            ['emoji' => '⭐', 'text' => 'Ribuan bintang gemerlap dan bulan yang indah', 'is_correct' => true],
+                            ['emoji' => '☀️', 'text' => 'Matahari siang hari yang terik', 'is_correct' => false],
+                            ['emoji' => '🌫️', 'text' => 'Asap hitam tebal', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana cara kita menjaga kebersihan saat berwisata atau berkemah di alam terbuka?',
+                        'audio' => 'Bagaimana cara kita menjaga kebersihan saat berwisata di alam terbuka?',
+                        'emoji' => '🗑️',
+                        'options' => [
+                            ['emoji' => '🗑️', 'text' => 'Mengumpulkan kembali sampah dan membuangnya ke tempat sampah', 'is_correct' => true],
+                            ['emoji' => '🌊', 'text' => 'Membuang plastik ke dalam danau', 'is_correct' => false],
+                            ['emoji' => '🔥', 'text' => 'Membakar sampah sembarangan di hutan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Cerita: "Anak yang rajin belajar, selalu jujur, dan berbakti akan disayangi semua orang." Siapakah yang menyayanginya?',
+                        'audio' => 'Siapakah yang menyayangi anak yang berbudi pekerti luhur?',
+                        'emoji' => '👨‍👩‍👧',
+                        'options' => [
+                            ['emoji' => '👨‍👩‍👧', 'text' => 'Orang tua, guru, teman, dan semua orang di sekitarnya', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Tidak ada yang suka', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Hanya bantal guling', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa berkata jujur adalah sifat yang sangat mulia bagi anak hebat?',
+                        'audio' => 'Mengapa berkata jujur adalah sifat yang sangat mulia bagi anak hebat?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena kejujuran membuat kita dipercaya, dihormati, dan hati tenang', 'is_correct' => true],
+                            ['emoji' => '🙈', 'text' => 'Biar bisa menipu orang lain', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Jujur tidak ada manfaatnya', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana cara anak yang berbakti memperlakukan ayah dan ibunya di rumah?',
+                        'audio' => 'Bagaimana cara anak yang berbakti memperlakukan ayah dan ibunya di rumah?',
+                        'emoji' => '❤️',
+                        'options' => [
+                            ['emoji' => '❤️', 'text' => 'Mendengarkan nasehat, bertutur kata sopan, dan suka membantu', 'is_correct' => true],
+                            ['emoji' => '😡', 'text' => 'Membantah dan berteriak marah', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Mengabaikan panggilan orang tua', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika kita berbuat kesalahan tanpa sengaja, apa kata ajaib yang harus kita ucapkan?',
+                        'audio' => 'Jika kita berbuat kesalahan apa kata ajaib yang harus kita ucapkan?',
+                        'emoji' => '🙏',
+                        'options' => [
+                            ['emoji' => '🙏', 'text' => '"Maafkan saya"', 'is_correct' => true],
+                            ['emoji' => '😝', 'text' => '"Bukan urusan saya"', 'is_correct' => false],
+                            ['emoji' => '🏃', 'text' => 'Langsung kabur melarikan diri', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika kita menerima bantuan atau hadiah dari orang lain, apa kata ajaib yang kita sampaikan?',
+                        'audio' => 'Jika menerima bantuan atau hadiah apa kata ajaib yang kita sampaikan?',
+                        'emoji' => '🎁',
+                        'options' => [
+                            ['emoji' => '🎁', 'text' => '"Terima kasih banyak"', 'is_correct' => true],
+                            ['emoji' => '😒', 'text' => '"Kurang banyak hadiahnya"', 'is_correct' => false],
+                            ['emoji' => '🤐', 'text' => 'Diam saja cemberut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika kita ingin meminta tolong kepada teman atau guru, kata santun apa yang kita gunakan?',
+                        'audio' => 'Kata santun apa yang kita gunakan saat meminta tolong?',
+                        'emoji' => '🤝',
+                        'options' => [
+                            ['emoji' => '🤝', 'text' => '"Tolong bantu saya, ya"', 'is_correct' => true],
+                            ['emoji' => '😡', 'text' => '"Cepat kerjakan untukku!"', 'is_correct' => false],
+                            ['emoji' => '👎', 'text' => '"Hei kamu sini!"', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa hadiah terindah bagi anak yang tekun belajar dan berbudi pekerti baik?',
+                        'audio' => 'Apa hadiah terindah bagi anak yang tekun belajar dan berbudi pekerti baik?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => 'Masa depan yang cerah, ilmu yang bermanfaat, dan kebahagiaan sejati', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Waktu tidur seharian', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu karang yang keras', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'cerita-pendek',
+                'level_number' => 3,
+                'title' => 'Grand Champion Pemahaman Cerita & Bintang Literasi Cilik',
+                'slug' => 'kuis-cerita-l3-grand-master-literasi',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Siapakah tokoh anak yang suka makan buah apel merah renyah?',
+                        'audio' => 'Siapakah tokoh anak yang suka makan buah apel merah renyah?',
                         'emoji' => '🍎',
                         'options' => [
                             ['emoji' => '👦', 'text' => 'Budi', 'is_correct' => true],
-                            ['emoji' => '🐱', 'text' => 'Kucing', 'is_correct' => false],
+                            ['emoji' => '👧', 'text' => 'Siti', 'is_correct' => false],
+                            ['emoji' => '👦', 'text' => 'Dika', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan apa yang minum susu hangat lalu tidur pulas di sofa?',
+                        'audio' => 'Hewan apa yang minum susu hangat lalu tidur pulas di sofa?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            ['emoji' => '🐱', 'text' => 'Kucing Putih yang Lucu', 'is_correct' => true],
+                            ['emoji' => '🐶', 'text' => 'Anjing', 'is_correct' => false],
                             ['emoji' => '🐰', 'text' => 'Kelinci', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Cerita: "Kucing putih minum susu hangat." Apa yang diminum kucing?',
-                        'audio' => 'Cerita: Kucing putih minum susu hangat. Apa yang diminum kucing?',
-                        'emoji' => '🥛',
+                        'text' => 'Siapakah anak yang rajin menyiram bunga mawar di kebunnya setiap sore?',
+                        'audio' => 'Siapakah anak yang rajin menyiram bunga mawar di kebunnya setiap sore?',
+                        'emoji' => '🌸',
                         'options' => [
-                            ['emoji' => '🧃', 'text' => 'Jus Buah', 'is_correct' => false],
-                            ['emoji' => '🥛', 'text' => 'Susu Hangat', 'is_correct' => true],
-                            ['emoji' => '☕', 'text' => 'Teh Manis', 'is_correct' => false],
+                            ['emoji' => '👧', 'text' => 'Siti', 'is_correct' => true],
+                            ['emoji' => '👦', 'text' => 'Ali', 'is_correct' => false],
+                            ['emoji' => '👦', 'text' => 'Doni', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Siapakah anak yang mencetak gol kemenangan saat bermain sepak bola di lapangan?',
+                        'audio' => 'Siapakah anak yang mencetak gol kemenangan saat bermain sepak bola di lapangan?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            ['emoji' => '👦', 'text' => 'Ali', 'is_correct' => true],
+                            ['emoji' => '👦', 'text' => 'Beni', 'is_correct' => false],
+                            ['emoji' => '👦', 'text' => 'Dika', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Siapakah anak yang rajin mencuci tangan dengan sabun sebelum makan?',
+                        'audio' => 'Siapakah anak yang rajin mencuci tangan dengan sabun sebelum makan?',
+                        'emoji' => '🧼',
+                        'options' => [
+                            ['emoji' => '👧', 'text' => 'Rina', 'is_correct' => true],
+                            ['emoji' => '👧', 'text' => 'Nina', 'is_correct' => false],
+                            ['emoji' => '👧', 'text' => 'Rani', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Siapakah anak yang selalu menggosok gigi sebelum tidur malam agar giginya sehat?',
+                        'audio' => 'Siapakah anak yang selalu menggosok gigi sebelum tidur malam agar giginya sehat?',
+                        'emoji' => '🦷',
+                        'options' => [
+                            ['emoji' => '👦', 'text' => 'Beni', 'is_correct' => true],
+                            ['emoji' => '👦', 'text' => 'Budi', 'is_correct' => false],
+                            ['emoji' => '👦', 'text' => 'Doni', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Siapakah anak yang menanam bibit pohon mangga bersama ayah di halaman rumah?',
+                        'audio' => 'Siapakah anak yang menanam bibit pohon mangga bersama ayah di halaman rumah?',
+                        'emoji' => '🌱',
+                        'options' => [
+                            ['emoji' => '👦', 'text' => 'Doni', 'is_correct' => true],
+                            ['emoji' => '👦', 'text' => 'Ali', 'is_correct' => false],
+                            ['emoji' => '👦', 'text' => 'Dika', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Siapakah sahabat baik yang menolong Rani saat terjatuh di taman bermain?',
+                        'audio' => 'Siapakah sahabat baik yang menolong Rani saat terjatuh di taman bermain?',
+                        'emoji' => '🤝',
+                        'options' => [
+                            ['emoji' => '👧', 'text' => 'Nina', 'is_correct' => true],
+                            ['emoji' => '👧', 'text' => 'Siti', 'is_correct' => false],
+                            ['emoji' => '👧', 'text' => 'Rina', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Siapakah anak yang gemar membaca buku cerita di perpustakaan?',
+                        'audio' => 'Siapakah anak yang gemar membaca buku cerita di perpustakaan?',
+                        'emoji' => '📚',
+                        'options' => [
+                            ['emoji' => '👦', 'text' => 'Dika', 'is_correct' => true],
+                            ['emoji' => '👦', 'text' => 'Budi', 'is_correct' => false],
+                            ['emoji' => '👦', 'text' => 'Beni', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar kehormatan apakah yang pantas disematkan untuk anak yang gemar membaca dan memahami cerita?',
+                        'audio' => 'Gelar kehormatan apakah yang pantas disematkan untuk anak yang gemar membaca dan memahami cerita?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Grand Champion Bintang Literasi & Sahabat Cerita Cilik!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Malas Mendengarkan Dongeng', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Patung Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
