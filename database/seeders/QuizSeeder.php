@@ -1345,43 +1345,665 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 1 - TOPIK 3: HURUF HIJAIYAH CILIK (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (HURUF ALIF - RO) ---
             [
                 'category_slug' => 'hijaiyah',
-                'title' => 'Tebak Huruf Hijaiyah Cilik',
-                'slug' => 'tebak-hijaiyah',
+                'level_number' => 1,
+                'title' => 'Tebak Huruf Alif, Ba, Ta Cilik',
+                'slug' => 'kuis-hijaiyah-l1-alif-ba-ta',
                 'icon_emoji' => '🌙',
-                'target_age' => 4,
+                'target_age' => 3,
                 'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Huruf hijaiyah pertama yang berdiri lurus tegak adalah?',
-                        'audio' => 'Huruf hijaiyah pertama yang berdiri lurus tegak adalah?',
+                        'text' => 'Huruf hijaiyah pertama yang berdiri tegak lurus adalah...?',
+                        'audio' => 'Huruf hijaiyah pertama yang berdiri tegak lurus adalah apa?',
                         'emoji' => '🌙',
                         'options' => [
-                            ['emoji' => 'ا', 'text' => 'Alif (ا)', 'is_correct' => true],
-                            ['emoji' => 'ب', 'text' => 'Ba (ب)', 'is_correct' => false],
-                            ['emoji' => 'ت', 'text' => 'Ta (ت)', 'is_correct' => false],
+                            ['emoji' => '🌙', 'text' => 'Huruf Alif (ا)', 'is_correct' => true],
+                            ['emoji' => '⛵', 'text' => 'Huruf Ba (ب)', 'is_correct' => false],
+                            ['emoji' => '🍎', 'text' => 'Huruf Ta (ت)', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Manakah huruf hijaiyah yang memiliki satu titik di bawah perahu?',
-                        'audio' => 'Manakah huruf hijaiyah yang memiliki satu titik di bawah perahu?',
+                        'text' => 'Huruf hijaiyah berbentuk perahu dengan SATU titik di BAWAH adalah...?',
+                        'audio' => 'Huruf hijaiyah berbentuk perahu dengan satu titik di bawah adalah apa?',
                         'emoji' => '⛵',
                         'options' => [
-                            ['emoji' => 'ت', 'text' => 'Ta (ت)', 'is_correct' => false],
-                            ['emoji' => 'ب', 'text' => 'Ba (ب)', 'is_correct' => true],
-                            ['emoji' => 'ث', 'text' => 'Tsa (ث)', 'is_correct' => false],
+                            ['emoji' => '⛵', 'text' => 'Huruf Ba (ب)', 'is_correct' => true],
+                            ['emoji' => '🍎', 'text' => 'Huruf Ta (ت)', 'is_correct' => false],
+                            ['emoji' => '✨', 'text' => 'Huruf Tsa (ث)', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Manakah huruf Ta yang memiliki dua titik di atasnya?',
-                        'audio' => 'Manakah huruf Ta yang memiliki dua titik di atasnya?',
+                        'text' => 'Huruf hijaiyah tersenyum dengan DUA titik ceria di ATAS adalah...?',
+                        'audio' => 'Huruf hijaiyah tersenyum dengan dua titik ceria di atas adalah apa?',
                         'emoji' => '🍎',
                         'options' => [
-                            ['emoji' => 'ت', 'text' => 'Ta (ت)', 'is_correct' => true],
-                            ['emoji' => 'ج', 'text' => 'Jim (ج)', 'is_correct' => false],
-                            ['emoji' => 'ا', 'text' => 'Alif (ا)', 'is_correct' => false],
+                            ['emoji' => '🍎', 'text' => 'Huruf Ta (ت)', 'is_correct' => true],
+                            ['emoji' => '⛵', 'text' => 'Huruf Ba (ب)', 'is_correct' => false],
+                            ['emoji' => '🌙', 'text' => 'Huruf Alif (ا)', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hijaiyah',
+                'level_number' => 1,
+                'title' => 'Tebak Huruf Tsa, Jim, Ha Ceria',
+                'slug' => 'kuis-hijaiyah-l1-tsa-jim-ha',
+                'icon_emoji' => '🐪',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Huruf hijaiyah bermahkota TIGA titik bintang di atasnya adalah...?',
+                        'audio' => 'Huruf hijaiyah bermahkota tiga titik bintang di atasnya adalah apa?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '✨', 'text' => 'Huruf Tsa (ث)', 'is_correct' => true],
+                            ['emoji' => '🍎', 'text' => 'Huruf Ta (ت)', 'is_correct' => false],
+                            ['emoji' => '⛵', 'text' => 'Huruf Ba (ب)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf hijaiyah berperut buncit dengan SATU titik di TENGAH perutnya adalah...?',
+                        'audio' => 'Huruf hijaiyah berperut buncit dengan satu titik di tengah perutnya adalah apa?',
+                        'emoji' => '🐪',
+                        'options' => [
+                            ['emoji' => '🐪', 'text' => 'Huruf Jim (ج)', 'is_correct' => true],
+                            ['emoji' => '🕊️', 'text' => 'Huruf Ha (ح)', 'is_correct' => false],
+                            ['emoji' => '🥒', 'text' => 'Huruf Kho (خ)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf hijaiyah yang bentuknya mirip Jim namun BERSIH tanpa titik adalah...?',
+                        'audio' => 'Huruf hijaiyah yang bentuknya mirip Jim namun bersih tanpa titik adalah apa?',
+                        'emoji' => '🕊️',
+                        'options' => [
+                            ['emoji' => '🕊️', 'text' => 'Huruf Ha (ح)', 'is_correct' => true],
+                            ['emoji' => '🐪', 'text' => 'Huruf Jim (ج)', 'is_correct' => false],
+                            ['emoji' => '🥒', 'text' => 'Huruf Kho (خ)', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hijaiyah',
+                'level_number' => 1,
+                'title' => 'Petualangan Huruf Kho, Dal, Dzal, Ro',
+                'slug' => 'kuis-hijaiyah-l1-kho-dal-ro',
+                'icon_emoji' => '🛝',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Huruf melengkung dengan SATU titik mahkota di ATAS KEPALA adalah...?',
+                        'audio' => 'Huruf melengkung dengan satu titik mahkota di atas kepala adalah apa?',
+                        'emoji' => '🥒',
+                        'options' => [
+                            ['emoji' => '🥒', 'text' => 'Huruf Kho (خ)', 'is_correct' => true],
+                            ['emoji' => '🕊️', 'text' => 'Huruf Ha (ح)', 'is_correct' => false],
+                            ['emoji' => '🐪', 'text' => 'Huruf Jim (ج)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf melengkung membuka ke kiri tanpa titik adalah...?',
+                        'audio' => 'Huruf melengkung membuka ke kiri tanpa titik adalah apa?',
+                        'emoji' => '🐓',
+                        'options' => [
+                            ['emoji' => '🐓', 'text' => 'Huruf Dal (د)', 'is_correct' => true],
+                            ['emoji' => '🐺', 'text' => 'Huruf Dzal (ذ)', 'is_correct' => false],
+                            ['emoji' => '🛝', 'text' => 'Huruf Ro (ر)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf yang meluncur ke bawah seperti papan seluncuran adalah...?',
+                        'audio' => 'Huruf yang meluncur ke bawah seperti papan seluncuran adalah apa?',
+                        'emoji' => '🛝',
+                        'options' => [
+                            ['emoji' => '🛝', 'text' => 'Huruf Ro (ر)', 'is_correct' => true],
+                            ['emoji' => '🐓', 'text' => 'Huruf Dal (د)', 'is_correct' => false],
+                            ['emoji' => '🌙', 'text' => 'Huruf Alif (ا)', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (HURUF ZAI - FA) ---
+            [
+                'category_slug' => 'hijaiyah',
+                'level_number' => 2,
+                'title' => 'Tantangan Huruf Zai, Sin, Syin',
+                'slug' => 'kuis-hijaiyah-l2-zai-sin-syin',
+                'icon_emoji' => '🐟',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Huruf meluncur mirip Ro yang memiliki SATU titik di atasnya adalah...?',
+                        'audio' => 'Huruf meluncur mirip Ro yang memiliki satu titik di atasnya adalah apa?',
+                        'emoji' => '🌸',
+                        'options' => [
+                            ['emoji' => '🌸', 'text' => 'Huruf Zai (ز)', 'is_correct' => true],
+                            ['emoji' => '🛝', 'text' => 'Huruf Ro (ر)', 'is_correct' => false],
+                            ['emoji' => '🐺', 'text' => 'Huruf Dzal (ذ)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf bertiga gigi rapi tanpa titik adalah...?',
+                        'audio' => 'Huruf bertiga gigi rapi tanpa titik adalah apa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '🐟', 'text' => 'Huruf Sin (س)', 'is_correct' => true],
+                            ['emoji' => '☀️', 'text' => 'Huruf Syin (ش)', 'is_correct' => false],
+                            ['emoji' => '🦅', 'text' => 'Huruf Shod (ص)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf bergigi tiga dengan TIGA titik bintang di atasnya adalah...?',
+                        'audio' => 'Huruf bergigi tiga dengan tiga titik bintang di atasnya adalah apa?',
+                        'emoji' => '☀️',
+                        'options' => [
+                            ['emoji' => '☀️', 'text' => 'Huruf Syin (ش)', 'is_correct' => true],
+                            ['emoji' => '🐟', 'text' => 'Huruf Sin (س)', 'is_correct' => false],
+                            ['emoji' => '✨', 'text' => 'Huruf Tsa (ث)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf hijaiyah untuk kata ikan (Samakun 🐟) adalah...?',
+                        'audio' => 'Huruf hijaiyah untuk kata ikan adalah apa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '🐟', 'text' => 'Huruf Sin (س)', 'is_correct' => true],
+                            ['emoji' => '🌸', 'text' => 'Huruf Zai (ز)', 'is_correct' => false],
+                            ['emoji' => '🛝', 'text' => 'Huruf Ro (ر)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf hijaiyah untuk kata matahari cerah (Syamsun ☀️) adalah...?',
+                        'audio' => 'Huruf hijaiyah untuk kata matahari cerah adalah apa?',
+                        'emoji' => '☀️',
+                        'options' => [
+                            ['emoji' => '☀️', 'text' => 'Huruf Syin (ش)', 'is_correct' => true],
+                            ['emoji' => '🐟', 'text' => 'Huruf Sin (س)', 'is_correct' => false],
+                            ['emoji' => '🌙', 'text' => 'Huruf Alif (ا)', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hijaiyah',
+                'level_number' => 2,
+                'title' => 'Mengenal Huruf Shod, Dhod, Tho, Zho',
+                'slug' => 'kuis-hijaiyah-l2-shod-dhod-tho-zho',
+                'icon_emoji' => '🦅',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Huruf tebal dengan kepala bundar dan mangkok tanpa titik adalah...?',
+                        'audio' => 'Huruf tebal dengan kepala bundar dan mangkok tanpa titik adalah apa?',
+                        'emoji' => '🦅',
+                        'options' => [
+                            ['emoji' => '🦅', 'text' => 'Huruf Shod (ص)', 'is_correct' => true],
+                            ['emoji' => '🐸', 'text' => 'Huruf Dhod (ض)', 'is_correct' => false],
+                            ['emoji' => '🐟', 'text' => 'Huruf Sin (س)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf mirip Shod yang memiliki SATU titik mahkota di atasnya adalah...?',
+                        'audio' => 'Huruf mirip Shod yang memiliki satu titik mahkota di atasnya adalah apa?',
+                        'emoji' => '🐸',
+                        'options' => [
+                            ['emoji' => '🐸', 'text' => 'Huruf Dhod (ض)', 'is_correct' => true],
+                            ['emoji' => '🦅', 'text' => 'Huruf Shod (ص)', 'is_correct' => false],
+                            ['emoji' => '☀️', 'text' => 'Huruf Syin (ش)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf bertiang tegak lurus di atas lengkungan tanpa titik adalah...?',
+                        'audio' => 'Huruf bertiang tegak lurus di atas lengkungan tanpa titik adalah apa?',
+                        'emoji' => '✈️',
+                        'options' => [
+                            ['emoji' => '✈️', 'text' => 'Huruf Tho (ط)', 'is_correct' => true],
+                            ['emoji' => '🦌', 'text' => 'Huruf Zho (ظ)', 'is_correct' => false],
+                            ['emoji' => '🦅', 'text' => 'Huruf Shod (ص)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf bertiang tegak yang memiliki SATU titik di atasnya adalah...?',
+                        'audio' => 'Huruf bertiang tegak yang memiliki satu titik di atasnya adalah apa?',
+                        'emoji' => '🦌',
+                        'options' => [
+                            ['emoji' => '🦌', 'text' => 'Huruf Zho (ظ)', 'is_correct' => true],
+                            ['emoji' => '✈️', 'text' => 'Huruf Tho (ط)', 'is_correct' => false],
+                            ['emoji' => '🐸', 'text' => 'Huruf Dhod (ض)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah pasangan huruf yang sama-sama memiliki tiang tegak lurus?',
+                        'audio' => 'Manakah pasangan huruf yang sama-sama memiliki tiang tegak lurus?',
+                        'emoji' => '✈️',
+                        'options' => [
+                            ['emoji' => '✈️', 'text' => 'Huruf Tho (ط) & Zho (ظ)', 'is_correct' => true],
+                            ['emoji' => '🐟', 'text' => 'Huruf Sin (س) & Syin (ش)', 'is_correct' => false],
+                            ['emoji' => '🐓', 'text' => 'Huruf Dal (د) & Dzal (ذ)', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hijaiyah',
+                'level_number' => 2,
+                'title' => "Eksplorasi Huruf 'Ain, Ghoin, Fa",
+                'slug' => 'kuis-hijaiyah-l2-ain-ghoin-fa',
+                'icon_emoji' => '🍇',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Huruf berkepala kecil dan berperut besar melengkung tanpa titik adalah...?',
+                        'audio' => 'Huruf berkepala kecil dan berperut besar melengkung tanpa titik adalah apa?',
+                        'emoji' => '🍇',
+                        'options' => [
+                            ['emoji' => '🍇', 'text' => "Huruf 'Ain (ع)", 'is_correct' => true],
+                            ['emoji' => '☁️', 'text' => 'Huruf Ghoin (غ)', 'is_correct' => false],
+                            ['emoji' => '🕊️', 'text' => 'Huruf Ha (ح)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => "Huruf mirip 'Ain yang memiliki SATU titik di atas kepalanya adalah...?",
+                        'audio' => "Huruf mirip 'Ain yang memiliki satu titik di atas kepalanya adalah apa?",
+                        'emoji' => '☁️',
+                        'options' => [
+                            ['emoji' => '☁️', 'text' => 'Huruf Ghoin (غ)', 'is_correct' => true],
+                            ['emoji' => '🍇', 'text' => "Huruf 'Ain (ع)", 'is_correct' => false],
+                            ['emoji' => '🥒', 'text' => 'Huruf Kho (خ)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf berkepala bundar dengan mangkok datar dan SATU titik di atas adalah...?',
+                        'audio' => 'Huruf berkepala bundar dengan mangkok datar dan satu titik di atas adalah apa?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '🐘', 'text' => 'Huruf Fa (ف)', 'is_correct' => true],
+                            ['emoji' => '🏹', 'text' => 'Huruf Qof (ق)', 'is_correct' => false],
+                            ['emoji' => '⛵', 'text' => 'Huruf Ba (ب)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf hijaiyah untuk kata gajah besar (Fiilun 🐘) adalah...?',
+                        'audio' => 'Huruf hijaiyah untuk kata gajah besar adalah apa?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '🐘', 'text' => 'Huruf Fa (ف)', 'is_correct' => true],
+                            ['emoji' => '🍇', 'text' => "Huruf 'Ain (ع)", 'is_correct' => false],
+                            ['emoji' => '☁️', 'text' => 'Huruf Ghoin (غ)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => "Huruf hijaiyah untuk kata buah anggur manis ('Inabun 🍇) adalah...?",
+                        'audio' => 'Huruf hijaiyah untuk kata buah anggur manis adalah apa?',
+                        'emoji' => '🍇',
+                        'options' => [
+                            ['emoji' => '🍇', 'text' => "Huruf 'Ain (ع)", 'is_correct' => true],
+                            ['emoji' => '☁️', 'text' => 'Huruf Ghoin (غ)', 'is_correct' => false],
+                            ['emoji' => '🐘', 'text' => 'Huruf Fa (ف)', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (HURUF QOF - YA & ALIF-YA LENGKAP) ---
+            [
+                'category_slug' => 'hijaiyah',
+                'level_number' => 3,
+                'title' => 'Master Huruf Qof sampai Ya',
+                'slug' => 'kuis-hijaiyah-l3-qof-sampai-ya',
+                'icon_emoji' => '🏹',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Huruf berkepala bulat dengan mangkok dalam dan DUA titik di atas adalah...?',
+                        'audio' => 'Huruf berkepala bulat dengan mangkok dalam dan dua titik di atas adalah apa?',
+                        'emoji' => '🏹',
+                        'options' => [
+                            ['emoji' => '🏹', 'text' => 'Huruf Qof (ق)', 'is_correct' => true],
+                            ['emoji' => '🐘', 'text' => 'Huruf Fa (ف)', 'is_correct' => false],
+                            ['emoji' => '🍎', 'text' => 'Huruf Ta (ت)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf berwadah lebar dengan tanda hamzah kecil di dalamnya adalah...?',
+                        'audio' => 'Huruf berwadah lebar dengan tanda hamzah kecil di dalamnya adalah apa?',
+                        'emoji' => '📖',
+                        'options' => [
+                            ['emoji' => '📖', 'text' => 'Huruf Kaf (ك)', 'is_correct' => true],
+                            ['emoji' => '🍋', 'text' => 'Huruf Lam (ل)', 'is_correct' => false],
+                            ['emoji' => '🏹', 'text' => 'Huruf Qof (ق)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf berbentuk tongkat melengkung indah ke bawah adalah...?',
+                        'audio' => 'Huruf berbentuk tongkat melengkung indah ke bawah adalah apa?',
+                        'emoji' => '🍋',
+                        'options' => [
+                            ['emoji' => '🍋', 'text' => 'Huruf Lam (ل)', 'is_correct' => true],
+                            ['emoji' => '📖', 'text' => 'Huruf Kaf (ك)', 'is_correct' => false],
+                            ['emoji' => '🌙', 'text' => 'Huruf Alif (ا)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf berkepala bulat kecil dengan ekor turun ke bawah adalah...?',
+                        'audio' => 'Huruf berkepala bulat kecil dengan ekor turun ke bawah adalah apa?',
+                        'emoji' => '💧',
+                        'options' => [
+                            ['emoji' => '💧', 'text' => 'Huruf Mim (م)', 'is_correct' => true],
+                            ['emoji' => '🌟', 'text' => 'Huruf Nun (ن)', 'is_correct' => false],
+                            ['emoji' => '🌹', 'text' => 'Huruf Wawu (و)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf berbentuk mangkok bulat dengan SATU titik mutiara di tengahnya adalah...?',
+                        'audio' => 'Huruf berbentuk mangkok bulat dengan satu titik mutiara di tengahnya adalah apa?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Huruf Nun (ن)', 'is_correct' => true],
+                            ['emoji' => '⛵', 'text' => 'Huruf Ba (ب)', 'is_correct' => false],
+                            ['emoji' => '💧', 'text' => 'Huruf Mim (م)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf berkepala melingkar dengan ekor meluncur manis adalah...?',
+                        'audio' => 'Huruf berkepala melingkar dengan ekor meluncur manis adalah apa?',
+                        'emoji' => '🌹',
+                        'options' => [
+                            ['emoji' => '🌹', 'text' => 'Huruf Wawu (و)', 'is_correct' => true],
+                            ['emoji' => '🛝', 'text' => 'Huruf Ro (ر)', 'is_correct' => false],
+                            ['emoji' => '💧', 'text' => 'Huruf Mim (م)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf Ha besar yang berongga bulat melingkar adalah...?',
+                        'audio' => 'Huruf Ha besar yang berongga bulat melingkar adalah apa?',
+                        'emoji' => '🎁',
+                        'options' => [
+                            ['emoji' => '🎁', 'text' => 'Huruf Ha Besar (هـ)', 'is_correct' => true],
+                            ['emoji' => '🕊️', 'text' => 'Huruf Ha Kecil (ح)', 'is_correct' => false],
+                            ['emoji' => '🌹', 'text' => 'Huruf Wawu (و)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf istimewa bergandengan antara huruf Lam dan Alif adalah...?',
+                        'audio' => 'Huruf istimewa bergandengan antara huruf Lam dan Alif adalah apa?',
+                        'emoji' => '🕌',
+                        'options' => [
+                            ['emoji' => '🕌', 'text' => 'Huruf Lam Alif (لا)', 'is_correct' => true],
+                            ['emoji' => '🍋', 'text' => 'Huruf Lam (ل)', 'is_correct' => false],
+                            ['emoji' => '🌙', 'text' => 'Huruf Alif (ا)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => "Huruf mungil pemutus suara seperti kepala 'Ain kecil adalah...?",
+                        'audio' => 'Huruf mungil pemutus suara adalah apa?',
+                        'emoji' => '💎',
+                        'options' => [
+                            ['emoji' => '💎', 'text' => 'Huruf Hamzah (ء)', 'is_correct' => true],
+                            ['emoji' => '🍇', 'text' => "Huruf 'Ain (ع)", 'is_correct' => false],
+                            ['emoji' => '🌙', 'text' => 'Huruf Alif (ا)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf hijaiyah penutup berbadan bebek dengan DUA titik di bawah adalah...?',
+                        'audio' => 'Huruf hijaiyah penutup berbadan bebek dengan dua titik di bawah adalah apa?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            ['emoji' => '🦆', 'text' => 'Huruf Ya (ي)', 'is_correct' => true],
+                            ['emoji' => '⛵', 'text' => 'Huruf Ba (ب)', 'is_correct' => false],
+                            ['emoji' => '🍎', 'text' => 'Huruf Ta (ت)', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hijaiyah',
+                'level_number' => 3,
+                'title' => 'Tantangan Karakteristik Titik & Bentuk Huruf',
+                'slug' => 'kuis-hijaiyah-l3-karakteristik-huruf',
+                'icon_emoji' => '🕌',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok 3 huruf bersaudara yang berbentuk perahu?',
+                        'audio' => 'Manakah kelompok 3 huruf bersaudara yang berbentuk perahu?',
+                        'emoji' => '⛵',
+                        'options' => [
+                            ['emoji' => '⛵', 'text' => 'Ba (ب), Ta (ت), Tsa (ث)', 'is_correct' => true],
+                            ['emoji' => '🐪', 'text' => 'Jim (ج), Ha (ح), Kho (خ)', 'is_correct' => false],
+                            ['emoji' => '🐓', 'text' => 'Dal (د), Dzal (ذ), Ro (ر)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok 3 huruf bersaudara yang memiliki perut melengkung besar?',
+                        'audio' => 'Manakah kelompok 3 huruf bersaudara yang memiliki perut melengkung besar?',
+                        'emoji' => '🐪',
+                        'options' => [
+                            ['emoji' => '🐪', 'text' => 'Jim (ج), Ha (ح), Kho (خ)', 'is_correct' => true],
+                            ['emoji' => '⛵', 'text' => 'Ba (ب), Ta (ت), Tsa (ث)', 'is_correct' => false],
+                            ['emoji' => '🐟', 'text' => 'Sin (س), Syin (ش), Shod (ص)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah 2 huruf hijaiyah yang memiliki TIGA titik di atasnya?',
+                        'audio' => 'Manakah 2 huruf hijaiyah yang memiliki tiga titik di atasnya?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '✨', 'text' => 'Tsa (ث) dan Syin (ش)', 'is_correct' => true],
+                            ['emoji' => '🍎', 'text' => 'Ta (ت) dan Qof (ق)', 'is_correct' => false],
+                            ['emoji' => '⛵', 'text' => 'Ba (ب) dan Nun (ن)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah 2 huruf hijaiyah yang memiliki DUA titik di ATAS badannya?',
+                        'audio' => 'Manakah 2 huruf hijaiyah yang memiliki dua titik di atas badannya?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '🍎', 'text' => 'Ta (ت) dan Qof (ق)', 'is_correct' => true],
+                            ['emoji' => '🦆', 'text' => 'Ta (ت) dan Ya (ي)', 'is_correct' => false],
+                            ['emoji' => '⛵', 'text' => 'Ba (ب) dan Ta (ت)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf hijaiyah manakah yang memiliki DUA titik di BAWAH badannya?',
+                        'audio' => 'Huruf hijaiyah manakah yang memiliki dua titik di bawah badannya?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            ['emoji' => '🦆', 'text' => 'Huruf Ya (ي)', 'is_correct' => true],
+                            ['emoji' => '⛵', 'text' => 'Huruf Ba (ب)', 'is_correct' => false],
+                            ['emoji' => '🍎', 'text' => 'Huruf Ta (ت)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah huruf hijaiyah yang memiliki SATU titik di BAWAH perahunya?',
+                        'audio' => 'Manakah huruf hijaiyah yang memiliki satu titik di bawah perahunya?',
+                        'emoji' => '⛵',
+                        'options' => [
+                            ['emoji' => '⛵', 'text' => 'Huruf Ba (ب)', 'is_correct' => true],
+                            ['emoji' => '🌟', 'text' => 'Huruf Nun (ن)', 'is_correct' => false],
+                            ['emoji' => '🐪', 'text' => 'Huruf Jim (ج)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah huruf hijaiyah yang BERSIH tanpa titik sama sekali?',
+                        'audio' => 'Manakah huruf hijaiyah yang bersih tanpa titik sama sekali?',
+                        'emoji' => '🕊️',
+                        'options' => [
+                            ['emoji' => '🕊️', 'text' => 'Alif (ا), Ha (ح), Dal (د), Ro (ر)', 'is_correct' => true],
+                            ['emoji' => '⛵', 'text' => 'Ba (ب), Ta (ت), Tsa (ث)', 'is_correct' => false],
+                            ['emoji' => '🐪', 'text' => 'Jim (ج), Kho (خ), Zai (ز)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah pasangan huruf yang dibedakan hanya dengan satu titik di atas?',
+                        'audio' => 'Manakah pasangan huruf yang dibedakan hanya dengan satu titik di atas?',
+                        'emoji' => '🐓',
+                        'options' => [
+                            ['emoji' => '🐓', 'text' => 'Dal (د) & Dzal (ذ)', 'is_correct' => true],
+                            ['emoji' => '⛵', 'text' => 'Ba (ب) & Ta (ت)', 'is_correct' => false],
+                            ['emoji' => '🌙', 'text' => 'Alif (ا) & Ba (ب)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf apakah yang memiliki tanda hamzah kecil di bagian dalamnya?',
+                        'audio' => 'Huruf apakah yang memiliki tanda hamzah kecil di bagian dalamnya?',
+                        'emoji' => '📖',
+                        'options' => [
+                            ['emoji' => '📖', 'text' => 'Huruf Kaf (ك)', 'is_correct' => true],
+                            ['emoji' => '🍋', 'text' => 'Huruf Lam (ل)', 'is_correct' => false],
+                            ['emoji' => '🏹', 'text' => 'Huruf Qof (ق)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf apakah yang merupakan perpaduan dua huruf bersahabat?',
+                        'audio' => 'Huruf apakah yang merupakan perpaduan dua huruf bersahabat?',
+                        'emoji' => '🕌',
+                        'options' => [
+                            ['emoji' => '🕌', 'text' => 'Huruf Lam Alif (لا)', 'is_correct' => true],
+                            ['emoji' => '💎', 'text' => 'Huruf Hamzah (ء)', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Huruf Ya (ي)', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hijaiyah',
+                'level_number' => 3,
+                'title' => 'Grand Champion Maestro Hijaiyah Cilik Alif-Ya',
+                'slug' => 'kuis-hijaiyah-l3-grand-master',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Huruf pertama dalam urutan huruf hijaiyah adalah...?',
+                        'audio' => 'Huruf pertama dalam urutan huruf hijaiyah adalah apa?',
+                        'emoji' => '🌙',
+                        'options' => [
+                            ['emoji' => '🌙', 'text' => 'Huruf Alif (ا)', 'is_correct' => true],
+                            ['emoji' => '⛵', 'text' => 'Huruf Ba (ب)', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Huruf Ya (ي)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf terakhir penutup dalam urutan huruf hijaiyah adalah...?',
+                        'audio' => 'Huruf terakhir penutup dalam urutan huruf hijaiyah adalah apa?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            ['emoji' => '🦆', 'text' => 'Huruf Ya (ي)', 'is_correct' => true],
+                            ['emoji' => '🌙', 'text' => 'Huruf Alif (ا)', 'is_correct' => false],
+                            ['emoji' => '🕌', 'text' => 'Huruf Lam Alif (لا)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan dari urutan huruf hijaiyah berikut: Alif (ا), Ba (ب), ... ?',
+                        'audio' => 'Lanjutan dari urutan huruf hijaiyah berikut: Alif, Ba, lalu huruf apa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '🍎', 'text' => 'Huruf Ta (ت)', 'is_correct' => true],
+                            ['emoji' => '✨', 'text' => 'Huruf Tsa (ث)', 'is_correct' => false],
+                            ['emoji' => '🐪', 'text' => 'Huruf Jim (ج)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan dari urutan huruf hijaiyah berikut: Jim (ج), Ha (ح), ... ?',
+                        'audio' => 'Lanjutan dari urutan huruf hijaiyah berikut: Jim, Ha, lalu huruf apa?',
+                        'emoji' => '🥒',
+                        'options' => [
+                            ['emoji' => '🥒', 'text' => 'Huruf Kho (خ)', 'is_correct' => true],
+                            ['emoji' => '🐓', 'text' => 'Huruf Dal (د)', 'is_correct' => false],
+                            ['emoji' => '🛝', 'text' => 'Huruf Ro (ر)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan dari urutan huruf hijaiyah berikut: Dal (د), Dzal (ذ), ... ?',
+                        'audio' => 'Lanjutan dari urutan huruf hijaiyah berikut: Dal, Dzal, lalu huruf apa?',
+                        'emoji' => '🛝',
+                        'options' => [
+                            ['emoji' => '🛝', 'text' => 'Huruf Ro (ر)', 'is_correct' => true],
+                            ['emoji' => '🌸', 'text' => 'Huruf Zai (ز)', 'is_correct' => false],
+                            ['emoji' => '🐟', 'text' => 'Huruf Sin (س)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan dari urutan huruf hijaiyah berikut: Sin (س), Syin (ش), ... ?',
+                        'audio' => 'Lanjutan dari urutan huruf hijaiyah berikut: Sin, Syin, lalu huruf apa?',
+                        'emoji' => '🦅',
+                        'options' => [
+                            ['emoji' => '🦅', 'text' => 'Huruf Shod (ص)', 'is_correct' => true],
+                            ['emoji' => '🐸', 'text' => 'Huruf Dhod (ض)', 'is_correct' => false],
+                            ['emoji' => '✈️', 'text' => 'Huruf Tho (ط)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan dari urutan huruf hijaiyah berikut: Tho (ط), Zho (ظ), ... ?',
+                        'audio' => 'Lanjutan dari urutan huruf hijaiyah berikut: Tho, Zho, lalu huruf apa?',
+                        'emoji' => '🍇',
+                        'options' => [
+                            ['emoji' => '🍇', 'text' => "Huruf 'Ain (ع)", 'is_correct' => true],
+                            ['emoji' => '☁️', 'text' => 'Huruf Ghoin (غ)', 'is_correct' => false],
+                            ['emoji' => '🐘', 'text' => 'Huruf Fa (ف)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan dari urutan huruf hijaiyah berikut: Kaf (ك), Lam (ل), ... ?',
+                        'audio' => 'Lanjutan dari urutan huruf hijaiyah berikut: Kaf, Lam, lalu huruf apa?',
+                        'emoji' => '💧',
+                        'options' => [
+                            ['emoji' => '💧', 'text' => 'Huruf Mim (م)', 'is_correct' => true],
+                            ['emoji' => '🌟', 'text' => 'Huruf Nun (ن)', 'is_correct' => false],
+                            ['emoji' => '🌹', 'text' => 'Huruf Wawu (و)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan dari urutan huruf hijaiyah berikut: Nun (ن), Wawu (و), ... ?',
+                        'audio' => 'Lanjutan dari urutan huruf hijaiyah berikut: Nun, Wawu, lalu huruf apa?',
+                        'emoji' => '🎁',
+                        'options' => [
+                            ['emoji' => '🎁', 'text' => 'Huruf Ha Besar (هـ)', 'is_correct' => true],
+                            ['emoji' => '🕌', 'text' => 'Huruf Lam Alif (لا)', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Huruf Ya (ي)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar hebat apakah untuk anak pintar yang menguasai huruf Alif sampai Ya?',
+                        'audio' => 'Gelar hebat apakah untuk anak pintar yang menguasai huruf Alif sampai Ya?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Juara Cilik Hijaiyah Hebat!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Mengantuk', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
