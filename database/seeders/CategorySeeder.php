@@ -166,6 +166,21 @@ class CategorySeeder extends Seeder
                 'recommended_age' => '3 - 6 Thn',
                 'sort_order' => 10,
             ],
+            [
+                'pillar' => 'mengenal',
+                'name' => 'Mengenal Alat Musik',
+                'slug' => 'alat-musik',
+                'icon_emoji' => '🎵',
+                'color_theme' => 'purple',
+                'bg_gradient' => 'from-purple-400 to-pink-500',
+                'border_color' => '#a855f7',
+                'subtitle' => 'Mengenal suara & bentuk alat musik merdu',
+                'description' => 'Materi pengenalan aneka alat musik petik, tiup, pukul, dan tuts lengkap dengan suara tiruan dan pelafalan suku kata.',
+                'age_min' => 3,
+                'age_max' => 6,
+                'recommended_age' => '3 - 6 Thn',
+                'sort_order' => 11,
+            ],
 
             // =========================================================================
             // PILAR 2: ZONA BELAJAR MEMBACA (5 Topik)

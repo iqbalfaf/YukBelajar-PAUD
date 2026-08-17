@@ -65,6 +65,7 @@ Platform membagi seluruh materi dan kuis ke dalam **3 Pilar / Zona Petualangan**
 | 8 | 🧸 **Benda di Sekitar Kita** | `benda` | Meja, Kursi, Buku, Pensil, Sepatu, Bola |
 | 9 | 🚩 **Bendera Negara Dunia** | `bendera` | Bendera Merah Putih Indonesia, Palestina, Arab Saudi, Malaysia, Jepang, dll. |
 | 10 | 👀 **Anggota Tubuh & Panca Indra** | `tubuh` | Mata (Melihat), Telinga (Mendengar), Hidung (Mencium), Tangan, Kaki |
+| 11 | 🎵 **Mengenal Alat Musik** | `alat-musik` | Piano 🎹, Gitar 🎸, Drum 🥁, Terompet 🎺, Biola 🎻, Saxophone 🎷, Marakas 🪇 |
 
 ---
 

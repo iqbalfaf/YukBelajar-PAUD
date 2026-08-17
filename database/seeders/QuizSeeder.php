@@ -379,6 +379,58 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            [
+                'category_slug' => 'alat-musik',
+                'title' => 'Tebak Alat Musik Merdu',
+                'slug' => 'tebak-alat-musik',
+                'icon_emoji' => '🎵',
+                'target_age' => 4,
+                'total_questions' => 4,
+                'stars_reward' => 4,
+                'questions' => [
+                    [
+                        'text' => 'Alat musik manakah yang dimainkan dengan cara dipetik senarnya?',
+                        'audio' => 'Alat musik manakah yang dimainkan dengan cara dipetik senarnya?',
+                        'emoji' => '🎸',
+                        'options' => [
+                            ['emoji' => '🎸', 'text' => 'Gitar Petik', 'is_correct' => true],
+                            ['emoji' => '🥁', 'text' => 'Drum Pukul', 'is_correct' => false],
+                            ['emoji' => '🎺', 'text' => 'Terompet Tiup', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik perkusi yang dipukul menggunakan stik dan berbunyi duk-duk-tak adalah...?',
+                        'audio' => 'Alat musik perkusi yang dipukul menggunakan stik dan berbunyi duk-duk-tak adalah...?',
+                        'emoji' => '🥁',
+                        'options' => [
+                            ['emoji' => '🎹', 'text' => 'Piano', 'is_correct' => false],
+                            ['emoji' => '🥁', 'text' => 'Drum', 'is_correct' => true],
+                            ['emoji' => '🎻', 'text' => 'Biola', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik besar bertuts hitam dan putih yang dimainkan dengan jari tangan adalah...?',
+                        'audio' => 'Alat musik besar bertuts hitam dan putih yang dimainkan dengan jari tangan adalah...?',
+                        'emoji' => '🎹',
+                        'options' => [
+                            ['emoji' => '🎹', 'text' => 'Piano Tuts', 'is_correct' => true],
+                            ['emoji' => '🎷', 'text' => 'Saxophone', 'is_correct' => false],
+                            ['emoji' => '🪇', 'text' => 'Marakas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah alat musik tiup dari logam kuningan yang bersuara lantang tet-tooot?',
+                        'audio' => 'Manakah alat musik tiup dari logam kuningan yang bersuara lantang tet-tooot?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '🎸', 'text' => 'Gitar', 'is_correct' => false],
+                            ['emoji' => '🎺', 'text' => 'Terompet', 'is_correct' => true],
+                            ['emoji' => '🪗', 'text' => 'Akordeon', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
             // =========================================================================
             // PILAR 2: ZONA BELAJAR MEMBACA
             // =========================================================================

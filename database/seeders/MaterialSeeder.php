@@ -170,6 +170,23 @@ class MaterialSeeder extends Seeder
                 ],
             ],
 
+            'alat-musik' => [
+                1 => [
+                    ['title' => 'Piano Tuts Indah', 'subtitle' => 'Pi-a-no (3 Suku Kata)', 'icon_emoji' => '🎹', 'sound_effect' => 'Ting-ting-ting! Melodi Indah Piano', 'speech_text' => 'Piano! Alat musik ber-tuts hitam putih yang menghasilkan melodi indah dan merdu.', 'parent_note' => 'Ajak anak menggerakkan jari-jarinya di atas meja seperti sedang menekan tuts piano.', 'sort_order' => 1],
+                    ['title' => 'Gitar Petik Ceria', 'subtitle' => 'Gi-tar (2 Suku Kata)', 'icon_emoji' => '🎸', 'sound_effect' => 'Jreng-jreng-jreng! Petikan Senar Gitar', 'speech_text' => 'Gitar! Alat musik berdawai yang dimainkan dengan cara dipetik menggunakan jari tangan.', 'parent_note' => 'Tanyakan pada anak berapa jumlah senar pada gitar akustik.', 'sort_order' => 2],
+                    ['title' => 'Drum Pukul Semangat', 'subtitle' => 'Drum (1 Suku Kata)', 'icon_emoji' => '🥁', 'sound_effect' => 'Duk-duk-tak! Irama Tabuhan Drum', 'speech_text' => 'Drum! Alat musik perkusi yang dipukul menggunakan stik untuk menjaga ketukan irama lagu.', 'parent_note' => 'Ajak anak bertepuk tangan mengikuti ketukan irama drum.', 'sort_order' => 3],
+                ],
+                2 => [
+                    ['title' => 'Terompet Tiup Megah', 'subtitle' => 'Te-rom-pet (3 Suku Kata)', 'icon_emoji' => '🎺', 'sound_effect' => 'Tet-tooot! Tiupan Kencang Terompet', 'speech_text' => 'Terompet! Alat musik tiup dari logam kuningan yang bersuara lantang dan megah.', 'parent_note' => 'Minta anak menirukan gerakan memegang dan meniup terompet.', 'sort_order' => 1],
+                    ['title' => 'Biola Gesek Lembut', 'subtitle' => 'Bi-o-la (3 Suku Kata)', 'icon_emoji' => '🎻', 'sound_effect' => 'Ngiing-ngiing! Gesekan Halus Biola', 'speech_text' => 'Biola! Alat musik dawai bertubuh kayu yang dimainkan dengan cara digesek menggunakan busur.', 'parent_note' => 'Peragakan cara meletakkan biola di antara bahu dan dagu.', 'sort_order' => 2],
+                    ['title' => 'Saxophone Melodi Merdu', 'subtitle' => 'Sak-so-fon (3 Suku Kata)', 'icon_emoji' => '🎷', 'sound_effect' => 'Tuut-tuut-tuuu! Alunan Manis Saxophone', 'speech_text' => 'Saxophone! Alat musik tiup berkilau keemasan dengan suara melengkung yang sangat merdu.', 'parent_note' => 'Jelaskan bahwa saxophone ditiup melalui corong tiup di bagian atas.', 'sort_order' => 3],
+                ],
+                3 => [
+                    ['title' => 'Marakas Goyang Ceria', 'subtitle' => 'Ma-ra-kas (3 Suku Kata)', 'icon_emoji' => '🪇', 'sound_effect' => 'Cik-cik-syik! Kocokan Seru Marakas', 'speech_text' => 'Marakas! Sepasang alat musik goyang berisi biji-bijian yang berbunyi ceria saat diguncangkan.', 'parent_note' => 'Ajak anak menggoyangkan kedua tangan ke kiri dan ke kanan seperti bermain marakas.', 'sort_order' => 1],
+                    ['title' => 'Akordeon Lipat Harmoni', 'subtitle' => 'A-kor-de-on (4 Suku Kata)', 'icon_emoji' => '🪗', 'sound_effect' => 'Teeet-tet-tet! Pompa Udara Akordeon', 'speech_text' => 'Akordeon! Alat musik unik yang dimainkan dengan cara ditarik-didorong sambil menekan tombol nada.', 'parent_note' => 'Tunjukkan bagaimana akordeon memompa udara untuk menghasilkan bunyi indah.', 'sort_order' => 2],
+                ],
+            ],
+
             // =========================================================================
             // PILAR 2: ZONA BELAJAR MEMBACA
             // =========================================================================
