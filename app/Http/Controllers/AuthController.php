@@ -113,6 +113,10 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:4'],
             'age' => ['required', 'integer', 'between:3,6'],
             'avatar_icon' => ['required', 'string', 'max:30'],
+            'parent_name' => ['nullable', 'string', 'max:100'],
+            'parent_relationship' => ['nullable', 'string', 'in:bunda,ayah,wali'],
+            'phone' => ['nullable', 'string', 'max:30'],
+            'parent_pin' => ['nullable', 'string', 'max:10'],
             'email' => ['nullable', 'email', 'max:150', 'unique:users,email'],
         ], [
             'name.required' => 'Nama panggilan anak wajib diisi.',
@@ -123,7 +127,14 @@ class AuthController extends Controller
             'password.min' => 'Kata sandi minimal 4 karakter.',
             'age.required' => 'Usia belajar anak wajib dipilih.',
             'avatar_icon.required' => 'Silakan pilih salah satu avatar kartun hewan favorit.',
+            'parent_relationship.in' => 'Pilihan peran orang tua harus antara Bunda, Ayah, atau Wali.',
+            'email.unique' => 'Email ini sudah terdaftar. Silakan gunakan email lain atau langsung masuk.',
         ]);
+
+        $parentPin = trim($request->input('parent_pin', ''));
+        if (empty($parentPin)) {
+            $parentPin = '1234';
+        }
 
         $user = User::create([
             'name' => $request->input('name'),
@@ -132,17 +143,21 @@ class AuthController extends Controller
             'role' => 'student',
             'avatar_icon' => $request->input('avatar_icon', 'dino'),
             'age' => (int) $request->input('age', 4),
-            'parent_pin' => '1234',
+            'parent_name' => $request->input('parent_name') ?: 'Bunda & Ayah Tercinta',
+            'parent_relationship' => $request->input('parent_relationship', 'bunda'),
+            'parent_pin' => $parentPin,
+            'phone' => $request->input('phone'),
             'email' => $request->input('email'),
             'total_stars' => 10, // 10 Bintang Emas Bonus Awal Registrasi!
             'is_active' => true,
             'last_login_at' => now(),
         ]);
 
+        $parentDesc = $user->parent_name ? " dengan pendamping {$user->parent_name}" : '';
         AuditLog::create([
             'user_id' => $user->id,
             'action_type' => 'register',
-            'description' => "Akun siswa baru {$user->name} (@{$user->username}) berhasil didaftarkan.",
+            'description' => "Akun siswa baru {$user->name} (@{$user->username}){$parentDesc} berhasil didaftarkan.",
             'ip_address' => $request->ip(),
         ]);
 

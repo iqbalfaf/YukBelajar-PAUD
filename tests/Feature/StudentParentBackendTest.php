@@ -54,6 +54,8 @@ test('halaman portal orang tua memuat riwayat belajar anak dan analisis penguasa
     expect($parentData['learning_summary']['total_stars'])->toBe($student->total_stars);
     expect($parentData['topic_mastery'])->not->toBeEmpty();
     expect($parentData['child_profile']['name'])->toBe($student->name);
+    expect($parentData['parent_profile'])->not->toBeEmpty();
+    expect($parentData['parent_profile']['name'])->toBe($student->parent_name);
 });
 
 test('halaman panggung sahabat petualang memuat daftar siswa nyata dari database', function () {
@@ -95,7 +97,7 @@ test('halaman ruang piala memuat lencana prestasi nyata dari database', function
     expect($achievementsData['printable_certificates'])->not->toBeEmpty();
 });
 
-test('pengguna dapat memperbarui profil nama, usia, avatar, dan PIN ke database', function () {
+test('pengguna dapat memperbarui profil nama, usia, avatar, data orang tua dan PIN ke database', function () {
     $student = User::where('username', 'alif_ceria')->first();
 
     $response = $this->actingAs($student)->post(route('profile.update'), [
@@ -103,6 +105,9 @@ test('pengguna dapat memperbarui profil nama, usia, avatar, dan PIN ke database'
         'age' => 5,
         'avatar_icon' => 'singa',
         'avatar_accessory' => 'crown',
+        'parent_name' => 'Bunda Siti Rahmawati Update',
+        'parent_relationship' => 'bunda',
+        'phone' => '0812-9999-8888',
         'parent_pin' => '9988',
     ]);
 
@@ -114,6 +119,8 @@ test('pengguna dapat memperbarui profil nama, usia, avatar, dan PIN ke database'
     expect($student->age)->toBe(5);
     expect($student->avatar_icon)->toBe('singa');
     expect($student->avatar_accessory)->toBe('crown');
+    expect($student->parent_name)->toBe('Bunda Siti Rahmawati Update');
+    expect($student->phone)->toBe('0812-9999-8888');
     expect($student->parent_pin)->toBe('9988');
 });
 

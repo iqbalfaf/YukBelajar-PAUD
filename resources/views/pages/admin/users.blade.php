@@ -23,11 +23,14 @@
              name: '',
              username: '',
              email: '',
+             phone: '',
+             parent_name: '',
+             parent_relationship: 'bunda',
              role: 'student',
              age: 4,
              avatar: 'dino',
              status: 'active',
-             parent_name: '',
+             parent_pin: '1234',
              password: ''
          },
 
@@ -36,7 +39,7 @@
                  const matchesRole = this.roleFilter === 'all' || u.role === this.roleFilter || (this.roleFilter === 'teacher' && (u.role === 'teacher' || u.role === 'admin'));
                  const matchesStatus = this.statusFilter === 'all' || (this.statusFilter === 'active' ? u.is_active : !u.is_active);
                  const q = this.searchQuery.toLowerCase();
-                 const matchesSearch = !q || u.name.toLowerCase().includes(q) || u.username.toLowerCase().includes(q) || (u.email && u.email.toLowerCase().includes(q));
+                 const matchesSearch = !q || u.name.toLowerCase().includes(q) || u.username.toLowerCase().includes(q) || (u.email && u.email.toLowerCase().includes(q)) || (u.parent_name && u.parent_name.toLowerCase().includes(q));
                  return matchesRole && matchesStatus && matchesSearch;
              });
          },
@@ -48,11 +51,14 @@
                  name: '',
                  username: '',
                  email: '',
+                 phone: '',
+                 parent_name: '',
+                 parent_relationship: 'bunda',
                  role: 'student',
                  age: 4,
                  avatar: 'dino',
                  status: 'active',
-                 parent_name: '',
+                 parent_pin: '1234',
                  password: '1234'
              };
              this.showModal = true;
@@ -65,9 +71,13 @@
                  name: user.name,
                  username: user.username,
                  email: user.email === '-' ? '' : user.email,
+                 phone: user.phone === '-' ? '' : user.phone,
+                 parent_name: user.parent_name === '-' ? '' : user.parent_name,
+                 parent_relationship: user.parent_relationship || 'bunda',
                  role: user.role,
                  age: user.age,
                  avatar: user.avatar_key,
+                 parent_pin: user.parent_pin || '1234',
                  status: user.is_active ? 'active' : 'inactive',
                  password: ''
              };
@@ -90,7 +100,7 @@
                 Kelola Akun Siswa, Orang Tua & Pengajar
             </h2>
             <p class="text-sm text-sky-100 mt-1 max-w-xl">
-                Atur hak akses, pantau perolehan bintang siswa, reset PIN akun mandiri, dan kelola profil pengguna YukBelajar PAUD.
+                Atur hak akses, pantau perolehan bintang siswa, lihat kontak orang tua / wali, dan kelola profil pengguna YukBelajar PAUD.
             </p>
         </div>
 
@@ -101,48 +111,9 @@
         </button>
     </div>
 
-    <!-- Overview Stats Metrics (Pure Database Counts) -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Total Akun Siswa</span>
-                <span class="text-2xl">👶</span>
-            </div>
-            <div class="text-3xl font-extrabold font-heading text-slate-800">{{ $usersData['stats']['total_students'] }}</div>
-            <span class="text-xs font-semibold text-emerald-600">Usia 3 - 6 Tahun</span>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Orang Tua Terhubung</span>
-                <span class="text-2xl">👨‍👩‍👧</span>
-            </div>
-            <div class="text-3xl font-extrabold font-heading text-slate-800">{{ $usersData['stats']['total_parents'] }}</div>
-            <span class="text-xs font-semibold text-sky-600">Terdaftar Aktif</span>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Guru & Kurator</span>
-                <span class="text-2xl">🦁</span>
-            </div>
-            <div class="text-3xl font-extrabold font-heading text-slate-800">{{ $usersData['stats']['total_teachers'] }}</div>
-            <span class="text-xs font-semibold text-purple-600">Akses Admin/Guru</span>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Akun Aktif</span>
-                <span class="text-2xl">🟢</span>
-            </div>
-            <div class="text-3xl font-extrabold font-heading text-slate-800">{{ $usersData['stats']['active_today'] }}</div>
-            <span class="text-xs font-semibold text-emerald-600">Siap Belajar</span>
-        </div>
-    </div>
-
     <!-- Alert Success Notification -->
     @if(session('success'))
-    <div class="p-4 bg-emerald-100 border-2 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
+    <div class="p-4 bg-emerald-100 border-3 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
         <div class="flex items-center gap-3">
             <span class="text-2xl">✨</span>
             <span>{{ session('success') }}</span>
@@ -150,8 +121,9 @@
     </div>
     @endif
 
+    <!-- Alert Error Notification -->
     @if($errors->any())
-    <div class="p-4 bg-rose-100 border-2 border-rose-400 text-rose-950 font-bold text-sm rounded-2xl shadow-xs">
+    <div class="p-4 bg-rose-100 border-3 border-rose-400 text-rose-950 font-bold text-sm rounded-2xl shadow-xs">
         <ul class="list-disc list-inside">
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -160,23 +132,23 @@
     </div>
     @endif
 
-    <!-- Table Container & Filters -->
-    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs flex flex-col gap-6">
+    <!-- Main Table Container -->
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border-3 border-slate-200 shadow-xs flex flex-col gap-6">
         
-        <!-- Filter Controls Bar -->
+        <!-- Filter Controls -->
         <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
             
             <!-- Role Tabs -->
             <div class="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl overflow-x-auto">
                 <button @click="roleFilter = 'all'"
                         class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
-                        :class="roleFilter === 'all' ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                    Semua User ({{ count($usersData['users']) }})
+                        :class="roleFilter === 'all' ? 'bg-white text-slate-800 shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
+                    Semua ({{ count($usersData['users']) }})
                 </button>
                 <button @click="roleFilter = 'student'"
                         class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
                         :class="roleFilter === 'student' ? 'bg-emerald-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                    👶 Siswa Cilik ({{ $usersData['stats']['total_students'] }})
+                    👶 Siswa ({{ $usersData['stats']['total_students'] }})
                 </button>
                 <button @click="roleFilter = 'parent'"
                         class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
@@ -194,7 +166,7 @@
             <div class="flex items-center gap-3">
                 <div class="relative flex-1 sm:w-64">
                     <input type="text" x-model="searchQuery"
-                           placeholder="Cari nama / username..."
+                           placeholder="Cari nama / username / orang tua..."
                            class="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-xl text-xs font-bold outline-none">
                     <span class="absolute left-3 top-2.5 text-slate-400 text-sm">🔍</span>
                 </div>
@@ -216,8 +188,9 @@
                     <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 font-extrabold text-[11px] uppercase tracking-wider">
                         <th class="p-4">Pengguna / Avatar</th>
                         <th class="p-4">Username & Email</th>
+                        <th class="p-4">Orang Tua / Wali</th>
                         <th class="p-4">Peran & Usia</th>
-                        <th class="p-4">Perolehan Bintang</th>
+                        <th class="p-4">Bintang</th>
                         <th class="p-4">Status</th>
                         <th class="p-4">Terdaftar</th>
                         <th class="p-4 text-right">Aksi Manajemen</th>
@@ -243,6 +216,22 @@
                             <td class="p-4">
                                 <span class="px-2 py-0.5 bg-slate-100 text-slate-700 font-mono font-bold rounded-md" x-text="'@' + u.username"></span>
                                 <p class="text-[11px] text-slate-400 font-semibold mt-0.5" x-text="u.email"></p>
+                            </td>
+
+                            <!-- Parent / Guardian Information -->
+                            <td class="p-4">
+                                <template x-if="u.parent_name && u.parent_name !== '-'">
+                                    <div>
+                                        <p class="font-extrabold text-purple-900 flex items-center gap-1">
+                                            <span>👨‍👩‍👧</span>
+                                            <span x-text="u.parent_name"></span>
+                                        </p>
+                                        <p class="text-[11px] text-slate-500 font-semibold mt-0.5" x-text="'📱 ' + (u.phone !== '-' ? u.phone : 'Tanpa No. HP')"></p>
+                                    </div>
+                                </template>
+                                <template x-if="!u.parent_name || u.parent_name === '-'">
+                                    <span class="text-slate-400 font-bold">-</span>
+                                </template>
                             </td>
 
                             <!-- Role & Age -->
@@ -366,9 +355,40 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap</label>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap Pengguna</label>
                     <input type="text" name="name" x-model="formData.name" required placeholder="Contoh: Alif Rahman"
                            class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                </div>
+
+                <!-- Section Data Orang Tua / Pendamping -->
+                <div x-show="formData.role === 'student'" class="p-3.5 bg-amber-50/70 border-2 border-amber-200 rounded-2xl flex flex-col gap-3">
+                    <span class="text-xs font-black text-amber-950 uppercase tracking-wide flex items-center gap-1">
+                        <span>👨‍👩‍👧</span>
+                        <span>Data Orang Tua / Pendamping:</span>
+                    </span>
+                    
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Nama Orang Tua</label>
+                            <input type="text" name="parent_name" x-model="formData.parent_name" placeholder="Bunda Siti"
+                                   class="w-full p-2.5 text-xs font-bold bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Peran / Hubungan</label>
+                            <select name="parent_relationship" x-model="formData.parent_relationship"
+                                    class="w-full p-2.5 text-xs font-bold bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none cursor-pointer">
+                                <option value="bunda">🌸 Bunda / Ibu</option>
+                                <option value="ayah">⚡ Ayah</option>
+                                <option value="wali">🌟 Wali / Pendamping</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1">No. WhatsApp / HP Orang Tua</label>
+                        <input type="text" name="phone" x-model="formData.phone" placeholder="0812-3456-7890"
+                               class="w-full p-2.5 text-xs font-bold bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none">
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
@@ -476,6 +496,37 @@
                     <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap</label>
                     <input type="text" name="name" x-model="formData.name" required
                            class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                </div>
+
+                <!-- Section Data Orang Tua / Pendamping -->
+                <div x-show="formData.role === 'student'" class="p-3.5 bg-amber-50/70 border-2 border-amber-200 rounded-2xl flex flex-col gap-3">
+                    <span class="text-xs font-black text-amber-950 uppercase tracking-wide flex items-center gap-1">
+                        <span>👨‍👩‍👧</span>
+                        <span>Data Orang Tua / Pendamping:</span>
+                    </span>
+                    
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Nama Orang Tua</label>
+                            <input type="text" name="parent_name" x-model="formData.parent_name" placeholder="Bunda Siti"
+                                   class="w-full p-2.5 text-xs font-bold bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Peran / Hubungan</label>
+                            <select name="parent_relationship" x-model="formData.parent_relationship"
+                                    class="w-full p-2.5 text-xs font-bold bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none cursor-pointer">
+                                <option value="bunda">🌸 Bunda / Ibu</option>
+                                <option value="ayah">⚡ Ayah</option>
+                                <option value="wali">🌟 Wali / Pendamping</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1">No. WhatsApp / HP Orang Tua</label>
+                        <input type="text" name="phone" x-model="formData.phone" placeholder="0812-3456-7890"
+                               class="w-full p-2.5 text-xs font-bold bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none">
+                    </div>
                 </div>
 
                 <div>

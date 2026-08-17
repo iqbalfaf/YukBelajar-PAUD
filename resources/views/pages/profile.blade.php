@@ -11,6 +11,10 @@
          age: {{ $user['age'] }},
          avatar: '{{ $user['avatar'] }}',
          accessory: '{{ $user['avatar_accessory'] }}',
+         parentName: '{{ $user['parent_name'] ?? '' }}',
+         parentRelationship: '{{ $user['parent_relationship'] ?? 'bunda' }}',
+         phone: '{{ $user['phone'] ?? '' }}',
+         email: '{{ $user['email'] ?? '' }}',
          parentPin: '{{ $user['parent_pin'] }}',
          newPassword: '',
          confirmPassword: '',
@@ -75,6 +79,10 @@
                     <span class="px-2 py-0.5 bg-white/80 rounded-md font-mono" x-text="'@' + username"></span>
                     <span>•</span>
                     <span class="text-sky-800" x-text="'Usia ' + age + ' Tahun'"></span>
+                    @if(!empty($user['parent_name']))
+                    <span>•</span>
+                    <span class="text-purple-700 font-extrabold">👨‍👩‍👧 {{ $user['parent_display_title'] }}</span>
+                    @endif
                     <span>•</span>
                     <span class="text-emerald-700 font-extrabold">🏆 {{ $user['stickers_count'] }} Stiker Karakter</span>
                 </div>
@@ -83,7 +91,7 @@
         </div>
 
         <button @click="testVoice()"
-                class="btn-3d btn-3d-yellow px-5 py-3 rounded-2xl flex items-center gap-2 text-xs sm:text-sm font-extrabold text-amber-950 z-10">
+                class="btn-3d btn-3d-yellow px-5 py-3 rounded-2xl flex items-center gap-2 text-xs sm:text-sm font-extrabold text-amber-950 z-10 cursor-pointer">
             <span class="text-xl">🔊</span>
             <span>Uji Suara Sapaan</span>
         </button>
@@ -124,8 +132,8 @@
         <button @click="activeTab = 'parent_security'; if(window.soundEngine) window.soundEngine.playClick()"
                 class="flex-1 min-w-[140px] py-2.5 px-3 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
                 :class="activeTab === 'parent_security' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
-            <span>🔒</span>
-            <span>PIN & Keamanan Akun</span>
+            <span>👨‍👩‍👧</span>
+            <span>Data Orang Tua & PIN</span>
         </button>
 
         <button @click="activeTab = 'audio_preferences'; if(window.soundEngine) window.soundEngine.playClick()"
@@ -204,7 +212,7 @@
             </div>
 
             <button type="submit"
-                    class="btn-3d btn-3d-sky w-full py-4 rounded-2xl font-black text-base text-white mt-2">
+                    class="btn-3d btn-3d-sky w-full py-4 rounded-2xl font-black text-base text-white mt-2 cursor-pointer">
                 Simpan Perubahan Profil Anak ke Database
             </button>
 
@@ -212,7 +220,7 @@
 
     </div>
 
-    <!-- TAB 2: KEAMANAN, USERNAME & PIN ORANG TUA -->
+    <!-- TAB 2: DATA ORANG TUA, KEAMANAN & PIN -->
     <div x-show="activeTab === 'parent_security'" class="bg-white rounded-3xl p-6 sm:p-8 border-3 border-slate-200 shadow-xs flex flex-col gap-6">
         
         <form action="{{ route('profile.update') }}" method="POST" class="flex flex-col gap-5">
@@ -221,46 +229,88 @@
             <input type="hidden" name="age" :value="age">
 
             <div class="p-4 bg-amber-50 border-2 border-amber-300 rounded-2xl flex items-start gap-3">
-                <span class="text-2xl shrink-0">🔒</span>
+                <span class="text-2xl shrink-0">👨‍👩‍👧</span>
                 <div>
                     <h4 class="font-extrabold text-xs text-amber-950 uppercase tracking-wide mb-0.5">
-                        Parental Gate & Keamanan Akun
+                        Data Diri Orang Tua / Pendamping & Parental Gate
                     </h4>
                     <p class="text-xs font-semibold text-amber-900 leading-relaxed">
-                        PIN Orang Tua digunakan untuk membuka menu pengaturan kurikulum, laporan penguasaan materi, dan pembatasan fitur.
+                        Data ini digunakan untuk laporan perkembangan belajar anak dan PIN 4 digit digunakan untuk mengamankan akses pengaturan kurikulum.
                     </p>
                 </div>
-            </div>
-
-            <div>
-                <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Username Login Akun (Permanen)
-                </label>
-                <input type="text" x-model="username" readonly disabled
-                       class="w-full p-3.5 text-sm font-bold bg-slate-100 border-2 border-slate-300 rounded-2xl font-mono text-slate-600 cursor-not-allowed">
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
-                        PIN Orang Tua (4 Digit Angka)
+                        Nama Lengkap Orang Tua / Wali
                     </label>
-                    <input type="password" name="parent_pin" maxlength="4" x-model="parentPin" required placeholder="1234"
-                           class="w-full p-3.5 text-center text-xl tracking-widest font-black bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-2xl outline-none font-mono">
+                    <input type="text" name="parent_name" x-model="parentName" placeholder="Contoh: Bunda Siti Rahmawati"
+                           class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-amber-500 rounded-2xl outline-none">
                 </div>
 
                 <div>
                     <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
-                        Kata Sandi Baru (Opsional)
+                        Hubungan / Peran
                     </label>
-                    <input type="password" name="password" x-model="newPassword" placeholder="Biarkan kosong jika tidak diganti"
-                           class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-2xl outline-none">
+                    <select name="parent_relationship" x-model="parentRelationship"
+                            class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-amber-500 rounded-2xl outline-none cursor-pointer">
+                        <option value="bunda">🌸 Bunda / Ibu</option>
+                        <option value="ayah">⚡ Ayah</option>
+                        <option value="wali">🌟 Wali / Pendamping</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
+                        No. WhatsApp / HP Orang Tua
+                    </label>
+                    <input type="text" name="phone" x-model="phone" placeholder="Contoh: 0812-3456-7890"
+                           class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-amber-500 rounded-2xl outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Email Orang Tua (Untuk Notifikasi Rapor)
+                    </label>
+                    <input type="email" name="email" x-model="email" placeholder="Contoh: bunda.siti@gmail.com"
+                           class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-amber-500 rounded-2xl outline-none">
+                </div>
+            </div>
+
+            <div class="border-t border-slate-100 pt-4 flex flex-col gap-4">
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Username Login Akun (Permanen)
+                    </label>
+                    <input type="text" x-model="username" readonly disabled
+                           class="w-full p-3.5 text-sm font-bold bg-slate-100 border-2 border-slate-300 rounded-2xl font-mono text-slate-600 cursor-not-allowed">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
+                            PIN Orang Tua (4 Digit Angka)
+                        </label>
+                        <input type="password" name="parent_pin" maxlength="4" x-model="parentPin" required placeholder="1234"
+                               class="w-full p-3.5 text-center text-xl tracking-widest font-black bg-slate-50 border-2 border-slate-300 focus:border-amber-500 rounded-2xl outline-none font-mono">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
+                            Kata Sandi Baru (Opsional)
+                        </label>
+                        <input type="password" name="password" x-model="newPassword" placeholder="Biarkan kosong jika tidak diganti"
+                               class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-amber-500 rounded-2xl outline-none">
+                    </div>
                 </div>
             </div>
 
             <button type="submit"
-                    class="btn-3d btn-3d-yellow w-full py-4 rounded-2xl font-black text-base text-amber-950 mt-2">
-                Simpan Pengaturan Keamanan ke Database
+                    class="btn-3d btn-3d-yellow w-full py-4 rounded-2xl font-black text-base text-amber-950 mt-2 cursor-pointer">
+                Simpan Data Orang Tua & Keamanan ke Database
             </button>
 
         </form>
@@ -306,7 +356,7 @@
             </div>
 
             <button type="button" @click="testVoice(); if(window.soundEngine) window.soundEngine.playVictory()"
-                    class="btn-3d btn-3d-purple w-full py-4 rounded-2xl font-black text-base text-white mt-2">
+                    class="btn-3d btn-3d-purple w-full py-4 rounded-2xl font-black text-base text-white mt-2 cursor-pointer">
                 Uji & Aktifkan Pengaturan Suara
             </button>
 

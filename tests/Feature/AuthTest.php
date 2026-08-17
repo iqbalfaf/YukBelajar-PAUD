@@ -11,7 +11,8 @@ test('halaman login dan register dapat diakses oleh tamu (guest)', function () {
 
     $regRes = $this->get(route('register'));
     $regRes->assertStatus(200);
-    $regRes->assertSee('DAFTAR AKUN PETUALANG CILIK');
+    $regRes->assertSee('DAFTAR AKUN');
+    $regRes->assertSee('Data Diri Orang Tua');
     $regRes->assertSee('10 Bintang Emas Pertama');
 });
 
@@ -72,14 +73,18 @@ test('login gagal jika kredensial salah dan menampilkan error session', function
     expect(Auth::check())->toBeFalse();
 });
 
-test('pendaftaran siswa baru berhasil dan otomatis mendapatkan 10 bintang emas', function () {
+test('pendaftaran siswa baru dengan data orang tua berhasil dan otomatis mendapatkan 10 bintang emas', function () {
     $response = $this->post(route('register.post'), [
         'name' => 'Budi Santoso',
         'username' => 'budi_pintar',
         'password' => 'budi1234',
         'age' => 5,
         'avatar_icon' => 'kelinci',
-        'email' => 'budi@gmail.com',
+        'parent_name' => 'Bunda Ratna Dewi',
+        'parent_relationship' => 'bunda',
+        'phone' => '0812-9988-7766',
+        'parent_pin' => '5678',
+        'email' => 'ratna.dewi@gmail.com',
     ]);
 
     $response->assertRedirect(route('home'));
@@ -90,6 +95,10 @@ test('pendaftaran siswa baru berhasil dan otomatis mendapatkan 10 bintang emas',
     expect($user->name)->toBe('Budi Santoso');
     expect($user->total_stars)->toBe(10); // 10 Welcome Bonus Stars!
     expect($user->avatar_icon)->toBe('kelinci');
+    expect($user->parent_name)->toBe('Bunda Ratna Dewi');
+    expect($user->parent_relationship)->toBe('bunda');
+    expect($user->phone)->toBe('0812-9988-7766');
+    expect($user->parent_pin)->toBe('5678');
     expect($user->role)->toBe('student');
 });
 

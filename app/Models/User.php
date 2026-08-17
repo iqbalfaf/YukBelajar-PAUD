@@ -30,6 +30,8 @@ class User extends Authenticatable
         'avatar_icon',
         'avatar_accessory',
         'age',
+        'parent_name',
+        'parent_relationship',
         'parent_pin',
         'school_name',
         'phone',
@@ -157,6 +159,30 @@ class User extends Authenticatable
             'koala' => '🐨',
             default => '🦖',
         };
+    }
+
+    /**
+     * Helper label hubungan orang tua.
+     */
+    public function getParentRelationshipLabelAttribute(): string
+    {
+        return match (strtolower($this->parent_relationship ?? 'bunda')) {
+            'ayah' => 'Ayah',
+            'wali' => 'Wali / Pendamping',
+            default => 'Bunda / Ibu',
+        };
+    }
+
+    /**
+     * Helper tampilan lengkap pendamping anak.
+     */
+    public function getParentDisplayTitleAttribute(): string
+    {
+        if (! empty($this->parent_name)) {
+            return "{$this->parent_name} ({$this->parent_relationship_label})";
+        }
+
+        return 'Bunda / Pendamping Keluarga';
     }
 
     /**

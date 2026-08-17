@@ -91,6 +91,9 @@ test('admin dapat menambahkan pengguna baru ke database', function () {
         'name' => 'Bintang Baru',
         'username' => 'bintang_baru',
         'email' => 'bintang@kuybelajar.test',
+        'phone' => '0812-3333-4444',
+        'parent_name' => 'Bunda Mega',
+        'parent_relationship' => 'bunda',
         'role' => 'student',
         'age' => 4,
         'avatar_icon' => 'kelinci',
@@ -105,6 +108,8 @@ test('admin dapat menambahkan pengguna baru ke database', function () {
     expect($newUser)->not->toBeNull();
     expect($newUser->name)->toBe('Bintang Baru');
     expect($newUser->role)->toBe('student');
+    expect($newUser->parent_name)->toBe('Bunda Mega');
+    expect($newUser->phone)->toBe('0812-3333-4444');
 });
 
 test('admin dapat memperbarui profil pengguna di database', function () {
@@ -114,6 +119,9 @@ test('admin dapat memperbarui profil pengguna di database', function () {
     $response = $this->actingAs($admin)->put(route('admin.users.update', $targetUser->id), [
         'name' => 'Bintang Terang Juara',
         'email' => $targetUser->email,
+        'phone' => '0812-5555-6666',
+        'parent_name' => 'Ayah Surya',
+        'parent_relationship' => 'ayah',
         'role' => 'student',
         'age' => 5,
         'avatar_icon' => 'singa',
@@ -126,6 +134,9 @@ test('admin dapat memperbarui profil pengguna di database', function () {
     $targetUser->refresh();
     expect($targetUser->name)->toBe('Bintang Terang Juara');
     expect($targetUser->age)->toBe(5);
+    expect($targetUser->parent_name)->toBe('Ayah Surya');
+    expect($targetUser->parent_relationship)->toBe('ayah');
+    expect($targetUser->phone)->toBe('0812-5555-6666');
 });
 
 test('admin dapat mereset PIN parental pengguna', function () {

@@ -221,9 +221,22 @@
                     🐱 Kiki si Kucing Pintar Menyapa
                 </div>
                 <h2 class="text-xl sm:text-3xl font-extrabold font-heading text-amber-950 leading-tight">
-                    "Halo <span class="text-sky-700 underline decoration-wavy">{{ $user['name'] }}</span>! (Usia {{ $user['age'] }} Tahun)"
+                    "Halo <span class="text-sky-700 underline decoration-wavy">{{ $user['name'] }}</span>!"
                 </h2>
-                <p class="text-xs sm:text-sm font-bold text-amber-900 mt-0.5">
+                <div class="flex items-center justify-center sm:justify-start gap-2 flex-wrap mt-1">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 bg-white/90 border border-amber-300 text-amber-950 font-extrabold text-[11px] rounded-full shadow-2xs">
+                        <span>🧒</span>
+                        <span>Usia {{ $user['age'] }} Tahun</span>
+                    </span>
+                    @if(!empty($user['parent_name']))
+                    <a href="{{ route('parents') }}" class="inline-flex items-center gap-1 px-2.5 py-0.5 bg-purple-100/90 hover:bg-purple-200 border border-purple-300 text-purple-950 font-extrabold text-[11px] rounded-full shadow-2xs transition-all" title="Buka Portal Pantauan Orang Tua">
+                        <span>👨‍👩‍👧</span>
+                        <span>Didampingi {{ $user['parent_display_title'] }}</span>
+                        <span class="text-[9px] text-purple-700 underline font-black">➔</span>
+                    </a>
+                    @endif
+                </div>
+                <p class="text-xs sm:text-sm font-bold text-amber-900 mt-1">
                     Pilih salah satu Zona Belajar di bawah ini dan kumpulkan bintang emas sebanyak-banyaknya! ⭐
                 </p>
             </div>

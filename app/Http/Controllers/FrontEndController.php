@@ -73,6 +73,12 @@ class FrontEndController extends Controller
             'avatar_emoji' => $authUser->avatar_emoji ?? '🦖',
             'avatar_accessory' => $accessoryIcon,
             'role' => $authUser->role ?? 'student',
+            'parent_name' => $authUser->parent_name ?? 'Bunda Siti Rahmawati',
+            'parent_relationship' => $authUser->parent_relationship ?? 'bunda',
+            'parent_relationship_label' => $authUser->parent_relationship_label ?? 'Bunda / Ibu',
+            'parent_display_title' => $authUser->parent_display_title ?? 'Bunda Siti Rahmawati (Bunda / Ibu)',
+            'phone' => $authUser->phone ?? '0813-9876-5432',
+            'email' => $authUser->email ?? 'ortu.alif@gmail.com',
             'stars_count' => $authUser->total_stars ?? 0,
             'current_streak_days' => $authUser->current_streak_days ?? 1,
             'longest_streak_days' => $authUser->longest_streak_days ?? 1,
@@ -955,6 +961,15 @@ class FrontEndController extends Controller
 
         $parentData = [
             'child_profile' => $user,
+            'parent_profile' => [
+                'name' => $user['parent_name'] ?? 'Bunda Siti Rahmawati',
+                'relationship' => $user['parent_relationship'] ?? 'bunda',
+                'relationship_label' => $user['parent_relationship_label'] ?? 'Bunda / Ibu',
+                'display_title' => $user['parent_display_title'] ?? 'Bunda Siti Rahmawati (Bunda / Ibu)',
+                'phone' => $user['phone'] ?? '0813-9876-5432',
+                'email' => $user['email'] ?? 'ortu.alif@gmail.com',
+                'parent_pin' => $user['parent_pin'] ?? '1234',
+            ],
             'learning_summary' => [
                 'total_stars' => $user['stars_count'],
                 'stars_target' => 50,
@@ -1001,6 +1016,10 @@ class FrontEndController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:100',
             'age' => 'nullable|integer|min:3|max:10',
+            'parent_name' => 'nullable|string|max:100',
+            'parent_relationship' => 'nullable|string|in:bunda,ayah,wali',
+            'phone' => 'nullable|string|max:30',
+            'email' => 'nullable|email|max:150|unique:users,email,'.$authUser->id,
             'avatar_icon' => 'nullable|string|in:dino,kucing,singa,kelinci,panda,beruang,gajah,koala',
             'avatar_accessory' => 'nullable|string|in:none,crown,party,hat,glasses,superhero',
             'parent_pin' => 'nullable|string|max:10',
@@ -1010,6 +1029,18 @@ class FrontEndController extends Controller
         $authUser->name = $validated['name'];
         if (isset($validated['age'])) {
             $authUser->age = $validated['age'];
+        }
+        if (array_key_exists('parent_name', $validated)) {
+            $authUser->parent_name = $validated['parent_name'];
+        }
+        if (isset($validated['parent_relationship'])) {
+            $authUser->parent_relationship = $validated['parent_relationship'];
+        }
+        if (array_key_exists('phone', $validated)) {
+            $authUser->phone = $validated['phone'];
+        }
+        if (array_key_exists('email', $validated)) {
+            $authUser->email = $validated['email'];
         }
         if (! empty($validated['avatar_icon'])) {
             $authUser->avatar_icon = $validated['avatar_icon'];
@@ -1026,7 +1057,11 @@ class FrontEndController extends Controller
 
         $authUser->save();
 
-        return redirect()->route('profile')->with('success', '✨ Profil akun berhasil diperbarui di database!');
+        if ($request->input('redirect_to') === 'parents') {
+            return redirect()->route('parents')->with('success', '✨ Pengaturan profil anak & orang tua berhasil disimpan!');
+        }
+
+        return redirect()->route('profile')->with('success', '✨ Profil akun & data orang tua berhasil diperbarui di database!');
     }
 
     /**

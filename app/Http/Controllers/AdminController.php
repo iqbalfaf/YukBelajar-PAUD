@@ -1295,6 +1295,11 @@ class AdminController extends Controller
                 'name' => $u->name,
                 'username' => $u->username,
                 'email' => $u->email ?? '-',
+                'phone' => $u->phone ?? '-',
+                'parent_name' => $u->parent_name ?? '-',
+                'parent_relationship' => $u->parent_relationship ?? 'bunda',
+                'parent_relationship_label' => $u->parent_relationship_label,
+                'parent_display_title' => $u->parent_display_title,
                 'role' => $u->role,
                 'role_label' => $roleLabel,
                 'avatar_emoji' => $u->avatar_emoji,
@@ -1348,6 +1353,9 @@ class AdminController extends Controller
             'name' => 'required|string|max:100',
             'username' => 'required|string|max:50|unique:users,username',
             'email' => 'nullable|email|max:100|unique:users,email',
+            'phone' => 'nullable|string|max:30',
+            'parent_name' => 'nullable|string|max:100',
+            'parent_relationship' => 'nullable|string|in:bunda,ayah,wali',
             'role' => 'required|string|in:student,parent,teacher,admin',
             'age' => 'nullable|integer|min:3|max:10',
             'avatar_icon' => 'nullable|string',
@@ -1359,6 +1367,9 @@ class AdminController extends Controller
             'name' => $validated['name'],
             'username' => $validated['username'],
             'email' => $validated['email'] ?? null,
+            'phone' => $validated['phone'] ?? null,
+            'parent_name' => $validated['parent_name'] ?? null,
+            'parent_relationship' => $validated['parent_relationship'] ?? 'bunda',
             'role' => $validated['role'],
             'age' => $validated['age'] ?? 4,
             'avatar_icon' => $validated['avatar_icon'] ?? 'dino',
@@ -1388,16 +1399,29 @@ class AdminController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'nullable|email|max:100|unique:users,email,'.$id,
+            'phone' => 'nullable|string|max:30',
+            'parent_name' => 'nullable|string|max:100',
+            'parent_relationship' => 'nullable|string|in:bunda,ayah,wali',
             'role' => 'required|string|in:student,parent,teacher,admin',
             'age' => 'nullable|integer|min:3|max:10',
             'avatar_icon' => 'nullable|string',
+            'parent_pin' => 'nullable|string|max:10',
             'is_active' => 'nullable|boolean',
             'password' => 'nullable|string|min:4',
         ]);
 
         $user->name = $validated['name'];
-        if (isset($validated['email'])) {
+        if (array_key_exists('email', $validated)) {
             $user->email = $validated['email'];
+        }
+        if (array_key_exists('phone', $validated)) {
+            $user->phone = $validated['phone'];
+        }
+        if (array_key_exists('parent_name', $validated)) {
+            $user->parent_name = $validated['parent_name'];
+        }
+        if (isset($validated['parent_relationship'])) {
+            $user->parent_relationship = $validated['parent_relationship'];
         }
         $user->role = $validated['role'];
         if (isset($validated['age'])) {
@@ -1405,6 +1429,9 @@ class AdminController extends Controller
         }
         if (! empty($validated['avatar_icon'])) {
             $user->avatar_icon = $validated['avatar_icon'];
+        }
+        if (! empty($validated['parent_pin'])) {
+            $user->parent_pin = $validated['parent_pin'];
         }
         if (isset($validated['is_active'])) {
             $user->is_active = (bool) $validated['is_active'];

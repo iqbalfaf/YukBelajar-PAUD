@@ -8,9 +8,13 @@
          savedName: '{{ $parentData['child_profile']['name'] }}',
          savedAge: {{ $parentData['child_profile']['age'] }},
          savedAvatar: '{{ $parentData['child_profile']['avatar'] }}',
+         parentName: '{{ $parentData['parent_profile']['name'] }}',
+         parentRelationship: '{{ $parentData['parent_profile']['relationship'] }}',
+         parentPhone: '{{ $parentData['parent_profile']['phone'] }}',
+         parentEmail: '{{ $parentData['parent_profile']['email'] }}',
          curriculumMode: 'adaptive', // 'adaptive' (by age) or 'unlocked_all' (accelerated)
          unlockedCategories: {{ Js::from($parentData['unlocked_categories']) }},
-         showSuccessAlert: false,
+         showSuccessAlert: {{ session('success') ? 'true' : 'false' }},
          
          saveProfile() {
              this.showSuccessAlert = true;
@@ -25,15 +29,22 @@
      }">
 
     <!-- Top Banner Protected Mode -->
-    <div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-md border-4 border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="bg-gradient-to-r from-slate-800 via-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 shadow-md border-4 border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-4 text-center sm:text-left">
             <div class="w-16 h-16 bg-slate-700 rounded-2xl flex items-center justify-center text-3xl border border-slate-600 shrink-0">
                 🔒
             </div>
             <div>
-                <span class="inline-block px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 rounded-full text-xs font-bold uppercase tracking-wider mb-1">
-                    Parental Gate Terverifikasi
-                </span>
+                <div class="flex items-center gap-2 flex-wrap justify-center sm:justify-start mb-1">
+                    <span class="inline-block px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 rounded-full text-xs font-bold uppercase tracking-wider">
+                        Parental Gate Terverifikasi
+                    </span>
+                    @if(!empty($parentData['parent_profile']['name']))
+                    <span class="inline-block px-2.5 py-0.5 bg-sky-500/20 text-sky-200 rounded-full text-xs font-bold">
+                        👨‍👩‍👧 {{ $parentData['parent_profile']['display_title'] }}
+                    </span>
+                    @endif
+                </div>
                 <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">
                     Portal Pantauan Belajar Orang Tua
                 </h2>
@@ -48,6 +59,16 @@
             ← Kembali ke Tampilan Siswa
         </a>
     </div>
+
+    <!-- Alert Success Notification -->
+    @if(session('success'))
+    <div class="p-4 bg-emerald-100 border-3 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">✨</span>
+            <span>{{ session('success') }}</span>
+        </div>
+    </div>
+    @endif
 
     <!-- Quick Stats Cards (Real Data MySQL) -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -76,6 +97,36 @@
             <span class="text-xs font-bold text-slate-500">Belajar Berturut</span>
         </div>
 
+    </div>
+
+    <!-- Official Parent & Child Identity Overview Card -->
+    <div class="bg-gradient-to-r from-amber-50 via-sky-50 to-purple-50 border-3 border-amber-300 rounded-3xl p-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl bg-amber-400 border-2 border-amber-500 text-3xl flex items-center justify-center shrink-0 shadow-xs">
+                👨‍👩‍👧
+            </div>
+            <div>
+                <span class="text-[10px] font-black uppercase text-amber-800 bg-amber-200/80 px-2.5 py-0.5 rounded-full">
+                    Keluarga Petualang Terdaftar
+                </span>
+                <h3 class="text-lg font-black font-heading text-slate-800 mt-1">
+                    {{ $parentData['parent_profile']['name'] ?: 'Orang Tua / Pendamping Belum Diisi' }}
+                </h3>
+                <div class="flex items-center gap-2 flex-wrap text-xs font-bold text-slate-600 mt-0.5">
+                    <span class="text-purple-700">🌸 Peran: {{ $parentData['parent_profile']['relationship_label'] }}</span>
+                    <span>•</span>
+                    <span class="text-sky-700">📱 WhatsApp: {{ $parentData['parent_profile']['phone'] ?: '-' }}</span>
+                    <span>•</span>
+                    <span class="text-emerald-700">✉️ Email: {{ $parentData['parent_profile']['email'] ?: '-' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ route('profile') }}" 
+           class="px-4 py-2.5 bg-white hover:bg-slate-100 border-2 border-amber-300 rounded-2xl text-xs font-black text-amber-950 flex items-center gap-1.5 shadow-xs transition-all shrink-0">
+            <span>✏️</span>
+            <span>Ubah Data & PIN</span>
+        </a>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -307,25 +358,28 @@
             <div class="bg-white border-3 border-slate-200 rounded-3xl p-6 shadow-xs flex flex-col gap-4">
                 <h4 class="text-lg font-bold font-heading text-slate-800 flex items-center gap-2">
                     <span>⚙️</span>
-                    <span>Kelola Profil & Usia Anak</span>
+                    <span>Kelola Profil Anak & Pendamping</span>
                 </h4>
 
                 <!-- Success Alert -->
                 <div x-show="showSuccessAlert" x-cloak
                      class="p-3 bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold text-xs rounded-2xl animate-pop-star">
-                    ✨ Pengaturan profil & usia belajar berhasil diperbarui!
+                    ✨ Pengaturan profil & data keluarga berhasil disimpan!
                 </div>
 
-                <form @submit.prevent="saveProfile()" class="flex flex-col gap-3.5">
+                <form action="{{ route('profile.update') }}" method="POST" class="flex flex-col gap-3.5">
+                    @csrf
+                    <input type="hidden" name="redirect_to" value="parents">
+
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Nama Panggilan Anak</label>
-                        <input type="text" x-model="savedName" required
+                        <input type="text" name="name" x-model="savedName" required
                                class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none">
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Usia Belajar (PAUD/TK)</label>
-                        <select x-model="savedAge" @change="saveProfile()"
+                        <select name="age" x-model="savedAge"
                                 class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none cursor-pointer">
                             <option :value="3">3 Tahun (Level 1: Dasar / Pemula)</option>
                             <option :value="4">4 Tahun (Level 2: Menengah / Eksplorasi)</option>
@@ -333,8 +387,32 @@
                             <option :value="6">6 Tahun (Level 3: Siap Sekolah Dasar)</option>
                         </select>
                         <span class="text-[11px] font-semibold text-slate-500 mt-1 block">
-                            💡 Mengubah usia akan otomatis menyesuaikan kurikulum dan modul yang disarankan.
+                            💡 Menyesuaikan kurikulum & modul yang disarankan.
                         </span>
+                    </div>
+
+                    <div class="border-t border-slate-100 pt-3">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nama Orang Tua / Pendamping</label>
+                        <input type="text" name="parent_name" x-model="parentName"
+                               placeholder="Nama Lengkap Orang Tua"
+                               class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Hubungan / Peran</label>
+                        <select name="parent_relationship" x-model="parentRelationship"
+                                class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none cursor-pointer">
+                            <option value="bunda">🌸 Bunda / Ibu</option>
+                            <option value="ayah">⚡ Ayah</option>
+                            <option value="wali">🌟 Wali / Pendamping</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">No. WhatsApp / HP</label>
+                        <input type="text" name="phone" x-model="parentPhone"
+                               placeholder="0812-3456-7890"
+                               class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-2xl outline-none">
                     </div>
 
                     <div>
@@ -349,8 +427,8 @@
                     </div>
 
                     <button type="submit"
-                            class="btn-3d btn-3d-sky w-full py-3.5 rounded-2xl font-bold text-sm text-white mt-2">
-                        Simpan Perubahan
+                            class="btn-3d btn-3d-sky w-full py-3.5 rounded-2xl font-bold text-sm text-white mt-2 cursor-pointer">
+                        Simpan Perubahan ke Database
                     </button>
 
                     <a href="{{ route('profile') }}" 
