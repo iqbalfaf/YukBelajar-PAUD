@@ -88,79 +88,108 @@ class AdminController extends Controller
         $totalStarsAwarded = (int) User::where('role', 'student')->sum('total_stars');
         $activeTeachers = User::whereIn('role', ['admin', 'teacher'])->count();
 
-        // 4. Hitung data analitik mingguan dari tabel quiz_attempts nyata
-        $days = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
-        $quizzesCompletedWeekly = [0, 0, 0, 0, 0, 0, 0];
-        $starsAwardedWeekly = [0, 0, 0, 0, 0, 0, 0];
-
+        // 4. Hitung data analitik 7 hari terakhir dari tabel quiz_attempts nyata (Database MySQL murni)
         $now = Carbon::now();
-        $startOfWeek = $now->copy()->startOfWeek();
+        $dailyData = [];
 
-        $attemptsThisWeek = QuizAttempt::where('completed_at', '>=', $startOfWeek->copy()->subDays(7))->get();
+        for ($offset = 6; $offset >= 0; $offset--) {
+            $date = $now->copy()->subDays($offset);
+            $dayKey = $date->format('Y-m-d');
+            $dayLabel = match ($date->dayOfWeekIso) {
+                1 => 'Sen',
+                2 => 'Sel',
+                3 => 'Rab',
+                4 => 'Kam',
+                5 => 'Jum',
+                6 => 'Sab',
+                default => 'Min',
+            };
+            $dayFullName = match ($date->dayOfWeekIso) {
+                1 => 'Senin',
+                2 => 'Selasa',
+                3 => 'Rabu',
+                4 => 'Kamis',
+                5 => 'Jumat',
+                6 => 'Sabtu',
+                default => 'Minggu',
+            };
 
-        foreach ($attemptsThisWeek as $attempt) {
-            $dayOfWeek = Carbon::parse($attempt->completed_at)->dayOfWeekIso - 1;
-            if ($dayOfWeek >= 0 && $dayOfWeek <= 6) {
-                $quizzesCompletedWeekly[$dayOfWeek]++;
-                $starsAwardedWeekly[$dayOfWeek] += $attempt->stars_earned;
-            }
+            $attemptsOnDay = QuizAttempt::whereDate('completed_at', $dayKey)->get();
+            $qCount = $attemptsOnDay->count();
+            $sCount = (int) $attemptsOnDay->sum('stars_earned');
+
+            $dailyData[] = [
+                'date' => $dayKey,
+                'day' => $dayLabel,
+                'full_day' => $dayFullName,
+                'quizzes' => $qCount,
+                'stars' => $sCount,
+            ];
         }
 
-        // Hitung metrik puncak belajar mingguan
+        $maxQuizzes = max(array_column($dailyData, 'quizzes')) ?: 1;
+        $maxStars = max(array_column($dailyData, 'stars')) ?: 1;
+
         $weeklyActivity = [];
-        $peakDay = 'Sabtu';
+        $peakDay = $dailyData[count($dailyData) - 1]['full_day'];
         $peakQuizzes = 0;
         $peakStars = 0;
         $totalQuizzesWeekly = 0;
+        $starsThisWeek = 0;
 
-        for ($i = 0; $i < 7; $i++) {
-            $qCount = $quizzesCompletedWeekly[$i];
-            $sCount = $starsAwardedWeekly[$i];
+        foreach ($dailyData as $item) {
+            $qCount = $item['quizzes'];
+            $sCount = $item['stars'];
             $totalQuizzesWeekly += $qCount;
+            $starsThisWeek += $sCount;
 
-            if ($qCount >= $peakQuizzes) {
+            if ($qCount >= $peakQuizzes && $qCount > 0) {
                 $peakQuizzes = $qCount;
                 $peakStars = $sCount;
-                $peakDay = match ($i) {
-                    0 => 'Senin',
-                    1 => 'Selasa',
-                    2 => 'Rabu',
-                    3 => 'Kamis',
-                    4 => 'Jumat',
-                    5 => 'Sabtu',
-                    default => 'Minggu',
-                };
+                $peakDay = $item['full_day'];
             }
 
-            $heightPct = max(15, min(100, $qCount * 15));
+            // Normalisasi proporsi tinggi bar (antara 8% - 85% agar tidak keluar container dan bebas tabrakan)
+            $quizHeightPct = $qCount > 0 ? round(($qCount / $maxQuizzes) * 82) : 6;
+            $starHeightPct = $sCount > 0 ? round(($sCount / $maxStars) * 82) : 6;
+
             $weeklyActivity[] = [
-                'day' => $days[$i],
+                'day' => $item['day'],
                 'quizzes' => $qCount,
                 'stars' => $sCount,
-                'height_pct' => $heightPct,
+                'quiz_height' => max(6, $quizHeightPct),
+                'star_height' => max(6, $starHeightPct),
             ];
         }
 
         // 5. Hitung tingkat ketuntasan per kategori dari data quiz_attempts nyata
         $categoryDistribution = [];
-        $topCatName = 'Pulau Hewan';
+        $topCatName = '-';
         $topCatPct = 0;
 
         foreach ($categoriesModel as $cat) {
             $quizzesInCat = Quiz::where('category_id', $cat->id)->pluck('id');
-            $attemptsInCat = QuizAttempt::whereIn('quiz_id', $quizzesInCat)->count();
             $materialsCount = $cat->levels->flatMap->materials->count();
-            $pct = $attemptsInCat > 0 ? min(98, max(50, $attemptsInCat * 20)) : min(90, max(30, $materialsCount * 10));
+            $quizzesCount = $quizzesInCat->count();
 
-            if ($pct > $topCatPct) {
+            $attemptsInCat = QuizAttempt::whereIn('quiz_id', $quizzesInCat)->get();
+            $attemptsCount = $attemptsInCat->count();
+
+            if ($attemptsCount > 0) {
+                $pct = (int) round($attemptsInCat->avg('score'));
+            } else {
+                $pct = 0;
+            }
+
+            if ($pct >= $topCatPct && ($pct > 0 || $topCatName === '-')) {
                 $topCatPct = $pct;
                 $topCatName = "{$cat->icon_emoji} {$cat->name} ({$pct}%)";
             }
 
             $bgBar = match ($cat->color_theme) {
-                'orange' => 'bg-orange-500',
+                'orange' => 'bg-amber-500',
                 'sky' => 'bg-sky-500',
-                'pink', 'rose' => 'bg-pink-500',
+                'pink', 'rose' => 'bg-rose-500',
                 'purple' => 'bg-purple-500',
                 'indigo' => 'bg-indigo-500',
                 default => 'bg-emerald-500',
@@ -170,6 +199,8 @@ class AdminController extends Controller
                 'name' => $cat->name,
                 'icon' => $cat->icon_emoji,
                 'materials' => $materialsCount,
+                'quizzes' => $quizzesCount,
+                'attempts' => $attemptsCount,
                 'pct' => $pct,
                 'bg_bar' => $bgBar,
             ];
@@ -179,9 +210,9 @@ class AdminController extends Controller
         $auditLogs = AuditLog::with('user')->latest()->take(6)->get()->map(function ($log) {
             $badge = match ($log->action_type) {
                 'LOGIN' => 'bg-sky-100 text-sky-800',
-                'CREATE_MATERIAL', 'AI_GENERATE', 'PUBLISH_AI' => 'bg-purple-100 text-purple-800',
-                'UPDATE_PROFILE' => 'bg-amber-100 text-amber-800',
-                'DELETE_USER', 'DELETE_MATERIAL' => 'bg-rose-100 text-rose-800',
+                'CREATE_MATERIAL', 'AI_GENERATE', 'PUBLISH_AI', 'CREATE_QUIZ', 'CREATE_QUESTION' => 'bg-purple-100 text-purple-800',
+                'UPDATE_PROFILE', 'UPDATE_QUIZ' => 'bg-amber-100 text-amber-800',
+                'DELETE_USER', 'DELETE_MATERIAL', 'DELETE_QUIZ', 'DELETE_QUESTION' => 'bg-rose-100 text-rose-800',
                 default => 'bg-emerald-100 text-emerald-800',
             };
 
@@ -195,9 +226,11 @@ class AdminController extends Controller
             ];
         })->toArray();
 
-        $starsThisWeek = array_sum($starsAwardedWeekly);
         $avgScore = QuizAttempt::avg('score');
-        $avgCompletionRate = $avgScore ? round($avgScore).'%' : '88%';
+        $avgCompletionRate = $avgScore ? round($avgScore).'%' : '0%';
+
+        $aiLogsToday = AuditLog::whereIn('action_type', ['AI_GENERATE', 'PUBLISH_AI'])->whereDate('created_at', Carbon::today())->count();
+        $dailyQuotaLeft = max(0, 1000 - $aiLogsToday);
 
         // 7. Bungkus data lengkap ke dalam $adminData
         $adminData = [
@@ -222,9 +255,9 @@ class AdminController extends Controller
             ],
             'system_health' => [
                 'gemini_model' => 'Google Gemini 2.0 Flash',
-                'daily_prompt_quota' => '850 / 1.000 Prompt',
+                'daily_prompt_quota' => "{$dailyQuotaLeft} / 1.000 Prompt",
                 'tts_engine' => 'Web Speech Synthesis (id-ID)',
-                'parental_gate_status' => '100% Proteksi Aktif',
+                'parental_gate_status' => '100% Proteksi Aktif 🔒',
                 'server_status' => '🟢 Stabil (PHP 8.4)',
             ],
             'audit_logs' => $auditLogs,

@@ -116,7 +116,6 @@ test('halaman dashboard admin dan 1-click ai generator dapat diakses oleh admin'
     $dashboardResponse->assertStatus(200);
     $dashboardResponse->assertSee('Kelola Materi');
     $dashboardResponse->assertSee('Aktivitas Kuis');
-    $dashboardResponse->assertSee('Bintang Siswa Mingguan');
     $dashboardResponse->assertSee('Ketuntasan per Kategori');
     $dashboardResponse->assertSee('Pengkategorian Materi');
     $dashboardResponse->assertSee('Tingkatan Level');

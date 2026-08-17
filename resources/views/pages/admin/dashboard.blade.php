@@ -91,25 +91,25 @@
             <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span class="text-slate-400 font-bold">Google Gemini AI:</span>
-                <span class="font-extrabold text-emerald-300" x-text="systemHealth.gemini_model">Gemini 2.0 Flash</span>
+                <span class="font-extrabold text-emerald-300" x-text="systemHealth.gemini_model || 'Gemini 2.0 Flash'"></span>
             </div>
 
             <!-- Daily Quota -->
             <div class="flex items-center gap-2">
                 <span class="text-slate-400 font-bold">Kuota AI Harian:</span>
-                <span class="font-extrabold text-amber-300" x-text="systemHealth.daily_prompt_quota">850 / 1.000 Prompt</span>
+                <span class="font-extrabold text-amber-300" x-text="systemHealth.daily_prompt_quota || '1.000 / 1.000 Prompt'"></span>
             </div>
 
             <!-- Speech Synthesis -->
             <div class="flex items-center gap-2">
                 <span class="text-slate-400 font-bold">Audio Engine:</span>
-                <span class="font-extrabold text-sky-300" x-text="systemHealth.tts_engine">Web Speech (id-ID)</span>
+                <span class="font-extrabold text-sky-300" x-text="systemHealth.tts_engine || 'Web Speech Synthesis (id-ID)'"></span>
             </div>
 
             <!-- Parental Gate -->
             <div class="flex items-center gap-2">
                 <span class="text-slate-400 font-bold">Parental Gate:</span>
-                <span class="font-extrabold text-purple-300">100% Proteksi Aktif 🔒</span>
+                <span class="font-extrabold text-purple-300" x-text="systemHealth.parental_gate_status || '100% Proteksi Aktif 🔒'"></span>
             </div>
 
         </div>
@@ -169,91 +169,94 @@
 
         <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
             <div class="flex items-center justify-between mb-1 text-slate-500">
-                <span class="text-xs font-bold">Rerata Ketuntasan</span>
+                <span class="text-xs font-bold">Rerata Skor</span>
                 <span class="text-xl">📈</span>
             </div>
             <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['avg_completion_rate'] }}</div>
-            <span class="text-[11px] font-semibold text-emerald-600">Sangat Tinggi</span>
+            <span class="text-[11px] font-semibold text-emerald-600">Penguasaan Materi</span>
         </div>
 
     </div>
 
-    <!-- DUAL ANALYTICS CHARTS SECTION -->
+    <!-- DUAL ANALYTICS CHARTS SECTION (NO OVERLAP / CLEAN CSS) -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         <!-- Left 7 Cols: Weekly Engagement Dual-Bar Chart -->
         <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-xs flex flex-col justify-between">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
                 <div>
                     <h3 class="text-lg font-bold font-heading text-slate-800 flex items-center gap-2">
                         <span>📊</span>
-                        <span>Aktivitas Kuis & Perolehan Bintang Siswa Mingguan</span>
+                        <span>Aktivitas Kuis & Bintang Siswa (7 Hari Terakhir)</span>
                     </h3>
-                    <p class="text-xs font-bold text-slate-400 mt-0.5">Jumlah kuis yang dimainkan dan total bintang emas yang dikumpulkan.</p>
+                    <p class="text-xs font-bold text-slate-400 mt-0.5">Jumlah pengerjaan kuis dan total bintang emas riil yang didapatkan siswa.</p>
                 </div>
-                <div class="flex items-center gap-3 text-xs font-bold">
-                    <span class="flex items-center gap-1.5 text-sky-600"><span class="w-3 h-3 rounded-md bg-sky-500"></span> Kuis Selesai</span>
-                    <span class="flex items-center gap-1.5 text-amber-500"><span class="w-3 h-3 rounded-md bg-amber-400"></span> Bintang Emas</span>
+                <div class="flex items-center gap-3 text-xs font-bold shrink-0">
+                    <span class="flex items-center gap-1.5 text-sky-600"><span class="w-3 h-3 rounded-md bg-sky-500"></span> Kuis</span>
+                    <span class="flex items-center gap-1.5 text-amber-500"><span class="w-3 h-3 rounded-md bg-amber-400"></span> Bintang ⭐</span>
                 </div>
             </div>
 
-            <!-- Visual Bar Graph -->
-            <div class="h-48 sm:h-56 flex items-end justify-between gap-2 sm:gap-4 pt-6 border-b border-slate-200 pb-2">
+            <!-- Visual Bar Graph with Zero Layout Shifts and Absolute Tooltip -->
+            <div class="h-56 pt-8 pb-2 flex items-end justify-between gap-2 sm:gap-4 border-b border-slate-200">
                 <template x-for="(bar, idx) in chartAnalytics.weekly_activity" :key="idx">
-                    <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+                    <div class="flex-1 flex flex-col items-center h-full justify-end relative group">
                         
-                        <!-- Tooltip on hover -->
-                        <div class="opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 text-white text-[10px] py-1 px-2 rounded-lg pointer-events-none whitespace-nowrap shadow-md mb-1 flex flex-col items-center">
-                            <span x-text="bar.quizzes + ' Kuis (' + bar.stars + ' ⭐)'"></span>
+                        <!-- Floating Tooltip (Absolute, Above Column) -->
+                        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute -top-7 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold py-1 px-2 rounded-lg pointer-events-none whitespace-nowrap shadow-lg z-30 flex items-center gap-1">
+                            <span x-text="bar.day + ': ' + bar.quizzes + ' Kuis (' + bar.stars + ' ⭐)'"></span>
                         </div>
 
-                        <div class="w-full max-w-[36px] flex items-end justify-center gap-1 h-full">
-                            <!-- Quizzes bar -->
-                            <div class="w-1/2 bg-sky-500 group-hover:bg-sky-600 rounded-t-lg transition-all duration-300"
-                                 :style="'height: ' + (bar.height_pct * 0.85) + '%;'">
+                        <!-- Bar Columns Container -->
+                        <div class="w-full flex items-end justify-center gap-1 sm:gap-1.5 h-36">
+                            <!-- Quizzes Bar -->
+                            <div class="w-2.5 sm:w-4 bg-sky-500 group-hover:bg-sky-600 rounded-t-md transition-all duration-300 shadow-xs"
+                                 :style="'height: ' + bar.quiz_height + '%;'">
                             </div>
-                            <!-- Stars bar -->
-                            <div class="w-1/2 bg-amber-400 group-hover:bg-amber-500 rounded-t-lg transition-all duration-300"
-                                 :style="'height: ' + bar.height_pct + '%;'">
+                            <!-- Stars Bar -->
+                            <div class="w-2.5 sm:w-4 bg-amber-400 group-hover:bg-amber-500 rounded-t-md transition-all duration-300 shadow-xs"
+                                 :style="'height: ' + bar.star_height + '%;'">
                             </div>
                         </div>
 
                         <!-- Day Label -->
-                        <span class="text-[11px] font-bold text-slate-500 mt-1" x-text="bar.day"></span>
+                        <span class="text-[11px] font-bold text-slate-500 mt-2" x-text="bar.day"></span>
                     </div>
                 </template>
             </div>
             
-            <div class="flex items-center justify-between text-xs text-slate-400 pt-3 font-semibold">
-                <span>Puncak Belajar: <b>{{ $adminData['chart_analytics']['peak_day'] }} ({{ $adminData['chart_analytics']['peak_quizzes'] }} Kuis / {{ $adminData['chart_analytics']['peak_stars'] }} ⭐)</b></span>
-                <span>Total Pekan Ini: <b>{{ $adminData['chart_analytics']['total_quizzes_weekly'] }} Kuis Selesai</b></span>
+            <div class="flex items-center justify-between text-xs text-slate-500 pt-3 font-semibold flex-wrap gap-2">
+                <span>Puncak Belajar: <b class="text-slate-800" x-text="chartAnalytics.peak_day + ' (' + chartAnalytics.peak_quizzes + ' Kuis / ' + chartAnalytics.peak_stars + ' ⭐)'"></b></span>
+                <span>Total 7 Hari: <b class="text-slate-800" x-text="chartAnalytics.total_quizzes_weekly + ' Kuis Selesai'"></b></span>
             </div>
         </div>
 
         <!-- Right 5 Cols: Category Mastery Distribution Progress Bars -->
         <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-xs flex flex-col justify-between">
-            <div class="mb-4">
+            <div class="mb-3">
                 <h3 class="text-lg font-bold font-heading text-slate-800 flex items-center gap-2">
                     <span>🎯</span>
                     <span>Tingkat Ketuntasan per Kategori</span>
                 </h3>
-                <p class="text-xs font-bold text-slate-400 mt-0.5">Persentase penguasaan materi oleh seluruh siswa terdaftar.</p>
+                <p class="text-xs font-bold text-slate-400 mt-0.5">Rerata skor kuis dan materi aktif yang diselesaikan siswa.</p>
             </div>
 
-            <div class="flex flex-col gap-3.5 my-auto">
+            <div class="flex flex-col gap-3 my-auto">
                 <template x-for="(cat, idx) in chartAnalytics.category_distribution" :key="idx">
                     <div class="flex flex-col gap-1">
                         <div class="flex items-center justify-between text-xs font-bold">
-                            <span class="text-slate-800 flex items-center gap-1.5">
+                            <span class="text-slate-800 flex items-center gap-1.5 truncate">
                                 <span x-text="cat.icon"></span>
-                                <span x-text="cat.name"></span>
+                                <span class="truncate" x-text="cat.name"></span>
                             </span>
-                            <span class="text-slate-600" x-text="cat.pct + '% (' + cat.materials + ' Kartu)'"></span>
+                            <span class="text-slate-600 text-[11px] shrink-0 font-semibold"
+                                  x-text="cat.pct + '% (' + cat.quizzes + ' Kuis, ' + cat.materials + ' Kartu)'">
+                            </span>
                         </div>
                         <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
                             <div class="h-full rounded-full transition-all duration-500"
                                  :class="cat.bg_bar"
-                                 :style="'width: ' + cat.pct + '%;'">
+                                 :style="'width: ' + Math.max(4, cat.pct) + '%;'">
                             </div>
                         </div>
                     </div>
@@ -261,8 +264,8 @@
             </div>
 
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-700">
-                <span>Kategori Terpopuler: <b>{{ $adminData['stats']['most_popular_category'] }}</b></span>
-                <a href="{{ route('admin.ai-generator') }}" class="hover:underline">Tambah Materi AI →</a>
+                <span>Kategori Terpopuler: <b class="text-slate-800" x-text="chartAnalytics.category_distribution[0] ? chartAnalytics.category_distribution[0].name : '-'"></b></span>
+                <a href="{{ route('admin.quizzes') }}" class="hover:underline">Kelola Kuis →</a>
             </div>
         </div>
 
@@ -416,7 +419,7 @@
                 @csrf
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Jenis Laporan</label>
-                    <select name="report_type" class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none">
+                    <select name="report_type" class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
                         <option value="all_students">📋 Rekap Rapor Seluruh Siswa PAUD ({{ $adminData['stats']['total_students'] }} Siswa)</option>
                     </select>
                 </div>
