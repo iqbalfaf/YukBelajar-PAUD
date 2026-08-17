@@ -101,10 +101,12 @@ Platform membagi seluruh materi dan kuis ke dalam **3 Pilar / Zona Petualangan**
 ```mermaid
 flowchart TD
     A[Siswa Masuk ke /petualangan] --> B[Layar 1: Pilih Zona & Topik Pembelajaran]
-    B -->|Pilih Salah Satu Topik| C[Layar 2: Eksplorasi Seluruh Materi & Kuis di Topik Tersebut]
-    C --> D1[📚 Pelajari Kartu Flashcard Bersuara +1 ⭐]
-    C --> D2[🎯 Mainkan Pilihan Kuis Gambar & Dapatkan Bintang]
-    C --> D3[⚡ Uji Cepat Akselerasi Buka Level Lebih Tinggi]
+    B -->|Pilih Salah Satu Topik| C[Layar 2: Workspace Topik Terpilih]
+    C -->|Default View| D1[🃏 Tab 1: Kartu Pengenalan Belajar Flashcard]
+    D1 -->|Pagination Ceria Max 6-8 Kartu/Hal| D1A[Dengar Suara TTS 🔊 & Selesaikan +1 ⭐]
+    D1 -->|CTA Banner 'Sudah Paham?'| D2[🎯 Tab 2: Arena Kuis & Tantangan Soal]
+    C -->|Beralih Tab Kuis| D2
+    D2 --> D2A[Kerjakan Kuis Bergambar & Raih Bintang ⭐]
     C -->|Tombol Ganti Topik| B
 ```
 
@@ -116,17 +118,17 @@ flowchart TD
   * Status Keterbukaan Level: `L1 🔓 (0 ⭐)`, `L2 ⭐ (10 ⭐)`, `L3 🚀 (25 ⭐)`.
   * Tombol Aksi: **`🏝️ Buka & Lihat Seluruh Materi ➔`**.
 
-#### B. Layar 2: Eksplorasi Lengkap di Topik Terpilih
-* **Header Topik**: Icon & Nama Topik, tombol **`⬅️ Ganti Topik Lain`**, dan tombol **`📖 Buka Mode Flashcard Penuh`**.
-* **Filter Level di Dalam Topik**: `🌟 Semua Level`, `🌱 Level 1 (3-4 Thn)`, `⭐ Level 2 (4-5 Thn)`, `🚀 Level 3 (5-6 Thn)`.
-* **Tab Konten**: `Semua Konten`, `🃏 Kartu Materi Flashcard`, `🎯 Kuis Soal`.
-* **Grid Kartu Flashcard**:
-  * Badge Level & status kunci (`🔓 Terbuka` / `🔒 Butuh X ⭐`).
-  * Emoji visual jumbo + Judul + Suku Kata.
-  * Tombol Audio: `🔊 Dengarkan Suara`, `🗣️ Tirukan Suara`, dan `⭐ Selesaikan (+1 ⭐)`.
-* **Grid Pilihan Kuis**:
-  * Menampilkan **seluruh kuis** di topik tersebut (termasuk kuis baru dari AI).
-  * Menampilkan jumlah soal, target usia, rekor bintang, dan tombol **`🎯 Mainkan Kuis Ini ▶`**.
+#### B. Layar 2: Workspace Lengkap di Topik Terpilih (Flashcard-First & Pagination)
+* **Header Topik**: Icon & Nama Topik, tombol **`⬅️ Ganti Topik Lain`**, dan tombol **`📖 Mode Belajar Penuh`**.
+* **2 Tab Utama Terpisah (Learn First, Then Practice)**:
+  * **`🃏 1. Kartu Pengenalan Belajar`** *(Default Awal)*: Fokus pada kartu visual & audio pelafalan TTS.
+  * **`🎯 2. Arena Kuis & Tantangan`**: Menampilkan modul kuis pengujian materi.
+* **Filter Tingkatan Level**: `🌟 Semua Level`, `🌱 Level 1: Dasar`, `⭐ Level 2: Menengah`, `🚀 Level 3: Pra-SD`.
+* **Pagination Ceria Khusus Anak PAUD (Kids-Friendly Pagination)**:
+  * Dibatasi **maksimal 6–8 kartu per halaman** untuk mencegah halaman memanjang ke bawah (*anti-endless scrolling*).
+  * Navigasi nomor bulat besar warna-warni `[ 1 ] ( 2 ) [ 3 ]` serta tombol panah empuk `⬅️ Sebelumnya` & `Berikutnya ➡️` dengan efek suara klik ceria.
+* **Banner Ajakan Kuis (Call-to-Action)**:
+  * Di bagian bawah kartu pengenalan, disediakan banner ajakan: *"🌟 Hebat! Kamu sudah mempelajari kartu di halaman ini. Ayo coba Kuisnya! ➔"*.
 
 ---
 
@@ -144,6 +146,13 @@ flowchart TD
    * **Level 2 (Menengah)**: `10 ⭐` $\rightarrow$ Terbuka otomatis saat total bintang $\ge 10$ ⭐.
    * **Level 3 (Pra-SD / Mahir)**: `25 ⭐` $\rightarrow$ Terbuka otomatis saat total bintang $\ge 25$ ⭐.
    * Akselerasi Cerdas: Siswa dapat membuka Level 3 secara instan melalui fitur **`⚡ Uji Cepat`** (menjawab 1 tantangan logika).
+4. **Sistem Pembukaan Buku Stiker Bertingkat (42 Koleksi Stiker)**:
+   * **Tier 1: Sahabat Pertama (3 – 10 ⭐)**: Stiker pemula instan (*Dino, Kucing Kiki, Apel, Pensil*).
+   * **Tier 2: Penjelajah Aktif (15 – 30 ⭐)**: Stiker topik dasar (*Kelinci, Beruang, Tenda, Kuas*).
+   * **Tier 3: Petualang Hebat (40 – 70 ⭐)**: Stiker langka topik (*Singa, Gajah, Balon Udara, Peta*).
+   * **Tier 4: Juara Teladan (80 – 120 ⭐)**: Stiker penakluk 1 pilar (*Lumba-Lumba, Teleskop, Astronaut, Piala Emas*).
+   * **Tier 5: Mahkota Agung (150 – 200+ ⭐)**: Stiker legendaris penakluk 3 pilar (*Roket, Berlian, Mahkota Emas*).
+   * *Auto-Unlock Sync*: Stiker otomatis terbuka di album anak saat akumulasi bintang mencapai syarat.
 
 ---
 
