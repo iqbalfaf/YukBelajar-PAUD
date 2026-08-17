@@ -681,12 +681,18 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 1 - TOPIK 2: MENGENAL ANGKA CERDAS (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (ANGKA 1 - 6) ---
             [
                 'category_slug' => 'angka',
-                'title' => 'Tebak Angka Cerdas',
-                'slug' => 'tebak-angka',
-                'icon_emoji' => '🔢',
-                'target_age' => 4,
+                'level_number' => 1,
+                'title' => 'Tebak Angka 1, 2, 3 Cilik',
+                'slug' => 'kuis-angka-l1-123',
+                'icon_emoji' => '1️⃣',
+                'target_age' => 3,
                 'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
@@ -706,18 +712,634 @@ class QuizSeeder extends Seeder
                         'emoji' => '👀',
                         'options' => [
                             ['emoji' => '1️⃣', 'text' => '1 Mata', 'is_correct' => false],
-                            ['emoji' => '2️⃣', 'text' => '2 Mata', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Mata (Dua)', 'is_correct' => true],
                             ['emoji' => '4️⃣', 'text' => '4 Mata', 'is_correct' => false],
                         ],
                     ],
+                    [
+                        'text' => 'Manakah simbol angka TIGA di antara pilihan berikut?',
+                        'audio' => 'Manakah simbol angka TIGA di antara pilihan berikut?',
+                        'emoji' => '3️⃣',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => 'Angka 3 (Tiga)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 1', 'is_correct' => false],
+                            ['emoji' => '5️⃣', 'text' => 'Angka 5', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'angka',
+                'level_number' => 1,
+                'title' => 'Tebak Angka 4, 5, 6 Ceria',
+                'slug' => 'kuis-angka-l1-456',
+                'icon_emoji' => '4️⃣',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
                     [
                         'text' => 'Berapa jumlah roda pada sebuah mobil keluarga?',
                         'audio' => 'Berapa jumlah roda pada sebuah mobil keluarga?',
                         'emoji' => '🚗',
                         'options' => [
-                            ['emoji' => '4️⃣', 'text' => '4 Roda', 'is_correct' => true],
+                            ['emoji' => '4️⃣', 'text' => '4 Roda (Empat)', 'is_correct' => true],
                             ['emoji' => '2️⃣', 'text' => '2 Roda', 'is_correct' => false],
                             ['emoji' => '3️⃣', 'text' => '3 Roda', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada berapa jumlah jari pada satu telapak tangan kanan kita?',
+                        'audio' => 'Ada berapa jumlah jari pada satu telapak tangan kanan kita?',
+                        'emoji' => '🖐️',
+                        'options' => [
+                            ['emoji' => '5️⃣', 'text' => '5 Jari (Lima)', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '3 Jari', 'is_correct' => false],
+                            ['emoji' => '🔟', 'text' => '10 Jari', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah kaki kecil pada seekor semut?',
+                        'audio' => 'Berapakah jumlah kaki kecil pada seekor semut?',
+                        'emoji' => '🐜',
+                        'options' => [
+                            ['emoji' => '6️⃣', 'text' => '6 Kaki (Enam)', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Kaki', 'is_correct' => false],
+                            ['emoji' => '8️⃣', 'text' => '8 Kaki', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'angka',
+                'level_number' => 1,
+                'title' => 'Petualangan Hitung Benda 1 sampai 6',
+                'slug' => 'kuis-angka-l1-hitung-1-6',
+                'icon_emoji' => '🎲',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Hitung jumlah balon ceria berikut: 🎈🎈🎈. Ada berapa balon?',
+                        'audio' => 'Hitung jumlah balon ceria berikut: ada berapa balon?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => '3 Balon', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Balon', 'is_correct' => false],
+                            ['emoji' => '4️⃣', 'text' => '4 Balon', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung jumlah buah apel segar berikut: 🍎🍎. Ada berapa apel?',
+                        'audio' => 'Hitung jumlah buah apel segar berikut: ada berapa apel?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '2 Apel', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '1 Apel', 'is_correct' => false],
+                            ['emoji' => '5️⃣', 'text' => '5 Apel', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung jumlah bintang emas berikut: ⭐⭐⭐⭐⭐. Ada berapa bintang?',
+                        'audio' => 'Hitung jumlah bintang emas berikut: ada berapa bintang?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            ['emoji' => '5️⃣', 'text' => '5 Bintang', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '3 Bintang', 'is_correct' => false],
+                            ['emoji' => '6️⃣', 'text' => '6 Bintang', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (ANGKA 7 - 13) ---
+            [
+                'category_slug' => 'angka',
+                'level_number' => 2,
+                'title' => 'Tantangan Angka 7, 8, 9, 10',
+                'slug' => 'kuis-angka-l2-7-10',
+                'icon_emoji' => '🔟',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Ada berapa hari dalam satu minggu dari hari Senin sampai Minggu?',
+                        'audio' => 'Ada berapa hari dalam satu minggu dari hari Senin sampai Minggu?',
+                        'emoji' => '📅',
+                        'options' => [
+                            ['emoji' => '7️⃣', 'text' => '7 Hari (Tujuh)', 'is_correct' => true],
+                            ['emoji' => '5️⃣', 'text' => '5 Hari', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '10 Hari', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah tentakel kaki pada hewan gurita laut?',
+                        'audio' => 'Berapakah jumlah tentakel kaki pada hewan gurita laut?',
+                        'emoji' => '🐙',
+                        'options' => [
+                            ['emoji' => '8️⃣', 'text' => '8 Kaki (Delapan)', 'is_correct' => true],
+                            ['emoji' => '6️⃣', 'text' => '6 Kaki', 'is_correct' => false],
+                            ['emoji' => '4️⃣', 'text' => '4 Kaki', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka satuan tertinggi tepat sebelum angka sepuluh adalah...?',
+                        'audio' => 'Angka satuan tertinggi tepat sebelum angka sepuluh adalah apa?',
+                        'emoji' => '9️⃣',
+                        'options' => [
+                            ['emoji' => '9️⃣', 'text' => 'Angka 9 (Sembilan)', 'is_correct' => true],
+                            ['emoji' => '7️⃣', 'text' => 'Angka 7', 'is_correct' => false],
+                            ['emoji' => '8️⃣', 'text' => 'Angka 8', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah gabungan seluruh jari kedua tangan kita?',
+                        'audio' => 'Berapakah jumlah gabungan seluruh jari kedua tangan kita?',
+                        'emoji' => '👐',
+                        'options' => [
+                            ['emoji' => '🔟', 'text' => '10 Jari (Sepuluh)', 'is_correct' => true],
+                            ['emoji' => '5️⃣', 'text' => '5 Jari', 'is_correct' => false],
+                            ['emoji' => '8️⃣', 'text' => '8 Jari', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Urutan angka setelah angka 7 adalah angka...?',
+                        'audio' => 'Urutan angka setelah angka 7 adalah angka apa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '8️⃣', 'text' => 'Angka 8 (Delapan)', 'is_correct' => true],
+                            ['emoji' => '6️⃣', 'text' => 'Angka 6', 'is_correct' => false],
+                            ['emoji' => '9️⃣', 'text' => 'Angka 9', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'angka',
+                'level_number' => 2,
+                'title' => 'Mengenal Angka Belasan 11, 12, 13',
+                'slug' => 'kuis-angka-l2-belasan-awal',
+                'icon_emoji' => '🗓️',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Angka 10 ditambah 1 menghasilkan angka berapa?',
+                        'audio' => 'Angka 10 ditambah 1 menghasilkan angka berapa?',
+                        'emoji' => '1️⃣',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '11 (Sebelas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '12 (Dua Belas)', 'is_correct' => false],
+                            ['emoji' => '2️⃣', 'text' => '20 (Dua Puluh)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah bulan dalam satu tahun kalender?',
+                        'audio' => 'Berapakah jumlah bulan dalam satu tahun kalender?',
+                        'emoji' => '🗓️',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '12 Bulan (Dua Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '10 Bulan', 'is_correct' => false],
+                            ['emoji' => '7️⃣', 'text' => '7 Bulan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka belasan yang terdiri dari angka 1 dan angka 3 adalah...?',
+                        'audio' => 'Angka belasan yang terdiri dari angka 1 dan angka 3 adalah apa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '13 (Tiga Belas)', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '31 (Tiga Puluh Satu)', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '11 (Sebelas)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung jumlah bebek berikut: 🦆 (10 ekor) + 🦆 (2 ekor) = ... ?',
+                        'audio' => 'Hitung jumlah bebek berikut: sepuluh ditambah dua sama dengan berapa?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '12 Ekor Bebek', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '11 Ekor', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '15 Ekor', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka berapakah yang berada tepat di antara angka 11 dan 13?',
+                        'audio' => 'Angka berapakah yang berada tepat di antara angka 11 dan 13?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => 'Angka 12 (11 - 12 - 13)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 10', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 14', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'angka',
+                'level_number' => 2,
+                'title' => 'Eksplorasi Hitung Maju 7 sampai 13',
+                'slug' => 'kuis-angka-l2-hitung-maju',
+                'icon_emoji' => '🚀',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Lanjutan dari urutan angka berikut: 7, 8, 9, ... ?',
+                        'audio' => 'Lanjutan dari urutan angka berikut: 7, 8, 9, lalu angka berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '🔟', 'text' => 'Angka 10', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 11', 'is_correct' => false],
+                            ['emoji' => '6️⃣', 'text' => 'Angka 6', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan dari urutan angka berikut: 10, 11, 12, ... ?',
+                        'audio' => 'Lanjutan dari urutan angka berikut: 10, 11, 12, lalu angka berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => 'Angka 13', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 14', 'is_correct' => false],
+                            ['emoji' => '9️⃣', 'text' => 'Angka 9', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah angka yang nilainya paling besar antara 8, 10, dan 13?',
+                        'audio' => 'Manakah angka yang nilainya paling besar antara 8, 10, dan 13?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => 'Angka 13 (Paling Besar)', 'is_correct' => true],
+                            ['emoji' => '🔟', 'text' => 'Angka 10', 'is_correct' => false],
+                            ['emoji' => '8️⃣', 'text' => 'Angka 8', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 6 donat 🍩 lalu ibu memberi 2 donat lagi 🍩🍩. Berapa totalnya?',
+                        'audio' => 'Ada 6 donat lalu ibu memberi 2 donat lagi. Berapa totalnya?',
+                        'emoji' => '🍩',
+                        'options' => [
+                            ['emoji' => '8️⃣', 'text' => '8 Donat', 'is_correct' => true],
+                            ['emoji' => '7️⃣', 'text' => '7 Donat', 'is_correct' => false],
+                            ['emoji' => '9️⃣', 'text' => '9 Donat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sebutan populer untuk jumlah 12 buah benda adalah...?',
+                        'audio' => 'Sebutan populer untuk jumlah 12 buah benda adalah apa?',
+                        'emoji' => '📦',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '1 Lusin (12 Buah)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '1 Ratus', 'is_correct' => false],
+                            ['emoji' => '5️⃣', 'text' => 'Setengah', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (ANGKA 14 - 20 & 1-20 LENGKAP) ---
+            [
+                'category_slug' => 'angka',
+                'level_number' => 3,
+                'title' => 'Master Angka Belasan 14 sampai 20',
+                'slug' => 'kuis-angka-l3-14-20',
+                'icon_emoji' => '🔢',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Angka belasan yang terdiri dari angka 1 dan angka 4 adalah...?',
+                        'audio' => 'Angka belasan yang terdiri dari angka 1 dan angka 4 adalah apa?',
+                        'emoji' => '🍒',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '14 (Empat Belas)', 'is_correct' => true],
+                            ['emoji' => '4️⃣', 'text' => '41', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '15', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka pertengahan antara 10 dan 20 adalah...?',
+                        'audio' => 'Angka pertengahan antara 10 dan 20 adalah apa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '15 (Lima Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '12', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '18', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka belasan yang terdiri dari angka 1 dan angka 6 adalah...?',
+                        'audio' => 'Angka belasan yang terdiri dari angka 1 dan angka 6 adalah apa?',
+                        'emoji' => '🍓',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '16 (Enam Belas)', 'is_correct' => true],
+                            ['emoji' => '6️⃣', 'text' => '61', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '19', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka istimewa tanggal kemerdekaan Indonesia di bulan Agustus adalah...?',
+                        'audio' => 'Angka istimewa tanggal kemerdekaan Indonesia di bulan Agustus adalah berapa?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '17 (Tujuh Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '15', 'is_correct' => false],
+                            ['emoji' => '2️⃣', 'text' => '20', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka belasan yang terdiri dari angka 1 dan angka 8 adalah...?',
+                        'audio' => 'Angka belasan yang terdiri dari angka 1 dan angka 8 adalah apa?',
+                        'emoji' => '🦋',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '18 (Delapan Belas)', 'is_correct' => true],
+                            ['emoji' => '8️⃣', 'text' => '81', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '13', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka belasan tertinggi sebelum angka dua puluh adalah...?',
+                        'audio' => 'Angka belasan tertinggi sebelum angka dua puluh adalah apa?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '19 (Sembilan Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '18', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '17', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah gabungan 10 jari tangan dan 10 jari kaki kita?',
+                        'audio' => 'Berapakah jumlah gabungan 10 jari tangan dan 10 jari kaki kita?',
+                        'emoji' => '🦶',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '20 (Dua Puluh)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '10', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '15', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Urutan angka yang berada tepat setelah angka 15 adalah...?',
+                        'audio' => 'Urutan angka yang berada tepat setelah angka 15 adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => 'Angka 16', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 14', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 17', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Urutan angka yang berada tepat sebelum angka 20 adalah...?',
+                        'audio' => 'Urutan angka yang berada tepat sebelum angka 20 adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => 'Angka 19', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 18', 'is_correct' => false],
+                            ['emoji' => '2️⃣', 'text' => 'Angka 21', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah yang merupakan urutan bilangan belasan yang benar?',
+                        'audio' => 'Manakah yang merupakan urutan bilangan belasan yang benar?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '🔢', 'text' => '14, 15, 16, 17', 'is_correct' => true],
+                            ['emoji' => '🔢', 'text' => '14, 16, 15, 17', 'is_correct' => false],
+                            ['emoji' => '🔢', 'text' => '17, 16, 18, 19', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'angka',
+                'level_number' => 3,
+                'title' => 'Tantangan Berhitung Ceria & Pola Angka',
+                'slug' => 'kuis-angka-l3-pola-hitung',
+                'icon_emoji' => '🧮',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Lanjutkan pola lompat 2 angka berikut: 2, 4, 6, ... ?',
+                        'audio' => 'Lanjutkan pola lompat 2 angka berikut: 2, 4, 6, lalu angka berapa?',
+                        'emoji' => '🧮',
+                        'options' => [
+                            ['emoji' => '8️⃣', 'text' => 'Angka 8', 'is_correct' => true],
+                            ['emoji' => '7️⃣', 'text' => 'Angka 7', 'is_correct' => false],
+                            ['emoji' => '9️⃣', 'text' => 'Angka 9', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola lompat 5 angka berikut: 5, 10, 15, ... ?',
+                        'audio' => 'Lanjutkan pola lompat 5 angka berikut: 5, 10, 15, lalu angka berapa?',
+                        'emoji' => '🧮',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => 'Angka 20', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 16', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 18', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung: 10 jari tangan + 5 jari kaki = berapa jari?',
+                        'audio' => 'Hitung: 10 jari tangan ditambah 5 jari kaki sama dengan berapa jari?',
+                        'emoji' => '🖐️',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '15 Jari', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '12 Jari', 'is_correct' => false],
+                            ['emoji' => '2️⃣', 'text' => '20 Jari', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung: 10 buah apel 🍎 + 10 buah apel 🍎 = berapa apel?',
+                        'audio' => 'Hitung: 10 buah apel ditambah 10 buah apel sama dengan berapa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '20 Apel', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '15 Apel', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '10 Apel', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah tanda perbandingan yang benar: 18 ... 12 ?',
+                        'audio' => 'Manakah yang benar: 18 lebih besar atau lebih kecil dari 12?',
+                        'emoji' => '⚖️',
+                        'options' => [
+                            ['emoji' => '👍', 'text' => '18 Lebih Besar dari 12', 'is_correct' => true],
+                            ['emoji' => '👎', 'text' => '18 Lebih Kecil dari 12', 'is_correct' => false],
+                            ['emoji' => '🟰', 'text' => 'Sama Banyak', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah tanda perbandingan yang benar: 14 ... 20 ?',
+                        'audio' => 'Manakah yang benar: 14 lebih kecil atau lebih besar dari 20?',
+                        'emoji' => '⚖️',
+                        'options' => [
+                            ['emoji' => '👍', 'text' => '14 Lebih Kecil dari 20', 'is_correct' => true],
+                            ['emoji' => '👎', 'text' => '14 Lebih Besar dari 20', 'is_correct' => false],
+                            ['emoji' => '🟰', 'text' => 'Sama Banyak', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 20 bintang ✨, 1 bintang tertutup awan ☁️. Sisa berapa bintang?',
+                        'audio' => 'Ada 20 bintang, 1 bintang tertutup awan. Sisa berapa bintang?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '19 Bintang', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '18 Bintang', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '15 Bintang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 13 balon 🎈, ditiup 2 balon lagi 🎈🎈. Berapa total balon sekarang?',
+                        'audio' => 'Ada 13 balon, ditiup 2 balon lagi. Berapa total balon sekarang?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '15 Balon', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '14 Balon', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '16 Balon', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka genap manakah yang terletak di antara 15 dan 17?',
+                        'audio' => 'Angka genap manakah yang terletak di antara 15 dan 17?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '16 (Enam Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '14', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '18', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah hasil dari 9 ditambah 9 ?',
+                        'audio' => 'Berapakah hasil dari 9 ditambah 9?',
+                        'emoji' => '🧮',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '18 (Delapan Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '17', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '19', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'angka',
+                'level_number' => 3,
+                'title' => 'Grand Champion Maestro Angka Cerdas 1-20',
+                'slug' => 'kuis-angka-l3-grand-master',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Angka terkecil dalam materi berhitung 1 sampai 20 adalah...?',
+                        'audio' => 'Angka terkecil dalam materi berhitung 1 sampai 20 adalah apa?',
+                        'emoji' => '1️⃣',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => 'Angka 1 (Satu)', 'is_correct' => true],
+                            ['emoji' => '5️⃣', 'text' => 'Angka 5', 'is_correct' => false],
+                            ['emoji' => '🔟', 'text' => 'Angka 10', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka terbesar dalam materi berhitung 1 sampai 20 adalah...?',
+                        'audio' => 'Angka terbesar dalam materi berhitung 1 sampai 20 adalah apa?',
+                        'emoji' => '2️⃣',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => 'Angka 20 (Dua Puluh)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 19', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 15', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah total seluruh angka yang kita pelajari dari 1 sampai 20?',
+                        'audio' => 'Berapakah total seluruh angka yang kita pelajari dari 1 sampai 20?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '20 Angka Lengkap', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '10 Angka', 'is_correct' => false],
+                            ['emoji' => '5️⃣', 'text' => '5 Angka', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Urutan bilangan mundur dari 5 sampai 1 yang benar adalah...?',
+                        'audio' => 'Urutan bilangan mundur dari 5 sampai 1 yang benar adalah apa?',
+                        'emoji' => '⏳',
+                        'options' => [
+                            ['emoji' => '🔢', 'text' => '5, 4, 3, 2, 1 (Selesai!)', 'is_correct' => true],
+                            ['emoji' => '🔢', 'text' => '1, 2, 3, 4, 5', 'is_correct' => false],
+                            ['emoji' => '🔢', 'text' => '5, 3, 4, 2, 1', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka belasan manakah yang melambangkan 10 + 7 ?',
+                        'audio' => 'Angka belasan manakah yang melambangkan 10 ditambah 7?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => '17 (Tujuh Belas)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '16', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '18', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa banyak kaki pada 2 ekor kucing lucu 🐱🐱? (4 kaki + 4 kaki)',
+                        'audio' => 'Berapa banyak kaki pada 2 ekor kucing lucu?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            ['emoji' => '8️⃣', 'text' => '8 Kaki Kucing', 'is_correct' => true],
+                            ['emoji' => '6️⃣', 'text' => '6 Kaki', 'is_correct' => false],
+                            ['emoji' => '🔟', 'text' => '10 Kaki', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa banyak roda pada 3 buah sepeda roda dua 🚲🚲🚲? (2 + 2 + 2)',
+                        'audio' => 'Berapa banyak roda pada 3 buah sepeda roda dua?',
+                        'emoji' => '🚲',
+                        'options' => [
+                            ['emoji' => '6️⃣', 'text' => '6 Roda Sepeda', 'is_correct' => true],
+                            ['emoji' => '4️⃣', 'text' => '4 Roda', 'is_correct' => false],
+                            ['emoji' => '8️⃣', 'text' => '8 Roda', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka berapakah yang terdiri dari angka 2 diikuti angka 0?',
+                        'audio' => 'Angka berapakah yang terdiri dari angka 2 diikuti angka 0?',
+                        'emoji' => '2️⃣',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '20 (Dua Puluh)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '10 (Sepuluh)', 'is_correct' => false],
+                            ['emoji' => '2️⃣', 'text' => '2 (Dua)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan dari urutan angka berikut: 16, 17, 18, ... ?',
+                        'audio' => 'Lanjutan dari urutan angka berikut: 16, 17, 18, lalu angka berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            ['emoji' => '1️⃣', 'text' => 'Angka 19', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => 'Angka 20', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => 'Angka 15', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar hebat apakah untuk anak pintar yang menguasai angka 1 sampai 20?',
+                        'audio' => 'Gelar hebat apakah untuk anak pintar yang menguasai angka 1 sampai 20?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Juara Cilik Angka Cerdas', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Tidur', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
