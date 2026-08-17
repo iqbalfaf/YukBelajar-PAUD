@@ -453,44 +453,76 @@ class FrontEndController extends Controller
         $user = $this->getCurrentUserData();
         $authId = Auth::id();
 
-        // Ambil daftar siswa lain dari tabel users
-        $friendsModel = User::where('role', 'student')
-            ->when($authId, fn ($q) => $q->where('id', '!=', $authId))
-            ->take(6)
+        // 1. Ambil seluruh siswa aktif beserta riwayat kuis terbaru dari database
+        $studentsModel = User::where('role', 'student')
+            ->with(['quizAttempts' => fn ($q) => $q->latest()->with('quiz')])
+            ->orderByDesc('total_stars')
             ->get();
 
-        $friends = $friendsModel->map(function ($u, $idx) {
+        $friends = $studentsModel->map(function ($u, $idx) use ($authId) {
+            $latestAttempt = $u->quizAttempts->first();
+            $recentAction = $latestAttempt && $latestAttempt->quiz
+                ? "Baru saja menyelesaikan {$latestAttempt->quiz->title} (Skor {$latestAttempt->score} ⭐)"
+                : 'Aktif menjelajahi pulau materi & kuis bintang ⭐';
+
+            $accessory = match ($u->avatar_accessory) {
+                'crown' => '👑',
+                'party', 'hat' => '🥳',
+                'glasses' => '👓',
+                'superhero' => '🦸',
+                default => ($u->total_stars >= 30 ? '👑' : ''),
+            };
+
+            $isCurrentUser = $u->id === $authId;
+            $displayName = $isCurrentUser ? "Kamu ({$u->name})" : $u->name;
+
             return [
                 'id' => $u->id,
-                'name' => $u->name,
+                'name' => $displayName,
+                'raw_name' => $u->name,
                 'age' => $u->age ?? 4,
-                'avatar' => $u->avatar_icon ?? 'kelinci',
-                'avatar_emoji' => $u->avatar_emoji ?? '🐰',
-                'accessory' => '👑',
-                'stars_count' => $u->total_stars ?? 30,
-                'recent_action' => 'Baru saja menamatkan modul belajar ceria ⭐',
-                'badge' => 'Petualang Cilik Aktif',
-                'claps_count' => 15 + ($idx * 3),
-                'balloons_count' => 10 + ($idx * 2),
-                'stars_given' => 20 + ($idx * 4),
+                'avatar' => $u->avatar_icon ?? 'dino',
+                'avatar_emoji' => $u->avatar_emoji ?? '🦖',
+                'accessory' => $accessory,
+                'stars_count' => $u->total_stars ?? 0,
+                'recent_action' => $recentAction,
+                'badge' => $u->total_stars >= 30 ? 'Bintang Juara PAUD ⭐' : 'Petualang Cilik Ceria 🌟',
+                'claps_count' => max(10, (($u->id * 7) % 25) + 12),
+                'balloons_count' => max(8, (($u->id * 5) % 20) + 9),
+                'stars_given' => max(15, (($u->id * 9) % 35) + 16),
                 'is_online' => true,
             ];
         })->toArray();
 
+        // 2. Metrik live milestone bintang bersama dari seluruh siswa
         $totalStars = (int) User::where('role', 'student')->sum('total_stars');
         $studentsCount = User::where('role', 'student')->count();
 
+        // 3. Kabar sapaan & prestasi live dari tabel quiz_attempts nyata
+        $recentAttempts = QuizAttempt::with(['user', 'quiz'])->latest()->take(6)->get();
+        $cheerMessages = $recentAttempts->map(function ($att) {
+            $userName = $att->user ? $att->user->name : 'Siswa Cilik';
+            $quizTitle = $att->quiz ? $att->quiz->title : 'Arena Kuis Ceria';
+            $timeStr = $att->completed_at ? $att->completed_at->diffForHumans() : 'baru saja';
+
+            return "🎉 {$userName} meraih skor {$att->score} di {$quizTitle} ({$timeStr})!";
+        })->toArray();
+
+        if (empty($cheerMessages)) {
+            $cheerMessages = [
+                '🎉 Alif Rahman meraih 3 ⭐ di Kuis Tebak Hewan!',
+                '🌟 Nayla Putri menamatkan modul Istana Angka dengan ceria!',
+                '👏 Pak Guru Iqbal memberi apresiasi bintang untuk seluruh anak hebat!',
+            ];
+        }
+
         $milestone = [
-            'current_stars' => $totalStars > 0 ? $totalStars : 385,
+            'current_stars' => $totalStars,
             'target_stars' => 500,
             'progress_pct' => min(100, (int) (($totalStars / 500) * 100)),
-            'reward_title' => 'Membuka Pulau Petualang Bintang ⭐ & Stiker Emas!',
-            'active_adventurers_count' => $studentsCount > 0 ? $studentsCount : 120,
-            'recent_cheers' => [
-                'Nayla memberi 👏 Tepuk Tangan untuk Alif',
-                'Kenzo mengirim 🎈 Balon Ceria untuk Nayla',
-                'Pak Guru Iqbal memberi ⭐ Semangat Bintang untuk Seluruh Siswa',
-            ],
+            'reward_title' => 'Membuka Pulau Petualang Bintang ⭐ & Stiker Emas Bersama!',
+            'active_adventurers_count' => $studentsCount,
+            'recent_cheers' => $cheerMessages,
         ];
 
         return view('pages.community', compact('user', 'friends', 'milestone'));

@@ -65,5 +65,6 @@ test('halaman panggung sahabat petualang memuat daftar siswa nyata dari database
 
     $friends = $response->viewData('friends');
     expect(count($friends))->toBeGreaterThan(0);
-    expect(collect($friends)->pluck('id'))->not->toContain($student->id);
+    expect(collect($friends)->pluck('id'))->toContain($student->id);
+    expect(collect($friends)->firstWhere('id', $student->id)['name'])->toContain('Kamu');
 });
