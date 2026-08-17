@@ -6,7 +6,7 @@
 <div class="flex flex-col gap-6 pb-16"
      x-data="{
          activePillar: 'mengenal', // 'mengenal', 'membaca', 'menghitung'
-         selectedCat: 'all',
+         selectedCat: '{{ $categories[0]['slug'] ?? 'abjad' }}',
          searchQuery: '',
          showAddModal: false,
          showEditModal: false,
@@ -62,7 +62,8 @@
 
          switchPillar(p) {
              this.activePillar = p;
-             this.selectedCat = 'all';
+             const firstCat = this.categories.find(c => c.pillar === p);
+             this.selectedCat = firstCat ? firstCat.slug : 'all';
          },
 
          openEdit(item) {
@@ -331,41 +332,54 @@
                                 <!-- Cards List in this Level -->
                                 <div class="flex flex-col gap-3">
                                     <template x-for="item in lvl.items" :key="item.id">
-                                        <div class="bg-white border-2 border-slate-200/80 rounded-2xl p-3.5 shadow-2xs flex items-center justify-between gap-3 hover:border-sky-400 hover:shadow-xs transition-all">
+                                        <div class="bg-white border-2 border-slate-200/90 rounded-2xl p-4 shadow-xs flex flex-col justify-between gap-3 hover:border-sky-400 hover:shadow-md transition-all">
                                             
-                                            <!-- Emoji Icon & Title Info -->
-                                            <div class="flex items-center gap-3 min-w-0 flex-1">
-                                                <div class="w-11 h-11 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                                            <!-- Top Row: Icon + Full Title & Subtitle (Full width, no wrap mess!) -->
+                                            <div class="flex items-start gap-3">
+                                                <div class="w-12 h-12 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-3xl shrink-0 shadow-inner">
                                                     <span x-html="window.twemojiParse(item.icon_emoji)"></span>
                                                 </div>
-                                                <div class="min-w-0 flex-1">
-                                                    <h5 class="text-xs sm:text-sm font-black text-slate-800 leading-snug" x-text="item.title"></h5>
-                                                    <p class="text-[11px] font-semibold text-slate-400 truncate mt-0.5" x-text="item.subtitle"></p>
+                                                <div class="flex-1 min-w-0">
+                                                    <h5 class="text-sm font-extrabold text-slate-800 leading-snug break-words" x-text="item.title"></h5>
+                                                    <p class="text-xs font-semibold text-slate-400 mt-0.5" x-text="item.subtitle"></p>
                                                 </div>
                                             </div>
 
-                                            <!-- Card Actions (Speak, Edit, Delete) -->
-                                            <div class="flex items-center gap-1.5 shrink-0">
-                                                <button @click="playSpeech(item.speech_text || item.title)" 
-                                                        title="Tes Suara TTS"
-                                                        class="w-8 h-8 bg-yellow-100 hover:bg-yellow-200 text-yellow-900 rounded-xl flex items-center justify-center text-xs font-bold transition-transform active:scale-90 cursor-pointer">
-                                                    🔊
+                                            <!-- Speech text audio preview (if available) -->
+                                            <template x-if="item.speech_text">
+                                                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-[11px] text-slate-600">
+                                                    <span class="font-bold text-slate-700">🗣️ Audio:</span> 
+                                                    <span class="italic" x-text="`&ldquo;${item.speech_text}&rdquo;`"></span>
+                                                </div>
+                                            </template>
+
+                                            <!-- Bottom Action Toolbar -->
+                                            <div class="flex items-center justify-between gap-2 pt-2 border-t border-slate-100">
+                                                <button type="button" @click="playSpeech(item.speech_text || item.title)" 
+                                                        title="Dengarkan Suara Pelafalan"
+                                                        class="flex-1 py-1.5 px-2.5 bg-yellow-100 hover:bg-yellow-200 text-yellow-950 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition-transform active:scale-95 cursor-pointer shadow-2xs">
+                                                    <span>🔊</span>
+                                                    <span>Dengar Suara</span>
                                                 </button>
-                                                <button @click="openEdit(item)" 
+
+                                                <button type="button" @click="openEdit(item)" 
                                                         title="Edit Kartu"
-                                                        class="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl flex items-center justify-center text-xs font-bold transition-transform active:scale-90 cursor-pointer">
-                                                    ✏️
+                                                        class="py-1.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1 transition-transform active:scale-95 cursor-pointer">
+                                                    <span>✏️</span>
+                                                    <span>Edit</span>
                                                 </button>
+
                                                 <form :action="`{{ url('/admin/materials') }}/${item.id}`" method="POST"
                                                       onsubmit="return confirm('Hapus kartu materi ini?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" title="Hapus Kartu"
-                                                            class="w-8 h-8 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-xs font-bold transition-transform active:scale-90 cursor-pointer">
+                                                            class="p-1.5 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl text-xs font-bold transition-transform active:scale-95 cursor-pointer">
                                                         🗑️
                                                     </button>
                                                 </form>
                                             </div>
+
                                         </div>
                                     </template>
 
