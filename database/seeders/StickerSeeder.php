@@ -46,8 +46,10 @@ class StickerSeeder extends Seeder
             ['name' => 'Roket Penjelajah Angkasa', 'emoji' => '🚀', 'category' => 'petualang', 'rarity' => 'legendary', 'required_stars' => 150, 'description' => 'Meluncur tinggi menggapai cita-cita setinggi langit.'],
 
             // ==========================================
-            // KATEGORI 3: 👑 SPESIAL & PRESTASI (10 Stiker: 10 - 200 Bintang)
+            // KATEGORI 3: 👑 SPESIAL & PRESTASI (12 Stiker: Streak & 10 - 200 Bintang)
             // ==========================================
+            ['name' => 'Api Semangat Belajar 3 Hari', 'emoji' => '🔥', 'category' => 'spesial', 'rarity' => 'rare', 'required_stars' => 0, 'description' => 'Stiker langka apresiasi belajar 3 hari berturut-turut!'],
+            ['name' => 'Bintang Ketekunan Emas 7 Hari', 'emoji' => '⭐', 'category' => 'spesial', 'rarity' => 'legendary', 'required_stars' => 0, 'description' => 'Stiker legendaris pahlawan belajar 7 hari konsisten!'],
             ['name' => 'Kotak Hadiah Kejutan', 'emoji' => '🎁', 'category' => 'spesial', 'rarity' => 'common', 'required_stars' => 10, 'description' => 'Hadiah spesial penuh berkah untuk anak pintar.'],
             ['name' => 'Pita Kehormatan Emas', 'emoji' => '🎗️', 'category' => 'spesial', 'rarity' => 'rare', 'required_stars' => 35, 'description' => 'Dianugerahkan kepada siswa paling tekun.'],
             ['name' => 'Kembang Api Perayaan', 'emoji' => '🎆', 'category' => 'spesial', 'rarity' => 'rare', 'required_stars' => 50, 'description' => 'Pesta kembang api merayakan kelulusan modul.'],

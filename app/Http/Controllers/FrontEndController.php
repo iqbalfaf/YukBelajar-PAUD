@@ -74,6 +74,9 @@ class FrontEndController extends Controller
             'avatar_accessory' => $accessoryIcon,
             'role' => $authUser->role ?? 'student',
             'stars_count' => $authUser->total_stars ?? 0,
+            'current_streak_days' => $authUser->current_streak_days ?? 1,
+            'longest_streak_days' => $authUser->longest_streak_days ?? 1,
+            'last_activity_date' => $authUser->last_activity_date ? (is_string($authUser->last_activity_date) ? $authUser->last_activity_date : $authUser->last_activity_date->toDateString()) : null,
             'stickers_count' => $stickersCount,
             'total_quizzes_completed' => $quizzesCompletedCount,
             'achievements_count' => $achievementsCount,
@@ -456,6 +459,7 @@ class FrontEndController extends Controller
             'completed_at' => now(),
         ]);
 
+        $oldStars = $authUser->total_stars;
         $newStarsAwarded = 0;
         if ($starsEarned > $previousBest) {
             $newStarsAwarded = $starsEarned - $previousBest;
@@ -466,6 +470,26 @@ class FrontEndController extends Controller
         }
 
         $authUser->refresh();
+        $newStars = $authUser->total_stars;
+
+        // Catat keaktifan harian (Daily Learning Streak 🔥)
+        $streakInfo = $authUser->recordDailyActivity();
+
+        // Deteksi apakah penambahan bintang ini membuka Level 2 atau Level 3
+        $levelUnlocked = null;
+        if ($oldStars < 5 && $newStars >= 5) {
+            $levelUnlocked = [
+                'level' => 2,
+                'title' => 'Level 2 (Eksplorasi Menengah)',
+                'message' => 'Hore! Level 2 sudah terbuka untukmu! Hebat sekali!',
+            ];
+        } elseif ($oldStars < 15 && $newStars >= 15) {
+            $levelUnlocked = [
+                'level' => 3,
+                'title' => 'Level 3 (Pra-SD & Mahir)',
+                'message' => 'Luar Biasa! Level 3 sudah terbuka untukmu! Kamu benar-benar anak pintar!',
+            ];
+        }
 
         return response()->json([
             'success' => true,
@@ -475,6 +499,8 @@ class FrontEndController extends Controller
             'best_stars' => max($starsEarned, $previousBest),
             'new_stars_awarded' => $newStarsAwarded,
             'total_stars' => $authUser->total_stars,
+            'streak_info' => $streakInfo,
+            'level_unlocked' => $levelUnlocked,
             'message' => $message,
         ]);
     }
@@ -493,12 +519,34 @@ class FrontEndController extends Controller
             'material_id' => 'required|integer|exists:materials,id',
         ]);
 
+        $oldStars = $authUser->total_stars;
         $authUser->increment('total_stars', 1);
         $authUser->refresh();
+        $newStars = $authUser->total_stars;
+
+        // Catat keaktifan harian (Daily Learning Streak 🔥)
+        $streakInfo = $authUser->recordDailyActivity();
+
+        $levelUnlocked = null;
+        if ($oldStars < 5 && $newStars >= 5) {
+            $levelUnlocked = [
+                'level' => 2,
+                'title' => 'Level 2 (Eksplorasi Menengah)',
+                'message' => 'Hore! Level 2 sudah terbuka untukmu! Hebat sekali!',
+            ];
+        } elseif ($oldStars < 15 && $newStars >= 15) {
+            $levelUnlocked = [
+                'level' => 3,
+                'title' => 'Level 3 (Pra-SD & Mahir)',
+                'message' => 'Luar Biasa! Level 3 sudah terbuka untukmu! Kamu benar-benar anak pintar!',
+            ];
+        }
 
         return response()->json([
             'success' => true,
             'total_stars' => $authUser->total_stars,
+            'streak_info' => $streakInfo,
+            'level_unlocked' => $levelUnlocked,
             'message' => '⭐ Hore! Kamu dapat +1 Bintang Emas karena rajin mendengarkan materi!',
         ]);
     }
@@ -796,6 +844,55 @@ class FrontEndController extends Controller
             default => 'Ananda sedang dalam fase persiapan Pra-SD. Latih ketelitian menyimak instruksi audio dan kemandirian menjawab kuis.',
         };
 
+        // 5. Data Grafik Statistik Perkembangan Anak per Kategori (Real MySQL Data)
+        $chartCategories = $categories->map(function ($c) use ($authUser) {
+            $quizIds = $c->quizzes->pluck('id');
+            $attempts = $authUser ? QuizAttempt::where('user_id', $authUser->id)->whereIn('quiz_id', $quizIds)->get() : collect();
+
+            $starsEarned = 0;
+            foreach ($c->quizzes as $q) {
+                $maxStarForQuiz = $attempts->where('quiz_id', $q->id)->max('stars_earned') ?? 0;
+                $starsEarned += $maxStarForQuiz;
+            }
+
+            $maxPossibleStars = $c->quizzes->sum('stars_reward') ?: ($c->quizzes->count() * 5);
+            $quizzesDone = $attempts->unique('quiz_id')->count();
+            $quizzesTotal = $c->quizzes->count();
+            $avgScore = $attempts->count() > 0 ? (int) round($attempts->avg('score')) : 0;
+            $accuracy = $attempts->sum('total_questions') > 0
+                ? (int) round(($attempts->sum('total_correct') / $attempts->sum('total_questions')) * 100)
+                : 0;
+
+            return [
+                'id' => $c->id,
+                'slug' => $c->slug,
+                'pillar' => $c->pillar ?: 'mengenal',
+                'name' => $c->name,
+                'short_name' => explode(' ', $c->name)[0],
+                'icon' => $c->icon_emoji,
+                'stars_earned' => $starsEarned,
+                'max_stars' => max(10, $maxPossibleStars),
+                'quizzes_done' => $quizzesDone,
+                'quizzes_total' => $quizzesTotal,
+                'avg_score' => $avgScore,
+                'accuracy' => $accuracy,
+                'color' => match ($c->color_theme) {
+                    'orange' => '#f97316',
+                    'sky' => '#0284c7',
+                    'pink', 'rose' => '#ec4899',
+                    'purple' => '#a855f7',
+                    'indigo' => '#6366f1',
+                    'amber' => '#f59e0b',
+                    default => '#10b981',
+                },
+            ];
+        })->values()->toArray();
+
+        $favoriteCategory = collect($chartCategories)->sortByDesc('stars_earned')->first();
+        $favoriteTopicName = ($favoriteCategory && $favoriteCategory['stars_earned'] > 0)
+            ? "{$favoriteCategory['name']} {$favoriteCategory['icon']}"
+            : 'Pulau Satwa Ceria 🦁';
+
         $parentData = [
             'child_profile' => $user,
             'learning_summary' => [
@@ -803,14 +900,16 @@ class FrontEndController extends Controller
                 'stars_target' => 50,
                 'quizzes_completed' => $totalQuizzes > 0 ? $totalQuizzes : count($recentActivities),
                 'materials_read' => $totalMaterials > 0 ? $totalMaterials : 18,
-                'learning_streak_days' => 5,
-                'favorite_topic' => 'Pulau Hewan Ceria 🦁',
+                'learning_streak_days' => $authUser ? ($authUser->current_streak_days ?? 1) : 1,
+                'longest_streak_days' => $authUser ? ($authUser->longest_streak_days ?? 1) : 1,
+                'favorite_topic' => $favoriteTopicName,
             ],
             'recent_activities' => $recentActivities,
             'topic_mastery' => $topicMastery,
             'categories' => $categoriesList,
             'unlocked_categories' => $unlockedCategories,
             'recommendation' => $recommendationByAge,
+            'chart_categories' => $chartCategories,
         ];
 
         return view('pages.parents', compact('user', 'parentData'));

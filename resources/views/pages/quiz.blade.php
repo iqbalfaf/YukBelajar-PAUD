@@ -100,6 +100,15 @@
                      this.bestStars = res.best_stars || this.scoreCorrect;
                      this.currentUserStars = res.total_stars || (this.currentUserStars + this.newStarsAwarded);
                      this.submissionMessage = res.message || '';
+
+                     // Trigger Audio-Guided Level Unlock Celebration jika level baru terbuka!
+                     if (res.level_unlocked) {
+                         setTimeout(() => {
+                             window.dispatchEvent(new CustomEvent('level-unlocked', {
+                                 detail: res.level_unlocked
+                             }));
+                         }, 1200);
+                     }
                  }
              } catch (err) {
                  console.error('Submit Quiz Error:', err);

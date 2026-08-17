@@ -22,6 +22,9 @@
           parentalError: false,
           num1: 4,
           num2: 3,
+          showStreakModal: false,
+          showLevelUnlockModal: false,
+          unlockedLevelData: { level: 2, title: 'Level 2: Menengah', message: 'Hore! Level baru sudah terbuka untukmu! Hebat sekali!' },
           initAudio() {
               if (window.soundEngine) {
                   window.soundEngine.initContext();
@@ -48,8 +51,27 @@
                   this.parentalError = true;
                   if (window.soundEngine) window.soundEngine.playWrong();
               }
+          },
+          triggerLevelUnlockCelebration(data) {
+              this.unlockedLevelData = data;
+              this.showLevelUnlockModal = true;
+              if (window.soundEngine) {
+                  window.soundEngine.playVictory();
+                  setTimeout(() => {
+                      window.soundEngine.speak(data.message || 'Hore! Level baru sudah terbuka untukmu! Hebat sekali!');
+                  }, 300);
+              }
+              if (window.triggerConfetti) {
+                  window.triggerConfetti(0.5);
+                  setTimeout(() => window.triggerConfetti(0.4), 400);
+              }
           }
-      }">
+      }"
+      x-init="
+          window.addEventListener('level-unlocked', (e) => {
+              triggerLevelUnlockCelebration(e.detail);
+          });
+      ">
 
     <!-- Floating Background Clouds -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-40">
@@ -83,6 +105,14 @@
                         <span class="text-sm sm:text-base animate-wiggle">⭐</span>
                         <span>{{ auth()->check() ? auth()->user()->total_stars : 35 }}</span>
                     </div>
+
+                    <!-- Daily Learning Streak Badge (🔥) -->
+                    <button @click="showStreakModal = true; if(window.soundEngine) { window.soundEngine.playChirp(); window.soundEngine.speak('Semangat belajar harian! Kamu sudah belajar {{ auth()->check() ? (auth()->user()->current_streak_days ?? 1) : 1 }} hari berturut-turut!'); }"
+                            title="Semangat Belajar Harian (Daily Streak 🔥)"
+                            class="flex items-center gap-1 bg-gradient-to-r from-orange-100 to-amber-100 hover:from-orange-200 hover:to-amber-200 border-2 border-orange-400 px-2.5 py-1 rounded-full shadow-xs text-orange-950 font-black text-xs sm:text-sm hover:scale-105 transition-transform cursor-pointer">
+                        <span class="text-sm sm:text-base animate-bounce-slow">🔥</span>
+                        <span>{{ auth()->check() ? (auth()->user()->current_streak_days ?? 1) : 1 }} <span class="hidden sm:inline text-[11px] font-bold text-orange-800">Hari</span></span>
+                    </button>
 
                     <!-- Sound FX Toggle -->
                     <button @click="toggleAudio()" title="Suara Musik & Efek"
@@ -257,6 +287,143 @@
                 <button type="button" @click="checkParentalGate()"
                         class="flex-1 py-3 btn-3d btn-3d-sky rounded-2xl text-white">
                     Masuk
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Learning Streak Milestone Modal -->
+    <div x-show="showStreakModal" x-cloak
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95">
+        
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full border-4 border-orange-400 shadow-2xl text-center relative overflow-hidden"
+             @click.away="showStreakModal = false">
+            <!-- Header glow background -->
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-orange-300/30 rounded-full blur-xl pointer-events-none"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-amber-300/30 rounded-full blur-xl pointer-events-none"></div>
+
+            <div class="w-20 h-20 bg-gradient-to-tr from-orange-400 to-amber-300 rounded-3xl flex items-center justify-center mx-auto mb-4 text-4xl shadow-md border-3 border-white animate-bounce-slow">
+                🔥
+            </div>
+
+            <span class="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-black uppercase tracking-wider mb-2">
+                Semangat Belajar Harian
+            </span>
+
+            <h3 class="text-2xl sm:text-3xl font-black font-heading text-slate-800 mb-2">
+                {{ auth()->check() ? (auth()->user()->current_streak_days ?? 1) : 1 }} Hari Berturut-Turut!
+            </h3>
+
+            <p class="text-xs sm:text-sm font-semibold text-slate-600 mb-5">
+                Konsistensi hebat! Belajarlah setiap hari untuk mengumpulkan api semangat dan membuka stiker langka eksklusif!
+            </p>
+
+            <!-- 3-Day & 7-Day Track Visual -->
+            <div class="bg-orange-50 border-2 border-orange-200 rounded-2xl p-4 mb-5">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                    <span class="text-xs font-bold text-orange-950">Milestone Hadiah Stiker:</span>
+                    <span class="text-xs font-black text-orange-700">Target: 3 Hari 🔥</span>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-2">
+                    @php
+                        $curStreak = auth()->check() ? (auth()->user()->current_streak_days ?? 1) : 1;
+                    @endphp
+                    <div class="p-3 rounded-xl flex flex-col items-center gap-1 border-2 {{ $curStreak >= 1 ? 'bg-orange-500 border-orange-600 text-white shadow-xs' : 'bg-white border-orange-200 text-slate-400' }}">
+                        <span class="text-xl">🔥</span>
+                        <span class="text-[11px] font-black">Hari 1</span>
+                        <span class="text-[9px] font-bold">{{ $curStreak >= 1 ? '✓ Tercapai' : 'Terkunci' }}</span>
+                    </div>
+
+                    <div class="p-3 rounded-xl flex flex-col items-center gap-1 border-2 {{ $curStreak >= 2 ? 'bg-orange-500 border-orange-600 text-white shadow-xs' : 'bg-white border-orange-200 text-slate-400' }}">
+                        <span class="text-xl">🔥</span>
+                        <span class="text-[11px] font-black">Hari 2</span>
+                        <span class="text-[9px] font-bold">{{ $curStreak >= 2 ? '✓ Tercapai' : 'Terkunci' }}</span>
+                    </div>
+
+                    <div class="p-3 rounded-xl flex flex-col items-center gap-1 border-2 {{ $curStreak >= 3 ? 'bg-gradient-to-tr from-amber-400 to-yellow-300 border-amber-500 text-amber-950 shadow-xs' : 'bg-white border-orange-200 text-slate-400' }}">
+                        <span class="text-xl">🎁</span>
+                        <span class="text-[11px] font-black">Hari 3</span>
+                        <span class="text-[9px] font-bold">{{ $curStreak >= 3 ? '⭐ Stiker Terbuka!' : 'Stiker Langka' }}</span>
+                    </div>
+                </div>
+
+                <div class="mt-3 pt-3 border-t border-orange-200/80 flex items-center justify-between text-xs text-orange-900 font-bold">
+                    <span>Hadiah: Stiker "🔥 Sang Jawara Api Semangat"</span>
+                    <a href="{{ route('stickers') }}" class="text-sky-700 underline font-black">Buku Stiker →</a>
+                </div>
+            </div>
+
+            <button type="button" @click="showStreakModal = false; if(window.soundEngine) window.soundEngine.playClick()"
+                    class="btn-3d btn-3d-orange w-full py-3.5 rounded-2xl text-white font-extrabold text-sm shadow-md">
+                Ayo Belajar Lebih Giat! 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- AUDIO-GUIDED LEVEL UNLOCK CELEBRATION MODAL (MASCOT KIKI) -->
+    <div x-show="showLevelUnlockModal" x-cloak
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-md"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-90"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-90">
+        
+        <div class="bg-gradient-to-b from-amber-50 via-white to-sky-50 rounded-3xl p-6 sm:p-8 max-w-lg w-full border-4 border-yellow-400 shadow-2xl text-center relative overflow-hidden"
+             @click.away="showLevelUnlockModal = false">
+            
+            <!-- Confetti blast decoration -->
+            <div class="text-4xl animate-bounce-slow mb-1">🎆 🌟 🎊</div>
+
+            <!-- Mascot Kiki Avatar with animated speech bubble -->
+            <div class="relative inline-block my-2">
+                <div class="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-tr from-yellow-300 via-amber-200 to-sky-200 rounded-full flex items-center justify-center mx-auto text-5xl sm:text-6xl border-4 border-white shadow-lg animate-wiggle">
+                    🐱
+                </div>
+                <span class="absolute -bottom-2 -right-2 bg-yellow-400 border-2 border-white px-2 py-0.5 rounded-full text-xs font-black text-amber-950 shadow-xs">
+                    Kiki si Kucing
+                </span>
+            </div>
+
+            <!-- Dialogue Speech Bubble -->
+            <div class="bg-white border-3 border-amber-300 rounded-3xl p-4 sm:p-5 shadow-xs mb-4 text-center relative mt-3">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t-3 border-l-3 border-amber-300 rotate-45"></div>
+                
+                <h3 class="text-xl sm:text-2xl font-black font-heading text-amber-950 mb-1">
+                    "Hore! Level Baru Terbuka!"
+                </h3>
+                <p class="text-sm sm:text-base font-bold text-slate-700" x-text="unlockedLevelData.message || 'Hore! Level baru sudah terbuka untukmu! Hebat sekali!'"></p>
+            </div>
+
+            <!-- Unlocked Level Badge Card -->
+            <div class="bg-sky-50 border-2 border-sky-300 rounded-2xl p-3.5 mb-5 flex items-center justify-between text-left">
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl">🔓</span>
+                    <div>
+                        <h4 class="text-sm font-black text-sky-950" x-text="unlockedLevelData.title || 'Level Baru Terbuka'"></h4>
+                        <span class="text-xs font-bold text-sky-700">Kartu & Tantangan Baru Siap Dijelajahi!</span>
+                    </div>
+                </div>
+                <button type="button" 
+                        @click="if(window.soundEngine) window.soundEngine.speak(unlockedLevelData.message || 'Hore! Level baru sudah terbuka untukmu!')"
+                        class="p-2.5 bg-sky-500 hover:bg-sky-400 text-white rounded-xl text-xs font-black shadow-xs flex items-center gap-1 cursor-pointer">
+                    <span>🔊</span>
+                    <span class="hidden sm:inline">Ulangi Suara</span>
+                </button>
+            </div>
+
+            <div class="flex gap-3">
+                <button type="button" @click="showLevelUnlockModal = false; if(window.soundEngine) window.soundEngine.playClick()"
+                        class="flex-1 py-3.5 btn-3d btn-3d-yellow rounded-2xl text-amber-950 font-black text-sm shadow-md">
+                    Jelajahi Level Baru Sekarang! 🗺️
                 </button>
             </div>
         </div>

@@ -149,6 +149,92 @@
                 </div>
             </div>
 
+            <!-- GRAFIK PERKEMBANGAN BINTANG & MINAT BELAJAR PER KATEGORI (REAL MYSQL DATA) -->
+            <div class="bg-white border-3 border-sky-200 rounded-3xl p-6 shadow-xs flex flex-col gap-5"
+                 x-data="{
+                     chartPillarFilter: 'all',
+                     chartViewType: 'bar', // 'bar' or 'radar'
+                     chartData: {{ Js::from($parentData['chart_categories']) }},
+                     get filteredChartCategories() {
+                         if (this.chartPillarFilter === 'all') return this.chartData;
+                         return this.chartData.filter(c => c.pillar === this.chartPillarFilter);
+                     },
+                     initChart() {
+                         this.$nextTick(() => {
+                             if (window.renderParentsProgressChart) {
+                                 window.renderParentsProgressChart(this.filteredChartCategories, this.chartViewType);
+                             }
+                         });
+                     }
+                 }"
+                 x-init="initChart(); $watch('chartPillarFilter', () => initChart()); $watch('chartViewType', () => initChart());">
+                
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                    <div>
+                        <span class="text-xs font-black uppercase text-sky-700 bg-sky-100 px-3 py-0.5 rounded-full">
+                            Analisis Capaian Pembelajaran
+                        </span>
+                        <h4 class="text-xl font-black font-heading text-slate-800 mt-1 flex items-center gap-2">
+                            <span>📈</span>
+                            <span>Grafik Bintang & Penguasaan Kategori</span>
+                        </h4>
+                        <p class="text-xs text-slate-500 font-semibold mt-0.5">
+                            Grafik bintang yang diperoleh anak per kategori materi (hewan, angka, abjad, buah, warna, kendaraan).
+                        </p>
+                    </div>
+
+                    <!-- Filter Pillar & Chart Type -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs font-bold">
+                            <button @click="chartPillarFilter = 'all'"
+                                    class="px-2.5 py-1 rounded-lg transition-all cursor-pointer"
+                                    :class="chartPillarFilter === 'all' ? 'bg-white text-sky-800 shadow-xs' : 'text-slate-600'">
+                                Semua
+                            </button>
+                            <button @click="chartPillarFilter = 'mengenal'"
+                                    class="px-2.5 py-1 rounded-lg transition-all cursor-pointer"
+                                    :class="chartPillarFilter === 'mengenal' ? 'bg-white text-sky-800 shadow-xs' : 'text-slate-600'">
+                                🦁 Mengenal
+                            </button>
+                            <button @click="chartPillarFilter = 'membaca'"
+                                    class="px-2.5 py-1 rounded-lg transition-all cursor-pointer"
+                                    :class="chartPillarFilter === 'membaca' ? 'bg-white text-sky-800 shadow-xs' : 'text-slate-600'">
+                                📖 Membaca
+                            </button>
+                            <button @click="chartPillarFilter = 'menghitung'"
+                                    class="px-2.5 py-1 rounded-lg transition-all cursor-pointer"
+                                    :class="chartPillarFilter === 'menghitung' ? 'bg-white text-sky-800 shadow-xs' : 'text-slate-600'">
+                                ➕ Menghitung
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canvas Chart Container -->
+                <div class="relative w-full h-72 sm:h-80 bg-slate-50/70 p-3 rounded-2xl border border-slate-200">
+                    <canvas id="parentsCategoryChart" class="w-full h-full"></canvas>
+                </div>
+
+                <!-- Summary Category Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <template x-for="cat in filteredChartCategories.slice(0, 6)" :key="cat.id">
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col justify-between gap-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xl" x-text="cat.icon"></span>
+                                <span class="text-xs font-black text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full" x-text="`${cat.stars_earned} ⭐`"></span>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-black text-slate-800 truncate" x-text="cat.name"></h5>
+                                <div class="flex items-center justify-between text-[10px] text-slate-500 font-bold mt-1">
+                                    <span x-text="`Kuis: ${cat.quizzes_done}/${cat.quizzes_total}`"></span>
+                                    <span class="text-emerald-700 font-extrabold" x-text="`Akurasi: ${cat.accuracy}%`"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
             <!-- Topic Mastery Progress (Real Data MySQL Quiz Attempts) -->
             <div class="bg-white border-3 border-slate-200 rounded-3xl p-6 shadow-xs">
                 <h4 class="text-lg font-bold font-heading text-slate-800 mb-4 flex items-center gap-2">
@@ -296,3 +382,114 @@
 
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+let parentsChartInstance = null;
+
+window.renderParentsProgressChart = function(categoriesData, chartType = 'bar') {
+    const canvas = document.getElementById('parentsCategoryChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    if (parentsChartInstance) {
+        parentsChartInstance.destroy();
+        parentsChartInstance = null;
+    }
+
+    if (!categoriesData || categoriesData.length === 0) return;
+
+    const labels = categoriesData.map(c => `${c.icon} ${c.short_name || c.name}`);
+    const starsEarnedData = categoriesData.map(c => c.stars_earned);
+    const maxStarsData = categoriesData.map(c => c.max_stars);
+    const backgroundColors = categoriesData.map(c => c.color || '#0284c7');
+
+    parentsChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: '⭐ Bintang Terkumpul',
+                    data: starsEarnedData,
+                    backgroundColor: backgroundColors,
+                    borderRadius: 10,
+                    borderSkipped: false,
+                    barPercentage: 0.65,
+                    categoryPercentage: 0.8,
+                },
+                {
+                    label: '🎯 Target Maksimal Modul',
+                    data: maxStarsData,
+                    backgroundColor: 'rgba(203, 213, 225, 0.45)', // slate-300
+                    borderRadius: 10,
+                    borderSkipped: false,
+                    barPercentage: 0.65,
+                    categoryPercentage: 0.8,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 800,
+                easing: 'easeOutQuart'
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        boxWidth: 14,
+                        boxHeight: 14,
+                        borderRadius: 4,
+                        usePointStyle: true,
+                        pointStyle: 'circle',
+                        font: {
+                            family: 'Quicksand, sans-serif',
+                            weight: 'bold',
+                            size: 11
+                        },
+                        color: '#334155'
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#0f172a',
+                    titleFont: { family: 'Quicksand, sans-serif', weight: 'bold', size: 12 },
+                    bodyFont: { family: 'Quicksand, sans-serif', size: 11 },
+                    padding: 10,
+                    cornerRadius: 12,
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.parsed.y} ⭐`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        font: { family: 'Quicksand, sans-serif', weight: 'bold', size: 10 },
+                        color: '#475569',
+                        maxRotation: 30,
+                        minRotation: 0
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(226, 232, 240, 0.8)' },
+                    ticks: {
+                        stepSize: 5,
+                        font: { family: 'Quicksand, sans-serif', weight: 'bold', size: 10 },
+                        color: '#64748b'
+                    }
+                }
+            }
+        }
+    });
+};
+</script>
+@endpush
