@@ -167,6 +167,7 @@ class FrontEndController extends Controller
             // Daftar seluruh kuis di bawah kategori ini (termasuk yang baru dibuat via AI Generator / Admin)
             $quizzesList = $cat->quizzes->map(function ($q) use ($authUser) {
                 $bestStars = $authUser ? (QuizAttempt::where('user_id', $authUser->id)->where('quiz_id', $q->id)->max('stars_earned') ?? 0) : 0;
+                $levelNum = $q->level ? $q->level->level_number : ($q->target_age >= 5 ? 3 : ($q->target_age >= 4 ? 2 : 1));
 
                 return [
                     'id' => $q->id,
@@ -174,8 +175,9 @@ class FrontEndController extends Controller
                     'title' => $q->title,
                     'icon_emoji' => $q->icon_emoji ?: '🎯',
                     'target_age' => "{$q->target_age} Thn",
+                    'level' => $levelNum,
                     'total_questions' => $q->total_questions ?: $q->questions->count(),
-                    'stars_reward' => $q->stars_reward ?: 3,
+                    'stars_reward' => $q->stars_reward ?: ($q->total_questions ?: $q->questions->count()),
                     'best_stars' => (int) $bestStars,
                     'is_completed' => $bestStars > 0,
                 ];

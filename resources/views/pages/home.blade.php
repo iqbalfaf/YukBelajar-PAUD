@@ -8,6 +8,7 @@
          activePillar: 'mengenal', // 'mengenal', 'membaca', 'menghitung'
          selectedCategory: null,
          categoryLevelFilter: 0, // 0: Semua Level, 1: Level 1, 2: Level 2, 3: Level 3
+         quizLevelFilter: 0, // 0: Semua Kuis, 1: Level 1, 2: Level 2, 3: Level 3
          categoryViewTab: 'materials', // 'materials' (default awal), 'quizzes'
          currentPage: 1,
          cardsPerPage: 6,
@@ -29,6 +30,15 @@
                  mats = mats.filter(m => m.level === this.categoryLevelFilter);
              }
              return mats;
+         },
+
+         get currentTopicQuizzes() {
+             if (!this.selectedCategory || !this.selectedCategory.quizzes_list) return [];
+             let quizzes = this.selectedCategory.quizzes_list;
+             if (this.quizLevelFilter > 0) {
+                 quizzes = quizzes.filter(q => q.level === this.quizLevelFilter);
+             }
+             return quizzes;
          },
 
          get totalMaterialPages() {
@@ -62,6 +72,7 @@
          selectCategory(cat) {
              this.selectedCategory = cat;
              this.categoryLevelFilter = 0;
+             this.quizLevelFilter = 0;
              this.categoryViewTab = 'materials'; // Default ke Pengenalan Kartu!
              this.currentPage = 1;
              if (window.soundEngine) {
@@ -82,6 +93,11 @@
          setCategoryLevelFilter(lvl) {
              this.categoryLevelFilter = lvl;
              this.currentPage = 1;
+             if (window.soundEngine) window.soundEngine.playClick();
+         },
+
+         setQuizLevelFilter(lvl) {
+             this.quizLevelFilter = lvl;
              if (window.soundEngine) window.soundEngine.playClick();
          },
 
@@ -681,45 +697,77 @@
             <!-- TAB 2 CONTENT: ARENA KUIS & TANTANGAN SOAL                                -->
             <!-- ========================================================================= -->
             <div x-show="categoryViewTab === 'quizzes'" class="flex flex-col gap-6">
-                <div class="flex items-center justify-between px-1">
-                    <div>
-                        <h3 class="text-xl sm:text-2xl font-black font-heading text-slate-800 flex items-center gap-2">
-                            <span>🎯</span>
-                            <span>Pilihan Kuis & Tantangan Soal:</span>
-                        </h3>
-                        <p class="text-xs font-bold text-slate-500">Pilih salah satu modul kuis untuk mulai bermain dan mengumpulkan bintang emas!</p>
+                
+                <!-- Sub-bar Header & Filter Level Kuis -->
+                <div class="bg-white/95 border-2 border-slate-200 rounded-2xl p-3 sm:p-4 shadow-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                    <div class="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0">
+                        <span class="text-xs font-black text-slate-700 uppercase tracking-wide mr-1 shrink-0">Level Kuis:</span>
+                        
+                        <button type="button" @click="setQuizLevelFilter(0)"
+                                class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer whitespace-nowrap"
+                                :class="quizLevelFilter === 0 ? 'bg-amber-500 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                            🌟 Semua Kuis
+                        </button>
+                        
+                        <button type="button" @click="setQuizLevelFilter(1)"
+                                class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer whitespace-nowrap flex items-center gap-1"
+                                :class="quizLevelFilter === 1 ? 'bg-emerald-500 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                            <span>🌱</span>
+                            <span>Level 1 (3 Soal)</span>
+                        </button>
+
+                        <button type="button" @click="setQuizLevelFilter(2)"
+                                class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer whitespace-nowrap flex items-center gap-1"
+                                :class="quizLevelFilter === 2 ? 'bg-amber-500 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                            <span>⭐</span>
+                            <span>Level 2 (5 Soal)</span>
+                        </button>
+
+                        <button type="button" @click="setQuizLevelFilter(3)"
+                                class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer whitespace-nowrap flex items-center gap-1"
+                                :class="quizLevelFilter === 3 ? 'bg-purple-600 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                            <span>🚀</span>
+                            <span>Level 3 (10 Soal)</span>
+                        </button>
                     </div>
 
                     <button type="button" @click="switchToMaterials()"
-                            class="btn-3d btn-3d-sky px-4 py-2 rounded-2xl text-xs font-black text-white flex items-center gap-1.5 cursor-pointer shadow-xs shrink-0">
+                            class="btn-3d btn-3d-sky px-4 py-2 rounded-xl text-xs font-black text-white flex items-center justify-center gap-1.5 cursor-pointer shadow-xs shrink-0">
                         <span>🃏</span>
                         <span>Lihat Flashcard</span>
                     </button>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <template x-for="q in selectedCategory.quizzes_list" :key="q.id">
-                        <div class="card-bubbly p-6 rounded-3xl flex flex-col justify-between border-4 border-amber-300 bg-gradient-to-b from-amber-50/50 to-white shadow-xs hover:border-amber-400 transition-all hover:shadow-md">
+                    <template x-for="q in currentTopicQuizzes" :key="q.id">
+                        <div class="card-bubbly p-6 rounded-3xl flex flex-col justify-between border-4 bg-gradient-to-b from-amber-50/40 to-white shadow-xs transition-all hover:shadow-md"
+                             :class="q.level === 1 ? 'border-emerald-200 hover:border-emerald-400' : (q.level === 2 ? 'border-amber-300 hover:border-amber-400' : 'border-purple-300 hover:border-purple-400')">
                             
                             <div>
                                 <div class="flex items-start justify-between gap-3 mb-3">
                                     <span class="text-5xl group-hover:scale-110 transition-transform" x-html="window.twemojiParse(q.icon_emoji)"></span>
                                     
-                                    <div class="flex flex-col items-end gap-1">
-                                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-amber-200 text-amber-950 border border-amber-300 shadow-2xs"
+                                    <div class="flex flex-col items-end gap-1.5">
+                                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase shadow-2xs"
+                                              :class="q.level === 1 ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : (q.level === 2 ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-purple-100 text-purple-900 border border-purple-300')"
+                                              x-text="`Level ${q.level}`"></span>
+                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-slate-100 text-slate-600 border border-slate-200"
                                               x-text="`Usia ${q.target_age}`"></span>
-                                        <span class="text-[11px] font-bold text-slate-500"
-                                              x-text="`${q.total_questions} Butir Soal`"></span>
                                     </div>
                                 </div>
 
                                 <h4 class="text-lg font-extrabold font-heading text-slate-800 mb-1" x-text="q.title"></h4>
                                 
-                                <div class="bg-amber-100/60 border border-amber-200 rounded-2xl p-3 my-3 flex items-center justify-between">
+                                <div class="flex items-center gap-2 text-xs font-black text-amber-700 mb-2">
+                                    <span class="px-2 py-0.5 rounded-md bg-amber-100 border border-amber-200" x-text="`🎯 ${q.total_questions} Soal`"></span>
+                                    <span class="px-2 py-0.5 rounded-md bg-yellow-100 border border-yellow-200" x-text="`Hadiah ${q.stars_reward} ⭐`"></span>
+                                </div>
+
+                                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 my-2 flex items-center justify-between">
                                     <span class="text-xs font-bold text-amber-900">Rekor Bintangmu:</span>
                                     <span class="text-xs font-black text-amber-700 flex items-center gap-1">
                                         <span>⭐</span>
-                                        <span x-text="q.best_stars > 0 ? `${q.best_stars} / ${q.total_questions} ⭐` : 'Belum Dicoba'"></span>
+                                        <span x-text="q.best_stars > 0 ? `${q.best_stars} / ${q.stars_reward} ⭐` : 'Belum Dicoba'"></span>
                                     </span>
                                 </div>
                             </div>

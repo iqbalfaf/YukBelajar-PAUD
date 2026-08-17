@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\LearningLevel;
 use App\Models\Question;
 use App\Models\QuestionOption;
 use App\Models\Quiz;
@@ -379,63 +380,665 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 1 - TOPIK 11: MENGENAL ALAT MUSIK (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL ---
             [
                 'category_slug' => 'alat-musik',
-                'title' => 'Tebak Alat Musik Merdu',
-                'slug' => 'tebak-alat-musik',
-                'icon_emoji' => '🎵',
+                'level_number' => 1,
+                'title' => 'Tebak Tuts Piano Cilik',
+                'slug' => 'kuis-musik-l1-piano',
+                'icon_emoji' => '🎹',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Alat musik bertuts hitam putih yang berbunyi ting-ting-ting adalah...?',
+                        'audio' => 'Alat musik bertuts hitam putih yang berbunyi ting-ting-ting adalah apa?',
+                        'emoji' => '🎹',
+                        'options' => [
+                            ['emoji' => '🎹', 'text' => 'Piano Tuts', 'is_correct' => true],
+                            ['emoji' => '🥁', 'text' => 'Drum Pukul', 'is_correct' => false],
+                            ['emoji' => '🔔', 'text' => 'Lonceng', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa warna tuts pada alat musik piano yang indah?',
+                        'audio' => 'Apa warna tuts pada alat musik piano yang indah?',
+                        'emoji' => '🎹',
+                        'options' => [
+                            ['emoji' => '🎹', 'text' => 'Hitam dan Putih', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Merah dan Biru', 'is_correct' => false],
+                            ['emoji' => '🟢', 'text' => 'Hijau dan Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana cara memainkan alat musik piano?',
+                        'audio' => 'Bagaimana cara memainkan alat musik piano?',
+                        'emoji' => '🖐️',
+                        'options' => [
+                            ['emoji' => '🖐️', 'text' => 'Menekan Tuts dengan Jari', 'is_correct' => true],
+                            ['emoji' => '🦶', 'text' => 'Menendang dengan Kaki', 'is_correct' => false],
+                            ['emoji' => '✂️', 'text' => 'Menggunting', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'alat-musik',
+                'level_number' => 1,
+                'title' => 'Tebak Irama Gitar & Drum',
+                'slug' => 'kuis-musik-l1-gitar-drum',
+                'icon_emoji' => '🎸',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Alat musik yang dimainkan dengan cara dipetik senarnya adalah...?',
+                        'audio' => 'Alat musik yang dimainkan dengan cara dipetik senarnya adalah apa?',
+                        'emoji' => '🎸',
+                        'options' => [
+                            ['emoji' => '🎸', 'text' => 'Gitar Petik', 'is_correct' => true],
+                            ['emoji' => '🥁', 'text' => 'Drum Pukul', 'is_correct' => false],
+                            ['emoji' => '📻', 'text' => 'Radio Musik', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik perkusi yang dipukul dengan stik berbunyi duk-duk-tak adalah...?',
+                        'audio' => 'Alat musik perkusi yang dipukul dengan stik berbunyi duk-duk-tak adalah apa?',
+                        'emoji' => '🥁',
+                        'options' => [
+                            ['emoji' => '🎹', 'text' => 'Piano', 'is_correct' => false],
+                            ['emoji' => '🥁', 'text' => 'Drum Pukul', 'is_correct' => true],
+                            ['emoji' => '🎧', 'text' => 'Headphone', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa stik pemukul yang biasa digunakan saat memainkan drum?',
+                        'audio' => 'Berapa stik pemukul yang biasa digunakan saat memainkan drum?',
+                        'emoji' => '🥢',
+                        'options' => [
+                            ['emoji' => '🥢', 'text' => '2 Stik Pemukul', 'is_correct' => true],
+                            ['emoji' => '🔟', 'text' => '10 Stik', 'is_correct' => false],
+                            ['emoji' => '0️⃣', 'text' => 'Tidak Pakai Stik', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'alat-musik',
+                'level_number' => 1,
+                'title' => 'Tebak Lonceng, Headphone & Radio',
+                'slug' => 'kuis-musik-l1-suara-ceria',
+                'icon_emoji' => '🔔',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Alat musik logam yang berbunyi kling-kling-kling saat digoyang adalah...?',
+                        'audio' => 'Alat musik logam yang berbunyi kling-kling-kling saat digoyang adalah apa?',
+                        'emoji' => '🔔',
+                        'options' => [
+                            ['emoji' => '🔔', 'text' => 'Lonceng Ceria', 'is_correct' => true],
+                            ['emoji' => '🎸', 'text' => 'Gitar', 'is_correct' => false],
+                            ['emoji' => '🥁', 'text' => 'Drum', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat yang kita pasang di telinga untuk mendengarkan lagu kesayangan adalah...?',
+                        'audio' => 'Alat yang kita pasang di telinga untuk mendengarkan lagu kesayangan adalah apa?',
+                        'emoji' => '🎧',
+                        'options' => [
+                            ['emoji' => '🎧', 'text' => 'Headphone Musik', 'is_correct' => true],
+                            ['emoji' => '👟', 'text' => 'Sepatu', 'is_correct' => false],
+                            ['emoji' => '🧢', 'text' => 'Topi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kotak ajaib yang bisa memutar lagu anak-anak dan dongeng seru adalah...?',
+                        'audio' => 'Kotak ajaib yang bisa memutar lagu anak-anak dan dongeng seru adalah apa?',
+                        'emoji' => '📻',
+                        'options' => [
+                            ['emoji' => '📻', 'text' => 'Radio Musik', 'is_correct' => true],
+                            ['emoji' => '🪑', 'text' => 'Meja Belajar', 'is_correct' => false],
+                            ['emoji' => '🚪', 'text' => 'Pintu Rumah', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL ---
+            [
+                'category_slug' => 'alat-musik',
+                'level_number' => 2,
+                'title' => 'Eksplorasi Terompet & Biola Indah',
+                'slug' => 'kuis-musik-l2-tiup-gesek',
+                'icon_emoji' => '🎺',
                 'target_age' => 4,
                 'total_questions' => 5,
                 'stars_reward' => 5,
                 'questions' => [
                     [
-                        'text' => 'Alat musik manakah yang dimainkan dengan cara dipetik senarnya?',
-                        'audio' => 'Alat musik manakah yang dimainkan dengan cara dipetik senarnya?',
-                        'emoji' => '🎸',
+                        'text' => 'Alat musik tiup dari logam kuningan yang bersuara lantang tet-tooot adalah...?',
+                        'audio' => 'Alat musik tiup dari logam kuningan yang bersuara lantang tet-tooot adalah apa?',
+                        'emoji' => '🎺',
                         'options' => [
-                            ['emoji' => '🎸', 'text' => 'Gitar Petik', 'is_correct' => true],
+                            ['emoji' => '🎺', 'text' => 'Terompet Tiup', 'is_correct' => true],
+                            ['emoji' => '🎻', 'text' => 'Biola Gesek', 'is_correct' => false],
+                            ['emoji' => '🎹', 'text' => 'Piano Tuts', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik dawai kayu yang dimainkan dengan cara digesek memakai busur adalah...?',
+                        'audio' => 'Alat musik dawai kayu yang dimainkan dengan cara digesek memakai busur adalah apa?',
+                        'emoji' => '🎻',
+                        'options' => [
+                            ['emoji' => '🎻', 'text' => 'Biola Gesek', 'is_correct' => true],
                             ['emoji' => '🥁', 'text' => 'Drum Pukul', 'is_correct' => false],
-                            ['emoji' => '🎺', 'text' => 'Terompet Tiup', 'is_correct' => false],
-                        ],
-                    ],
-                    [
-                        'text' => 'Alat musik perkusi yang dipukul menggunakan stik dan berbunyi duk-duk-tak adalah...?',
-                        'audio' => 'Alat musik perkusi yang dipukul menggunakan stik dan berbunyi duk-duk-tak adalah...?',
-                        'emoji' => '🥁',
-                        'options' => [
-                            ['emoji' => '🎹', 'text' => 'Piano', 'is_correct' => false],
-                            ['emoji' => '🥁', 'text' => 'Drum', 'is_correct' => true],
-                            ['emoji' => '🎻', 'text' => 'Biola', 'is_correct' => false],
-                        ],
-                    ],
-                    [
-                        'text' => 'Alat musik besar bertuts hitam dan putih yang dimainkan dengan jari tangan adalah...?',
-                        'audio' => 'Alat musik besar bertuts hitam dan putih yang dimainkan dengan jari tangan adalah...?',
-                        'emoji' => '🎹',
-                        'options' => [
-                            ['emoji' => '🎹', 'text' => 'Piano Tuts', 'is_correct' => true],
-                            ['emoji' => '🎷', 'text' => 'Saxophone', 'is_correct' => false],
                             ['emoji' => '🔔', 'text' => 'Lonceng', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Manakah alat musik tiup dari logam kuningan yang bersuara lantang tet-tooot?',
-                        'audio' => 'Manakah alat musik tiup dari logam kuningan yang bersuara lantang tet-tooot?',
-                        'emoji' => '🎺',
+                        'text' => 'Di manakah posisi meletakkan biola saat hendak digesek?',
+                        'audio' => 'Di manakah posisi meletakkan biola saat hendak digesek?',
+                        'emoji' => '🎻',
                         'options' => [
-                            ['emoji' => '🎸', 'text' => 'Gitar', 'is_correct' => false],
-                            ['emoji' => '🎺', 'text' => 'Terompet', 'is_correct' => true],
-                            ['emoji' => '🪗', 'text' => 'Akordeon', 'is_correct' => false],
+                            ['emoji' => '🎻', 'text' => 'Di antara Bahu dan Dagu', 'is_correct' => true],
+                            ['emoji' => '🦶', 'text' => 'Di Telapak Kaki', 'is_correct' => false],
+                            ['emoji' => '🎒', 'text' => 'Di dalam Tas', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Alat musik bertubuh kayu yang dimainkan dengan cara digesek memakai busur adalah...?',
-                        'audio' => 'Alat musik bertubuh kayu yang dimainkan dengan cara digesek memakai busur adalah...?',
+                        'text' => 'Bagaimana cara membunyikan terompet logam?',
+                        'audio' => 'Bagaimana cara membunyikan terompet logam?',
+                        'emoji' => '💨',
+                        'options' => [
+                            ['emoji' => '💨', 'text' => 'Ditiup dengan Mulut', 'is_correct' => true],
+                            ['emoji' => '🥢', 'text' => 'Dipukul dengan Kayu', 'is_correct' => false],
+                            ['emoji' => '✂️', 'text' => 'Digunting', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Dari bahan apakah terompet musik umumnya dibuat?',
+                        'audio' => 'Dari bahan apakah terompet musik umumnya dibuat?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '🎺', 'text' => 'Logam Kuningan Emas', 'is_correct' => true],
+                            ['emoji' => '🍰', 'text' => 'Kue Cokelat', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Kali', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'alat-musik',
+                'level_number' => 2,
+                'title' => 'Petualangan Saxophone & Banjo Ceria',
+                'slug' => 'kuis-musik-l2-sax-banjo',
+                'icon_emoji' => '🎷',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Alat musik tiup keemasan dengan suara jazz melengkung merdu adalah...?',
+                        'audio' => 'Alat musik tiup keemasan dengan suara jazz melengkung merdu adalah apa?',
+                        'emoji' => '🎷',
+                        'options' => [
+                            ['emoji' => '🎷', 'text' => 'Saxophone', 'is_correct' => true],
+                            ['emoji' => '🎸', 'text' => 'Gitar Petik', 'is_correct' => false],
+                            ['emoji' => '📻', 'text' => 'Radio Musik', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik petik yang memiliki badan berbentuk lingkaran bundar adalah...?',
+                        'audio' => 'Alat musik petik yang memiliki badan berbentuk lingkaran bundar adalah apa?',
+                        'emoji' => '🪕',
+                        'options' => [
+                            ['emoji' => '🪕', 'text' => 'Banjo Ceria', 'is_correct' => true],
+                            ['emoji' => '🥁', 'text' => 'Drum', 'is_correct' => false],
+                            ['emoji' => '🔔', 'text' => 'Lonceng', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Melalui bagian manakah pemain meniup alat musik saxophone?',
+                        'audio' => 'Melalui bagian manakah pemain meniup alat musik saxophone?',
+                        'emoji' => '🎷',
+                        'options' => [
+                            ['emoji' => '🎷', 'text' => 'Corong Tiup di Atas', 'is_correct' => true],
+                            ['emoji' => '🦶', 'text' => 'Ujung Bawah', 'is_correct' => false],
+                            ['emoji' => '🎒', 'text' => 'Tali Pegangan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa bentuk badan utama dari alat musik banjo?',
+                        'audio' => 'Apa bentuk badan utama dari alat musik banjo?',
+                        'emoji' => '🪕',
+                        'options' => [
+                            ['emoji' => '🪕', 'text' => 'Bulat Melingkar', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Segitiga Runcing', 'is_correct' => false],
+                            ['emoji' => '⭐', 'text' => 'Bintang Bersegi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah yang termasuk pasangan dua alat musik tiup?',
+                        'audio' => 'Manakah yang termasuk pasangan dua alat musik tiup?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '🎺', 'text' => '🎷 Saxophone & 🎺 Terompet', 'is_correct' => true],
+                            ['emoji' => '🥁', 'text' => '🥁 Drum & 🎸 Gitar', 'is_correct' => false],
+                            ['emoji' => '🎹', 'text' => '🎹 Piano & 🔔 Lonceng', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'alat-musik',
+                'level_number' => 2,
+                'title' => 'Tantangan Speaker & Not Balok Nada',
+                'slug' => 'kuis-musik-l2-speaker-nada',
+                'icon_emoji' => '🔊',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Pengeras suara agar musik terdengar menggelegar ke seluruh ruangan adalah...?',
+                        'audio' => 'Pengeras suara agar musik terdengar menggelegar ke seluruh ruangan adalah apa?',
+                        'emoji' => '🔊',
+                        'options' => [
+                            ['emoji' => '🔊', 'text' => 'Speaker Musik', 'is_correct' => true],
+                            ['emoji' => '✏️', 'text' => 'Pensil Gambar', 'is_correct' => false],
+                            ['emoji' => '🍎', 'text' => 'Apel Merah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Simbol tanda nada untuk menuliskan melodi lagu adalah...?',
+                        'audio' => 'Simbol tanda nada untuk menuliskan melodi lagu adalah apa?',
+                        'emoji' => '🎵',
+                        'options' => [
+                            ['emoji' => '🎵', 'text' => 'Not Balok Musik', 'is_correct' => true],
+                            ['emoji' => '🚗', 'text' => 'Mobil Balap', 'is_correct' => false],
+                            ['emoji' => '🏠', 'text' => 'Rumah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa fungsi utama dari alat speaker pengeras suara?',
+                        'audio' => 'Apa fungsi utama dari alat speaker pengeras suara?',
+                        'emoji' => '🔊',
+                        'options' => [
+                            ['emoji' => '🔊', 'text' => 'Mengeraskan Suara Lagu', 'is_correct' => true],
+                            ['emoji' => '🧹', 'text' => 'Menyapu Lantai', 'is_correct' => false],
+                            ['emoji' => '🍳', 'text' => 'Memasak Nasi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah gambar simbol not balok musik ceria?',
+                        'audio' => 'Manakah gambar simbol not balok musik ceria?',
+                        'emoji' => '🎵',
+                        'options' => [
+                            ['emoji' => '🎵', 'text' => 'Not Musik (🎵)', 'is_correct' => true],
+                            ['emoji' => '⚽', 'text' => 'Bola Sepak (⚽)', 'is_correct' => false],
+                            ['emoji' => '🎈', 'text' => 'Balon Terbang (🎈)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang kita lakukan saat mendengar alunan lagu ceria dari speaker?',
+                        'audio' => 'Apa yang kita lakukan saat mendengar alunan lagu ceria dari speaker?',
+                        'emoji' => '💃',
+                        'options' => [
+                            ['emoji' => '💃', 'text' => 'Menari & Bernyanyi Bahagia', 'is_correct' => true],
+                            ['emoji' => '😭', 'text' => 'Menangis Sedih', 'is_correct' => false],
+                            ['emoji' => '😡', 'text' => 'Marah-marah', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL ---
+            [
+                'category_slug' => 'alat-musik',
+                'level_number' => 3,
+                'title' => 'Master Akordeon & Kendang Tradisional',
+                'slug' => 'kuis-musik-l3-akordeon-kendang',
+                'icon_emoji' => '🪗',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Alat musik unik yang dimainkan dengan cara ditarik dan didorong memompa udara adalah...?',
+                        'audio' => 'Alat musik unik yang dimainkan dengan cara ditarik dan didorong memompa udara adalah apa?',
+                        'emoji' => '🪗',
+                        'options' => [
+                            ['emoji' => '🪗', 'text' => 'Akordeon Lipat', 'is_correct' => true],
+                            ['emoji' => '🎸', 'text' => 'Gitar', 'is_correct' => false],
+                            ['emoji' => '🎹', 'text' => 'Piano', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik tradisional berkulit yang ditabuh dengan telapak tangan adalah...?',
+                        'audio' => 'Alat musik tradisional berkulit yang ditabuh dengan telapak tangan adalah apa?',
+                        'emoji' => '🪘',
+                        'options' => [
+                            ['emoji' => '🪘', 'text' => 'Kendang Nusantara', 'is_correct' => true],
+                            ['emoji' => '🎺', 'text' => 'Terompet', 'is_correct' => false],
+                            ['emoji' => '🎻', 'text' => 'Biola', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana cara menghasilkan suara pada alat musik akordeon?',
+                        'audio' => 'Bagaimana cara menghasilkan suara pada alat musik akordeon?',
+                        'emoji' => '🪗',
+                        'options' => [
+                            ['emoji' => '🪗', 'text' => 'Ditarik & Didorong Udaranya', 'is_correct' => true],
+                            ['emoji' => '✂️', 'text' => 'Digunting', 'is_correct' => false],
+                            ['emoji' => '🦶', 'text' => 'Diinjak-injak', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Anggota tubuh manakah yang digunakan langsung untuk menabuh kendang?',
+                        'audio' => 'Anggota tubuh manakah yang digunakan langsung untuk menabuh kendang?',
+                        'emoji' => '🖐️',
+                        'options' => [
+                            ['emoji' => '🖐️', 'text' => 'Telapak Tangan', 'is_correct' => true],
+                            ['emoji' => '👃', 'text' => 'Hidung', 'is_correct' => false],
+                            ['emoji' => '👂', 'text' => 'Telinga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik tiup melingkar yang bersuara gagah dan bergema jauh adalah...?',
+                        'audio' => 'Alat musik tiup melingkar yang bersuara gagah dan bergema jauh adalah apa?',
+                        'emoji' => '📯',
+                        'options' => [
+                            ['emoji' => '📯', 'text' => 'Terompet Tanduk (Horn)', 'is_correct' => true],
+                            ['emoji' => '🔔', 'text' => 'Lonceng', 'is_correct' => false],
+                            ['emoji' => '📻', 'text' => 'Radio', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah yang termasuk alat musik perkusi tradisional di Indonesia?',
+                        'audio' => 'Manakah yang termasuk alat musik perkusi tradisional di Indonesia?',
+                        'emoji' => '🪘',
+                        'options' => [
+                            ['emoji' => '🪘', 'text' => 'Kendang', 'is_correct' => true],
+                            ['emoji' => '🎸', 'text' => 'Gitar Listrik', 'is_correct' => false],
+                            ['emoji' => '🎹', 'text' => 'Piano Besar', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Akordeon memiliki bagian lipatan di tengah yang berfungsi untuk...?',
+                        'audio' => 'Akordeon memiliki bagian lipatan di tengah yang berfungsi untuk apa?',
+                        'emoji' => '🪗',
+                        'options' => [
+                            ['emoji' => '💨', 'text' => 'Memompa Udara Nada', 'is_correct' => true],
+                            ['emoji' => '💧', 'text' => 'Menyimpan Air Minum', 'is_correct' => false],
+                            ['emoji' => '🥪', 'text' => 'Menaruh Makanan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah dua alat musik yang sama-sama dimainkan dengan cara dipetik?',
+                        'audio' => 'Manakah dua alat musik yang sama-sama dimainkan dengan cara dipetik?',
+                        'emoji' => '🎸',
+                        'options' => [
+                            ['emoji' => '🎸', 'text' => '🎸 Gitar & 🪕 Banjo', 'is_correct' => true],
+                            ['emoji' => '🥁', 'text' => '🥁 Drum & 🎺 Terompet', 'is_correct' => false],
+                            ['emoji' => '🎹', 'text' => '🎹 Piano & 🔔 Lonceng', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah dua alat musik yang sama-sama dimainkan dengan cara dipukul / ditabuh?',
+                        'audio' => 'Manakah dua alat musik yang sama-sama dimainkan dengan cara dipukul atau ditabuh?',
+                        'emoji' => '🥁',
+                        'options' => [
+                            ['emoji' => '🥁', 'text' => '🥁 Drum & 🪘 Kendang', 'is_correct' => true],
+                            ['emoji' => '🎻', 'text' => '🎻 Biola & 🎷 Saxophone', 'is_correct' => false],
+                            ['emoji' => '🎹', 'text' => '🎹 Piano & 🎸 Gitar', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok tiga alat musik tiup yang tepat?',
+                        'audio' => 'Manakah kelompok tiga alat musik tiup yang tepat?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '🎺', 'text' => '🎺 Terompet, 🎷 Saxophone & 📯 Tanduk', 'is_correct' => true],
+                            ['emoji' => '🎸', 'text' => '🎸 Gitar, 🪕 Banjo & 🎻 Biola', 'is_correct' => false],
+                            ['emoji' => '🥁', 'text' => '🥁 Drum, 🪘 Kendang & 🔔 Lonceng', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'alat-musik',
+                'level_number' => 3,
+                'title' => 'Tantangan Partitur, Mikrofon & Do-Re-Mi',
+                'slug' => 'kuis-musik-l3-partitur-vokal',
+                'icon_emoji' => '🎼',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Alat pengeras suara untuk bernyanyi lagu ceria bersama teman adalah...?',
+                        'audio' => 'Alat pengeras suara untuk bernyanyi lagu ceria bersama teman adalah apa?',
+                        'emoji' => '🎙️',
+                        'options' => [
+                            ['emoji' => '🎙️', 'text' => 'Mikrofon Vokal', 'is_correct' => true],
+                            ['emoji' => '🎒', 'text' => 'Tas Sekolah', 'is_correct' => false],
+                            ['emoji' => '👟', 'text' => 'Sepatu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buku lembaran kertas yang berisi garis paranada dan not balok lagu adalah...?',
+                        'audio' => 'Buku lembaran kertas yang berisi garis paranada dan not balok lagu adalah apa?',
+                        'emoji' => '🎼',
+                        'options' => [
+                            ['emoji' => '🎼', 'text' => 'Partitur Musik', 'is_correct' => true],
+                            ['emoji' => '🚗', 'text' => 'Peta Mobil', 'is_correct' => false],
+                            ['emoji' => '🍎', 'text' => 'Kotak Bekal', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Urutan tangga nada musik yang harmonis dimulai dari nada apa?',
+                        'audio' => 'Urutan tangga nada musik yang harmonis dimulai dari nada apa?',
+                        'emoji' => '🎶',
+                        'options' => [
+                            ['emoji' => '🎶', 'text' => 'Do - Re - Mi', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => 'Satu - Dua - Tiga', 'is_correct' => false],
+                            ['emoji' => '🅰️', 'text' => 'A - B - C', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa kegunaan utama dari mikrofon di atas panggung musik?',
+                        'audio' => 'Apa kegunaan utama dari mikrofon di atas panggung musik?',
+                        'emoji' => '🎙️',
+                        'options' => [
+                            ['emoji' => '🎙️', 'text' => 'Memperjelas Suara Penyanyi', 'is_correct' => true],
+                            ['emoji' => '🧹', 'text' => 'Membersihkan Debu', 'is_correct' => false],
+                            ['emoji' => '🥤', 'text' => 'Tempat Minum', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang dibaca oleh seorang pemusik saat memainkan orkestra lagu?',
+                        'audio' => 'Apa yang dibaca oleh seorang pemusik saat memainkan orkestra lagu?',
+                        'emoji' => '🎼',
+                        'options' => [
+                            ['emoji' => '🎼', 'text' => 'Partitur Not Lagu', 'is_correct' => true],
+                            ['emoji' => '📖', 'text' => 'Buku Resep Masak', 'is_correct' => false],
+                            ['emoji' => '📰', 'text' => 'Koran Berita', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan urutan tangga nada berikut: Do, Re, Mi, Fa, ... ?',
+                        'audio' => 'Lanjutan urutan tangga nada berikut: Do, Re, Mi, Fa, lalu nada apa?',
+                        'emoji' => '🎶',
+                        'options' => [
+                            ['emoji' => '🎶', 'text' => 'Sol, La, Si, Do', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Tidur Pulas', 'is_correct' => false],
+                            ['emoji' => '🏃', 'text' => 'Lari Cepat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa jumlah nada utama dalam satu susunan tangga nada diatonis?',
+                        'audio' => 'Berapa jumlah nada utama dalam satu susunan tangga nada diatonis?',
+                        'emoji' => '7️⃣',
+                        'options' => [
+                            ['emoji' => '7️⃣', 'text' => '7 Nada (Do sampai Si)', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Nada Saja', 'is_correct' => false],
+                            ['emoji' => '0️⃣', 'text' => 'Tidak Ada Nada', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di manakah posisi seorang penyanyi memegang mikrofon saat bernyanyi?',
+                        'audio' => 'Di manakah posisi seorang penyanyi memegang mikrofon saat bernyanyi?',
+                        'emoji' => '🎙️',
+                        'options' => [
+                            ['emoji' => '🎙️', 'text' => 'Di Depan Mulut', 'is_correct' => true],
+                            ['emoji' => '🦶', 'text' => 'Di Bawah Kaki', 'is_correct' => false],
+                            ['emoji' => '🧢', 'text' => 'Di Atas Kepala', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Simbol apakah yang tersusun rapi di atas garis partitur musik?',
+                        'audio' => 'Simbol apakah yang tersusun rapi di atas garis partitur musik?',
+                        'emoji' => '🎵',
+                        'options' => [
+                            ['emoji' => '🎵', 'text' => 'Not Balok Nada (🎵)', 'is_correct' => true],
+                            ['emoji' => '🍎', 'text' => 'Buah-buahan', 'is_correct' => false],
+                            ['emoji' => '🐱', 'text' => 'Kucing-kucingan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita bernyanyi lagu ceria bersama teman-teman?',
+                        'audio' => 'Mengapa kita bernyanyi lagu ceria bersama teman-teman?',
+                        'emoji' => '😄',
+                        'options' => [
+                            ['emoji' => '😄', 'text' => 'Membuat Hati Gembira & Semangat', 'is_correct' => true],
+                            ['emoji' => '😭', 'text' => 'Supaya Menangis', 'is_correct' => false],
+                            ['emoji' => '😡', 'text' => 'Supaya Bertengkar', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'alat-musik',
+                'level_number' => 3,
+                'title' => 'Grand Champion Maestro Musik PAUD',
+                'slug' => 'kuis-musik-l3-grand-master',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Alat musik manakah yang dimainkan dengan cara digesek menggunakan busur?',
+                        'audio' => 'Alat musik manakah yang dimainkan dengan cara digesek menggunakan busur?',
                         'emoji' => '🎻',
                         'options' => [
                             ['emoji' => '🎻', 'text' => 'Biola Gesek', 'is_correct' => true],
-                            ['emoji' => '🪘', 'text' => 'Kendang', 'is_correct' => false],
+                            ['emoji' => '🥁', 'text' => 'Drum', 'is_correct' => false],
+                            ['emoji' => '📻', 'text' => 'Radio', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik manakah yang memiliki tuts hitam dan tuts putih berjejer rapi?',
+                        'audio' => 'Alat musik manakah yang memiliki tuts hitam dan tuts putih berjejer rapi?',
+                        'emoji' => '🎹',
+                        'options' => [
+                            ['emoji' => '🎹', 'text' => 'Piano Tuts', 'is_correct' => true],
+                            ['emoji' => '🎺', 'text' => 'Terompet', 'is_correct' => false],
+                            ['emoji' => '🪕', 'text' => 'Banjo', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik tiup logam berkilau keemasan dengan badan melengkung adalah...?',
+                        'audio' => 'Alat musik tiup logam berkilau keemasan dengan badan melengkung adalah apa?',
+                        'emoji' => '🎷',
+                        'options' => [
+                            ['emoji' => '🎷', 'text' => 'Saxophone Merdu', 'is_correct' => true],
+                            ['emoji' => '🎸', 'text' => 'Gitar Petik', 'is_correct' => false],
+                            ['emoji' => '🔔', 'text' => 'Lonceng', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik tradisional yang ditabuh langsung dengan telapak tangan adalah...?',
+                        'audio' => 'Alat musik tradisional yang ditabuh langsung dengan telapak tangan adalah apa?',
+                        'emoji' => '🪘',
+                        'options' => [
+                            ['emoji' => '🪘', 'text' => 'Kendang Nusantara', 'is_correct' => true],
+                            ['emoji' => '🎧', 'text' => 'Headphone', 'is_correct' => false],
                             ['emoji' => '🎙️', 'text' => 'Mikrofon', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik lipat unik yang ditarik dan didorong sambil memompa udara adalah...?',
+                        'audio' => 'Alat musik lipat unik yang ditarik dan didorong sambil memompa udara adalah apa?',
+                        'emoji' => '🪗',
+                        'options' => [
+                            ['emoji' => '🪗', 'text' => 'Akordeon Lipat', 'is_correct' => true],
+                            ['emoji' => '🔔', 'text' => 'Lonceng Logam', 'is_correct' => false],
+                            ['emoji' => '🔊', 'text' => 'Speaker', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah di antara pilihan berikut yang BUKAN merupakan alat musik tiup?',
+                        'audio' => 'Manakah di antara pilihan berikut yang BUKAN merupakan alat musik tiup?',
+                        'emoji' => '🥁',
+                        'options' => [
+                            ['emoji' => '🥁', 'text' => '🥁 Drum Pukul', 'is_correct' => true],
+                            ['emoji' => '🎺', 'text' => '🎺 Terompet Tiup', 'is_correct' => false],
+                            ['emoji' => '🎷', 'text' => '🎷 Saxophone Tiup', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat manakah yang kita pasang di telinga untuk mendengarkan lagu pribadi?',
+                        'audio' => 'Alat manakah yang kita pasang di telinga untuk mendengarkan lagu pribadi?',
+                        'emoji' => '🎧',
+                        'options' => [
+                            ['emoji' => '🎧', 'text' => 'Headphone Musik', 'is_correct' => true],
+                            ['emoji' => '👞', 'text' => 'Sepatu Lari', 'is_correct' => false],
+                            ['emoji' => '🧤', 'text' => 'Sarung Tangan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik perkusi manakah yang dipukul menggunakan dua stik kayu?',
+                        'audio' => 'Alat musik perkusi manakah yang dipukul menggunakan dua stik kayu?',
+                        'emoji' => '🥁',
+                        'options' => [
+                            ['emoji' => '🥁', 'text' => 'Drum Perkusi', 'is_correct' => true],
+                            ['emoji' => '🎻', 'text' => 'Biola', 'is_correct' => false],
+                            ['emoji' => '🎹', 'text' => 'Piano', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah alat musik petik yang bertubuh bundar seperti rebana?',
+                        'audio' => 'Manakah alat musik petik yang bertubuh bundar seperti rebana?',
+                        'emoji' => '🪕',
+                        'options' => [
+                            ['emoji' => '🪕', 'text' => 'Banjo Ceria', 'is_correct' => true],
+                            ['emoji' => '📯', 'text' => 'Terompet Tanduk', 'is_correct' => false],
+                            ['emoji' => '📻', 'text' => 'Radio Musik', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar hebat apakah untuk anak pintar yang menguasai seluruh instrumen musik?',
+                        'audio' => 'Gelar hebat apakah untuk anak pintar yang menguasai seluruh instrumen musik?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Maestro Musik Cilik Juara', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Tidur Siang', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
@@ -774,10 +1377,19 @@ class QuizSeeder extends Seeder
                 continue;
             }
 
+            $learningLevelId = null;
+            if (isset($qData['level_number'])) {
+                $lvl = LearningLevel::where('category_id', $cat->id)->where('level_number', $qData['level_number'])->first();
+                if ($lvl) {
+                    $learningLevelId = $lvl->id;
+                }
+            }
+
             $quiz = Quiz::updateOrCreate(
                 ['slug' => $qData['slug']],
                 [
                     'category_id' => $cat->id,
+                    'learning_level_id' => $learningLevelId,
                     'title' => $qData['title'],
                     'icon_emoji' => $qData['icon_emoji'],
                     'target_age' => $qData['target_age'],
