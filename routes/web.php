@@ -1,0 +1,48 @@
+<?php
+
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FrontEndController;
+use App\Http\Middleware\EnsureAdminOrTeacher;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes - YukBelajar PAUD
+|--------------------------------------------------------------------------
+*/
+
+// Landing Page & Public Showcase
+Route::get('/', [FrontEndController::class, 'landing'])->name('landing');
+
+// Rute Tamu / Guest (Hanya saat belum login)
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+    Route::get('/daftar', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/daftar', [AuthController::class, 'register'])->name('register.post');
+});
+
+// Logout Rute (Mendukung POST form maupun GET link langsung)
+Route::match(['get', 'post'], '/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Rute Pembelajaran Siswa & Orang Tua (Terproteksi Middleware Auth)
+Route::middleware('auth')->group(function () {
+    Route::get('/petualangan', [FrontEndController::class, 'gameHub'])->name('home');
+    Route::get('/profil', [FrontEndController::class, 'profile'])->name('profile');
+    Route::get('/materi/{category?}', [FrontEndController::class, 'materials'])->name('materials');
+    Route::get('/kuis/{quiz?}', [FrontEndController::class, 'quiz'])->name('quiz');
+    Route::get('/buku-stiker', [FrontEndController::class, 'stickers'])->name('stickers');
+    Route::get('/prestasi', [FrontEndController::class, 'achievements'])->name('achievements');
+    Route::get('/sahabat', [FrontEndController::class, 'community'])->name('community');
+    Route::get('/orang-tua', [FrontEndController::class, 'parents'])->name('parents');
+    Route::get('/pilih-avatar', [FrontEndController::class, 'authAvatar'])->name('auth.avatar');
+});
+
+// Rute Dashboard Khusus Admin / Guru (Terproteksi Middleware Auth + EnsureAdminOrTeacher)
+Route::prefix('admin')->name('admin.')->middleware(['auth', EnsureAdminOrTeacher::class])->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/ai-generator', [AdminController::class, 'aiGenerator'])->name('ai-generator');
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::get('/profil', [AdminController::class, 'profile'])->name('profile');
+});
