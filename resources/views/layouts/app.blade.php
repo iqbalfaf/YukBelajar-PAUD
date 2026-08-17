@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js" crossorigin="anonymous"></script>
     @stack('styles')
 </head>
 <body class="min-h-screen bg-gradient-to-b from-sky-200 via-sky-100 to-amber-50 text-slate-800 flex flex-col font-sans overflow-x-hidden relative"

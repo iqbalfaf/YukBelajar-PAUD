@@ -1,8 +1,50 @@
 import Alpine from 'alpinejs';
 import confetti from 'canvas-confetti';
+import twemoji from 'twemoji';
 
 window.Alpine = Alpine;
 window.confetti = confetti;
+window.twemoji = twemoji;
+
+/**
+ * Twemoji Auto-Parser: Converts Regional Indicator Flags & Emojis
+ * into crisp vector SVGs (Crucial for Windows Chrome/Edge which lacks native flag emojis).
+ */
+function parseEmojis(root = document.body) {
+    if (typeof twemoji !== 'undefined' && root) {
+        twemoji.parse(root, {
+            folder: 'svg',
+            ext: '.svg',
+            base: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/'
+        });
+    }
+}
+
+window.parseEmojis = parseEmojis;
+
+document.addEventListener('DOMContentLoaded', () => {
+    parseEmojis();
+
+    // Observe dynamic changes made by Alpine.js (switching tabs, categories, modals)
+    let isParsing = false;
+    const observer = new MutationObserver((mutations) => {
+        if (isParsing) return;
+        
+        const hasTextOrElementAdded = mutations.some(m => 
+            Array.from(m.addedNodes).some(n => n.nodeName !== 'IMG' || !n.classList?.contains('emoji'))
+        );
+
+        if (hasTextOrElementAdded) {
+            isParsing = true;
+            setTimeout(() => {
+                parseEmojis();
+                isParsing = false;
+            }, 60);
+        }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+});
 
 /**
  * Web Audio API Sound Synthesizer & Cheerful Speech Engine for YukBelajar PAUD

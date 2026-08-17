@@ -175,6 +175,16 @@ h1, h2, h3, h4, .font-heading {
     box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
 }
 
+/* Twemoji High-Res Flags & Emojis */
+img.emoji {
+    display: inline-block;
+    height: 1.15em;
+    width: 1.15em;
+    margin: 0 0.1em;
+    vertical-align: -0.15em;
+    object-fit: contain;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;

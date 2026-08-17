@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.16.1",
-        "canvas-confetti": "^1.9.4"
+        "canvas-confetti": "^1.9.4",
+        "twemoji": "^14.0.2"
     }
 }
