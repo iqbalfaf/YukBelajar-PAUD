@@ -1314,7 +1314,11 @@ class AdminController extends Controller
         })->toArray();
 
         $totalStudents = User::where('role', 'student')->count();
-        $totalParents = User::where('role', 'parent')->count();
+        $totalParents = User::where('role', 'parent')
+            ->orWhere(function ($q) {
+                $q->whereNotNull('parent_name')->where('parent_name', '!=', '');
+            })
+            ->count();
         $totalTeachers = User::whereIn('role', ['admin', 'teacher'])->count();
         $activeUsers = User::where('is_active', true)->count();
         $onlineToday = User::whereNotNull('last_login_at')->where('last_login_at', '>=', now()->subDay())->count();

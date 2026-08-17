@@ -5,7 +5,7 @@
 @section('content')
 <div class="flex flex-col gap-6"
      x-data="{
-         roleFilter: 'all', // 'all', 'student', 'parent', 'teacher', 'admin'
+         roleFilter: 'all', // 'all', 'student', 'parent', 'teacher'
          searchQuery: '',
          statusFilter: 'all', // 'all', 'active', 'inactive'
          showModal: false,
@@ -36,10 +36,18 @@
 
          get filteredUsers() {
              return this.users.filter(u => {
-                 const matchesRole = this.roleFilter === 'all' || u.role === this.roleFilter || (this.roleFilter === 'teacher' && (u.role === 'teacher' || u.role === 'admin'));
+                 const matchesRole = this.roleFilter === 'all' 
+                     || (this.roleFilter === 'student' && u.role === 'student')
+                     || (this.roleFilter === 'parent' && (u.role === 'parent' || (u.parent_name && u.parent_name !== '-')))
+                     || (this.roleFilter === 'teacher' && (u.role === 'teacher' || u.role === 'admin'));
                  const matchesStatus = this.statusFilter === 'all' || (this.statusFilter === 'active' ? u.is_active : !u.is_active);
                  const q = this.searchQuery.toLowerCase();
-                 const matchesSearch = !q || u.name.toLowerCase().includes(q) || u.username.toLowerCase().includes(q) || (u.email && u.email.toLowerCase().includes(q)) || (u.parent_name && u.parent_name.toLowerCase().includes(q));
+                 const matchesSearch = !q 
+                     || u.name.toLowerCase().includes(q) 
+                     || u.username.toLowerCase().includes(q) 
+                     || (u.email && u.email.toLowerCase().includes(q)) 
+                     || (u.phone && u.phone.toLowerCase().includes(q))
+                     || (u.parent_name && u.parent_name.toLowerCase().includes(q));
                  return matchesRole && matchesStatus && matchesSearch;
              });
          },
@@ -91,16 +99,16 @@
      }">
 
     <!-- Top Header Banner -->
-    <div class="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
         <div>
-            <span class="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+            <span class="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-xs font-black uppercase tracking-wider mb-2">
                 Panel Manajemen Pengguna
             </span>
             <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">
                 Kelola Akun Siswa, Orang Tua & Pengajar
             </h2>
             <p class="text-sm text-sky-100 mt-1 max-w-xl">
-                Atur hak akses, pantau perolehan bintang siswa, lihat kontak orang tua / wali, dan kelola profil pengguna YukBelajar PAUD.
+                Pantau perolehan bintang siswa, data kontak wali murid (Bunda/Ayah), reset PIN keamanan, dan kelola peran akun di platform YukBelajar PAUD.
             </p>
         </div>
 
@@ -109,6 +117,59 @@
             <span class="text-2xl">➕</span>
             <span>Tambah Pengguna Baru</span>
         </button>
+    </div>
+
+    <!-- 4 KPI Summary Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Total Siswa Card -->
+        <div class="bg-white p-5 rounded-3xl border-3 border-emerald-200 shadow-xs flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-100 border-2 border-emerald-300 flex items-center justify-center text-3xl shrink-0">
+                👶
+            </div>
+            <div>
+                <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block">Siswa Petualang</span>
+                <h3 class="text-2xl font-black text-slate-800 font-heading">{{ $usersData['stats']['total_students'] }}</h3>
+                <span class="text-[11px] font-bold text-emerald-700">Aktif belajar & kuis</span>
+            </div>
+        </div>
+
+        <!-- Total Orang Tua Card -->
+        <div class="bg-white p-5 rounded-3xl border-3 border-amber-200 shadow-xs flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-amber-100 border-2 border-amber-300 flex items-center justify-center text-3xl shrink-0">
+                👨‍👩‍👧
+            </div>
+            <div>
+                <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block">Orang Tua Terhubung</span>
+                <h3 class="text-2xl font-black text-slate-800 font-heading">{{ $usersData['stats']['total_parents'] }}</h3>
+                <span class="text-[11px] font-bold text-amber-700">Pendamping & WhatsApp</span>
+            </div>
+        </div>
+
+        <!-- Total Guru Card -->
+        <div class="bg-white p-5 rounded-3xl border-3 border-purple-200 shadow-xs flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-purple-100 border-2 border-purple-300 flex items-center justify-center text-3xl shrink-0">
+                🦁
+            </div>
+            <div>
+                <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block">Guru & Admin</span>
+                <h3 class="text-2xl font-black text-slate-800 font-heading">{{ $usersData['stats']['total_teachers'] }}</h3>
+                <span class="text-[11px] font-bold text-purple-700">Kurator materi PAUD</span>
+            </div>
+        </div>
+
+        <!-- Pengguna Aktif Card -->
+        <div class="bg-white p-5 rounded-3xl border-3 border-sky-200 shadow-xs flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-sky-100 border-2 border-sky-300 flex items-center justify-center text-3xl shrink-0">
+                🟢
+            </div>
+            <div>
+                <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block">Pengguna Aktif</span>
+                <h3 class="text-2xl font-black text-slate-800 font-heading">{{ $usersData['stats']['active_today'] }}</h3>
+                <span class="text-[11px] font-bold text-sky-700">Status akun normal</span>
+            </div>
+        </div>
+
     </div>
 
     <!-- Alert Success Notification -->
@@ -164,9 +225,9 @@
 
             <!-- Search and Status Filter -->
             <div class="flex items-center gap-3">
-                <div class="relative flex-1 sm:w-64">
+                <div class="relative flex-1 sm:w-72">
                     <input type="text" x-model="searchQuery"
-                           placeholder="Cari nama / username / orang tua..."
+                           placeholder="Cari nama, orang tua, no WA..."
                            class="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-xl text-xs font-bold outline-none">
                     <span class="absolute left-3 top-2.5 text-slate-400 text-sm">🔍</span>
                 </div>
@@ -188,7 +249,7 @@
                     <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 font-extrabold text-[11px] uppercase tracking-wider">
                         <th class="p-4">Pengguna / Avatar</th>
                         <th class="p-4">Username & Email</th>
-                        <th class="p-4">Orang Tua / Wali</th>
+                        <th class="p-4">Orang Tua / Wali Pendamping</th>
                         <th class="p-4">Peran & Usia</th>
                         <th class="p-4">Bintang</th>
                         <th class="p-4">Status</th>
@@ -225,8 +286,9 @@
                                         <p class="font-extrabold text-purple-900 flex items-center gap-1">
                                             <span>👨‍👩‍👧</span>
                                             <span x-text="u.parent_name"></span>
+                                            <span class="text-[10px] px-1.5 py-0.2 bg-purple-100 text-purple-800 rounded font-bold" x-text="u.parent_relationship_label"></span>
                                         </p>
-                                        <p class="text-[11px] text-slate-500 font-semibold mt-0.5" x-text="'📱 ' + (u.phone !== '-' ? u.phone : 'Tanpa No. HP')"></p>
+                                        <p class="text-[11px] text-slate-500 font-semibold mt-0.5" x-text="'📱 ' + (u.phone !== '-' ? u.phone : 'Tanpa WhatsApp')"></p>
                                     </div>
                                 </template>
                                 <template x-if="!u.parent_name || u.parent_name === '-'">
@@ -355,16 +417,16 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap Pengguna</label>
+                    <label class="block text-xs font-bold text-slate-700 mb-1" x-text="formData.role === 'student' ? 'Nama Panggilan Siswa' : 'Nama Lengkap Pengguna'"></label>
                     <input type="text" name="name" x-model="formData.name" required placeholder="Contoh: Alif Rahman"
                            class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
                 </div>
 
-                <!-- Section Data Orang Tua / Pendamping -->
-                <div x-show="formData.role === 'student'" class="p-3.5 bg-amber-50/70 border-2 border-amber-200 rounded-2xl flex flex-col gap-3">
+                <!-- Section Data Orang Tua / Pendamping (Visible for student and parent) -->
+                <div x-show="formData.role === 'student' || formData.role === 'parent'" class="p-3.5 bg-amber-50/70 border-2 border-amber-200 rounded-2xl flex flex-col gap-3">
                     <span class="text-xs font-black text-amber-950 uppercase tracking-wide flex items-center gap-1">
                         <span>👨‍👩‍👧</span>
-                        <span>Data Orang Tua / Pendamping:</span>
+                        <span x-text="formData.role === 'parent' ? 'Informasi Orang Tua:' : 'Data Orang Tua / Pendamping:'"></span>
                     </span>
                     
                     <div class="grid grid-cols-2 gap-2.5">
@@ -384,10 +446,17 @@
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-700 mb-1">No. WhatsApp / HP Orang Tua</label>
-                        <input type="text" name="phone" x-model="formData.phone" placeholder="0812-3456-7890"
-                               class="w-full p-2.5 text-xs font-bold bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none">
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">No. WhatsApp / HP</label>
+                            <input type="text" name="phone" x-model="formData.phone" placeholder="0812-3456-7890"
+                                   class="w-full p-2.5 text-xs font-bold bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">PIN Parental (4 Digit)</label>
+                            <input type="password" name="parent_pin" maxlength="4" x-model="formData.parent_pin" placeholder="1234"
+                                   class="w-full p-2.5 text-center text-xs font-mono font-black bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none">
+                        </div>
                     </div>
                 </div>
 
@@ -395,7 +464,7 @@
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Username Unik</label>
                         <input type="text" name="username" x-model="formData.username" required placeholder="alif_ceria"
-                               class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none font-mono">
+                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none font-mono">
                     </div>
 
                     <div>
@@ -406,7 +475,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Kata Sandi / PIN Awal</label>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Kata Sandi Awal</label>
                     <input type="password" name="password" required placeholder="Minimal 4 karakter"
                            class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
                 </div>
@@ -499,10 +568,10 @@
                 </div>
 
                 <!-- Section Data Orang Tua / Pendamping -->
-                <div x-show="formData.role === 'student'" class="p-3.5 bg-amber-50/70 border-2 border-amber-200 rounded-2xl flex flex-col gap-3">
+                <div x-show="formData.role === 'student' || formData.role === 'parent'" class="p-3.5 bg-amber-50/70 border-2 border-amber-200 rounded-2xl flex flex-col gap-3">
                     <span class="text-xs font-black text-amber-950 uppercase tracking-wide flex items-center gap-1">
                         <span>👨‍👩‍👧</span>
-                        <span>Data Orang Tua / Pendamping:</span>
+                        <span x-text="formData.role === 'parent' ? 'Informasi Orang Tua:' : 'Data Orang Tua / Pendamping:'"></span>
                     </span>
                     
                     <div class="grid grid-cols-2 gap-2.5">
@@ -522,10 +591,17 @@
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-700 mb-1">No. WhatsApp / HP Orang Tua</label>
-                        <input type="text" name="phone" x-model="formData.phone" placeholder="0812-3456-7890"
-                               class="w-full p-2.5 text-xs font-bold bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none">
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">No. WhatsApp / HP</label>
+                            <input type="text" name="phone" x-model="formData.phone" placeholder="0812-3456-7890"
+                                   class="w-full p-2.5 text-xs font-bold bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">PIN Parental (4 Digit)</label>
+                            <input type="password" name="parent_pin" maxlength="4" x-model="formData.parent_pin" placeholder="1234"
+                                   class="w-full p-2.5 text-center text-xs font-mono font-black bg-white border-2 border-slate-300 focus:border-amber-500 rounded-xl outline-none">
+                        </div>
                     </div>
                 </div>
 
