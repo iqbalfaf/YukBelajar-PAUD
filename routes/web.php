@@ -43,7 +43,12 @@ Route::middleware('auth')->group(function () {
 // Rute Dashboard Khusus Admin / Guru (Terproteksi Middleware Auth + EnsureAdminOrTeacher)
 Route::prefix('admin')->name('admin.')->middleware(['auth', EnsureAdminOrTeacher::class])->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::post('/materials', [AdminController::class, 'storeMaterial'])->name('materials.store');
+    Route::delete('/materials/{id}', [AdminController::class, 'deleteMaterial'])->name('materials.delete');
+    Route::post('/export-report', [AdminController::class, 'exportReport'])->name('export-report');
     Route::get('/ai-generator', [AdminController::class, 'aiGenerator'])->name('ai-generator');
+    Route::post('/ai-generator/generate', [AdminController::class, 'generateAiContent'])->name('ai-generator.generate');
+    Route::post('/ai-generator/publish', [AdminController::class, 'publishAiContent'])->name('ai-generator.publish');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
     Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
     Route::put('/users/{id}', [AdminController::class, 'updateUser'])->name('users.update');

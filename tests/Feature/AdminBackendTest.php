@@ -181,3 +181,108 @@ test('admin dapat memperbarui informasi profil dan sekolah di database', functio
     expect($admin->name)->toBe('Pak Guru Iqbal M.Pd.');
     expect($admin->school_name)->toBe('TK Pembina Ceria Bangsa');
 });
+
+test('admin dapat menambahkan materi flashcard baru ke database', function () {
+    $admin = User::where('role', 'admin')->first();
+
+    $response = $this->actingAs($admin)->post(route('admin.materials.store'), [
+        'category_slug' => 'hewan',
+        'level_number' => 2,
+        'title' => 'Kura-kura Hijau 🐢',
+        'subtitle' => 'Mengenal kura-kura yang berjalan lambat dan membawa tempurung',
+        'speech_text' => 'Kura-kura membawa rumah tempurung!',
+        'sound_effect' => 'Kecipak Air',
+        'parent_note' => 'Ajak anak menirukan gerakan berjalan lambat.',
+    ]);
+
+    $response->assertRedirect(route('admin.dashboard'));
+    $response->assertSessionHas('success');
+
+    $material = Material::where('title', 'Kura-kura Hijau 🐢')->first();
+    expect($material)->not->toBeNull();
+    expect($material->learningLevel->level_number)->toBe(2);
+});
+
+test('admin dapat menghapus kartu flashcard dari database', function () {
+    $admin = User::where('role', 'admin')->first();
+    $material = Material::where('title', 'Kura-kura Hijau 🐢')->first();
+
+    if (! $material) {
+        $level = LearningLevel::first();
+        $material = Material::create([
+            'learning_level_id' => $level->id,
+            'title' => 'Materi Dihapus Test',
+            'subtitle' => 'Subtitle test',
+            'icon_emoji' => '📄',
+        ]);
+    }
+
+    $matId = $material->id;
+    $response = $this->actingAs($admin)->delete(route('admin.materials.delete', $matId));
+
+    $response->assertRedirect(route('admin.dashboard'));
+    $response->assertSessionHas('success');
+
+    expect(Material::find($matId))->toBeNull();
+});
+
+test('admin dapat mengekspor laporan rapor belajar siswa ke format CSV', function () {
+    $admin = User::where('role', 'admin')->first();
+
+    $response = $this->actingAs($admin)->post(route('admin.export-report'));
+
+    $response->assertStatus(200);
+    expect($response->headers->get('content-type'))->toContain('text/csv');
+    expect($response->headers->get('content-disposition'))->toContain('rapor-belajar-paud');
+});
+
+test('admin dapat mengenerate materi dan soal kuis AI via backend endpoint', function () {
+    $admin = User::where('role', 'admin')->first();
+
+    $response = $this->actingAs($admin)->postJson(route('admin.ai-generator.generate'), [
+        'category_slug' => 'hewan',
+        'level_number' => 2,
+        'theme' => 'Satwa Gurun Pasir 🐫',
+        'questions_count' => 3,
+    ]);
+
+    $response->assertStatus(200);
+    $response->assertJsonStructure([
+        'success',
+        'category_slug',
+        'level_number',
+        'theme',
+        'generated_items' => [
+            '*' => ['question', 'voice_script', 'image_prompt', 'options'],
+        ],
+    ]);
+});
+
+test('admin dapat mempublikasikan materi dan kuis hasil AI langsung ke tabel database', function () {
+    $admin = User::where('role', 'admin')->first();
+
+    $response = $this->actingAs($admin)->postJson(route('admin.ai-generator.publish'), [
+        'category_slug' => 'hewan',
+        'level_number' => 2,
+        'theme' => 'Satwa Gurun Pasir 🐫',
+        'questions' => [
+            [
+                'question' => 'Manakah unta berpunuk yang kuat berjalan di padang pasir? 🐫',
+                'voice_script' => 'Unta memiliki punuk untuk menyimpan cadangan makanan.',
+                'image_prompt' => 'Cute cartoon camel smiling in desert',
+                'options' => [
+                    ['label' => 'Unta Padang Pasir 🐫', 'is_correct' => true],
+                    ['label' => 'Kucing Rumah 🐱', 'is_correct' => false],
+                ],
+            ],
+        ],
+    ]);
+
+    $response->assertStatus(200);
+    $response->assertJson(['success' => true]);
+
+    $quiz = Quiz::where('title', 'like', '%Satwa Gurun Pasir%')->first();
+    expect($quiz)->not->toBeNull();
+    expect($quiz->questions)->toHaveCount(1);
+    expect($quiz->questions->first()->options)->toHaveCount(2);
+});

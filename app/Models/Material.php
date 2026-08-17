@@ -32,4 +32,9 @@ class Material extends Model
     {
         return $this->belongsTo(LearningLevel::class, 'learning_level_id');
     }
+
+    public function learningLevel(): BelongsTo
+    {
+        return $this->level();
+    }
 }

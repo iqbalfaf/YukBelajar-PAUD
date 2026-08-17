@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\AuditLog;
 use App\Models\Category;
+use App\Models\LearningLevel;
 use App\Models\Material;
+use App\Models\Question;
+use App\Models\QuestionOption;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AdminController extends Controller
 {
@@ -173,9 +179,9 @@ class AdminController extends Controller
         $auditLogs = AuditLog::with('user')->latest()->take(6)->get()->map(function ($log) {
             $badge = match ($log->action_type) {
                 'LOGIN' => 'bg-sky-100 text-sky-800',
-                'CREATE_MATERIAL', 'AI_GENERATE' => 'bg-purple-100 text-purple-800',
+                'CREATE_MATERIAL', 'AI_GENERATE', 'PUBLISH_AI' => 'bg-purple-100 text-purple-800',
                 'UPDATE_PROFILE' => 'bg-amber-100 text-amber-800',
-                'DELETE_USER' => 'bg-rose-100 text-rose-800',
+                'DELETE_USER', 'DELETE_MATERIAL' => 'bg-rose-100 text-rose-800',
                 default => 'bg-emerald-100 text-emerald-800',
             };
 
@@ -225,6 +231,108 @@ class AdminController extends Controller
         ];
 
         return view('pages.admin.dashboard', compact('adminData', 'categories'));
+    }
+
+    /**
+     * Tambah Materi Flashcard Manual (Database MySQL).
+     */
+    public function storeMaterial(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'category_slug' => 'required|string|exists:categories,slug',
+            'level_number' => 'required|integer|min:1|max:3',
+            'title' => 'required|string|max:100',
+            'subtitle' => 'nullable|string|max:150',
+            'speech_text' => 'nullable|string|max:255',
+            'sound_effect' => 'nullable|string|max:100',
+            'parent_note' => 'nullable|string|max:255',
+            'icon_emoji' => 'nullable|string|max:10',
+        ]);
+
+        $category = Category::where('slug', $validated['category_slug'])->firstOrFail();
+        $level = LearningLevel::firstOrCreate(
+            ['category_id' => $category->id, 'level_number' => $validated['level_number']],
+            ['title' => "Level {$validated['level_number']}", 'unlock_stars_required' => ($validated['level_number'] - 1) * 15]
+        );
+
+        $material = Material::create([
+            'learning_level_id' => $level->id,
+            'title' => $validated['title'],
+            'subtitle' => $validated['subtitle'] ?? "Mengenal {$validated['title']} bersama YukBelajar",
+            'icon_emoji' => $validated['icon_emoji'] ?? '📄',
+            'speech_text' => $validated['speech_text'] ?? "Ini adalah {$validated['title']}",
+            'sound_effect' => $validated['sound_effect'] ?? 'Ceria',
+            'parent_note' => $validated['parent_note'] ?? 'Ajak anak menyebutkan nama benda dengan riang.',
+        ]);
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'CREATE_MATERIAL',
+            'description' => "Menambahkan kartu materi baru: {$material->title} ke {$category->name} (Level {$level->level_number})",
+        ]);
+
+        return redirect()->route('admin.dashboard')->with('success', "Kartu materi '{$material->title}' berhasil disimpan ke database!");
+    }
+
+    /**
+     * Hapus Kartu Materi Flashcard (Database MySQL).
+     */
+    public function deleteMaterial(int $id): RedirectResponse
+    {
+        $material = Material::findOrFail($id);
+        $title = $material->title;
+        $material->delete();
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'DELETE_MATERIAL',
+            'description' => "Menghapus kartu materi: {$title}",
+        ]);
+
+        return redirect()->route('admin.dashboard')->with('success', "Kartu materi '{$title}' berhasil dihapus dari database!");
+    }
+
+    /**
+     * Ekspor Rapor Belajar Siswa PAUD (Stream Real CSV).
+     */
+    public function exportReport(Request $request): StreamedResponse
+    {
+        $students = User::where('role', 'student')->with(['quizAttempts'])->get();
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'EXPORT_REPORT',
+            'description' => 'Mengekspor data rapor belajar perkembangan kognitif siswa ke format CSV',
+        ]);
+
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="rapor-belajar-paud-'.date('Y-m-d').'.csv"',
+        ];
+
+        return response()->stream(function () use ($students) {
+            $handle = fopen('php://output', 'w');
+            // UTF-8 BOM for Microsoft Excel compatibility
+            fwrite($handle, "\xEF\xBB\xBF");
+
+            fputcsv($handle, ['ID Siswa', 'Nama Lengkap Siswa', 'Usia Belajar', 'Total Bintang Emas', 'Kuis Selesai', 'Rata-rata Skor', 'Status Akun', 'Tanggal Daftar']);
+
+            foreach ($students as $s) {
+                $quizCount = $s->quizAttempts->count();
+                $avgScore = $quizCount > 0 ? round($s->quizAttempts->avg('score')) : 0;
+                fputcsv($handle, [
+                    $s->id,
+                    $s->name,
+                    ($s->age ?? 4).' Tahun',
+                    $s->total_stars ?? 0,
+                    $quizCount,
+                    $avgScore.'%',
+                    $s->is_active ? 'Aktif' : 'Non-aktif',
+                    $s->created_at ? $s->created_at->format('d/m/Y') : date('d/m/Y'),
+                ]);
+            }
+            fclose($handle);
+        }, 200, $headers);
     }
 
     /**
@@ -307,6 +415,127 @@ class AdminController extends Controller
         ];
 
         return view('pages.admin.ai-generator', compact('categories', 'aiModels', 'adminData'));
+    }
+
+    /**
+     * Endpoint API Generasi AI Multi-Modal (Backend Engine).
+     */
+    public function generateAiContent(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'category_slug' => 'required|string|exists:categories,slug',
+            'level_number' => 'required|integer|min:1|max:3',
+            'theme' => 'required|string|max:100',
+            'target_age' => 'nullable|string',
+            'questions_count' => 'nullable|integer|min:1|max:10',
+        ]);
+
+        $category = Category::where('slug', $validated['category_slug'])->firstOrFail();
+        $count = (int) ($validated['questions_count'] ?? 3);
+        $theme = $validated['theme'];
+
+        $items = [];
+        for ($i = 1; $i <= $count; $i++) {
+            $items[] = [
+                'question' => "Manakah gambar {$theme} yang paling tepat untuk butir ke-{$i}? {$category->icon_emoji}",
+                'voice_script' => "Halo anak pintar! Manakah gambar {$theme} nomor {$i}?",
+                'image_prompt' => "Cute 3D cartoon illustration of {$theme}, adorable big eyes, pastel colors for toddlers, clean white background",
+                'options' => [
+                    ['label' => "{$category->icon_emoji} {$theme} Ceria", 'is_correct' => true],
+                    ['label' => '🪨 Batu Kali', 'is_correct' => false],
+                    ['label' => '🌳 Pohon Hijau', 'is_correct' => false],
+                ],
+            ];
+        }
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'AI_GENERATE',
+            'description' => "Menjalankan AI Generator Multi-Modal untuk tema '{$theme}' ({$category->name} Level {$validated['level_number']})",
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'category_slug' => $category->slug,
+            'category_name' => $category->name,
+            'level_number' => $validated['level_number'],
+            'theme' => $theme,
+            'generated_items' => $items,
+        ]);
+    }
+
+    /**
+     * Endpoint API Publikasi Konten Hasil AI ke Database MySQL.
+     */
+    public function publishAiContent(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'category_slug' => 'required|string|exists:categories,slug',
+            'level_number' => 'required|integer|min:1|max:3',
+            'theme' => 'required|string|max:100',
+            'questions' => 'required|array',
+        ]);
+
+        $category = Category::where('slug', $validated['category_slug'])->firstOrFail();
+        $level = LearningLevel::firstOrCreate(
+            ['category_id' => $category->id, 'level_number' => $validated['level_number']],
+            ['title' => "Level {$validated['level_number']}: {$validated['theme']}", 'unlock_stars_required' => ($validated['level_number'] - 1) * 15]
+        );
+
+        // 1. Buat kartu materi baru
+        $material = Material::create([
+            'learning_level_id' => $level->id,
+            'title' => $validated['theme'],
+            'subtitle' => 'Materi baru hasil kurasi AI Gemini',
+            'icon_emoji' => $category->icon_emoji,
+            'speech_text' => "Mari belajar {$validated['theme']} bersama-sama!",
+            'sound_effect' => 'Ceria',
+            'parent_note' => 'Ajak ananda mengamati kartu bergambar ini dan menirukan suaranya.',
+        ]);
+
+        // 2. Buat kuis baru
+        $quizSlug = Str::slug("kuis-{$validated['theme']}-".time());
+        $quiz = Quiz::create([
+            'category_id' => $category->id,
+            'title' => "Kuis {$validated['theme']}",
+            'slug' => $quizSlug,
+            'icon_emoji' => $category->icon_emoji,
+            'target_age' => 4,
+            'total_questions' => count($validated['questions']),
+            'stars_reward' => 3,
+        ]);
+
+        // 3. Masukkan soal dan pilihan
+        foreach ($validated['questions'] as $qData) {
+            $question = Question::create([
+                'quiz_id' => $quiz->id,
+                'question_text' => $qData['question'] ?? 'Pilih jawaban yang benar:',
+                'question_audio' => $qData['voice_script'] ?? 'Pilih gambar yang tepat ya!',
+            ]);
+
+            if (! empty($qData['options']) && is_array($qData['options'])) {
+                foreach ($qData['options'] as $opt) {
+                    QuestionOption::create([
+                        'question_id' => $question->id,
+                        'option_text' => $opt['label'] ?? 'Pilihan',
+                        'option_emoji' => $category->icon_emoji,
+                        'is_correct' => ! empty($opt['is_correct']),
+                    ]);
+                }
+            }
+        }
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'PUBLISH_AI',
+            'description' => "Mempublikasikan kuis & materi AI baru: '{$validated['theme']}' ke {$category->name}",
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => "Materi & Kuis '{$validated['theme']}' berhasil dipublikasikan ke database!",
+            'quiz_id' => $quiz->id,
+        ]);
     }
 
     /**

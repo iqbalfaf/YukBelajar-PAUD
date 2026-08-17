@@ -6,13 +6,15 @@
 <div class="flex flex-col gap-6 pb-16"
      x-data="{
          selectedCategory: 'hewan',
-         targetLevel: '1',
-         theme: 'Mengenal Hewan Laut 🐬',
+         targetLevel: 1,
+         theme: 'Mengenal Hewan Jinak Ceria 🐱',
          targetAge: '3-4',
          questionsCount: 3,
          isGenerating: false,
+         isPublishing: false,
          hasGenerated: true,
          publishedSuccess: false,
+         alertMessage: '',
          categories: {{ Js::from($categories) }},
          generatedData: {{ Js::from($adminData['sample_ai_preview']['generated_items']) }},
          
@@ -20,29 +22,53 @@
              const catObj = this.categories.find(c => c.slug === this.selectedCategory);
              if (catObj) {
                  if (this.selectedCategory === 'hewan') {
-                     this.theme = this.targetLevel === '1' ? 'Hewan Peliharaan Jinak 🐱' : (this.targetLevel === '2' ? 'Hewan Rimba Gagah 🦁' : 'Mengenal Hewan Laut 🐬');
+                     this.theme = this.targetLevel == 1 ? 'Hewan Peliharaan Jinak 🐱' : (this.targetLevel == 2 ? 'Hewan Rimba Gagah 🦁' : 'Mengenal Hewan Laut 🐬');
                  } else if (this.selectedCategory === 'angka') {
-                     this.theme = this.targetLevel === '1' ? 'Berhitung Angka 1 sampai 5 🔢' : 'Berhitung Angka 6 sampai 10 ⭐';
+                     this.theme = this.targetLevel == 1 ? 'Berhitung Angka 1 sampai 5 🔢' : 'Berhitung Angka 6 sampai 10 ⭐';
                  } else if (this.selectedCategory === 'abjad') {
-                     this.theme = this.targetLevel === '1' ? 'Huruf Vokal A I U E O 🔤' : 'Huruf Konsonan & Kata Benda 📖';
+                     this.theme = this.targetLevel == 1 ? 'Huruf Vokal A I U E O 🔤' : 'Huruf Konsonan & Kata Benda 📖';
                  } else if (this.selectedCategory === 'buah') {
                      this.theme = 'Aneka Buah Manis & Segar 🍎';
                  } else if (this.selectedCategory === 'warna') {
-                     this.theme = 'Mengenal Warna Primer & Sekunder 🎨';
+                     this.theme = 'Mengenal Warna Dasar Cerah 🎨';
                  } else if (this.selectedCategory === 'kendaraan') {
                      this.theme = 'Kendaraan Darat, Air, dan Udara 🚗✈️';
                  }
              }
          },
 
-         triggerGenerate() {
+         async triggerGenerate() {
              this.isGenerating = true;
              this.publishedSuccess = false;
-             setTimeout(() => {
+             
+             try {
+                 const response = await fetch('{{ route('admin.ai-generator.generate') }}', {
+                     method: 'POST',
+                     headers: {
+                         'Content-Type': 'application/json',
+                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                         'Accept': 'application/json'
+                     },
+                     body: JSON.stringify({
+                         category_slug: this.selectedCategory,
+                         level_number: parseInt(this.targetLevel),
+                         theme: this.theme,
+                         target_age: this.targetAge,
+                         questions_count: parseInt(this.questionsCount)
+                     })
+                 });
+
+                 const result = await response.json();
+                 if (result.success && result.generated_items) {
+                     this.generatedData = result.generated_items;
+                     this.hasGenerated = true;
+                     if (window.soundEngine) window.soundEngine.playVictory();
+                 }
+             } catch (err) {
+                 console.error('AI Generation Error:', err);
+             } finally {
                  this.isGenerating = false;
-                 this.hasGenerated = true;
-                 if (window.soundEngine) window.soundEngine.playVictory();
-             }, 1500);
+             }
          },
          
          playNarration(text) {
@@ -51,11 +77,38 @@
              }
          },
          
-         publishToStudents() {
-             this.publishedSuccess = true;
-             if (window.soundEngine) window.soundEngine.playVictory();
-             window.triggerConfetti(0.5);
-             setTimeout(() => this.publishedSuccess = false, 4000);
+         async publishToStudents() {
+             this.isPublishing = true;
+             
+             try {
+                 const response = await fetch('{{ route('admin.ai-generator.publish') }}', {
+                     method: 'POST',
+                     headers: {
+                         'Content-Type': 'application/json',
+                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                         'Accept': 'application/json'
+                     },
+                     body: JSON.stringify({
+                         category_slug: this.selectedCategory,
+                         level_number: parseInt(this.targetLevel),
+                         theme: this.theme,
+                         questions: this.generatedData
+                     })
+                 });
+
+                 const result = await response.json();
+                 if (result.success) {
+                     this.publishedSuccess = true;
+                     this.alertMessage = result.message;
+                     if (window.soundEngine) window.soundEngine.playVictory();
+                     if (typeof window.triggerConfetti === 'function') window.triggerConfetti(0.5);
+                     setTimeout(() => this.publishedSuccess = false, 5000);
+                 }
+             } catch (err) {
+                 console.error('Publishing Error:', err);
+             } finally {
+                 this.isPublishing = false;
+             }
          }
      }">
 
@@ -160,7 +213,7 @@
             <template x-if="isGenerating">
                 <div class="flex items-center gap-2">
                     <span class="animate-spin text-2xl">⏳</span>
-                    <span>Sedang Meracik Soal Ramah Anak & Mengenerate Media...</span>
+                    <span>Sedang Meracik Soal Ramah Anak & Mengenerate Media via Backend...</span>
                 </div>
             </template>
         </button>
@@ -187,15 +240,15 @@
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <button @click="triggerGenerate()"
-                            class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all">
+                    <button @click="triggerGenerate()" :disabled="isGenerating"
+                            class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all cursor-pointer">
                         🔄 Generate Ulang
                     </button>
 
-                    <button @click="publishToStudents()"
-                            class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer hover:scale-105">
-                        <span>🚀</span>
-                        <span>Publish ke Kategori & Siswa</span>
+                    <button @click="publishToStudents()" :disabled="isPublishing"
+                            class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer hover:scale-105 disabled:opacity-50">
+                        <span x-show="!isPublishing">🚀 Publish ke Database Siswa</span>
+                        <span x-show="isPublishing">⏳ Menyimpan...</span>
                     </button>
                 </div>
             </div>
@@ -205,10 +258,10 @@
                  class="p-4 bg-emerald-100 border-2 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">🎉</span>
-                    <span>Sukses! Kuis berhasil dipublikasikan dan langsung masuk ke kategori yang dipilih!</span>
+                    <span x-text="alertMessage || 'Sukses! Kuis & Materi berhasil dipublikasikan ke database!'"></span>
                 </div>
                 <a href="{{ route('home') }}" class="px-3 py-1 bg-emerald-700 text-white rounded-lg text-xs font-bold hover:underline">
-                    Lihat di Siswa →
+                    Lihat di Taman Siswa →
                 </a>
             </div>
 
@@ -254,13 +307,6 @@
                                     </div>
                                 </template>
                             </div>
-                        </div>
-
-                        <!-- Card Action -->
-                        <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
-                            <button type="button" class="text-xs text-slate-500 hover:text-slate-800 font-bold">
-                                ✏️ Edit Butir Ini
-                            </button>
                         </div>
 
                     </div>

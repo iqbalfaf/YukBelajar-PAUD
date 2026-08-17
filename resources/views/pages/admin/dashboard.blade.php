@@ -8,10 +8,8 @@
          selectedCategoryTab: 'hewan',
          showAddMaterialModal: false,
          showExportModal: false,
-         exportType: 'all_students', // 'all_students' or 'category_mastery'
-         exportFormat: 'pdf', // 'pdf' or 'csv'
-         exporting: false,
-         exportSuccess: false,
+         exportType: 'all_students',
+         exportFormat: 'csv',
          newCardTitle: '',
          newCardLevel: 1,
          newCardCategory: 'hewan',
@@ -21,77 +19,7 @@
          categorizedMaterials: {{ Js::from($adminData['categorized_materials']) }},
          chartAnalytics: {{ Js::from($adminData['chart_analytics']) }},
          systemHealth: {{ Js::from($adminData['system_health'] ?? []) }},
-         auditLogs: {{ Js::from($adminData['audit_logs'] ?? []) }},
-         
-         addNewMaterial() {
-             if (!this.newCardTitle.trim()) {
-                 alert('Silakan masukkan judul materi flashcard!');
-                 return;
-             }
-             
-             if (!this.categorizedMaterials[this.newCardCategory]) {
-                 this.categorizedMaterials[this.newCardCategory] = {
-                     category_name: this.newCardCategory,
-                     category_icon: '📁',
-                     levels: [
-                         { level_num: 1, level_title: 'Level 1: Dasar', cards_count: 0, items: [] }
-                     ]
-                 };
-             }
-
-             const targetLevels = this.categorizedMaterials[this.newCardCategory].levels;
-             let levelObj = targetLevels.find(l => l.level_num == this.newCardLevel);
-             if (!levelObj) {
-                 levelObj = {
-                     level_num: this.newCardLevel,
-                     level_title: 'Level ' + this.newCardLevel + ': Materi Baru',
-                     cards_count: 0,
-                     items: []
-                 };
-                 targetLevels.push(levelObj);
-             }
-
-             levelObj.items.push({
-                 id: Date.now(),
-                 title: this.newCardTitle,
-                 type: 'Flashcard Baru',
-                 voice_ready: true,
-                 has_quiz: false
-             });
-             levelObj.cards_count = levelObj.items.length;
-
-             alert('Materi ' + this.newCardTitle + ' berhasil ditambahkan ke Level ' + this.newCardLevel + '!');
-             this.showAddMaterialModal = false;
-             this.newCardTitle = '';
-             this.newCardVoice = '';
-             this.newCardParentNote = '';
-         },
-
-         deleteItem(catKey, levelNum, itemId) {
-             if (confirm('Yakin ingin menghapus materi kartu ini?')) {
-                 const cat = this.categorizedMaterials[catKey];
-                 if (cat) {
-                     const level = cat.levels.find(l => l.level_num === levelNum);
-                     if (level) {
-                         level.items = level.items.filter(i => i.id !== itemId);
-                         level.cards_count = level.items.length;
-                     }
-                 }
-             }
-         },
-
-         runExport() {
-             this.exporting = true;
-             setTimeout(() => {
-                 this.exporting = false;
-                 this.exportSuccess = true;
-                 if (window.soundEngine) window.soundEngine.playVictory();
-                 setTimeout(() => {
-                     this.exportSuccess = false;
-                     this.showExportModal = false;
-                 }, 2500);
-             }, 1200);
-         }
+         auditLogs: {{ Js::from($adminData['audit_logs'] ?? []) }}
      }">
 
     <!-- Top Greeting Banner with Quick CTAs -->
@@ -128,6 +56,26 @@
             </a>
         </div>
     </div>
+
+    <!-- Alert Notifications -->
+    @if(session('success'))
+    <div class="p-4 bg-emerald-100 border-2 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">✨</span>
+            <span>{{ session('success') }}</span>
+        </div>
+    </div>
+    @endif
+
+    @if($errors->any())
+    <div class="p-4 bg-rose-100 border-2 border-rose-400 text-rose-950 font-bold text-sm rounded-2xl shadow-xs">
+        <ul class="list-disc list-inside">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
     <!-- SYSTEM HEALTH & LIVE API STATUS BAR -->
     <div class="bg-slate-900 text-white rounded-2xl p-4 border border-slate-800 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -413,10 +361,16 @@
                                             </div>
                                         </div>
 
-                                        <button type="button" @click="deleteItem(selectedCategoryTab, level.level_num, item.id)"
-                                                class="text-rose-400 hover:text-rose-600 font-bold text-xs p-1 rounded-md hover:bg-rose-50 cursor-pointer shrink-0">
-                                            🗑️
-                                        </button>
+                                        <!-- Real Delete Form -->
+                                        <form :action="'{{ url('admin/materials') }}/' + item.id" method="POST"
+                                              onsubmit="return confirm('Yakin ingin menghapus kartu materi ini dari database?')" class="inline shrink-0">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" title="Hapus Materi"
+                                                    class="text-rose-400 hover:text-rose-600 font-bold text-xs p-1 rounded-md hover:bg-rose-50 cursor-pointer">
+                                                🗑️
+                                            </button>
+                                        </form>
                                     </div>
                                 </template>
                             </div>
@@ -429,15 +383,9 @@
 
     </div>
 
-    <!-- MODAL: EKSPOR RAPOR BELAJAR PAUD (PROFESSIONAL REPORT CARD GENERATOR) -->
+    <!-- MODAL: EKSPOR RAPOR BELAJAR PAUD (REAL CSV STREAM EXPORTER) -->
     <div x-show="showExportModal" x-cloak
-         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 scale-95"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-95">
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
         
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full border-4 border-emerald-400 shadow-2xl relative my-8"
              @click.away="showExportModal = false">
@@ -455,63 +403,43 @@
                 Studio Ekspor Rapor Belajar PAUD
             </h3>
             <p class="text-xs font-bold text-slate-500 text-center mb-5">
-                Cetak atau unduh rekap capaian bintang dan ketuntasan kuis anak untuk laporan orang tua / sekolah.
+                Cetak atau unduh rekap capaian bintang dan ketuntasan kuis anak untuk laporan orang tua / sekolah langsung dari database.
             </p>
 
-            <div x-show="exportSuccess" class="p-3 bg-emerald-100 border border-emerald-400 text-emerald-950 font-bold text-xs rounded-xl mb-4 text-center">
-                ✨ Laporan Rapor PAUD berhasil di-generate dan siap diunduh!
-            </div>
-
-            <div class="flex flex-col gap-3.5 mb-6">
+            <form action="{{ route('admin.export-report') }}" method="POST" class="flex flex-col gap-4">
+                @csrf
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Jenis Laporan</label>
-                    <select x-model="exportType" class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none">
-                        <option value="all_students">📋 Rekap Rapor Seluruh Siswa PAUD (120 Siswa)</option>
-                        <option value="category_mastery">🎯 Laporan Ketuntasan 6 Pulau Belajar</option>
+                    <select name="report_type" class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none">
+                        <option value="all_students">📋 Rekap Rapor Seluruh Siswa PAUD ({{ $adminData['stats']['total_students'] }} Siswa)</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Format Dokumen</label>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button type="button" @click="exportFormat = 'pdf'"
-                                class="p-3 rounded-xl border-2 text-xs font-bold flex items-center justify-center gap-2 cursor-pointer"
-                                :class="exportFormat === 'pdf' ? 'bg-rose-50 border-rose-400 text-rose-800 shadow-xs' : 'bg-slate-50 border-slate-200 text-slate-600'">
-                            <span>📄 Format PDF Resmi</span>
-                        </button>
-                        <button type="button" @click="exportFormat = 'csv'"
-                                class="p-3 rounded-xl border-2 text-xs font-bold flex items-center justify-center gap-2 cursor-pointer"
-                                :class="exportFormat === 'csv' ? 'bg-emerald-50 border-emerald-400 text-emerald-800 shadow-xs' : 'bg-slate-50 border-slate-200 text-slate-600'">
-                            <span>📗 Excel / CSV</span>
-                        </button>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Format File Dokumen</label>
+                    <div class="p-3 bg-emerald-50 border-2 border-emerald-300 rounded-xl text-xs font-bold text-emerald-950 flex items-center justify-center gap-2">
+                        <span>📗 Spreadsheet CSV Resmi (Kompatibel Excel)</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="flex gap-3">
-                <button type="button" @click="showExportModal = false"
-                        class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl">
-                    Batal
-                </button>
-                <button type="button" @click="runExport()" :disabled="exporting"
-                        class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow-xs flex items-center justify-center gap-2">
-                    <span x-show="exporting">⏳ Memproses...</span>
-                    <span x-show="!exporting">Unduh Dokumen 📥</span>
-                </button>
-            </div>
+                <div class="flex gap-3 mt-2">
+                    <button type="button" @click="showExportModal = false"
+                            class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit" @click="setTimeout(() => showExportModal = false, 1000)"
+                            class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow-xs flex items-center justify-center gap-2 cursor-pointer">
+                        <span>Unduh File CSV 📥</span>
+                    </button>
+                </div>
+            </form>
 
         </div>
     </div>
 
-    <!-- MODAL: ADD NEW FLASHCARD MANUAL -->
+    <!-- MODAL: ADD NEW FLASHCARD MANUAL (REAL DATABASE POST) -->
     <div x-show="showAddMaterialModal" x-cloak
-         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 scale-95"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-95">
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
         
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-4 border-sky-400 shadow-2xl relative my-8"
              @click.away="showAddMaterialModal = false">
@@ -525,60 +453,61 @@
                 <span class="text-3xl">➕</span>
                 <div>
                     <h3 class="text-xl font-black font-heading text-slate-800">Tambah Flashcard Baru</h3>
-                    <p class="text-xs font-bold text-slate-500">Buat materi kartu pembelajaran dan tentukan levelnya.</p>
+                    <p class="text-xs font-bold text-slate-500">Buat materi kartu pembelajaran dan simpan ke database.</p>
                 </div>
             </div>
 
-            <form @submit.prevent="addNewMaterial()" class="flex flex-col gap-4">
+            <form action="{{ route('admin.materials.store') }}" method="POST" class="flex flex-col gap-4">
+                @csrf
                 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Kategori Sasaran</label>
-                        <select x-model="newCardCategory"
-                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none">
+                        <select name="category_slug" x-model="selectedCategoryTab"
+                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
                             <template x-for="cat in categories" :key="cat.slug">
-                                <option :value="cat.slug" x-text="cat.name"></option>
+                                <option :value="cat.slug" x-text="cat.icon_emoji + ' ' + cat.name"></option>
                             </template>
                         </select>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Tingkatan Level</label>
-                        <select x-model="newCardLevel"
-                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none">
-                            <option value="1">Level 1 (Usia 3-4 Thn - Dasar)</option>
-                            <option value="2">Level 2 (Usia 4-5 Thn - Menengah)</option>
-                            <option value="3">Level 3 (Usia 5-6 Thn - Pra-SD)</option>
+                        <select name="level_number" x-model="newCardLevel"
+                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
+                            <option :value="1">Level 1 (Dasar / Pemula)</option>
+                            <option :value="2">Level 2 (Menengah / Eksplorasi)</option>
+                            <option :value="3">Level 3 (Pra-SD / Mahir)</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Judul Objek / Materi</label>
-                    <input type="text" x-model="newCardTitle" required placeholder="Contoh: Burung Hantu 🦉"
+                    <input type="text" name="title" required placeholder="Contoh: Burung Hantu 🦉"
                            class="w-full p-3 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Naskah Pelafalan Suara (TTS)</label>
-                    <textarea x-model="newCardVoice" rows="2" placeholder="Contoh: Burung Hantu! Matanya bulat besar dan suka terbang di malam hari!"
+                    <textarea name="speech_text" rows="2" placeholder="Contoh: Burung Hantu! Matanya bulat besar dan suka terbang di malam hari!"
                               class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none"></textarea>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Tips Interaksi untuk Orang Tua</label>
-                    <input type="text" x-model="newCardParentNote" placeholder="Ajak anak menirukan bunyi uuu-huuu bersama."
+                    <input type="text" name="parent_note" placeholder="Ajak anak menirukan bunyi uuu-huuu bersama."
                            class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
                 </div>
 
                 <div class="flex gap-3 mt-2">
                     <button type="button" @click="showAddMaterialModal = false"
-                            class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl">
+                            class="flex-1 py-3 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl cursor-pointer">
                         Batal
                     </button>
                     <button type="submit"
-                            class="flex-1 py-3 bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-xs rounded-xl shadow-xs">
-                        Simpan Materi
+                            class="flex-1 py-3 bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-xs rounded-xl shadow-xs cursor-pointer">
+                        Simpan ke Database
                     </button>
                 </div>
 
