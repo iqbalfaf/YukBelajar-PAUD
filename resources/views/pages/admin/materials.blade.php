@@ -201,67 +201,100 @@
         </div>
     </div>
 
-    <!-- SUB-NAVIGATION: Topik Pills & Search Bar -->
-    <div class="bg-white p-4 sm:p-5 rounded-3xl border border-slate-200 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+    <!-- TOPIC SELECTOR GRID (NO HORIZONTAL SCROLL - SUPER EASY NAVIGATION) -->
+    <div class="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-xs flex flex-col gap-4">
         
-        <!-- Category Pill Selector -->
-        <div class="flex items-center gap-2 overflow-x-auto max-w-full pb-2 md:pb-0 w-full md:w-auto">
-            <button @click="selectedCat = 'all'"
-                    class="px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap"
-                    :class="selectedCat === 'all' ? 'bg-slate-800 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
-                🌟 Semua Topik
-            </button>
+        <!-- Grid Header with Search & Mode Toggle -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-black uppercase text-slate-700 tracking-wide">
+                    📌 Pilih Topik Pembelajaran:
+                </span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full text-[11px] font-bold"
+                      x-text="`${currentPillarCategories.length} Topik Tersedia`"></span>
+            </div>
 
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <button type="button" 
+                        @click="selectedCat = 'all'"
+                        class="px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer whitespace-nowrap"
+                        :class="selectedCat === 'all' ? 'bg-slate-800 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                    🌟 Lihat Semua Topik
+                </button>
+
+                <!-- Search Input -->
+                <div class="relative w-full sm:w-60 shrink-0">
+                    <input type="text" 
+                           x-model="searchQuery" 
+                           placeholder="Cari materi / topik..."
+                           class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-sky-500">
+                    <span class="absolute right-2.5 top-2 text-xs text-slate-400">🔍</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visual Topic Selection Cards Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             <template x-for="cat in currentPillarCategories" :key="cat.id">
-                <button @click="selectedCat = cat.slug"
-                        class="px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
-                        :class="selectedCat === cat.slug ? 'bg-sky-600 text-white shadow-xs font-black' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
-                    <span x-text="cat.icon_emoji"></span>
-                    <span x-text="cat.name"></span>
+                <button type="button" 
+                        @click="selectedCat = cat.slug"
+                        class="p-3 rounded-2xl border-2 text-left transition-all cursor-pointer flex flex-col justify-between gap-2 group relative overflow-hidden"
+                        :class="selectedCat === cat.slug 
+                            ? 'border-sky-500 bg-sky-50 shadow-xs ring-3 ring-sky-200/80 scale-[1.02]' 
+                            : 'border-slate-200 bg-slate-50/50 hover:bg-white hover:border-slate-300 text-slate-700'">
+                    
+                    <div class="flex items-center justify-between gap-1.5">
+                        <span class="text-2xl sm:text-3xl shrink-0" x-html="window.twemojiParse(cat.icon_emoji)"></span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-black"
+                              :class="selectedCat === cat.slug ? 'bg-sky-200 text-sky-900' : 'bg-slate-200/70 text-slate-600'"
+                              x-text="`${cat.levels.reduce((acc, l) => acc + l.cards_count, 0)} Kartu`"></span>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs sm:text-sm font-black font-heading line-clamp-1 leading-snug"
+                            :class="selectedCat === cat.slug ? 'text-sky-950 font-extrabold' : 'text-slate-800 group-hover:text-sky-700'"
+                            x-text="cat.name"></h4>
+                        <p class="text-[10px] font-semibold text-slate-400 line-clamp-1 mt-0.5" x-text="cat.subtitle"></p>
+                    </div>
+
+                    <div x-show="selectedCat === cat.slug" class="absolute top-0 right-0 w-2.5 h-2.5 bg-sky-500 rounded-bl-lg"></div>
                 </button>
             </template>
         </div>
 
-        <!-- Search Input -->
-        <div class="relative w-full md:w-72 shrink-0">
-            <input type="text" 
-                   x-model="searchQuery" 
-                   placeholder="Cari materi / kata kunci..."
-                   class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-xs font-bold text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-sky-500">
-            <span class="absolute right-3 top-2.5 text-xs text-slate-400">🔍</span>
-        </div>
-
     </div>
 
-    <!-- MAIN CURRICULUM ACCORDION PER TOPIC -->
+    <!-- MAIN CURRICULUM WORKSPACE PER TOPIC -->
     <div class="flex flex-col gap-8">
         <template x-for="cat in currentFilteredCategories" :key="cat.id">
-            <div class="bg-white border-2 border-slate-200 rounded-3xl p-5 sm:p-6 shadow-xs flex flex-col gap-5">
+            <div class="bg-white border-2 border-slate-200 rounded-3xl p-5 sm:p-7 shadow-xs flex flex-col gap-6">
                 
                 <!-- Category Top Header -->
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
-                    <div class="flex items-center gap-3">
-                        <span class="text-4xl sm:text-5xl" x-text="cat.icon_emoji"></span>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+                    <div class="flex items-center gap-4">
+                        <span class="text-5xl sm:text-6xl shrink-0" x-html="window.twemojiParse(cat.icon_emoji)"></span>
                         <div>
-                            <div class="flex items-center gap-2 flex-wrap">
-                                <h3 class="text-xl sm:text-2xl font-black font-heading text-slate-800" x-text="cat.name"></h3>
-                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-slate-100 text-slate-600 border border-slate-200"
-                                      x-text="`Usia ${cat.recommended_age}`"></span>
+                            <div class="flex items-center gap-2 flex-wrap mb-1">
+                                <h3 class="text-2xl sm:text-3xl font-black font-heading text-slate-800" x-text="cat.name"></h3>
+                                <span class="px-3 py-1 rounded-full text-xs font-black bg-sky-100 text-sky-800 border border-sky-200"
+                                      x-text="`Target: Usia ${cat.recommended_age}`"></span>
+                                <span class="px-3 py-1 rounded-full text-xs font-black bg-amber-100 text-amber-900 border border-amber-200"
+                                      x-text="`${cat.levels.reduce((acc, l) => acc + l.cards_count, 0)} Total Kartu`"></span>
                             </div>
-                            <p class="text-xs font-bold text-slate-500 mt-0.5" x-text="cat.subtitle"></p>
+                            <p class="text-xs sm:text-sm font-bold text-slate-500" x-text="cat.subtitle"></p>
                         </div>
                     </div>
 
                     <!-- Category Action Buttons (Add Card, Edit Topic, Delete Topic) -->
-                    <div class="flex items-center gap-2 flex-wrap">
+                    <div class="flex items-center gap-2.5 flex-wrap w-full sm:w-auto justify-end">
                         <button @click="openAddCardForCategory(cat.slug)"
-                                class="px-3 py-1.5 bg-yellow-400 hover:bg-yellow-300 text-yellow-950 rounded-xl font-extrabold text-xs flex items-center gap-1 shadow-2xs cursor-pointer">
-                            <span>➕</span>
+                                class="px-4 py-2.5 bg-yellow-400 hover:bg-yellow-300 text-yellow-950 rounded-2xl font-extrabold text-xs flex items-center gap-1.5 shadow-xs transition-all hover:scale-105 cursor-pointer">
+                            <span class="text-base">➕</span>
                             <span>Tambah Kartu</span>
                         </button>
 
                         <button @click="openEditTopic(cat)"
-                                class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-1 cursor-pointer">
+                                class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer">
                             <span>✏️</span>
                             <span>Edit Topik</span>
                         </button>
@@ -270,7 +303,7 @@
                               onsubmit="return confirm('Apakah Anda yakin ingin menghapus topik ini beserta seluruh materi dan kuisnya?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl font-bold text-xs cursor-pointer">
+                            <button type="submit" class="p-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-2xl font-bold text-xs transition-all cursor-pointer" title="Hapus Topik">
                                 🗑️
                             </button>
                         </form>
@@ -278,43 +311,49 @@
                 </div>
 
                 <!-- 3 Levels Container (Level 1, Level 2, Level 3) -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <template x-for="lvl in cat.levels" :key="lvl.id">
-                        <div class="bg-slate-50/80 border border-slate-200 rounded-2xl p-4 flex flex-col justify-between gap-4">
+                        <div class="bg-slate-50/90 border-2 border-slate-200/90 rounded-3xl p-5 flex flex-col justify-between gap-4">
                             
                             <div>
                                 <!-- Level Title & Badge -->
-                                <div class="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-200">
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="px-2 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider"
-                                              :class="lvl.level_num === 1 ? 'bg-emerald-100 text-emerald-800' : (lvl.level_num === 2 ? 'bg-amber-100 text-amber-900' : 'bg-purple-100 text-purple-900')"
+                                <div class="flex items-center justify-between gap-2 mb-4 pb-3 border-b-2 border-slate-200">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2.5 py-1 rounded-xl text-xs font-black uppercase tracking-wide shadow-2xs"
+                                              :class="lvl.level_num === 1 ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : (lvl.level_num === 2 ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-purple-100 text-purple-900 border border-purple-300')"
                                               x-text="`Level ${lvl.level_num}`"></span>
                                         <h4 class="text-xs font-extrabold text-slate-800" x-text="lvl.level_title"></h4>
                                     </div>
-                                    <span class="text-[11px] font-bold text-slate-500" x-text="`${lvl.cards_count} Kartu`"></span>
+                                    <span class="px-2 py-0.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600" 
+                                          x-text="`${lvl.cards_count} Kartu`"></span>
                                 </div>
 
                                 <!-- Cards List in this Level -->
-                                <div class="flex flex-col gap-2.5">
+                                <div class="flex flex-col gap-3">
                                     <template x-for="item in lvl.items" :key="item.id">
-                                        <div class="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs flex items-center justify-between gap-2 hover:border-sky-300 transition-colors">
-                                            <div class="flex items-center gap-2.5 min-w-0">
-                                                <span class="text-2xl shrink-0" x-text="item.icon_emoji"></span>
-                                                <div class="min-w-0">
-                                                    <h5 class="text-xs font-black text-slate-800 truncate" x-text="item.title"></h5>
-                                                    <p class="text-[10px] font-semibold text-slate-400 truncate" x-text="item.subtitle"></p>
+                                        <div class="bg-white border-2 border-slate-200/80 rounded-2xl p-3.5 shadow-2xs flex items-center justify-between gap-3 hover:border-sky-400 hover:shadow-xs transition-all">
+                                            
+                                            <!-- Emoji Icon & Title Info -->
+                                            <div class="flex items-center gap-3 min-w-0 flex-1">
+                                                <div class="w-11 h-11 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                                                    <span x-html="window.twemojiParse(item.icon_emoji)"></span>
+                                                </div>
+                                                <div class="min-w-0 flex-1">
+                                                    <h5 class="text-xs sm:text-sm font-black text-slate-800 leading-snug" x-text="item.title"></h5>
+                                                    <p class="text-[11px] font-semibold text-slate-400 truncate mt-0.5" x-text="item.subtitle"></p>
                                                 </div>
                                             </div>
 
-                                            <div class="flex items-center gap-1 shrink-0">
+                                            <!-- Card Actions (Speak, Edit, Delete) -->
+                                            <div class="flex items-center gap-1.5 shrink-0">
                                                 <button @click="playSpeech(item.speech_text || item.title)" 
                                                         title="Tes Suara TTS"
-                                                        class="w-7 h-7 bg-yellow-100 hover:bg-yellow-200 text-yellow-900 rounded-lg flex items-center justify-center text-xs cursor-pointer">
+                                                        class="w-8 h-8 bg-yellow-100 hover:bg-yellow-200 text-yellow-900 rounded-xl flex items-center justify-center text-xs font-bold transition-transform active:scale-90 cursor-pointer">
                                                     🔊
                                                 </button>
                                                 <button @click="openEdit(item)" 
                                                         title="Edit Kartu"
-                                                        class="w-7 h-7 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs cursor-pointer">
+                                                        class="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl flex items-center justify-center text-xs font-bold transition-transform active:scale-90 cursor-pointer">
                                                     ✏️
                                                 </button>
                                                 <form :action="`{{ url('/admin/materials') }}/${item.id}`" method="POST"
@@ -322,7 +361,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" title="Hapus Kartu"
-                                                            class="w-7 h-7 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-lg flex items-center justify-center text-xs cursor-pointer">
+                                                            class="w-8 h-8 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-xs font-bold transition-transform active:scale-90 cursor-pointer">
                                                         🗑️
                                                     </button>
                                                 </form>
@@ -331,12 +370,21 @@
                                     </template>
 
                                     <template x-if="lvl.items.length === 0">
-                                        <div class="py-6 text-center text-slate-400 text-xs font-bold">
-                                            Belum ada kartu di level ini
+                                        <div class="py-8 text-center bg-white/60 border border-dashed border-slate-300 rounded-2xl text-slate-400 text-xs font-bold flex flex-col items-center justify-center gap-2">
+                                            <span>📭</span>
+                                            <span>Belum ada kartu di Level ini</span>
                                         </div>
                                     </template>
                                 </div>
                             </div>
+
+                            <!-- Bottom Quick Add Button per Level -->
+                            <button type="button" 
+                                    @click="newCard.category_slug = cat.slug; newCard.level_number = lvl.level_num; showAddModal = true"
+                                    class="w-full py-2.5 bg-white hover:bg-sky-50 border-2 border-dashed border-slate-300 hover:border-sky-400 text-slate-600 hover:text-sky-700 rounded-2xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-2">
+                                <span>➕</span>
+                                <span x-text="`Tambah Kartu di Level ${lvl.level_num}`"></span>
+                            </button>
 
                         </div>
                     </template>

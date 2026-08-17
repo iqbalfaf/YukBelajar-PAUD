@@ -207,31 +207,34 @@
     </div>
 
     <!-- Filter & Controls Bar -->
-    <div class="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+    <div class="bg-white rounded-3xl p-4 sm:p-5 border-2 border-slate-200 shadow-xs flex flex-col gap-3">
         
-        <!-- Category Filter Tabs -->
-        <div class="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl overflow-x-auto max-w-full">
+        <div class="flex items-center justify-between gap-3 pb-2 border-b border-slate-100 flex-wrap">
+            <span class="text-xs font-black uppercase text-slate-700">Filter Topik Kuis:</span>
+            <!-- Search Bar -->
+            <div class="relative w-full sm:w-64">
+                <input type="text" x-model="searchQuery"
+                       placeholder="Cari modul kuis..."
+                       class="w-full pl-9 pr-3.5 py-1.5 bg-slate-50 border border-slate-200 focus:border-sky-500 rounded-xl text-xs font-bold outline-none">
+                <span class="absolute left-3 top-1.5 text-slate-400 text-xs">🔍</span>
+            </div>
+        </div>
+
+        <!-- Category Filter Chips (Wrapable Grid) -->
+        <div class="flex items-center gap-1.5 flex-wrap">
             <button @click="selectedCatFilter = 'all'"
-                    class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
-                    :class="selectedCatFilter === 'all' ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                Semua Topik (<span x-text="filteredQuizzes.length"></span>)
+                    class="px-3.5 py-2 rounded-xl font-black text-xs transition-all whitespace-nowrap cursor-pointer"
+                    :class="selectedCatFilter === 'all' ? 'bg-slate-800 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                🌟 Semua Topik (<span x-text="filteredQuizzes.length"></span>)
             </button>
             <template x-for="cat in currentPillarCategories" :key="cat.id">
                 <button @click="selectedCatFilter = cat.id"
-                        class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5"
-                        :class="selectedCatFilter == cat.id ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                    <span x-text="cat.icon_emoji"></span>
+                        class="px-3 py-1.5 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border"
+                        :class="selectedCatFilter == cat.id ? 'bg-sky-600 border-sky-700 text-white shadow-xs font-black' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'">
+                    <span x-html="window.twemojiParse(cat.icon_emoji)"></span>
                     <span x-text="cat.name"></span>
                 </button>
             </template>
-        </div>
-
-        <!-- Search Bar -->
-        <div class="relative w-full md:w-64 shrink-0">
-            <input type="text" x-model="searchQuery"
-                   placeholder="Cari modul kuis..."
-                   class="w-full pl-9 pr-3.5 py-2 bg-slate-50 border border-slate-200 focus:border-sky-500 rounded-xl text-xs font-bold outline-none">
-            <span class="absolute left-3 top-2 text-slate-400 text-sm">🔍</span>
         </div>
 
     </div>
@@ -247,7 +250,7 @@
                     <div class="flex items-start justify-between gap-3 mb-3">
                         <div class="flex items-center gap-3">
                             <div class="w-12 h-12 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-3xl shrink-0 shadow-xs">
-                                <span x-text="quiz.icon_emoji"></span>
+                                <span x-html="window.twemojiParse(quiz.icon_emoji)"></span>
                             </div>
                             <div>
                                 <span class="px-2.5 py-0.5 rounded-md font-extrabold text-[10px] uppercase bg-sky-100 text-sky-800"
