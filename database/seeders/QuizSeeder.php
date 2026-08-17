@@ -2673,33 +2673,665 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 1 - TOPIK 5: BUAH & SAYURAN SEGAR (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (BUAH POPULER & SAYUR MANIS) ---
             [
                 'category_slug' => 'buah',
-                'title' => 'Tebak Buah Segar Sehat',
-                'slug' => 'tebak-buah',
+                'level_number' => 1,
+                'title' => 'Tebak Buah Merah & Kuning Manis',
+                'slug' => 'kuis-buah-l1-merah-kuning-manis',
                 'icon_emoji' => '🍎',
-                'target_age' => 4,
-                'total_questions' => 2,
+                'target_age' => 3,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Buah apakah yang berkulit kuning melengkung dan disukai monyet?',
-                        'audio' => 'Buah apakah yang berkulit kuning melengkung dan disukai monyet?',
-                        'emoji' => '🍌',
+                        'text' => 'Buah merah bulat manis dan renyah yang kaya vitamin adalah...?',
+                        'audio' => 'Buah merah bulat manis dan renyah yang kaya vitamin adalah apa?',
+                        'emoji' => '🍎',
                         'options' => [
-                            ['emoji' => '🍌', 'text' => 'Pisang', 'is_correct' => true],
-                            ['emoji' => '🍎', 'text' => 'Apel', 'is_correct' => false],
-                            ['emoji' => '🍇', 'text' => 'Anggur', 'is_correct' => false],
+                            ['emoji' => '🍎', 'text' => 'Apel Merah Manis', 'is_correct' => true],
+                            ['emoji' => '🥕', 'text' => 'Wortel Oranye', 'is_correct' => false],
+                            ['emoji' => '🍌', 'text' => 'Pisang Kuning', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Buah besar berdaging merah manis dengan biji kecil adalah?',
-                        'audio' => 'Buah besar berdaging merah manis dengan biji kecil adalah?',
+                        'text' => 'Buah kuning melengkung lembut yang sangat disukai anak-anak dan monyet adalah...?',
+                        'audio' => 'Buah kuning melengkung lembut yang sangat disukai anak anak dan monyet adalah apa?',
+                        'emoji' => '🍌',
+                        'options' => [
+                            ['emoji' => '🍌', 'text' => 'Pisang Kuning Lembut', 'is_correct' => true],
+                            ['emoji' => '🍊', 'text' => 'Jeruk Oranye', 'is_correct' => false],
+                            ['emoji' => '🍉', 'text' => 'Semangka Berair', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah bulat berwarna oranye segar yang kaya vitamin C adalah...?',
+                        'audio' => 'Buah bulat berwarna oranye segar yang kaya vitamin C adalah apa?',
+                        'emoji' => '🍊',
+                        'options' => [
+                            ['emoji' => '🍊', 'text' => 'Jeruk Oranye Segar', 'is_correct' => true],
+                            ['emoji' => '🍎', 'text' => 'Apel Merah', 'is_correct' => false],
+                            ['emoji' => '🍓', 'text' => 'Stroberi Bintik', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'buah',
+                'level_number' => 1,
+                'title' => 'Segarnya Semangka & Sayur Wortel Sehat',
+                'slug' => 'kuis-buah-l1-semangka-wortel-sehat',
+                'icon_emoji' => '🍉',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Buah besar berdaging merah berair manis dengan kulit hijau bergaris adalah...?',
+                        'audio' => 'Buah besar berdaging merah berair manis dengan kulit hijau bergaris adalah apa?',
                         'emoji' => '🍉',
                         'options' => [
-                            ['emoji' => '🍊', 'text' => 'Jeruk', 'is_correct' => false],
-                            ['emoji' => '🍉', 'text' => 'Semangka', 'is_correct' => true],
+                            ['emoji' => '🍉', 'text' => 'Semangka Merah Berair', 'is_correct' => true],
+                            ['emoji' => '🍌', 'text' => 'Pisang Lembut', 'is_correct' => false],
+                            ['emoji' => '🍊', 'text' => 'Jeruk Segar', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayuran renyah berwarna oranye kesukaan kelinci yang baik untuk mata adalah...?',
+                        'audio' => 'Sayuran renyah berwarna oranye kesukaan kelinci yang baik untuk mata adalah apa?',
+                        'emoji' => '🥕',
+                        'options' => [
+                            ['emoji' => '🥕', 'text' => 'Wortel Oranye Renyah', 'is_correct' => true],
+                            ['emoji' => '🍎', 'text' => 'Apel Merah', 'is_correct' => false],
+                            ['emoji' => '🍅', 'text' => 'Tomat Merah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah merah mungil berbentuk hati dengan bintik biji manis adalah...?',
+                        'audio' => 'Buah merah mungil berbentuk hati dengan bintik biji manis adalah apa?',
+                        'emoji' => '🍓',
+                        'options' => [
+                            ['emoji' => '🍓', 'text' => 'Stroberi Merah Bintik', 'is_correct' => true],
+                            ['emoji' => '🍉', 'text' => 'Semangka Berair', 'is_correct' => false],
+                            ['emoji' => '🍌', 'text' => 'Pisang Lembut', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'buah',
+                'level_number' => 1,
+                'title' => 'Sahabat Kebun & Tomat Merah Ceria',
+                'slug' => 'kuis-buah-l1-tomat-merah-ceria',
+                'icon_emoji' => '🍅',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Sayur buah berwarna merah bulat yang sering dibuat jus atau sup sehat adalah...?',
+                        'audio' => 'Sayur buah berwarna merah bulat yang sering dibuat jus atau sup sehat adalah apa?',
+                        'emoji' => '🍅',
+                        'options' => [
+                            ['emoji' => '🍅', 'text' => 'Tomat Merah Segar', 'is_correct' => true],
+                            ['emoji' => '🍌', 'text' => 'Pisang Lembut', 'is_correct' => false],
+                            ['emoji' => '🥕', 'text' => 'Wortel Renyah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah di antara berikut ini yang merupakan buah berdaging merah banyak air saat digigit?',
+                        'audio' => 'Manakah di antara berikut ini yang merupakan buah berdaging merah banyak air saat digigit?',
+                        'emoji' => '🍉',
+                        'options' => [
+                            ['emoji' => '🍉', 'text' => 'Semangka Merah', 'is_correct' => true],
+                            ['emoji' => '🍌', 'text' => 'Pisang Kuning', 'is_correct' => false],
+                            ['emoji' => '🥕', 'text' => 'Wortel Oranye', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah kulit buah pisang yang sudah matang dan manis?',
+                        'audio' => 'Warna apakah kulit buah pisang yang sudah matang dan manis?',
+                        'emoji' => '🍌',
+                        'options' => [
+                            ['emoji' => '🍌', 'text' => 'Kuning Cerah', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Biru Tua', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Hitam Gelap', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (BUAH MANIS & SAYURAN BERGIZI) ---
+            [
+                'category_slug' => 'buah',
+                'level_number' => 2,
+                'title' => 'Petualangan Anggur, Nanas & Mangga Manis',
+                'slug' => 'kuis-buah-l2-anggur-nanas-mangga',
+                'icon_emoji' => '🍇',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Buah bergerombol bulat ungu manis yang tumbuh merambat di pohon adalah...?',
+                        'audio' => 'Buah bergerombol bulat ungu manis yang tumbuh merambat di pohon adalah apa?',
+                        'emoji' => '🍇',
+                        'options' => [
+                            ['emoji' => '🍇', 'text' => 'Anggur Ungu Manis', 'is_correct' => true],
+                            ['emoji' => '🍍', 'text' => 'Nanas Mahkota', 'is_correct' => false],
+                            ['emoji' => '🥭', 'text' => 'Mangga Harum', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah bersisik kuning dengan mahkota daun hijau di atasnya adalah...?',
+                        'audio' => 'Buah bersisik kuning dengan mahkota daun hijau di atasnya adalah apa?',
+                        'emoji' => '🍍',
+                        'options' => [
+                            ['emoji' => '🍍', 'text' => 'Nanas Mahkota Emas', 'is_correct' => true],
+                            ['emoji' => '🥭', 'text' => 'Mangga Manis', 'is_correct' => false],
+                            ['emoji' => '🌽', 'text' => 'Jagung Manis', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah tropis berdaging oranye lembut dengan aroma sangat harum adalah...?',
+                        'audio' => 'Buah tropis berdaging oranye lembut dengan aroma sangat harum adalah apa?',
+                        'emoji' => '🥭',
+                        'options' => [
+                            ['emoji' => '🥭', 'text' => 'Mangga Harum Manis', 'is_correct' => true],
+                            ['emoji' => '🥑', 'text' => 'Alpukat Gurih', 'is_correct' => false],
+                            ['emoji' => '🥦', 'text' => 'Brokoli Hijau', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayuran bertongkol dengan deretan biji kuning manis yang lezat direbus adalah...?',
+                        'audio' => 'Sayuran bertongkol dengan deretan biji kuning manis yang lezat direbus adalah apa?',
+                        'emoji' => '🌽',
+                        'options' => [
+                            ['emoji' => '🌽', 'text' => 'Jagung Manis Kuning', 'is_correct' => true],
+                            ['emoji' => '🍇', 'text' => 'Anggur Ungu', 'is_correct' => false],
+                            ['emoji' => '🍍', 'text' => 'Nanas Emas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayuran hijau yang bentuknya unik mirip pohon cilik rindang adalah...?',
+                        'audio' => 'Sayuran hijau yang bentuknya unik mirip pohon cilik rindang adalah apa?',
+                        'emoji' => '🥦',
+                        'options' => [
+                            ['emoji' => '🥦', 'text' => 'Brokoli Hijau Si Pohon Cilik', 'is_correct' => true],
+                            ['emoji' => '🥭', 'text' => 'Mangga Harum', 'is_correct' => false],
+                            ['emoji' => '🌽', 'text' => 'Jagung Manis', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'buah',
+                'level_number' => 2,
+                'title' => 'Manfaat Alpukat, Melon & Sayur Hijau',
+                'slug' => 'kuis-buah-l2-alpukat-melon-sayur-hijau',
+                'icon_emoji' => '🥑',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Buah berkulit hijau dengan daging lembut gurih berlemak baik untuk otak adalah...?',
+                        'audio' => 'Buah berkulit hijau dengan daging lembut gurih berlemak baik untuk otak adalah apa?',
+                        'emoji' => '🥑',
+                        'options' => [
+                            ['emoji' => '🥑', 'text' => 'Alpukat Hijau Gurih', 'is_correct' => true],
+                            ['emoji' => '🍍', 'text' => 'Nanas Mahkota', 'is_correct' => false],
+                            ['emoji' => '🍇', 'text' => 'Anggur Ungu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah bulat wangi manis dengan daging buah hijau muda yang lembut menyegarkan adalah...?',
+                        'audio' => 'Buah bulat wangi manis dengan daging buah hijau muda yang lembut menyegarkan adalah apa?',
+                        'emoji' => '🍈',
+                        'options' => [
+                            ['emoji' => '🍈', 'text' => 'Melon Hijau Manis Segar', 'is_correct' => true],
+                            ['emoji' => '🌽', 'text' => 'Jagung Manis', 'is_correct' => false],
+                            ['emoji' => '🥦', 'text' => 'Brokoli Hijau', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayuran apakah yang sering disebut "Si Pohon Cilik Rindang" karena kaya vitamin?',
+                        'audio' => 'Sayuran apakah yang sering disebut si pohon cilik rindang karena kaya vitamin?',
+                        'emoji' => '🥦',
+                        'options' => [
+                            ['emoji' => '🥦', 'text' => 'Brokoli Hijau', 'is_correct' => true],
+                            ['emoji' => '🥑', 'text' => 'Alpukat', 'is_correct' => false],
+                            ['emoji' => '🥭', 'text' => 'Mangga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Makanan jagung manis paling lezat dinikmati dengan cara...?',
+                        'audio' => 'Makanan jagung manis paling lezat dinikmati dengan cara apa?',
+                        'emoji' => '🌽',
+                        'options' => [
+                            ['emoji' => '🌽', 'text' => 'Direbus atau dibakar manis hangat', 'is_correct' => true],
+                            ['emoji' => '🪨', 'text' => 'Dibiarkan mengeras kotor', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Tidak dimasak sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah buah yang memiliki biji bulat besar di bagian tengahnya?',
+                        'audio' => 'Manakah buah yang memiliki biji bulat besar di bagian tengahnya?',
+                        'emoji' => '🥑',
+                        'options' => [
+                            ['emoji' => '🥑', 'text' => 'Alpukat Gurih', 'is_correct' => true],
+                            ['emoji' => '🍇', 'text' => 'Anggur', 'is_correct' => false],
                             ['emoji' => '🍓', 'text' => 'Stroberi', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'buah',
+                'level_number' => 2,
+                'title' => 'Eksplorasi Cita Rasa & Warna Buah Kebun',
+                'slug' => 'kuis-buah-l2-cita-rasa-warna-buah',
+                'icon_emoji' => '🌽',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok buah dan sayuran yang berwarna ungu dan hijau segar?',
+                        'audio' => 'Manakah kelompok buah dan sayuran yang berwarna ungu dan hijau segar?',
+                        'emoji' => '🍇',
+                        'options' => [
+                            ['emoji' => '🍇', 'text' => 'Anggur Ungu & Brokoli Hijau', 'is_correct' => true],
+                            ['emoji' => '🍌', 'text' => 'Pisang & Jagung', 'is_correct' => false],
+                            ['emoji' => '🍎', 'text' => 'Apel & Stroberi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah nanas memiliki hiasan daun alami di bagian atasnya yang menyerupai...?',
+                        'audio' => 'Buah nanas memiliki hiasan daun alami di bagian atasnya yang menyerupai apa?',
+                        'emoji' => '🍍',
+                        'options' => [
+                            ['emoji' => '🍍', 'text' => 'Mahkota Raja yang Indah', 'is_correct' => true],
+                            ['emoji' => '🪶', 'text' => 'Sayap Burung', 'is_correct' => false],
+                            ['emoji' => '🎩', 'text' => 'Topi Pesulap', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita dianjurkan rajin makan buah dan sayuran setiap hari?',
+                        'audio' => 'Mengapa kita dianjurkan rajin makan buah dan sayuran setiap hari?',
+                        'emoji' => '💪',
+                        'options' => [
+                            ['emoji' => '💪', 'text' => 'Agar tubuh sehat, kuat, dan tidak mudah sakit', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar cepat mengantuk dan malas', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada manfaatnya sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah buah yang tumbuh bergerombol di satu tangkai ranting pohon?',
+                        'audio' => 'Manakah buah yang tumbuh bergerombol di satu tangkai ranting pohon?',
+                        'emoji' => '🍇',
+                        'options' => [
+                            ['emoji' => '🍇', 'text' => 'Anggur Ungu', 'is_correct' => true],
+                            ['emoji' => '🍉', 'text' => 'Semangka Besar', 'is_correct' => false],
+                            ['emoji' => '🍍', 'text' => 'Nanas Emas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah mangga yang sudah matang biasanya memiliki rasa yang...?',
+                        'audio' => 'Buah mangga yang sudah matang biasanya memiliki rasa apa?',
+                        'emoji' => '🥭',
+                        'options' => [
+                            ['emoji' => '🥭', 'text' => 'Manis, lembut, dan segar', 'is_correct' => true],
+                            ['emoji' => '🧂', 'text' => 'Sangat asin seperti garam', 'is_correct' => false],
+                            ['emoji' => '☕', 'text' => 'Pahit seperti jamu', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (BUAH TROPIS, VITAMIN & NUTRISI) ---
+            [
+                'category_slug' => 'buah',
+                'level_number' => 3,
+                'title' => 'Juara Buah Tropis & Vitamin Alami',
+                'slug' => 'kuis-buah-l3-buah-tropis-vitamin-alami',
+                'icon_emoji' => '🥥',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Buah berkulit keras di pohon pantai tinggi yang airnya sangat segar melegakan dahaga adalah...?',
+                        'audio' => 'Buah berkulit keras di pohon pantai tinggi yang airnya sangat segar melegakan dahaga adalah apa?',
+                        'emoji' => '🥥',
+                        'options' => [
+                            ['emoji' => '🥥', 'text' => 'Kelapa Muda Segar', 'is_correct' => true],
+                            ['emoji' => '🥝', 'text' => 'Kiwi Hijau', 'is_correct' => false],
+                            ['emoji' => '🍒', 'text' => 'Ceri Merah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah berkulit cokelat berbulu dengan daging hijau berbintik hitam yang kaya vitamin C adalah...?',
+                        'audio' => 'Buah berkulit cokelat berbulu dengan daging hijau berbintik hitam yang kaya vitamin C adalah apa?',
+                        'emoji' => '🥝',
+                        'options' => [
+                            ['emoji' => '🥝', 'text' => 'Kiwi Hijau Berbintik', 'is_correct' => true],
+                            ['emoji' => '🥥', 'text' => 'Kelapa Muda', 'is_correct' => false],
+                            ['emoji' => '🍋', 'text' => 'Lemon Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah mungil merah mengkilap yang sering tumbuh berpasangan kembar di tangkai adalah...?',
+                        'audio' => 'Buah mungil merah mengkilap yang sering tumbuh berpasangan kembar di tangkai adalah apa?',
+                        'emoji' => '🍒',
+                        'options' => [
+                            ['emoji' => '🍒', 'text' => 'Ceri Merah Berpasangan', 'is_correct' => true],
+                            ['emoji' => '🥒', 'text' => 'Mentimun', 'is_correct' => false],
+                            ['emoji' => '🫑', 'text' => 'Paprika', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah kuning cerah yang kaya vitamin C dan membuat minuman terasa asam segar adalah...?',
+                        'audio' => 'Buah kuning cerah yang kaya vitamin C dan membuat minuman terasa asam segar adalah apa?',
+                        'emoji' => '🍋',
+                        'options' => [
+                            ['emoji' => '🍋', 'text' => 'Lemon Kuning Asam Segar', 'is_correct' => true],
+                            ['emoji' => '🥥', 'text' => 'Kelapa Muda', 'is_correct' => false],
+                            ['emoji' => '🥑', 'text' => 'Alpukat Gurih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayuran hijau panjang berair yang dingin menyegarkan dan baik untuk pencernaan adalah...?',
+                        'audio' => 'Sayuran hijau panjang berair yang dingin menyegarkan dan baik untuk pencernaan adalah apa?',
+                        'emoji' => '🥒',
+                        'options' => [
+                            ['emoji' => '🥒', 'text' => 'Mentimun Hijau Segar', 'is_correct' => true],
+                            ['emoji' => '🍒', 'text' => 'Ceri Merah', 'is_correct' => false],
+                            ['emoji' => '🍋', 'text' => 'Lemon Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayuran berbentuk lonceng cerah yang memiliki warna merah, kuning, dan hijau adalah...?',
+                        'audio' => 'Sayuran berbentuk lonceng cerah yang memiliki warna merah kuning dan hijau adalah apa?',
+                        'emoji' => '🫑',
+                        'options' => [
+                            ['emoji' => '🫑', 'text' => 'Paprika Warna-Warni', 'is_correct' => true],
+                            ['emoji' => '🥥', 'text' => 'Kelapa Muda', 'is_correct' => false],
+                            ['emoji' => '🥝', 'text' => 'Kiwi Hijau', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa buah jeruk, lemon, dan kiwi sangat penting dikonsumsi tubuh kita?',
+                        'audio' => 'Mengapa buah jeruk, lemon, dan kiwi sangat penting dikonsumsi tubuh kita?',
+                        'emoji' => '🍋',
+                        'options' => [
+                            ['emoji' => '🍋', 'text' => 'Kaya vitamin C untuk daya tahan tubuh kuat', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Membuat tubuh lemas dan lelah', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak memiliki vitamin apa pun', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagian buah kelapa manakah yang biasa diminum langsung untuk menyegarkan tubuh?',
+                        'audio' => 'Bagian buah kelapa manakah yang biasa diminum langsung untuk menyegarkan tubuh?',
+                        'emoji' => '🥥',
+                        'options' => [
+                            ['emoji' => '🥥', 'text' => 'Air kelapa murni di dalam buah', 'is_correct' => true],
+                            ['emoji' => '🪨', 'text' => 'Sabut kelapa kering', 'is_correct' => false],
+                            ['emoji' => '🪵', 'text' => 'Batang pohon kelapa', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayuran apakah yang biasa diiris tipis untuk lalapan dan masker alami penyegar mata?',
+                        'audio' => 'Sayuran apakah yang biasa diiris tipis untuk lalapan dan masker alami penyegar mata?',
+                        'emoji' => '🥒',
+                        'options' => [
+                            ['emoji' => '🥒', 'text' => 'Mentimun Segar', 'is_correct' => true],
+                            ['emoji' => '🍋', 'text' => 'Lemon Kuning', 'is_correct' => false],
+                            ['emoji' => '🍒', 'text' => 'Ceri Merah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah mungil apakah yang sering digunakan sebagai hiasan manis di atas kue ulang tahun?',
+                        'audio' => 'Buah mungil apakah yang sering digunakan sebagai hiasan manis di atas kue ulang tahun?',
+                        'emoji' => '🍒',
+                        'options' => [
+                            ['emoji' => '🍒', 'text' => 'Ceri Merah Berpasangan', 'is_correct' => true],
+                            ['emoji' => '🥥', 'text' => 'Kelapa Utuh', 'is_correct' => false],
+                            ['emoji' => '🫑', 'text' => 'Paprika Lonceng', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'buah',
+                'level_number' => 3,
+                'title' => 'Cerdas Mengelompokkan Buah, Sayur & Vitamin',
+                'slug' => 'kuis-buah-l3-kelompok-buah-sayur-vitamin',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok makanan yang semuanya termasuk jenis buah manis?',
+                        'audio' => 'Manakah kelompok makanan yang semuanya termasuk jenis buah manis?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '🍎', 'text' => 'Apel, Pisang, Anggur', 'is_correct' => true],
+                            ['emoji' => '🥕', 'text' => 'Wortel, Brokoli, Mentimun', 'is_correct' => false],
+                            ['emoji' => '🥔', 'text' => 'Kentang, Tomat, Bawang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok makanan yang semuanya termasuk jenis sayuran sehat?',
+                        'audio' => 'Manakah kelompok makanan yang semuanya termasuk jenis sayuran sehat?',
+                        'emoji' => '🥦',
+                        'options' => [
+                            ['emoji' => '🥦', 'text' => 'Brokoli, Wortel, Mentimun', 'is_correct' => true],
+                            ['emoji' => '🍉', 'text' => 'Semangka, Stroberi, Mangga', 'is_correct' => false],
+                            ['emoji' => '🍍', 'text' => 'Nanas, Pisang, Apel', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah sayuran yang berwarna oranye dan sangat kaya akan vitamin A untuk kesehatan mata?',
+                        'audio' => 'Manakah sayuran yang berwarna oranye dan sangat kaya akan vitamin A untuk kesehatan mata?',
+                        'emoji' => '🥕',
+                        'options' => [
+                            ['emoji' => '🥕', 'text' => 'Wortel Oranye Renyah', 'is_correct' => true],
+                            ['emoji' => '🥦', 'text' => 'Brokoli Hijau', 'is_correct' => false],
+                            ['emoji' => '🫑', 'text' => 'Paprika Hijau', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah buah yang berukuran paling besar dan memiliki biji banyak di dalamnya?',
+                        'audio' => 'Manakah buah yang berukuran paling besar dan memiliki biji banyak di dalamnya?',
+                        'emoji' => '🍉',
+                        'options' => [
+                            ['emoji' => '🍉', 'text' => 'Semangka Merah', 'is_correct' => true],
+                            ['emoji' => '🍒', 'text' => 'Ceri Mungil', 'is_correct' => false],
+                            ['emoji' => '🍓', 'text' => 'Stroberi Merah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah buah yang kulitnya harus dikupas sebelum dimakan daging buahnya yang lembut?',
+                        'audio' => 'Manakah buah yang kulitnya harus dikupas sebelum dimakan daging buahnya yang lembut?',
+                        'emoji' => '🍌',
+                        'options' => [
+                            ['emoji' => '🍌', 'text' => 'Pisang & Alpukat', 'is_correct' => true],
+                            ['emoji' => '🍎', 'text' => 'Apel & Ceri', 'is_correct' => false],
+                            ['emoji' => '🍇', 'text' => 'Anggur & Stroberi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayuran hijau apakah yang kaya serat dan berbentuk mirip pohon cilik?',
+                        'audio' => 'Sayuran hijau apakah yang kaya serat dan berbentuk mirip pohon cilik?',
+                        'emoji' => '🥦',
+                        'options' => [
+                            ['emoji' => '🥦', 'text' => 'Brokoli Hijau Sehat', 'is_correct' => true],
+                            ['emoji' => '🍌', 'text' => 'Pisang Kuning', 'is_correct' => false],
+                            ['emoji' => '🍉', 'text' => 'Semangka Merah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah manakah yang memiliki rasa asam segar dan biasa diperas menjadi minuman limun hangat?',
+                        'audio' => 'Buah manakah yang memiliki rasa asam segar dan biasa diperas menjadi minuman limun hangat?',
+                        'emoji' => '🍋',
+                        'options' => [
+                            ['emoji' => '🍋', 'text' => 'Lemon Kuning Segar', 'is_correct' => true],
+                            ['emoji' => '🥑', 'text' => 'Alpukat Gurih', 'is_correct' => false],
+                            ['emoji' => '🥥', 'text' => 'Kelapa Muda', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah pasangan buah yang sama-sama berwarna merah cerah saat matang?',
+                        'audio' => 'Manakah pasangan buah yang sama-sama berwarna merah cerah saat matang?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '🍎', 'text' => 'Apel & Stroberi', 'is_correct' => true],
+                            ['emoji' => '🍌', 'text' => 'Pisang & Lemon', 'is_correct' => false],
+                            ['emoji' => '🍇', 'text' => 'Anggur & Kiwi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang harus kita lakukan sebelum memakan buah atau sayuran segar?',
+                        'audio' => 'Apa yang harus kita lakukan sebelum memakan buah atau sayuran segar?',
+                        'emoji' => '🧼',
+                        'options' => [
+                            ['emoji' => '🧼', 'text' => 'Mencucinya dengan air bersih mengalir', 'is_correct' => true],
+                            ['emoji' => '🚫', 'text' => 'Langsung memakannya dalam keadaan kotor', 'is_correct' => false],
+                            ['emoji' => '🗑️', 'text' => 'Membuangnya ke tempat sampah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa makan sayur dan buah membuat kita cerdas dan berenergi di sekolah?',
+                        'audio' => 'Mengapa makan sayur dan buah membuat kita cerdas dan berenergi di sekolah?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena kaya vitamin, mineral, dan nutrisi alami', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Karena membuat mengantuk dan malas', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak memiliki pengaruh apa pun', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'buah',
+                'level_number' => 3,
+                'title' => 'Grand Champion Ahli Nutrisi Buah & Sayur Ceria',
+                'slug' => 'kuis-buah-l3-grand-master-nutrisi-ceria',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Buah renyah berwarna merah yang terkenal sangat menyehatkan tubuh adalah...?',
+                        'audio' => 'Buah renyah berwarna merah yang terkenal sangat menyehatkan tubuh adalah apa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '🍎', 'text' => 'Apel Merah Manis', 'is_correct' => true],
+                            ['emoji' => '🌽', 'text' => 'Jagung Manis', 'is_correct' => false],
+                            ['emoji' => '🥒', 'text' => 'Mentimun', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayuran apakah yang bentuknya seperti mahkota pohon hijau kecil dan kaya nutrisi?',
+                        'audio' => 'Sayuran apakah yang bentuknya seperti mahkota pohon hijau kecil dan kaya nutrisi?',
+                        'emoji' => '🥦',
+                        'options' => [
+                            ['emoji' => '🥦', 'text' => 'Brokoli Hijau Sehat', 'is_correct' => true],
+                            ['emoji' => '🍌', 'text' => 'Pisang Kuning', 'is_correct' => false],
+                            ['emoji' => '🥥', 'text' => 'Kelapa Muda', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Minuman segar alami dari pohon pantai tropis yang kaya mineral alami adalah...?',
+                        'audio' => 'Minuman segar alami dari pohon pantai tropis yang kaya mineral alami adalah apa?',
+                        'emoji' => '🥥',
+                        'options' => [
+                            ['emoji' => '🥥', 'text' => 'Air Kelapa Muda Segar', 'is_correct' => true],
+                            ['emoji' => '🥫', 'text' => 'Minuman Kaleng Bersoda', 'is_correct' => false],
+                            ['emoji' => '☕', 'text' => 'Kopi Pahit Panas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayuran renyah yang membuat kelinci lincah dan mata kita jernih adalah...?',
+                        'audio' => 'Sayuran renyah yang membuat kelinci lincah dan mata kita jernih adalah apa?',
+                        'emoji' => '🥕',
+                        'options' => [
+                            ['emoji' => '🥕', 'text' => 'Wortel Oranye Renyah', 'is_correct' => true],
+                            ['emoji' => '🍉', 'text' => 'Semangka Berair', 'is_correct' => false],
+                            ['emoji' => '🍍', 'text' => 'Nanas Emas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah berdaging hijau gurih berlemak baik yang lezat dibuat jus alpukat adalah...?',
+                        'audio' => 'Buah berdaging hijau gurih berlemak baik yang lezat dibuat jus alpukat adalah apa?',
+                        'emoji' => '🥑',
+                        'options' => [
+                            ['emoji' => '🥑', 'text' => 'Alpukat Hijau Gurih', 'is_correct' => true],
+                            ['emoji' => '🍋', 'text' => 'Lemon Asam', 'is_correct' => false],
+                            ['emoji' => '🌶️', 'text' => 'Cabai Pedas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah apakah yang bagian luarnya memiliki mahkota daun hijau berduri kecil?',
+                        'audio' => 'Buah apakah yang bagian luarnya memiliki mahkota daun hijau berduri kecil?',
+                        'emoji' => '🍍',
+                        'options' => [
+                            ['emoji' => '🍍', 'text' => 'Nanas Mahkota Emas', 'is_correct' => true],
+                            ['emoji' => '🥭', 'text' => 'Mangga Harum', 'is_correct' => false],
+                            ['emoji' => '🍎', 'text' => 'Apel Merah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah semangka memiliki rasa yang sangat menyegarkan karena banyak mengandung...?',
+                        'audio' => 'Buah semangka memiliki rasa yang sangat menyegarkan karena banyak mengandung apa?',
+                        'emoji' => '🍉',
+                        'options' => [
+                            ['emoji' => '🍉', 'text' => 'Air Alami dan Vitamin Segar', 'is_correct' => true],
+                            ['emoji' => '🧂', 'text' => 'Garam Dapur Asin', 'is_correct' => false],
+                            ['emoji' => '🌶️', 'text' => 'Rasa Pedas Panas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah kecil merah mengkilap yang sering ditaruh di puncak kue tart manis adalah...?',
+                        'audio' => 'Buah kecil merah mengkilap yang sering ditaruh di puncak kue tart manis adalah apa?',
+                        'emoji' => '🍒',
+                        'options' => [
+                            ['emoji' => '🍒', 'text' => 'Ceri Merah Berpasangan', 'is_correct' => true],
+                            ['emoji' => '🥥', 'text' => 'Kelapa Utuh', 'is_correct' => false],
+                            ['emoji' => '🥑', 'text' => 'Alpukat Gurih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana sikap anak hebat yang ingin tubuhnya tumbuh tinggi dan sehat kuat?',
+                        'audio' => 'Bagaimana sikap anak hebat yang ingin tubuhnya tumbuh tinggi dan sehat kuat?',
+                        'emoji' => '🥗',
+                        'options' => [
+                            ['emoji' => '🥗', 'text' => 'Gemar makan aneka buah dan sayuran segar setiap hari', 'is_correct' => true],
+                            ['emoji' => '🍟', 'text' => 'Hanya mau makan permen manis', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Selalu menolak makan sayur di rumah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar hebat apakah untuk anak pintar yang gemar makan buah dan sayuran segar?',
+                        'audio' => 'Gelar hebat apakah untuk anak pintar yang gemar makan buah dan sayuran segar?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Juara Cilik Sehat & Sahabat Nutrisi Hebat!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Mengantuk dan Malas', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Kebun yang Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
