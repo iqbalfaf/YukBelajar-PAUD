@@ -319,13 +319,14 @@
                             <div>
                                 <!-- Level Title & Badge -->
                                 <div class="flex items-center justify-between gap-2 mb-4 pb-3 border-b-2 border-slate-200">
-                                    <div class="flex items-center gap-2">
-                                        <span class="px-2.5 py-1 rounded-xl text-xs font-black uppercase tracking-wide shadow-2xs"
+                                    <div class="flex items-center gap-2 min-w-0 flex-1">
+                                        <span class="px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wide shadow-2xs shrink-0"
                                               :class="lvl.level_num === 1 ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : (lvl.level_num === 2 ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-purple-100 text-purple-900 border border-purple-300')"
                                               x-text="`Level ${lvl.level_num}`"></span>
-                                        <h4 class="text-xs font-extrabold text-slate-800" x-text="lvl.level_title"></h4>
+                                        <h4 class="text-xs sm:text-sm font-extrabold text-slate-800 truncate" 
+                                            x-text="lvl.level_title.replace(/^Level \d+:\s*/, '')"></h4>
                                     </div>
-                                    <span class="px-2 py-0.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600" 
+                                    <span class="px-2.5 py-1 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 shrink-0 shadow-2xs" 
                                           x-text="`${lvl.cards_count} Kartu`"></span>
                                 </div>
 

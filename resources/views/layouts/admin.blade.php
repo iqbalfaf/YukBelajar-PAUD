@@ -58,7 +58,7 @@
         </div>
     </header>
 
-    <div class="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto p-3.5 sm:p-6 lg:p-8 gap-5 sm:gap-6">
+    <div class="flex-1 flex flex-col md:flex-row w-full max-w-[1780px] mx-auto p-4 sm:p-6 lg:p-8 gap-6">
         <!-- Sidebar Navigation (Responsive on Mobile & Tablet) -->
         <aside class="w-full md:w-64 shrink-0 flex flex-col gap-2">
             <div class="bg-white p-2.5 sm:p-3 rounded-2xl border border-slate-200 shadow-xs grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-col gap-1.5 sm:gap-1">
