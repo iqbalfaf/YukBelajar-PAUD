@@ -101,6 +101,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Relasi ke materi flashcard yang sudah diselesaikan & diklaim bintangnya (+1 ⭐).
+     */
+    public function completedMaterials(): BelongsToMany
+    {
+        return $this->belongsToMany(Material::class, 'user_materials')
+            ->withPivot('completed_at')
+            ->withTimestamps();
+    }
+
+    /**
      * Relasi ke log aktivitas audit sistem.
      */
     public function auditLogs(): HasMany

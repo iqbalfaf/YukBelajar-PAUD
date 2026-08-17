@@ -107,34 +107,54 @@
          },
 
          async markCompleted(cardId) {
-             const id = cardId || (this.currentCard() ? this.currentCard().id : null);
-             if (id) {
-                 this.isCompletedList[id] = true;
-                 try {
-                     const response = await fetch('{{ route('materials.complete-card') }}', {
-                         method: 'POST',
-                         headers: {
-                             'Content-Type': 'application/json',
-                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                             'Accept': 'application/json'
-                         },
-                         body: JSON.stringify({ material_id: id })
-                     });
-                     const res = await response.json();
-                     if (res.success) {
-                         this.userStars = res.total_stars;
-                     }
-                 } catch (e) {
-                     console.error(e);
-                 }
+            const id = cardId || (this.currentCard() ? this.currentCard().id : null);
+            if (!id) return;
 
-                 if (window.soundEngine) {
-                     window.soundEngine.playCorrect();
-                     window.soundEngine.playStar();
-                     window.triggerConfetti(0.7);
-                 }
-             }
-         }
+            if (this.isCompletedList[id]) {
+                if (window.soundEngine) {
+                    window.soundEngine.speak('Kartu ini sudah selesai kamu pelajari!');
+                    window.soundEngine.playClick();
+                }
+                return;
+            }
+
+            try {
+                const response = await fetch('{{ route('materials.complete-card') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ material_id: id })
+                });
+                const res = await response.json();
+                if (res.success) {
+                    this.isCompletedList[id] = true;
+                    this.userStars = res.total_stars;
+
+                    if (!res.already_completed) {
+                        if (window.soundEngine) {
+                            window.soundEngine.playCorrect();
+                            window.soundEngine.playStar();
+                            window.triggerConfetti(0.7);
+                            window.soundEngine.speak('Hore! Dapat satu bintang emas!');
+                        }
+                    } else {
+                        if (window.soundEngine) window.soundEngine.playClick();
+                    }
+
+                    if (res.level_unlocked && window.soundEngine) {
+                        setTimeout(() => {
+                            window.soundEngine.playVictory();
+                            window.soundEngine.speak(res.level_unlocked.message);
+                        }, 1200);
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
      }">
 
     <!-- Category Header & Navigation Bar -->
@@ -260,9 +280,9 @@
                                 </span>
 
                                 <button @click="markCompleted(card.id)"
-                                        class="px-2.5 py-0.5 rounded-full font-extrabold text-[10px] cursor-pointer"
-                                        :class="isCompletedList[card.id] ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500 hover:bg-emerald-50'">
-                                    <span x-text="isCompletedList[card.id] ? '✅ Selesai' : '⭕ Belum'"></span>
+                                        class="px-2.5 py-1 rounded-full font-black text-[10px] cursor-pointer transition-all flex items-center gap-1 shrink-0"
+                                        :class="isCompletedList[card.id] ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 shadow-xs hover:scale-105'">
+                                    <span x-text="isCompletedList[card.id] ? '✅ Sudah Diklaim' : '⭐ Ambil Bintang (+1)'"></span>
                                 </button>
                             </div>
 
@@ -439,9 +459,9 @@
 
                         <!-- Read Status Badge -->
                         <button @click="markCompleted()" 
-                                class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-extrabold text-xs transition-all cursor-pointer"
-                                :class="isCompletedList[currentCard().id] ? 'bg-emerald-100 text-emerald-800 border-2 border-emerald-400' : 'bg-slate-100 text-slate-600 border-2 border-slate-300 hover:bg-emerald-50'">
-                            <span x-text="isCompletedList[currentCard().id] ? '✅ Sudah Dipelajari' : '⭕ Tandai Selesai'"></span>
+                                class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-black text-xs transition-all cursor-pointer shadow-xs"
+                                :class="isCompletedList[currentCard().id] ? 'bg-emerald-100 text-emerald-800 border-2 border-emerald-400' : 'bg-amber-400 hover:bg-amber-300 text-amber-950 border-2 border-amber-500 hover:scale-105'">
+                            <span x-text="isCompletedList[currentCard().id] ? '✅ Bintang Sudah Diklaim' : '⭐ Klaim Bintang (+1)'"></span>
                         </button>
                     </div>
 

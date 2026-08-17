@@ -314,6 +314,8 @@ class FrontEndController extends Controller
             ];
         })->toArray();
 
+        $completedMaterialIds = $authUser ? $authUser->completedMaterials()->pluck('materials.id')->flip()->toArray() : [];
+
         $cards = [];
         if ($catModel) {
             foreach ($catModel->levels as $lvl) {
@@ -331,7 +333,7 @@ class FrontEndController extends Controller
                         'badge' => "Level {$lvl->level_number} • {$lvl->title}",
                         'is_unlocked' => $isLevelUnlocked,
                         'req_stars' => $lvl->unlock_stars_required,
-                        'is_completed' => true,
+                        'is_completed' => isset($completedMaterialIds[$mat->id]),
                     ];
                 }
             }
@@ -557,6 +559,22 @@ class FrontEndController extends Controller
             'material_id' => 'required|integer|exists:materials,id',
         ]);
 
+        $materialId = (int) $validated['material_id'];
+        $alreadyCompleted = $authUser->completedMaterials()->where('material_id', $materialId)->exists();
+
+        if ($alreadyCompleted) {
+            return response()->json([
+                'success' => true,
+                'already_completed' => true,
+                'new_stars_awarded' => 0,
+                'total_stars' => $authUser->total_stars,
+                'message' => '⭐ Kartu ini sudah pernah kamu pelajari dan bintangnya sudah diambil!',
+            ]);
+        }
+
+        // Catat relasi bahwa kartu ini telah diselesaikan
+        $authUser->completedMaterials()->attach($materialId, ['completed_at' => now()]);
+
         $oldStars = $authUser->total_stars;
         $authUser->increment('total_stars', 1);
         $authUser->refresh();
@@ -582,6 +600,8 @@ class FrontEndController extends Controller
 
         return response()->json([
             'success' => true,
+            'already_completed' => false,
+            'new_stars_awarded' => 1,
             'total_stars' => $authUser->total_stars,
             'streak_info' => $streakInfo,
             'level_unlocked' => $levelUnlocked,

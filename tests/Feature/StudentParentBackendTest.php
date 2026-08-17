@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Material;
 use App\Models\User;
 
 test('halaman beranda game hub memuat relasi kategori, level progress, dan kuis dari database', function () {
@@ -114,4 +115,55 @@ test('pengguna dapat memperbarui profil nama, usia, avatar, dan PIN ke database'
     expect($student->avatar_icon)->toBe('singa');
     expect($student->avatar_accessory)->toBe('crown');
     expect($student->parent_pin)->toBe('9988');
+});
+
+test('siswa dapat mengklaim bintang 1x pada kartu materi flashcard dan tersimpan permanen ke database', function () {
+    $student = User::where('username', 'alif_ceria')->first();
+    $material = Material::first();
+
+    // Reset hubungan materi untuk pengujian
+    $student->completedMaterials()->detach($material->id);
+    $initialStars = $student->total_stars;
+
+    // 1. Klaim pertama kali -> Sukses dapat +1 bintang
+    $response = $this->actingAs($student)->postJson(route('materials.complete-card'), [
+        'material_id' => $material->id,
+    ]);
+
+    $response->assertStatus(200);
+    $response->assertJson([
+        'success' => true,
+        'already_completed' => false,
+        'new_stars_awarded' => 1,
+        'total_stars' => $initialStars + 1,
+    ]);
+
+    $student->refresh();
+    expect($student->total_stars)->toBe($initialStars + 1);
+    expect($student->completedMaterials()->where('material_id', $material->id)->exists())->toBeTrue();
+
+    // 2. Klaim kedua kali (kartu yang sama) -> Tidak menambah bintang lagi
+    $duplicateResponse = $this->actingAs($student)->postJson(route('materials.complete-card'), [
+        'material_id' => $material->id,
+    ]);
+
+    $duplicateResponse->assertStatus(200);
+    $duplicateResponse->assertJson([
+        'success' => true,
+        'already_completed' => true,
+        'new_stars_awarded' => 0,
+        'total_stars' => $initialStars + 1,
+    ]);
+
+    $student->refresh();
+    expect($student->total_stars)->toBe($initialStars + 1);
+
+    // 3. Muat halaman materi -> is_completed bernilai true
+    $pageResponse = $this->actingAs($student)->get(route('materials', 'hewan'));
+    $pageResponse->assertStatus(200);
+    $materialData = $pageResponse->viewData('materialData');
+    $claimedCard = collect($materialData['cards'])->firstWhere('id', $material->id);
+    if ($claimedCard) {
+        expect($claimedCard['is_completed'])->toBeTrue();
+    }
 });
