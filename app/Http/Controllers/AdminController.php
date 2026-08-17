@@ -725,8 +725,6 @@ class AdminController extends Controller
      */
     public function exportReport(Request $request): StreamedResponse
     {
-        $students = User::where('role', 'student')->with(['quizAttempts'])->get();
-
         AuditLog::create([
             'user_id' => Auth::id(),
             'action_type' => 'EXPORT_REPORT',
@@ -738,14 +736,14 @@ class AdminController extends Controller
             'Content-Disposition' => 'attachment; filename="rapor-belajar-paud-'.date('Y-m-d').'.csv"',
         ];
 
-        return response()->stream(function () use ($students) {
+        return response()->stream(function () {
             $handle = fopen('php://output', 'w');
             // UTF-8 BOM for Microsoft Excel compatibility
             fwrite($handle, "\xEF\xBB\xBF");
 
             fputcsv($handle, ['ID Siswa', 'Nama Lengkap Siswa', 'Usia Belajar', 'Total Bintang Emas', 'Kuis Selesai', 'Rata-rata Skor', 'Status Akun', 'Tanggal Daftar']);
 
-            foreach ($students as $s) {
+            User::where('role', 'student')->with(['quizAttempts'])->cursor()->each(function ($s) use ($handle) {
                 $quizCount = $s->quizAttempts->count();
                 $avgScore = $quizCount > 0 ? round($s->quizAttempts->avg('score')) : 0;
                 fputcsv($handle, [
@@ -758,7 +756,8 @@ class AdminController extends Controller
                     $s->is_active ? 'Aktif' : 'Non-aktif',
                     $s->created_at ? $s->created_at->format('d/m/Y') : date('d/m/Y'),
                 ]);
-            }
+            });
+
             fclose($handle);
         }, 200, $headers);
     }
@@ -1414,6 +1413,16 @@ class AdminController extends Controller
             'is_active' => 'nullable|boolean',
             'password' => 'nullable|string|min:4',
         ]);
+
+        // Keamanan: Cegah admin/guru yang sedang login menurunkan peran sendiri atau menonaktifkan akun sendiri
+        if ($user->id === Auth::id()) {
+            if ($validated['role'] !== $user->role) {
+                return redirect()->route('admin.users')->withErrors(['error' => 'Anda tidak dapat mengubah peran (role) akun Anda sendiri!']);
+            }
+            if (isset($validated['is_active']) && ! $validated['is_active']) {
+                return redirect()->route('admin.users')->withErrors(['error' => 'Anda tidak dapat menonaktifkan akun Anda sendiri!']);
+            }
+        }
 
         $user->name = $validated['name'];
         if (array_key_exists('email', $validated)) {

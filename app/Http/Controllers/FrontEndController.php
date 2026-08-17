@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Achievement;
 use App\Models\Category;
+use App\Models\LearningLevel;
 use App\Models\Material;
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
@@ -74,12 +75,12 @@ class FrontEndController extends Controller
             'avatar_emoji' => $authUser->avatar_emoji ?? '🦖',
             'avatar_accessory' => $accessoryIcon,
             'role' => $authUser->role ?? 'student',
-            'parent_name' => $authUser->parent_name ?? 'Bunda Siti Rahmawati',
+            'parent_name' => $authUser->parent_name ?? '',
             'parent_relationship' => $authUser->parent_relationship ?? 'bunda',
             'parent_relationship_label' => $authUser->parent_relationship_label ?? 'Bunda / Ibu',
-            'parent_display_title' => $authUser->parent_display_title ?? 'Bunda Siti Rahmawati (Bunda / Ibu)',
-            'phone' => $authUser->phone ?? '0813-9876-5432',
-            'email' => $authUser->email ?? 'ortu.alif@gmail.com',
+            'parent_display_title' => $authUser->parent_display_title ?? 'Bunda / Pendamping Keluarga',
+            'phone' => $authUser->phone ?? '',
+            'email' => $authUser->email ?? '',
             'stars_count' => $authUser->total_stars ?? 0,
             'current_streak_days' => $authUser->current_streak_days ?? 1,
             'longest_streak_days' => $authUser->longest_streak_days ?? 1,
@@ -497,15 +498,17 @@ class FrontEndController extends Controller
             return response()->json(['success' => false, 'message' => 'Silakan login terlebih dahulu.'], 401);
         }
 
-        $quizModel = Quiz::where('slug', $quiz)->firstOrFail();
+        $quizModel = Quiz::where('slug', $quiz)->with('questions')->firstOrFail();
 
         $validated = $request->validate([
             'total_correct' => 'required|integer|min:0',
             'total_questions' => 'required|integer|min:1',
         ]);
 
-        $totalCorrect = $validated['total_correct'];
-        $totalQuestions = $validated['total_questions'];
+        // Keamanan: Validasi batas atas agar bintang tidak dapat dimanipulasi melalui request klien
+        $actualQuestionsCount = $quizModel->questions->count();
+        $totalQuestions = $actualQuestionsCount > 0 ? min($validated['total_questions'], $actualQuestionsCount) : $validated['total_questions'];
+        $totalCorrect = min($validated['total_correct'], $totalQuestions);
         $score = round(($totalCorrect / max(1, $totalQuestions)) * 100);
 
         // Bintang diperoleh dari total jawaban benar (1 benar = 1 bintang, maks total_questions)
@@ -543,15 +546,18 @@ class FrontEndController extends Controller
         // Catat keaktifan harian (Daily Learning Streak 🔥)
         $streakInfo = $authUser->recordDailyActivity();
 
-        // Deteksi apakah penambahan bintang ini membuka Level 2 atau Level 3 (Syarat: 10 & 25 ⭐)
+        // Deteksi pembukaan Level 2 atau Level 3 secara dinamis dari database
+        $lvl2Req = LearningLevel::where('level_number', 2)->min('unlock_stars_required') ?? 10;
+        $lvl3Req = LearningLevel::where('level_number', 3)->min('unlock_stars_required') ?? 25;
+
         $levelUnlocked = null;
-        if ($oldStars < 10 && $newStars >= 10) {
+        if ($oldStars < $lvl2Req && $newStars >= $lvl2Req) {
             $levelUnlocked = [
                 'level' => 2,
                 'title' => 'Level 2 (Eksplorasi Menengah)',
                 'message' => 'Hore! Level 2 sudah terbuka untukmu! Hebat sekali!',
             ];
-        } elseif ($oldStars < 25 && $newStars >= 25) {
+        } elseif ($oldStars < $lvl3Req && $newStars >= $lvl3Req) {
             $levelUnlocked = [
                 'level' => 3,
                 'title' => 'Level 3 (Pra-SD & Mahir)',
@@ -611,15 +617,18 @@ class FrontEndController extends Controller
         // Catat keaktifan harian (Daily Learning Streak 🔥)
         $streakInfo = $authUser->recordDailyActivity();
 
-        // Deteksi apakah penambahan bintang ini membuka Level 2 atau Level 3 (Syarat: 10 & 25 ⭐)
+        // Deteksi pembukaan Level 2 atau Level 3 secara dinamis dari database
+        $lvl2Req = LearningLevel::where('level_number', 2)->min('unlock_stars_required') ?? 10;
+        $lvl3Req = LearningLevel::where('level_number', 3)->min('unlock_stars_required') ?? 25;
+
         $levelUnlocked = null;
-        if ($oldStars < 10 && $newStars >= 10) {
+        if ($oldStars < $lvl2Req && $newStars >= $lvl2Req) {
             $levelUnlocked = [
                 'level' => 2,
                 'title' => 'Level 2 (Eksplorasi Menengah)',
                 'message' => 'Hore! Level 2 sudah terbuka untukmu! Hebat sekali!',
             ];
-        } elseif ($oldStars < 25 && $newStars >= 25) {
+        } elseif ($oldStars < $lvl3Req && $newStars >= $lvl3Req) {
             $levelUnlocked = [
                 'level' => 3,
                 'title' => 'Level 3 (Pra-SD & Mahir)',
@@ -1005,12 +1014,12 @@ class FrontEndController extends Controller
         $parentData = [
             'child_profile' => $user,
             'parent_profile' => [
-                'name' => $user['parent_name'] ?? 'Bunda Siti Rahmawati',
+                'name' => $user['parent_name'] ?? '',
                 'relationship' => $user['parent_relationship'] ?? 'bunda',
                 'relationship_label' => $user['parent_relationship_label'] ?? 'Bunda / Ibu',
-                'display_title' => $user['parent_display_title'] ?? 'Bunda Siti Rahmawati (Bunda / Ibu)',
-                'phone' => $user['phone'] ?? '0813-9876-5432',
-                'email' => $user['email'] ?? 'ortu.alif@gmail.com',
+                'display_title' => $user['parent_display_title'] ?? 'Bunda / Pendamping Keluarga',
+                'phone' => $user['phone'] ?? '',
+                'email' => $user['email'] ?? '',
                 'parent_pin' => $user['parent_pin'] ?? '1234',
             ],
             'learning_summary' => [
