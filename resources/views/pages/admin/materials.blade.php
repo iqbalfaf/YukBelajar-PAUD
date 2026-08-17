@@ -337,8 +337,8 @@
                                             
                                             <!-- Top Row: Icon + Full Title & Subtitle (Full width, no wrap mess!) -->
                                             <div class="flex items-start gap-3">
-                                                <div class="w-12 h-12 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-3xl shrink-0 shadow-inner">
-                                                    <span x-html="window.twemojiParse(item.icon_emoji)"></span>
+                                                <div class="w-16 h-12 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center shrink-0 shadow-inner px-1 overflow-hidden">
+                                                    <span class="inline-flex items-center justify-center gap-0.5 whitespace-nowrap text-xl [&>img.emoji]:h-7 [&>img.emoji]:w-auto [&>img.emoji]:m-0 [&>img.emoji]:shrink-0" x-html="window.twemojiParse(item.icon_emoji)"></span>
                                                 </div>
                                                 <div class="flex-1 min-w-0">
                                                     <h5 class="text-sm font-extrabold text-slate-800 leading-snug break-words" x-text="item.title"></h5>

@@ -191,9 +191,9 @@
                                 !isAnswered ? 'border-slate-200 hover:border-yellow-400 bg-gradient-to-b from-white to-slate-50 hover:to-yellow-50 hover:scale-105' : ''
                             ]">
                         
-                        <!-- Option Single Emoji -->
-                        <span class="text-6xl sm:text-7xl group-hover:scale-110 transition-transform drop-shadow-xs"
-                              x-text="opt.emoji">
+                        <!-- Option Emoji with Twemoji & Side-by-Side Fit -->
+                        <span class="inline-flex items-center justify-center gap-1.5 whitespace-nowrap text-5xl sm:text-6xl group-hover:scale-110 transition-transform drop-shadow-xs [&>img.emoji]:h-14 sm:[&>img.emoji]:h-16 [&>img.emoji]:w-auto [&>img.emoji]:m-0 [&>img.emoji]:shrink-0"
+                              x-html="window.twemojiParse(opt.emoji)">
                         </span>
 
                         <!-- Clean Option Text -->

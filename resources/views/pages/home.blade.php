@@ -576,9 +576,10 @@
                                     </template>
                                 </div>
 
-                                <!-- Big Emoji Icon with Twemoji Rendering -->
-                                <div class="w-24 h-24 mx-auto bg-slate-50 rounded-2xl flex items-center justify-center text-5xl sm:text-6xl mb-3 border-2 border-slate-100 group-hover:scale-110 transition-transform shadow-inner select-none">
-                                    <span x-html="window.twemojiParse(m.icon_emoji)"></span>
+                                <!-- Big Emoji Icon with Twemoji Rendering (Side-by-side Horizontal Fit) -->
+                                <div class="w-32 h-24 mx-auto bg-slate-50 rounded-2xl flex items-center justify-center mb-3 border-2 border-slate-100 group-hover:scale-105 transition-transform shadow-inner select-none px-2 overflow-hidden">
+                                    <span class="inline-flex items-center justify-center gap-1.5 whitespace-nowrap max-w-full text-5xl [&>img.emoji]:h-14 [&>img.emoji]:w-auto [&>img.emoji]:max-h-14 [&>img.emoji]:max-w-14 [&>img.emoji]:m-0 [&>img.emoji]:shrink-0" 
+                                          x-html="window.twemojiParse(m.icon_emoji)"></span>
                                 </div>
 
                                 <!-- Title & Subtitle -->
@@ -745,7 +746,7 @@
                             
                             <div>
                                 <div class="flex items-start justify-between gap-3 mb-3">
-                                    <span class="text-5xl group-hover:scale-110 transition-transform" x-html="window.twemojiParse(q.icon_emoji)"></span>
+                                    <span class="inline-flex items-center gap-1 text-4xl sm:text-5xl group-hover:scale-110 transition-transform whitespace-nowrap [&>img.emoji]:h-11 sm:[&>img.emoji]:h-12 [&>img.emoji]:w-auto [&>img.emoji]:m-0 [&>img.emoji]:shrink-0" x-html="window.twemojiParse(q.icon_emoji)"></span>
                                     
                                     <div class="flex flex-col items-end gap-1.5">
                                         <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase shadow-2xs"
