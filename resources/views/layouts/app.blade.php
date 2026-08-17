@@ -325,28 +325,47 @@
         @yield('content')
     </main>
 
-    <!-- Playful Grass & Animal Footer -->
-    <footer class="mt-auto relative z-10 bg-emerald-400 border-t-8 border-emerald-500 pt-8 pb-6 px-4 text-emerald-950">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div class="flex items-center gap-3">
-                <span class="text-4xl">🐱</span>
+    <!-- Playful Grass & Friendly Footer -->
+    <footer class="mt-auto relative z-10 bg-emerald-400 border-t-8 border-emerald-500 pt-7 pb-6 px-4 sm:px-8 text-emerald-950">
+        <div class="max-w-[1600px] w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-5 text-center md:text-left">
+            
+            <!-- Left: Mascot & Brand Info -->
+            <div class="flex items-center gap-3.5">
+                <span class="emoji-icon text-4xl sm:text-5xl shrink-0">🐱</span>
                 <div>
-                    <p class="font-bold text-lg font-heading">YukBelajar PAUD &copy; {{ date('Y') }}</p>
-                    <p class="text-xs font-semibold text-emerald-900">Platform Belajar & Kuis Game Ramah Anak Usia Dini 🇮🇩</p>
+                    <h3 class="font-black text-lg sm:text-xl font-heading text-emerald-950 leading-tight">
+                        YukBelajar <span class="text-amber-300">PAUD</span>
+                    </h3>
+                    <p class="text-xs font-bold text-emerald-900 mt-0.5">
+                        Media Belajar & Kuis Interaktif Ramah Anak Usia Dini 🇮🇩
+                    </p>
+                    <p class="text-[10px] font-semibold text-emerald-800/90 mt-1">
+                        &copy; {{ date('Y') }} YukBelajar PAUD &bull; Hak Cipta Dilindungi
+                    </p>
                 </div>
             </div>
-            <div class="flex items-center gap-4 text-sm font-bold flex-wrap justify-center">
-                <a href="{{ route('landing') }}" class="hover:underline">Beranda</a>
-                <a href="{{ route('home') }}" class="hover:underline">Petualangan Game</a>
-                <a href="{{ route('community') }}" class="hover:underline">Panggung Sahabat</a>
-                <a href="{{ route('achievements') }}" class="hover:underline">Ruang Piala</a>
-                <a href="{{ route('stickers') }}" class="hover:underline">Buku Stiker</a>
-                <a href="{{ route('login') }}" class="hover:underline">Masuk</a>
-                <a href="{{ route('register') }}" class="hover:underline">Daftar Akun</a>
-                <a href="{{ route('parents') }}" class="hover:underline">Menu Orang Tua</a>
-                <a href="{{ route('profile') }}" class="hover:underline">Profil Akun</a>
-                <a href="{{ route('admin.dashboard') }}" class="hover:underline">Panel Guru</a>
+
+            <!-- Right: Essential Links & Kid Safe Badge -->
+            <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
+                <!-- Navigation links -->
+                <div class="flex items-center gap-4 text-xs sm:text-sm font-black flex-wrap justify-center text-emerald-950">
+                    <a href="{{ route('landing') }}" class="hover:text-emerald-800 transition-colors">Beranda</a>
+                    <a href="{{ route('home') }}" class="hover:text-emerald-800 transition-colors">Taman Petualangan</a>
+                    <button type="button" @click="openParentalGate()" class="hover:text-emerald-800 transition-colors cursor-pointer">
+                        Portal Orang Tua
+                    </button>
+                    @if (auth()->check() && in_array(auth()->user()->role, ['admin', 'teacher']))
+                        <a href="{{ route('admin.dashboard') }}" class="hover:text-emerald-800 transition-colors">Panel Guru</a>
+                    @endif
+                </div>
+
+                <!-- Kid Safe Badge -->
+                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/40 border-2 border-emerald-600/50 rounded-2xl text-[11px] font-black text-emerald-950">
+                    <span>🛡️</span>
+                    <span>100% Ramah & Aman Anak</span>
+                </div>
             </div>
+
         </div>
     </footer>
 
