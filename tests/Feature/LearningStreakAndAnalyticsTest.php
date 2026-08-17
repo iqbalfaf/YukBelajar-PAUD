@@ -80,7 +80,7 @@ test('quiz submission records daily streak and returns level unlock information'
     ]);
 
     $user = User::factory()->create([
-        'total_stars' => 3,
+        'total_stars' => 8,
         'current_streak_days' => 1,
         'last_activity_date' => null,
     ]);
@@ -105,8 +105,8 @@ test('quiz submission records daily streak and returns level unlock information'
             'level_unlocked',
         ]);
 
-    // User went from 3 stars to 6 stars (crossing threshold 5 for Level 2)
-    expect($response->json('total_stars'))->toBe(6)
+    // User went from 8 stars to 11 stars (crossing threshold 10 for Level 2)
+    expect($response->json('total_stars'))->toBe(11)
         ->and($response->json('level_unlocked.level'))->toBe(2);
 });
 

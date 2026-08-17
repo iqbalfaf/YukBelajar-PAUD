@@ -515,15 +515,15 @@ class FrontEndController extends Controller
         // Catat keaktifan harian (Daily Learning Streak 🔥)
         $streakInfo = $authUser->recordDailyActivity();
 
-        // Deteksi apakah penambahan bintang ini membuka Level 2 atau Level 3
+        // Deteksi apakah penambahan bintang ini membuka Level 2 atau Level 3 (Syarat: 10 & 25 ⭐)
         $levelUnlocked = null;
-        if ($oldStars < 5 && $newStars >= 5) {
+        if ($oldStars < 10 && $newStars >= 10) {
             $levelUnlocked = [
                 'level' => 2,
                 'title' => 'Level 2 (Eksplorasi Menengah)',
                 'message' => 'Hore! Level 2 sudah terbuka untukmu! Hebat sekali!',
             ];
-        } elseif ($oldStars < 15 && $newStars >= 15) {
+        } elseif ($oldStars < 25 && $newStars >= 25) {
             $levelUnlocked = [
                 'level' => 3,
                 'title' => 'Level 3 (Pra-SD & Mahir)',
@@ -583,14 +583,15 @@ class FrontEndController extends Controller
         // Catat keaktifan harian (Daily Learning Streak 🔥)
         $streakInfo = $authUser->recordDailyActivity();
 
+        // Deteksi apakah penambahan bintang ini membuka Level 2 atau Level 3 (Syarat: 10 & 25 ⭐)
         $levelUnlocked = null;
-        if ($oldStars < 5 && $newStars >= 5) {
+        if ($oldStars < 10 && $newStars >= 10) {
             $levelUnlocked = [
                 'level' => 2,
                 'title' => 'Level 2 (Eksplorasi Menengah)',
                 'message' => 'Hore! Level 2 sudah terbuka untukmu! Hebat sekali!',
             ];
-        } elseif ($oldStars < 15 && $newStars >= 15) {
+        } elseif ($oldStars < 25 && $newStars >= 25) {
             $levelUnlocked = [
                 'level' => 3,
                 'title' => 'Level 3 (Pra-SD & Mahir)',
