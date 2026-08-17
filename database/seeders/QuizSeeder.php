@@ -11309,35 +11309,1309 @@ class QuizSeeder extends Seeder
             ],
 
             // =========================================================================
-            // PILAR 3: ZONA BELAJAR MENGHITUNG
+            // =========================================================================
+            // PILAR 3: ZONA BELAJAR MENGHITUNG (45 KUIS TOTAL: 9 PER TOPIK)
             // =========================================================================
             [
                 'category_slug' => 'membilang',
-                'title' => 'Kuis Membilang Benda',
-                'slug' => 'kuis-membilang',
+                'level_number' => 1,
+                'title' => 'Membilang 1 Balon, 2 Bintang & 3 Apel',
+                'slug' => 'kuis-membilang-l1-balon-bintang-apel',
                 'icon_emoji' => '🎈',
                 'target_age' => 4,
-                'total_questions' => 2,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Hitung ada berapa balon: 🎈 🎈 🎈 ?',
-                        'audio' => 'Hitung ada berapa balon yang melayang?',
+                        'text' => 'Hitung ada berapa balon merah: 🎈 ?',
+                        'audio' => 'Hitung ada berapa balon merah yang melayang?',
                         'emoji' => '🎈',
                         'options' => [
-                            ['emoji' => '3️⃣', 'text' => '3 Balon', 'is_correct' => true],
-                            ['emoji' => '2️⃣', 'text' => '2 Balon', 'is_correct' => false],
-                            ['emoji' => '4️⃣', 'text' => '4 Balon', 'is_correct' => false],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 (Satu) Balon',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Balon',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Balon',
+                                'is_correct' => false,
+                            ],
                         ],
                     ],
                     [
-                        'text' => 'Hitung ada berapa bintang: ⭐ ⭐ ?',
-                        'audio' => 'Hitung ada berapa bintang emas yang berkilau?',
+                        'text' => 'Hitung ada berapa bintang emas berkilau: ⭐ ⭐ ?',
+                        'audio' => 'Hitung ada berapa bintang emas yang berkilau indah?',
                         'emoji' => '⭐',
                         'options' => [
-                            ['emoji' => '1️⃣', 'text' => '1 Bintang', 'is_correct' => false],
-                            ['emoji' => '2️⃣', 'text' => '2 Bintang', 'is_correct' => true],
-                            ['emoji' => '5️⃣', 'text' => '5 Bintang', 'is_correct' => false],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 (Dua) Bintang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 Bintang',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Bintang',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung ada berapa apel merah segar di keranjang: 🍎 🍎 🍎 ?',
+                        'audio' => 'Hitung ada berapa apel merah di dalam keranjang?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 (Tiga) Apel',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Apel',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'membilang',
+                'level_number' => 1,
+                'title' => 'Membilang 4 Mobil, 5 Ikan & 6 Bunga',
+                'slug' => 'kuis-membilang-l1-mobil-ikan-bunga',
+                'icon_emoji' => '🚗',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Hitung ada berapa mobil melaju di jalan: 🚗 🚗 🚗 🚗 ?',
+                        'audio' => 'Hitung ada berapa mobil melaju di jalan?',
+                        'emoji' => '🚗',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 (Empat) Mobil',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Mobil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Mobil',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung ada berapa ikan berenang lincah di kolam: 🐟 🐟 🐟 🐟 🐟 ?',
+                        'audio' => 'Hitung ada berapa ikan berenang di kolam jernih?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 (Lima) Ikan',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Ikan',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Ikan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung ada berapa kuntum bunga mawar mekar: 🌸 🌸 🌸 🌸 🌸 🌸 ?',
+                        'audio' => 'Hitung ada berapa kuntum bunga mawar di kebun?',
+                        'emoji' => '🌸',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 (Enam) Bunga',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Bunga',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Bunga',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'membilang',
+                'level_number' => 1,
+                'title' => 'Membilang 7 Bola & Mengenal Kuantitas Awal',
+                'slug' => 'kuis-membilang-l1-bola-kuantitas-awal',
+                'icon_emoji' => '⚽',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Hitung ada berapa bola warna di lapangan: ⚽ ⚽ ⚽ ⚽ ⚽ ⚽ ⚽ ?',
+                        'audio' => 'Hitung ada berapa bola warna di lapangan?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 (Tujuh) Bola',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Bola',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Bola',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka berapakah lambang bilangan dari SATU buah balon 🎈?',
+                        'audio' => 'Angka berapakah lambang bilangan dari satu buah balon?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => 'Angka 1 (Satu)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => 'Angka 2 (Dua)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => 'Angka 3 (Tiga)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Angka berapakah lambang bilangan dari LIMA ekor ikan 🐟🐟🐟🐟🐟?',
+                        'audio' => 'Angka berapakah lambang bilangan dari lima ekor ikan?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => 'Angka 5 (Lima)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => 'Angka 4 (Empat)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => 'Angka 6 (Enam)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'membilang',
+                'level_number' => 2,
+                'title' => 'Membilang 8 Bebek, 9 Stroberi & 10 Jari',
+                'slug' => 'kuis-membilang-l2-bebek-stroberi-jari',
+                'icon_emoji' => '🦆',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Hitung ada berapa bebek berbaris: 🦆 🦆 🦆 🦆 🦆 🦆 🦆 🦆 ?',
+                        'audio' => 'Hitung ada berapa bebek berbaris rapi?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 (Delapan) Bebek',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Bebek',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Bebek',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung ada berapa buah stroberi segar: 🍓 🍓 🍓 🍓 🍓 🍓 🍓 🍓 🍓 ?',
+                        'audio' => 'Hitung ada berapa buah stroberi merah segar?',
+                        'emoji' => '🍓',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 (Sembilan) Stroberi',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Stroberi',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Stroberi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada berapakah jumlah seluruh jari tangan pada kedua belah tangan kita?',
+                        'audio' => 'Ada berapakah jumlah seluruh jari tangan pada kedua belah tangan kita?',
+                        'emoji' => '🔟',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 (Sepuluh) Jari Tangan',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Jari Tangan',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Jari Tangan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lambang bilangan manakah yang melambangkan angka DELAPAN?',
+                        'audio' => 'Lambang bilangan manakah yang melambangkan angka delapan?',
+                        'emoji' => '8️⃣',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => 'Angka 8',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => 'Angka 6',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => 'Angka 9',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lambang bilangan manakah yang melambangkan angka SEPULUH?',
+                        'audio' => 'Lambang bilangan manakah yang melambangkan angka sepuluh?',
+                        'emoji' => '🔟',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => 'Angka 10',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => 'Angka 1',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => 'Angka 0',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'membilang',
+                'level_number' => 2,
+                'title' => 'Membilang 11 Telur, 12 Kue & 13 Pensil',
+                'slug' => 'kuis-membilang-l2-telur-kue-pensil',
+                'icon_emoji' => '🥚',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Hitung butir telur di sarang (10 telur ditambah 1 telur): ada berapa butir?',
+                        'audio' => 'Sepuluh butir telur ditambah satu butir telur menjadi berapa?',
+                        'emoji' => '🥚',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 (Sebelas) Butir Telur',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Butir',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12 Butir',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada berapakah jumlah kue cangkir dalam 1 (satu) lusin?',
+                        'audio' => 'Ada berapakah jumlah kue cangkir dalam satu lusin?',
+                        'emoji' => '🧁',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12 (Dua Belas) Kue',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Kue',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '14 Kue',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung pensil warna di kotak: ada 12 pensil ditambah 1 pensil baru. Totalnya...?',
+                        'audio' => 'Dua belas pensil ditambah satu pensil menjadi berapa?',
+                        'emoji' => '✏️',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '13 (Tiga Belas) Pensil',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 Pensil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '15 Pensil',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bilangan setelah angka 10 (sepuluh) adalah...?',
+                        'audio' => 'Bilangan setelah angka sepuluh adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 (Sebelas)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 (Sembilan)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12 (Dua Belas)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bilangan setelah angka 12 (dua belas) adalah...?',
+                        'audio' => 'Bilangan setelah angka dua belas adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '13 (Tiga Belas)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 (Sebelas)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '14 (Empat Belas)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'membilang',
+                'level_number' => 2,
+                'title' => 'Membilang 14 Kupu-Kupu, 15 Permen & 16 Jeruk',
+                'slug' => 'kuis-membilang-l2-kupu-permen-jeruk',
+                'icon_emoji' => '🦋',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Ada 13 kupu-kupu hinggap, lalu 1 kupu-kupu datang lagi. Total ada berapa kupu-kupu?',
+                        'audio' => 'Tiga belas kupu-kupu ditambah satu kupu-kupu menjadi berapa?',
+                        'emoji' => '🦋',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '14 (Empat Belas) Kupu-Kupu',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12 Kupu-Kupu',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '15 Kupu-Kupu',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 3 kelompok permen, masing-masing berisi 5 permen (5 + 5 + 5). Total permen ada...?',
+                        'audio' => 'Tiga kelompok permen masing-masing berisi lima permen totalnya ada berapa?',
+                        'emoji' => '🍬',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '15 (Lima Belas) Permen',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Permen',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '20 Permen',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di meja ada 15 jeruk manis, ibu menambah 1 jeruk lagi. Sekarang ada berapa jeruk?',
+                        'audio' => 'Lima belas jeruk ditambah satu jeruk lagi menjadi berapa?',
+                        'emoji' => '🍊',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '16 (Enam Belas) Jeruk',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '14 Jeruk',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '17 Jeruk',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lambang bilangan 14 dibaca...?',
+                        'audio' => 'Lambang bilangan empat belas ditulis dengan angka berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => 'Empat Belas',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => 'Empat Puluh',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => 'Dua Puluh Empat',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lambang bilangan 15 dibaca...?',
+                        'audio' => 'Lambang bilangan lima belas ditulis dengan angka berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => 'Lima Belas',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => 'Lima Puluh',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => 'Lima Saja',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'membilang',
+                'level_number' => 3,
+                'title' => 'Membilang 17 Perahu, 18 Lonceng, 19 Buku & 20 Medali',
+                'slug' => 'kuis-membilang-l3-perahu-lonceng-buku-medali',
+                'icon_emoji' => '⛵',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Ada 16 perahu berlayar, ditambah 1 perahu lagi. Total ada berapa perahu layar?',
+                        'audio' => 'Enam belas perahu ditambah satu perahu menjadi berapa?',
+                        'emoji' => '⛵',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '17 (Tujuh Belas) Perahu',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '15 Perahu',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '18 Perahu',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Dua deret lonceng masing-masing berisi 9 lonceng (9 + 9). Total lonceng ada...?',
+                        'audio' => 'Sembilan lonceng ditambah sembilan lonceng menjadi berapa?',
+                        'emoji' => '🔔',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '18 (Delapan Belas) Lonceng',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '16 Lonceng',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '20 Lonceng',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 18 buku di rak, ditambah 1 buku cerita baru. Total buku di rak menjadi...?',
+                        'audio' => 'Delapan belas buku ditambah satu buku cerita baru menjadi berapa?',
+                        'emoji' => '📚',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '19 (Sembilan Belas) Buku',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '17 Buku',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '20 Buku',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Dua kotak medali emas masing-masing berisi 10 medali (10 + 10). Total medali ada...?',
+                        'audio' => 'Sepuluh medali ditambah sepuluh medali menjadi berapa?',
+                        'emoji' => '🏅',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '20 (Dua Puluh) Medali Juara',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Medali',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '15 Medali',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lambang bilangan dari TUJUH BELAS adalah...?',
+                        'audio' => 'Lambang bilangan dari tujuh belas adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '17',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '71',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lambang bilangan dari DELAPAN BELAS adalah...?',
+                        'audio' => 'Lambang bilangan dari delapan belas adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '18',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '81',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lambang bilangan dari SEMBILAN BELAS adalah...?',
+                        'audio' => 'Lambang bilangan dari sembilan belas adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '19',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '91',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lambang bilangan dari DUA PULUH adalah...?',
+                        'audio' => 'Lambang bilangan dari dua puluh adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '20',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Urutan bilangan yang benar setelah angka 16 adalah...?',
+                        'audio' => 'Urutan bilangan yang benar setelah angka enam belas adalah apa?',
+                        'emoji' => '📈',
+                        'options' => [
+                            [
+                                'emoji' => '📈',
+                                'text' => '17, 18, 19, 20',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '📉',
+                                'text' => '15, 14, 13, 12',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔀',
+                                'text' => '20, 19, 18, 17',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah total medali emas juara membilang yang kita pelajari pada materi?',
+                        'audio' => 'Berapakah total medali emas juara membilang yang kita pelajari?',
+                        'emoji' => '🏅',
+                        'options' => [
+                            [
+                                'emoji' => '🏅',
+                                'text' => '20 Medali Emas Juara!',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Medali',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Medali',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'membilang',
+                'level_number' => 3,
+                'title' => 'Cerdas Membilang Cepat & Menghitung Objek Visual',
+                'slug' => 'kuis-membilang-l3-hitung-cepat-visual',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Jika ada 1 balon 🎈 ditambah 2 bintang ⭐⭐, ada berapa total benda?',
+                        'audio' => 'Satu balon ditambah dua bintang totalnya ada berapa benda?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Benda',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Benda',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Benda',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika ada 3 apel 🍎🍎🍎 ditambah 3 mobil 🚗🚗🚗, ada berapa total benda?',
+                        'audio' => 'Tiga apel ditambah tiga mobil totalnya ada berapa benda?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Benda',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Benda',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Benda',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika ada 5 ikan 🐟 dan 5 jari 🔟, ada berapa total kuantitasnya?',
+                        'audio' => 'Lima ikan ditambah lima jari totalnya ada berapa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 (Sepuluh)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 (Delapan)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 (Sembilan)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung mundur: 20, 19, 18, ... angka selanjutnya adalah?',
+                        'audio' => 'Dua puluh, sembilan belas, delapan belas, lalu angka berapa?',
+                        'emoji' => '📉',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '17 (Tujuh Belas)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '16 (Enam Belas)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '21 (Dua Puluh Satu)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung mundur: 15, 14, 13, ... angka selanjutnya adalah?',
+                        'audio' => 'Lima belas, empat belas, tiga belas, lalu angka berapa?',
+                        'emoji' => '📉',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12 (Dua Belas)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 (Sebelas)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '14 (Empat Belas)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok bilangan yang berada di antara 10 dan 15?',
+                        'audio' => 'Manakah kelompok bilangan yang berada di antara sepuluh dan lima belas?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '🔢',
+                                'text' => '11, 12, 13, 14',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔢',
+                                'text' => '6, 7, 8, 9',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔢',
+                                'text' => '16, 17, 18, 19',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok bilangan yang berada di antara 15 dan 20?',
+                        'audio' => 'Manakah kelompok bilangan yang berada di antara lima belas dan dua puluh?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '🔢',
+                                'text' => '16, 17, 18, 19',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔢',
+                                'text' => '11, 12, 13, 14',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔢',
+                                'text' => '1, 2, 3, 4',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah benda jika kita membilang 10 buku ditambah 10 medali?',
+                        'audio' => 'Berapakah jumlah benda jika sepuluh buku ditambah sepuluh medali?',
+                        'emoji' => '📚',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '20 Benda',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '15 Benda',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Benda',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa belajar membilang benda sangat bermanfaat dalam kehidupan sehari-hari?',
+                        'audio' => 'Mengapa belajar membilang benda sangat bermanfaat dalam kehidupan sehari-hari?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            [
+                                'emoji' => '🌟',
+                                'text' => 'Agar kita dapat menghitung mainan, uang saku, dan benda dengan teliti',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Hanya untuk membuang waktu',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🚫',
+                                'text' => 'Tidak ada gunanya sama sekali',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana cara membilang benda yang banyak agar tidak ada yang terlewat?',
+                        'audio' => 'Bagaimana cara membilang benda yang banyak agar tidak ada yang terlewat?',
+                        'emoji' => '👆',
+                        'options' => [
+                            [
+                                'emoji' => '👆',
+                                'text' => 'Menunjuk benda satu per satu secara berurutan dan teratur',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🙈',
+                                'text' => 'Menebak asal-asalan tanpa melihat',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🏃',
+                                'text' => 'Menghitung sambil berlari cepat',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'membilang',
+                'level_number' => 3,
+                'title' => 'Grand Champion Ahli Membilang Ceria 1 Sampai 20',
+                'slug' => 'kuis-membilang-l3-grand-master-membilang',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Hitung 1 balon 🎈 ditambah 4 mobil 🚗🚗🚗🚗: total ada berapa benda?',
+                        'audio' => 'Satu balon ditambah empat mobil totalnya ada berapa benda?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Benda',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Benda',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Benda',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung 2 bintang ⭐⭐ ditambah 6 bunga 🌸🌸🌸🌸🌸🌸: total ada berapa?',
+                        'audio' => 'Dua bintang ditambah enam bunga totalnya ada berapa?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Benda',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Benda',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Benda',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung 3 apel 🍎🍎🍎 ditambah 7 bola ⚽⚽⚽⚽⚽⚽⚽: total ada berapa?',
+                        'audio' => 'Tiga apel ditambah tujuh bola totalnya ada berapa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Benda',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Benda',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 Benda',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung 8 bebek 🦆 ditambah 3 pensil ✏️: total ada berapa benda?',
+                        'audio' => 'Delapan bebek ditambah tiga pensil totalnya ada berapa benda?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 Benda',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Benda',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12 Benda',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung 9 stroberi 🍓 ditambah 5 permen 🍬: total ada berapa makanan lezat?',
+                        'audio' => 'Sembilan stroberi ditambah lima permen totalnya ada berapa?',
+                        'emoji' => '🍓',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '14 Benda',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '13 Benda',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '15 Benda',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung 10 jari 🔟 ditambah 6 jeruk 🍊: total ada berapa?',
+                        'audio' => 'Sepuluh ditambah enam totalnya menjadi berapa?',
+                        'emoji' => '🍊',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '16',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '15',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '17',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung 11 telur 🥚 ditambah 7 perahu ⛵: total ada berapa?',
+                        'audio' => 'Sebelas ditambah tujuh totalnya menjadi berapa?',
+                        'emoji' => '🥚',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '18',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '17',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '19',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung 12 kue 🧁 ditambah 7 lonceng 🔔: total ada berapa?',
+                        'audio' => 'Dua belas ditambah tujuh totalnya menjadi berapa?',
+                        'emoji' => '🧁',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '19',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '18',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '20',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hitung 10 buku 📚 ditambah 10 medali 🏅: total angka puncaknya adalah...?',
+                        'audio' => 'Sepuluh ditambah sepuluh total angka puncaknya adalah berapa?',
+                        'emoji' => '🏅',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '20 (Dua Puluh Penuh!)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '19',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar kehormatan apakah yang pantas untuk anak pintar yang menguasai membilang 1 sampai 20?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak pintar yang menguasai membilang satu sampai dua puluh?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            [
+                                'emoji' => '🏆',
+                                'text' => '🏆 Grand Champion Ahli Membilang Ceria 1 Sampai 20!',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Juara Malas Berhitung',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Batu Patung Diam',
+                                'is_correct' => false,
+                            ],
                         ],
                     ],
                 ],
@@ -11345,31 +12619,1304 @@ class QuizSeeder extends Seeder
 
             [
                 'category_slug' => 'perbandingan',
-                'title' => 'Tebak Perbandingan Ukuran & Jumlah',
-                'slug' => 'kuis-perbandingan',
-                'icon_emoji' => '⚖️',
+                'level_number' => 1,
+                'title' => 'Membandingkan Besar-Kecil & Banyak-Sedikit',
+                'slug' => 'kuis-banding-l1-besar-kecil-banyak-sedikit',
+                'icon_emoji' => '🐘',
                 'target_age' => 4,
-                'total_questions' => 2,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Di antara Gajah dan Tikus, manakah yang berukuran LEBIH BESAR?',
-                        'audio' => 'Di antara Gajah dan Tikus, manakah yang berukuran LEBIH BESAR?',
+                        'text' => 'Di antara Gajah dan Tikus, hewan manakah yang berukuran LEBIH BESAR?',
+                        'audio' => 'Di antara Gajah dan Tikus hewan manakah yang berukuran lebih besar?',
                         'emoji' => '🐘',
                         'options' => [
-                            ['emoji' => '🐘', 'text' => 'Gajah (Besar)', 'is_correct' => true],
-                            ['emoji' => '🐭', 'text' => 'Tikus (Kecil)', 'is_correct' => false],
-                            ['emoji' => '🐜', 'text' => 'Semut', 'is_correct' => false],
+                            [
+                                'emoji' => '🐘',
+                                'text' => 'Gajah (Besar)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐭',
+                                'text' => 'Tikus (Kecil)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🐜',
+                                'text' => 'Semut',
+                                'is_correct' => false,
+                            ],
                         ],
                     ],
                     [
-                        'text' => 'Di antara Jerapah dan Kelinci, manakah yang berpostur LEBIH TINGGI?',
-                        'audio' => 'Di antara Jerapah dan Kelinci, manakah yang berpostur LEBIH TINGGI?',
+                        'text' => 'Di antara keranjang berisi 10 apel dan 2 apel, manakah yang LEBIH BANYAK?',
+                        'audio' => 'Keranjang manakah yang berisi lebih banyak apel?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '🍎',
+                                'text' => 'Keranjang 10 Apel (Banyak)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🍏',
+                                'text' => 'Keranjang 2 Apel (Sedikit)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🧺',
+                                'text' => 'Keranjang Kosong',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Tikus memiliki tubuh yang lebih ... daripada gajah?',
+                        'audio' => 'Tikus memiliki tubuh yang lebih apa daripada gajah?',
+                        'emoji' => '🐭',
+                        'options' => [
+                            [
+                                'emoji' => '🐭',
+                                'text' => 'Kecil',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐘',
+                                'text' => 'Besar',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🦒',
+                                'text' => 'Tinggi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'perbandingan',
+                'level_number' => 1,
+                'title' => 'Membandingkan Tinggi-Pendek & Panjang-Pendek',
+                'slug' => 'kuis-banding-l1-tinggi-pendek-panjang',
+                'icon_emoji' => '🦒',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Di antara Jerapah dan Kelinci, siapakah yang bertubuh LEBIH TINGGI?',
+                        'audio' => 'Siapakah yang bertubuh lebih tinggi antara Jerapah dan Kelinci?',
                         'emoji' => '🦒',
                         'options' => [
-                            ['emoji' => '🐰', 'text' => 'Kelinci (Pendek)', 'is_correct' => false],
-                            ['emoji' => '🦒', 'text' => 'Jerapah (Tinggi)', 'is_correct' => true],
-                            ['emoji' => '🐢', 'text' => 'Kura-kura', 'is_correct' => false],
+                            [
+                                'emoji' => '🦒',
+                                'text' => 'Jerapah (Tinggi)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐰',
+                                'text' => 'Kelinci (Pendek)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🐢',
+                                'text' => 'Kura-kura',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara Penggaris 30 cm dan Penghapus kecil, benda manakah yang LEBIH PANJANG?',
+                        'audio' => 'Benda manakah yang lebih panjang antara Penggaris dan Penghapus?',
+                        'emoji' => '📏',
+                        'options' => [
+                            [
+                                'emoji' => '📏',
+                                'text' => 'Penggaris (Panjang)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🧽',
+                                'text' => 'Penghapus (Pendek)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '✏️',
+                                'text' => 'Rautan Pensil',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelinci memiliki postur tubuh yang lebih ... daripada jerapah?',
+                        'audio' => 'Kelinci memiliki postur tubuh yang lebih apa daripada jerapah?',
+                        'emoji' => '🐰',
+                        'options' => [
+                            [
+                                'emoji' => '🐰',
+                                'text' => 'Pendek',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🦒',
+                                'text' => 'Tinggi',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🐘',
+                                'text' => 'Lebar',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'perbandingan',
+                'level_number' => 1,
+                'title' => 'Membandingkan Berat-Ringan & Penuh-Kosong',
+                'slug' => 'kuis-banding-l1-berat-ringan-penuh-kosong',
+                'icon_emoji' => '🪨',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Di antara Batu kali yang padat dan Bulu ayam yang halus, manakah yang LEBIH BERAT?',
+                        'audio' => 'Manakah yang lebih berat antara Batu kali dan Bulu ayam?',
+                        'emoji' => '🪨',
+                        'options' => [
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Batu Kali (Berat)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🪶',
+                                'text' => 'Bulu Ayam (Ringan)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🍃',
+                                'text' => 'Daun Kering',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelas yang terisi air susu sampai ke bibir gelas disebut gelas yang...?',
+                        'audio' => 'Gelas yang terisi air susu sampai penuh disebut gelas apa?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            [
+                                'emoji' => '🥛',
+                                'text' => 'Penuh',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🫙',
+                                'text' => 'Kosong',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '💧',
+                                'text' => 'Bocor',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara Kuda yang berlari kencang dan Kura-kura, manakah yang LEBIH CEPAT?',
+                        'audio' => 'Manakah yang lebih cepat antara Kuda dan Kura-kura?',
+                        'emoji' => '🐎',
+                        'options' => [
+                            [
+                                'emoji' => '🐎',
+                                'text' => 'Kuda (Cepat)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐢',
+                                'text' => 'Kura-kura (Lambat)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🐌',
+                                'text' => 'Siput',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'perbandingan',
+                'level_number' => 2,
+                'title' => 'Membandingkan Tebal-Tipis & Lebar-Sempit',
+                'slug' => 'kuis-banding-l2-tebal-tipis-lebar-sempit',
+                'icon_emoji' => '🌳',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Di antara Batang pohon mangga dan Ranting daun kecil, manakah yang LEBIH TEBAL?',
+                        'audio' => 'Manakah yang lebih tebal antara Batang pohon dan Ranting daun?',
+                        'emoji' => '🌳',
+                        'options' => [
+                            [
+                                'emoji' => '🌳',
+                                'text' => 'Batang Pohon (Tebal)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🌿',
+                                'text' => 'Ranting Daun (Tipis)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🍃',
+                                'text' => 'Helai Daun',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara Pintu utama rumah dan Celah jendela kecil, manakah yang LEBIH LEBAR?',
+                        'audio' => 'Manakah yang lebih lebar antara Pintu rumah dan Celah jendela?',
+                        'emoji' => '🚪',
+                        'options' => [
+                            [
+                                'emoji' => '🚪',
+                                'text' => 'Pintu Rumah (Lebar)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🪟',
+                                'text' => 'Celah Jendela (Sempit)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🕳️',
+                                'text' => 'Lubang Kunci',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Selembar kertas buku memiliki bentuk yang lebih ... daripada buku kamus tebal?',
+                        'audio' => 'Selembar kertas buku memiliki bentuk yang lebih apa daripada buku kamus?',
+                        'emoji' => '📄',
+                        'options' => [
+                            [
+                                'emoji' => '📄',
+                                'text' => 'Tipis',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '📚',
+                                'text' => 'Tebal',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🪵',
+                                'text' => 'Keras',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lorong yang hanya bisa dilewati satu orang saja disebut lorong yang...?',
+                        'audio' => 'Lorong yang hanya bisa dilewati satu orang disebut lorong apa?',
+                        'emoji' => '🚶',
+                        'options' => [
+                            [
+                                'emoji' => '🚶',
+                                'text' => 'Sempit',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🛣️',
+                                'text' => 'Lebar',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🏖️',
+                                'text' => 'Luas',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buku ensiklopedia bergambar memiliki ukuran yang lebih ... daripada brosur kertas?',
+                        'audio' => 'Buku ensiklopedia bergambar memiliki ukuran yang lebih apa?',
+                        'emoji' => '📚',
+                        'options' => [
+                            [
+                                'emoji' => '📚',
+                                'text' => 'Tebal',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '📄',
+                                'text' => 'Tipis',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🪶',
+                                'text' => 'Ringan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'perbandingan',
+                'level_number' => 2,
+                'title' => 'Simbol Perbandingan: Lebih Banyak, Lebih Sedikit & Sama',
+                'slug' => 'kuis-banding-l2-simbol-lebih-banyak-sedikit',
+                'icon_emoji' => '⚖️',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Kelompok 5 Bintang ⭐⭐⭐⭐⭐ ... Kelompok 2 Bintang ⭐⭐. Kata perbandingan yang tepat adalah?',
+                        'audio' => 'Lima bintang dibanding dua bintang adalah apa?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            [
+                                'emoji' => '➕',
+                                'text' => 'Lebih Banyak Dari ( > )',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '➖',
+                                'text' => 'Lebih Sedikit Dari ( < )',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🟰',
+                                'text' => 'Sama Banyak Dengan ( = )',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelompok 3 Ikan 🐟🐟🐟 ... Kelompok 7 Ikan 🐟🐟🐟🐟🐟🐟🐟. Kata perbandingan yang tepat adalah?',
+                        'audio' => 'Tiga ikan dibanding tujuh ikan adalah apa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '➖',
+                                'text' => 'Lebih Sedikit Dari ( < )',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '➕',
+                                'text' => 'Lebih Banyak Dari ( > )',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🟰',
+                                'text' => 'Sama Banyak Dengan ( = )',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelompok 4 Balon 🎈🎈🎈🎈 ... Kelompok 4 Balon 🎈🎈🎈🎈. Simbol yang tepat adalah?',
+                        'audio' => 'Empat balon dibanding empat balon simbolnya apa?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '🟰',
+                                'text' => 'Sama Banyak ( = )',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '➕',
+                                'text' => 'Lebih Banyak ( > )',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '➖',
+                                'text' => 'Lebih Sedikit ( < )',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mulut simbol perbandingan \" > \" selalu terbuka menghadap ke arah kelompok yang...?',
+                        'audio' => 'Mulut simbol perbandingan selalu menghadap ke arah kelompok yang bagaimana?',
+                        'emoji' => '🐊',
+                        'options' => [
+                            [
+                                'emoji' => '➕',
+                                'text' => 'Lebih Banyak / Lebih Besar',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '➖',
+                                'text' => 'Lebih Sedikit / Kecil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => 'Kosong',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Tanda garis sejajar \" = \" melambangkan bahwa kedua kelompok benda memiliki jumlah yang...?',
+                        'audio' => 'Tanda garis sejajar sama dengan melambangkan bahwa kedua kelompok benda berjumlah apa?',
+                        'emoji' => '⚖️',
+                        'options' => [
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Banyak dan Seimbang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '💥',
+                                'text' => 'Berbeda jauh',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '❓',
+                                'text' => 'Tidak diketahui',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'perbandingan',
+                'level_number' => 2,
+                'title' => 'Membandingkan Dalam-Dangkal & Panas-Dingin',
+                'slug' => 'kuis-banding-l2-dalam-dangkal-panas-dingin',
+                'icon_emoji' => '🌊',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Di antara Laut Samudra lepas dan Kolam karet anak di halaman, manakah yang LEBIH DALAM?',
+                        'audio' => 'Manakah yang lebih dalam antara Laut samudra dan Kolam karet anak?',
+                        'emoji' => '🌊',
+                        'options' => [
+                            [
+                                'emoji' => '🌊',
+                                'text' => 'Laut Samudra (Dalam)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🏖️',
+                                'text' => 'Kolam Karet (Dangkal)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🛁',
+                                'text' => 'Bak Mandi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara Mangkok sup mendidih dan Es krim buah beku, manakah yang LEBIH DINGIN?',
+                        'audio' => 'Manakah yang lebih dingin antara Sup mendidih dan Es krim beku?',
+                        'emoji' => '🍦',
+                        'options' => [
+                            [
+                                'emoji' => '🍦',
+                                'text' => 'Es Krim (Dingin)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🍲',
+                                'text' => 'Sup Mendidih (Panas)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '☕',
+                                'text' => 'Kopi Hangat',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kolam renang anak yang tingginya hanya setinggi mata kaki disebut kolam yang...?',
+                        'audio' => 'Kolam renang yang tingginya setinggi mata kaki disebut kolam apa?',
+                        'emoji' => '👶',
+                        'options' => [
+                            [
+                                'emoji' => '👶',
+                                'text' => 'Dangkal dan Aman',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🌊',
+                                'text' => 'Sangat Dalam',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🕳️',
+                                'text' => 'Curam',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda yang baru saja dipanaskan di atas api kompor memiliki suhu yang...?',
+                        'audio' => 'Benda yang dipanaskan di atas api kompor memiliki suhu apa?',
+                        'emoji' => '🔥',
+                        'options' => [
+                            [
+                                'emoji' => '🔥',
+                                'text' => 'Panas',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '❄️',
+                                'text' => 'Dingin Beku',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🌬️',
+                                'text' => 'Sejuk',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita harus didampingi orang tua saat berada di dekat air kolam yang dalam?',
+                        'audio' => 'Mengapa kita harus didampingi orang tua di dekat kolam yang dalam?',
+                        'emoji' => '🛡️',
+                        'options' => [
+                            [
+                                'emoji' => '🛡️',
+                                'text' => 'Agar kita selalu aman dan terlindungi dari bahaya',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Biar bisa tidur',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🚫',
+                                'text' => 'Tidak perlu alasan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'perbandingan',
+                'level_number' => 3,
+                'title' => 'Menemukan Objek Terbesar, Terkecil, Tertinggi & Terbanyak',
+                'slug' => 'kuis-banding-l3-superlatif-terbesar-terkecil',
+                'icon_emoji' => '🐋',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Satwa laut apakah yang memiliki ukuran tubuh PALING BESAR (TERBESAR) di bumi?',
+                        'audio' => 'Satwa laut apakah yang bertubuh paling besar di bumi?',
+                        'emoji' => '🐋',
+                        'options' => [
+                            [
+                                'emoji' => '🐋',
+                                'text' => 'Ikan Paus Biru',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐟',
+                                'text' => 'Ikan Emas',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🦐',
+                                'text' => 'Udang Kecil',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Satwa serangga kebun apakah yang berukuran PALING KECIL (TERKECIL) dan suka gotong royong?',
+                        'audio' => 'Satwa apakah yang berukuran paling kecil di kebun?',
+                        'emoji' => '🐜',
+                        'options' => [
+                            [
+                                'emoji' => '🐜',
+                                'text' => 'Semut',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐱',
+                                'text' => 'Kucing',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🐘',
+                                'text' => 'Gajah',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bangunan apakah yang menjulang PALING TINGGI (TERTINGGI) di tengah kota?',
+                        'audio' => 'Bangunan apakah yang menjulang paling tinggi di kota?',
+                        'emoji' => '🗼',
+                        'options' => [
+                            [
+                                'emoji' => '🗼',
+                                'text' => 'Menara Kota Megah',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🏠',
+                                'text' => 'Rumah Tingkat Satu',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🛖',
+                                'text' => 'Gubuk Kayu',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Keranjang manakah yang memuat jumlah buah PALING BANYAK (TERBANYAK)?',
+                        'audio' => 'Keranjang manakah yang memuat buah paling banyak?',
+                        'emoji' => '🧺',
+                        'options' => [
+                            [
+                                'emoji' => '🧺',
+                                'text' => 'Keranjang Penuh 20 Apel',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🍎',
+                                'text' => 'Keranjang 5 Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🍏',
+                                'text' => 'Keranjang 2 Apel',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan apakah yang meluncur PALING CEPAT (TERCEPAT) menembus angkasa?',
+                        'audio' => 'Kendaraan apakah yang meluncur paling cepat menembus angkasa?',
+                        'emoji' => '🚀',
+                        'options' => [
+                            [
+                                'emoji' => '🚀',
+                                'text' => 'Roket Angkasa Luar',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🚲',
+                                'text' => 'Sepeda Gowes',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🚶',
+                                'text' => 'Jalan Kaki',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara pohon cemara, rumput halaman, dan bunga mawar, manakah yang PALING PENDEK?',
+                        'audio' => 'Manakah yang paling pendek antara pohon cemara, rumput, dan bunga mawar?',
+                        'emoji' => '🌱',
+                        'options' => [
+                            [
+                                'emoji' => '🌱',
+                                'text' => 'Rumput Halaman',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🌲',
+                                'text' => 'Pohon Cemara',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🌸',
+                                'text' => 'Bunga Mawar',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara besi baja, batu bata, dan sehelai kapas, manakah yang PALING RINGAN?',
+                        'audio' => 'Manakah yang paling ringan antara besi, batu bata, dan sehelai kapas?',
+                        'emoji' => '☁️',
+                        'options' => [
+                            [
+                                'emoji' => '☁️',
+                                'text' => 'Sehelai Kapas',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🧱',
+                                'text' => 'Batu Bata',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⛓️',
+                                'text' => 'Besi Baja',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara tali tambang 10 meter, pita 1 meter, dan benang 5 cm, manakah yang PALING PANJANG?',
+                        'audio' => 'Manakah yang paling panjang antara tali tambang 10 meter, pita 1 meter, dan benang 5 cm?',
+                        'emoji' => '📏',
+                        'options' => [
+                            [
+                                'emoji' => '🪢',
+                                'text' => 'Tali Tambang 10 Meter',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🎀',
+                                'text' => 'Pita 1 Meter',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🧵',
+                                'text' => 'Benang 5 cm',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kata imbuhan \"ter-\" pada kata terbesar, tertinggi, dan tercepat memiliki arti...?',
+                        'audio' => 'Kata imbuhan ter pada kata terbesar dan tertinggi memiliki arti apa?',
+                        'emoji' => '💡',
+                        'options' => [
+                            [
+                                'emoji' => '💡',
+                                'text' => 'Paling / Nomor Satu dalam perbandingan',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '❌',
+                                'text' => 'Kurang / Tidak ada',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Biasa saja',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apa yang pantas untuk anak yang cermat membandingkan semua ukuran di dunia?',
+                        'audio' => 'Gelar apa yang pantas untuk anak yang cermat membandingkan semua ukuran?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            [
+                                'emoji' => '🏆',
+                                'text' => '🏆 Juara Ahli Logika Perbandingan Cilik!',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Anak Kurang Cermat',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Batu Diam',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'perbandingan',
+                'level_number' => 3,
+                'title' => 'Cerdas Memecahkan Teka-Teki Logika Perbandingan',
+                'slug' => 'kuis-banding-l3-teka-teki-logika-banding',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Jika Ali lebih tinggi dari Budi, dan Budi lebih tinggi dari Cici, siapakah yang PALING TINGGI?',
+                        'audio' => 'Jika Ali lebih tinggi dari Budi dan Budi lebih tinggi dari Cici siapakah yang paling tinggi?',
+                        'emoji' => '👦',
+                        'options' => [
+                            [
+                                'emoji' => '👦',
+                                'text' => 'Ali (Paling Tinggi)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '👦',
+                                'text' => 'Budi',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '👧',
+                                'text' => 'Cici',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika Kotak A lebih berat dari Kotak B, dan Kotak B lebih berat dari Kotak C, manakah yang PALING RINGAN?',
+                        'audio' => 'Jika Kotak A lebih berat dari Kotak B dan Kotak B lebih berat dari Kotak C manakah yang paling ringan?',
+                        'emoji' => '📦',
+                        'options' => [
+                            [
+                                'emoji' => '📦',
+                                'text' => 'Kotak C (Paling Ringan)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '📦',
+                                'text' => 'Kotak A',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '📦',
+                                'text' => 'Kotak B',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Timbangan kiri turun ke bawah karena berisi Semangka, timbangan kanan naik berisi Jeruk. Artinya...?',
+                        'audio' => 'Timbangan kiri turun berisi Semangka timbangan kanan naik berisi Jeruk artinya apa?',
+                        'emoji' => '🍉',
+                        'options' => [
+                            [
+                                'emoji' => '🍉',
+                                'text' => 'Semangka LEBIH BERAT daripada Jeruk',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🍊',
+                                'text' => 'Jeruk lebih berat daripada Semangka',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Keduanya sama berat',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara angka 15, 8, dan 20, manakah angka yang PALING BESAR?',
+                        'audio' => 'Di antara angka 15, 8, dan 20 manakah angka yang paling besar?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '20 (Paling Besar)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '15',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di antara angka 12, 19, dan 5, manakah angka yang PALING KECIL?',
+                        'audio' => 'Di antara angka 12, 19, dan 5 manakah angka yang paling kecil?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 (Paling Kecil)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '19',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Budi punya 10 balon, Dika punya 10 balon. Perbandingan jumlah balon mereka adalah...?',
+                        'audio' => 'Budi punya 10 balon dan Dika punya 10 balon perbandingannya apa?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '🟰',
+                                'text' => 'Sama Banyak ( 10 = 10 )',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '➕',
+                                'text' => 'Budi Lebih Banyak',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '➖',
+                                'text' => 'Dika Lebih Sedikit',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mana yang lebih tebal: 1 lembar koran ATAU 1 buah kasur busa kamar?',
+                        'audio' => 'Mana yang lebih tebal antara 1 lembar koran atau 1 buah kasur busa?',
+                        'emoji' => '🛏️',
+                        'options' => [
+                            [
+                                'emoji' => '🛏️',
+                                'text' => 'Kasur Busa (Lebih Tebal)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '📰',
+                                'text' => 'Lembar Koran (Lebih Tipis)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Tebal',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mana yang lebih luas: Lapangan sepak bola ATAU meja belajar kamar?',
+                        'audio' => 'Mana yang lebih luas antara Lapangan sepak bola atau Meja belajar?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            [
+                                'emoji' => '⚽',
+                                'text' => 'Lapangan Sepak Bola (Lebih Luas)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🪑',
+                                'text' => 'Meja Belajar (Lebih Sempit)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Luas',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika air di ember terisi setengah, ember tersebut dikatakan...?',
+                        'audio' => 'Jika air di ember terisi setengah ember tersebut dikatakan apa?',
+                        'emoji' => '🪣',
+                        'options' => [
+                            [
+                                'emoji' => '🪣',
+                                'text' => 'Terisi Sebagian (Setengah Penuh)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🥛',
+                                'text' => 'Penuh Meluap',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🫙',
+                                'text' => 'Kosong Melompong',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Urutan ukuran dari yang TERKECIL ke TERBESAR yang benar adalah...?',
+                        'audio' => 'Urutan ukuran dari yang terkecil ke terbesar yang benar adalah apa?',
+                        'emoji' => '📐',
+                        'options' => [
+                            [
+                                'emoji' => '📐',
+                                'text' => 'Semut -> Kucing -> Gajah -> Ikan Paus',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔀',
+                                'text' => 'Gajah -> Semut -> Ikan Paus -> Kucing',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '📉',
+                                'text' => 'Ikan Paus -> Gajah -> Kucing -> Semut',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'perbandingan',
+                'level_number' => 3,
+                'title' => 'Grand Champion Ahli Perbandingan Ukuran & Kuantitas',
+                'slug' => 'kuis-banding-l3-grand-master-perbandingan',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Gajah ... Tikus (Ukuran Tubuh)',
+                        'audio' => 'Gajah dibanding Tikus adalah apa?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            [
+                                'emoji' => '🐘',
+                                'text' => 'Lebih Besar',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐭',
+                                'text' => 'Lebih Kecil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Besar',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jerapah ... Kelinci (Tinggi Tubuh)',
+                        'audio' => 'Jerapah dibanding Kelinci adalah apa?',
+                        'emoji' => '🦒',
+                        'options' => [
+                            [
+                                'emoji' => '🦒',
+                                'text' => 'Lebih Tinggi',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐰',
+                                'text' => 'Lebih Pendek',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Tinggi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Batu Kali ... Bulu Ayam (Berat Bobot)',
+                        'audio' => 'Batu Kali dibanding Bulu Ayam adalah apa?',
+                        'emoji' => '🪨',
+                        'options' => [
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Lebih Berat',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🪶',
+                                'text' => 'Lebih Ringan',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Berat',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kuda ... Kura-Kura (Kecepatan Lari)',
+                        'audio' => 'Kuda dibanding Kura-kura adalah apa?',
+                        'emoji' => '🐎',
+                        'options' => [
+                            [
+                                'emoji' => '🐎',
+                                'text' => 'Lebih Cepat',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐢',
+                                'text' => 'Lebih Lambat',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Cepat',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Batang Pohon ... Ranting Daun (Ketebalan)',
+                        'audio' => 'Batang Pohon dibanding Ranting Daun adalah apa?',
+                        'emoji' => '🌳',
+                        'options' => [
+                            [
+                                'emoji' => '🌳',
+                                'text' => 'Lebih Tebal',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🌿',
+                                'text' => 'Lebih Tipis',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Tebal',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pintu Rumah ... Celah Jendela (Lebar Ruang)',
+                        'audio' => 'Pintu Rumah dibanding Celah Jendela adalah apa?',
+                        'emoji' => '🚪',
+                        'options' => [
+                            [
+                                'emoji' => '🚪',
+                                'text' => 'Lebih Lebar',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🪟',
+                                'text' => 'Lebih Sempit',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Lebar',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Laut Samudra ... Kolam Karet (Kedalaman Air)',
+                        'audio' => 'Laut Samudra dibanding Kolam Karet adalah apa?',
+                        'emoji' => '🌊',
+                        'options' => [
+                            [
+                                'emoji' => '🌊',
+                                'text' => 'Lebih Dalam',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🏖️',
+                                'text' => 'Lebih Dangkal',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Dalam',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sup Mendidih ... Es Krim Buah (Suhu Benda)',
+                        'audio' => 'Sup Mendidih dibanding Es Krim Buah adalah apa?',
+                        'emoji' => '🔥',
+                        'options' => [
+                            [
+                                'emoji' => '🔥',
+                                'text' => 'Lebih Panas',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🍦',
+                                'text' => 'Lebih Dingin',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⚖️',
+                                'text' => 'Sama Suhu',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Simbol yang tepat untuk 10 Benda ... 10 Benda adalah?',
+                        'audio' => 'Simbol yang tepat untuk 10 benda dibanding 10 benda adalah apa?',
+                        'emoji' => '🟰',
+                        'options' => [
+                            [
+                                'emoji' => '🟰',
+                                'text' => 'Sama Dengan ( = )',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '➕',
+                                'text' => 'Lebih Besar ( > )',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '➖',
+                                'text' => 'Lebih Kecil ( < )',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar kehormatan untuk anak yang menguasai seluruh konsep perbandingan ukuran dan kuantitas adalah...?',
+                        'audio' => 'Gelar kehormatan untuk anak yang menguasai seluruh konsep perbandingan adalah apa?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            [
+                                'emoji' => '🏆',
+                                'text' => '🏆 Grand Champion Ahli Perbandingan Ukuran & Kuantitas!',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Juara Malas Mengamati',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Batu Patung Diam',
+                                'is_correct' => false,
+                            ],
                         ],
                     ],
                 ],
@@ -11377,31 +13924,1304 @@ class QuizSeeder extends Seeder
 
             [
                 'category_slug' => 'penjumlahan',
-                'title' => 'Tebak Penjumlahan Ceria',
-                'slug' => 'kuis-penjumlahan',
-                'icon_emoji' => '➕',
+                'level_number' => 1,
+                'title' => 'Penjumlahan Dasar Hasil 2 dan 3',
+                'slug' => 'kuis-tambah-l1-hasil-2-3',
+                'icon_emoji' => '🍎',
                 'target_age' => 4,
-                'total_questions' => 2,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
                         'text' => 'Berapa hasil dari: 1 Apel 🍎 + 1 Apel 🍎 = ... ?',
-                        'audio' => 'Berapa hasil dari 1 Apel ditambah 1 Apel?',
+                        'audio' => 'Berapa hasil dari satu apel ditambah satu apel?',
                         'emoji' => '🍎',
                         'options' => [
-                            ['emoji' => '2️⃣', 'text' => '2 Apel', 'is_correct' => true],
-                            ['emoji' => '3️⃣', 'text' => '3 Apel', 'is_correct' => false],
-                            ['emoji' => '1️⃣', 'text' => '1 Apel', 'is_correct' => false],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Apel',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 Apel',
+                                'is_correct' => false,
+                            ],
                         ],
                     ],
                     [
-                        'text' => 'Berapa hasil dari: 2 Kucing 🐱🐱 + 1 Kucing 🐱 = ... ?',
-                        'audio' => 'Berapa hasil dari 2 Kucing ditambah 1 Kucing?',
+                        'text' => 'Berapa hasil dari: 2 Balon 🎈🎈 + 1 Balon 🎈 = ... ?',
+                        'audio' => 'Berapa hasil dari dua balon ditambah satu balon?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Balon',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Balon',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Balon',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 1 Bintang ⭐ + 2 Bintang ⭐⭐ = ... ?',
+                        'audio' => 'Berapa hasil dari satu bintang ditambah dua bintang?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Bintang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Bintang',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Bintang',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'penjumlahan',
+                'level_number' => 1,
+                'title' => 'Penjumlahan Dasar Hasil 4',
+                'slug' => 'kuis-tambah-l1-hasil-4',
+                'icon_emoji' => '🐱',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Berapa hasil dari: 2 Kucing 🐱🐱 + 2 Kucing 🐱🐱 = ... ?',
+                        'audio' => 'Berapa hasil dari dua kucing ditambah dua kucing?',
                         'emoji' => '🐱',
                         'options' => [
-                            ['emoji' => '4️⃣', 'text' => '4 Kucing', 'is_correct' => false],
-                            ['emoji' => '3️⃣', 'text' => '3 Kucing', 'is_correct' => true],
-                            ['emoji' => '2️⃣', 'text' => '2 Kucing', 'is_correct' => false],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Kucing',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Kucing',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Kucing',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 3 Mobil 🚗🚗🚗 + 1 Mobil 🚗 = ... ?',
+                        'audio' => 'Berapa hasil dari tiga mobil ditambah satu mobil?',
+                        'emoji' => '🚗',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Mobil',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Mobil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Mobil',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 1 Apel 🍎 + 3 Apel 🍎🍎🍎 = ... ?',
+                        'audio' => 'Berapa hasil dari satu apel ditambah tiga apel?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Apel',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Apel',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'penjumlahan',
+                'level_number' => 1,
+                'title' => 'Penjumlahan Dasar Hasil 5',
+                'slug' => 'kuis-tambah-l1-hasil-5',
+                'icon_emoji' => '🐟',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Berapa hasil dari: 3 Ikan 🐟🐟🐟 + 2 Ikan 🐟🐟 = ... ?',
+                        'audio' => 'Berapa hasil dari tiga ikan ditambah dua ikan?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Ikan',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Ikan',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Ikan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 4 Bunga 🌸🌸🌸🌸 + 1 Bunga 🌸 = ... ?',
+                        'audio' => 'Berapa hasil dari empat bunga ditambah satu bunga?',
+                        'emoji' => '🌸',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Bunga',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Bunga',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Bunga',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 2 Balon 🎈🎈 + 3 Balon 🎈🎈🎈 = ... ?',
+                        'audio' => 'Berapa hasil dari dua balon ditambah tiga balon?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Balon',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Balon',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Balon',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'penjumlahan',
+                'level_number' => 2,
+                'title' => 'Penjumlahan Ceria Hasil 6',
+                'slug' => 'kuis-tambah-l2-hasil-6',
+                'icon_emoji' => '⚽',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Berapa hasil dari: 3 Bola ⚽⚽⚽ + 3 Bola ⚽⚽⚽ = ... ?',
+                        'audio' => 'Berapa hasil dari tiga bola ditambah tiga bola?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Bola',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Bola',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Bola',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 4 Bebek 🦆🦆🦆🦆 + 2 Bebek 🦆🦆 = ... ?',
+                        'audio' => 'Berapa hasil dari empat bebek ditambah dua bebek?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Bebek',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Bebek',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Bebek',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 5 Stroberi 🍓🍓🍓🍓🍓 + 1 Stroberi 🍓 = ... ?',
+                        'audio' => 'Berapa hasil dari lima stroberi ditambah satu stroberi?',
+                        'emoji' => '🍓',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Stroberi',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Stroberi',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Stroberi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 2 Apel 🍎🍎 + 4 Apel 🍎🍎🍎🍎 = ... ?',
+                        'audio' => 'Berapa hasil dari dua apel ditambah empat apel?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Apel',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Apel',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 1 Mobil 🚗 + 5 Mobil 🚗🚗🚗🚗🚗 = ... ?',
+                        'audio' => 'Berapa hasil dari satu mobil ditambah lima mobil?',
+                        'emoji' => '🚗',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Mobil',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Mobil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Mobil',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'penjumlahan',
+                'level_number' => 2,
+                'title' => 'Penjumlahan Ceria Hasil 7',
+                'slug' => 'kuis-tambah-l2-hasil-7',
+                'icon_emoji' => '🥚',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Berapa hasil dari: 4 Telur 🥚🥚🥚🥚 + 3 Telur 🥚🥚🥚 = ... ?',
+                        'audio' => 'Berapa hasil dari empat telur ditambah tiga telur?',
+                        'emoji' => '🥚',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Telur',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Telur',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Telur',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 5 Kue 🧁🧁🧁🧁🧁 + 2 Kue 🧁🧁 = ... ?',
+                        'audio' => 'Berapa hasil dari lima kue ditambah dua kue?',
+                        'emoji' => '🧁',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Kue',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Kue',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Kue',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 6 Balon 🎈🎈🎈🎈🎈🎈 + 1 Balon 🎈 = ... ?',
+                        'audio' => 'Berapa hasil dari enam balon ditambah satu balon?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Balon',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Balon',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Balon',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 3 Ikan 🐟🐟🐟 + 4 Ikan 🐟🐟🐟🐟 = ... ?',
+                        'audio' => 'Berapa hasil dari tiga ikan ditambah empat ikan?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Ikan',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Ikan',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Ikan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 2 Bintang ⭐⭐ + 5 Bintang ⭐⭐⭐⭐⭐ = ... ?',
+                        'audio' => 'Berapa hasil dari dua bintang ditambah lima bintang?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Bintang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Bintang',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Bintang',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'penjumlahan',
+                'level_number' => 2,
+                'title' => 'Penjumlahan Ceria Hasil 8',
+                'slug' => 'kuis-tambah-l2-hasil-8',
+                'icon_emoji' => '✏️',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Berapa hasil dari: 4 Pensil ✏️✏️✏️✏️ + 4 Pensil ✏️✏️✏️✏️ = ... ?',
+                        'audio' => 'Berapa hasil dari empat pensil ditambah empat pensil?',
+                        'emoji' => '✏️',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Pensil',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Pensil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Pensil',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 5 Kupu 🦋🦋🦋🦋🦋 + 3 Kupu 🦋🦋🦋 = ... ?',
+                        'audio' => 'Berapa hasil dari lima kupu-kupu ditambah tiga kupu-kupu?',
+                        'emoji' => '🦋',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Kupu-Kupu',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Kupu-Kupu',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Kupu-Kupu',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 6 Apel 🍎🍎🍎🍎🍎🍎 + 2 Apel 🍎🍎 = ... ?',
+                        'audio' => 'Berapa hasil dari enam apel ditambah dua apel?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Apel',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Apel',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 7 Balon 🎈🎈🎈🎈🎈🎈🎈 + 1 Balon 🎈 = ... ?',
+                        'audio' => 'Berapa hasil dari tujuh balon ditambah satu balon?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Balon',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Balon',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Balon',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 3 Bebek 🦆🦆🦆 + 5 Bebek 🦆🦆🦆🦆🦆 = ... ?',
+                        'audio' => 'Berapa hasil dari tiga bebek ditambah lima bebek?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Bebek',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Bebek',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Bebek',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'penjumlahan',
+                'level_number' => 3,
+                'title' => 'Penjumlahan Hebat Hasil 9',
+                'slug' => 'kuis-tambah-l3-hasil-9',
+                'icon_emoji' => '🍬',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Berapa hasil dari: 5 Permen 🍬 + 4 Permen 🍬 = ... ?',
+                        'audio' => 'Berapa hasil dari lima permen ditambah empat permen?',
+                        'emoji' => '🍬',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Permen',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Permen',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Permen',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 6 Jeruk 🍊 + 3 Jeruk 🍊 = ... ?',
+                        'audio' => 'Berapa hasil dari enam jeruk ditambah tiga jeruk?',
+                        'emoji' => '🍊',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Jeruk',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Jeruk',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Jeruk',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 7 Perahu ⛵ + 2 Perahu ⛵ = ... ?',
+                        'audio' => 'Berapa hasil dari tujuh perahu ditambah dua perahu?',
+                        'emoji' => '⛵',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Perahu',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Perahu',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Perahu',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 8 Lonceng 🔔 + 1 Lonceng 🔔 = ... ?',
+                        'audio' => 'Berapa hasil dari delapan lonceng ditambah satu lonceng?',
+                        'emoji' => '🔔',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Lonceng',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Lonceng',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Lonceng',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 4 Bintang ⭐ + 5 Bintang ⭐ = ... ?',
+                        'audio' => 'Berapa hasil dari empat bintang ditambah lima bintang?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Bintang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Bintang',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Bintang',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 3 Apel 🍎 + 6 Apel 🍎 = ... ?',
+                        'audio' => 'Berapa hasil dari tiga apel ditambah enam apel?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Apel',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Apel',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 2 Kucing 🐱 + 7 Kucing 🐱 = ... ?',
+                        'audio' => 'Berapa hasil dari dua kucing ditambah tujuh kucing?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Kucing',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Kucing',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Kucing',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 1 Balon 🎈 + 8 Balon 🎈 = ... ?',
+                        'audio' => 'Berapa hasil dari satu balon ditambah delapan balon?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Balon',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Balon',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Balon',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika di meja ada 5 donat dan ibu memberi 4 donat lagi, total donat menjadi...?',
+                        'audio' => 'Jika di meja ada lima donat dan ibu memberi empat donat lagi totalnya ada berapa?',
+                        'emoji' => '🍩',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Donat',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Donat',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 Donat',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apakah 4 + 5 hasilnya sama dengan 5 + 4?',
+                        'audio' => 'Apakah empat ditambah lima hasilnya sama dengan lima ditambah empat?',
+                        'emoji' => '✨',
+                        'options' => [
+                            [
+                                'emoji' => '✨',
+                                'text' => 'Ya, Sama! Keduanya menghasilkan 9',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '❌',
+                                'text' => 'Tidak, hasilnya berbeda',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '❓',
+                                'text' => 'Tidak bisa dihitung',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'penjumlahan',
+                'level_number' => 3,
+                'title' => 'Penjumlahan Sempurna Pasangan 10',
+                'slug' => 'kuis-tambah-l3-pasangan-10',
+                'icon_emoji' => '🍩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Berapa hasil dari penjumlahan kembar: 5 Donat 🍩 + 5 Donat 🍩 = ... ?',
+                        'audio' => 'Berapa hasil dari lima ditambah lima?',
+                        'emoji' => '🍩',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Donat',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Donat',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Donat',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 6 Lonceng 🔔 + 4 Lonceng 🔔 = ... ?',
+                        'audio' => 'Berapa hasil dari enam lonceng ditambah empat lonceng?',
+                        'emoji' => '🔔',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Lonceng',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Lonceng',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 Lonceng',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 8 Medali 🏅 + 2 Medali 🏅 = ... ?',
+                        'audio' => 'Berapa hasil dari delapan medali ditambah dua medali?',
+                        'emoji' => '🏅',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Medali',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Medali',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12 Medali',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 7 Bintang ⭐ + 3 Bintang ⭐ = ... ?',
+                        'audio' => 'Berapa hasil dari tujuh bintang ditambah tiga bintang?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Bintang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Bintang',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Bintang',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 9 Balon 🎈 + 1 Balon 🎈 = ... ?',
+                        'audio' => 'Berapa hasil dari sembilan balon ditambah satu balon?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Balon',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Balon',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 Balon',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 4 Apel 🍎 + 6 Apel 🍎 = ... ?',
+                        'audio' => 'Berapa hasil dari empat apel ditambah enam apel?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Apel',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Apel',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 2 Ikan 🐟 + 8 Ikan 🐟 = ... ?',
+                        'audio' => 'Berapa hasil dari dua ikan ditambah delapan ikan?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Ikan',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Ikan',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 Ikan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 3 Mobil 🚗 + 7 Mobil 🚗 = ... ?',
+                        'audio' => 'Berapa hasil dari tiga mobil ditambah tujuh mobil?',
+                        'emoji' => '🚗',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Mobil',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Mobil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Mobil',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 1 Permen 🍬 + 9 Permen 🍬 = ... ?',
+                        'audio' => 'Berapa hasil dari satu permen ditambah sembilan permen?',
+                        'emoji' => '🍬',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Permen',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 Permen',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 Permen',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 10 Jeruk 🍊 + 0 (nol) Jeruk = ... ?',
+                        'audio' => 'Berapa hasil dari sepuluh jeruk ditambah nol jeruk?',
+                        'emoji' => '🍊',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 Jeruk',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0 Jeruk',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 Jeruk',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'penjumlahan',
+                'level_number' => 3,
+                'title' => 'Grand Champion Master Penjumlahan Bergambar 1 Sampai 10',
+                'slug' => 'kuis-tambah-l3-grand-master-tambah',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => '1 + 1 = ... ?',
+                        'audio' => 'Satu ditambah satu sama dengan berapa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '2 + 1 = ... ?',
+                        'audio' => 'Dua ditambah satu sama dengan berapa?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '2 + 2 = ... ?',
+                        'audio' => 'Dua ditambah dua sama dengan berapa?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '3 + 2 = ... ?',
+                        'audio' => 'Tiga ditambah dua sama dengan berapa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '3 + 3 = ... ?',
+                        'audio' => 'Tiga ditambah tiga sama dengan berapa?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '4 + 3 = ... ?',
+                        'audio' => 'Empat ditambah tiga sama dengan berapa?',
+                        'emoji' => '🥚',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '4 + 4 = ... ?',
+                        'audio' => 'Empat ditambah empat sama dengan berapa?',
+                        'emoji' => '✏️',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '5 + 4 = ... ?',
+                        'audio' => 'Lima ditambah empat sama dengan berapa?',
+                        'emoji' => '🍬',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '5 + 5 = ... ?',
+                        'audio' => 'Lima ditambah lima sama dengan berapa?',
+                        'emoji' => '🍩',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar kehormatan untuk anak yang berhasil menguasai penjumlahan bergambar 1 sampai 10 adalah...?',
+                        'audio' => 'Gelar kehormatan untuk anak yang menguasai penjumlahan bergambar adalah apa?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            [
+                                'emoji' => '🏆',
+                                'text' => '🏆 Grand Champion Master Penjumlahan Bergambar 1 Sampai 10!',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Juara Malas Menjumlahkan',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Batu Patung Diam',
+                                'is_correct' => false,
+                            ],
                         ],
                     ],
                 ],
@@ -11409,31 +15229,1304 @@ class QuizSeeder extends Seeder
 
             [
                 'category_slug' => 'pengurangan',
-                'title' => 'Tebak Pengurangan Ceria',
-                'slug' => 'kuis-pengurangan',
-                'icon_emoji' => '➖',
-                'target_age' => 5,
-                'total_questions' => 2,
+                'level_number' => 1,
+                'title' => 'Pengurangan Dasar dari Angka 2 dan 3',
+                'slug' => 'kuis-kurang-l1-angka-2-3',
+                'icon_emoji' => '🍎',
+                'target_age' => 4,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Ada 3 balon 🎈🎈🎈, 1 balon terbang lepas. Sisa berapa balon?',
-                        'audio' => 'Ada 3 balon, 1 balon terbang lepas. Sisa berapa balon?',
-                        'emoji' => '🎈',
+                        'text' => 'Ada 2 Apel 🍎🍎, adik makan 1 apel. Sisa berapa apel di piring?',
+                        'audio' => 'Ada dua apel adik memakan satu apel sisa berapa apel?',
+                        'emoji' => '🍎',
                         'options' => [
-                            ['emoji' => '2️⃣', 'text' => '2 Balon', 'is_correct' => true],
-                            ['emoji' => '1️⃣', 'text' => '1 Balon', 'is_correct' => false],
-                            ['emoji' => '0️⃣', 'text' => 'Habis', 'is_correct' => false],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 Apel',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => 'Habis',
+                                'is_correct' => false,
+                            ],
                         ],
                     ],
                     [
-                        'text' => 'Ada 4 donat 🍩🍩🍩🍩, adik makan 1 donat. Sisa berapa donat?',
-                        'audio' => 'Ada 4 donat, adik makan 1 donat. Sisa berapa donat?',
+                        'text' => 'Ada 3 Balon 🎈🎈🎈, 1 balon terbang lepas. Sisa berapa balon di tangan?',
+                        'audio' => 'Ada tiga balon satu balon terbang lepas sisa berapa balon?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Balon',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 Balon',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Balon',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 3 Bintang ⭐⭐⭐, 2 bintang tertutup awan. Sisa berapa bintang yang bersinar?',
+                        'audio' => 'Tiga bintang dikurang dua bintang sisa berapa bintang?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 Bintang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Bintang',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Bintang',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pengurangan',
+                'level_number' => 1,
+                'title' => 'Pengurangan Dasar dari Angka 4',
+                'slug' => 'kuis-kurang-l1-angka-4',
+                'icon_emoji' => '🚗',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Ada 4 Mobil 🚗🚗🚗🚗, 1 mobil masuk garasi. Sisa berapa mobil di jalan?',
+                        'audio' => 'Empat mobil dikurang satu mobil sisa berapa mobil?',
+                        'emoji' => '🚗',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Mobil',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Mobil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Mobil',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 4 Kucing 🐱🐱🐱🐱, 2 kucing tidur pulas. Sisa berapa kucing yang masih bermain?',
+                        'audio' => 'Empat kucing dikurang dua kucing sisa berapa kucing?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Kucing',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 Kucing',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Kucing',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 4 Bunga 🌸🌸🌸🌸, 3 bunga dirangkai ke vas. Sisa berapa bunga di meja?',
+                        'audio' => 'Empat bunga dikurang tiga bunga sisa berapa bunga?',
+                        'emoji' => '🌸',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 Bunga',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Bunga',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Bunga',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pengurangan',
+                'level_number' => 1,
+                'title' => 'Pengurangan Dasar dari Angka 5',
+                'slug' => 'kuis-kurang-l1-angka-5',
+                'icon_emoji' => '🐟',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Ada 5 Ikan 🐟🐟🐟🐟🐟 di kolam, 1 ikan ditangkap jaring. Sisa berapa ikan di kolam?',
+                        'audio' => 'Lima ikan dikurang satu ikan sisa berapa ikan?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Ikan',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Ikan',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Ikan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 5 Donat 🍩🍩🍩🍩🍩, 2 donat dimakan kakak. Sisa berapa donat di piring?',
+                        'audio' => 'Lima donat dikurang dua donat sisa berapa donat?',
                         'emoji' => '🍩',
                         'options' => [
-                            ['emoji' => '2️⃣', 'text' => '2 Donat', 'is_correct' => false],
-                            ['emoji' => '3️⃣', 'text' => '3 Donat', 'is_correct' => true],
-                            ['emoji' => '4️⃣', 'text' => '4 Donat', 'is_correct' => false],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Donat',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Donat',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Donat',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 5 Bola ⚽⚽⚽⚽⚽, 3 bola ditendang masuk gawang. Sisa berapa bola di lapangan?',
+                        'audio' => 'Lima bola dikurang tiga bola sisa berapa bola?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Bola',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 Bola',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Bola',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pengurangan',
+                'level_number' => 2,
+                'title' => 'Pengurangan Ceria dari Angka 5 dan 6',
+                'slug' => 'kuis-kurang-l2-angka-5-6',
+                'icon_emoji' => '🍩',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Berapa hasil dari: 5 - 4 = ... ?',
+                        'audio' => 'Lima dikurang empat sama dengan berapa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 6 Bebek 🦆 berenang, 1 bebek naik ke darat. Sisa berapa bebek berenang?',
+                        'audio' => 'Enam bebek dikurang satu bebek sisa berapa bebek?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Bebek',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Bebek',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Bebek',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 6 Stroberi 🍓, 3 stroberi dimakan adik. Sisa berapa stroberi di mangkuk?',
+                        'audio' => 'Enam stroberi dikurang tiga stroberi sisa berapa stroberi?',
+                        'emoji' => '🍓',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Stroberi',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Stroberi',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Stroberi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 6 - 2 = ... ?',
+                        'audio' => 'Enam dikurang dua sama dengan berapa?',
+                        'emoji' => '🚗',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 6 - 5 = ... ?',
+                        'audio' => 'Enam dikurang lima sama dengan berapa?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pengurangan',
+                'level_number' => 2,
+                'title' => 'Pengurangan Ceria dari Angka 6 dan 7',
+                'slug' => 'kuis-kurang-l2-angka-6-7',
+                'icon_emoji' => '🥚',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Ada 6 Telur 🥚 di sarang, 4 sudah menetas jadi anak ayam. Sisa telur belum menetas ada...?',
+                        'audio' => 'Enam telur dikurang empat telur sisa berapa telur?',
+                        'emoji' => '🥚',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Telur',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Telur',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 Telur',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 7 Kue 🧁 wangi, 2 kue dibagikan ke teman baik. Sisa kue ada...?',
+                        'audio' => 'Tujuh kue dikurang dua kue sisa berapa kue?',
+                        'emoji' => '🧁',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Kue',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Kue',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Kue',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 7 Pensil ✏️ warna, 4 pensil dipinjam teman. Sisa pensil di kotak ada...?',
+                        'audio' => 'Tujuh pensil dikurang empat pensil sisa berapa pensil?',
+                        'emoji' => '✏️',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Pensil',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Pensil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Pensil',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 7 - 1 = ... ?',
+                        'audio' => 'Tujuh dikurang satu sama dengan berapa?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 7 - 6 = ... ?',
+                        'audio' => 'Tujuh dikurang enam sama dengan berapa?',
+                        'emoji' => '🌸',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pengurangan',
+                'level_number' => 2,
+                'title' => 'Pengurangan Ceria dari Angka 7 dan 8',
+                'slug' => 'kuis-kurang-l2-angka-7-8',
+                'icon_emoji' => '✏️',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Berapa hasil dari: 7 - 5 = ... ?',
+                        'audio' => 'Tujuh dikurang lima sama dengan berapa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 8 Kupu-Kupu 🦋 di taman, 3 kupu-kupu terbang ke pohon. Sisa berapa kupu-kupu di taman?',
+                        'audio' => 'Delapan kupu-kupu dikurang tiga kupu-kupu sisa berapa kupu-kupu?',
+                        'emoji' => '🦋',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Kupu-Kupu',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Kupu-Kupu',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Kupu-Kupu',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 8 Permen 🍬 di toples, 4 permen dimakan bersama. Sisa berapa permen di toples?',
+                        'audio' => 'Delapan permen dikurang empat permen sisa berapa permen?',
+                        'emoji' => '🍬',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Permen',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Permen',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Permen',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 8 - 2 = ... ?',
+                        'audio' => 'Delapan dikurang dua sama dengan berapa?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 8 - 1 = ... ?',
+                        'audio' => 'Delapan dikurang satu sama dengan berapa?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pengurangan',
+                'level_number' => 3,
+                'title' => 'Pengurangan Hebat dari Angka 8 dan 9',
+                'slug' => 'kuis-kurang-l3-angka-8-9',
+                'icon_emoji' => '🦋',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => '8 - 5 = ... ?',
+                        'audio' => 'Delapan dikurang lima sama dengan berapa?',
+                        'emoji' => '🦋',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '8 - 6 = ... ?',
+                        'audio' => 'Delapan dikurang enam sama dengan berapa?',
+                        'emoji' => '🍬',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '8 - 7 = ... ?',
+                        'audio' => 'Delapan dikurang tujuh sama dengan berapa?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '8 - 8 = ... ?',
+                        'audio' => 'Delapan dikurang delapan sama dengan berapa?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0 (Nol / Habis)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 9 Jeruk 🍊, 4 jeruk diperas jadi jus segar. Sisa jeruk utuh ada...?',
+                        'audio' => 'Sembilan jeruk dikurang empat jeruk sisa berapa jeruk?',
+                        'emoji' => '🍊',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Jeruk',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Jeruk',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Jeruk',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 9 Perahu ⛵ berlayar, 5 perahu bersandar di dermaga. Sisa perahu berlayar ada...?',
+                        'audio' => 'Sembilan perahu dikurang lima perahu sisa berapa perahu?',
+                        'emoji' => '⛵',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Perahu',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Perahu',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Perahu',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 9 - 1 = ... ?',
+                        'audio' => 'Sembilan dikurang satu sama dengan berapa?',
+                        'emoji' => '🚗',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 9 - 2 = ... ?',
+                        'audio' => 'Sembilan dikurang dua sama dengan berapa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 9 - 3 = ... ?',
+                        'audio' => 'Sembilan dikurang tiga sama dengan berapa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 9 - 6 = ... ?',
+                        'audio' => 'Sembilan dikurang enam sama dengan berapa?',
+                        'emoji' => '🔔',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pengurangan',
+                'level_number' => 3,
+                'title' => 'Pengurangan Sempurna dari Angka 10',
+                'slug' => 'kuis-kurang-l3-angka-10',
+                'icon_emoji' => '🔔',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Ada 10 Lonceng 🔔 emas di dinding, 5 lonceng sudah berdenting merdu. Sisa lonceng belum berdenting ada...?',
+                        'audio' => 'Sepuluh lonceng dikurang lima lonceng sisa berapa lonceng?',
+                        'emoji' => '🔔',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Lonceng',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Lonceng',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 Lonceng',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ada 10 Medali 🏅 kejuaraan, 7 diberikan ke peserta teladan. Sisa medali ada...?',
+                        'audio' => 'Sepuluh medali dikurang tujuh medali sisa berapa medali?',
+                        'emoji' => '🏅',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Medali',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2 Medali',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Medali',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 10 - 1 = ... ?',
+                        'audio' => 'Sepuluh dikurang satu sama dengan berapa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 10 - 2 = ... ?',
+                        'audio' => 'Sepuluh dikurang dua sama dengan berapa?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 10 - 3 = ... ?',
+                        'audio' => 'Sepuluh dikurang tiga sama dengan berapa?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 10 - 4 = ... ?',
+                        'audio' => 'Sepuluh dikurang empat sama dengan berapa?',
+                        'emoji' => '🍩',
+                        'options' => [
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 10 - 6 = ... ?',
+                        'audio' => 'Sepuluh dikurang enam sama dengan berapa?',
+                        'emoji' => '🥚',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 10 - 8 = ... ?',
+                        'audio' => 'Sepuluh dikurang delapan sama dengan berapa?',
+                        'emoji' => '✏️',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 10 - 9 = ... ?',
+                        'audio' => 'Sepuluh dikurang sembilan sama dengan berapa?',
+                        'emoji' => '🍬',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapa hasil dari: 10 - 10 = ... ?',
+                        'audio' => 'Sepuluh dikurang sepuluh sama dengan berapa?',
+                        'emoji' => '🍊',
+                        'options' => [
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0 (Nol / Habis)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pengurangan',
+                'level_number' => 3,
+                'title' => 'Grand Champion Master Pengurangan Bergambar 1 Sampai 10',
+                'slug' => 'kuis-kurang-l3-grand-master-kurang',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => '2 - 1 = ... ?',
+                        'audio' => 'Dua dikurang satu sama dengan berapa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '3 - 1 = ... ?',
+                        'audio' => 'Tiga dikurang satu sama dengan berapa?',
+                        'emoji' => '🎈',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '4 - 2 = ... ?',
+                        'audio' => 'Empat dikurang dua sama dengan berapa?',
+                        'emoji' => '🚗',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '5 - 3 = ... ?',
+                        'audio' => 'Lima dikurang tiga sama dengan berapa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '6 - 3 = ... ?',
+                        'audio' => 'Enam dikurang tiga sama dengan berapa?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '7 - 4 = ... ?',
+                        'audio' => 'Tujuh dikurang empat sama dengan berapa?',
+                        'emoji' => '🥚',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '2',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '8 - 4 = ... ?',
+                        'audio' => 'Delapan dikurang empat sama dengan berapa?',
+                        'emoji' => '✏️',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '9 - 5 = ... ?',
+                        'audio' => 'Sembilan dikurang lima sama dengan berapa?',
+                        'emoji' => '🍊',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => '10 - 5 = ... ?',
+                        'audio' => 'Sepuluh dikurang lima sama dengan berapa?',
+                        'emoji' => '🔔',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar kehormatan untuk anak yang berhasil menguasai pengurangan bergambar 1 sampai 10 adalah...?',
+                        'audio' => 'Gelar kehormatan untuk anak yang menguasai pengurangan bergambar adalah apa?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            [
+                                'emoji' => '🏆',
+                                'text' => '🏆 Grand Champion Master Pengurangan Bergambar 1 Sampai 10!',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Juara Mengantuk Berhitung',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Batu Patung Diam',
+                                'is_correct' => false,
+                            ],
                         ],
                     ],
                 ],
@@ -11441,35 +16534,1309 @@ class QuizSeeder extends Seeder
 
             [
                 'category_slug' => 'pola-logika',
-                'title' => 'Tantangan Pola & Logika Pintar',
-                'slug' => 'kuis-pola-logika',
-                'icon_emoji' => '🧩',
+                'level_number' => 1,
+                'title' => 'Menebak Kelanjutan Pola Warna & Bentuk AB-AB',
+                'slug' => 'kuis-pola-l1-warna-bentuk-ab',
+                'icon_emoji' => '🔴',
                 'target_age' => 4,
-                'total_questions' => 2,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
                         'text' => 'Lanjutkan pola warna berikut: 🔴 Merah, 🔵 Biru, 🔴 Merah, ... ?',
-                        'audio' => 'Lanjutkan pola warna berikut: Merah, Biru, Merah, lalu warna apa?',
+                        'audio' => 'Lanjutkan pola warna: Merah, Biru, Merah, lalu warna apa?',
                         'emoji' => '🔴',
                         'options' => [
-                            ['emoji' => '🔵', 'text' => '🔵 Warna Biru', 'is_correct' => true],
-                            ['emoji' => '🟢', 'text' => '🟢 Warna Hijau', 'is_correct' => false],
-                            ['emoji' => '🟡', 'text' => '🟡 Warna Kuning', 'is_correct' => false],
+                            [
+                                'emoji' => '🔵',
+                                'text' => '🔵 Warna Biru',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🟢',
+                                'text' => '🟢 Warna Hijau',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🟡',
+                                'text' => '🟡 Warna Kuning',
+                                'is_correct' => false,
+                            ],
                         ],
                     ],
                     [
                         'text' => 'Lanjutkan pola bentuk berikut: ⭕ Lingkaran, 🟩 Kotak, ⭕ Lingkaran, ... ?',
-                        'audio' => 'Lanjutkan pola bentuk berikut: Lingkaran, Kotak, Lingkaran, lalu bentuk apa?',
+                        'audio' => 'Lanjutkan pola bentuk: Lingkaran, Kotak, Lingkaran, lalu bentuk apa?',
                         'emoji' => '⭕',
                         'options' => [
-                            ['emoji' => '🔺', 'text' => '🔺 Segitiga', 'is_correct' => false],
-                            ['emoji' => '🟩', 'text' => '🟩 Kotak', 'is_correct' => true],
-                            ['emoji' => '⭐', 'text' => '⭐ Bintang', 'is_correct' => false],
+                            [
+                                'emoji' => '🟩',
+                                'text' => '🟩 Kotak',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔺',
+                                'text' => '🔺 Segitiga',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⭐',
+                                'text' => '⭐ Bintang',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola warna berikut: 🟢 Hijau, 🟡 Kuning, 🟢 Hijau, ... ?',
+                        'audio' => 'Lanjutkan pola warna: Hijau, Kuning, Hijau, lalu warna apa?',
+                        'emoji' => '🟢',
+                        'options' => [
+                            [
+                                'emoji' => '🟡',
+                                'text' => '🟡 Warna Kuning',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔴',
+                                'text' => '🔴 Warna Merah',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔵',
+                                'text' => '🔵 Warna Biru',
+                                'is_correct' => false,
+                            ],
                         ],
                     ],
                 ],
             ],
+
+            [
+                'category_slug' => 'pola-logika',
+                'level_number' => 1,
+                'title' => 'Menebak Kelanjutan Pola Hewan, Buah & Ukuran',
+                'slug' => 'kuis-pola-l1-hewan-buah-ukuran',
+                'icon_emoji' => '🐱',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Lanjutkan pola suara hewan: 🐱 Meong, 🦆 Kwek-kwek, 🐱 Meong, ... ?',
+                        'audio' => 'Lanjutkan pola hewan: Kucing, Bebek, Kucing, lalu apa?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            [
+                                'emoji' => '🦆',
+                                'text' => '🦆 Kwek-kwek Bebek',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐱',
+                                'text' => '🐱 Meong Kucing',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🐮',
+                                'text' => '🐮 Mooo Sapi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola buah: 🍎 Apel, 🍌 Pisang, 🍎 Apel, ... ?',
+                        'audio' => 'Lanjutkan pola buah: Apel, Pisang, Apel, lalu buah apa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '🍌',
+                                'text' => '🍌 Buah Pisang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🍎',
+                                'text' => '🍎 Buah Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🍊',
+                                'text' => '🍊 Buah Jeruk',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola ukuran: 🌟 Besar, ⭐ Kecil, 🌟 Besar, ... ?',
+                        'audio' => 'Lanjutkan pola ukuran: Besar, Kecil, Besar, lalu ukuran apa?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            [
+                                'emoji' => '⭐',
+                                'text' => '⭐ Ukuran Kecil',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🌟',
+                                'text' => '🌟 Ukuran Besar',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '📏',
+                                'text' => '📏 Ukuran Sedang',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pola-logika',
+                'level_number' => 1,
+                'title' => 'Menebak Kelanjutan Pola Arah & Waktu Alam',
+                'slug' => 'kuis-pola-l1-arah-waktu',
+                'icon_emoji' => '⬆️',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Lanjutkan pola arah panah: ⬆️ Atas, ⬇️ Bawah, ⬆️ Atas, ... ?',
+                        'audio' => 'Lanjutkan pola arah: Atas, Bawah, Atas, lalu arah mana?',
+                        'emoji' => '⬆️',
+                        'options' => [
+                            [
+                                'emoji' => '⬇️',
+                                'text' => '⬇️ Panah Bawah',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '⬆️',
+                                'text' => '⬆️ Panah Atas',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '➡️',
+                                'text' => '➡️ Panah Kanan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola siklus waktu alam: 🌞 Siang, 🌙 Malam, 🌞 Siang, ... ?',
+                        'audio' => 'Lanjutkan pola waktu: Siang, Malam, Siang, lalu waktu apa?',
+                        'emoji' => '🌞',
+                        'options' => [
+                            [
+                                'emoji' => '🌙',
+                                'text' => '🌙 Waktu Malam',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🌞',
+                                'text' => '🌞 Waktu Siang',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⛅',
+                                'text' => '⛅ Waktu Sore',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola arah: ⬅️ Kiri, ➡️ Kanan, ⬅️ Kiri, ... ?',
+                        'audio' => 'Lanjutkan pola arah: Kiri, Kanan, Kiri, lalu arah mana?',
+                        'emoji' => '⬅️',
+                        'options' => [
+                            [
+                                'emoji' => '➡️',
+                                'text' => '➡️ Arah Kanan',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '⬅️',
+                                'text' => '⬅️ Arah Kiri',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⬆️',
+                                'text' => '⬆️ Arah Atas',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pola-logika',
+                'level_number' => 2,
+                'title' => 'Menebak Kelanjutan Pola 3 Elemen ABC-ABC',
+                'slug' => 'kuis-pola-l2-pola-tiga-elemen',
+                'icon_emoji' => '🟢',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Pola lampu lalu lintas: 🔴 Merah, 🟡 Kuning, 🟢 Hijau, 🔴 Merah, 🟡 Kuning, ... ?',
+                        'audio' => 'Merah, Kuning, Hijau, Merah, Kuning, lalu warna apa?',
+                        'emoji' => '🟢',
+                        'options' => [
+                            [
+                                'emoji' => '🟢',
+                                'text' => '🟢 Warna Hijau',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔴',
+                                'text' => '🔴 Warna Merah',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔵',
+                                'text' => '🔵 Warna Biru',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola 3 bentuk: 🔺 Segitiga, ⭕ Lingkaran, 🟩 Kotak, 🔺 Segitiga, ⭕ Lingkaran, ... ?',
+                        'audio' => 'Segitiga, Lingkaran, Kotak, Segitiga, Lingkaran, lalu bentuk apa?',
+                        'emoji' => '🔺',
+                        'options' => [
+                            [
+                                'emoji' => '🟩',
+                                'text' => '🟩 Bentuk Kotak',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔺',
+                                'text' => '🔺 Bentuk Segitiga',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '⭐',
+                                'text' => '⭐ Bentuk Bintang',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola kendaraan: 🚗 Mobil, ✈️ Pesawat, 🚢 Kapal, 🚗 Mobil, ✈️ Pesawat, ... ?',
+                        'audio' => 'Mobil, Pesawat, Kapal, Mobil, Pesawat, lalu kendaraan apa?',
+                        'emoji' => '🚗',
+                        'options' => [
+                            [
+                                'emoji' => '🚢',
+                                'text' => '🚢 Kapal Laut',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🚗',
+                                'text' => '🚗 Mobil',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🚲',
+                                'text' => '🚲 Sepeda',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola buah: 🍎 Apel, 🍊 Jeruk, 🍌 Pisang, 🍎 Apel, 🍊 Jeruk, ... ?',
+                        'audio' => 'Apel, Jeruk, Pisang, Apel, Jeruk, lalu buah apa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '🍌',
+                                'text' => '🍌 Buah Pisang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🍎',
+                                'text' => '🍎 Buah Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🍇',
+                                'text' => '🍇 Buah Anggur',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola angka berulang: 1️⃣ Satu, 2️⃣ Dua, 3️⃣ Tiga, 1️⃣ Satu, 2️⃣ Dua, ... ?',
+                        'audio' => 'Satu, Dua, Tiga, Satu, Dua, lalu angka berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 (Tiga)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 (Empat)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 (Satu)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pola-logika',
+                'level_number' => 2,
+                'title' => 'Melanjutkan Pola Lompat Bilangan Genap & Ganjil',
+                'slug' => 'kuis-pola-l2-lompat-bilangan',
+                'icon_emoji' => '🔢',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Lanjutkan pola bilangan genap lompat 2: 2, 4, 6, ... ?',
+                        'audio' => 'Dua, Empat, Enam, angka selanjutnya adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 (Delapan)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 (Tujuh)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 (Sembilan)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola bilangan ganjil lompat 2: 1, 3, 5, ... ?',
+                        'audio' => 'Satu, Tiga, Lima, angka selanjutnya adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 (Tujuh)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 (Enam)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 (Delapan)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola bilangan genap: 4, 6, 8, ... ?',
+                        'audio' => 'Empat, Enam, Delapan, angka selanjutnya adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 (Sepuluh)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 (Sembilan)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '11 (Sebelas)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola bilangan ganjil: 3, 5, 7, ... ?',
+                        'audio' => 'Tiga, Lima, Tujuh, angka selanjutnya adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9 (Sembilan)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 (Delapan)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10 (Sepuluh)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola kelipatan 5: 5, 10, 15, ... ?',
+                        'audio' => 'Lima, Sepuluh, Lima Belas, angka selanjutnya adalah berapa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '2️⃣',
+                                'text' => '20 (Dua Puluh)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '16 (Enam Belas)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '18 (Delapan Belas)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pola-logika',
+                'level_number' => 2,
+                'title' => 'Mengurutkan Pola Pertumbuhan & Siklus Hidup',
+                'slug' => 'kuis-pola-l2-siklus-hidup-tumbuh',
+                'icon_emoji' => '🌱',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Pola pertumbuhan tanaman: Sebutir Biji 🌱 -> Tumbuh Tunas 🌿 -> Menjadi ... ?',
+                        'audio' => 'Biji tumbuh menjadi tunas lalu tumbuh menjadi apa?',
+                        'emoji' => '🌳',
+                        'options' => [
+                            [
+                                'emoji' => '🌳',
+                                'text' => 'Pohon Rindang Berbuah',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Batu Kali',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🏠',
+                                'text' => 'Rumah',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola metamorfosis: Ulat makan daun 🐛 -> Berubah jadi Kepompong 🪵 -> Berubah jadi ... ?',
+                        'audio' => 'Ulat menjadi kepompong lalu berubah menjadi apa?',
+                        'emoji' => '🦋',
+                        'options' => [
+                            [
+                                'emoji' => '🦋',
+                                'text' => 'Kupu-Kupu Bersayap Indah',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🦆',
+                                'text' => 'Bebek',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🐟',
+                                'text' => 'Ikan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola perkembangbiakan ayam: Butir Telur 🥚 -> Menetas jadi Anak Ayam 🐣 -> Tumbuh jadi ... ?',
+                        'audio' => 'Telur menetas jadi anak ayam lalu tumbuh menjadi apa?',
+                        'emoji' => '🐔',
+                        'options' => [
+                            [
+                                'emoji' => '🐔',
+                                'text' => 'Ayam Dewasa Berkokok',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐱',
+                                'text' => 'Kucing',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🐘',
+                                'text' => 'Gajah',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola urutan waktu harian: Pagi terbit mentari 🌅 -> Siang terik ☀️ -> Sore senja 🌇 -> ... ?',
+                        'audio' => 'Pagi, Siang, Sore, lalu waktu apa?',
+                        'emoji' => '🌙',
+                        'options' => [
+                            [
+                                'emoji' => '🌙',
+                                'text' => 'Malam Hari Bertabur Bintang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🌅',
+                                'text' => 'Pagi Kembali',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '☀️',
+                                'text' => 'Siang Lagi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola tahapan manusia: Bayi mungil 👶 -> Tumbuh jadi Anak pintar 👦 -> Tumbuh jadi ... ?',
+                        'audio' => 'Bayi tumbuh jadi anak lalu tumbuh menjadi apa?',
+                        'emoji' => '👨',
+                        'options' => [
+                            [
+                                'emoji' => '👨',
+                                'text' => 'Orang Dewasa Hebat',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🧸',
+                                'text' => 'Boneka',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '👶',
+                                'text' => 'Bayi Lagi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pola-logika',
+                'level_number' => 3,
+                'title' => 'Memecahkan Pola Dobel AABB & Gradasi Ukuran',
+                'slug' => 'kuis-pola-l3-pola-aabb-gradasi',
+                'icon_emoji' => '🟦',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Pola dobel AABB: 🔵🔵 Biru Biru, 🟡🟡 Kuning Kuning, 🔵🔵 Biru Biru, ... ?',
+                        'audio' => 'Biru Biru, Kuning Kuning, Biru Biru, dua warna selanjutnya adalah apa?',
+                        'emoji' => '🟦',
+                        'options' => [
+                            [
+                                'emoji' => '🟡',
+                                'text' => '🟡🟡 Kuning Kuning',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔵',
+                                'text' => '🔵🔵 Biru Biru',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔴',
+                                'text' => '🔴🔴 Merah Merah',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola dobel bentuk: 🟩🟩 Kotak Kotak, ⭕⭕ Lingkaran Lingkaran, 🟩🟩 Kotak Kotak, ... ?',
+                        'audio' => 'Kotak Kotak, Lingkaran Lingkaran, Kotak Kotak, selanjutnya bentuk apa?',
+                        'emoji' => '🟩',
+                        'options' => [
+                            [
+                                'emoji' => '⭕',
+                                'text' => '⭕⭕ Lingkaran Lingkaran',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🟩',
+                                'text' => '🟩🟩 Kotak Kotak',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔺',
+                                'text' => '🔺🔺 Segitiga Segitiga',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola gradasi ukuran membesar: Kecil -> Sedang -> Besar -> ... ?',
+                        'audio' => 'Kecil, Sedang, Besar, tingkat selanjutnya adalah apa?',
+                        'emoji' => '📐',
+                        'options' => [
+                            [
+                                'emoji' => '🐋',
+                                'text' => 'Sangat Besar / Raksasa',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐜',
+                                'text' => 'Mengecil Kembali',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '📏',
+                                'text' => 'Kecil Lagi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola gradasi warna: Biru Muda 🩵 -> Biru Sedang 💙 -> ... ?',
+                        'audio' => 'Biru Muda, Biru Sedang, warna selanjutnya adalah apa?',
+                        'emoji' => '💙',
+                        'options' => [
+                            [
+                                'emoji' => '🔵',
+                                'text' => 'Biru Tua Pekat',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🟡',
+                                'text' => 'Kuning',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔴',
+                                'text' => 'Merah',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola dobel hewan: 🐱🐱 Kucing Kucing, 🦆🦆 Bebek Bebek, 🐱🐱 Kucing Kucing, ... ?',
+                        'audio' => 'Kucing Kucing, Bebek Bebek, Kucing Kucing, selanjutnya apa?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            [
+                                'emoji' => '🦆',
+                                'text' => '🦆🦆 Bebek Bebek',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🐱',
+                                'text' => '🐱🐱 Kucing Kucing',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🐮',
+                                'text' => '🐮🐮 Sapi Sapi',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola dobel buah: 🍎🍎 Apel Apel, 🍌🍌 Pisang Pisang, 🍎🍎 Apel Apel, ... ?',
+                        'audio' => 'Apel Apel, Pisang Pisang, Apel Apel, selanjutnya apa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '🍌',
+                                'text' => '🍌🍌 Pisang Pisang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🍎',
+                                'text' => '🍎🍎 Apel Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🍊',
+                                'text' => '🍊🍊 Jeruk Jeruk',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola susunan balok: 1 Balon 🎈, 2 Bintang ⭐⭐, 3 Apel 🍎🍎🍎, ... selanjutnya berisi berapa benda?',
+                        'audio' => 'Satu balon, dua bintang, tiga apel, kelompok berikutnya berisi berapa benda?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 Benda',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 Benda',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3 Benda',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola urutan tangga: Tangga 2 -> Tangga 4 -> Tangga 6 -> Tangga 8 -> ... tangga berapa?',
+                        'audio' => 'Dua, Empat, Enam, Delapan, anak tangga berikutnya adalah berapa?',
+                        'emoji' => '🪜',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => 'Tangga 10',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => 'Tangga 9',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => 'Tangga 12',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola pengulangan pola AAB: 🔴 Merah, 🔴 Merah, 🔵 Biru, 🔴 Merah, 🔴 Merah, ... ?',
+                        'audio' => 'Merah, Merah, Biru, Merah, Merah, lalu warna apa?',
+                        'emoji' => '🔴',
+                        'options' => [
+                            [
+                                'emoji' => '🔵',
+                                'text' => '🔵 Warna Biru',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔴',
+                                'text' => '🔴 Warna Merah',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🟢',
+                                'text' => '🟢 Warna Hijau',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita perlu mengenali pola dalam belajar logika dan matematika?',
+                        'audio' => 'Mengapa kita perlu mengenali pola dalam belajar logika?',
+                        'emoji' => '🧠',
+                        'options' => [
+                            [
+                                'emoji' => '🧠',
+                                'text' => 'Melatih kecerdasan otak memprediksi urutan dan menyelesaikan masalah',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Supaya cepat mengantuk',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🚫',
+                                'text' => 'Tidak ada gunanya',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pola-logika',
+                'level_number' => 3,
+                'title' => 'Memecahkan Urutan Logika Mundur & Sebab-Akibat',
+                'slug' => 'kuis-pola-l3-hitung-mundur-sebab-akibat',
+                'icon_emoji' => '🌧️',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Pola hitung mundur roket: 10, 9, 8, 7, 6, ... angka selanjutnya adalah?',
+                        'audio' => 'Sepuluh, Sembilan, Delapan, Tujuh, Enam, lalu angka berapa?',
+                        'emoji' => '🚀',
+                        'options' => [
+                            [
+                                'emoji' => '5️⃣',
+                                'text' => '5 (Lima)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 (Tujuh)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '4️⃣',
+                                'text' => '4 (Empat)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola hitung mundur: 5, 4, 3, 2, ... angka selanjutnya adalah?',
+                        'audio' => 'Lima, Empat, Tiga, Dua, lalu angka berapa?',
+                        'emoji' => '📉',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1 (Satu -> Roket Meluncur!)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '3️⃣',
+                                'text' => '3',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola logika cuaca: Langit berawan mendung ☁️ -> Turun air hujan 🌧️ -> Akibatnya adalah...?',
+                        'audio' => 'Langit mendung lalu turun hujan akibatnya apa?',
+                        'emoji' => '🌧️',
+                        'options' => [
+                            [
+                                'emoji' => '🌱',
+                                'text' => 'Tanaman menjadi segar dan tanah basah',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔥',
+                                'text' => 'Tanah kebakaran panas',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🏜️',
+                                'text' => 'Menjadi padang pasir kering',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola memasak di dapur: Telur mentah 🥚 -> Dipecahkan ke wajan sreng 🍳 -> Hasilnya adalah...?',
+                        'audio' => 'Telur mentah digoreng di wajan hasilnya apa?',
+                        'emoji' => '🍳',
+                        'options' => [
+                            [
+                                'emoji' => '🍳',
+                                'text' => 'Telur Dadar Matang yang Lezat',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🥚',
+                                'text' => 'Telur Mentah Kembali',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🪵',
+                                'text' => 'Menjadi Kayu Kering',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola sebab-akibat belajar: Anak rajin membaca buku 📚 dan tekun berlatih -> Akibatnya adalah...?',
+                        'audio' => 'Anak rajin membaca buku dan tekun berlatih akibatnya apa?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            [
+                                'emoji' => '🏆',
+                                'text' => 'Menjadi anak pintar, berprestasi, dan juara',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Menjadi malas',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '😭',
+                                'text' => 'Menangis sedih',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola kebersihan: Membuang sampah pada tempatnya 🗑️ -> Akibatnya lingkungan rumah menjadi...?',
+                        'audio' => 'Membuang sampah pada tempatnya membuat rumah menjadi apa?',
+                        'emoji' => '🧹',
+                        'options' => [
+                            [
+                                'emoji' => '✨',
+                                'text' => 'Bersih, harum, asri, dan bebas penyakit',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🦟',
+                                'text' => 'Banyak nyamuk dan bau kotor',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '💥',
+                                'text' => 'Rusak berantakan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola kesehatan gigi: Rajin menggosok gigi setiap malam 🦷 -> Akibatnya gigi menjadi...?',
+                        'audio' => 'Rajin menggosok gigi setiap malam membuat gigi menjadi apa?',
+                        'emoji' => '🦷',
+                        'options' => [
+                            [
+                                'emoji' => '🦷',
+                                'text' => 'Putih bersih, kuat, sehat, dan tidak berlubang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🖤',
+                                'text' => 'Hitam berlubang dan sakit',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '❌',
+                                'text' => 'Ompong semua',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola menanam: Menyiram tunas pohon setiap hari 💧 -> Akibatnya pohon akan...?',
+                        'audio' => 'Menyiram tunas pohon setiap hari membuat pohon menjadi apa?',
+                        'emoji' => '🌱',
+                        'options' => [
+                            [
+                                'emoji' => '🌳',
+                                'text' => 'Tumbuh subur, tinggi, dan berbuah lebat',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🍂',
+                                'text' => 'Layu dan mati kering',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Berubah jadi batu',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola hitung mundur: 20 -> 18 -> 16 -> 14 -> ... angka mundur lompat 2 berikutnya adalah?',
+                        'audio' => 'Dua puluh, delapan belas, enam belas, empat belas, lalu angka berapa?',
+                        'emoji' => '📉',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12 (Dua Belas)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '13 (Tiga Belas)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '10 (Sepuluh)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola hitung mundur: 15 -> 13 -> 11 -> 9 -> ... angka mundur ganjil berikutnya adalah?',
+                        'audio' => 'Lima belas, tiga belas, sebelas, sembilan, lalu angka berapa?',
+                        'emoji' => '📉',
+                        'options' => [
+                            [
+                                'emoji' => '7️⃣',
+                                'text' => '7 (Tujuh)',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8 (Delapan)',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6 (Enam)',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'pola-logika',
+                'level_number' => 3,
+                'title' => 'Grand Champion Master Pola Logika & Berpikir Komputasional',
+                'slug' => 'kuis-pola-l3-grand-master-pola-logika',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Lanjutkan pola: 🔴 Merah, 🔵 Biru, 🔴 Merah, 🔵 Biru, ... ?',
+                        'audio' => 'Merah, Biru, Merah, Biru, lalu apa?',
+                        'emoji' => '🔴',
+                        'options' => [
+                            [
+                                'emoji' => '🔴',
+                                'text' => '🔴 Merah',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🔵',
+                                'text' => '🔵 Biru',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🟢',
+                                'text' => '🟢 Hijau',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola: ⭕ Lingkaran, 🟩 Kotak, 🔺 Segitiga, ⭕ Lingkaran, 🟩 Kotak, ... ?',
+                        'audio' => 'Lingkaran, Kotak, Segitiga, Lingkaran, Kotak, lalu apa?',
+                        'emoji' => '⭕',
+                        'options' => [
+                            [
+                                'emoji' => '🔺',
+                                'text' => '🔺 Segitiga',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '⭕',
+                                'text' => '⭕ Lingkaran',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🟩',
+                                'text' => '🟩 Kotak',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola: 2, 4, 6, 8, ... ?',
+                        'audio' => 'Dua, Empat, Enam, Delapan, lalu apa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '12',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola: 1, 3, 5, 7, ... ?',
+                        'audio' => 'Satu, Tiga, Lima, Tujuh, lalu apa?',
+                        'emoji' => '🔢',
+                        'options' => [
+                            [
+                                'emoji' => '9️⃣',
+                                'text' => '9',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '8️⃣',
+                                'text' => '8',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🔟',
+                                'text' => '10',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutkan pola dobel: 🍎🍎, 🍌🍌, 🍎🍎, ... ?',
+                        'audio' => 'Apel Apel, Pisang Pisang, Apel Apel, lalu apa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            [
+                                'emoji' => '🍌',
+                                'text' => '🍌🍌 Pisang Pisang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🍎',
+                                'text' => '🍎🍎 Apel Apel',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🍊',
+                                'text' => '🍊🍊 Jeruk Jeruk',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola pertumbuhan kupu-kupu: Ulat -> Kepompong -> ... ?',
+                        'audio' => 'Ulat menjadi kepompong lalu menjadi apa?',
+                        'emoji' => '🦋',
+                        'options' => [
+                            [
+                                'emoji' => '🦋',
+                                'text' => 'Kupu-Kupu',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🦆',
+                                'text' => 'Bebek',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🐱',
+                                'text' => 'Kucing',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola pertumbuhan tanaman: Biji -> Tunas -> ... ?',
+                        'audio' => 'Biji menjadi tunas lalu menjadi apa?',
+                        'emoji' => '🌱',
+                        'options' => [
+                            [
+                                'emoji' => '🌳',
+                                'text' => 'Pohon Rindang',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Batu',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🏠',
+                                'text' => 'Rumah',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola hitung mundur: 5, 4, 3, 2, ... ?',
+                        'audio' => 'Lima, Empat, Tiga, Dua, lalu apa?',
+                        'emoji' => '📉',
+                        'options' => [
+                            [
+                                'emoji' => '1️⃣',
+                                'text' => '1',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '0️⃣',
+                                'text' => '0',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '6️⃣',
+                                'text' => '6',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pola arah: ⬆️ Atas, ⬇️ Bawah, ⬆️ Atas, ... ?',
+                        'audio' => 'Atas, Bawah, Atas, lalu apa?',
+                        'emoji' => '⬆️',
+                        'options' => [
+                            [
+                                'emoji' => '⬇️',
+                                'text' => '⬇️ Bawah',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '⬆️',
+                                'text' => '⬆️ Atas',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '➡️',
+                                'text' => '➡️ Kanan',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar kehormatan untuk anak yang berhasil menguasai seluruh pola logika dan berpikir komputasional cilik adalah...?',
+                        'audio' => 'Gelar kehormatan untuk anak yang menguasai seluruh pola logika adalah apa?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            [
+                                'emoji' => '🏆',
+                                'text' => '🏆 Grand Champion Master Pola Logika & Berpikir Komputasional Cilik!',
+                                'is_correct' => true,
+                            ],
+                            [
+                                'emoji' => '😴',
+                                'text' => 'Juara Malas Berpikir',
+                                'is_correct' => false,
+                            ],
+                            [
+                                'emoji' => '🪨',
+                                'text' => 'Batu Patung Diam',
+                                'is_correct' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+
         ];
 
         foreach ($quizzesData as $qData) {
