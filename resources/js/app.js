@@ -8,16 +8,22 @@ window.twemoji = twemoji;
 
 /**
  * Twemoji Helper: Converts flag emojis and Unicode symbols into crisp SVGs
- * completely safe with Alpine.js reactive DOM.
+ * completely safe with Alpine.js reactive DOM with automatic fallback on 404.
  */
 window.twemojiParse = function(str) {
     if (!str) return '';
     if (typeof twemoji !== 'undefined') {
-        return twemoji.parse(str, {
-            folder: 'svg',
-            ext: '.svg',
-            base: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/'
-        });
+        try {
+            const parsed = twemoji.parse(str, {
+                folder: 'svg',
+                ext: '.svg',
+                base: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/'
+            });
+            // Ensure any missing SVG icons immediately fallback to the raw native emoji character
+            return parsed.replace(/<img /g, '<img onerror="this.replaceWith(this.alt)" ');
+        } catch (e) {
+            return str;
+        }
     }
     return str;
 };

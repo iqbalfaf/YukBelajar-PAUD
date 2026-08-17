@@ -385,8 +385,8 @@ class QuizSeeder extends Seeder
                 'slug' => 'tebak-alat-musik',
                 'icon_emoji' => '🎵',
                 'target_age' => 4,
-                'total_questions' => 4,
-                'stars_reward' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
                 'questions' => [
                     [
                         'text' => 'Alat musik manakah yang dimainkan dengan cara dipetik senarnya?',
@@ -415,7 +415,7 @@ class QuizSeeder extends Seeder
                         'options' => [
                             ['emoji' => '🎹', 'text' => 'Piano Tuts', 'is_correct' => true],
                             ['emoji' => '🎷', 'text' => 'Saxophone', 'is_correct' => false],
-                            ['emoji' => '🪇', 'text' => 'Marakas', 'is_correct' => false],
+                            ['emoji' => '🔔', 'text' => 'Lonceng', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -426,6 +426,16 @@ class QuizSeeder extends Seeder
                             ['emoji' => '🎸', 'text' => 'Gitar', 'is_correct' => false],
                             ['emoji' => '🎺', 'text' => 'Terompet', 'is_correct' => true],
                             ['emoji' => '🪗', 'text' => 'Akordeon', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik bertubuh kayu yang dimainkan dengan cara digesek memakai busur adalah...?',
+                        'audio' => 'Alat musik bertubuh kayu yang dimainkan dengan cara digesek memakai busur adalah...?',
+                        'emoji' => '🎻',
+                        'options' => [
+                            ['emoji' => '🎻', 'text' => 'Biola Gesek', 'is_correct' => true],
+                            ['emoji' => '🪘', 'text' => 'Kendang', 'is_correct' => false],
+                            ['emoji' => '🎙️', 'text' => 'Mikrofon', 'is_correct' => false],
                         ],
                     ],
                 ],
