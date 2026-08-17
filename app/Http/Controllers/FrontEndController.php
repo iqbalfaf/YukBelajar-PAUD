@@ -296,10 +296,22 @@ class FrontEndController extends Controller
             foreach ($quizModel->questions as $q) {
                 $optionsArr = [];
                 foreach ($q->options as $opt) {
+                    $rawText = $opt->option_text;
+                    $emoji = $opt->option_emoji;
+                    $labelText = $rawText;
+
+                    if (preg_match('/([\x{1F300}-\x{1FAFF}\x{2600}-\x{27BF}\x{1F600}-\x{1F64F}\x{1F680}-\x{1F6FF}\x{1F1E0}-\x{1F1FF}])/u', $rawText, $matches)) {
+                        $extractedEmoji = $matches[1];
+                        if (empty($emoji) || $emoji === '✨') {
+                            $emoji = $extractedEmoji;
+                        }
+                        $labelText = trim(str_replace($extractedEmoji, '', $rawText));
+                    }
+
                     $optionsArr[] = [
                         'id' => $opt->id,
-                        'label' => $opt->option_text,
-                        'emoji' => $opt->option_emoji,
+                        'label' => $labelText ?: $rawText,
+                        'emoji' => $emoji ?: '⭐',
                         'is_correct' => (bool) $opt->is_correct,
                         'bg' => 'from-amber-100 to-yellow-200',
                     ];

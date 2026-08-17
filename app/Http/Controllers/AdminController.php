@@ -776,10 +776,19 @@ class AdminController extends Controller
 
             if (! empty($qData['options']) && is_array($qData['options'])) {
                 foreach ($qData['options'] as $opt) {
+                    $rawLabel = $opt['label'] ?? $opt['text'] ?? 'Pilihan';
+                    $optionEmoji = $opt['emoji'] ?? null;
+                    $optionText = $rawLabel;
+
+                    if (! $optionEmoji && preg_match('/([\x{1F300}-\x{1FAFF}\x{2600}-\x{27BF}\x{1F600}-\x{1F64F}\x{1F680}-\x{1F6FF}\x{1F1E0}-\x{1F1FF}])/u', $rawLabel, $matches)) {
+                        $optionEmoji = $matches[1];
+                        $optionText = trim(str_replace($optionEmoji, '', $rawLabel));
+                    }
+
                     QuestionOption::create([
                         'question_id' => $question->id,
-                        'option_text' => $opt['label'] ?? 'Pilihan',
-                        'option_emoji' => $category->icon_emoji,
+                        'option_text' => $optionText ?: $rawLabel,
+                        'option_emoji' => $optionEmoji ?: $category->icon_emoji,
                         'is_correct' => ! empty($opt['is_correct']),
                     ]);
                 }
@@ -917,10 +926,19 @@ class AdminController extends Controller
             ]);
 
             foreach ($qData['options'] as $opt) {
+                $rawText = $opt['option_text'] ?? 'Pilihan';
+                $optionEmoji = $opt['option_emoji'] ?? null;
+                $optionText = $rawText;
+
+                if (! $optionEmoji && preg_match('/([\x{1F300}-\x{1FAFF}\x{2600}-\x{27BF}\x{1F600}-\x{1F64F}\x{1F680}-\x{1F6FF}\x{1F1E0}-\x{1F1FF}])/u', $rawText, $matches)) {
+                    $optionEmoji = $matches[1];
+                    $optionText = trim(str_replace($optionEmoji, '', $rawText));
+                }
+
                 QuestionOption::create([
                     'question_id' => $question->id,
-                    'option_text' => $opt['option_text'],
-                    'option_emoji' => $opt['option_emoji'] ?? '✨',
+                    'option_text' => $optionText ?: $rawText,
+                    'option_emoji' => $optionEmoji ?: '⭐',
                     'is_correct' => ! empty($opt['is_correct']),
                 ]);
             }
@@ -1009,10 +1027,19 @@ class AdminController extends Controller
         ]);
 
         foreach ($validated['options'] as $opt) {
+            $rawText = $opt['option_text'] ?? 'Pilihan';
+            $optionEmoji = $opt['option_emoji'] ?? null;
+            $optionText = $rawText;
+
+            if (! $optionEmoji && preg_match('/([\x{1F300}-\x{1FAFF}\x{2600}-\x{27BF}\x{1F600}-\x{1F64F}\x{1F680}-\x{1F6FF}\x{1F1E0}-\x{1F1FF}])/u', $rawText, $matches)) {
+                $optionEmoji = $matches[1];
+                $optionText = trim(str_replace($optionEmoji, '', $rawText));
+            }
+
             QuestionOption::create([
                 'question_id' => $question->id,
-                'option_text' => $opt['option_text'],
-                'option_emoji' => $opt['option_emoji'] ?? '✨',
+                'option_text' => $optionText ?: $rawText,
+                'option_emoji' => $optionEmoji ?: '⭐',
                 'is_correct' => ! empty($opt['is_correct']),
             ]);
         }
