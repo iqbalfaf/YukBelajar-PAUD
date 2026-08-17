@@ -6,6 +6,7 @@
 <div class="flex flex-col gap-6 max-w-5xl mx-auto pb-16"
      x-data="{
          stickers: {{ Js::from($stickers) }},
+         selectedCat: 'all',
          selectedSticker: null,
          openModal: false,
          inspectSticker(st) {
@@ -56,26 +57,54 @@
         <div class="absolute -right-10 -bottom-10 text-9xl opacity-20 pointer-events-none">✨</div>
     </div>
 
-    <!-- Navigation Back Link -->
-    <div class="flex items-center justify-between">
+    <!-- Navigation & Category Filter Tabs -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
         <a href="{{ route('home') }}" 
-           class="flex items-center gap-2 text-slate-700 hover:text-sky-700 font-bold text-sm bg-white hover:bg-slate-100 px-4 py-2 rounded-2xl border-2 border-slate-200 shadow-xs transition-all">
+           class="flex items-center justify-center gap-2 text-slate-700 hover:text-sky-700 font-bold text-sm bg-white hover:bg-slate-100 px-4 py-2.5 rounded-2xl border-2 border-slate-200 shadow-xs transition-all">
             <span>🏠</span>
             <span>Kembali ke Taman Petualangan</span>
         </a>
-        <span class="text-xs font-bold text-slate-500">💡 Sentuh salah satu stiker untuk melihat detailnya!</span>
+
+        <!-- Category Tabs -->
+        <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-2xl border-2 border-slate-200 overflow-x-auto shadow-xs">
+            <button @click="selectedCat = 'all'"
+                    class="px-3.5 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    :class="selectedCat === 'all' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
+                🌟 Semua (<span x-text="stickers.length"></span>)
+            </button>
+            <button @click="selectedCat = 'hewan'"
+                    class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    :class="selectedCat === 'hewan' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
+                🦁 Hewan (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'hewan').length"></span>)
+            </button>
+            <button @click="selectedCat = 'petualang'"
+                    class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    :class="selectedCat === 'petualang' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
+                🚀 Petualang (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'petualang').length"></span>)
+            </button>
+            <button @click="selectedCat = 'spesial'"
+                    class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    :class="selectedCat === 'spesial' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
+                👑 Spesial (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'spesial').length"></span>)
+            </button>
+            <button @click="selectedCat = 'belajar'"
+                    class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    :class="selectedCat === 'belajar' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
+                🎨 Belajar (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'belajar').length"></span>)
+            </button>
+        </div>
     </div>
 
     <!-- Stickers Grid -->
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
-        <template x-for="st in stickers" :key="st.id">
+        <template x-for="st in stickers.filter(s => selectedCat === 'all' || s.category.toLowerCase() === selectedCat.toLowerCase())" :key="st.id">
             <div @click="inspectSticker(st)"
                  class="card-bubbly p-5 sm:p-6 flex flex-col items-center justify-center text-center cursor-pointer border-4 transition-all relative group"
-                 :class="st.is_unlocked ? 'border-purple-300 hover:border-purple-500 hover:scale-105 bg-white' : 'border-slate-200 bg-slate-100/70 opacity-70 hover:opacity-90'">
+                 :class="st.is_unlocked ? 'border-purple-300 hover:border-purple-500 hover:scale-105 bg-white shadow-xs' : 'border-slate-200 bg-slate-100/70 opacity-70 hover:opacity-90'">
                 
                 <!-- Unlocked Sticker Glow & Badge -->
                 <template x-if="st.is_unlocked">
-                    <span class="absolute top-2 right-2 px-2 py-0.5 bg-amber-400 text-amber-950 rounded-full text-[10px] font-extrabold uppercase">
+                    <span class="absolute top-2 right-2 px-2 py-0.5 bg-amber-400 text-amber-950 rounded-full text-[10px] font-extrabold uppercase shadow-2xs">
                         Terbuka ✨
                     </span>
                 </template>
@@ -84,9 +113,9 @@
                 </template>
 
                 <!-- Sticker Visual -->
-                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center text-6xl sm:text-7xl mb-3 shadow-inner select-none transition-transform group-hover:scale-110"
+                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center text-5xl sm:text-6xl mb-3 shadow-inner select-none transition-transform group-hover:scale-110"
                      :class="st.is_unlocked ? 'bg-gradient-to-br from-amber-100 to-purple-100 border-3 border-purple-200' : 'bg-slate-200 border-2 border-slate-300 grayscale'">
-                    <span x-text="st.is_unlocked ? st.emoji : '❓'"></span>
+                    <span x-html="st.is_unlocked ? window.twemojiParse(st.emoji) : '🔒'"></span>
                 </div>
 
                 <!-- Sticker Name & Category -->
@@ -94,8 +123,8 @@
                     x-text="st.is_unlocked ? st.name : 'Stiker Rahasia'">
                 </h4>
 
-                <span class="text-xs font-bold mt-0.5"
-                      :class="st.is_unlocked ? 'text-purple-600' : 'text-slate-400'"
+                <span class="text-xs font-bold mt-0.5 capitalize"
+                      :class="st.is_unlocked ? 'text-purple-600 font-extrabold' : 'text-slate-400'"
                       x-text="st.category">
                 </span>
             </div>
@@ -124,7 +153,7 @@
                 <div>
                     <div class="w-32 h-32 rounded-full mx-auto mb-4 flex items-center justify-center text-7xl shadow-lg border-4"
                          :class="selectedSticker.is_unlocked ? 'bg-gradient-to-tr from-amber-200 via-pink-100 to-purple-200 border-purple-400 animate-wiggle' : 'bg-slate-200 border-slate-300 grayscale'">
-                        <span x-text="selectedSticker.is_unlocked ? selectedSticker.emoji : '🔒'"></span>
+                        <span x-html="selectedSticker.is_unlocked ? window.twemojiParse(selectedSticker.emoji) : '🔒'"></span>
                     </div>
 
                     <h3 class="text-2xl font-extrabold font-heading text-purple-950 mb-1"

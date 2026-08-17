@@ -105,27 +105,32 @@
     </div>
 
     <!-- Filter Bar -->
-    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+    <div class="bg-white rounded-3xl p-6 border-2 border-slate-200 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
         <div class="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl overflow-x-auto max-w-full">
             <button @click="selectedCat = 'all'"
-                    class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
-                    :class="selectedCat === 'all' ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                Semua Kategori ({{ count($stickersData['stickers']) }})
+                    class="px-3.5 py-2 rounded-xl font-black text-xs transition-all whitespace-nowrap cursor-pointer"
+                    :class="selectedCat === 'all' ? 'bg-slate-800 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
+                🌟 Semua Kategori ({{ count($stickersData['stickers']) }})
             </button>
-            <button @click="selectedCat = 'Hewan'"
+            <button @click="selectedCat = 'hewan'"
                     class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
-                    :class="selectedCat === 'Hewan' ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
+                    :class="selectedCat === 'hewan' ? 'bg-sky-600 text-white shadow-xs font-black' : 'text-slate-600 hover:bg-slate-200'">
                 🦁 Hewan
             </button>
-            <button @click="selectedCat = 'Petualang'"
+            <button @click="selectedCat = 'petualang'"
                     class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
-                    :class="selectedCat === 'Petualang' ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
+                    :class="selectedCat === 'petualang' ? 'bg-sky-600 text-white shadow-xs font-black' : 'text-slate-600 hover:bg-slate-200'">
                 🚀 Petualang
             </button>
-            <button @click="selectedCat = 'Spesial'"
+            <button @click="selectedCat = 'spesial'"
                     class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
-                    :class="selectedCat === 'Spesial' ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
+                    :class="selectedCat === 'spesial' ? 'bg-sky-600 text-white shadow-xs font-black' : 'text-slate-600 hover:bg-slate-200'">
                 👑 Edisi Spesial
+            </button>
+            <button @click="selectedCat = 'belajar'"
+                    class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    :class="selectedCat === 'belajar' ? 'bg-sky-600 text-white shadow-xs font-black' : 'text-slate-600 hover:bg-slate-200'">
+                🎨 Belajar & Objek
             </button>
         </div>
 
@@ -139,13 +144,13 @@
 
     <!-- Stickers Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        <template x-for="sticker in stickers.filter(s => (selectedCat === 'all' || s.category === selectedCat || (selectedCat === 'Spesial' && s.is_special)) && (!searchQuery || s.name.toLowerCase().includes(searchQuery.toLowerCase())))" :key="sticker.id">
-            <div class="bg-white rounded-3xl p-5 border-2 border-slate-200 hover:border-sky-300 shadow-xs flex flex-col justify-between gap-4 transition-all">
+        <template x-for="sticker in stickers.filter(s => (selectedCat === 'all' || s.category.toLowerCase() === selectedCat.toLowerCase() || (selectedCat === 'spesial' && s.is_special)) && (!searchQuery || s.name.toLowerCase().includes(searchQuery.toLowerCase())))" :key="sticker.id">
+            <div class="bg-white rounded-3xl p-5 border-2 border-slate-200 hover:border-sky-300 shadow-xs flex flex-col justify-between gap-4 transition-all hover:shadow-md">
                 <div>
                     <!-- Card Top -->
                     <div class="flex items-start justify-between gap-2 mb-3">
                         <div class="w-14 h-14 rounded-2xl bg-amber-50 border-2 border-amber-200 flex items-center justify-center text-3xl shadow-xs">
-                            <span x-text="sticker.icon_emoji"></span>
+                            <span x-html="window.twemojiParse(sticker.icon_emoji)"></span>
                         </div>
 
                         <div class="flex items-center gap-1">
@@ -177,7 +182,7 @@
                 </div>
 
                 <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold">
-                    <span class="text-amber-600">⭐ Syarat: <span x-text="sticker.required_stars + ' Bintang'"></span></span>
+                    <span class="text-amber-600 font-extrabold">⭐ Syarat: <span x-text="sticker.required_stars + ' Bintang'"></span></span>
                     <span class="text-slate-400" x-text="sticker.claimed_count + 'x Diklaim'"></span>
                 </div>
             </div>
@@ -225,10 +230,10 @@
                         <label class="block text-xs font-bold text-slate-700 mb-1">Kategori</label>
                         <select name="category" x-model="newSticker.category"
                                 class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
-                            <option value="Hewan">Hewan 🦁</option>
-                            <option value="Petualang">Petualang 🚀</option>
-                            <option value="Alam">Alam 🌳</option>
-                            <option value="Prestasi">Prestasi 🏆</option>
+                            <option value="hewan">🦁 Hewan</option>
+                            <option value="petualang">🚀 Petualang</option>
+                            <option value="spesial">👑 Edisi Spesial</option>
+                            <option value="belajar">🎨 Belajar & Objek</option>
                         </select>
                     </div>
 
@@ -308,10 +313,10 @@
                         <label class="block text-xs font-bold text-slate-700 mb-1">Kategori</label>
                         <select name="category" x-model="editData.category"
                                 class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
-                            <option value="Hewan">Hewan 🦁</option>
-                            <option value="Petualang">Petualang 🚀</option>
-                            <option value="Alam">Alam 🌳</option>
-                            <option value="Prestasi">Prestasi 🏆</option>
+                            <option value="hewan">🦁 Hewan</option>
+                            <option value="petualang">🚀 Petualang</option>
+                            <option value="spesial">👑 Edisi Spesial</option>
+                            <option value="belajar">🎨 Belajar & Objek</option>
                         </select>
                     </div>
 
