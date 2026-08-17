@@ -69,75 +69,75 @@
      }">
 
     <!-- Top Heading Banner -->
-    <div class="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300 border-4 border-amber-500 rounded-3xl p-6 sm:p-8 text-amber-950 shadow-md flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-        <div class="flex items-center gap-4 sm:gap-6 text-center md:text-left z-10">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 bg-white/40 backdrop-blur-md rounded-full border-4 border-white flex items-center justify-center text-5xl sm:text-6xl shadow-inner animate-bounce-slow shrink-0">
-                🎖️
+    <div class="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300 border-4 border-amber-500 rounded-3xl p-5 sm:p-7 md:p-8 text-amber-950 shadow-md flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 relative overflow-hidden">
+        <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left z-10">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/40 backdrop-blur-md rounded-full border-4 border-white flex items-center justify-center text-4xl sm:text-5xl shadow-inner animate-bounce-slow shrink-0">
+                <span class="emoji-icon">🎖️</span>
             </div>
             <div>
-                <span class="inline-block bg-amber-600 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-1">
+                <span class="inline-block bg-amber-600 text-white font-extrabold text-[11px] sm:text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-1">
                     Ruang Piala & Prestasi Belajar
                 </span>
-                <h2 class="text-3xl sm:text-4xl font-black font-heading text-amber-950">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black font-heading text-amber-950 leading-tight">
                     Piala & Sertifikat {{ $user['name'] }}
                 </h2>
-                <p class="text-sm sm:text-base font-bold text-amber-900 mt-1">
+                <p class="text-xs sm:text-sm font-bold text-amber-900 mt-1 max-w-xl">
                     Koleksi lencana pahlawan, ganti aksesori avatar, dan unduh sertifikat kelulusan pulau siap cetak!
                 </p>
             </div>
         </div>
 
         <!-- Quick Summary Badge -->
-        <div class="bg-white/95 p-4 rounded-2xl border-3 border-amber-300 shadow-xs text-center shrink-0 z-10 min-w-[170px]">
-            <span class="text-xs font-bold text-slate-500 uppercase">Lencana Terbuka</span>
-            <div class="text-3xl font-black font-heading text-amber-900 my-0.5">
-                <span class="text-emerald-600">{{ $achievementsData['unlocked_count'] }}</span> / {{ $achievementsData['total_count'] }} Piala
+        <div class="bg-white/95 p-3.5 sm:p-4 rounded-2xl border-3 border-amber-300 shadow-xs text-center shrink-0 z-10 w-full md:w-auto min-w-[170px]">
+            <span class="text-[11px] font-bold text-slate-500 uppercase">Lencana Terbuka</span>
+            <div class="text-2xl sm:text-3xl font-black font-heading text-amber-900 my-0.5">
+                <span class="text-emerald-600">{{ $achievementsData['unlocked_count'] }}</span> / {{ $achievementsData['total_count'] }} <span class="text-sm font-bold text-amber-800">Piala</span>
             </div>
-            <span class="text-[11px] font-bold text-amber-800">Tingkat Master 🌟</span>
+            <span class="text-[10px] sm:text-[11px] font-black text-amber-800">Tingkat Master 🌟</span>
         </div>
 
         <div class="absolute -right-8 -bottom-8 text-9xl opacity-20 pointer-events-none">🏆</div>
     </div>
 
     <!-- Switchable Tabs (Kids vs Parents) -->
-    <div class="grid grid-cols-2 gap-3 bg-white/80 p-2 rounded-2xl border-3 border-amber-300 shadow-xs">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 bg-white/80 p-2 rounded-2xl border-3 border-amber-300 shadow-xs">
         <button type="button" @click="setTab('kids')"
-                class="py-3.5 px-4 rounded-xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition-all cursor-pointer"
+                class="py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
                 :class="activeTab === 'kids' ? 'btn-3d btn-3d-yellow text-amber-950 shadow-sm scale-102' : 'text-slate-600 hover:bg-slate-100'">
-            <span class="text-xl">👶</span>
+            <span class="text-lg">👶</span>
             <span>Lencana Petualang Cilik</span>
         </button>
 
         <button type="button" @click="setTab('parents')"
-                class="py-3.5 px-4 rounded-xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition-all cursor-pointer"
+                class="py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
                 :class="activeTab === 'parents' ? 'btn-3d btn-3d-sky text-white shadow-sm scale-102' : 'text-slate-600 hover:bg-slate-100'">
-            <span class="text-xl">📜</span>
+            <span class="text-lg">📜</span>
             <span>Studio Sertifikat & Orang Tua</span>
         </button>
     </div>
 
     <!-- TAB 1: KID ACHIEVEMENTS & AVATAR DRESS-UP -->
     <template x-if="activeTab === 'kids'">
-        <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-6 sm:gap-8">
             
             <!-- Avatar Dress-Up Mini Station -->
-            <div class="bg-gradient-to-r from-amber-50 via-white to-amber-50 border-4 border-amber-300 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="bg-gradient-to-r from-amber-50 via-white to-amber-50 border-4 border-amber-300 rounded-3xl p-5 sm:p-7 shadow-sm flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6">
                 
-                <div class="flex items-center gap-6 text-center md:text-left">
+                <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
                     <!-- Avatar Visual with Worn Accessory -->
-                    <div class="relative w-28 h-28 bg-amber-100 border-4 border-amber-400 rounded-full flex items-center justify-center text-7xl shadow-md shrink-0 animate-bounce-slow">
+                    <div class="relative w-20 h-20 sm:w-24 sm:h-24 bg-amber-100 border-4 border-amber-400 rounded-full flex items-center justify-center text-5xl sm:text-6xl shadow-md shrink-0 animate-bounce-slow">
                         <span>{{ $user['avatar_emoji'] }}</span>
                         <!-- Dynamic Accessory Floating Overlay -->
                         <template x-if="currentAccessory">
-                            <span class="absolute -top-3 right-0 text-4xl animate-wiggle drop-shadow-md" x-text="currentAccessory"></span>
+                            <span class="absolute -top-3 right-0 text-3xl sm:text-4xl animate-wiggle drop-shadow-md" x-text="currentAccessory"></span>
                         </template>
                     </div>
 
                     <div>
-                        <span class="text-xs font-black uppercase text-amber-700 bg-amber-200/70 px-3 py-0.5 rounded-full">
+                        <span class="text-[10px] sm:text-xs font-black uppercase text-amber-700 bg-amber-200/70 px-3 py-0.5 rounded-full inline-block">
                             🎨 Kamar Ganti Aksesori Avatar
                         </span>
-                        <h3 class="text-2xl font-extrabold font-heading text-amber-950 mt-1">
+                        <h3 class="text-xl sm:text-2xl font-black font-heading text-amber-950 mt-1">
                             Kostum Petualang {{ $user['name'] }}
                         </h3>
                         <p class="text-xs sm:text-sm font-bold text-slate-600 mt-0.5">
@@ -147,13 +147,13 @@
                 </div>
 
                 <!-- Accessory Selector Buttons -->
-                <div class="flex items-center gap-2 flex-wrap justify-center">
+                <div class="grid grid-cols-4 sm:flex sm:flex-wrap gap-2 justify-center w-full md:w-auto">
                     <template x-for="acc in accessories" :key="acc.key">
                         <button type="button" @click="equipAccessory(acc)"
-                                class="p-3 rounded-2xl border-3 flex flex-col items-center justify-center gap-1 transition-all cursor-pointer"
+                                class="p-2.5 sm:p-3 rounded-2xl border-3 flex flex-col items-center justify-center gap-1 transition-all cursor-pointer"
                                 :class="currentAccessory === (acc.icon === '❌' ? '' : acc.icon) ? 'border-amber-400 bg-amber-100 scale-110 shadow-md ring-3 ring-amber-300' : (acc.is_unlocked ? 'border-slate-200 bg-white hover:border-amber-300' : 'border-slate-200 bg-slate-100 opacity-50')">
-                            <span class="text-2xl select-none" x-text="acc.icon"></span>
-                            <span class="text-[10px] font-extrabold text-slate-700 line-clamp-1" x-text="acc.name"></span>
+                            <span class="text-2xl select-none emoji-icon" x-text="acc.icon"></span>
+                            <span class="text-[9px] sm:text-[10px] font-extrabold text-slate-700 line-clamp-1" x-text="acc.name"></span>
                         </button>
                     </template>
                 </div>
@@ -162,44 +162,44 @@
 
             <!-- Kid Achievements Badges Grid -->
             <div>
-                <h3 class="text-xl font-extrabold font-heading text-slate-800 mb-4 flex items-center gap-2">
-                    <span>🏆</span>
+                <h3 class="text-lg sm:text-xl font-black font-heading text-slate-800 mb-3.5 flex items-center gap-2">
+                    <span class="emoji-icon">🏆</span>
                     <span>Koleksi Lencana Gelar Juara (Piala Cilik)</span>
                 </h3>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5">
                     <template x-for="ach in kidAchievements" :key="ach.id">
                         <div @click="inspectAchievement(ach)"
-                             class="card-bubbly p-6 flex flex-col justify-between border-4 cursor-pointer transition-all hover:scale-103"
-                             :class="ach.is_unlocked ? 'border-amber-300 bg-white' : 'border-slate-200 bg-slate-50/80 opacity-75'">
+                             class="card-bubbly p-4 sm:p-5 flex flex-col justify-between border-3 sm:border-4 cursor-pointer transition-all hover:scale-102 bg-white shadow-xs hover:shadow-md"
+                             :class="ach.is_unlocked ? 'border-amber-300' : 'border-slate-200 bg-slate-50/80 opacity-75'">
                             
                             <div>
                                 <div class="flex items-start justify-between gap-3 mb-3">
-                                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm border-2"
+                                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl shadow-xs border-2"
                                          :class="ach.is_unlocked ? 'bg-amber-100 border-amber-300 animate-wiggle' : 'bg-slate-200 border-slate-300 grayscale'">
-                                        <span x-text="ach.is_unlocked ? ach.icon : '🔒'"></span>
+                                        <span class="emoji-icon" x-text="ach.is_unlocked ? ach.icon : '🔒'"></span>
                                     </div>
 
                                     <template x-if="ach.is_unlocked">
-                                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full text-[11px] font-black uppercase">
+                                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full text-[10px] sm:text-[11px] font-black uppercase">
                                             Diraih ✨
                                         </span>
                                     </template>
                                     <template x-if="!ach.is_unlocked">
-                                        <span class="px-2.5 py-1 bg-slate-200 text-slate-600 rounded-full text-[11px] font-bold">
+                                        <span class="px-2.5 py-1 bg-slate-200 text-slate-600 rounded-full text-[10px] sm:text-[11px] font-bold">
                                             Progres <span x-text="ach.progress"></span>
                                         </span>
                                     </template>
                                 </div>
 
-                                <h4 class="font-black font-heading text-lg text-slate-800 mb-1" x-text="ach.title"></h4>
-                                <p class="text-xs font-semibold text-slate-600 mb-4" x-text="ach.description"></p>
+                                <h4 class="font-black font-heading text-base sm:text-lg text-slate-800 mb-1" x-text="ach.title"></h4>
+                                <p class="text-xs font-semibold text-slate-600 mb-3" x-text="ach.description"></p>
                             </div>
 
                             <!-- Reward Bottom Box -->
-                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs">
                                 <span class="font-bold text-slate-500">Hadiah:</span>
-                                <span class="font-black text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200" x-text="ach.reward_title"></span>
+                                <span class="font-black text-purple-700 bg-purple-50 px-2 py-0.5 rounded-lg border border-purple-200" x-text="ach.reward_title"></span>
                             </div>
 
                         </div>
@@ -212,38 +212,38 @@
 
     <!-- TAB 2: PARENT ACHIEVEMENTS & PRINTABLE CERTIFICATES -->
     <template x-if="activeTab === 'parents'">
-        <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-6 sm:gap-8">
             
             <!-- Printable Certificate Studio Section -->
-            <div class="bg-gradient-to-r from-sky-400 to-indigo-500 text-white rounded-3xl p-6 sm:p-8 shadow-md border-4 border-sky-300">
+            <div class="bg-gradient-to-r from-sky-400 to-indigo-500 text-white rounded-3xl p-5 sm:p-7 md:p-8 shadow-md border-4 border-sky-300">
                 <div class="flex items-center gap-3 mb-2">
-                    <span class="text-3xl">📜</span>
+                    <span class="emoji-icon text-3xl">📜</span>
                     <div>
                         <span class="text-xs font-black uppercase text-sky-200">Fitur Kebanggaan Keluarga</span>
-                        <h3 class="text-2xl font-black font-heading text-white">
+                        <h3 class="text-xl sm:text-2xl font-black font-heading text-white leading-tight">
                             Studio Sertifikat Kelulusan Siap Cetak (Printable)
                         </h3>
                     </div>
                 </div>
-                <p class="text-xs sm:text-sm text-sky-100 max-w-2xl mb-6">
+                <p class="text-xs sm:text-sm text-sky-100 max-w-2xl mb-5">
                     Unduh dan cetak sertifikat resmi kelulusan pulau anak untuk dipajang di dinding kamar atau pigura sebagai bentuk apresiasi prestasi belajar!
                 </p>
 
                 <!-- Certificate Cards Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-4">
                     <template x-for="cert in certificates" :key="cert.id">
-                        <div class="bg-white text-slate-800 rounded-2xl p-5 border-3 border-amber-300 shadow-md flex flex-col justify-between gap-4">
+                        <div class="bg-white text-slate-800 rounded-2xl p-4 sm:p-5 border-3 border-amber-300 shadow-md flex flex-col justify-between gap-3 sm:gap-4">
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <span class="text-xs font-bold text-slate-400">📜 Sertifikat Resmi</span>
-                                    <span class="text-xl">⭐</span>
+                                    <span class="text-lg">⭐</span>
                                 </div>
-                                <h4 class="font-black font-heading text-base text-slate-900 mb-1" x-text="cert.title"></h4>
-                                <span class="inline-block text-[11px] font-extrabold text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full" x-text="cert.badge"></span>
+                                <h4 class="font-black font-heading text-sm sm:text-base text-slate-900 mb-1" x-text="cert.title"></h4>
+                                <span class="inline-block text-[10px] sm:text-[11px] font-extrabold text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full" x-text="cert.badge"></span>
                             </div>
 
                             <button type="button" @click="openCert(cert)"
-                                    class="w-full py-2.5 btn-3d btn-3d-yellow rounded-xl font-extrabold text-xs text-amber-950 flex items-center justify-center gap-1.5 shadow-sm">
+                                    class="w-full py-2.5 btn-3d btn-3d-yellow rounded-xl font-black text-xs text-amber-950 flex items-center justify-center gap-1.5 shadow-xs">
                                 <span>🖨️</span>
                                 <span>Lihat & Cetak Sertifikat</span>
                             </button>
@@ -254,22 +254,22 @@
 
             <!-- Super Parent Badges -->
             <div>
-                <h3 class="text-xl font-extrabold font-heading text-slate-800 mb-4 flex items-center gap-2">
-                    <span>🌟</span>
+                <h3 class="text-lg sm:text-xl font-black font-heading text-slate-800 mb-3.5 flex items-center gap-2">
+                    <span class="emoji-icon">🌟</span>
                     <span>Lencana Pendampingan Orang Tua Hebat</span>
                 </h3>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-5">
                     <template x-for="pAch in parentAchievements" :key="pAch.id">
-                        <div class="bg-white rounded-3xl p-6 border-3 border-purple-200 shadow-sm flex flex-col justify-between gap-4">
+                        <div class="bg-white rounded-3xl p-4 sm:p-5 border-3 border-purple-200 shadow-xs flex flex-col justify-between gap-3 sm:gap-4 hover:shadow-md transition-shadow">
                             <div>
-                                <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center text-3xl mb-3 border-2 border-purple-300">
-                                    <span x-text="pAch.icon"></span>
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-purple-100 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mb-2.5 border-2 border-purple-300">
+                                    <span class="emoji-icon" x-text="pAch.icon"></span>
                                 </div>
-                                <h4 class="font-extrabold font-heading text-base text-slate-800 mb-1" x-text="pAch.title"></h4>
+                                <h4 class="font-black font-heading text-sm sm:text-base text-slate-800 mb-1" x-text="pAch.title"></h4>
                                 <p class="text-xs font-semibold text-slate-600" x-text="pAch.description"></p>
                             </div>
-                            <span class="px-3 py-1 bg-purple-50 text-purple-800 font-extrabold text-xs rounded-full border border-purple-200 text-center" x-text="pAch.badge_label"></span>
+                            <span class="px-3 py-1 bg-purple-50 text-purple-800 font-black text-[10px] sm:text-xs rounded-full border border-purple-200 text-center" x-text="pAch.badge_label"></span>
                         </div>
                     </template>
                 </div>

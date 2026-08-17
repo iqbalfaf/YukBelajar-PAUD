@@ -23,115 +23,122 @@
      }">
 
     <!-- Header Album Title & Stats Banner -->
-    <div class="bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 border-4 border-purple-500 rounded-3xl p-6 sm:p-8 shadow-md text-white flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+    <div class="bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 border-4 border-purple-500 rounded-3xl p-5 sm:p-7 md:p-8 shadow-md text-white flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 relative overflow-hidden">
         
-        <div class="flex items-center gap-4 sm:gap-6 text-center md:text-left z-10">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 bg-white/20 backdrop-blur-md rounded-full border-4 border-white/40 flex items-center justify-center text-5xl sm:text-6xl shadow-inner animate-bounce-slow shrink-0">
-                🏆
+        <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left z-10">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 backdrop-blur-md rounded-full border-4 border-white/40 flex items-center justify-center text-4xl sm:text-5xl shadow-inner animate-bounce-slow shrink-0">
+                <span class="emoji-icon">🏆</span>
             </div>
             <div>
-                <span class="inline-block bg-purple-900/40 text-purple-100 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-1">
+                <span class="inline-block bg-purple-900/40 text-purple-100 font-extrabold text-[11px] sm:text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-1">
                     Album Prestasi Anak Ceria
                 </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black font-heading text-white leading-tight">
                     Buku Stiker Virtual {{ $user['name'] }}
                 </h2>
-                <p class="text-sm sm:text-base font-bold text-purple-100 mt-1">
-                    Koleksi stiker hadiah yang kamu dapatkan setelah menamatkan kartu belajar dan kuis!
+                <p class="text-xs sm:text-sm font-bold text-purple-100 mt-1 max-w-xl">
+                    Koleksi stiker karakter lucu yang kamu dapatkan setelah menuntaskan kartu belajar dan kuis pintar!
                 </p>
             </div>
         </div>
 
         <!-- Progress Counter Widget (Real Database Data) -->
-        <div class="bg-white/90 text-purple-950 p-4 sm:p-5 rounded-3xl border-3 border-purple-300 shadow-sm text-center shrink-0 z-10 w-full md:w-auto min-w-[200px]">
-            <span class="text-xs font-bold uppercase tracking-wider text-purple-700">Total Koleksi</span>
-            <div class="text-3xl font-extrabold font-heading text-purple-900 my-0.5">
-                <span class="text-amber-500">{{ $stickersData['unlocked_count'] }}</span> / {{ $stickersData['total_count'] }} Stiker
+        <div class="bg-white/95 text-purple-950 p-3.5 sm:p-4 rounded-2xl border-3 border-purple-300 shadow-sm text-center shrink-0 z-10 w-full md:w-auto min-w-[190px]">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-purple-700">Total Koleksi</span>
+            <div class="text-2xl sm:text-3xl font-black font-heading text-purple-900 my-0.5">
+                <span class="text-amber-500">{{ $stickersData['unlocked_count'] }}</span> / {{ $stickersData['total_count'] }} <span class="text-sm font-bold text-purple-700">Stiker</span>
             </div>
-            <div class="w-full bg-purple-100 rounded-full h-3 overflow-hidden border border-purple-300">
+            <div class="w-full bg-purple-100 rounded-full h-3 overflow-hidden border border-purple-300 mt-1.5">
                 <div class="bg-gradient-to-r from-amber-400 to-yellow-500 h-full rounded-full transition-all duration-500" style="width: {{ $stickersData['progress_pct'] }}%;"></div>
             </div>
-            <span class="text-[11px] font-bold text-purple-800 mt-1 block">{{ $stickersData['progress_pct'] }}% Terkumpul!</span>
+            <span class="text-[10px] sm:text-[11px] font-black text-purple-800 mt-1 block">{{ $stickersData['progress_pct'] }}% Terkumpul!</span>
         </div>
 
         <div class="absolute -right-10 -bottom-10 text-9xl opacity-20 pointer-events-none">✨</div>
     </div>
 
     <!-- Navigation & Category Filter Tabs -->
-    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
         <a href="{{ route('home') }}" 
-           class="flex items-center justify-center gap-2 text-slate-700 hover:text-sky-700 font-bold text-sm bg-white hover:bg-slate-100 px-4 py-2.5 rounded-2xl border-2 border-slate-200 shadow-xs transition-all">
+           class="flex items-center justify-center gap-2 text-slate-700 hover:text-sky-700 font-extrabold text-xs sm:text-sm bg-white hover:bg-slate-100 px-4 py-2.5 rounded-2xl border-2 border-slate-200 shadow-xs transition-all w-full sm:w-auto">
             <span>🏠</span>
-            <span>Kembali ke Taman Petualangan</span>
+            <span>Kembali ke Petualangan</span>
         </a>
 
         <!-- Category Tabs -->
-        <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-2xl border-2 border-slate-200 overflow-x-auto shadow-xs">
+        <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-2xl border-2 border-slate-200 overflow-x-auto shadow-xs w-full sm:w-auto justify-start sm:justify-center">
             <button @click="selectedCat = 'all'"
-                    class="px-3.5 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    class="px-3 sm:px-3.5 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1"
                     :class="selectedCat === 'all' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
-                🌟 Semua (<span x-text="stickers.length"></span>)
+                <span>🌟</span>
+                <span>Semua (<span x-text="stickers.length"></span>)</span>
             </button>
             <button @click="selectedCat = 'hewan'"
-                    class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    class="px-3 sm:px-3.5 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1"
                     :class="selectedCat === 'hewan' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
-                🦁 Hewan (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'hewan').length"></span>)
+                <span>🦁</span>
+                <span>Hewan (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'hewan').length"></span>)</span>
             </button>
             <button @click="selectedCat = 'petualang'"
-                    class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    class="px-3 sm:px-3.5 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1"
                     :class="selectedCat === 'petualang' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
-                🚀 Petualang (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'petualang').length"></span>)
+                <span>🚀</span>
+                <span>Petualang (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'petualang').length"></span>)</span>
             </button>
             <button @click="selectedCat = 'spesial'"
-                    class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    class="px-3 sm:px-3.5 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1"
                     :class="selectedCat === 'spesial' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
-                👑 Spesial (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'spesial').length"></span>)
+                <span>👑</span>
+                <span>Spesial (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'spesial').length"></span>)</span>
             </button>
             <button @click="selectedCat = 'belajar'"
-                    class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer"
+                    class="px-3 sm:px-3.5 py-1.5 rounded-xl font-extrabold text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1"
                     :class="selectedCat === 'belajar' ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'">
-                🎨 Belajar (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'belajar').length"></span>)
+                <span>🎨</span>
+                <span>Belajar (<span x-text="stickers.filter(s => s.category.toLowerCase() === 'belajar').length"></span>)</span>
             </button>
         </div>
     </div>
 
     <!-- Stickers Grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5 sm:gap-5">
         <template x-for="st in stickers.filter(s => selectedCat === 'all' || s.category.toLowerCase() === selectedCat.toLowerCase())" :key="st.id">
             <div @click="inspectSticker(st)"
-                 class="card-bubbly p-5 sm:p-6 flex flex-col items-center justify-center text-center cursor-pointer border-4 transition-all relative group"
-                 :class="st.is_unlocked ? 'border-purple-300 hover:border-purple-500 hover:scale-105 bg-white shadow-xs' : 'border-slate-200 bg-slate-100/70 opacity-70 hover:opacity-90'">
+                 class="card-bubbly p-4 sm:p-5 flex flex-col items-center justify-between text-center cursor-pointer border-3 sm:border-4 transition-all relative group bg-white shadow-xs hover:shadow-md"
+                 :class="st.is_unlocked ? 'border-purple-300 hover:border-purple-500 hover:scale-105' : 'border-slate-200 bg-slate-50/80 opacity-75 hover:opacity-95'">
                 
                 <!-- Unlocked Sticker Glow & Badge -->
                 <template x-if="st.is_unlocked">
-                    <span class="absolute top-2 right-2 px-2 py-0.5 bg-amber-400 text-amber-950 rounded-full text-[10px] font-extrabold uppercase shadow-2xs">
+                    <span class="absolute top-2 right-2 px-2 py-0.5 bg-amber-400 text-amber-950 rounded-full text-[9px] sm:text-[10px] font-black uppercase shadow-2xs">
                         Terbuka ✨
                     </span>
                 </template>
                 <template x-if="!st.is_unlocked">
-                    <span class="absolute top-2 right-2 text-base">🔒</span>
+                    <span class="absolute top-2 right-2 text-sm sm:text-base">🔒</span>
                 </template>
 
                 <!-- Sticker Visual -->
-                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center text-5xl sm:text-6xl mb-3 shadow-inner select-none transition-transform group-hover:scale-110"
-                     :class="st.is_unlocked ? 'bg-gradient-to-br from-amber-100 to-purple-100 border-3 border-purple-200' : 'bg-slate-200 border-2 border-slate-300 grayscale'">
-                    <span x-html="st.is_unlocked ? window.twemojiParse(st.emoji) : '🔒'"></span>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center text-4xl sm:text-5xl my-2 shadow-inner select-none transition-transform group-hover:scale-110"
+                     :class="st.is_unlocked ? 'bg-gradient-to-br from-amber-100 via-yellow-50 to-purple-100 border-3 border-purple-200' : 'bg-slate-200 border-2 border-slate-300 grayscale'">
+                    <span class="emoji-icon" x-text="st.is_unlocked ? (st.emoji || '⭐') : '🔒'"></span>
                 </div>
 
                 <!-- Sticker Name & Category -->
-                <h4 class="font-extrabold font-heading text-base sm:text-lg text-slate-800 line-clamp-1"
-                    x-text="st.is_unlocked ? st.name : 'Stiker Rahasia'">
-                </h4>
+                <div class="w-full">
+                    <h4 class="font-black font-heading text-xs sm:text-sm text-slate-800 line-clamp-2 min-h-[2.2rem] flex items-center justify-center leading-snug"
+                        x-text="st.is_unlocked ? st.name : 'Stiker Rahasia'">
+                    </h4>
 
-                <div class="flex flex-col items-center gap-0.5 mt-0.5">
-                    <span class="text-xs font-bold capitalize"
-                          :class="st.is_unlocked ? 'text-purple-600 font-extrabold' : 'text-slate-400'"
-                          x-text="st.category">
-                    </span>
-                    <template x-if="!st.is_unlocked">
-                        <span class="px-2 py-0.5 bg-amber-50 border border-amber-300 text-amber-900 rounded-full text-[10px] font-black mt-0.5"
-                              x-text="`⭐ ${st.required_stars} Bintang`"></span>
-                    </template>
+                    <div class="flex flex-col items-center gap-0.5 mt-1">
+                        <span class="text-[10px] sm:text-xs font-bold capitalize"
+                              :class="st.is_unlocked ? 'text-purple-700 font-black' : 'text-slate-400'"
+                              x-text="st.category">
+                        </span>
+                        <template x-if="!st.is_unlocked">
+                            <span class="px-2 py-0.5 bg-amber-50 border border-amber-300 text-amber-900 rounded-full text-[9px] sm:text-[10px] font-black mt-0.5"
+                                  x-text="`⭐ ${st.required_stars} Bintang`"></span>
+                        </template>
+                    </div>
                 </div>
             </div>
         </template>

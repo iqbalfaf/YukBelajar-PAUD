@@ -59,7 +59,7 @@ test('halaman panggung sahabat petualang dapat diakses', function () {
     $response = $this->actingAs($student)->get(route('community'));
 
     $response->assertStatus(200);
-    $response->assertSee('PANGGUNG SAHABAT PETUALANG');
+    $response->assertSee('Panggung Sahabat Petualang');
     $response->assertSee('Kumpulkan 500 Bintang Emas Bersama');
     $response->assertSee('Nayla');
     $response->assertSee('Kenzo');
