@@ -4,13 +4,38 @@ import twemoji from 'twemoji';
 
 window.Alpine = Alpine;
 window.confetti = confetti;
+window.twemoji = twemoji;
 
 /**
- * Emoji Helper: Returns clean native emoji string
+ * Twemoji Helper: Converts emojis (including country flags on Windows) to crisp SVG graphics
  */
 window.twemojiParse = function(str) {
-    return str || '';
+    if (!str) return '';
+    try {
+        return twemoji.parse(str, {
+            folder: 'svg',
+            ext: '.svg',
+            base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
+        });
+    } catch (e) {
+        return str;
+    }
 };
+
+// Auto-parse static flag emojis on DOM ready
+if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', () => {
+        try {
+            twemoji.parse(document.body, {
+                folder: 'svg',
+                ext: '.svg',
+                base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
+            });
+        } catch (e) {
+            // silent fallback
+        }
+    });
+}
 
 /**
  * Web Audio API Sound Synthesizer & Cheerful Speech Engine for YukBelajar PAUD
