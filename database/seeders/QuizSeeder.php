@@ -8652,13 +8652,19 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 2 - TOPIK 2: MEMBACA 2 SUKU KATA (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (BOLA, BUKU, KUDA, MATA, SAPI, ROTI, MEJA) ---
             [
                 'category_slug' => 'dua-suku-kata',
-                'title' => 'Tantangan Membaca 2 Suku Kata',
-                'slug' => 'kuis-dua-suku-kata',
-                'icon_emoji' => '🗣️',
+                'level_number' => 1,
+                'title' => 'Membaca Kata Bo-la, Bu-ku & Ku-da',
+                'slug' => 'kuis-2suku-l1-bola-buku-kuda',
+                'icon_emoji' => '⚽',
                 'target_age' => 4,
-                'total_questions' => 2,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
@@ -8666,9 +8672,9 @@ class QuizSeeder extends Seeder
                         'audio' => 'B-O Bo, L-A La. Jika digabungkan dibaca apa ya?',
                         'emoji' => '⚽',
                         'options' => [
-                            ['emoji' => '⚽', 'text' => 'Bo-la', 'is_correct' => true],
-                            ['emoji' => '📖', 'text' => 'Bu-ku', 'is_correct' => false],
-                            ['emoji' => '🐎', 'text' => 'Ku-da', 'is_correct' => false],
+                            ['emoji' => '⚽', 'text' => 'Bo - la (Bola)', 'is_correct' => true],
+                            ['emoji' => '📖', 'text' => 'Bu - ku', 'is_correct' => false],
+                            ['emoji' => '🐎', 'text' => 'Ku - da', 'is_correct' => false],
                         ],
                     ],
                     [
@@ -8676,9 +8682,683 @@ class QuizSeeder extends Seeder
                         'audio' => 'B-U Bu, K-U Ku. Jika digabungkan dibaca apa ya?',
                         'emoji' => '📖',
                         'options' => [
-                            ['emoji' => '🐄', 'text' => 'Sa-pi', 'is_correct' => false],
-                            ['emoji' => '📖', 'text' => 'Bu-ku', 'is_correct' => true],
-                            ['emoji' => '🍞', 'text' => 'Ro-ti', 'is_correct' => false],
+                            ['emoji' => '📖', 'text' => 'Bu - ku (Buku)', 'is_correct' => true],
+                            ['emoji' => '🐄', 'text' => 'Sa - pi', 'is_correct' => false],
+                            ['emoji' => '🍞', 'text' => 'Ro - ti', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'K-U Ku, D-A Da. Jika digabungkan dibaca apa ya?',
+                        'audio' => 'K-U Ku, D-A Da. Jika digabungkan dibaca apa ya?',
+                        'emoji' => '🐎',
+                        'options' => [
+                            ['emoji' => '🐎', 'text' => 'Ku - da (Kuda)', 'is_correct' => true],
+                            ['emoji' => '👀', 'text' => 'Ma - ta', 'is_correct' => false],
+                            ['emoji' => '🪑', 'text' => 'Me - ja', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'dua-suku-kata',
+                'level_number' => 1,
+                'title' => 'Membaca Kata Ma-ta, Sa-pi & Ro-ti',
+                'slug' => 'kuis-2suku-l1-mata-sapi-roti',
+                'icon_emoji' => '👀',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'M-A Ma, T-A Ta. Jika digabungkan dibaca apa ya?',
+                        'audio' => 'M-A Ma, T-A Ta. Jika digabungkan dibaca apa ya?',
+                        'emoji' => '👀',
+                        'options' => [
+                            ['emoji' => '👀', 'text' => 'Ma - ta (Mata)', 'is_correct' => true],
+                            ['emoji' => '⚽', 'text' => 'Bo - la', 'is_correct' => false],
+                            ['emoji' => '🍞', 'text' => 'Ro - ti', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'S-A Sa, P-I Pi. Jika digabungkan dibaca apa ya?',
+                        'audio' => 'S-A Sa, P-I Pi. Jika digabungkan dibaca apa ya?',
+                        'emoji' => '🐄',
+                        'options' => [
+                            ['emoji' => '🐄', 'text' => 'Sa - pi (Sapi)', 'is_correct' => true],
+                            ['emoji' => '🐎', 'text' => 'Ku - da', 'is_correct' => false],
+                            ['emoji' => '📖', 'text' => 'Bu - ku', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'R-O Ro, T-I Ti. Jika digabungkan dibaca apa ya?',
+                        'audio' => 'R-O Ro, T-I Ti. Jika digabungkan dibaca apa ya?',
+                        'emoji' => '🍞',
+                        'options' => [
+                            ['emoji' => '🍞', 'text' => 'Ro - ti (Roti)', 'is_correct' => true],
+                            ['emoji' => '🪑', 'text' => 'Me - ja', 'is_correct' => false],
+                            ['emoji' => '👀', 'text' => 'Ma - ta', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'dua-suku-kata',
+                'level_number' => 1,
+                'title' => 'Membaca Kata Me-ja & Benda Harian',
+                'slug' => 'kuis-2suku-l1-meja-benda-harian',
+                'icon_emoji' => '🪑',
+                'target_age' => 4,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'M-E Me, J-A Ja. Jika digabungkan dibaca apa ya?',
+                        'audio' => 'M-E Me, J-A Ja. Jika digabungkan dibaca apa ya?',
+                        'emoji' => '🪑',
+                        'options' => [
+                            ['emoji' => '🪑', 'text' => 'Me - ja (Meja)', 'is_correct' => true],
+                            ['emoji' => '👕', 'text' => 'Ba - ju', 'is_correct' => false],
+                            ['emoji' => '⚽', 'text' => 'Bo - la', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah suku kata pada kata "Bo - la"?',
+                        'audio' => 'Berapakah jumlah suku kata pada kata Bola?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '2 Suku Kata (Bo - la)', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '1 Suku Kata', 'is_correct' => false],
+                            ['emoji' => '3️⃣', 'text' => '3 Suku Kata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf konsonan apakah yang mengawali kata "Bu - ku"?',
+                        'audio' => 'Huruf konsonan apakah yang mengawali kata Buku?',
+                        'emoji' => '📖',
+                        'options' => [
+                            ['emoji' => '🅱️', 'text' => 'Huruf B', 'is_correct' => true],
+                            ['emoji' => '🅺', 'text' => 'Huruf K', 'is_correct' => false],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (BAJU, NURI, GIGI, KUKU, TOPI, PADI, LELE) ---
+            [
+                'category_slug' => 'dua-suku-kata',
+                'level_number' => 2,
+                'title' => 'Membaca Ba-ju, Nuri & Gi-gi',
+                'slug' => 'kuis-2suku-l2-baju-nuri-gigi',
+                'icon_emoji' => '👕',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'B-A Ba, J-U Ju. Jika digabungkan dibaca apa ya?',
+                        'audio' => 'B-A Ba, J-U Ju. Jika digabungkan dibaca apa ya?',
+                        'emoji' => '👕',
+                        'options' => [
+                            ['emoji' => '👕', 'text' => 'Ba - ju (Baju)', 'is_correct' => true],
+                            ['emoji' => '🧢', 'text' => 'To - pi', 'is_correct' => false],
+                            ['emoji' => '🥛', 'text' => 'Su - su', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'N-U Nu, R-I Ri. Burung cantik bersiul ini dibaca apa?',
+                        'audio' => 'N-U Nu, R-I Ri. Burung cantik bersiul ini dibaca apa?',
+                        'emoji' => '🦜',
+                        'options' => [
+                            ['emoji' => '🦜', 'text' => 'Nu - ri (Nuri)', 'is_correct' => true],
+                            ['emoji' => '🐎', 'text' => 'Ku - da', 'is_correct' => false],
+                            ['emoji' => '🐄', 'text' => 'Sa - pi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'G-I Gi, G-I Gi. Bagian mulut untuk mengunyah ini dibaca apa?',
+                        'audio' => 'G-I Gi, G-I Gi. Bagian mulut untuk mengunyah ini dibaca apa?',
+                        'emoji' => '🦷',
+                        'options' => [
+                            ['emoji' => '🦷', 'text' => 'Gi - gi (Gigi)', 'is_correct' => true],
+                            ['emoji' => '💅', 'text' => 'Ku - ku', 'is_correct' => false],
+                            ['emoji' => '👀', 'text' => 'Ma - ta', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'K-U Ku, K-U Ku. Bagian ujung jari yang bersih ini dibaca apa?',
+                        'audio' => 'K-U Ku, K-U Ku. Bagian ujung jari yang bersih ini dibaca apa?',
+                        'emoji' => '💅',
+                        'options' => [
+                            ['emoji' => '💅', 'text' => 'Ku - ku (Kuku)', 'is_correct' => true],
+                            ['emoji' => '🦷', 'text' => 'Gi - gi', 'is_correct' => false],
+                            ['emoji' => '🐎', 'text' => 'Ku - da', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata pertama pada kata "Ba - ju" adalah...?',
+                        'audio' => 'Suku kata pertama pada kata Baju adalah apa?',
+                        'emoji' => '👕',
+                        'options' => [
+                            ['emoji' => '🅱️', 'text' => 'BA', 'is_correct' => true],
+                            ['emoji' => '🇯', 'text' => 'JU', 'is_correct' => false],
+                            ['emoji' => '🅱️', 'text' => 'BO', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'dua-suku-kata',
+                'level_number' => 2,
+                'title' => 'Membaca To-pi, Pa-di & Le-le',
+                'slug' => 'kuis-2suku-l2-topi-padi-lele',
+                'icon_emoji' => '🧢',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'T-O To, P-I Pi. Pelindung kepala dari panas ini dibaca apa?',
+                        'audio' => 'T-O To, P-I Pi. Pelindung kepala dari panas ini dibaca apa?',
+                        'emoji' => '🧢',
+                        'options' => [
+                            ['emoji' => '🧢', 'text' => 'To - pi (Topi)', 'is_correct' => true],
+                            ['emoji' => '👕', 'text' => 'Ba - ju', 'is_correct' => false],
+                            ['emoji' => '🍞', 'text' => 'Ro - ti', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'P-A Pa, D-I Di. Tanaman penghasil beras di sawah ini dibaca apa?',
+                        'audio' => 'P-A Pa, D-I Di. Tanaman penghasil beras di sawah ini dibaca apa?',
+                        'emoji' => '🌾',
+                        'options' => [
+                            ['emoji' => '🌾', 'text' => 'Pa - di (Padi)', 'is_correct' => true],
+                            ['emoji' => '🥭', 'text' => 'Sa - wo', 'is_correct' => false],
+                            ['emoji' => '🪵', 'text' => 'Ka - yu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'L-E Le, L-E Le. Ikan air tawar berkumis lincah ini dibaca apa?',
+                        'audio' => 'L-E Le, L-E Le. Ikan air tawar berkumis lincah ini dibaca apa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '🐟', 'text' => 'Le - le (Lele)', 'is_correct' => true],
+                            ['emoji' => '🐄', 'text' => 'Sa - pi', 'is_correct' => false],
+                            ['emoji' => '🦜', 'text' => 'Nu - ri', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata kedua pada kata "To - pi" adalah...?',
+                        'audio' => 'Suku kata kedua pada kata Topi adalah apa?',
+                        'emoji' => '🧢',
+                        'options' => [
+                            ['emoji' => '🅿️', 'text' => 'PI', 'is_correct' => true],
+                            ['emoji' => '🇹', 'text' => 'TO', 'is_correct' => false],
+                            ['emoji' => '🅿️', 'text' => 'PA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata kedua pada kata "Pa - di" adalah...?',
+                        'audio' => 'Suku kata kedua pada kata Padi adalah apa?',
+                        'emoji' => '🌾',
+                        'options' => [
+                            ['emoji' => '🇩', 'text' => 'DI', 'is_correct' => true],
+                            ['emoji' => '🅿️', 'text' => 'PA', 'is_correct' => false],
+                            ['emoji' => '🇩', 'text' => 'DA', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'dua-suku-kata',
+                'level_number' => 2,
+                'title' => 'Membaca Su-su, Ka-yu & La-ri',
+                'slug' => 'kuis-2suku-l2-susu-kayu-lari',
+                'icon_emoji' => '🥛',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'S-U Su, S-U Su. Minuman sehat berkalsium ini dibaca apa?',
+                        'audio' => 'S-U Su, S-U Su. Minuman sehat berkalsium ini dibaca apa?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            ['emoji' => '🥛', 'text' => 'Su - su (Susu)', 'is_correct' => true],
+                            ['emoji' => '🍞', 'text' => 'Ro - ti', 'is_correct' => false],
+                            ['emoji' => '🥭', 'text' => 'Sa - wo', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'B-A Ba, T-A Ta. Bahan pembuat tembok dinding ini dibaca apa?',
+                        'audio' => 'B-A Ba, T-A Ta. Bahan pembuat tembok dinding ini dibaca apa?',
+                        'emoji' => '🧱',
+                        'options' => [
+                            ['emoji' => '🧱', 'text' => 'Ba - ta (Bata)', 'is_correct' => true],
+                            ['emoji' => '🪵', 'text' => 'Ka - yu', 'is_correct' => false],
+                            ['emoji' => '🪑', 'text' => 'Me - ja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'K-A Ka, Y-U Yu. Batang pohon keras untuk perabot ini dibaca apa?',
+                        'audio' => 'K-A Ka, Y-U Yu. Batang pohon keras untuk perabot ini dibaca apa?',
+                        'emoji' => '🪵',
+                        'options' => [
+                            ['emoji' => '🪵', 'text' => 'Ka - yu (Kayu)', 'is_correct' => true],
+                            ['emoji' => '🧱', 'text' => 'Ba - ta', 'is_correct' => false],
+                            ['emoji' => '🌾', 'text' => 'Pa - di', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'S-A Sa, W-O Wo. Buah cokelat manis legit ini dibaca apa?',
+                        'audio' => 'S-A Sa, W-O Wo. Buah cokelat manis legit ini dibaca apa?',
+                        'emoji' => '🥭',
+                        'options' => [
+                            ['emoji' => '🥭', 'text' => 'Sa - wo (Sawo)', 'is_correct' => true],
+                            ['emoji' => '🍞', 'text' => 'Ro - ti', 'is_correct' => false],
+                            ['emoji' => '🥛', 'text' => 'Su - su', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'L-A La, R-I Ri. Olahraga melangkah kencang ini dibaca apa?',
+                        'audio' => 'L-A La, R-I Ri. Olahraga melangkah kencang ini dibaca apa?',
+                        'emoji' => '🏃',
+                        'options' => [
+                            ['emoji' => '🏃', 'text' => 'La - ri (Lari)', 'is_correct' => true],
+                            ['emoji' => '🎵', 'text' => 'La - gu', 'is_correct' => false],
+                            ['emoji' => '⚽', 'text' => 'Bo - la', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (SUSUN KATA, KALIMAT PENDEK & GRAND MASTER) ---
+            [
+                'category_slug' => 'dua-suku-kata',
+                'level_number' => 3,
+                'title' => 'Menyusun Potongan 2 Suku Kata Cerdas',
+                'slug' => 'kuis-2suku-l3-susun-suku-kata',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Jika suku kata "BA" digabung dengan suku kata "TA", akan menjadi kata...?',
+                        'audio' => 'Jika suku kata BA digabung dengan suku kata TA akan menjadi kata apa?',
+                        'emoji' => '🧱',
+                        'options' => [
+                            ['emoji' => '🧱', 'text' => 'BATA', 'is_correct' => true],
+                            ['emoji' => '👕', 'text' => 'BAJU', 'is_correct' => false],
+                            ['emoji' => '⚽', 'text' => 'BOLA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "LA" digabung dengan suku kata "GU", akan menjadi kata...?',
+                        'audio' => 'Jika suku kata LA digabung dengan suku kata GU akan menjadi kata apa?',
+                        'emoji' => '🎵',
+                        'options' => [
+                            ['emoji' => '🎵', 'text' => 'LAGU', 'is_correct' => true],
+                            ['emoji' => '🏃', 'text' => 'LARI', 'is_correct' => false],
+                            ['emoji' => '🐟', 'text' => 'LELE', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "SA" digabung dengan suku kata "PI", akan menjadi kata...?',
+                        'audio' => 'Jika suku kata SA digabung dengan suku kata PI akan menjadi kata apa?',
+                        'emoji' => '🐄',
+                        'options' => [
+                            ['emoji' => '🐄', 'text' => 'SAPI', 'is_correct' => true],
+                            ['emoji' => '🥭', 'text' => 'SAWO', 'is_correct' => false],
+                            ['emoji' => '🥛', 'text' => 'SUSU', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "BO" digabung dengan suku kata "LA", akan menjadi kata...?',
+                        'audio' => 'Jika suku kata BO digabung dengan suku kata LA akan menjadi kata apa?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            ['emoji' => '⚽', 'text' => 'BOLA', 'is_correct' => true],
+                            ['emoji' => '📖', 'text' => 'BUKU', 'is_correct' => false],
+                            ['emoji' => '🧱', 'text' => 'BATA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "KU" digabung dengan suku kata "DA", akan menjadi kata...?',
+                        'audio' => 'Jika suku kata KU digabung dengan suku kata DA akan menjadi kata apa?',
+                        'emoji' => '🐎',
+                        'options' => [
+                            ['emoji' => '🐎', 'text' => 'KUDA', 'is_correct' => true],
+                            ['emoji' => '💅', 'text' => 'KUKU', 'is_correct' => false],
+                            ['emoji' => '🪵', 'text' => 'KAYU', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "RO" digabung dengan suku kata "TI", akan menjadi kata...?',
+                        'audio' => 'Jika suku kata RO digabung dengan suku kata TI akan menjadi kata apa?',
+                        'emoji' => '🍞',
+                        'options' => [
+                            ['emoji' => '🍞', 'text' => 'ROTI', 'is_correct' => true],
+                            ['emoji' => '🪑', 'text' => 'MEJA', 'is_correct' => false],
+                            ['emoji' => '🧢', 'text' => 'TOPI', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "ME" digabung dengan suku kata "JA", akan menjadi kata...?',
+                        'audio' => 'Jika suku kata ME digabung dengan suku kata JA akan menjadi kata apa?',
+                        'emoji' => '🪑',
+                        'options' => [
+                            ['emoji' => '🪑', 'text' => 'MEJA', 'is_correct' => true],
+                            ['emoji' => '👀', 'text' => 'MATA', 'is_correct' => false],
+                            ['emoji' => '👕', 'text' => 'BAJU', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "GI" digabung dengan suku kata "GI", akan menjadi kata...?',
+                        'audio' => 'Jika suku kata GI digabung dengan suku kata GI akan menjadi kata apa?',
+                        'emoji' => '🦷',
+                        'options' => [
+                            ['emoji' => '🦷', 'text' => 'GIGI', 'is_correct' => true],
+                            ['emoji' => '💅', 'text' => 'KUKU', 'is_correct' => false],
+                            ['emoji' => '👀', 'text' => 'MATA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "TO" digabung dengan suku kata "PI", akan menjadi kata...?',
+                        'audio' => 'Jika suku kata TO digabung dengan suku kata PI akan menjadi kata apa?',
+                        'emoji' => '🧢',
+                        'options' => [
+                            ['emoji' => '🧢', 'text' => 'TOPI', 'is_correct' => true],
+                            ['emoji' => '🍞', 'text' => 'ROTI', 'is_correct' => false],
+                            ['emoji' => '🌾', 'text' => 'PADI', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "SU" digabung dengan suku kata "SU", akan menjadi kata...?',
+                        'audio' => 'Jika suku kata SU digabung dengan suku kata SU akan menjadi kata apa?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            ['emoji' => '🥛', 'text' => 'SUSU', 'is_correct' => true],
+                            ['emoji' => '🐄', 'text' => 'SAPI', 'is_correct' => false],
+                            ['emoji' => '🥭', 'text' => 'SAWO', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'dua-suku-kata',
+                'level_number' => 3,
+                'title' => 'Membaca Gabungan Kata 2 Suku Kata Ceria',
+                'slug' => 'kuis-2suku-l3-gabung-kata-ceria',
+                'icon_emoji' => '📖',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Baca gabungan kata ini: "Bu - ku  Bo - la". Ada berapa kata yang dibaca?',
+                        'audio' => 'Baca gabungan kata ini: Buku Bola. Ada berapa kata yang dibaca?',
+                        'emoji' => '📖',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '2 Kata (Buku dan Bola)', 'is_correct' => true],
+                            ['emoji' => '4️⃣', 'text' => '4 Kata', 'is_correct' => false],
+                            ['emoji' => '1️⃣', 'text' => '1 Kata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Baca kalimat: "Ma - ta  Sa - pi". Kata pertama adalah...?',
+                        'audio' => 'Baca kalimat: Mata Sapi. Kata pertama adalah apa?',
+                        'emoji' => '👀',
+                        'options' => [
+                            ['emoji' => '👀', 'text' => 'Mata', 'is_correct' => true],
+                            ['emoji' => '🐄', 'text' => 'Sapi', 'is_correct' => false],
+                            ['emoji' => '🐎', 'text' => 'Kuda', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Baca kalimat: "Ba - ju  To - pi". Kata kedua adalah...?',
+                        'audio' => 'Baca kalimat: Baju Topi. Kata kedua adalah apa?',
+                        'emoji' => '🧢',
+                        'options' => [
+                            ['emoji' => '🧢', 'text' => 'Topi', 'is_correct' => true],
+                            ['emoji' => '👕', 'text' => 'Baju', 'is_correct' => false],
+                            ['emoji' => '🪑', 'text' => 'Meja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Baca kalimat: "Mi - num  Su - su". Minuman sehat apa yang diminum?',
+                        'audio' => 'Baca kalimat: Minum Susu. Minuman sehat apa yang diminum?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            ['emoji' => '🥛', 'text' => 'Susu Sehat', 'is_correct' => true],
+                            ['emoji' => '🍞', 'text' => 'Roti', 'is_correct' => false],
+                            ['emoji' => '🥭', 'text' => 'Sawo', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Baca kalimat: "Ku - da  La - ri". Apa yang dilakukan hewan kuda?',
+                        'audio' => 'Baca kalimat: Kuda Lari. Apa yang dilakukan hewan kuda?',
+                        'emoji' => '🏃',
+                        'options' => [
+                            ['emoji' => '🏃', 'text' => 'Berlari Kencang', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Tidur Pulas', 'is_correct' => false],
+                            ['emoji' => '🏊', 'text' => 'Berenang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Baca kalimat: "Ro - ti  Ma - nis". Makanan lezat apakah itu?',
+                        'audio' => 'Baca kalimat: Roti Manis. Makanan lezat apakah itu?',
+                        'emoji' => '🍞',
+                        'options' => [
+                            ['emoji' => '🍞', 'text' => 'Roti Manis Sarapan', 'is_correct' => true],
+                            ['emoji' => '🌾', 'text' => 'Padi', 'is_correct' => false],
+                            ['emoji' => '🧱', 'text' => 'Bata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelompok kata manakah yang semuanya berakhiran huruf vokal I?',
+                        'audio' => 'Kelompok kata manakah yang semuanya berakhiran huruf vokal I?',
+                        'emoji' => 'ℹ️',
+                        'options' => [
+                            ['emoji' => '🍞', 'text' => 'Ro-ti, Sa-pi, Pa-di, To-pi', 'is_correct' => true],
+                            ['emoji' => '📖', 'text' => 'Bu-ku, Su-su, Ka-yu', 'is_correct' => false],
+                            ['emoji' => '⚽', 'text' => 'Bo-la, Ma-ta, Me-ja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelompok kata manakah yang semuanya berakhiran huruf vokal U?',
+                        'audio' => 'Kelompok kata manakah yang semuanya berakhiran huruf vokal U?',
+                        'emoji' => '☂️',
+                        'options' => [
+                            ['emoji' => '📖', 'text' => 'Bu-ku, Ba-ju, Su-su, Ka-yu', 'is_correct' => true],
+                            ['emoji' => '👀', 'text' => 'Ma-ta, Bo-la, Ba-ta', 'is_correct' => false],
+                            ['emoji' => '🍞', 'text' => 'Ro-ti, Sa-pi, To-pi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelompok kata manakah yang semuanya berakhiran huruf vokal A?',
+                        'audio' => 'Kelompok kata manakah yang semuanya berakhiran huruf vokal A?',
+                        'emoji' => '🅰️',
+                        'options' => [
+                            ['emoji' => '⚽', 'text' => 'Bo-la, Ma-ta, Me-ja, Ba-ta', 'is_correct' => true],
+                            ['emoji' => '🥛', 'text' => 'Su-su, Bu-ku, Ku-ku', 'is_correct' => false],
+                            ['emoji' => '🐟', 'text' => 'Le-le, Ro-ti, Nu-ri', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa manfaat anak hebat yang rajin membaca kata 2 suku kata setiap hari?',
+                        'audio' => 'Apa manfaat anak hebat yang rajin membaca kata 2 suku kata setiap hari?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Membaca jadi semakin lancar, pintar, dan percaya diri', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Biar cepat mengantuk', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada gunanya sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'dua-suku-kata',
+                'level_number' => 3,
+                'title' => 'Grand Champion Pembaca Cilik 2 Suku Kata',
+                'slug' => 'kuis-2suku-l3-grand-master-membaca',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'M-A Ma, T-A Ta dibaca apa?',
+                        'audio' => 'M-A Ma, T-A Ta dibaca apa?',
+                        'emoji' => '👀',
+                        'options' => [
+                            ['emoji' => '👀', 'text' => 'Mata', 'is_correct' => true],
+                            ['emoji' => '🪑', 'text' => 'Meja', 'is_correct' => false],
+                            ['emoji' => '⚽', 'text' => 'Bola', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'N-U Nu, R-I Ri dibaca apa?',
+                        'audio' => 'N-U Nu, R-I Ri dibaca apa?',
+                        'emoji' => '🦜',
+                        'options' => [
+                            ['emoji' => '🦜', 'text' => 'Nuri', 'is_correct' => true],
+                            ['emoji' => '🐎', 'text' => 'Kuda', 'is_correct' => false],
+                            ['emoji' => '🐄', 'text' => 'Sapi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'S-A Sa, W-O Wo dibaca apa?',
+                        'audio' => 'S-A Sa, W-O Wo dibaca apa?',
+                        'emoji' => '🥭',
+                        'options' => [
+                            ['emoji' => '🥭', 'text' => 'Sawo', 'is_correct' => true],
+                            ['emoji' => '🥛', 'text' => 'Susu', 'is_correct' => false],
+                            ['emoji' => '🍞', 'text' => 'Roti', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'P-A Pa, D-I Di dibaca apa?',
+                        'audio' => 'P-A Pa, D-I Di dibaca apa?',
+                        'emoji' => '🌾',
+                        'options' => [
+                            ['emoji' => '🌾', 'text' => 'Padi', 'is_correct' => true],
+                            ['emoji' => '🧱', 'text' => 'Bata', 'is_correct' => false],
+                            ['emoji' => '🪵', 'text' => 'Kayu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'K-A Ka, Y-U Yu dibaca apa?',
+                        'audio' => 'K-A Ka, Y-U Yu dibaca apa?',
+                        'emoji' => '🪵',
+                        'options' => [
+                            ['emoji' => '🪵', 'text' => 'Kayu', 'is_correct' => true],
+                            ['emoji' => '💅', 'text' => 'Kuku', 'is_correct' => false],
+                            ['emoji' => '🐎', 'text' => 'Kuda', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'L-A La, G-U Gu dibaca apa?',
+                        'audio' => 'L-A La, G-U Gu dibaca apa?',
+                        'emoji' => '🎵',
+                        'options' => [
+                            ['emoji' => '🎵', 'text' => 'Lagu', 'is_correct' => true],
+                            ['emoji' => '🏃', 'text' => 'Lari', 'is_correct' => false],
+                            ['emoji' => '🐟', 'text' => 'Lele', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'L-E Le, L-E Le dibaca apa?',
+                        'audio' => 'L-E Le, L-E Le dibaca apa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '🐟', 'text' => 'Lele', 'is_correct' => true],
+                            ['emoji' => '🦜', 'text' => 'Nuri', 'is_correct' => false],
+                            ['emoji' => '🐄', 'text' => 'Sapi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'K-U Ku, K-U Ku dibaca apa?',
+                        'audio' => 'K-U Ku, K-U Ku dibaca apa?',
+                        'emoji' => '💅',
+                        'options' => [
+                            ['emoji' => '💅', 'text' => 'Kuku', 'is_correct' => true],
+                            ['emoji' => '🦷', 'text' => 'Gigi', 'is_correct' => false],
+                            ['emoji' => '👀', 'text' => 'Mata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'B-A Ba, J-U Ju dibaca apa?',
+                        'audio' => 'B-A Ba, J-U Ju dibaca apa?',
+                        'emoji' => '👕',
+                        'options' => [
+                            ['emoji' => '👕', 'text' => 'Baju', 'is_correct' => true],
+                            ['emoji' => '🧢', 'text' => 'Topi', 'is_correct' => false],
+                            ['emoji' => '🧱', 'text' => 'Bata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apakah yang pantas untuk anak hebat yang lancar membaca seluruh kata 2 suku kata?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak hebat yang lancar membaca seluruh kata 2 suku kata?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Bintang Cilik Ahli Membaca 2 Suku Kata!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Malas Membaca', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Diam', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // =========================================================================
+            // PILAR 2 - TOPIK 3: MEMBACA 3 SUKU KATA (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (SEPEDA, KELAPA, CELANA, GURITA, SEPATU, KEPALA, PEPAYA) ---
+            [
+                'category_slug' => 'tiga-suku-kata',
+                'level_number' => 1,
+                'title' => 'Membaca Se-pe-da, Ke-la-pa & Ce-la-na',
+                'slug' => 'kuis-3suku-l1-sepeda-kelapa-celana',
+                'icon_emoji' => '🚲',
+                'target_age' => 5,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Se - Pe - Da. Kendaraan roda dua asyik ini dibaca apa ya?',
+                        'audio' => 'Se - Pe - Da. Kendaraan roda dua asyik ini dibaca apa ya?',
+                        'emoji' => '🚲',
+                        'options' => [
+                            ['emoji' => '🚲', 'text' => 'Se - pe - da (Sepeda)', 'is_correct' => true],
+                            ['emoji' => '👟', 'text' => 'Se - pa - tu', 'is_correct' => false],
+                            ['emoji' => '🥥', 'text' => 'Ke - la - pa', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ke - La - Pa. Pohon pantai tinggi ini dibaca apa ya?',
+                        'audio' => 'Ke - La - Pa. Pohon pantai tinggi ini dibaca apa ya?',
+                        'emoji' => '🥥',
+                        'options' => [
+                            ['emoji' => '🥥', 'text' => 'Ke - la - pa (Kelapa)', 'is_correct' => true],
+                            ['emoji' => '👖', 'text' => 'Ce - la - na', 'is_correct' => false],
+                            ['emoji' => '👶', 'text' => 'Ke - pa - la', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ce - La - Na. Pakaian bawahan ini dibaca apa ya?',
+                        'audio' => 'Ce - La - Na. Pakaian bawahan ini dibaca apa ya?',
+                        'emoji' => '👖',
+                        'options' => [
+                            ['emoji' => '👖', 'text' => 'Ce - la - na (Celana)', 'is_correct' => true],
+                            ['emoji' => '👔', 'text' => 'Ke - me - ja', 'is_correct' => false],
+                            ['emoji' => '🚲', 'text' => 'Se - pe - da', 'is_correct' => false],
                         ],
                     ],
                 ],
@@ -8686,31 +9366,615 @@ class QuizSeeder extends Seeder
 
             [
                 'category_slug' => 'tiga-suku-kata',
-                'title' => 'Tantangan Membaca 3 Suku Kata',
-                'slug' => 'kuis-tiga-suku-kata',
-                'icon_emoji' => '📚',
+                'level_number' => 1,
+                'title' => 'Membaca Gu-ri-ta, Se-pa-tu & Ke-pa-la',
+                'slug' => 'kuis-3suku-l1-gurita-sepatu-kepala',
+                'icon_emoji' => '🐙',
                 'target_age' => 5,
-                'total_questions' => 2,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Se - Pe - Da. Kata ini dibaca apa ya?',
-                        'audio' => 'Se - Pe - Da. Kata ini dibaca apa ya?',
-                        'emoji' => '🚲',
+                        'text' => 'Gu - Ri - Ta. Hewan bertentakel delapan ini dibaca apa ya?',
+                        'audio' => 'Gu - Ri - Ta. Hewan bertentakel delapan ini dibaca apa ya?',
+                        'emoji' => '🐙',
                         'options' => [
-                            ['emoji' => '🚲', 'text' => 'Sepeda', 'is_correct' => true],
-                            ['emoji' => '👟', 'text' => 'Sepatu', 'is_correct' => false],
-                            ['emoji' => '🥥', 'text' => 'Kelapa', 'is_correct' => false],
+                            ['emoji' => '🐙', 'text' => 'Gu - ri - ta (Gurita)', 'is_correct' => true],
+                            ['emoji' => '🐊', 'text' => 'Bu - a - ya', 'is_correct' => false],
+                            ['emoji' => '🦅', 'text' => 'Ga - ru - da', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Ke - La - Pa. Kata ini dibaca apa ya?',
-                        'audio' => 'Ke - La - Pa. Kata ini dibaca apa ya?',
+                        'text' => 'Se - Pa - Tu. Alas pelindung kaki ini dibaca apa ya?',
+                        'audio' => 'Se - Pa - Tu. Alas pelindung kaki ini dibaca apa ya?',
+                        'emoji' => '👟',
+                        'options' => [
+                            ['emoji' => '👟', 'text' => 'Se - pa - tu (Sepatu)', 'is_correct' => true],
+                            ['emoji' => '🚲', 'text' => 'Se - pe - da', 'is_correct' => false],
+                            ['emoji' => '👖', 'text' => 'Ce - la - na', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ke - Pa - La. Bagian tubuh atas tempat otak pintar ini dibaca apa ya?',
+                        'audio' => 'Ke - Pa - La. Bagian tubuh atas tempat otak pintar ini dibaca apa ya?',
+                        'emoji' => '👶',
+                        'options' => [
+                            ['emoji' => '👶', 'text' => 'Ke - pa - la (Kepala)', 'is_correct' => true],
+                            ['emoji' => '🥥', 'text' => 'Ke - la - pa', 'is_correct' => false],
+                            ['emoji' => '🚆', 'text' => 'Ke - re - ta', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tiga-suku-kata',
+                'level_number' => 1,
+                'title' => 'Membaca Pe-pa-ya & Ke-re-ta Ceria',
+                'slug' => 'kuis-3suku-l1-pepaya-kereta',
+                'icon_emoji' => '🍈',
+                'target_age' => 5,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Pe - Pa - Ya. Buah manis berdaging jingga ini dibaca apa ya?',
+                        'audio' => 'Pe - Pa - Ya. Buah manis berdaging jingga ini dibaca apa ya?',
+                        'emoji' => '🍈',
+                        'options' => [
+                            ['emoji' => '🍈', 'text' => 'Pe - pa - ya (Pepaya)', 'is_correct' => true],
+                            ['emoji' => '🥥', 'text' => 'Ke - la - pa', 'is_correct' => false],
+                            ['emoji' => '🥑', 'text' => 'Al - pu - kat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ke - Re - Ta. Angkutan rel panjang cepat ini dibaca apa ya?',
+                        'audio' => 'Ke - Re - Ta. Angkutan rel panjang cepat ini dibaca apa ya?',
+                        'emoji' => '🚆',
+                        'options' => [
+                            ['emoji' => '🚆', 'text' => 'Ke - re - ta (Kereta)', 'is_correct' => true],
+                            ['emoji' => '👶', 'text' => 'Ke - pa - la', 'is_correct' => false],
+                            ['emoji' => '🚲', 'text' => 'Se - pe - da', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah suku kata pada kata "Se - pe - da"?',
+                        'audio' => 'Berapakah jumlah suku kata pada kata Sepeda?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => '3 Suku Kata (Se - pe - da)', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Suku Kata', 'is_correct' => false],
+                            ['emoji' => '4️⃣', 'text' => '4 Suku Kata', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (CEMARA, GARUDA, MENARA, BUAYA, KEMEJA, JENDELA, PIANO, RADIO, KUALI) ---
+            [
+                'category_slug' => 'tiga-suku-kata',
+                'level_number' => 2,
+                'title' => 'Membaca Ce-ma-ra, Ga-ru-da & Me-na-ra',
+                'slug' => 'kuis-3suku-l2-cemara-garuda-menara',
+                'icon_emoji' => '🌲',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Ce - Ma - Ra. Pohon cemara rindang ini dibaca apa ya?',
+                        'audio' => 'Ce - Ma - Ra. Pohon cemara rindang ini dibaca apa ya?',
+                        'emoji' => '🌲',
+                        'options' => [
+                            ['emoji' => '🌲', 'text' => 'Ce - ma - ra (Cemara)', 'is_correct' => true],
+                            ['emoji' => '🥥', 'text' => 'Ke - la - pa', 'is_correct' => false],
+                            ['emoji' => '🗼', 'text' => 'Me - na - ra', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ga - Ru - Da. Burung lambang negara perkasa ini dibaca apa ya?',
+                        'audio' => 'Ga - Ru - Da. Burung lambang negara perkasa ini dibaca apa ya?',
+                        'emoji' => '🦅',
+                        'options' => [
+                            ['emoji' => '🦅', 'text' => 'Ga - ru - da (Garuda)', 'is_correct' => true],
+                            ['emoji' => '🐙', 'text' => 'Gu - ri - ta', 'is_correct' => false],
+                            ['emoji' => '🐊', 'text' => 'Bu - a - ya', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Me - Na - Ra. Bangunan tinggi pemantau pemandangan ini dibaca apa ya?',
+                        'audio' => 'Me - Na - Ra. Bangunan tinggi pemantau pemandangan ini dibaca apa ya?',
+                        'emoji' => '🗼',
+                        'options' => [
+                            ['emoji' => '🗼', 'text' => 'Me - na - ra (Menara)', 'is_correct' => true],
+                            ['emoji' => '🌲', 'text' => 'Ce - ma - ra', 'is_correct' => false],
+                            ['emoji' => '🚆', 'text' => 'Ke - re - ta', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata kedua pada kata "Ce - ma - ra" adalah...?',
+                        'audio' => 'Suku kata kedua pada kata Cemara adalah apa?',
+                        'emoji' => '🌲',
+                        'options' => [
+                            ['emoji' => 'Ⓜ️', 'text' => 'MA', 'is_correct' => true],
+                            ['emoji' => '🇨', 'text' => 'CE', 'is_correct' => false],
+                            ['emoji' => '🇷', 'text' => 'RA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata pertama pada kata "Ga - ru - da" adalah...?',
+                        'audio' => 'Suku kata pertama pada kata Garuda adalah apa?',
+                        'emoji' => '🦅',
+                        'options' => [
+                            ['emoji' => '🇬', 'text' => 'GA', 'is_correct' => true],
+                            ['emoji' => '🇷', 'text' => 'RU', 'is_correct' => false],
+                            ['emoji' => '🇩', 'text' => 'DA', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tiga-suku-kata',
+                'level_number' => 2,
+                'title' => 'Membaca Bu-a-ya, Ke-me-ja & Jen-de-la',
+                'slug' => 'kuis-3suku-l2-buaya-kemeja-jendela',
+                'icon_emoji' => '🐊',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Bu - A - Ya. Hewan reptil sungai ini dibaca apa ya?',
+                        'audio' => 'Bu - A - Ya. Hewan reptil sungai ini dibaca apa ya?',
+                        'emoji' => '🐊',
+                        'options' => [
+                            ['emoji' => '🐊', 'text' => 'Bu - a - ya (Buaya)', 'is_correct' => true],
+                            ['emoji' => '🐙', 'text' => 'Gu - ri - ta', 'is_correct' => false],
+                            ['emoji' => '🦅', 'text' => 'Ga - ru - da', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ke - Me - Ja. Pakaian berkerah rapi ini dibaca apa ya?',
+                        'audio' => 'Ke - Me - Ja. Pakaian berkerah rapi ini dibaca apa ya?',
+                        'emoji' => '👔',
+                        'options' => [
+                            ['emoji' => '👔', 'text' => 'Ke - me - ja (Kemeja)', 'is_correct' => true],
+                            ['emoji' => '👖', 'text' => 'Ce - la - na', 'is_correct' => false],
+                            ['emoji' => '👟', 'text' => 'Se - pa - tu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jen - De - La. Ventilasi kaca rumah ini dibaca apa ya?',
+                        'audio' => 'Jen - De - La. Ventilasi kaca rumah ini dibaca apa ya?',
+                        'emoji' => '🪟',
+                        'options' => [
+                            ['emoji' => '🪟', 'text' => 'Jen - de - la (Jendela)', 'is_correct' => true],
+                            ['emoji' => '🗼', 'text' => 'Me - na - ra', 'is_correct' => false],
+                            ['emoji' => '🌲', 'text' => 'Ce - ma - ra', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata tengah pada kata "Bu - A - Ya" adalah huruf vokal...?',
+                        'audio' => 'Suku kata tengah pada kata Buaya adalah huruf vokal apa?',
+                        'emoji' => '🐊',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Huruf Vokal A', 'is_correct' => true],
+                            ['emoji' => '☂️', 'text' => 'Huruf U', 'is_correct' => false],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata terakhir pada kata "Ke - me - ja" adalah...?',
+                        'audio' => 'Suku kata terakhir pada kata Kemeja adalah apa?',
+                        'emoji' => '👔',
+                        'options' => [
+                            ['emoji' => '🇯', 'text' => 'JA', 'is_correct' => true],
+                            ['emoji' => '🅺', 'text' => 'KE', 'is_correct' => false],
+                            ['emoji' => 'Ⓜ️', 'text' => 'ME', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tiga-suku-kata',
+                'level_number' => 2,
+                'title' => 'Membaca Pi-a-no, Ra-di-o & Ku-a-li',
+                'slug' => 'kuis-3suku-l2-piano-radio-kuali',
+                'icon_emoji' => '🎹',
+                'target_age' => 5,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Pi - A - No. Alat musik tuts melodi indah ini dibaca apa ya?',
+                        'audio' => 'Pi - A - No. Alat musik tuts melodi indah ini dibaca apa ya?',
+                        'emoji' => '🎹',
+                        'options' => [
+                            ['emoji' => '🎹', 'text' => 'Pi - a - no (Piano)', 'is_correct' => true],
+                            ['emoji' => '📻', 'text' => 'Ra - di - o', 'is_correct' => false],
+                            ['emoji' => '🎺', 'text' => 'Te - rom - pet', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ra - Di - O. Pemutar siaran lagu ceria ini dibaca apa ya?',
+                        'audio' => 'Ra - Di - O. Pemutar siaran lagu ceria ini dibaca apa ya?',
+                        'emoji' => '📻',
+                        'options' => [
+                            ['emoji' => '📻', 'text' => 'Ra - di - o (Radio)', 'is_correct' => true],
+                            ['emoji' => '🎹', 'text' => 'Pi - a - no', 'is_correct' => false],
+                            ['emoji' => '🍳', 'text' => 'Ku - a - li', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ku - A - Li. Wajan masak di dapur ibu ini dibaca apa ya?',
+                        'audio' => 'Ku - A - Li. Wajan masak di dapur ibu ini dibaca apa ya?',
+                        'emoji' => '🍳',
+                        'options' => [
+                            ['emoji' => '🍳', 'text' => 'Ku - a - li (Kuali)', 'is_correct' => true],
+                            ['emoji' => '🥑', 'text' => 'Al - pu - kat', 'is_correct' => false],
+                            ['emoji' => '🍈', 'text' => 'Pe - pa - ya', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata tengah pada kata "Pi - A - No" adalah huruf vokal...?',
+                        'audio' => 'Suku kata tengah pada kata Piano adalah huruf vokal apa?',
+                        'emoji' => '🎹',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Huruf Vokal A', 'is_correct' => true],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Huruf O', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata terakhir pada kata "Ra - Di - O" adalah huruf vokal...?',
+                        'audio' => 'Suku kata terakhir pada kata Radio adalah huruf vokal apa?',
+                        'emoji' => '📻',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Huruf Vokal O', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => 'ℹ️', 'text' => 'Huruf I', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (ALPUKAT, TEROMPET, JUARA, PENGGAL KATA & GRAND MASTER) ---
+            [
+                'category_slug' => 'tiga-suku-kata',
+                'level_number' => 3,
+                'title' => 'Membaca Al-pu-kat, Te-rom-pet & Ju-a-ra',
+                'slug' => 'kuis-3suku-l3-alpukat-terompet-juara',
+                'icon_emoji' => '🥑',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Al - Pu - Kat. Buah hijau lembut bernutrisi ini dibaca apa?',
+                        'audio' => 'Al - Pu - Kat. Buah hijau lembut bernutrisi ini dibaca apa?',
+                        'emoji' => '🥑',
+                        'options' => [
+                            ['emoji' => '🥑', 'text' => 'Al - pu - kat (Alpukat)', 'is_correct' => true],
+                            ['emoji' => '🍈', 'text' => 'Pe - pa - ya', 'is_correct' => false],
+                            ['emoji' => '🥥', 'text' => 'Ke - la - pa', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Te - Rom - Pet. Alat musik tiup lantang ini dibaca apa?',
+                        'audio' => 'Te - Rom - Pet. Alat musik tiup lantang ini dibaca apa?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '🎺', 'text' => 'Te - rom - pet (Terompet)', 'is_correct' => true],
+                            ['emoji' => '🎹', 'text' => 'Pi - a - no', 'is_correct' => false],
+                            ['emoji' => '📻', 'text' => 'Ra - di - o', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Ju - A - Ra. Anak pintar berprestasi hebat ini dibaca apa?',
+                        'audio' => 'Ju - A - Ra. Anak pintar berprestasi hebat ini dibaca apa?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => 'Ju - a - ra (Juara)', 'is_correct' => true],
+                            ['emoji' => '🦅', 'text' => 'Ga - ru - da', 'is_correct' => false],
+                            ['emoji' => '🗼', 'text' => 'Me - na - ra', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata pertama pada kata "Al - pu - kat" adalah...?',
+                        'audio' => 'Suku kata pertama pada kata Alpukat adalah apa?',
+                        'emoji' => '🥑',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'AL', 'is_correct' => true],
+                            ['emoji' => '🅿️', 'text' => 'PU', 'is_correct' => false],
+                            ['emoji' => '🅺', 'text' => 'KAT', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata tengah pada kata "Te - rom - pet" adalah...?',
+                        'audio' => 'Suku kata tengah pada kata Terompet adalah apa?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '🇷', 'text' => 'ROM', 'is_correct' => true],
+                            ['emoji' => '🇹', 'text' => 'TE', 'is_correct' => false],
+                            ['emoji' => '🅿️', 'text' => 'PET', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suku kata pertama pada kata "Ju - a - ra" adalah...?',
+                        'audio' => 'Suku kata pertama pada kata Juara adalah apa?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🇯', 'text' => 'JU', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'A', 'is_correct' => false],
+                            ['emoji' => '🇷', 'text' => 'RA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah suku kata pada kata "Al - pu - kat"?',
+                        'audio' => 'Berapakah jumlah suku kata pada kata Alpukat?',
+                        'emoji' => '🥑',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => '3 Suku Kata', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Suku Kata', 'is_correct' => false],
+                            ['emoji' => '4️⃣', 'text' => '4 Suku Kata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah suku kata pada kata "Te - rom - pet"?',
+                        'audio' => 'Berapakah jumlah suku kata pada kata Terompet?',
+                        'emoji' => '🎺',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => '3 Suku Kata', 'is_correct' => true],
+                            ['emoji' => '2️⃣', 'text' => '2 Suku Kata', 'is_correct' => false],
+                            ['emoji' => '5️⃣', 'text' => '5 Suku Kata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah suku kata pada kata "Ju - a - ra"?',
+                        'audio' => 'Berapakah jumlah suku kata pada kata Juara?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => '3 Suku Kata', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '1 Suku Kata', 'is_correct' => false],
+                            ['emoji' => '2️⃣', 'text' => '2 Suku Kata', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kita harus membaca kata demi suku kata secara tenang dan tepat?',
+                        'audio' => 'Mengapa kita harus membaca kata demi suku kata secara tenang dan tepat?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Agar pengucapannya jelas, benar, dan maknanya mudah dipahami', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar cepat tidur', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada gunanya', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tiga-suku-kata',
+                'level_number' => 3,
+                'title' => 'Cerdas Memenggal & Menghitung 3 Suku Kata',
+                'slug' => 'kuis-3suku-l3-penggal-hitung-suku-kata',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata "Sepeda"?',
+                        'audio' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata Sepeda?',
+                        'emoji' => '🚲',
+                        'options' => [
+                            ['emoji' => '🚲', 'text' => 'Se - pe - da', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Sep - eda', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Seped - a', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata "Kelapa"?',
+                        'audio' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata Kelapa?',
                         'emoji' => '🥥',
                         'options' => [
-                            ['emoji' => '👖', 'text' => 'Celana', 'is_correct' => false],
-                            ['emoji' => '🥥', 'text' => 'Kelapa', 'is_correct' => true],
-                            ['emoji' => '🐙', 'text' => 'Gurita', 'is_correct' => false],
+                            ['emoji' => '🥥', 'text' => 'Ke - la - pa', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Kel - apa', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Kela - pa', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata "Celana"?',
+                        'audio' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata Celana?',
+                        'emoji' => '👖',
+                        'options' => [
+                            ['emoji' => '👖', 'text' => 'Ce - la - na', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Cel - ana', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Cela - na', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata "Gurita"?',
+                        'audio' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata Gurita?',
+                        'emoji' => '🐙',
+                        'options' => [
+                            ['emoji' => '🐙', 'text' => 'Gu - ri - ta', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Gur - ita', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Guri - ta', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata "Sepatu"?',
+                        'audio' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata Sepatu?',
+                        'emoji' => '👟',
+                        'options' => [
+                            ['emoji' => '👟', 'text' => 'Se - pa - tu', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Sep - atu', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Sepa - tu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata "Kepala"?',
+                        'audio' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata Kepala?',
+                        'emoji' => '👶',
+                        'options' => [
+                            ['emoji' => '👶', 'text' => 'Ke - pa - la', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Kep - ala', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Kepa - la', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata "Pepaya"?',
+                        'audio' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata Pepaya?',
+                        'emoji' => '🍈',
+                        'options' => [
+                            ['emoji' => '🍈', 'text' => 'Pe - pa - ya', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Pep - aya', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Pepa - ya', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata "Kereta"?',
+                        'audio' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata Kereta?',
+                        'emoji' => '🚆',
+                        'options' => [
+                            ['emoji' => '🚆', 'text' => 'Ke - re - ta', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Ker - eta', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Kere - ta', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata "Cemara"?',
+                        'audio' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata Cemara?',
+                        'emoji' => '🌲',
+                        'options' => [
+                            ['emoji' => '🌲', 'text' => 'Ce - ma - ra', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Cem - ara', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Cema - ra', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata "Kemeja"?',
+                        'audio' => 'Bagaimanakah pemenggalan suku kata yang benar untuk kata Kemeja?',
+                        'emoji' => '👔',
+                        'options' => [
+                            ['emoji' => '👔', 'text' => 'Ke - me - ja', 'is_correct' => true],
+                            ['emoji' => '❌', 'text' => 'Kem - eja', 'is_correct' => false],
+                            ['emoji' => '❌', 'text' => 'Keme - ja', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'tiga-suku-kata',
+                'level_number' => 3,
+                'title' => 'Grand Champion Ahli Membaca 3 Suku Kata Ceria',
+                'slug' => 'kuis-3suku-l3-grand-master-3suku',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Kata manakah di bawah ini yang terdiri dari TEPAT 3 suku kata?',
+                        'audio' => 'Kata manakah di bawah ini yang terdiri dari TEPAT 3 suku kata?',
+                        'emoji' => '🚲',
+                        'options' => [
+                            ['emoji' => '🚲', 'text' => 'Se - pe - da (3 Suku Kata)', 'is_correct' => true],
+                            ['emoji' => '⚽', 'text' => 'Bo - la (2 Suku Kata)', 'is_correct' => false],
+                            ['emoji' => '📖', 'text' => 'Bu - ku (2 Suku Kata)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kata manakah di bawah ini yang BUKAN 3 suku kata?',
+                        'audio' => 'Kata manakah di bawah ini yang BUKAN 3 suku kata?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            ['emoji' => '⚽', 'text' => 'Bo - la (Hanya 2 Suku Kata)', 'is_correct' => true],
+                            ['emoji' => '🥥', 'text' => 'Ke - la - pa (3 Suku Kata)', 'is_correct' => false],
+                            ['emoji' => '👖', 'text' => 'Ce - la - na (3 Suku Kata)', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "SE", "PA", dan "TU" digabungkan, akan membentuk kata...?',
+                        'audio' => 'Jika suku kata SE, PA, dan TU digabungkan akan membentuk kata apa?',
+                        'emoji' => '👟',
+                        'options' => [
+                            ['emoji' => '👟', 'text' => 'SEPATU', 'is_correct' => true],
+                            ['emoji' => '🚲', 'text' => 'SEPEDA', 'is_correct' => false],
+                            ['emoji' => '👖', 'text' => 'CELANA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "KE", "LA", dan "PA" digabungkan, akan membentuk kata...?',
+                        'audio' => 'Jika suku kata KE, LA, dan PA digabungkan akan membentuk kata apa?',
+                        'emoji' => '🥥',
+                        'options' => [
+                            ['emoji' => '🥥', 'text' => 'KELAPA', 'is_correct' => true],
+                            ['emoji' => '👶', 'text' => 'KEPALA', 'is_correct' => false],
+                            ['emoji' => '🚆', 'text' => 'KERETA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "GU", "RI", dan "TA" digabungkan, akan membentuk kata...?',
+                        'audio' => 'Jika suku kata GU, RI, dan TA digabungkan akan membentuk kata apa?',
+                        'emoji' => '🐙',
+                        'options' => [
+                            ['emoji' => '🐙', 'text' => 'GURITA', 'is_correct' => true],
+                            ['emoji' => '🐊', 'text' => 'BUAYA', 'is_correct' => false],
+                            ['emoji' => '🦅', 'text' => 'GARUDA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "KE", "RE", dan "TA" digabungkan, akan membentuk kata...?',
+                        'audio' => 'Jika suku kata KE, RE, dan TA digabungkan akan membentuk kata apa?',
+                        'emoji' => '🚆',
+                        'options' => [
+                            ['emoji' => '🚆', 'text' => 'KERETA', 'is_correct' => true],
+                            ['emoji' => '👶', 'text' => 'KEPALA', 'is_correct' => false],
+                            ['emoji' => '👔', 'text' => 'KEMEJA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "GA", "RU", dan "DA" digabungkan, akan membentuk kata...?',
+                        'audio' => 'Jika suku kata GA, RU, dan DA digabungkan akan membentuk kata apa?',
+                        'emoji' => '🦅',
+                        'options' => [
+                            ['emoji' => '🦅', 'text' => 'GARUDA', 'is_correct' => true],
+                            ['emoji' => '🐙', 'text' => 'GURITA', 'is_correct' => false],
+                            ['emoji' => '🐊', 'text' => 'BUAYA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "ME", "NA", dan "RA" digabungkan, akan membentuk kata...?',
+                        'audio' => 'Jika suku kata ME, NA, dan RA digabungkan akan membentuk kata apa?',
+                        'emoji' => '🗼',
+                        'options' => [
+                            ['emoji' => '🗼', 'text' => 'MENARA', 'is_correct' => true],
+                            ['emoji' => '🌲', 'text' => 'CEMARA', 'is_correct' => false],
+                            ['emoji' => '🪟', 'text' => 'JENDELA', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika suku kata "PI", "A", dan "NO" digabungkan, akan membentuk kata...?',
+                        'audio' => 'Jika suku kata PI, A, dan NO digabungkan akan membentuk kata apa?',
+                        'emoji' => '🎹',
+                        'options' => [
+                            ['emoji' => '🎹', 'text' => 'PIANO', 'is_correct' => true],
+                            ['emoji' => '📻', 'text' => 'RADIO', 'is_correct' => false],
+                            ['emoji' => '🎺', 'text' => 'TEROMPET', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apakah yang pantas untuk anak pintar yang sudah menguasai seluruh kata 3 suku kata?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak pintar yang sudah menguasai seluruh kata 3 suku kata?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Grand Champion Ahli Membaca 3 Suku Kata Ceria!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Mengantuk Saat Mengeja', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Patung Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
