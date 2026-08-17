@@ -16,6 +16,7 @@
 </head>
 <body class="min-h-screen bg-gradient-to-b from-sky-200 via-sky-100 to-amber-50 text-slate-800 flex flex-col font-sans overflow-x-hidden relative"
       x-data="{
+          mobileNavOpen: false,
           audioUnlocked: false,
           isMuted: localStorage.getItem('kuy_muted') === 'true',
           showParentalGate: false,
@@ -81,67 +82,58 @@
     </div>
 
     <!-- Top Navigation Header -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-4 border-sky-300 shadow-sm px-4 sm:px-6 py-2.5 sm:py-3"
-            x-data="{ mobileNavOpen: false }">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-4 border-sky-300 shadow-sm px-4 sm:px-6 lg:px-8 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 lg:gap-6">
             
             <!-- Left: Logo & Brand -->
             <a href="{{ route('landing') }}" @click="if(window.soundEngine) window.soundEngine.playClick()" class="flex items-center gap-2.5 group shrink-0">
-                <span class="text-2xl sm:text-3xl group-hover:rotate-12 transition-transform">🌟</span>
+                <span class="text-3xl sm:text-4xl group-hover:rotate-12 transition-transform drop-shadow-xs">🌟</span>
                 <div>
-                    <h1 class="text-lg sm:text-xl font-black font-heading tracking-wide text-sky-700 leading-none">
+                    <h1 class="text-xl sm:text-2xl font-black font-heading tracking-wide text-sky-700 leading-none">
                         YukBelajar <span class="text-amber-500">PAUD</span>
                     </h1>
                     <p class="text-[10px] sm:text-xs font-bold text-slate-500 hidden sm:block">Game Belajar & Kuis Ceria</p>
                 </div>
             </a>
 
-            <!-- Center: Desktop Navigation Links (Hidden on Mobile/Tablet) -->
-            <nav class="hidden lg:flex items-center gap-1.5">
+            <!-- Center: Desktop Navigation Links (Visible on lg+ screens: 1024px, 1280px, etc.) -->
+            <nav class="hidden lg:flex items-center gap-1.5 xl:gap-2">
                 <a href="{{ route('home') }}" @click="if(window.soundEngine) window.soundEngine.playClick()"
-                   class="px-3.5 py-1.5 rounded-full font-black text-xs transition-all flex items-center gap-1.5 {{ request()->routeIs('home') ? 'bg-amber-400 text-amber-950 shadow-xs ring-2 ring-amber-300' : 'text-slate-700 hover:bg-slate-100' }}">
-                    <span>🎮</span>
+                   class="px-3.5 py-2 rounded-2xl font-black text-xs xl:text-sm transition-all flex items-center gap-1.5 {{ request()->routeIs('home') ? 'bg-amber-400 text-amber-950 shadow-xs ring-2 ring-amber-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
+                    <span class="text-base">🎮</span>
                     <span>Petualangan</span>
                 </a>
 
                 <a href="{{ route('stickers') }}" @click="if(window.soundEngine) window.soundEngine.playClick()"
-                   class="px-3.5 py-1.5 rounded-full font-bold text-xs transition-all flex items-center gap-1.5 {{ request()->routeIs('stickers') ? 'bg-purple-600 text-white shadow-xs ring-2 ring-purple-300' : 'text-slate-700 hover:bg-slate-100' }}">
-                    <span>🏆</span>
+                   class="px-3.5 py-2 rounded-2xl font-black text-xs xl:text-sm transition-all flex items-center gap-1.5 {{ request()->routeIs('stickers') ? 'bg-purple-600 text-white shadow-xs ring-2 ring-purple-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
+                    <span class="text-base">🏆</span>
                     <span>Buku Stiker</span>
                 </a>
 
                 <a href="{{ route('achievements') }}" @click="if(window.soundEngine) window.soundEngine.playClick()"
-                   class="px-3.5 py-1.5 rounded-full font-bold text-xs transition-all flex items-center gap-1.5 {{ request()->routeIs('achievements') ? 'bg-amber-500 text-white shadow-xs ring-2 ring-amber-300' : 'text-slate-700 hover:bg-slate-100' }}">
-                    <span>🎖️</span>
+                   class="px-3.5 py-2 rounded-2xl font-black text-xs xl:text-sm transition-all flex items-center gap-1.5 {{ request()->routeIs('achievements') ? 'bg-amber-500 text-white shadow-xs ring-2 ring-amber-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
+                    <span class="text-base">🎖️</span>
                     <span>Ruang Piala</span>
                 </a>
 
                 <a href="{{ route('community') }}" @click="if(window.soundEngine) window.soundEngine.playClick()"
-                   class="px-3.5 py-1.5 rounded-full font-bold text-xs transition-all flex items-center gap-1.5 {{ request()->routeIs('community') ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-300' : 'text-slate-700 hover:bg-slate-100' }}">
-                    <span>👥</span>
+                   class="px-3.5 py-2 rounded-2xl font-black text-xs xl:text-sm transition-all flex items-center gap-1.5 {{ request()->routeIs('community') ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
+                    <span class="text-base">👥</span>
                     <span>Sahabat</span>
                 </a>
 
                 <button type="button" @click="openParentalGate()"
-                        class="px-3.5 py-1.5 rounded-full font-bold text-xs transition-all flex items-center gap-1.5 text-slate-700 hover:bg-slate-100 cursor-pointer">
-                    <span>🔒</span>
+                        class="px-3.5 py-2 rounded-2xl font-extrabold text-xs xl:text-sm transition-all flex items-center gap-1.5 text-slate-700 hover:bg-slate-100 cursor-pointer">
+                    <span class="text-base">🔒</span>
                     <span>Orang Tua</span>
                 </button>
-
-                @if (auth()->check() && in_array(auth()->user()->role, ['admin', 'teacher']))
-                    <a href="{{ route('admin.dashboard') }}"
-                       class="px-3 py-1.5 rounded-full font-bold text-xs bg-emerald-100 hover:bg-emerald-200 border border-emerald-300 text-emerald-800 flex items-center gap-1">
-                        <span>🦁</span>
-                        <span>Panel Guru</span>
-                    </a>
-                @endif
             </nav>
 
             <!-- Right: Action Badges & Audio & Mobile Toggle -->
             <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
                 
                 <!-- Gold Stars Badge (Always Visible) -->
-                <div class="flex items-center gap-1 bg-amber-50 border-2 border-amber-300 px-2.5 sm:px-3 py-1 rounded-full shadow-xs text-yellow-950 font-black text-xs sm:text-sm">
+                <div class="flex items-center gap-1 bg-amber-50 border-2 border-amber-300 px-3 py-1.5 rounded-2xl shadow-xs text-yellow-950 font-black text-xs sm:text-sm">
                     <span class="text-sm sm:text-base animate-wiggle">⭐</span>
                     <span>{{ auth()->check() ? auth()->user()->total_stars : 35 }}</span>
                 </div>
@@ -149,176 +141,184 @@
                 <!-- Daily Streak Badge (Visible on sm+) -->
                 <button @click="showStreakModal = true; if(window.soundEngine) { window.soundEngine.playChirp(); window.soundEngine.speak('Semangat belajar harian! Kamu sudah belajar {{ auth()->check() ? (auth()->user()->current_streak_days ?? 1) : 1 }} hari berturut-turut!'); }"
                         title="Semangat Belajar Harian (Daily Streak 🔥)"
-                        class="hidden sm:flex items-center gap-1 bg-orange-50 hover:bg-orange-100 border-2 border-orange-400 px-2.5 sm:px-3 py-1 rounded-full shadow-xs text-orange-950 font-black text-xs sm:text-sm cursor-pointer hover:scale-105 transition-transform">
+                        class="hidden sm:flex items-center gap-1 bg-orange-50 hover:bg-orange-100 border-2 border-orange-400 px-3 py-1.5 rounded-2xl shadow-xs text-orange-950 font-black text-xs sm:text-sm cursor-pointer hover:scale-105 transition-transform">
                     <span class="text-sm sm:text-base animate-bounce-slow">🔥</span>
                     <span>{{ auth()->check() ? (auth()->user()->current_streak_days ?? 1) : 1 }} <span class="hidden md:inline text-[11px] font-bold text-orange-800">Hari</span></span>
                 </button>
 
                 <!-- Audio Toggle (Always Visible) -->
                 <button @click="toggleAudio()" title="Suara Musik & Efek"
-                        class="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-sky-100 hover:bg-sky-200 border-2 border-sky-400 rounded-full shadow-xs transition-all text-sky-800 font-bold text-sm cursor-pointer">
+                        class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-sky-100 hover:bg-sky-200 border-2 border-sky-400 rounded-2xl shadow-xs transition-all text-sky-800 font-bold text-sm cursor-pointer hover:scale-105">
                     <span x-text="isMuted ? '🔇' : '🔊'"></span>
                 </button>
 
-                <!-- Desktop User Profile Badge (Auth) or Login/Register (Guest) -->
+                <!-- Desktop Profile & Action Buttons (Visible on lg+) -->
                 <div class="hidden lg:flex items-center gap-2">
                     @auth
                         <a href="{{ route('profile') }}" @click="if(window.soundEngine) window.soundEngine.playClick()"
-                           class="flex items-center gap-1.5 px-3 py-1 bg-sky-50 hover:bg-sky-100 border-2 border-sky-300 rounded-full text-xs font-black text-sky-900 shadow-xs">
-                            <span class="text-sm">{{ auth()->user()->avatar_emoji ?? '🦖' }}</span>
-                            <span class="truncate max-w-[100px]">{{ auth()->user()->name }}</span>
+                           class="flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 hover:bg-sky-100 border-2 border-sky-300 rounded-2xl text-xs font-black text-sky-900 shadow-xs hover:scale-105 transition-all">
+                            <span class="text-base">{{ auth()->user()->avatar_emoji ?? '🦖' }}</span>
+                            <span class="truncate max-w-[120px]">{{ auth()->user()->name }}</span>
                         </a>
+
+                        @if (in_array(auth()->user()->role, ['admin', 'teacher']))
+                            <a href="{{ route('admin.dashboard') }}"
+                               class="px-3 py-1.5 rounded-2xl font-black text-xs bg-emerald-100 hover:bg-emerald-200 border-2 border-emerald-300 text-emerald-800 flex items-center gap-1 hover:scale-105 transition-all">
+                                <span>🦁</span>
+                                <span class="hidden xl:inline">Panel Guru</span>
+                            </a>
+                        @endif
 
                         <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf
                             <button type="submit" title="Keluar dari Akun"
-                                    class="w-9 h-9 flex items-center justify-center bg-rose-50 hover:bg-rose-100 border-2 border-rose-300 rounded-full text-rose-700 shadow-xs transition-all text-sm font-bold cursor-pointer">
+                                    class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-rose-50 hover:bg-rose-100 border-2 border-rose-300 rounded-2xl text-rose-700 shadow-xs transition-all text-sm font-bold cursor-pointer hover:scale-105">
                                 🚪
                             </button>
                         </form>
                     @else
                         <a href="{{ route('login') }}" 
-                           class="px-3.5 py-1.5 bg-amber-400 hover:bg-yellow-300 border-2 border-amber-500 rounded-full text-amber-950 font-black text-xs shadow-xs">
+                           class="px-4 py-2 bg-amber-400 hover:bg-yellow-300 border-2 border-amber-500 rounded-2xl text-amber-950 font-black text-xs sm:text-sm shadow-xs hover:scale-105 transition-all">
                             🔑 Masuk
                         </a>
                         <a href="{{ route('register') }}" 
-                           class="px-3.5 py-1.5 bg-sky-500 hover:bg-sky-400 border-2 border-sky-600 rounded-full text-white font-black text-xs shadow-xs">
+                           class="px-4 py-2 bg-sky-500 hover:bg-sky-400 border-2 border-sky-600 rounded-2xl text-white font-black text-xs sm:text-sm shadow-xs hover:scale-105 transition-all">
                             ✨ Daftar
                         </a>
                     @endauth
                 </div>
 
-                <!-- Hamburger Button for Mobile / Tablet -->
+                <!-- Hamburger Button for Mobile / Tablet (< lg) -->
                 <button type="button" @click="mobileNavOpen = true"
-                        class="lg:hidden w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 rounded-full text-slate-700 font-black text-base shadow-xs cursor-pointer">
+                        class="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 rounded-2xl text-slate-700 font-black text-lg shadow-xs cursor-pointer active:scale-95 transition-all">
                     ☰
                 </button>
             </div>
 
         </div>
+    </header>
 
-        <!-- Mobile Slide-Over Navigation Drawer -->
-        <div x-show="mobileNavOpen" x-cloak class="relative z-50 lg:hidden" aria-modal="true">
-            <!-- Backdrop -->
-            <div x-show="mobileNavOpen" 
-                 x-transition:enter="transition-opacity ease-linear duration-200"
-                 x-transition:enter-start="opacity-0"
-                 x-transition:enter-end="opacity-100"
-                 x-transition:leave="transition-opacity ease-linear duration-200"
-                 x-transition:leave-start="opacity-100"
-                 x-transition:leave-end="opacity-0"
-                 class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs" 
-                 @click="mobileNavOpen = false"></div>
+    <!-- Mobile Slide-Over Navigation Drawer (Top-level Fixed Full Screen) -->
+    <div x-show="mobileNavOpen" x-cloak class="fixed inset-0 z-50 lg:hidden" aria-modal="true">
+        <!-- Backdrop -->
+        <div x-show="mobileNavOpen" 
+             x-transition:enter="transition-opacity ease-linear duration-200"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition-opacity ease-linear duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs" 
+             @click="mobileNavOpen = false"></div>
 
-            <!-- Drawer Container -->
-            <div class="fixed inset-0 flex justify-end">
-                <div x-show="mobileNavOpen"
-                     x-transition:enter="transition ease-in-out duration-300 transform"
-                     x-transition:enter-start="translate-x-full"
-                     x-transition:enter-end="translate-x-0"
-                     x-transition:leave="transition ease-in-out duration-300 transform"
-                     x-transition:leave-start="translate-x-0"
-                     x-transition:leave-end="translate-x-full"
-                     class="w-full max-w-xs bg-white h-full shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
-                    
-                    <div class="flex flex-col gap-5">
-                        <!-- Drawer Header -->
-                        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                            <div class="flex items-center gap-2">
-                                <span class="text-3xl">🌟</span>
-                                <span class="font-black text-lg text-sky-700">YukBelajar PAUD</span>
-                            </div>
-                            <button @click="mobileNavOpen = false" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center hover:bg-slate-200">
-                                ✕
-                            </button>
+        <!-- Drawer Sliding Container -->
+        <div class="fixed inset-0 flex justify-end pointer-events-none">
+            <div x-show="mobileNavOpen"
+                 x-transition:enter="transition ease-in-out duration-300 transform"
+                 x-transition:enter-start="translate-x-full"
+                 x-transition:enter-end="translate-x-0"
+                 x-transition:leave="transition ease-in-out duration-300 transform"
+                 x-transition:leave-start="translate-x-0"
+                 x-transition:leave-end="translate-x-full"
+                 class="w-full max-w-xs bg-white h-screen shadow-2xl p-6 flex flex-col justify-between overflow-y-auto pointer-events-auto z-50">
+                
+                <div class="flex flex-col gap-5">
+                    <!-- Drawer Header -->
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="text-3xl">🌟</span>
+                            <span class="font-black text-lg text-sky-700 font-heading">YukBelajar PAUD</span>
                         </div>
+                        <button @click="mobileNavOpen = false" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center hover:bg-slate-200 cursor-pointer">
+                            ✕
+                        </button>
+                    </div>
 
-                        <!-- User Profile Card in Drawer (if logged in) -->
-                        @auth
-                            <div class="bg-gradient-to-r from-amber-100 to-yellow-50 border-2 border-amber-300 p-4 rounded-2xl flex items-center gap-3">
-                                <span class="text-4xl">{{ auth()->user()->avatar_emoji ?? '🦖' }}</span>
-                                <div>
-                                    <h4 class="font-black text-slate-800 text-sm">{{ auth()->user()->name }}</h4>
-                                    <div class="flex items-center gap-2 mt-1">
-                                        <span class="text-xs font-black text-amber-900">⭐ {{ auth()->user()->total_stars }}</span>
-                                        <span class="text-xs font-black text-orange-700">🔥 {{ auth()->user()->current_streak_days ?? 1 }} Hari</span>
-                                    </div>
+                    <!-- User Profile Card in Drawer (if logged in) -->
+                    @auth
+                        <div class="bg-gradient-to-r from-amber-100 to-yellow-50 border-2 border-amber-300 p-4 rounded-2xl flex items-center gap-3">
+                            <span class="text-4xl">{{ auth()->user()->avatar_emoji ?? '🦖' }}</span>
+                            <div>
+                                <h4 class="font-black text-slate-800 text-sm">{{ auth()->user()->name }}</h4>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="text-xs font-black text-amber-900">⭐ {{ auth()->user()->total_stars }}</span>
+                                    <span class="text-xs font-black text-orange-700">🔥 {{ auth()->user()->current_streak_days ?? 1 }} Hari</span>
                                 </div>
                             </div>
-                        @endauth
+                        </div>
+                    @endauth
 
-                        <!-- Navigation Links -->
-                        <nav class="flex flex-col gap-2">
-                            <a href="{{ route('home') }}" @click="mobileNavOpen = false; if(window.soundEngine) window.soundEngine.playClick()"
-                               class="flex items-center gap-3 px-4 py-3 rounded-2xl font-black text-sm transition-all {{ request()->routeIs('home') ? 'bg-amber-400 text-amber-950 shadow-xs' : 'text-slate-700 hover:bg-slate-100' }}">
-                                <span class="text-xl">🎮</span>
-                                <span>Taman Petualangan</span>
+                    <!-- Navigation Links -->
+                    <nav class="flex flex-col gap-2">
+                        <a href="{{ route('home') }}" @click="mobileNavOpen = false; if(window.soundEngine) window.soundEngine.playClick()"
+                           class="flex items-center gap-3 px-4 py-3 rounded-2xl font-black text-sm transition-all {{ request()->routeIs('home') ? 'bg-amber-400 text-amber-950 shadow-xs' : 'text-slate-700 hover:bg-slate-100' }}">
+                            <span class="text-xl">🎮</span>
+                            <span>Taman Petualangan</span>
+                        </a>
+
+                        <a href="{{ route('stickers') }}" @click="mobileNavOpen = false; if(window.soundEngine) window.soundEngine.playClick()"
+                           class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all {{ request()->routeIs('stickers') ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100' }}">
+                            <span class="text-xl">🏆</span>
+                            <span>Buku Stiker Virtual</span>
+                        </a>
+
+                        <a href="{{ route('achievements') }}" @click="mobileNavOpen = false; if(window.soundEngine) window.soundEngine.playClick()"
+                           class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all {{ request()->routeIs('achievements') ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100' }}">
+                            <span class="text-xl">🎖️</span>
+                            <span>Ruang Piala & Prestasi</span>
+                        </a>
+
+                        <a href="{{ route('community') }}" @click="mobileNavOpen = false; if(window.soundEngine) window.soundEngine.playClick()"
+                           class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all {{ request()->routeIs('community') ? 'bg-emerald-600 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100' }}">
+                            <span class="text-xl">👥</span>
+                            <span>Sahabat Petualang</span>
+                        </a>
+
+                        <a href="{{ route('profile') }}" @click="mobileNavOpen = false; if(window.soundEngine) window.soundEngine.playClick()"
+                           class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all {{ request()->routeIs('profile') ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100' }}">
+                            <span class="text-xl">👤</span>
+                            <span>Profil Siswa</span>
+                        </a>
+
+                        <button type="button" @click="mobileNavOpen = false; openParentalGate()"
+                                class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm text-slate-700 hover:bg-slate-100 text-left cursor-pointer">
+                            <span class="text-xl">🔒</span>
+                            <span>Portal Orang Tua</span>
+                        </button>
+
+                        @if (auth()->check() && in_array(auth()->user()->role, ['admin', 'teacher']))
+                            <a href="{{ route('admin.dashboard') }}" @click="mobileNavOpen = false"
+                               class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200">
+                                <span class="text-xl">🦁</span>
+                                <span>Panel Guru & Admin</span>
                             </a>
-
-                            <a href="{{ route('stickers') }}" @click="mobileNavOpen = false; if(window.soundEngine) window.soundEngine.playClick()"
-                               class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all {{ request()->routeIs('stickers') ? 'bg-purple-600 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100' }}">
-                                <span class="text-xl">🏆</span>
-                                <span>Buku Stiker Virtual</span>
-                            </a>
-
-                            <a href="{{ route('achievements') }}" @click="mobileNavOpen = false; if(window.soundEngine) window.soundEngine.playClick()"
-                               class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all {{ request()->routeIs('achievements') ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100' }}">
-                                <span class="text-xl">🎖️</span>
-                                <span>Ruang Piala & Prestasi</span>
-                            </a>
-
-                            <a href="{{ route('community') }}" @click="mobileNavOpen = false; if(window.soundEngine) window.soundEngine.playClick()"
-                               class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all {{ request()->routeIs('community') ? 'bg-emerald-600 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100' }}">
-                                <span class="text-xl">👥</span>
-                                <span>Sahabat Petualang</span>
-                            </a>
-
-                            <a href="{{ route('profile') }}" @click="mobileNavOpen = false; if(window.soundEngine) window.soundEngine.playClick()"
-                               class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm transition-all {{ request()->routeIs('profile') ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100' }}">
-                                <span class="text-xl">👤</span>
-                                <span>Profil Siswa</span>
-                            </a>
-
-                            <button type="button" @click="mobileNavOpen = false; openParentalGate()"
-                                    class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm text-slate-700 hover:bg-slate-100 text-left cursor-pointer">
-                                <span class="text-xl">🔒</span>
-                                <span>Portal Orang Tua</span>
-                            </button>
-
-                            @if (auth()->check() && in_array(auth()->user()->role, ['admin', 'teacher']))
-                                <a href="{{ route('admin.dashboard') }}" @click="mobileNavOpen = false"
-                                   class="flex items-center gap-3 px-4 py-3 rounded-2xl font-bold text-sm bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200">
-                                    <span class="text-xl">🦁</span>
-                                    <span>Panel Guru & Admin</span>
-                                </a>
-                            @endif
-                        </nav>
-                    </div>
-
-                    <!-- Bottom Drawer Buttons -->
-                    <div class="border-t border-slate-100 pt-4 flex flex-col gap-2">
-                        @auth
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="w-full py-3 bg-rose-50 hover:bg-rose-100 border-2 border-rose-300 rounded-2xl text-rose-700 font-black text-sm flex items-center justify-center gap-2">
-                                    <span>🚪</span>
-                                    <span>Keluar dari Akun</span>
-                                </button>
-                            </form>
-                        @else
-                            <a href="{{ route('login') }}" class="w-full py-3 bg-amber-400 hover:bg-yellow-300 border-2 border-amber-500 rounded-2xl text-amber-950 font-black text-sm text-center">
-                                🔑 Masuk Akun
-                            </a>
-                            <a href="{{ route('register') }}" class="w-full py-3 bg-sky-500 hover:bg-sky-400 border-2 border-sky-600 rounded-2xl text-white font-black text-sm text-center">
-                                ✨ Daftar Siswa Baru (+10 ⭐)
-                            </a>
-                        @endauth
-                    </div>
-
+                        @endif
+                    </nav>
                 </div>
+
+                <!-- Bottom Drawer Buttons -->
+                <div class="border-t border-slate-100 pt-4 flex flex-col gap-2">
+                    @auth
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="w-full py-3 bg-rose-50 hover:bg-rose-100 border-2 border-rose-300 rounded-2xl text-rose-700 font-black text-sm flex items-center justify-center gap-2 cursor-pointer">
+                                <span>🚪</span>
+                                <span>Keluar dari Akun</span>
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="w-full py-3 bg-amber-400 hover:bg-yellow-300 border-2 border-amber-500 rounded-2xl text-amber-950 font-black text-sm text-center">
+                            🔑 Masuk Akun
+                        </a>
+                        <a href="{{ route('register') }}" class="w-full py-3 bg-sky-500 hover:bg-sky-400 border-2 border-sky-600 rounded-2xl text-white font-black text-sm text-center">
+                            ✨ Daftar Siswa Baru (+10 ⭐)
+                        </a>
+                    @endauth
+                </div>
+
             </div>
         </div>
-    </header>
+    </div>
 
     <!-- Main Content Area -->
     <main class="flex-1 relative z-10 max-w-7xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-5">
