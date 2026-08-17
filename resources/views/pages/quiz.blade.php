@@ -14,8 +14,15 @@
          scoreCorrect: 0,
          isFinished: false,
          starsEarned: 0,
-         feedbackMessage: '',
          init() {
+             // Acak urutan kartu pilihan jawaban di setiap butir soal agar interaksi tidak monoton
+             if (this.questions && this.questions.length > 0) {
+                 this.questions.forEach(q => {
+                     if (q.options && q.options.length > 1) {
+                         q.options = q.options.sort(() => Math.random() - 0.5);
+                     }
+                 });
+             }
              this.playCurrentQuestionVoice();
          },
          currentQuestion() {

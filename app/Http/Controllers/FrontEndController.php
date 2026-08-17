@@ -317,6 +317,9 @@ class FrontEndController extends Controller
                     ];
                 }
 
+                // Acak urutan kartu pilihan jawaban agar tidak monoton & posisi jawaban benar selalu bervariasi
+                shuffle($optionsArr);
+
                 $questionsArr[] = [
                     'id' => $q->id,
                     'prompt_text' => $q->question_text,
