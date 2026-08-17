@@ -12,13 +12,13 @@ test('halaman landing page utama dapat diakses dengan sukses tanpa login', funct
     $response->assertSee('MULAI MAIN');
 });
 
-test('halaman login dapat diakses dengan mode siswa dan mode guru', function () {
+test('halaman login dapat diakses dengan form terpadu', function () {
     $response = $this->get(route('login'));
 
     $response->assertStatus(200);
-    $response->assertSee('MASUK AKUN PETUALANG');
-    $response->assertSee('Mode Siswa Cilik');
-    $response->assertSee('Guru / Orang Tua');
+    $response->assertSee('Masuk Akun YukBelajar');
+    $response->assertSee('Username atau Email');
+    $response->assertSee('Kata Sandi');
 });
 
 test('halaman register dapat diakses dengan form avatar gamified', function () {

@@ -450,7 +450,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
             @foreach(array_slice($stickers, 0, 5) as $stk)
             <div class="bg-white/10 backdrop-blur-sm border border-white/20 p-3.5 rounded-2xl flex flex-col items-center text-center gap-1.5 hover:scale-105 transition-transform">
-                <span class="text-3xl sm:text-4xl" x-html="window.twemojiParse('{{ $stk['emoji'] }}')"></span>
+                <span class="emoji-icon text-3xl sm:text-4xl">{{ $stk['emoji'] }}</span>
                 <span class="text-xs font-bold text-white line-clamp-1 mt-1">{{ $stk['name'] }}</span>
                 <span class="text-[9px] px-2 py-0.5 rounded-full font-black uppercase {{ $stk['rarity'] === 'legendary' ? 'bg-amber-400 text-amber-950' : ($stk['rarity'] === 'rare' ? 'bg-purple-400 text-purple-950' : 'bg-slate-300 text-slate-900') }}">
                     {{ $stk['rarity'] }}
@@ -504,9 +504,6 @@
         </div>
     </section>
 
-    <!-- ========================================================================= -->
-    <!-- 8. BOTTOM GRAND CALL-TO-ACTION BANNER                                     -->
-    <!-- ========================================================================= -->
     <section class="bg-gradient-to-r from-yellow-300 via-amber-300 to-orange-300 border-4 border-amber-400 rounded-3xl sm:rounded-[2.5rem] p-8 sm:p-12 text-center shadow-lg flex flex-col items-center gap-6">
         <span class="text-6xl animate-bounce-slow">🎉</span>
         <div>
@@ -519,16 +516,24 @@
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full">
-            <a href="{{ route('home') }}" 
-               class="btn-3d btn-3d-yellow py-4 px-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl font-black text-amber-950 shadow-md flex items-center justify-center gap-2">
-                <span>🎮</span>
-                <span>Buka Petualangan Sekarang!</span>
-            </a>
-            <a href="{{ route('admin.dashboard') }}" 
-               class="btn-3d btn-3d-white py-4 px-6 rounded-2xl sm:rounded-3xl text-sm sm:text-base font-extrabold text-slate-700 shadow-md flex items-center justify-center gap-2">
-                <span>👨‍🏫</span>
-                <span>Masuk Panel Guru / Admin</span>
-            </a>
+            @auth
+                <a href="{{ route('home') }}" 
+                   class="btn-3d btn-3d-yellow py-4 px-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl font-black text-amber-950 shadow-md flex items-center justify-center gap-2 hover:scale-105 transition-transform">
+                    <span>🎮</span>
+                    <span>Lanjutkan Petualangan Sekarang!</span>
+                </a>
+            @else
+                <a href="{{ route('home') }}" 
+                   class="btn-3d btn-3d-yellow py-4 px-8 rounded-2xl sm:rounded-3xl text-lg sm:text-xl font-black text-amber-950 shadow-md flex items-center justify-center gap-2 hover:scale-105 transition-transform">
+                    <span>🎮</span>
+                    <span>Mulai Main Gratis!</span>
+                </a>
+                <a href="{{ route('register') }}" 
+                   class="btn-3d btn-3d-sky py-4 px-8 rounded-2xl sm:rounded-3xl text-base sm:text-lg font-black text-white shadow-md flex items-center justify-center gap-2 hover:scale-105 transition-transform">
+                    <span>✨</span>
+                    <span>Daftar Akun Belajar (+10 ⭐)</span>
+                </a>
+            @endauth
         </div>
     </section>
 

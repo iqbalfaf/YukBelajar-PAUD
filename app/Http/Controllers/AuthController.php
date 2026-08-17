@@ -9,76 +9,68 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
     /**
-     * Tampilkan halaman masuk (Login).
+     * Tampilkan halaman masuk (Login) - Form Tunggal Terpadu.
      */
     public function showLogin(): View
     {
-        $avatars = [
-            ['key' => 'dino', 'name' => 'Dino Ceria', 'emoji' => '🦖', 'bg' => 'from-emerald-400 to-teal-500'],
-            ['key' => 'kucing', 'name' => 'Kiki Kucing', 'emoji' => '🐱', 'bg' => 'from-amber-400 to-orange-500'],
-            ['key' => 'singa', 'name' => 'Leo Singa', 'emoji' => '🦁', 'bg' => 'from-yellow-400 to-amber-500'],
-            ['key' => 'kelinci', 'name' => 'Cici Kelinci', 'emoji' => '🐰', 'bg' => 'from-pink-400 to-rose-500'],
-            ['key' => 'panda', 'name' => 'Pan-Pan Panda', 'emoji' => '🐼', 'bg' => 'from-slate-400 to-slate-600'],
-            ['key' => 'beruang', 'name' => 'Bobi Beruang', 'emoji' => '🐻', 'bg' => 'from-amber-600 to-amber-800'],
-            ['key' => 'gajah', 'name' => 'Ello Gajah', 'emoji' => '🐘', 'bg' => 'from-sky-400 to-blue-600'],
-            ['key' => 'koala', 'name' => 'Koko Koala', 'emoji' => '🐨', 'bg' => 'from-violet-400 to-purple-600'],
-        ];
-
-        return view('pages.auth.login', compact('avatars'));
+        return view('pages.auth.login');
     }
 
     /**
-     * Proses autentikasi login pengguna.
+     * Proses autentikasi login terpadu untuk semua peran (Admin, Guru, Siswa, Orang Tua).
      */
     public function login(Request $request): RedirectResponse
     {
-        $mode = $request->input('auth_mode', 'student');
+        $request->validate([
+            'login' => ['required', 'string', 'max:150'],
+            'password' => ['required', 'string', 'min:4'],
+        ], [
+            'login.required' => 'Silakan masukkan Username atau Email Anda.',
+            'password.required' => 'Silakan masukkan Kata Sandi / Password Anda.',
+            'password.min' => 'Kata Sandi minimal terdiri dari 4 karakter.',
+        ]);
 
-        if ($mode === 'adult') {
-            $request->validate([
-                'login_id' => ['required', 'string'],
-                'password' => ['required', 'string'],
-            ], [
-                'login_id.required' => 'Email atau Username wajib diisi.',
-                'password.required' => 'Kata sandi wajib diisi.',
-            ]);
-
-            $loginId = $request->input('login_id');
-            $field = filter_var($loginId, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-            $credentials = [
-                $field => $loginId,
-                'password' => $request->input('password'),
-            ];
-        } else {
-            $request->validate([
-                'username' => ['required', 'string'],
-                'password' => ['required', 'string'],
-            ], [
-                'username.required' => 'Username wajib diisi.',
-                'password.required' => 'Kata sandi wajib diisi.',
-            ]);
-
-            $credentials = [
-                'username' => $request->input('username'),
-                'password' => $request->input('password'),
-            ];
-        }
-
+        $loginInput = trim($request->input('login'));
+        $password = $request->input('password');
         $remember = $request->boolean('remember', true);
 
-        if (Auth::attempt($credentials, $remember)) {
+        // Keamanan: Rate Limiting Perlindungan Brute-Force (Maks 5 percobaan per menit)
+        $throttleKey = Str::transliterate(Str::lower($loginInput).'|'.$request->ip());
+
+        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+            throw ValidationException::withMessages([
+                'login' => "Terlalu banyak percobaan masuk yang gagal. Silakan tunggu {$seconds} detik lagi.",
+            ]);
+        }
+
+        // Tentukan apakah input berupa email atau username
+        $isEmail = filter_var($loginInput, FILTER_VALIDATE_EMAIL);
+        $field = $isEmail ? 'email' : 'username';
+
+        // Coba autentikasi
+        $attemptSuccess = Auth::attempt([$field => $loginInput, 'password' => $password], $remember);
+
+        // Jika login dengan field utama belum berhasil, coba field alternatif (fallback)
+        if (! $attemptSuccess && ! $isEmail) {
+            $attemptSuccess = Auth::attempt(['email' => $loginInput, 'password' => $password], $remember);
+        }
+
+        if ($attemptSuccess) {
+            RateLimiter::clear($throttleKey);
             $user = Auth::user();
 
             if (! $user->is_active) {
                 Auth::logout();
                 throw ValidationException::withMessages([
-                    'login' => 'Akun Anda saat ini sedang dinonaktifkan. Silakan hubungi administrator.',
+                    'login' => 'Akun Anda saat ini sedang dinonaktifkan. Silakan hubungi pengajar atau administrator.',
                 ]);
             }
 
@@ -89,11 +81,13 @@ class AuthController extends Controller
                 return redirect()->intended(route('admin.dashboard'))->with('success', "Selamat datang kembali, {$user->name}!");
             }
 
-            return redirect()->intended(route('home'))->with('success', "Halo {$user->name}! Selamat datang di Taman Petualangan!");
+            return redirect()->intended(route('home'))->with('success', "Halo {$user->name}! Selamat datang kembali di Taman Petualangan!");
         }
 
+        RateLimiter::hit($throttleKey, 60);
+
         throw ValidationException::withMessages([
-            'login' => 'Username/Email atau kata sandi yang Anda masukkan belum tepat. Yuk coba lagi!',
+            'login' => 'Username/Email atau Kata Sandi yang Anda masukkan belum tepat. Silakan periksa kembali!',
         ]);
     }
 

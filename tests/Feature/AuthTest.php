@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Auth;
 test('halaman login dan register dapat diakses oleh tamu (guest)', function () {
     $loginRes = $this->get(route('login'));
     $loginRes->assertStatus(200);
-    $loginRes->assertSee('MASUK AKUN PETUALANG');
-    $loginRes->assertSee('Mode Siswa Cilik');
+    $loginRes->assertSee('Masuk Akun YukBelajar');
+    $loginRes->assertSee('Username atau Email');
 
     $regRes = $this->get(route('register'));
     $regRes->assertStatus(200);
@@ -15,10 +15,9 @@ test('halaman login dan register dapat diakses oleh tamu (guest)', function () {
     $regRes->assertSee('10 Bintang Emas Pertama');
 });
 
-test('siswa dapat login menggunakan username dan password yang benar', function () {
+test('siswa dapat login menggunakan username dan password yang benar pada form tunggal', function () {
     $response = $this->post(route('login.post'), [
-        'auth_mode' => 'student',
-        'username' => 'alif_ceria',
+        'login' => 'alif_ceria',
         'password' => 'password123',
     ]);
 
@@ -27,10 +26,9 @@ test('siswa dapat login menggunakan username dan password yang benar', function 
     expect(Auth::user()->username)->toBe('alif_ceria');
 });
 
-test('guru atau admin dapat login menggunakan email atau username dan diarahkan ke dashboard admin', function () {
+test('guru atau admin dapat login menggunakan email atau username pada form tunggal dan diarahkan ke dashboard admin', function () {
     $response = $this->post(route('login.post'), [
-        'auth_mode' => 'adult',
-        'login_id' => 'guru@kuybelajar.id',
+        'login' => 'guru@kuybelajar.id',
         'password' => 'password123',
     ]);
 
@@ -41,8 +39,7 @@ test('guru atau admin dapat login menggunakan email atau username dan diarahkan 
 
 test('login gagal jika kredensial salah dan menampilkan error session', function () {
     $response = $this->post(route('login.post'), [
-        'auth_mode' => 'student',
-        'username' => 'alif_ceria',
+        'login' => 'alif_ceria',
         'password' => 'passwordsalah123',
     ]);
 
