@@ -18,14 +18,17 @@ class QuizSeeder extends Seeder
     {
         $quizzesData = [
             // =========================================================================
-            // PILAR 1: ZONA MENGENAL
+            // PILAR 1 - TOPIK 1: HURUF ABJAD CERIA (9 KUIS: 3 L1, 3 L2, 3 L3)
             // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (HURUF A - I) ---
             [
                 'category_slug' => 'abjad',
-                'title' => 'Tebak Huruf Abjad Ceria',
-                'slug' => 'tebak-abjad',
-                'icon_emoji' => '🔤',
-                'target_age' => 4,
+                'level_number' => 1,
+                'title' => 'Tebak Huruf A, B, C Cilik',
+                'slug' => 'kuis-abjad-l1-abc',
+                'icon_emoji' => '🍎',
+                'target_age' => 3,
                 'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
@@ -40,8 +43,8 @@ class QuizSeeder extends Seeder
                         ],
                     ],
                     [
-                        'text' => 'Huruf apakah yang mengawali kata BEBEK?',
-                        'audio' => 'Huruf apakah yang mengawali kata BEBEK?',
+                        'text' => 'Hewan lucu yang bersuara kwek-kwek BEBEK diawali dengan huruf apa?',
+                        'audio' => 'Hewan lucu yang bersuara kwek-kwek BEBEK diawali dengan huruf apa?',
                         'emoji' => '🦆',
                         'options' => [
                             ['emoji' => '🅳', 'text' => 'Huruf D', 'is_correct' => false],
@@ -50,13 +53,629 @@ class QuizSeeder extends Seeder
                         ],
                     ],
                     [
-                        'text' => 'Manakah huruf C yang melengkung seperti bulan sabit?',
-                        'audio' => 'Manakah huruf C yang melengkung seperti bulan sabit?',
+                        'text' => 'Buah kecil manis berwarna merah CERI diawali dengan huruf apa?',
+                        'audio' => 'Buah kecil manis berwarna merah CERI diawali dengan huruf apa?',
                         'emoji' => '🍒',
                         'options' => [
                             ['emoji' => '🅲', 'text' => 'Huruf C', 'is_correct' => true],
                             ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => false],
                             ['emoji' => '🅾️', 'text' => 'Huruf O', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'abjad',
+                'level_number' => 1,
+                'title' => 'Tebak Huruf D, E, F Ceria',
+                'slug' => 'kuis-abjad-l1-def',
+                'icon_emoji' => '🦆',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Hewan berbulu putih tebal DOMBA diawali dengan huruf apa?',
+                        'audio' => 'Hewan berbulu putih tebal DOMBA diawali dengan huruf apa?',
+                        'emoji' => '🐑',
+                        'options' => [
+                            ['emoji' => '🅳', 'text' => 'Huruf D', 'is_correct' => true],
+                            ['emoji' => '🅱️', 'text' => 'Huruf B', 'is_correct' => false],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Burung gagah yang terbang tinggi ELANG diawali dengan huruf apa?',
+                        'audio' => 'Burung gagah yang terbang tinggi ELANG diawali dengan huruf apa?',
+                        'emoji' => '🦅',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => '🅴', 'text' => 'Huruf E', 'is_correct' => true],
+                            ['emoji' => '🅸', 'text' => 'Huruf I', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Burung cantik berbulu merah muda FLAMINGO diawali dengan huruf apa?',
+                        'audio' => 'Burung cantik berbulu merah muda FLAMINGO diawali dengan huruf apa?',
+                        'emoji' => '🦩',
+                        'options' => [
+                            ['emoji' => '🅵', 'text' => 'Huruf F', 'is_correct' => true],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                            ['emoji' => '🅿️', 'text' => 'Huruf P', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'abjad',
+                'level_number' => 1,
+                'title' => 'Tebak Huruf G, H, I Pintar',
+                'slug' => 'kuis-abjad-l1-ghi',
+                'icon_emoji' => '🐘',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Hewan besar berbelalai panjang GAJAH diawali dengan huruf apa?',
+                        'audio' => 'Hewan besar berbelalai panjang GAJAH diawali dengan huruf apa?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '🅶', 'text' => 'Huruf G', 'is_correct' => true],
+                            ['emoji' => '🅲', 'text' => 'Huruf C', 'is_correct' => false],
+                            ['emoji' => '🅾️', 'text' => 'Huruf O', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan loreng pemberani HARIMAU diawali dengan huruf apa?',
+                        'audio' => 'Hewan loreng pemberani HARIMAU diawali dengan huruf apa?',
+                        'emoji' => '🐯',
+                        'options' => [
+                            ['emoji' => '🅷', 'text' => 'Huruf H', 'is_correct' => true],
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => false],
+                            ['emoji' => '🅺', 'text' => 'Huruf K', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan yang lincah berenang di air IKAN diawali dengan huruf apa?',
+                        'audio' => 'Hewan yang lincah berenang di air IKAN diawali dengan huruf apa?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '🅸', 'text' => 'Huruf I', 'is_correct' => true],
+                            ['emoji' => '🅻', 'text' => 'Huruf L', 'is_correct' => false],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (HURUF J - R) ---
+            [
+                'category_slug' => 'abjad',
+                'level_number' => 2,
+                'title' => 'Petualangan Huruf J, K, L, M',
+                'slug' => 'kuis-abjad-l2-jklm',
+                'icon_emoji' => '🦒',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Hewan tinggi berleher panjang JERAPAH diawali dengan huruf apa?',
+                        'audio' => 'Hewan tinggi berleher panjang JERAPAH diawali dengan huruf apa?',
+                        'emoji' => '🦒',
+                        'options' => [
+                            ['emoji' => '🅹', 'text' => 'Huruf J', 'is_correct' => true],
+                            ['emoji' => '🅸', 'text' => 'Huruf I', 'is_correct' => false],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'KUCING imut yang suka mengeong diawali dengan huruf apa?',
+                        'audio' => 'KUCING imut yang suka mengeong diawali dengan huruf apa?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            ['emoji' => '🅺', 'text' => 'Huruf K', 'is_correct' => true],
+                            ['emoji' => '🅲', 'text' => 'Huruf C', 'is_correct' => false],
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah kuning segar kaya vitamin C LEMON diawali dengan huruf apa?',
+                        'audio' => 'Buah kuning segar kaya vitamin C LEMON diawali dengan huruf apa?',
+                        'emoji' => '🍋',
+                        'options' => [
+                            ['emoji' => '🅻', 'text' => 'Huruf L', 'is_correct' => true],
+                            ['emoji' => '🅸', 'text' => 'Huruf I', 'is_correct' => false],
+                            ['emoji' => '🅹', 'text' => 'Huruf J', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'MONYET lincah yang suka makan pisang diawali dengan huruf apa?',
+                        'audio' => 'MONYET lincah yang suka makan pisang diawali dengan huruf apa?',
+                        'emoji' => '🐒',
+                        'options' => [
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => true],
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => false],
+                            ['emoji' => '🆆', 'text' => 'Huruf W', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah huruf yang tepat untuk melengkapi kata: "...UCING" (Kucing)?',
+                        'audio' => 'Manakah huruf yang tepat untuk melengkapi kata Kucing?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            ['emoji' => '🅺', 'text' => 'Huruf K', 'is_correct' => true],
+                            ['emoji' => '🅱️', 'text' => 'Huruf B', 'is_correct' => false],
+                            ['emoji' => '🅳', 'text' => 'Huruf D', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'abjad',
+                'level_number' => 2,
+                'title' => 'Tantangan Huruf N, O, P, Q, R',
+                'slug' => 'kuis-abjad-l2-nopq',
+                'icon_emoji' => '🍍',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Buah bersisik dengan mahkota daun hijau NANAS diawali huruf apa?',
+                        'audio' => 'Buah bersisik dengan mahkota daun hijau NANAS diawali huruf apa?',
+                        'emoji' => '🍍',
+                        'options' => [
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => true],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                            ['emoji' => '🆄', 'text' => 'Huruf U', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan pintar penjaga rimba ORANGUTAN diawali huruf apa?',
+                        'audio' => 'Hewan pintar penjaga rimba ORANGUTAN diawali huruf apa?',
+                        'emoji' => '🦧',
+                        'options' => [
+                            ['emoji' => '🅾️', 'text' => 'Huruf O', 'is_correct' => true],
+                            ['emoji' => '🅲', 'text' => 'Huruf C', 'is_correct' => false],
+                            ['emoji' => '🆀', 'text' => 'Huruf Q', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Burung lucu yang pandai berenang di salju PENGUIN diawali huruf apa?',
+                        'audio' => 'Burung lucu yang pandai berenang di salju PENGUIN diawali huruf apa?',
+                        'emoji' => '🐧',
+                        'options' => [
+                            ['emoji' => '🅿️', 'text' => 'Huruf P', 'is_correct' => true],
+                            ['emoji' => '🅱️', 'text' => 'Huruf B', 'is_correct' => false],
+                            ['emoji' => '🅳', 'text' => 'Huruf D', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kitab suci mulia QURAN diawali dengan huruf apa?',
+                        'audio' => 'Kitab suci mulia QURAN diawali dengan huruf apa?',
+                        'emoji' => '📖',
+                        'options' => [
+                            ['emoji' => '🆀', 'text' => 'Huruf Q', 'is_correct' => true],
+                            ['emoji' => '🅾️', 'text' => 'Huruf O', 'is_correct' => false],
+                            ['emoji' => '🅶', 'text' => 'Huruf G', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan lincah bertanduk indah RUSA diawali dengan huruf apa?',
+                        'audio' => 'Hewan lincah bertanduk indah RUSA diawali dengan huruf apa?',
+                        'emoji' => '🦌',
+                        'options' => [
+                            ['emoji' => '🆁', 'text' => 'Huruf R', 'is_correct' => true],
+                            ['emoji' => '🅿️', 'text' => 'Huruf P', 'is_correct' => false],
+                            ['emoji' => '🅱️', 'text' => 'Huruf B', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'abjad',
+                'level_number' => 2,
+                'title' => 'Eksplorasi Huruf Tengah J sampai R',
+                'slug' => 'kuis-abjad-l2-j-sampai-r',
+                'icon_emoji' => '🐱',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Huruf apakah yang berada di antara huruf J dan L dalam urutan abjad?',
+                        'audio' => 'Huruf apakah yang berada di antara huruf J dan L dalam urutan abjad?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => '🅺', 'text' => 'Huruf K (J - K - L)', 'is_correct' => true],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah huruf vokal bulat sempurna seperti buah donat?',
+                        'audio' => 'Manakah huruf vokal bulat sempurna seperti buah donat?',
+                        'emoji' => '⭕',
+                        'options' => [
+                            ['emoji' => '🅾️', 'text' => 'Huruf O', 'is_correct' => true],
+                            ['emoji' => '🅳', 'text' => 'Huruf D', 'is_correct' => false],
+                            ['emoji' => '🅲', 'text' => 'Huruf C', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf apakah yang mengawali kata PENGUIN dan PISANG?',
+                        'audio' => 'Huruf apakah yang mengawali kata PENGUIN dan PISANG?',
+                        'emoji' => '🍌',
+                        'options' => [
+                            ['emoji' => '🅿️', 'text' => 'Huruf P', 'is_correct' => true],
+                            ['emoji' => '🅱️', 'text' => 'Huruf B', 'is_correct' => false],
+                            ['emoji' => '🆁', 'text' => 'Huruf R', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf apakah yang memiliki dua lengkungan kaki seperti gunung kembar?',
+                        'audio' => 'Huruf apakah yang memiliki dua lengkungan kaki seperti gunung kembar?',
+                        'emoji' => '⛰️',
+                        'options' => [
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => true],
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => false],
+                            ['emoji' => '🆅', 'text' => 'Huruf V', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah pasangan huruf dan nama hewan yang paling tepat?',
+                        'audio' => 'Manakah pasangan huruf dan nama hewan yang paling tepat?',
+                        'emoji' => '🦒',
+                        'options' => [
+                            ['emoji' => '🅹', 'text' => 'Huruf J untuk Jerapah', 'is_correct' => true],
+                            ['emoji' => '🅺', 'text' => 'Huruf K untuk Gajah', 'is_correct' => false],
+                            ['emoji' => '🅻', 'text' => 'Huruf L untuk Bebek', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (HURUF S - Z & A-Z LENGKAP) ---
+            [
+                'category_slug' => 'abjad',
+                'level_number' => 3,
+                'title' => 'Master Huruf Akhir S sampai Z',
+                'slug' => 'kuis-abjad-l3-s-sampai-z',
+                'icon_emoji' => '🦁',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Hewan perkasa si Raja Hutan SINGA diawali dengan huruf apa?',
+                        'audio' => 'Hewan perkasa si Raja Hutan SINGA diawali dengan huruf apa?',
+                        'emoji' => '🦁',
+                        'options' => [
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => true],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                            ['emoji' => '🅲', 'text' => 'Huruf C', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah merah segar dan menyehatkan TOMAT diawali huruf apa?',
+                        'audio' => 'Buah merah segar dan menyehatkan TOMAT diawali huruf apa?',
+                        'emoji' => '🍅',
+                        'options' => [
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => true],
+                            ['emoji' => '🅸', 'text' => 'Huruf I', 'is_correct' => false],
+                            ['emoji' => '🅻', 'text' => 'Huruf L', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan tangguh berpunuk di padang pasir UNTA diawali huruf apa?',
+                        'audio' => 'Hewan tangguh berpunuk di padang pasir UNTA diawali huruf apa?',
+                        'emoji' => '🐪',
+                        'options' => [
+                            ['emoji' => '🆄', 'text' => 'Huruf U', 'is_correct' => true],
+                            ['emoji' => '🅾️', 'text' => 'Huruf O', 'is_correct' => false],
+                            ['emoji' => '🅲', 'text' => 'Huruf C', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Tempat menaruh rangkaian bunga indah VAS diawali huruf apa?',
+                        'audio' => 'Tempat menaruh rangkaian bunga indah VAS diawali huruf apa?',
+                        'emoji' => '🏺',
+                        'options' => [
+                            ['emoji' => '🆅', 'text' => 'Huruf V', 'is_correct' => true],
+                            ['emoji' => '🆄', 'text' => 'Huruf U', 'is_correct' => false],
+                            ['emoji' => '🆆', 'text' => 'Huruf W', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sayur oranye kesukaan kelinci WORTEL diawali dengan huruf apa?',
+                        'audio' => 'Sayur oranye kesukaan kelinci WORTEL diawali dengan huruf apa?',
+                        'emoji' => '🥕',
+                        'options' => [
+                            ['emoji' => '🆆', 'text' => 'Huruf W', 'is_correct' => true],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                            ['emoji' => '🆅', 'text' => 'Huruf V', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat musik bilah bernada riang XILOFON diawali huruf apa?',
+                        'audio' => 'Alat musik bilah bernada riang XILOFON diawali huruf apa?',
+                        'emoji' => '🎹',
+                        'options' => [
+                            ['emoji' => '🆇', 'text' => 'Huruf X', 'is_correct' => true],
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => false],
+                            ['emoji' => '🆉', 'text' => 'Huruf Z', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mainan putar bertali yang seru YOYO diawali huruf apa?',
+                        'audio' => 'Mainan putar bertali yang seru YOYO diawali huruf apa?',
+                        'emoji' => '🪀',
+                        'options' => [
+                            ['emoji' => '🆈', 'text' => 'Huruf Y', 'is_correct' => true],
+                            ['emoji' => '🆅', 'text' => 'Huruf V', 'is_correct' => false],
+                            ['emoji' => '🆄', 'text' => 'Huruf U', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan unik bergaris belang hitam putih ZEBRA diawali huruf apa?',
+                        'audio' => 'Hewan unik bergaris belang hitam putih ZEBRA diawali huruf apa?',
+                        'emoji' => '🦓',
+                        'options' => [
+                            ['emoji' => '🆉', 'text' => 'Huruf Z', 'is_correct' => true],
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => false],
+                            ['emoji' => '🆇', 'text' => 'Huruf X', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf paling terakhir dalam urutan alfabet A sampai Z adalah...?',
+                        'audio' => 'Huruf paling terakhir dalam urutan alfabet A sampai Z adalah apa?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => '🆉', 'text' => 'Huruf Z', 'is_correct' => true],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf apakah yang berbentuk seperti cangkir melengkung ke atas?',
+                        'audio' => 'Huruf apakah yang berbentuk seperti cangkir melengkung ke atas?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            ['emoji' => '🆄', 'text' => 'Huruf U', 'is_correct' => true],
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => false],
+                            ['emoji' => '🅲', 'text' => 'Huruf C', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'abjad',
+                'level_number' => 3,
+                'title' => 'Tantangan Rangkaian Kata Abjad A-Z',
+                'slug' => 'kuis-abjad-l3-kata-abjad',
+                'icon_emoji' => '🔤',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Lengkapi huruf pertama untuk kata buah manis: "...PEL" (Apel)?',
+                        'audio' => 'Lengkapi huruf pertama untuk kata buah manis Apel?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Huruf A (Apel)', 'is_correct' => true],
+                            ['emoji' => '🅾️', 'text' => 'Huruf O', 'is_correct' => false],
+                            ['emoji' => '🆄', 'text' => 'Huruf U', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lengkapi huruf pertama untuk kata hewan lucu: "...EBEK" (Bebek)?',
+                        'audio' => 'Lengkapi huruf pertama untuk kata hewan lucu Bebek?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            ['emoji' => '🅱️', 'text' => 'Huruf B (Bebek)', 'is_correct' => true],
+                            ['emoji' => '🅳', 'text' => 'Huruf D', 'is_correct' => false],
+                            ['emoji' => '🅿️', 'text' => 'Huruf P', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lengkapi huruf pertama untuk kata hewan besar: "...AJAH" (Gajah)?',
+                        'audio' => 'Lengkapi huruf pertama untuk kata hewan besar Gajah?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '🅶', 'text' => 'Huruf G (Gajah)', 'is_correct' => true],
+                            ['emoji' => '🅲', 'text' => 'Huruf C', 'is_correct' => false],
+                            ['emoji' => '🅹', 'text' => 'Huruf J', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lengkapi huruf pertama untuk kata hewan laut: "...KAN" (Ikan)?',
+                        'audio' => 'Lengkapi huruf pertama untuk kata hewan laut Ikan?',
+                        'emoji' => '🐟',
+                        'options' => [
+                            ['emoji' => '🅸', 'text' => 'Huruf I (Ikan)', 'is_correct' => true],
+                            ['emoji' => '🅴', 'text' => 'Huruf E', 'is_correct' => false],
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lengkapi huruf pertama untuk kata hewan lincah: "...ONYET" (Monyet)?',
+                        'audio' => 'Lengkapi huruf pertama untuk kata hewan lincah Monyet?',
+                        'emoji' => '🐒',
+                        'options' => [
+                            ['emoji' => '🅼', 'text' => 'Huruf M (Monyet)', 'is_correct' => true],
+                            ['emoji' => '🅽', 'text' => 'Huruf N', 'is_correct' => false],
+                            ['emoji' => '🆆', 'text' => 'Huruf W', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lengkapi huruf pertama untuk kata buah segar: "...ANAS" (Nanas)?',
+                        'audio' => 'Lengkapi huruf pertama untuk kata buah segar Nanas?',
+                        'emoji' => '🍍',
+                        'options' => [
+                            ['emoji' => '🅽', 'text' => 'Huruf N (Nanas)', 'is_correct' => true],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                            ['emoji' => '🅷', 'text' => 'Huruf H', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lengkapi huruf pertama untuk kata hewan raja hutan: "...INGA" (Singa)?',
+                        'audio' => 'Lengkapi huruf pertama untuk kata hewan raja hutan Singa?',
+                        'emoji' => '🦁',
+                        'options' => [
+                            ['emoji' => '🆂', 'text' => 'Huruf S (Singa)', 'is_correct' => true],
+                            ['emoji' => '🅲', 'text' => 'Huruf C', 'is_correct' => false],
+                            ['emoji' => '🆉', 'text' => 'Huruf Z', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lengkapi huruf pertama untuk kata sayur oranye: "...ORTEL" (Wortel)?',
+                        'audio' => 'Lengkapi huruf pertama untuk kata sayur oranye Wortel?',
+                        'emoji' => '🥕',
+                        'options' => [
+                            ['emoji' => '🆆', 'text' => 'Huruf W (Wortel)', 'is_correct' => true],
+                            ['emoji' => '🆅', 'text' => 'Huruf V', 'is_correct' => false],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lengkapi huruf pertama untuk kata mainan putar: "...OYO" (Yoyo)?',
+                        'audio' => 'Lengkapi huruf pertama untuk kata mainan putar Yoyo?',
+                        'emoji' => '🪀',
+                        'options' => [
+                            ['emoji' => '🆈', 'text' => 'Huruf Y (Yoyo)', 'is_correct' => true],
+                            ['emoji' => '🆄', 'text' => 'Huruf U', 'is_correct' => false],
+                            ['emoji' => '🆅', 'text' => 'Huruf V', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lengkapi huruf pertama untuk kata hewan belang: "...EBRA" (Zebra)?',
+                        'audio' => 'Lengkapi huruf pertama untuk kata hewan belang Zebra?',
+                        'emoji' => '🦓',
+                        'options' => [
+                            ['emoji' => '🆉', 'text' => 'Huruf Z (Zebra)', 'is_correct' => true],
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => false],
+                            ['emoji' => '🆇', 'text' => 'Huruf X', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'abjad',
+                'level_number' => 3,
+                'title' => 'Grand Champion Maestro Abjad Ceria A-Z',
+                'slug' => 'kuis-abjad-l3-grand-master',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Huruf pertama dalam alfabet yang paling awal adalah...?',
+                        'audio' => 'Huruf pertama dalam alfabet yang paling awal adalah apa?',
+                        'emoji' => '🅰️',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'Huruf A', 'is_correct' => true],
+                            ['emoji' => '🅱️', 'text' => 'Huruf B', 'is_correct' => false],
+                            ['emoji' => '🆉', 'text' => 'Huruf Z', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah total seluruh jumlah huruf abjad dari A sampai Z?',
+                        'audio' => 'Berapakah total seluruh jumlah huruf abjad dari A sampai Z?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => '2️⃣', 'text' => '26 Huruf Lengkap', 'is_correct' => true],
+                            ['emoji' => '1️⃣', 'text' => '10 Huruf', 'is_correct' => false],
+                            ['emoji' => '5️⃣', 'text' => '5 Huruf', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf apakah yang berada tepat setelah huruf C?',
+                        'audio' => 'Huruf apakah yang berada tepat setelah huruf C?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => '🅳', 'text' => 'Huruf D (A-B-C-D)', 'is_correct' => true],
+                            ['emoji' => '🅴', 'text' => 'Huruf E', 'is_correct' => false],
+                            ['emoji' => '🅱️', 'text' => 'Huruf B', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf apakah yang berada tepat sebelum huruf Z?',
+                        'audio' => 'Huruf apakah yang berada tepat sebelum huruf Z?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => '🆈', 'text' => 'Huruf Y (X-Y-Z)', 'is_correct' => true],
+                            ['emoji' => '🆇', 'text' => 'Huruf X', 'is_correct' => false],
+                            ['emoji' => '🆆', 'text' => 'Huruf W', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah di bawah ini yang merupakan 5 huruf vokal utama?',
+                        'audio' => 'Manakah di bawah ini yang merupakan 5 huruf vokal utama?',
+                        'emoji' => '🅰️',
+                        'options' => [
+                            ['emoji' => '🅰️', 'text' => 'A - I - U - E - O', 'is_correct' => true],
+                            ['emoji' => '🅱️', 'text' => 'B - C - D - F - G', 'is_correct' => false],
+                            ['emoji' => '🆇', 'text' => 'V - W - X - Y - Z', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf apakah yang memiliki bentuk seperti garis lurus berdiri tegak?',
+                        'audio' => 'Huruf apakah yang memiliki bentuk seperti garis lurus berdiri tegak?',
+                        'emoji' => '📏',
+                        'options' => [
+                            ['emoji' => '🅸', 'text' => 'Huruf I', 'is_correct' => true],
+                            ['emoji' => '🅾️', 'text' => 'Huruf O', 'is_correct' => false],
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf apakah yang memiliki bentuk meliuk seperti ular?',
+                        'audio' => 'Huruf apakah yang memiliki bentuk meliuk seperti ular?',
+                        'emoji' => '🐍',
+                        'options' => [
+                            ['emoji' => '🆂', 'text' => 'Huruf S', 'is_correct' => true],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                            ['emoji' => '🅼', 'text' => 'Huruf M', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Huruf apakah yang memiliki bentuk dua garis menyilang membentuk tanda silang?',
+                        'audio' => 'Huruf apakah yang memiliki bentuk dua garis menyilang membentuk tanda silang?',
+                        'emoji' => '❌',
+                        'options' => [
+                            ['emoji' => '🆇', 'text' => 'Huruf X', 'is_correct' => true],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                            ['emoji' => '🅻', 'text' => 'Huruf L', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Lanjutan dari urutan abjad berikut: P, Q, R, ... ?',
+                        'audio' => 'Lanjutan dari urutan abjad berikut: P, Q, R, lalu huruf apa?',
+                        'emoji' => '🔤',
+                        'options' => [
+                            ['emoji' => '🆂', 'text' => 'Huruf S (P-Q-R-S)', 'is_correct' => true],
+                            ['emoji' => '🆃', 'text' => 'Huruf T', 'is_correct' => false],
+                            ['emoji' => '🆄', 'text' => 'Huruf U', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar hebat apakah untuk anak cerdas yang berhasil menghafal seluruh abjad A sampai Z?',
+                        'audio' => 'Gelar hebat apakah untuk anak cerdas yang berhasil menghafal seluruh abjad A sampai Z?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Juara Hebat Abjad Ceria', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Mengantuk', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
