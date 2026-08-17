@@ -3337,33 +3337,1329 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 1 - TOPIK 6: MENGENAL WARNA CERIA (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (WARNA PRIMER & POPULER DASAR) ---
             [
                 'category_slug' => 'warna',
-                'title' => 'Tebak Warna Indah Ceria',
-                'slug' => 'tebak-warna',
-                'icon_emoji' => '🎨',
-                'target_age' => 4,
-                'total_questions' => 2,
+                'level_number' => 1,
+                'title' => 'Warna Primer Ceria: Merah, Kuning, Biru',
+                'slug' => 'kuis-warna-l1-primer-ceria',
+                'icon_emoji' => '🔴',
+                'target_age' => 3,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Warna apakah yang sama seperti warna buah apel merah yang matang?',
-                        'audio' => 'Warna apakah yang sama seperti warna buah apel merah yang matang?',
+                        'text' => 'Warna buah stroberi manis, buah apel matang, dan bendera bagian atas Indonesia adalah...?',
+                        'audio' => 'Warna buah stroberi manis buah apel matang dan bendera bagian atas Indonesia adalah apa?',
                         'emoji' => '🔴',
                         'options' => [
-                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah Berani', 'is_correct' => true],
                             ['emoji' => '🔵', 'text' => 'Warna Biru', 'is_correct' => false],
                             ['emoji' => '🟢', 'text' => 'Warna Hijau', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Manakah bentuk bangun geometri yang bulat sempurna seperti roda?',
-                        'audio' => 'Manakah bentuk bangun geometri yang bulat sempurna seperti roda?',
+                        'text' => 'Warna langit cerah di siang hari dan air samudra luas adalah...?',
+                        'audio' => 'Warna langit cerah di siang hari dan air samudra luas adalah apa?',
+                        'emoji' => '🔵',
+                        'options' => [
+                            ['emoji' => '🔵', 'text' => 'Warna Biru Langit', 'is_correct' => true],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                            ['emoji' => '⚪', 'text' => 'Warna Putih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna sinar mentari pagi dan buah pisang yang sudah matang adalah...?',
+                        'audio' => 'Warna sinar mentari pagi dan buah pisang yang sudah matang adalah apa?',
+                        'emoji' => '🟡',
+                        'options' => [
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning Matahari', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'warna',
+                'level_number' => 1,
+                'title' => 'Eksplorasi Hijau, Oranye & Ungu Manis',
+                'slug' => 'kuis-warna-l1-hijau-oranye-ungu',
+                'icon_emoji' => '🟢',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Warna segar daun pepohonan rindang dan rumput di taman adalah...?',
+                        'audio' => 'Warna segar daun pepohonan rindang dan rumput di taman adalah apa?',
+                        'emoji' => '🟢',
+                        'options' => [
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau Daun', 'is_correct' => true],
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu', 'is_correct' => false],
+                            ['emoji' => '🟠', 'text' => 'Warna Oranye', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna buah jeruk manis dan sayuran wortel kesukaan kelinci adalah...?',
+                        'audio' => 'Warna buah jeruk manis dan sayuran wortel kesukaan kelinci adalah apa?',
+                        'emoji' => '🟠',
+                        'options' => [
+                            ['emoji' => '🟠', 'text' => 'Warna Oranye Jeruk', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Warna Biru', 'is_correct' => false],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna butiran buah anggur matang dan sayur terong kebun adalah...?',
+                        'audio' => 'Warna butiran buah anggur matang dan sayur terong kebun adalah apa?',
+                        'emoji' => '🟣',
+                        'options' => [
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu Anggur', 'is_correct' => true],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                            ['emoji' => '⚪', 'text' => 'Warna Putih', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'warna',
+                'level_number' => 1,
+                'title' => 'Pesona Warna Putih & Alam Sekitar',
+                'slug' => 'kuis-warna-l1-putih-alam-sekitar',
+                'icon_emoji' => '⚪',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Warna segelas susu segar yang menyehatkan dan awan bersih di langit adalah...?',
+                        'audio' => 'Warna segelas susu segar yang menyehatkan dan awan bersih di langit adalah apa?',
+                        'emoji' => '⚪',
+                        'options' => [
+                            ['emoji' => '⚪', 'text' => 'Warna Putih Bersih', 'is_correct' => true],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                            ['emoji' => '🟤', 'text' => 'Warna Cokelat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Buah apel yang matang dan manis di pohon umumnya memiliki warna...?',
+                        'audio' => 'Buah apel yang matang dan manis di pohon umumnya memiliki warna apa?',
+                        'emoji' => '🍎',
+                        'options' => [
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Warna Biru', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah rumput di taman bermain saat tumbuh subur dan segar?',
+                        'audio' => 'Warna apakah rumput di taman bermain saat tumbuh subur dan segar?',
+                        'emoji' => '🌱',
+                        'options' => [
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau Segar', 'is_correct' => true],
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu', 'is_correct' => false],
+                            ['emoji' => '🟠', 'text' => 'Warna Oranye', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (WARNA SEKUNDER, BUMI & KILAU) ---
+            [
+                'category_slug' => 'warna',
+                'level_number' => 2,
+                'title' => 'Warna Hitam, Cokelat & Merah Muda Manis',
+                'slug' => 'kuis-warna-l2-hitam-cokelat-pink',
+                'icon_emoji' => '🟤',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Warna malam hari yang tenang bertabur bintang dan warna aspal jalan raya adalah...?',
+                        'audio' => 'Warna malam hari yang tenang bertabur bintang dan warna aspal jalan raya adalah apa?',
+                        'emoji' => '⚫',
+                        'options' => [
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam Pekat', 'is_correct' => true],
+                            ['emoji' => '⚪', 'text' => 'Warna Putih', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna batang pohon kayu yang kokoh dan kue cokelat lezat adalah...?',
+                        'audio' => 'Warna batang pohon kayu yang kokoh dan kue cokelat lezat adalah apa?',
+                        'emoji' => '🟤',
+                        'options' => [
+                            ['emoji' => '🟤', 'text' => 'Warna Cokelat Manis', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Warna Biru', 'is_correct' => false],
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna manis lembut seperti kelopak bunga mawar merah muda dan permen adalah...?',
+                        'audio' => 'Warna manis lembut seperti kelopak bunga mawar merah muda dan permen adalah apa?',
+                        'emoji' => '🩷',
+                        'options' => [
+                            ['emoji' => '🩷', 'text' => 'Warna Merah Muda Ceria', 'is_correct' => true],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                            ['emoji' => '🟤', 'text' => 'Warna Cokelat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna tubuh hewan gajah besar perkasa dan batu gunung yang kokoh adalah...?',
+                        'audio' => 'Warna tubuh hewan gajah besar perkasa dan batu gunung yang kokoh adalah apa?',
+                        'emoji' => '🩶',
+                        'options' => [
+                            ['emoji' => '🩶', 'text' => 'Warna Abu-Abu Gajah', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna air sungai pegunungan yang jernih dan langit pagi yang cerah adalah...?',
+                        'audio' => 'Warna air sungai pegunungan yang jernih dan langit pagi yang cerah adalah apa?',
+                        'emoji' => '🩵',
+                        'options' => [
+                            ['emoji' => '🩵', 'text' => 'Warna Biru Muda Awan', 'is_correct' => true],
+                            ['emoji' => '🟤', 'text' => 'Warna Cokelat', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'warna',
+                'level_number' => 2,
+                'title' => 'Kemilau Emas, Perak & Hijau Toska Segar',
+                'slug' => 'kuis-warna-l2-emas-perak-toska',
+                'icon_emoji' => '💛',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Warna kuning berkilau megah seperti piala sang juara dan mahkota raja adalah...?',
+                        'audio' => 'Warna kuning berkilau megah seperti piala sang juara dan mahkota raja adalah apa?',
+                        'emoji' => '💛',
+                        'options' => [
+                            ['emoji' => '💛', 'text' => 'Warna Kuning Emas Megah', 'is_correct' => true],
+                            ['emoji' => '🩶', 'text' => 'Warna Abu-abu', 'is_correct' => false],
+                            ['emoji' => '🟤', 'text' => 'Warna Cokelat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna danau tropis bening yang merupakan perpaduan indah hijau dan biru adalah...?',
+                        'audio' => 'Warna danau tropis bening yang merupakan perpaduan indah hijau dan biru adalah apa?',
+                        'emoji' => '💚',
+                        'options' => [
+                            ['emoji' => '💚', 'text' => 'Warna Hijau Toska Segar', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna abu-abu berkilau mengkilap seperti sendok makan perak dan koin adalah...?',
+                        'audio' => 'Warna abu-abu berkilau mengkilap seperti sendok makan perak dan koin adalah apa?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '✨', 'text' => 'Warna Perak Berkilau', 'is_correct' => true],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah warna yang melambangkan keberanian pada bendera Sang Saka Indonesia?',
+                        'audio' => 'Manakah warna yang melambangkan keberanian pada bendera Sang Saka Indonesia?',
+                        'emoji' => '🇮🇩',
+                        'options' => [
+                            ['emoji' => '🔴', 'text' => 'Warna Merah (Berani)', 'is_correct' => true],
+                            ['emoji' => '⚪', 'text' => 'Warna Putih', 'is_correct' => false],
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah warna yang melambangkan kesucian dan kebersihan pada bendera Indonesia?',
+                        'audio' => 'Manakah warna yang melambangkan kesucian dan kebersihan pada bendera Indonesia?',
+                        'emoji' => '🕊️',
+                        'options' => [
+                            ['emoji' => '⚪', 'text' => 'Warna Putih (Suci)', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                            ['emoji' => '🔵', 'text' => 'Warna Biru', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'warna',
+                'level_number' => 2,
+                'title' => 'Petualangan Aneka Warna Buah & Alam',
+                'slug' => 'kuis-warna-l2-warna-buah-alam',
+                'icon_emoji' => '🎨',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Warna apakah kulit buah pisang yang sudah matang dan manis?',
+                        'audio' => 'Warna apakah kulit buah pisang yang sudah matang dan manis?',
+                        'emoji' => '🍌',
+                        'options' => [
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning Cerah', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Warna Biru', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah sayuran wortel segar yang renyah dan menyehatkan mata?',
+                        'audio' => 'Warna apakah sayuran wortel segar yang renyah dan menyehatkan mata?',
+                        'emoji' => '🥕',
+                        'options' => [
+                            ['emoji' => '🟠', 'text' => 'Warna Oranye Segar', 'is_correct' => true],
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu', 'is_correct' => false],
+                            ['emoji' => '⚪', 'text' => 'Warna Putih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah buah alpukat gurih dan daun teh di perkebunan pegunungan?',
+                        'audio' => 'Warna apakah buah alpukat gurih dan daun teh di perkebunan pegunungan?',
+                        'emoji' => '🥑',
+                        'options' => [
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau Subur', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda langit apakah yang bersinar memberikan warna kuning keemasan di siang hari?',
+                        'audio' => 'Benda langit apakah yang bersinar memberikan warna kuning keemasan di siang hari?',
+                        'emoji' => '☀️',
+                        'options' => [
+                            ['emoji' => '☀️', 'text' => 'Matahari Hangat', 'is_correct' => true],
+                            ['emoji' => '🌙', 'text' => 'Bulan Malam', 'is_correct' => false],
+                            ['emoji' => '☁️', 'text' => 'Awan Kelabu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah susu murni yang sering kita minum setiap pagi sebelum beraktivitas?',
+                        'audio' => 'Warna apakah susu murni yang sering kita minum setiap pagi sebelum beraktivitas?',
+                        'emoji' => '🥛',
+                        'options' => [
+                            ['emoji' => '⚪', 'text' => 'Warna Putih Bersih', 'is_correct' => true],
+                            ['emoji' => '🟤', 'text' => 'Warna Cokelat Pekat', 'is_correct' => false],
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (SAINS PENCAMPURAN WARNA & NUANSA ALAM) ---
+            [
+                'category_slug' => 'warna',
+                'level_number' => 3,
+                'title' => 'Sains Pencampuran Warna Ajaib (Primer & Sekunder)',
+                'slug' => 'kuis-warna-l3-pencampuran-warna',
+                'icon_emoji' => '🖌️',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Manakah tiga warna yang termasuk ke dalam kelompok Warna Primer dasar?',
+                        'audio' => 'Manakah tiga warna yang termasuk ke dalam kelompok Warna Primer dasar?',
+                        'emoji' => '🎨',
+                        'options' => [
+                            ['emoji' => '🎨', 'text' => 'Merah, Kuning, dan Biru', 'is_correct' => true],
+                            ['emoji' => '🟣', 'text' => 'Ungu, Hijau, dan Oranye', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Hitam, Putih, dan Abu-abu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika kita mencampurkan cat warna MERAH dan KUNING, warna baru apakah yang akan terbentuk?',
+                        'audio' => 'Jika kita mencampurkan cat warna MERAH dan KUNING warna baru apakah yang akan terbentuk?',
+                        'emoji' => '🟠',
+                        'options' => [
+                            ['emoji' => '🟠', 'text' => 'Warna Oranye', 'is_correct' => true],
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau', 'is_correct' => false],
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika kita mencampurkan cat warna BIRU dan KUNING, warna baru apakah yang akan tercipta?',
+                        'audio' => 'Jika kita mencampurkan cat warna BIRU dan KUNING warna baru apakah yang akan tercipta?',
+                        'emoji' => '🟢',
+                        'options' => [
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau', 'is_correct' => true],
+                            ['emoji' => '🟠', 'text' => 'Warna Oranye', 'is_correct' => false],
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika kita mencampurkan cat warna MERAH dan BIRU, warna baru apakah yang akan dihasilkan?',
+                        'audio' => 'Jika kita mencampurkan cat warna MERAH dan BIRU warna baru apakah yang akan dihasilkan?',
+                        'emoji' => '🟣',
+                        'options' => [
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu', 'is_correct' => true],
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika warna merah dicampur dengan warna putih, warna lembut apakah yang akan muncul?',
+                        'audio' => 'Jika warna merah dicampur dengan warna putih warna lembut apakah yang akan muncul?',
+                        'emoji' => '🩷',
+                        'options' => [
+                            ['emoji' => '🩷', 'text' => 'Warna Merah Muda (Pink)', 'is_correct' => true],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                            ['emoji' => '🟤', 'text' => 'Warna Cokelat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika warna hitam dicampur dengan warna putih, warna apakah yang akan terbentuk?',
+                        'audio' => 'Jika warna hitam dicampur dengan warna putih warna apakah yang akan terbentuk?',
+                        'emoji' => '🩶',
+                        'options' => [
+                            ['emoji' => '🩶', 'text' => 'Warna Abu-Abu', 'is_correct' => true],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                            ['emoji' => '🔵', 'text' => 'Warna Biru', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna sekunder adalah kelompok warna yang dihasilkan dari...?',
+                        'audio' => 'Warna sekunder adalah kelompok warna yang dihasilkan dari apa?',
+                        'emoji' => '🖌️',
+                        'options' => [
+                            ['emoji' => '🖌️', 'text' => 'Pencampuran dua warna primer', 'is_correct' => true],
+                            ['emoji' => '⚪', 'text' => 'Warna putih saja tanpa dicampur', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Warna hitam pekat saja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna biru nila pekat pada buah bluberi merupakan perpaduan antara...?',
+                        'audio' => 'Warna biru nila pekat pada buah bluberi merupakan perpaduan antara apa?',
+                        'emoji' => '🫐',
+                        'options' => [
+                            ['emoji' => '🫐', 'text' => 'Warna Biru dan sedikit Ungu', 'is_correct' => true],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning dan Merah', 'is_correct' => false],
+                            ['emoji' => '⚪', 'text' => 'Warna Putih dan Hijau', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna cokelat hangat di alam bisa dihasilkan dari perpaduan warna...?',
+                        'audio' => 'Warna cokelat hangat di alam bisa dihasilkan dari perpaduan warna apa?',
+                        'emoji' => '🟤',
+                        'options' => [
+                            ['emoji' => '🟤', 'text' => 'Warna Oranye dan sedikit Hitam atau Biru', 'is_correct' => true],
+                            ['emoji' => '⚪', 'text' => 'Warna Putih dan Kuning', 'is_correct' => false],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah dan Putih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa warna-warni di dunia sangat indah dan menyenangkan bagi mata kita?',
+                        'audio' => 'Mengapa warna-warni di dunia sangat indah dan menyenangkan bagi mata kita?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena warna memberikan keindahan dan mengenal aneka ciptaan Tuhan', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar kita cepat mengantuk', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada artinya sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'warna',
+                'level_number' => 3,
+                'title' => 'Cerdas Mengelompokkan Nuansa Warna Dingin & Hangat',
+                'slug' => 'kuis-warna-l3-nuansa-warna-alam',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok warna yang memberikan kesan hangat dan bersemangat?',
+                        'audio' => 'Manakah kelompok warna yang memberikan kesan hangat dan bersemangat?',
+                        'emoji' => '🔥',
+                        'options' => [
+                            ['emoji' => '🔴', 'text' => 'Merah, Oranye, dan Kuning', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Biru, Biru Muda, dan Hijau Toska', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Hitam, Putih, dan Abu-abu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok warna yang memberikan kesan sejuk dan dingin menenangkan?',
+                        'audio' => 'Manakah kelompok warna yang memberikan kesan sejuk dan dingin menenangkan?',
+                        'emoji' => '❄️',
+                        'options' => [
+                            ['emoji' => '🔵', 'text' => 'Biru Samudra, Hijau Daun, Biru Muda', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Merah, Oranye, Kuning Menyala', 'is_correct' => false],
+                            ['emoji' => '🟤', 'text' => 'Cokelat dan Hitam Pekat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna gradasi senja saat matahari terbenam terdiri dari perpaduan warna...?',
+                        'audio' => 'Warna gradasi senja saat matahari terbenam terdiri dari perpaduan warna apa?',
+                        'emoji' => '🌅',
+                        'options' => [
+                            ['emoji' => '🌅', 'text' => 'Merah, Jingga Oranye, dan Kuning Emas', 'is_correct' => true],
+                            ['emoji' => '🟢', 'text' => 'Hijau dan Biru Laut', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Hitam dan Putih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang paling cocok untuk menggambarkan daun-daun kering yang gugur di musim kemarau?',
+                        'audio' => 'Warna apakah yang paling cocok untuk menggambarkan daun-daun kering yang gugur di musim kemarau?',
+                        'emoji' => '🍂',
+                        'options' => [
+                            ['emoji' => '🟤', 'text' => 'Warna Cokelat dan Kuning Tua', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Warna Biru Muda', 'is_correct' => false],
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang mendominasi pemandangan pantai dan lautan yang jernih di siang hari?',
+                        'audio' => 'Warna apakah yang mendominasi pemandangan pantai dan lautan yang jernih di siang hari?',
+                        'emoji' => '🌊',
+                        'options' => [
+                            ['emoji' => '🔵', 'text' => 'Biru dan Biru Muda Jernih', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Merah Menyala', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Hitam Pekat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang mendominasi pemandangan hutan rimba yang subur dan lebat?',
+                        'audio' => 'Warna apakah yang mendominasi pemandangan hutan rimba yang subur dan lebat?',
+                        'emoji' => '🌲',
+                        'options' => [
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau Rindang', 'is_correct' => true],
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu', 'is_correct' => false],
+                            ['emoji' => '🩷', 'text' => 'Warna Merah Muda', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna perak berkilau sering kita temukan pada benda berupa...?',
+                        'audio' => 'Warna perak berkilau sering kita temukan pada benda berupa apa?',
+                        'emoji' => '✨',
+                        'options' => [
+                            ['emoji' => '✨', 'text' => 'Sendok makan, koin logam, dan perhiasan perak', 'is_correct' => true],
+                            ['emoji' => '🍃', 'text' => 'Daun pepohonan segar', 'is_correct' => false],
+                            ['emoji' => '🪵', 'text' => 'Batang kayu pohon', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang menandakan lampu lalu lintas bahwa kendaraan harus BERHENTI?',
+                        'audio' => 'Warna apakah yang menandakan lampu lalu lintas bahwa kendaraan harus BERHENTI?',
+                        'emoji' => '🚦',
+                        'options' => [
+                            ['emoji' => '🔴', 'text' => 'Warna Merah (Berhenti)', 'is_correct' => true],
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang menandakan lampu lalu lintas bahwa kendaraan boleh BERJALAN MAJU?',
+                        'audio' => 'Warna apakah yang menandakan lampu lalu lintas bahwa kendaraan boleh BERJALAN MAJU?',
+                        'emoji' => '🚦',
+                        'options' => [
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau (Jalan)', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang menandakan lampu lalu lintas agar pengemudi BERHATI-HATI?',
+                        'audio' => 'Warna apakah yang menandakan lampu lalu lintas agar pengemudi BERHATI-HATI?',
+                        'emoji' => '🚦',
+                        'options' => [
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning (Hati-hati)', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                            ['emoji' => '🟢', 'text' => 'Warna Hijau', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'warna',
+                'level_number' => 3,
+                'title' => 'Grand Champion Pelukis Cilik Ahli Warna Ceria',
+                'slug' => 'kuis-warna-l3-grand-master-pelukis',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Alat tulis manakah yang memiliki aneka warna lilin cerah untuk mewarnai gambar di buku gambar?',
+                        'audio' => 'Alat tulis manakah yang memiliki aneka warna lilin cerah untuk mewarnai gambar di buku gambar?',
+                        'emoji' => '🖍️',
+                        'options' => [
+                            ['emoji' => '🖍️', 'text' => 'Krayon Warna-Warni', 'is_correct' => true],
+                            ['emoji' => '✂️', 'text' => 'Gunting Kertas', 'is_correct' => false],
+                            ['emoji' => '📏', 'text' => 'Penggaris', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang menjadi latar belakang bendera negara Jepang dengan lingkaran merah di tengah?',
+                        'audio' => 'Warna apakah yang menjadi latar belakang bendera negara Jepang dengan lingkaran merah di tengah?',
+                        'emoji' => '🇯🇵',
+                        'options' => [
+                            ['emoji' => '⚪', 'text' => 'Warna Putih Bersih', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Warna Biru', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna dasar apakah yang mendominasi bendera negara Arab Saudi?',
+                        'audio' => 'Warna dasar apakah yang mendominasi bendera negara Arab Saudi?',
+                        'emoji' => '🇸🇦',
+                        'options' => [
+                            ['emoji' => '🇸🇦', 'text' => 'Warna Hijau Zamrud', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                            ['emoji' => '⚪', 'text' => 'Warna Putih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang dihasilkan saat sinar matahari pagi bersinar cerah menerangi bumi?',
+                        'audio' => 'Warna apakah yang dihasilkan saat sinar matahari pagi bersinar cerah menerangi bumi?',
+                        'emoji' => '☀️',
+                        'options' => [
+                            ['emoji' => '🟡', 'text' => 'Warna Kuning Hangat', 'is_correct' => true],
+                            ['emoji' => '🟣', 'text' => 'Warna Ungu', 'is_correct' => false],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jika anak pintar ingin menggambar batang pohon kelapa yang kokoh, warna apakah yang dipilih?',
+                        'audio' => 'Jika anak pintar ingin menggambar batang pohon kelapa yang kokoh warna apakah yang dipilih?',
+                        'emoji' => '🌴',
+                        'options' => [
+                            ['emoji' => '🟤', 'text' => 'Warna Cokelat Kayu', 'is_correct' => true],
+                            ['emoji' => '🔵', 'text' => 'Warna Biru', 'is_correct' => false],
+                            ['emoji' => '🔴', 'text' => 'Warna Merah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang dipilih saat anak pintar menggambar langit biru cerah di atas rumah?',
+                        'audio' => 'Warna apakah yang dipilih saat anak pintar menggambar langit biru cerah di atas rumah?',
+                        'emoji' => '🌤️',
+                        'options' => [
+                            ['emoji' => '🔵', 'text' => 'Warna Biru Langit', 'is_correct' => true],
+                            ['emoji' => '⚫', 'text' => 'Warna Hitam', 'is_correct' => false],
+                            ['emoji' => '🟤', 'text' => 'Warna Cokelat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah warna primer dasar yang menjadi pembentuk warna lainnya?',
+                        'audio' => 'Berapakah jumlah warna primer dasar yang menjadi pembentuk warna lainnya?',
+                        'emoji' => '🎨',
+                        'options' => [
+                            ['emoji' => '3️⃣', 'text' => '3 Warna (Merah, Kuning, Biru)', 'is_correct' => true],
+                            ['emoji' => '5️⃣', 'text' => '5 Warna', 'is_correct' => false],
+                            ['emoji' => '🔟', 'text' => '10 Warna', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna apakah yang membuat bunga mawar di taman terlihat sangat anggun dan menawan?',
+                        'audio' => 'Warna apakah yang membuat bunga mawar di taman terlihat sangat anggun dan menawan?',
+                        'emoji' => '🌹',
+                        'options' => [
+                            ['emoji' => '🔴', 'text' => 'Merah dan Merah Muda', 'is_correct' => true],
+                            ['emoji' => '⚫', 'text' => 'Hitam Aspal', 'is_correct' => false],
+                            ['emoji' => '🩶', 'text' => 'Abu-abu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa belajar mengenal warna membuat imajinasi dan kreativitas anak berkembang pesat?',
+                        'audio' => 'Mengapa belajar mengenal warna membuat imajinasi dan kreativitas anak berkembang pesat?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena membantu anak mengekspresikan karya seni dan mengenal alam dengan ceria', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar cepat tertidur', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada manfaatnya', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apakah yang pantas untuk anak pintar yang menguasai semua jenis warna dan perpaduannya?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak pintar yang menguasai semua jenis warna dan perpaduannya?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Pelukis Cilik Juara & Sahabat Warna Ceria!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Coret Tembok', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Kanvas yang Diam', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // =========================================================================
+            // PILAR 1 - TOPIK 7: MENGENAL BENTUK GEOMETRI INDAH (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (BENTUK GEOMETRI 2D DASAR) ---
+            [
+                'category_slug' => 'bentuk',
+                'level_number' => 1,
+                'title' => 'Lingkaran Bulat & Segitiga Runcing Ceria',
+                'slug' => 'kuis-bentuk-l1-lingkaran-segitiga',
+                'icon_emoji' => '⭕',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Bentuk bangun datar yang bulat sempurna tanpa sudut seperti roda sepeda dan piring makan adalah...?',
+                        'audio' => 'Bentuk bangun datar yang bulat sempurna tanpa sudut seperti roda sepeda dan piring makan adalah apa?',
                         'emoji' => '⭕',
                         'options' => [
-                            ['emoji' => '🔺', 'text' => 'Segitiga', 'is_correct' => false],
-                            ['emoji' => '⭕', 'text' => 'Lingkaran', 'is_correct' => true],
-                            ['emoji' => '🟩', 'text' => 'Kotak Persegi', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran Bulat', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bentuk bangun datar yang memiliki tiga garis sisi dan tiga sudut runcing seperti potongan pizza adalah...?',
+                        'audio' => 'Bentuk bangun datar yang memiliki tiga garis sisi dan tiga sudut runcing seperti potongan pizza adalah apa?',
+                        'emoji' => '🔺',
+                        'options' => [
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga Runcing', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '🏷️', 'text' => 'Bentuk Persegi Panjang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Jam dinding bulat di kamar kita memiliki bentuk bangun datar...?',
+                        'audio' => 'Jam dinding bulat di kamar kita memiliki bentuk bangun datar apa?',
+                        'emoji' => '⏰',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                            ['emoji' => '⭐', 'text' => 'Bentuk Bintang', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bentuk',
+                'level_number' => 1,
+                'title' => 'Persegi Kotak & Persegi Panjang Rapi',
+                'slug' => 'kuis-bentuk-l1-persegi-persegi-panjang',
+                'icon_emoji' => '🟩',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Bentuk kotak yang memiliki empat sisi sama panjang seperti biskuit kotak adalah...?',
+                        'audio' => 'Bentuk kotak yang memiliki empat sisi sama panjang seperti biskuit kotak adalah apa?',
+                        'emoji' => '🟩',
+                        'options' => [
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi Kotak', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bentuk yang memiliki dua sisi panjang dan dua sisi pendek seperti buku tulis dan daun pintu adalah...?',
+                        'audio' => 'Bentuk yang memiliki dua sisi panjang dan dua sisi pendek seperti buku tulis dan daun pintu adalah apa?',
+                        'emoji' => '🏷️',
+                        'options' => [
+                            ['emoji' => '🏷️', 'text' => 'Bentuk Persegi Panjang', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '⭐', 'text' => 'Bentuk Bintang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah garis sisi pada bangun datar persegi kotak?',
+                        'audio' => 'Berapakah jumlah garis sisi pada bangun datar persegi kotak?',
+                        'emoji' => '🟩',
+                        'options' => [
+                            ['emoji' => '4️⃣', 'text' => '4 Sisi Sama Panjang', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '3 Sisi', 'is_correct' => false],
+                            ['emoji' => '0️⃣', 'text' => '0 Sisi', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bentuk',
+                'level_number' => 1,
+                'title' => 'Bintang Bersinar, Hati Kasih & Bulan Sabit',
+                'slug' => 'kuis-bentuk-l1-bintang-hati-bulan',
+                'icon_emoji' => '⭐',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Bentuk bersudut lima yang bersinar indah menghiasi langit malam adalah...?',
+                        'audio' => 'Bentuk bersudut lima yang bersinar indah menghiasi langit malam adalah apa?',
+                        'emoji' => '⭐',
+                        'options' => [
+                            ['emoji' => '⭐', 'text' => 'Bentuk Bintang Lima Sudut', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bentuk lengkung manis yang melambangkan rasa cinta dan kasih sayang kepada orang tua adalah...?',
+                        'audio' => 'Bentuk lengkung manis yang melambangkan rasa cinta dan kasih sayang kepada orang tua adalah apa?',
+                        'emoji' => '❤️',
+                        'options' => [
+                            ['emoji' => '❤️', 'text' => 'Bentuk Hati Kasih Sayang', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                            ['emoji' => '🏷️', 'text' => 'Bentuk Persegi Panjang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bentuk lengkungan bulan yang bersinar lembut di langit malam awal bulan adalah...?',
+                        'audio' => 'Bentuk lengkungan bulan yang bersinar lembut di langit malam awal bulan adalah apa?',
+                        'emoji' => '🌙',
+                        'options' => [
+                            ['emoji' => '🌙', 'text' => 'Bentuk Bulan Sabit', 'is_correct' => true],
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi', 'is_correct' => false],
+                            ['emoji' => '⭐', 'text' => 'Bentuk Bintang', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (BENTUK GEOMETRI LANJUTAN & DATAR) ---
+            [
+                'category_slug' => 'bentuk',
+                'level_number' => 2,
+                'title' => 'Belah Ketupat, Layang-Layang & Oval Telur',
+                'slug' => 'kuis-bentuk-l2-ketupat-layangan-oval',
+                'icon_emoji' => '🔶',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Bentuk bersudut empat miring yang simetris seperti anyaman ketupat hari raya adalah...?',
+                        'audio' => 'Bentuk bersudut empat miring yang simetris seperti anyaman ketupat hari raya adalah apa?',
+                        'emoji' => '🔶',
+                        'options' => [
+                            ['emoji' => '🔶', 'text' => 'Bentuk Belah Ketupat', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bentuk bersudut empat dengan bagian bawah lebih panjang yang siap terbang dengan benang di udara adalah...?',
+                        'audio' => 'Bentuk bersudut empat dengan bagian bawah lebih panjang yang siap terbang dengan benang di udara adalah apa?',
+                        'emoji' => '🔷',
+                        'options' => [
+                            ['emoji' => '🔷', 'text' => 'Bentuk Layang-Layang', 'is_correct' => true],
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi', 'is_correct' => false],
+                            ['emoji' => '🌙', 'text' => 'Bulan Sabit', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bentuk bulat lonjong memanjang tanpa sudut seperti bentuk telur ayam adalah...?',
+                        'audio' => 'Bentuk bulat lonjong memanjang tanpa sudut seperti bentuk telur ayam adalah apa?',
+                        'emoji' => '🥚',
+                        'options' => [
+                            ['emoji' => '🥚', 'text' => 'Bentuk Oval Telur', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                            ['emoji' => '⭐', 'text' => 'Bentuk Bintang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah di meja makan yang memiliki bentuk oval lonjong alami?',
+                        'audio' => 'Benda apakah di meja makan yang memiliki bentuk oval lonjong alami?',
+                        'emoji' => '🥚',
+                        'options' => [
+                            ['emoji' => '🥚', 'text' => 'Telur Ayam Rebus', 'is_correct' => true],
+                            ['emoji' => '🟩', 'text' => 'Kotak Tisu Persegi', 'is_correct' => false],
+                            ['emoji' => '🔺', 'text' => 'Potongan Semangka', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah sudut yang dimiliki oleh bangun belah ketupat?',
+                        'audio' => 'Berapakah jumlah sudut yang dimiliki oleh bangun belah ketupat?',
+                        'emoji' => '🔶',
+                        'options' => [
+                            ['emoji' => '4️⃣', 'text' => '4 Sudut', 'is_correct' => true],
+                            ['emoji' => '3️⃣', 'text' => '3 Sudut', 'is_correct' => false],
+                            ['emoji' => '5️⃣', 'text' => '5 Sudut', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bentuk',
+                'level_number' => 2,
+                'title' => 'Mengenal Segi Lima, Segi Enam & Lengkungan',
+                'slug' => 'kuis-bentuk-l2-segi-lima-enam',
+                'icon_emoji' => '🛑',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Bangun datar kokoh yang memiliki 5 garis sisi sama panjang dan 5 sudut adalah...?',
+                        'audio' => 'Bangun datar kokoh yang memiliki 5 garis sisi sama panjang dan 5 sudut adalah apa?',
+                        'emoji' => '🛑',
+                        'options' => [
+                            ['emoji' => '🛑', 'text' => 'Bentuk Segi Lima (Pentagon)', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bangun datar bersisi 6 yang tersusun rapi sempurna seperti pola sarang lebah madu adalah...?',
+                        'audio' => 'Bangun datar bersisi 6 yang tersusun rapi sempurna seperti pola sarang lebah madu adalah apa?',
+                        'emoji' => '🐝',
+                        'options' => [
+                            ['emoji' => '🐝', 'text' => 'Bentuk Segi Enam (Heksagon)', 'is_correct' => true],
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi', 'is_correct' => false],
+                            ['emoji' => '❤️', 'text' => 'Bentuk Hati', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Garis melengkung halus seperti bentuk jembatan lengkung dan busur panah adalah...?',
+                        'audio' => 'Garis melengkung halus seperti bentuk jembatan lengkung dan busur panah adalah apa?',
+                        'emoji' => '🏹',
+                        'options' => [
+                            ['emoji' => '🏹', 'text' => 'Bentuk Busur Lengkung', 'is_correct' => true],
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi', 'is_correct' => false],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Perpotongan dua garis lurus tegak dan mendatar seperti tanda tambah pada matematika adalah...?',
+                        'audio' => 'Perpotongan dua garis lurus tegak dan mendatar seperti tanda tambah pada matematika adalah apa?',
+                        'emoji' => '➕',
+                        'options' => [
+                            ['emoji' => '➕', 'text' => 'Bentuk Tanda Palang Tambah', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '🥚', 'text' => 'Bentuk Oval', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah garis sisi yang dimiliki oleh sarang lebah madu (heksagon)?',
+                        'audio' => 'Berapakah jumlah garis sisi yang dimiliki oleh sarang lebah madu heksagon?',
+                        'emoji' => '🐝',
+                        'options' => [
+                            ['emoji' => '6️⃣', 'text' => '6 Sisi Simetris', 'is_correct' => true],
+                            ['emoji' => '4️⃣', 'text' => '4 Sisi', 'is_correct' => false],
+                            ['emoji' => '3️⃣', 'text' => '3 Sisi', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bentuk',
+                'level_number' => 2,
+                'title' => 'Detektif Bentuk Benda di Sekitar Kita',
+                'slug' => 'kuis-bentuk-l2-detektif-bentuk',
+                'icon_emoji' => '🔍',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Daun pintu kamar dan permukaan meja belajar umumnya memiliki bentuk...?',
+                        'audio' => 'Daun pintu kamar dan permukaan meja belajar umumnya memiliki bentuk apa?',
+                        'emoji' => '🚪',
+                        'options' => [
+                            ['emoji' => '🏷️', 'text' => 'Bentuk Persegi Panjang', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Roda mobil, koin uang, dan tutup botol minum semuanya memiliki bentuk...?',
+                        'audio' => 'Roda mobil koin uang dan tutup botol minum semuanya memiliki bentuk apa?',
+                        'emoji' => '🪙',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran Bulat', 'is_correct' => true],
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi', 'is_correct' => false],
+                            ['emoji' => '⭐', 'text' => 'Bentuk Bintang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Penggaris segitiga dan potongan kue pizza memiliki bentuk...?',
+                        'audio' => 'Penggaris segitiga dan potongan kue pizza memiliki bentuk apa?',
+                        'emoji' => '🍕',
+                        'options' => [
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga Runcing', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '🥚', 'text' => 'Bentuk Oval', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bingkai foto kotak sama sisi di dinding kamar memiliki bentuk...?',
+                        'audio' => 'Bingkai foto kotak sama sisi di dinding kamar memiliki bentuk apa?',
+                        'emoji' => '🖼️',
+                        'options' => [
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi Kotak', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                            ['emoji' => '🌙', 'text' => 'Bulan Sabit', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa roda kendaraan darat dibuat berbentuk lingkaran bulat?',
+                        'audio' => 'Mengapa roda kendaraan darat dibuat berbentuk lingkaran bulat?',
+                        'emoji' => '🚗',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Agar mudah berputar dan menggelinding lancar di jalan', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Agar mudah tersangkut batu', 'is_correct' => false],
+                            ['emoji' => '🟩', 'text' => 'Agar tidak bisa bergerak maju', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (BANGUN RUANG 3D & EKSPLORASI GEOMETRI) ---
+            [
+                'category_slug' => 'bentuk',
+                'level_number' => 3,
+                'title' => 'Bangun Ruang 3D: Kubus, Bola & Tabung Silinder',
+                'slug' => 'kuis-bentuk-l3-bangun-ruang-kubus-bola',
+                'icon_emoji' => '🧊',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Bangun ruang 3 dimensi yang memiliki 6 sisi kotak persegi sama besar seperti dadu mainan adalah...?',
+                        'audio' => 'Bangun ruang 3 dimensi yang memiliki 6 sisi kotak persegi sama besar seperti dadu mainan adalah apa?',
+                        'emoji' => '🧊',
+                        'options' => [
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus 3D', 'is_correct' => true],
+                            ['emoji' => '⚽', 'text' => 'Bentuk Bola', 'is_correct' => false],
+                            ['emoji' => '🥫', 'text' => 'Bentuk Tabung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bangun ruang 3 dimensi yang bulat padat dan bisa menggelinding ke segala arah seperti bola sepak adalah...?',
+                        'audio' => 'Bangun ruang 3 dimensi yang bulat padat dan bisa menggelinding ke segala arah seperti bola sepak adalah apa?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            ['emoji' => '⚽', 'text' => 'Bentuk Bola 3D', 'is_correct' => true],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                            ['emoji' => '⛺', 'text' => 'Bentuk Prisma', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bangun ruang silinder yang memiliki alas dan tutup lingkaran seperti kaleng susu dan drum musik adalah...?',
+                        'audio' => 'Bangun ruang silinder yang memiliki alas dan tutup lingkaran seperti kaleng susu dan drum musik adalah apa?',
+                        'emoji' => '🥫',
+                        'options' => [
+                            ['emoji' => '🥫', 'text' => 'Bentuk Tabung Silinder 3D', 'is_correct' => true],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                            ['emoji' => '🍦', 'text' => 'Bentuk Kerucut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Es batu kotak di dalam gelas minuman dingin berbentuk bangun ruang...?',
+                        'audio' => 'Es batu kotak di dalam gelas minuman dingin berbentuk bangun ruang apa?',
+                        'emoji' => '🧊',
+                        'options' => [
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus 3D', 'is_correct' => true],
+                            ['emoji' => '🥫', 'text' => 'Bentuk Tabung', 'is_correct' => false],
+                            ['emoji' => '🍦', 'text' => 'Bentuk Kerucut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kaleng biskuit bulat tinggi memiliki bentuk bangun ruang...?',
+                        'audio' => 'Kaleng biskuit bulat tinggi memiliki bentuk bangun ruang apa?',
+                        'emoji' => '🥫',
+                        'options' => [
+                            ['emoji' => '🥫', 'text' => 'Bentuk Tabung Silinder', 'is_correct' => true],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                            ['emoji' => '⛺', 'text' => 'Bentuk Prisma', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bola basket dan bola kasti termasuk ke dalam kelompok bangun ruang...?',
+                        'audio' => 'Bola basket dan bola kasti termasuk ke dalam kelompok bangun ruang apa?',
+                        'emoji' => '🏀',
+                        'options' => [
+                            ['emoji' => '⚽', 'text' => 'Bentuk Bola 3D', 'is_correct' => true],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                            ['emoji' => '🏛️', 'text' => 'Bentuk Balok', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Berapakah jumlah sisi datar pada bangun ruang kubus?',
+                        'audio' => 'Berapakah jumlah sisi datar pada bangun ruang kubus?',
+                        'emoji' => '🧊',
+                        'options' => [
+                            ['emoji' => '6️⃣', 'text' => '6 Sisi Kotak Sama Besar', 'is_correct' => true],
+                            ['emoji' => '4️⃣', 'text' => '4 Sisi', 'is_correct' => false],
+                            ['emoji' => '2️⃣', 'text' => '2 Sisi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bangun ruang manakah yang tidak memiliki sudut lancip sama sekali dan berbentuk bulat utuh?',
+                        'audio' => 'Bangun ruang manakah yang tidak memiliki sudut lancip sama sekali dan berbentuk bulat utuh?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            ['emoji' => '⚽', 'text' => 'Bentuk Bola 3D', 'is_correct' => true],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                            ['emoji' => '🍦', 'text' => 'Bentuk Kerucut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Tutup kaleng dan alas tabung silinder memiliki bentuk bangun 2D berupa...?',
+                        'audio' => 'Tutup kaleng dan alas tabung silinder memiliki bentuk bangun 2D berupa apa?',
+                        'emoji' => '🥫',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa bangun 3D disebut sebagai bangun ruang?',
+                        'audio' => 'Mengapa bangun 3D disebut sebagai bangun ruang?',
+                        'emoji' => '🌟',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena memiliki volume isi di dalamnya dan dapat diisi benda', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Karena berada di luar angkasa', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak ada ruangan di dalamnya', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bentuk',
+                'level_number' => 3,
+                'title' => 'Bangun Ruang 3D: Kerucut, Prisma & Balok Panjang',
+                'slug' => 'kuis-bentuk-l3-kerucut-prisma-balok',
+                'icon_emoji' => '🍦',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Bangun ruang yang memiliki alas lingkaran dan mengerucut runcing ke atas seperti topi pesta adalah...?',
+                        'audio' => 'Bangun ruang yang memiliki alas lingkaran dan mengerucut runcing ke atas seperti topi pesta adalah apa?',
+                        'emoji' => '🍦',
+                        'options' => [
+                            ['emoji' => '🍦', 'text' => 'Bentuk Kerucut Corong 3D', 'is_correct' => true],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                            ['emoji' => '🏛️', 'text' => 'Bentuk Balok', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bangun ruang yang memiliki sisi segitiga kokoh seperti bentuk tenda perkemahan pramuka adalah...?',
+                        'audio' => 'Bangun ruang yang memiliki sisi segitiga kokoh seperti bentuk tenda perkemahan pramuka adalah apa?',
+                        'emoji' => '⛺',
+                        'options' => [
+                            ['emoji' => '⛺', 'text' => 'Bentuk Prisma Segitiga 3D', 'is_correct' => true],
+                            ['emoji' => '🥫', 'text' => 'Bentuk Tabung', 'is_correct' => false],
+                            ['emoji' => '⚽', 'text' => 'Bentuk Bola', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bangun ruang 3 dimensi yang memiliki sisi persegi panjang seperti kotak kardus sepatu dan lemari adalah...?',
+                        'audio' => 'Bangun ruang 3 dimensi yang memiliki sisi persegi panjang seperti kotak kardus sepatu dan lemari adalah apa?',
+                        'emoji' => '🏛️',
+                        'options' => [
+                            ['emoji' => '🏛️', 'text' => 'Bentuk Balok Ruang Panjang 3D', 'is_correct' => true],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                            ['emoji' => '🍦', 'text' => 'Bentuk Kerucut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Corong es krim renyah (cone) yang lezat memiliki bentuk bangun ruang...?',
+                        'audio' => 'Corong es krim renyah cone yang lezat memiliki bentuk bangun ruang apa?',
+                        'emoji' => '🍦',
+                        'options' => [
+                            ['emoji' => '🍦', 'text' => 'Bentuk Kerucut 3D', 'is_correct' => true],
+                            ['emoji' => '🥫', 'text' => 'Bentuk Tabung', 'is_correct' => false],
+                            ['emoji' => '⛺', 'text' => 'Bentuk Prisma', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Tenda perkemahan yang didirikan di alam terbuka memiliki bentuk bangun ruang...?',
+                        'audio' => 'Tenda perkemahan yang didirikan di alam terbuka memiliki bentuk bangun ruang apa?',
+                        'emoji' => '⛺',
+                        'options' => [
+                            ['emoji' => '⛺', 'text' => 'Bentuk Prisma Segitiga', 'is_correct' => true],
+                            ['emoji' => '⚽', 'text' => 'Bentuk Bola', 'is_correct' => false],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kotak pensil berbahan kayu dan batu bata bangunan memiliki bentuk bangun ruang...?',
+                        'audio' => 'Kotak pensil berbahan kayu dan batu bata bangunan memiliki bentuk bangun ruang apa?',
+                        'emoji' => '🧱',
+                        'options' => [
+                            ['emoji' => '🏛️', 'text' => 'Bentuk Balok Ruang Panjang', 'is_correct' => true],
+                            ['emoji' => '🍦', 'text' => 'Bentuk Kerucut', 'is_correct' => false],
+                            ['emoji' => '⚽', 'text' => 'Bentuk Bola', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apakah perbedaan utama antara bangun ruang kubus dan balok?',
+                        'audio' => 'Apakah perbedaan utama antara bangun ruang kubus dan balok?',
+                        'emoji' => '📐',
+                        'options' => [
+                            ['emoji' => '📐', 'text' => 'Kubus sisinya persegi sama sisi, balok sisinya persegi panjang', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Kubus bulat, balok kotak', 'is_correct' => false],
+                            ['emoji' => '🔺', 'text' => 'Kubus segitiga, balok lingkaran', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda pembatas jalan raya (traffic cone) berbentuk bangun ruang...?',
+                        'audio' => 'Benda pembatas jalan raya traffic cone berbentuk bangun ruang apa?',
+                        'emoji' => '🚧',
+                        'options' => [
+                            ['emoji' => '🍦', 'text' => 'Bentuk Kerucut', 'is_correct' => true],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                            ['emoji' => '🥫', 'text' => 'Bentuk Tabung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Atap tenda prisma segitiga ditopang oleh bidang depan berbentuk...?',
+                        'audio' => 'Atap tenda prisma segitiga ditopang oleh bidang depan berbentuk apa?',
+                        'emoji' => '⛺',
+                        'options' => [
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga Kokoh', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '🥚', 'text' => 'Bentuk Oval', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa lemari pakaian dan kotak kardus berbentuk balok sangat praktis digunakan?',
+                        'audio' => 'Mengapa lemari pakaian dan kotak kardus berbentuk balok sangat praktis digunakan?',
+                        'emoji' => '📦',
+                        'options' => [
+                            ['emoji' => '🏛️', 'text' => 'Karena memiliki ruang penyimpanan yang luas dan stabil diletakkan', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar mudah menggelinding di lantai', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak praktis sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'bentuk',
+                'level_number' => 3,
+                'title' => 'Grand Champion Arsitek Cilik Ahli Bentuk Geometri',
+                'slug' => 'kuis-bentuk-l3-grand-master-arsitek',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Bentuk bangun datar apakah yang memiliki 3 sudut runcing dan 3 sisi garis lurus?',
+                        'audio' => 'Bentuk bangun datar apakah yang memiliki 3 sudut runcing dan 3 sisi garis lurus?',
+                        'emoji' => '🔺',
+                        'options' => [
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga Runcing', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bentuk bangun ruang apakah yang digunakan anak-anak saat bermain bola tendang di lapangan?',
+                        'audio' => 'Bentuk bangun ruang apakah yang digunakan anak-anak saat bermain bola tendang di lapangan?',
+                        'emoji' => '⚽',
+                        'options' => [
+                            ['emoji' => '⚽', 'text' => 'Bentuk Bola 3D', 'is_correct' => true],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                            ['emoji' => '🥫', 'text' => 'Bentuk Tabung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bangun geometri apakah yang memiliki 4 sisi sama panjang dan 4 sudut siku-siku?',
+                        'audio' => 'Bangun geometri apakah yang memiliki 4 sisi sama panjang dan 4 sudut siku-siku?',
+                        'emoji' => '🟩',
+                        'options' => [
+                            ['emoji' => '🟩', 'text' => 'Bentuk Persegi Kotak', 'is_correct' => true],
+                            ['emoji' => '🏷️', 'text' => 'Bentuk Persegi Panjang', 'is_correct' => false],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Benda apakah di angkasa malam yang berbentuk lengkungan bulan sabit?',
+                        'audio' => 'Benda apakah di angkasa malam yang berbentuk lengkungan bulan sabit?',
+                        'emoji' => '🌙',
+                        'options' => [
+                            ['emoji' => '🌙', 'text' => 'Bulan Sabit Malam', 'is_correct' => true],
+                            ['emoji' => '☀️', 'text' => 'Matahari Siang', 'is_correct' => false],
+                            ['emoji' => '☁️', 'text' => 'Awan Mendung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Topi pesulap atau topi kerucut pesta ulang tahun memiliki bentuk bangun ruang...?',
+                        'audio' => 'Topi pesulap atau topi kerucut pesta ulang tahun memiliki bentuk bangun ruang apa?',
+                        'emoji' => '🎉',
+                        'options' => [
+                            ['emoji' => '🍦', 'text' => 'Bentuk Kerucut Corong', 'is_correct' => true],
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus', 'is_correct' => false],
+                            ['emoji' => '⚽', 'text' => 'Bentuk Bola', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sarang lebah madu yang unik tersusun dari ratusan pola bangun datar...?',
+                        'audio' => 'Sarang lebah madu yang unik tersusun dari ratusan pola bangun datar apa?',
+                        'emoji' => '🐝',
+                        'options' => [
+                            ['emoji' => '🐝', 'text' => 'Segi Enam (Heksagon)', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Bentuk Segitiga', 'is_correct' => false],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bangun ruang apakah yang memiliki bentuk seperti dadu bermata enam?',
+                        'audio' => 'Bangun ruang apakah yang memiliki bentuk seperti dadu bermata enam?',
+                        'emoji' => '🎲',
+                        'options' => [
+                            ['emoji' => '🧊', 'text' => 'Bentuk Kubus 3D', 'is_correct' => true],
+                            ['emoji' => '🥫', 'text' => 'Bentuk Tabung', 'is_correct' => false],
+                            ['emoji' => '⛺', 'text' => 'Bentuk Prisma', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bangun datar apakah yang berbentuk berlian empat sisi miring seperti makanan ketupat lebaran?',
+                        'audio' => 'Bangun datar apakah yang berbentuk berlian empat sisi miring seperti makanan ketupat lebaran?',
+                        'emoji' => '🔶',
+                        'options' => [
+                            ['emoji' => '🔶', 'text' => 'Bentuk Belah Ketupat', 'is_correct' => true],
+                            ['emoji' => '⭕', 'text' => 'Bentuk Lingkaran', 'is_correct' => false],
+                            ['emoji' => '🥚', 'text' => 'Bentuk Oval', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa belajar mengenal bentuk geometri sangat penting untuk calon arsitek dan insinyur cilik?',
+                        'audio' => 'Mengapa belajar mengenal bentuk geometri sangat penting untuk calon arsitek dan insinyur cilik?',
+                        'emoji' => '🏗️',
+                        'options' => [
+                            ['emoji' => '🌟', 'text' => 'Karena semua gedung, rumah, dan benda di dunia dirancang dari bentuk geometri', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar cepat mengantuk', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak penting sama sekali', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apakah yang pantas untuk anak hebat yang menguasai seluruh bentuk 2D dan 3D dengan sempurna?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak hebat yang menguasai seluruh bentuk 2D dan 3D dengan sempurna?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Arsitek Cilik Juara & Master Bentuk Geometri!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Malas Belajar', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Patung yang Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
