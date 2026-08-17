@@ -11,7 +11,6 @@
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>[x-cloak] { display: none !important; }</style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js" crossorigin="anonymous"></script>
     @stack('styles')
 </head>
 <body class="min-h-screen bg-gradient-to-b from-sky-200 via-sky-100 to-amber-50 text-slate-800 flex flex-col font-sans overflow-x-hidden relative"
@@ -82,115 +81,116 @@
     </div>
 
     <!-- Top Navigation Header -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-4 border-sky-300 shadow-sm px-4 sm:px-6 lg:px-8 py-3">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 lg:gap-6">
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-4 border-sky-300 shadow-sm px-3 sm:px-5 lg:px-6 py-2.5">
+        <div class="max-w-[1600px] w-full mx-auto flex items-center justify-between gap-2 lg:gap-3 xl:gap-4">
             
             <!-- Left: Logo & Brand -->
-            <a href="{{ route('landing') }}" @click="if(window.soundEngine) window.soundEngine.playClick()" class="flex items-center gap-2.5 group shrink-0">
-                <span class="text-3xl sm:text-4xl group-hover:rotate-12 transition-transform drop-shadow-xs">🌟</span>
+            <a href="{{ route('landing') }}" @click="if(window.soundEngine) window.soundEngine.playClick()" class="flex items-center gap-2 group shrink-0">
+                <span class="emoji-icon text-2xl sm:text-3xl lg:text-3xl group-hover:rotate-12 transition-transform drop-shadow-xs">🌟</span>
                 <div>
-                    <h1 class="text-xl sm:text-2xl font-black font-heading tracking-wide text-sky-700 leading-none">
+                    <h1 class="text-base sm:text-lg lg:text-xl font-black font-heading tracking-wide text-sky-700 leading-none">
                         YukBelajar <span class="text-amber-500">PAUD</span>
                     </h1>
-                    <p class="text-[10px] sm:text-xs font-bold text-slate-500 hidden sm:block">Game Belajar & Kuis Ceria</p>
+                    <p class="text-[9px] sm:text-[10px] font-bold text-slate-500 hidden sm:block">Game Belajar & Kuis Ceria</p>
                 </div>
             </a>
 
-            <!-- Center: Desktop Navigation Links (Visible on lg+ screens: 1024px, 1280px, etc.) -->
-            <nav class="hidden lg:flex items-center gap-1.5 xl:gap-2">
+            <!-- Center: Desktop Navigation Links (Visible on xl+ screens: 1280px+) -->
+            <nav class="hidden xl:flex items-center gap-1 2xl:gap-2">
                 <a href="{{ route('home') }}" @click="if(window.soundEngine) window.soundEngine.playClick()"
-                   class="px-3.5 py-2 rounded-2xl font-black text-xs xl:text-sm transition-all flex items-center gap-1.5 {{ request()->routeIs('home') ? 'bg-amber-400 text-amber-950 shadow-xs ring-2 ring-amber-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
-                    <span class="text-base">🎮</span>
+                   class="px-2.5 2xl:px-3.5 py-1.5 rounded-2xl font-black text-xs 2xl:text-sm whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 {{ request()->routeIs('home') ? 'bg-amber-400 text-amber-950 shadow-xs ring-2 ring-amber-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
+                    <span class="emoji-icon text-base shrink-0">🎮</span>
                     <span>Petualangan</span>
                 </a>
 
                 <a href="{{ route('stickers') }}" @click="if(window.soundEngine) window.soundEngine.playClick()"
-                   class="px-3.5 py-2 rounded-2xl font-black text-xs xl:text-sm transition-all flex items-center gap-1.5 {{ request()->routeIs('stickers') ? 'bg-purple-600 text-white shadow-xs ring-2 ring-purple-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
-                    <span class="text-base">🏆</span>
+                   class="px-2.5 2xl:px-3.5 py-1.5 rounded-2xl font-black text-xs 2xl:text-sm whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 {{ request()->routeIs('stickers') ? 'bg-purple-600 text-white shadow-xs ring-2 ring-purple-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
+                    <span class="emoji-icon text-base shrink-0">🏆</span>
                     <span>Buku Stiker</span>
                 </a>
 
                 <a href="{{ route('achievements') }}" @click="if(window.soundEngine) window.soundEngine.playClick()"
-                   class="px-3.5 py-2 rounded-2xl font-black text-xs xl:text-sm transition-all flex items-center gap-1.5 {{ request()->routeIs('achievements') ? 'bg-amber-500 text-white shadow-xs ring-2 ring-amber-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
-                    <span class="text-base">🎖️</span>
+                   class="px-2.5 2xl:px-3.5 py-1.5 rounded-2xl font-black text-xs 2xl:text-sm whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 {{ request()->routeIs('achievements') ? 'bg-amber-500 text-white shadow-xs ring-2 ring-amber-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
+                    <span class="emoji-icon text-base shrink-0">🎖️</span>
                     <span>Ruang Piala</span>
                 </a>
 
                 <a href="{{ route('community') }}" @click="if(window.soundEngine) window.soundEngine.playClick()"
-                   class="px-3.5 py-2 rounded-2xl font-black text-xs xl:text-sm transition-all flex items-center gap-1.5 {{ request()->routeIs('community') ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
-                    <span class="text-base">👥</span>
+                   class="px-2.5 2xl:px-3.5 py-1.5 rounded-2xl font-black text-xs 2xl:text-sm whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 {{ request()->routeIs('community') ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-300' : 'text-slate-700 hover:bg-slate-100 font-extrabold' }}">
+                    <span class="emoji-icon text-base shrink-0">👥</span>
                     <span>Sahabat</span>
                 </a>
 
                 <button type="button" @click="openParentalGate()"
-                        class="px-3.5 py-2 rounded-2xl font-extrabold text-xs xl:text-sm transition-all flex items-center gap-1.5 text-slate-700 hover:bg-slate-100 cursor-pointer">
-                    <span class="text-base">🔒</span>
+                        class="px-2.5 2xl:px-3.5 py-1.5 rounded-2xl font-extrabold text-xs 2xl:text-sm whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 text-slate-700 hover:bg-slate-100 cursor-pointer">
+                    <span class="emoji-icon text-base shrink-0">🔒</span>
                     <span>Orang Tua</span>
                 </button>
             </nav>
 
             <!-- Right: Action Badges & Audio & Mobile Toggle -->
-            <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 
                 <!-- Gold Stars Badge (Always Visible) -->
-                <div class="flex items-center gap-1 bg-amber-50 border-2 border-amber-300 px-3 py-1.5 rounded-2xl shadow-xs text-yellow-950 font-black text-xs sm:text-sm">
-                    <span class="text-sm sm:text-base animate-wiggle">⭐</span>
+                <div class="flex items-center gap-1 bg-amber-50 border-2 border-amber-300 px-2.5 py-1 rounded-2xl shadow-xs text-yellow-950 font-black text-xs sm:text-sm whitespace-nowrap shrink-0">
+                    <span class="emoji-icon text-sm animate-wiggle">⭐</span>
                     <span>{{ auth()->check() ? auth()->user()->total_stars : 35 }}</span>
                 </div>
 
                 <!-- Daily Streak Badge (Visible on sm+) -->
                 <button @click="showStreakModal = true; if(window.soundEngine) { window.soundEngine.playChirp(); window.soundEngine.speak('Semangat belajar harian! Kamu sudah belajar {{ auth()->check() ? (auth()->user()->current_streak_days ?? 1) : 1 }} hari berturut-turut!'); }"
                         title="Semangat Belajar Harian (Daily Streak 🔥)"
-                        class="hidden sm:flex items-center gap-1 bg-orange-50 hover:bg-orange-100 border-2 border-orange-400 px-3 py-1.5 rounded-2xl shadow-xs text-orange-950 font-black text-xs sm:text-sm cursor-pointer hover:scale-105 transition-transform">
-                    <span class="text-sm sm:text-base animate-bounce-slow">🔥</span>
-                    <span>{{ auth()->check() ? (auth()->user()->current_streak_days ?? 1) : 1 }} <span class="hidden md:inline text-[11px] font-bold text-orange-800">Hari</span></span>
+                        class="hidden sm:flex items-center gap-1 bg-orange-50 hover:bg-orange-100 border-2 border-orange-400 px-2.5 py-1 rounded-2xl shadow-xs text-orange-950 font-black text-xs sm:text-sm cursor-pointer hover:scale-105 transition-transform whitespace-nowrap shrink-0">
+                    <span class="emoji-icon text-sm animate-bounce-slow">🔥</span>
+                    <span>{{ auth()->check() ? (auth()->user()->current_streak_days ?? 1) : 1 }} <span class="hidden md:inline text-[10px] 2xl:text-[11px] font-bold text-orange-800">Hari</span></span>
                 </button>
 
                 <!-- Audio Toggle (Always Visible) -->
                 <button @click="toggleAudio()" title="Suara Musik & Efek"
-                        class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-sky-100 hover:bg-sky-200 border-2 border-sky-400 rounded-2xl shadow-xs transition-all text-sky-800 font-bold text-sm cursor-pointer hover:scale-105">
-                    <span x-text="isMuted ? '🔇' : '🔊'"></span>
+                        class="w-8 h-8 sm:w-8 sm:h-8 2xl:w-9 2xl:h-9 flex items-center justify-center bg-sky-100 hover:bg-sky-200 border-2 border-sky-400 rounded-2xl shadow-xs transition-all text-sky-800 font-bold text-xs sm:text-sm cursor-pointer hover:scale-105 shrink-0">
+                    <span class="emoji-icon" x-text="isMuted ? '🔇' : '🔊'"></span>
                 </button>
 
-                <!-- Desktop Profile & Action Buttons (Visible on lg+) -->
-                <div class="hidden lg:flex items-center gap-2">
+                <!-- Desktop Profile & Action Buttons (Visible on xl+) -->
+                <div class="hidden xl:flex items-center gap-1.5 2xl:gap-2 shrink-0">
                     @auth
                         <a href="{{ route('profile') }}" @click="if(window.soundEngine) window.soundEngine.playClick()"
-                           class="flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 hover:bg-sky-100 border-2 border-sky-300 rounded-2xl text-xs font-black text-sky-900 shadow-xs hover:scale-105 transition-all">
-                            <span class="text-base">{{ auth()->user()->avatar_emoji ?? '🦖' }}</span>
-                            <span class="truncate max-w-[120px]">{{ auth()->user()->name }}</span>
+                           class="flex items-center gap-1.5 px-2.5 2xl:px-3 py-1 bg-sky-50 hover:bg-sky-100 border-2 border-sky-300 rounded-2xl text-xs font-black text-sky-900 shadow-xs hover:scale-105 transition-all whitespace-nowrap shrink-0">
+                            <span class="emoji-icon text-sm">{{ auth()->user()->avatar_emoji ?? '🦖' }}</span>
+                            <span class="whitespace-nowrap truncate max-w-[80px] 2xl:max-w-[160px]">{{ auth()->user()->name }}</span>
                         </a>
 
                         @if (in_array(auth()->user()->role, ['admin', 'teacher']))
                             <a href="{{ route('admin.dashboard') }}"
-                               class="px-3 py-1.5 rounded-2xl font-black text-xs bg-emerald-100 hover:bg-emerald-200 border-2 border-emerald-300 text-emerald-800 flex items-center gap-1 hover:scale-105 transition-all">
-                                <span>🦁</span>
-                                <span class="hidden xl:inline">Panel Guru</span>
+                               class="px-2 2xl:px-3 py-1 rounded-2xl font-black text-xs bg-emerald-100 hover:bg-emerald-200 border-2 border-emerald-300 text-emerald-800 flex items-center gap-1 hover:scale-105 transition-all whitespace-nowrap shrink-0"
+                               title="Panel Guru & Admin">
+                                <span class="emoji-icon text-sm">🦁</span>
+                                <span class="hidden 2xl:inline">Panel Guru</span>
                             </a>
                         @endif
 
-                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                        <form action="{{ route('logout') }}" method="POST" class="inline shrink-0">
                             @csrf
                             <button type="submit" title="Keluar dari Akun"
-                                    class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-rose-50 hover:bg-rose-100 border-2 border-rose-300 rounded-2xl text-rose-700 shadow-xs transition-all text-sm font-bold cursor-pointer hover:scale-105">
-                                🚪
+                                    class="w-7 h-7 2xl:w-8 2xl:h-8 flex items-center justify-center bg-rose-50 hover:bg-rose-100 border-2 border-rose-300 rounded-2xl text-rose-700 shadow-xs transition-all text-xs font-bold cursor-pointer hover:scale-105">
+                                <span class="emoji-icon">🚪</span>
                             </button>
                         </form>
                     @else
                         <a href="{{ route('login') }}" 
-                           class="px-4 py-2 bg-amber-400 hover:bg-yellow-300 border-2 border-amber-500 rounded-2xl text-amber-950 font-black text-xs sm:text-sm shadow-xs hover:scale-105 transition-all">
+                           class="px-3 2xl:px-4 py-1.5 2xl:py-2 bg-amber-400 hover:bg-yellow-300 border-2 border-amber-500 rounded-2xl text-amber-950 font-black text-xs sm:text-sm shadow-xs hover:scale-105 transition-all whitespace-nowrap shrink-0">
                             🔑 Masuk
                         </a>
                         <a href="{{ route('register') }}" 
-                           class="px-4 py-2 bg-sky-500 hover:bg-sky-400 border-2 border-sky-600 rounded-2xl text-white font-black text-xs sm:text-sm shadow-xs hover:scale-105 transition-all">
+                           class="px-3 2xl:px-4 py-1.5 2xl:py-2 bg-sky-500 hover:bg-sky-400 border-2 border-sky-600 rounded-2xl text-white font-black text-xs sm:text-sm shadow-xs hover:scale-105 transition-all whitespace-nowrap shrink-0">
                             ✨ Daftar
                         </a>
                     @endauth
                 </div>
 
-                <!-- Hamburger Button for Mobile / Tablet (< lg) -->
+                <!-- Hamburger Button for Mobile / Tablet (< xl) -->
                 <button type="button" @click="mobileNavOpen = true"
-                        class="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 rounded-2xl text-slate-700 font-black text-lg shadow-xs cursor-pointer active:scale-95 transition-all">
+                        class="xl:hidden w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 rounded-2xl text-slate-700 font-black text-base shadow-xs cursor-pointer active:scale-95 transition-all shrink-0">
                     ☰
                 </button>
             </div>
@@ -199,7 +199,7 @@
     </header>
 
     <!-- Mobile Slide-Over Navigation Drawer (Top-level Fixed Full Screen) -->
-    <div x-show="mobileNavOpen" x-cloak class="fixed inset-0 z-50 lg:hidden" aria-modal="true">
+    <div x-show="mobileNavOpen" x-cloak class="fixed inset-0 z-50 xl:hidden" aria-modal="true">
         <!-- Backdrop -->
         <div x-show="mobileNavOpen" 
              x-transition:enter="transition-opacity ease-linear duration-200"

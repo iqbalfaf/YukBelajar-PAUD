@@ -5,15 +5,23 @@
     display: none !important;
 }
 
+img.emoji {
+    width: 1.35em !important;
+    height: 1.35em !important;
+    display: inline-block !important;
+    vertical-align: -0.15em !important;
+    margin: 0 0.1em !important;
+}
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../views/**/*.blade.php';
 @source '../js/**/*.js';
 
 @theme {
-    --font-fredoka: 'Fredoka', 'Quicksand', system-ui, sans-serif;
-    --font-sans: 'Quicksand', 'Fredoka', system-ui, sans-serif;
-    --font-heading: 'Fredoka', cursive, sans-serif;
+    --font-fredoka: 'Fredoka', 'Quicksand', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', system-ui, sans-serif;
+    --font-sans: 'Quicksand', 'Fredoka', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', system-ui, sans-serif;
+    --font-heading: 'Fredoka', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', cursive, sans-serif;
     
     --color-paud-sky: #38bdf8;
     --color-paud-sun: #facc15;
@@ -22,6 +30,15 @@
     --color-paud-purple: #c084fc;
     --color-paud-orange: #fb923c;
     --color-paud-dark: #1e293b;
+}
+
+.emoji-icon {
+    font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-style: normal;
 }
 
 body {
