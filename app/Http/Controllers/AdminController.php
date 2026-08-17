@@ -28,7 +28,7 @@ class AdminController extends Controller
     /**
      * Dashboard Utama Admin & Guru PAUD (Real Data dari MySQL via Eloquent).
      */
-    public function dashboard(): View
+    public function dashboard(GeminiService $geminiService): View
     {
         // 1. Ambil seluruh kategori beserta level dan kartu materi
         $categoriesModel = Category::with(['levels.materials'])->orderBy('sort_order')->get();
@@ -231,8 +231,23 @@ class AdminController extends Controller
         $avgScore = QuizAttempt::avg('score');
         $avgCompletionRate = $avgScore ? round($avgScore).'%' : '0%';
 
-        $aiLogsToday = AuditLog::whereIn('action_type', ['AI_GENERATE', 'PUBLISH_AI'])->whereDate('created_at', Carbon::today())->count();
-        $dailyQuotaLeft = max(0, 1000 - $aiLogsToday);
+        $isGeminiConfigured = $geminiService->isConfigured();
+        $configuredModel = config('services.gemini.model', env('GEMINI_MODEL', 'gemini-2.0-flash'));
+
+        $aiGenerationsToday = AuditLog::where('action_type', 'AI_GENERATE')->whereDate('created_at', Carbon::today())->count();
+        $aiGenerationsTotal = AuditLog::where('action_type', 'AI_GENERATE')->count();
+
+        $geminiStatusText = $isGeminiConfigured
+            ? "Cloud API Aktif ({$configuredModel})"
+            : 'Mode Cerdas Lokal (Siap API)';
+
+        $geminiQuotaText = $isGeminiConfigured
+            ? "{$aiGenerationsToday} / 1.500 RPD"
+            : "{$aiGenerationsToday}x Dipakai (Lokal)";
+
+        $studentsWithPin = User::where('role', 'student')->whereNotNull('parent_pin')->count();
+        $parentGatePct = $totalStudents > 0 ? round(($studentsWithPin / $totalStudents) * 100) : 100;
+        $parentGateText = "{$studentsWithPin}/{$totalStudents} Siswa ({$parentGatePct}%)";
 
         // 7. Bungkus data lengkap ke dalam $adminData
         $adminData = [
@@ -256,11 +271,15 @@ class AdminController extends Controller
                 'total_quizzes_weekly' => $totalQuizzesWeekly,
             ],
             'system_health' => [
-                'gemini_model' => 'Google Gemini 2.0 Flash',
-                'daily_prompt_quota' => "{$dailyQuotaLeft} / 1.000 Prompt",
-                'tts_engine' => 'Web Speech Synthesis (id-ID)',
-                'parental_gate_status' => '100% Proteksi Aktif 🔒',
-                'server_status' => '🟢 Stabil (PHP 8.4)',
+                'is_gemini_configured' => $isGeminiConfigured,
+                'gemini_model' => $geminiStatusText,
+                'gemini_raw_model' => $configuredModel,
+                'daily_prompt_quota' => $geminiQuotaText,
+                'ai_generations_today' => $aiGenerationsToday,
+                'ai_generations_total' => $aiGenerationsTotal,
+                'tts_engine' => 'Web Speech TTS (id-ID)',
+                'parental_gate_status' => $parentGateText,
+                'server_status' => '🟢 Stabil (PHP '.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.')',
             ],
             'audit_logs' => $auditLogs,
         ];

@@ -100,10 +100,13 @@
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs w-full md:w-auto">
             <!-- Gemini Status -->
             <div class="flex items-center gap-2 bg-slate-800/80 px-3 py-2 rounded-xl border border-slate-700/60">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse"></span>
+                <span class="w-2.5 h-2.5 rounded-full shrink-0"
+                      :class="systemHealth.is_gemini_configured ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'"></span>
                 <div class="truncate">
                     <span class="text-slate-400 text-[10px] block font-semibold">Gemini AI</span>
-                    <span class="font-extrabold text-emerald-300 truncate" x-text="systemHealth.gemini_model || 'Gemini 2.0 Flash'"></span>
+                    <span class="font-extrabold truncate text-[11px]"
+                          :class="systemHealth.is_gemini_configured ? 'text-emerald-300' : 'text-amber-300'"
+                          x-text="systemHealth.gemini_model"></span>
                 </div>
             </div>
 
@@ -111,8 +114,8 @@
             <div class="flex items-center gap-2 bg-slate-800/80 px-3 py-2 rounded-xl border border-slate-700/60">
                 <span class="text-amber-400 text-sm shrink-0">⚡</span>
                 <div class="truncate">
-                    <span class="text-slate-400 text-[10px] block font-semibold">Kuota Harian</span>
-                    <span class="font-extrabold text-amber-300 truncate" x-text="systemHealth.daily_prompt_quota || '1.000 / 1.000'"></span>
+                    <span class="text-slate-400 text-[10px] block font-semibold">Kuota AI Harian</span>
+                    <span class="font-extrabold text-amber-300 truncate text-[11px]" x-text="systemHealth.daily_prompt_quota"></span>
                 </div>
             </div>
 
@@ -121,7 +124,7 @@
                 <span class="text-sky-400 text-sm shrink-0">🔊</span>
                 <div class="truncate">
                     <span class="text-slate-400 text-[10px] block font-semibold">Audio Engine</span>
-                    <span class="font-extrabold text-sky-300 truncate">TTS (id-ID)</span>
+                    <span class="font-extrabold text-sky-300 truncate text-[11px]" x-text="systemHealth.tts_engine"></span>
                 </div>
             </div>
 
@@ -130,7 +133,7 @@
                 <span class="text-purple-400 text-sm shrink-0">🔒</span>
                 <div class="truncate">
                     <span class="text-slate-400 text-[10px] block font-semibold">Parental Gate</span>
-                    <span class="font-extrabold text-purple-300 truncate">Proteksi Aktif</span>
+                    <span class="font-extrabold text-purple-300 truncate text-[11px]" x-text="systemHealth.parental_gate_status"></span>
                 </div>
             </div>
         </div>
