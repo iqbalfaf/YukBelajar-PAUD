@@ -201,6 +201,27 @@ class FrontEndController extends Controller
                 })->toArray();
             }
 
+            $allMaterials = $cat->levels->flatMap(function ($lvl) use ($userStars) {
+                $isUnlocked = $userStars >= $lvl->unlock_stars_required;
+
+                return $lvl->materials->map(function ($m) use ($lvl, $isUnlocked) {
+                    return [
+                        'id' => $m->id,
+                        'title' => $m->title,
+                        'subtitle' => $m->subtitle,
+                        'icon_emoji' => $m->icon_emoji,
+                        'sound_effect' => $m->sound_effect,
+                        'speech_text' => $m->speech_text ?: ($m->title.'. '.$m->subtitle),
+                        'parent_note' => $m->parent_note,
+                        'level' => $lvl->level_number,
+                        'level_title' => $lvl->title,
+                        'target_age' => $lvl->target_age.' Thn',
+                        'is_unlocked' => $isUnlocked,
+                        'req_stars' => $lvl->unlock_stars_required,
+                    ];
+                });
+            })->values()->toArray();
+
             return [
                 'id' => $cat->id,
                 'slug' => $cat->slug,
@@ -211,6 +232,7 @@ class FrontEndController extends Controller
                 'bg_gradient' => $cat->bg_gradient,
                 'border_color' => $cat->border_color,
                 'materials_count' => $materialsCount,
+                'all_materials' => $allMaterials,
                 'quiz_id' => $primaryQuiz ? $primaryQuiz->slug : 'tebak-hewan',
                 'quizzes_list' => $quizzesList,
                 'quizzes_count' => count($quizzesList),
