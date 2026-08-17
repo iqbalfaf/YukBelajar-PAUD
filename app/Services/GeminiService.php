@@ -81,6 +81,7 @@ class GeminiService
             ."Tugas Anda adalah merancang soal kuis pilihan ganda bergambar yang sangat ramah anak usia {$targetAge} tahun. "
             .'Gunakan bahasa Indonesia yang riang, santun, ceria, dan mudah dimengerti anak. '
             ."ATURAN MUTLAK: DILARANG menggunakan emoji pelangi (🌈) dan DILARANG menggunakan kata 'pelangi'. Gunakan bintang emas (⭐), roket (🚀), balon (🎈), dan piala (🏆). "
+            .'Pastikan seluruh emoji pilihan jawaban menggunakan emoji standar universal yang kompatibel (contoh: cacing/ulat gunakan 🐛, burung 🐦, ayam 🐔, ikan 🐟). '
             .'Format output WAJIB berupa JSON murni dengan format array of objects.';
 
         $prompt = "Buatlah {$questionsCount} butir soal kuis interaktif anak PAUD untuk Kategori: '{$categoryName}' (Level {$levelNumber}), Tema Spesifik: '{$theme}'. "
