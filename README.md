@@ -1,7 +1,7 @@
 # 🌟 YukBelajar PAUD — Platform Game Belajar & Kuis Bergambar Interaktif
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/iqbalfaf/YukBelajar-PAUD/main/public/favicon.ico" width="80" alt="YukBelajar Logo">
+  <img src="public/logo.svg" width="400" alt="YukBelajar PAUD Logo">
 </p>
 
 <p align="center">
