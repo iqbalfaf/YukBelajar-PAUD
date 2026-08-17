@@ -22,43 +22,54 @@
          auditLogs: {{ Js::from($adminData['audit_logs'] ?? []) }}
      }">
 
-    <!-- Top Greeting Banner with Quick CTAs -->
-    <div class="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-            <span class="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-xs font-bold uppercase tracking-wider mb-2">
-                Panel Kurator & Guru PAUD
-            </span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">
-                Kelola Materi, Tingkatan Level & Dashboard Pembelajaran
-            </h2>
-            <p class="text-sm text-sky-100 mt-1 max-w-xl">
-                Pantau grafik keaktifan siswa, atur struktur materi berlevel (Scaffolding), dan buat materi instan dengan 1-Click Gemini AI.
-            </p>
+    <!-- Top Greeting Banner with Clean Structured Action Bar -->
+    <div class="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col gap-6 relative overflow-hidden">
+        
+        <!-- Header Info -->
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="max-w-2xl">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-xs text-white rounded-full text-xs font-black uppercase tracking-wider mb-2.5">
+                    <span>👑</span>
+                    <span>Panel Kurator & Guru PAUD</span>
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-black font-heading text-white leading-tight">
+                    Kelola Materi, Tingkatan Level & Dashboard Pembelajaran
+                </h2>
+                <p class="text-xs sm:text-sm text-sky-100 mt-2 leading-relaxed">
+                    Pantau grafik keaktifan siswa, atur struktur materi berlevel (Scaffolding), dan buat materi instan dengan 1-Click Gemini AI.
+                </p>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-2 px-3.5 py-2 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-xs font-bold text-sky-100 shrink-0">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Sistem Siap Digunakan</span>
+            </div>
         </div>
 
-        <div class="flex items-center gap-3 shrink-0 flex-wrap">
+        <!-- Quick Action Buttons Toolbar -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-white/20">
             <button @click="showAddMaterialModal = true"
-                    class="px-4 py-3 bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-xs rounded-2xl shadow-md transition-all flex items-center gap-2 cursor-pointer">
-                <span>➕</span>
-                <span>Tambah Materi Manual</span>
+                    class="py-3 px-4 bg-white hover:bg-slate-50 text-slate-800 font-extrabold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer hover:shadow-md hover:-translate-y-0.5">
+                <span class="text-sm">➕</span>
+                <span class="truncate">Tambah Materi Manual</span>
             </button>
 
             <a href="{{ route('admin.quizzes') }}"
-               class="px-4 py-3 bg-purple-500 hover:bg-purple-400 text-white font-extrabold text-xs rounded-2xl shadow-md transition-all flex items-center gap-2 cursor-pointer">
-                <span>🎯</span>
-                <span>Bank Soal & Input Manual</span>
+               class="py-3 px-4 bg-purple-500/90 hover:bg-purple-500 text-white font-extrabold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer hover:shadow-md hover:-translate-y-0.5 border border-purple-400/40">
+                <span class="text-sm">🎯</span>
+                <span class="truncate">Bank Soal & Input Manual</span>
             </a>
 
             <button @click="showExportModal = true"
-                    class="px-4 py-3 bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold text-xs rounded-2xl shadow-md transition-all flex items-center gap-2 cursor-pointer">
-                <span>📊</span>
-                <span>Ekspor Rapor Belajar</span>
+                    class="py-3 px-4 bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer hover:shadow-md hover:-translate-y-0.5">
+                <span class="text-sm">📊</span>
+                <span class="truncate">Ekspor Rapor Belajar</span>
             </button>
 
             <a href="{{ route('admin.ai-generator') }}" 
-               class="px-5 py-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-950 font-black text-xs rounded-2xl shadow-md transition-all flex items-center gap-2 hover:scale-105">
-                <x-gemini-icon class="w-5 h-5 shrink-0" />
-                <span>1-Click AI Studio</span>
+               class="py-3 px-4 bg-yellow-400 hover:bg-yellow-300 text-yellow-950 font-black text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 hover:shadow-md hover:-translate-y-0.5">
+                <x-gemini-icon class="w-4 h-4 shrink-0" />
+                <span class="truncate">1-Click AI Studio</span>
             </a>
         </div>
     </div>
@@ -84,96 +95,114 @@
     @endif
 
     <!-- SYSTEM HEALTH & LIVE API STATUS BAR -->
-    <div class="bg-slate-900 text-white rounded-2xl p-4 border border-slate-800 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div class="flex items-center gap-6 flex-wrap text-xs">
-            
+    <div class="bg-slate-900 text-white rounded-2xl p-4 sm:p-5 border border-slate-800 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs w-full md:w-auto">
             <!-- Gemini Status -->
-            <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-slate-400 font-bold">Google Gemini AI:</span>
-                <span class="font-extrabold text-emerald-300" x-text="systemHealth.gemini_model || 'Gemini 2.0 Flash'"></span>
+            <div class="flex items-center gap-2 bg-slate-800/80 px-3 py-2 rounded-xl border border-slate-700/60">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse"></span>
+                <div class="truncate">
+                    <span class="text-slate-400 text-[10px] block font-semibold">Gemini AI</span>
+                    <span class="font-extrabold text-emerald-300 truncate" x-text="systemHealth.gemini_model || 'Gemini 2.0 Flash'"></span>
+                </div>
             </div>
 
             <!-- Daily Quota -->
-            <div class="flex items-center gap-2">
-                <span class="text-slate-400 font-bold">Kuota AI Harian:</span>
-                <span class="font-extrabold text-amber-300" x-text="systemHealth.daily_prompt_quota || '1.000 / 1.000 Prompt'"></span>
+            <div class="flex items-center gap-2 bg-slate-800/80 px-3 py-2 rounded-xl border border-slate-700/60">
+                <span class="text-amber-400 text-sm shrink-0">⚡</span>
+                <div class="truncate">
+                    <span class="text-slate-400 text-[10px] block font-semibold">Kuota Harian</span>
+                    <span class="font-extrabold text-amber-300 truncate" x-text="systemHealth.daily_prompt_quota || '1.000 / 1.000'"></span>
+                </div>
             </div>
 
             <!-- Speech Synthesis -->
-            <div class="flex items-center gap-2">
-                <span class="text-slate-400 font-bold">Audio Engine:</span>
-                <span class="font-extrabold text-sky-300" x-text="systemHealth.tts_engine || 'Web Speech Synthesis (id-ID)'"></span>
+            <div class="flex items-center gap-2 bg-slate-800/80 px-3 py-2 rounded-xl border border-slate-700/60">
+                <span class="text-sky-400 text-sm shrink-0">🔊</span>
+                <div class="truncate">
+                    <span class="text-slate-400 text-[10px] block font-semibold">Audio Engine</span>
+                    <span class="font-extrabold text-sky-300 truncate">TTS (id-ID)</span>
+                </div>
             </div>
 
             <!-- Parental Gate -->
-            <div class="flex items-center gap-2">
-                <span class="text-slate-400 font-bold">Parental Gate:</span>
-                <span class="font-extrabold text-purple-300" x-text="systemHealth.parental_gate_status || '100% Proteksi Aktif 🔒'"></span>
+            <div class="flex items-center gap-2 bg-slate-800/80 px-3 py-2 rounded-xl border border-slate-700/60">
+                <span class="text-purple-400 text-sm shrink-0">🔒</span>
+                <div class="truncate">
+                    <span class="text-slate-400 text-[10px] block font-semibold">Parental Gate</span>
+                    <span class="font-extrabold text-purple-300 truncate">Proteksi Aktif</span>
+                </div>
             </div>
-
         </div>
 
-        <a href="{{ route('admin.users') }}" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1 underline decoration-dotted">
-            <span>👥 Kelola {{ $adminData['stats']['total_students'] }} Siswa Terdaftar →</span>
+        <a href="{{ route('admin.users') }}"
+           class="w-full md:w-auto px-4 py-2.5 bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 border border-sky-500/40 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 whitespace-nowrap">
+            <span>👥</span>
+            <span>Kelola {{ $adminData['stats']['total_students'] }} Siswa Terdaftar →</span>
         </a>
     </div>
 
-    <!-- Quick Stats Grid (Real Database Counts) -->
-    <div class="grid grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4">
+    <!-- Quick Stats Grid (Real Database Counts & Uniform Cards) -->
+    <div class="grid grid-cols-2 lg:grid-cols-6 gap-3.5 sm:gap-4">
         
-        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-1 text-slate-500">
-                <span class="text-xs font-bold">Materi Aktif</span>
-                <span class="text-xl">📚</span>
+        <!-- 1. Materi Aktif -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between h-36 hover:border-sky-300 hover:shadow-md transition-all">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500">Materi Aktif</span>
+                <span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center text-sm font-bold">📚</span>
             </div>
-            <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['total_materials'] }}</div>
-            <span class="text-[11px] font-semibold text-emerald-600">{{ count($categories) }} Pulau Belajar</span>
+            <div class="text-2xl sm:text-3xl font-black font-heading text-slate-900 my-1">{{ $adminData['stats']['total_materials'] }}</div>
+            <span class="text-[11px] font-bold text-emerald-600 truncate">{{ count($categories) }} Pulau Belajar</span>
         </div>
 
-        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-1 text-slate-500">
-                <span class="text-xs font-bold">Bank Soal Kuis</span>
-                <span class="text-xl">🎯</span>
+        <!-- 2. Bank Soal Kuis -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between h-36 hover:border-sky-300 hover:shadow-md transition-all">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500">Bank Soal</span>
+                <span class="w-8 h-8 rounded-lg bg-sky-50 text-sky-700 flex items-center justify-center text-sm font-bold">🎯</span>
             </div>
-            <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['total_quizzes'] }}</div>
-            <a href="{{ route('admin.quizzes') }}" class="text-[11px] font-bold text-sky-600 hover:underline">Kelola {{ $adminData['stats']['total_quizzes'] }} Modul Kuis →</a>
+            <div class="text-2xl sm:text-3xl font-black font-heading text-slate-900 my-1">{{ $adminData['stats']['total_quizzes'] }}</div>
+            <a href="{{ route('admin.quizzes') }}" class="text-[11px] font-bold text-sky-600 hover:underline truncate">Kelola {{ $adminData['stats']['total_quizzes'] }} Modul Kuis →</a>
         </div>
 
-        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-1 text-slate-500">
-                <span class="text-xs font-bold">Total Siswa</span>
-                <span class="text-xl">👶</span>
+        <!-- 3. Total Siswa -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between h-36 hover:border-sky-300 hover:shadow-md transition-all">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500">Total Siswa</span>
+                <span class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center text-sm font-bold">👶</span>
             </div>
-            <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['total_students'] }}</div>
-            <a href="{{ route('admin.users') }}" class="text-[11px] font-bold text-sky-600 hover:underline">Kelola Akun →</a>
+            <div class="text-2xl sm:text-3xl font-black font-heading text-slate-900 my-1">{{ $adminData['stats']['total_students'] }}</div>
+            <a href="{{ route('admin.users') }}" class="text-[11px] font-bold text-sky-600 hover:underline truncate">Kelola Akun Siswa →</a>
         </div>
 
-        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-1 text-slate-500">
-                <span class="text-xs font-bold">Bintang Diberikan</span>
-                <span class="text-xl">⭐</span>
+        <!-- 4. Bintang Diberikan -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between h-36 hover:border-sky-300 hover:shadow-md transition-all">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500">Bintang Emas</span>
+                <span class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center text-sm font-bold">⭐</span>
             </div>
-            <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['total_stars_awarded'] }}</div>
-            <span class="text-[11px] font-semibold text-amber-600">+{{ $adminData['stats']['stars_this_week'] }} Pekan Ini</span>
+            <div class="text-2xl sm:text-3xl font-black font-heading text-slate-900 my-1">{{ $adminData['stats']['total_stars_awarded'] }}</div>
+            <span class="text-[11px] font-bold text-amber-600 truncate">+{{ $adminData['stats']['stars_this_week'] }} Pekan Ini</span>
         </div>
 
-        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-1 text-slate-500">
-                <span class="text-xs font-bold">Guru & Kurator</span>
-                <span class="text-xl">🦁</span>
+        <!-- 5. Guru & Kurator -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between h-36 hover:border-sky-300 hover:shadow-md transition-all">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500">Guru / Admin</span>
+                <span class="w-8 h-8 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center text-sm font-bold">🦁</span>
             </div>
-            <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['active_teachers'] }}</div>
-            <span class="text-[11px] font-semibold text-purple-600">Terverifikasi</span>
+            <div class="text-2xl sm:text-3xl font-black font-heading text-slate-900 my-1">{{ $adminData['stats']['active_teachers'] }}</div>
+            <span class="text-[11px] font-bold text-purple-600 truncate">Terverifikasi Aktif</span>
         </div>
 
-        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-1 text-slate-500">
-                <span class="text-xs font-bold">Rerata Skor</span>
-                <span class="text-xl">📈</span>
+        <!-- 6. Rerata Skor -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between h-36 hover:border-sky-300 hover:shadow-md transition-all">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500">Rerata Skor</span>
+                <span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center text-sm font-bold">📈</span>
             </div>
-            <div class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-800">{{ $adminData['stats']['avg_completion_rate'] }}</div>
-            <span class="text-[11px] font-semibold text-emerald-600">Penguasaan Materi</span>
+            <div class="text-2xl sm:text-3xl font-black font-heading text-slate-900 my-1">{{ $adminData['stats']['avg_completion_rate'] }}</div>
+            <span class="text-[11px] font-bold text-emerald-600 truncate">Penguasaan Materi</span>
         </div>
 
     </div>
