@@ -31,13 +31,13 @@ test('halaman materi flashcard memuat kartu materi nyata dan bank kuis dari data
 
 test('halaman arena kuis memuat butir soal dan opsi jawaban nyata dari database', function () {
     $student = User::where('username', 'alif_ceria')->first();
-    $response = $this->actingAs($student)->get(route('quiz', 'tebak-hewan'));
+    $response = $this->actingAs($student)->get(route('quiz', 'kuis-hewan-l1-suara-hewan-jinak'));
 
     $response->assertStatus(200);
     $response->assertViewHas('quizData');
 
     $quizData = $response->viewData('quizData');
-    expect($quizData['slug'])->toBe('tebak-hewan');
+    expect($quizData['slug'])->toBe('kuis-hewan-l1-suara-hewan-jinak');
     expect($quizData['questions'])->not->toBeEmpty();
     expect($quizData['questions'][0]['options'])->not->toBeEmpty();
 });

@@ -2009,43 +2009,665 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 1 - TOPIK 4: SATWA & HEWAN LUCU (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (HEWAN JINAK & TERNAK) ---
             [
                 'category_slug' => 'hewan',
-                'title' => 'Tebak Hewan Pintar',
-                'slug' => 'tebak-hewan',
-                'icon_emoji' => '🦁',
-                'target_age' => 4,
+                'level_number' => 1,
+                'title' => 'Tebak Suara Hewan Jinak Ceria',
+                'slug' => 'kuis-hewan-l1-suara-hewan-jinak',
+                'icon_emoji' => '🐱',
+                'target_age' => 3,
                 'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Manakah hewan yang memiliki belalai panjang dan telinga lebar?',
-                        'audio' => 'Manakah hewan yang memiliki belalai panjang dan telinga lebar?',
+                        'text' => 'Hewan berkumis lembut yang bunyinya "Meong-meong" adalah...?',
+                        'audio' => 'Hewan berkumis lembut yang bunyinya meong meong adalah apa?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            ['emoji' => '🐱', 'text' => 'Kucing Persia', 'is_correct' => true],
+                            ['emoji' => '🐮', 'text' => 'Sapi Perah', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Bebek Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan lucu bertelinga panjang yang suka melompat dan makan wortel adalah...?',
+                        'audio' => 'Hewan lucu bertelinga panjang yang suka melompat dan makan wortel adalah apa?',
+                        'emoji' => '🐰',
+                        'options' => [
+                            ['emoji' => '🐰', 'text' => 'Kelinci Putih', 'is_correct' => true],
+                            ['emoji' => '🐔', 'text' => 'Ayam Jago', 'is_correct' => false],
+                            ['emoji' => '🐑', 'text' => 'Domba Lembut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Unggas berparuh datar yang bersuara "Kwek-kwek" saat berenang adalah...?',
+                        'audio' => 'Unggas berparuh datar yang bersuara kwek kwek saat berenang adalah apa?',
+                        'emoji' => '🦆',
+                        'options' => [
+                            ['emoji' => '🦆', 'text' => 'Bebek Kuning', 'is_correct' => true],
+                            ['emoji' => '🐱', 'text' => 'Kucing Manja', 'is_correct' => false],
+                            ['emoji' => '🐠', 'text' => 'Ikan Mas', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hewan',
+                'level_number' => 1,
+                'title' => 'Mengenal Hewan Ternak Bermanfaat',
+                'slug' => 'kuis-hewan-l1-hewan-ternak-sehat',
+                'icon_emoji' => '🐮',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Hewan besar penghasil susu sehat yang berbunyi "Moo-moo" adalah...?',
+                        'audio' => 'Hewan besar penghasil susu sehat yang berbunyi moo moo adalah apa?',
+                        'emoji' => '🐮',
+                        'options' => [
+                            ['emoji' => '🐮', 'text' => 'Sapi Perah', 'is_correct' => true],
+                            ['emoji' => '🐔', 'text' => 'Ayam Jago', 'is_correct' => false],
+                            ['emoji' => '🐰', 'text' => 'Kelinci Putih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Unggas yang suka berkokok "Kukuruyuk!" di pagi hari adalah...?',
+                        'audio' => 'Unggas yang suka berkokok kukuruyuk di pagi hari adalah apa?',
+                        'emoji' => '🐔',
+                        'options' => [
+                            ['emoji' => '🐔', 'text' => 'Ayam Jago', 'is_correct' => true],
+                            ['emoji' => '🐑', 'text' => 'Domba Lembut', 'is_correct' => false],
+                            ['emoji' => '🐱', 'text' => 'Kucing Manja', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan berbulu tebal putih seperti awan yang bersuara "Mbee-mbee" adalah...?',
+                        'audio' => 'Hewan berbulu tebal putih seperti awan yang bersuara mbee mbee adalah apa?',
+                        'emoji' => '🐑',
+                        'options' => [
+                            ['emoji' => '🐑', 'text' => 'Domba Lembut', 'is_correct' => true],
+                            ['emoji' => '🐮', 'text' => 'Sapi Perah', 'is_correct' => false],
+                            ['emoji' => '🐠', 'text' => 'Ikan Mas', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hewan',
+                'level_number' => 1,
+                'title' => 'Sahabat Air & Peliharaan Lucu',
+                'slug' => 'kuis-hewan-l1-sahabat-air-lucu',
+                'icon_emoji' => '🐠',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Hewan yang hidup di air dan berenang lincah menggunakan sirip adalah...?',
+                        'audio' => 'Hewan yang hidup di air dan berenang lincah menggunakan sirip adalah apa?',
+                        'emoji' => '🐠',
+                        'options' => [
+                            ['emoji' => '🐠', 'text' => 'Ikan Mas Ceria', 'is_correct' => true],
+                            ['emoji' => '🐰', 'text' => 'Kelinci Putih', 'is_correct' => false],
+                            ['emoji' => '🐱', 'text' => 'Kucing Persia', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pasangan sahabat hewan jinak yang sama-sama berkaki empat adalah...?',
+                        'audio' => 'Pasangan sahabat hewan jinak yang sama-sama berkaki empat adalah apa?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            ['emoji' => '🐱', 'text' => 'Kucing & Kelinci', 'is_correct' => true],
+                            ['emoji' => '🦆', 'text' => 'Bebek & Ayam', 'is_correct' => false],
+                            ['emoji' => '🐠', 'text' => 'Ikan & Bebek', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Makanan renyah yang paling disukai oleh kelinci lucu adalah...?',
+                        'audio' => 'Makanan renyah yang paling disukai oleh kelinci lucu adalah apa?',
+                        'emoji' => '🥕',
+                        'options' => [
+                            ['emoji' => '🥕', 'text' => 'Sayur Wortel Renyah', 'is_correct' => true],
+                            ['emoji' => '🐟', 'text' => 'Ikan Asin', 'is_correct' => false],
+                            ['emoji' => '🦴', 'text' => 'Tulang Kering', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (SATWA RIMBA & SAFARI) ---
+            [
+                'category_slug' => 'hewan',
+                'level_number' => 2,
+                'title' => 'Raja Hutan & Raksasa Rimba',
+                'slug' => 'kuis-hewan-l2-raja-hutan-raksasa-rimba',
+                'icon_emoji' => '🦁',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Hewan gagah bertaring tajam dan berbulu lebat di leher yang dijuluki Raja Hutan adalah...?',
+                        'audio' => 'Hewan gagah bertaring tajam dan berbulu lebat di leher yang dijuluki Raja Hutan adalah apa?',
+                        'emoji' => '🦁',
+                        'options' => [
+                            ['emoji' => '🦁', 'text' => 'Singa Si Raja Hutan', 'is_correct' => true],
+                            ['emoji' => '🦒', 'text' => 'Jerapah Leher Tinggi', 'is_correct' => false],
+                            ['emoji' => '🐵', 'text' => 'Monyet Ceria', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan darat terbesar yang memiliki belalai panjang dan telinga lebar adalah...?',
+                        'audio' => 'Hewan darat terbesar yang memiliki belalai panjang dan telinga lebar adalah apa?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '🐘', 'text' => 'Gajah Belalai Panjang', 'is_correct' => true],
+                            ['emoji' => '🐼', 'text' => 'Panda Gemas', 'is_correct' => false],
+                            ['emoji' => '🐴', 'text' => 'Kuda Kencang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan berleher sangat panjang yang suka makan daun di pucuk pohon adalah...?',
+                        'audio' => 'Hewan berleher sangat panjang yang suka makan daun di pucuk pohon adalah apa?',
+                        'emoji' => '🦒',
+                        'options' => [
+                            ['emoji' => '🦒', 'text' => 'Jerapah Leher Tinggi', 'is_correct' => true],
+                            ['emoji' => '🦁', 'text' => 'Singa Gagah', 'is_correct' => false],
+                            ['emoji' => '🐯', 'text' => 'Harimau Belang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan lincah berekor panjang yang suka bergelantungan di dahan pohon adalah...?',
+                        'audio' => 'Hewan lincah berekor panjang yang suka bergelantungan di dahan pohon adalah apa?',
+                        'emoji' => '🐵',
+                        'options' => [
+                            ['emoji' => '🐵', 'text' => 'Monyet Ceria', 'is_correct' => true],
+                            ['emoji' => '🐘', 'text' => 'Gajah Besar', 'is_correct' => false],
+                            ['emoji' => '🐼', 'text' => 'Panda Gemas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suara auman keras menggelegar "Roaaar!" adalah suara dari hewan...?',
+                        'audio' => 'Suara auman keras menggelegar roar adalah suara dari hewan apa?',
+                        'emoji' => '🦁',
+                        'options' => [
+                            ['emoji' => '🦁', 'text' => 'Singa Si Raja Hutan', 'is_correct' => true],
+                            ['emoji' => '🦒', 'text' => 'Jerapah', 'is_correct' => false],
+                            ['emoji' => '🐵', 'text' => 'Monyet', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hewan',
+                'level_number' => 2,
+                'title' => 'Belang Gagah & Panda Gemas',
+                'slug' => 'kuis-hewan-l2-belang-gagah-panda-gemas',
+                'icon_emoji' => '🐯',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Kucing besar bercorak loreng oranye hitam yang berlari tangguh adalah...?',
+                        'audio' => 'Kucing besar bercorak loreng oranye hitam yang berlari tangguh adalah apa?',
+                        'emoji' => '🐯',
+                        'options' => [
+                            ['emoji' => '🐯', 'text' => 'Harimau Belang', 'is_correct' => true],
+                            ['emoji' => '🐼', 'text' => 'Panda Gemas', 'is_correct' => false],
+                            ['emoji' => '🐴', 'text' => 'Kuda Kencang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Beruang gemas berbulu hitam-putih yang sangat suka makan daun bambu adalah...?',
+                        'audio' => 'Beruang gemas berbulu hitam putih yang sangat suka makan daun bambu adalah apa?',
+                        'emoji' => '🐼',
+                        'options' => [
+                            ['emoji' => '🐼', 'text' => 'Panda Gemas', 'is_correct' => true],
+                            ['emoji' => '🐯', 'text' => 'Harimau Belang', 'is_correct' => false],
+                            ['emoji' => '🦁', 'text' => 'Singa Gagah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan tangguh berkaki empat yang berlari sangat kencang dan berbunyi "Hii-haak!" adalah...?',
+                        'audio' => 'Hewan tangguh berkaki empat yang berlari sangat kencang dan berbunyi hii haak adalah apa?',
+                        'emoji' => '🐴',
+                        'options' => [
+                            ['emoji' => '🐴', 'text' => 'Kuda Berlari Kencang', 'is_correct' => true],
+                            ['emoji' => '🐘', 'text' => 'Gajah Belalai', 'is_correct' => false],
+                            ['emoji' => '🦒', 'text' => 'Jerapah Tinggi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah hewan rimba yang memiliki belalai panjang untuk menyemprotkan air?',
+                        'audio' => 'Manakah hewan rimba yang memiliki belalai panjang untuk menyemprotkan air?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '🐘', 'text' => 'Gajah Belalai Panjang', 'is_correct' => true],
+                            ['emoji' => '🐯', 'text' => 'Harimau Belang', 'is_correct' => false],
+                            ['emoji' => '🐵', 'text' => 'Monyet Ceria', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan manakah yang sangat suka makan buah pisang manis di atas pohon?',
+                        'audio' => 'Hewan manakah yang sangat suka makan buah pisang manis di atas pohon?',
+                        'emoji' => '🐵',
+                        'options' => [
+                            ['emoji' => '🐵', 'text' => 'Monyet Ceria', 'is_correct' => true],
+                            ['emoji' => '🐴', 'text' => 'Kuda Kencang', 'is_correct' => false],
+                            ['emoji' => '🐼', 'text' => 'Panda Gemas', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hewan',
+                'level_number' => 2,
+                'title' => 'Eksplorasi Ciri & Keunikan Satwa Safari',
+                'slug' => 'kuis-hewan-l2-keunikan-satwa-safari',
+                'icon_emoji' => '🦒',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Mengapa leher jerapah diciptakan sangat panjang oleh Tuhan?',
+                        'audio' => 'Mengapa leher jerapah diciptakan sangat panjang oleh Tuhan?',
+                        'emoji' => '🦒',
+                        'options' => [
+                            ['emoji' => '🦒', 'text' => 'Untuk memetik daun di pucuk pohon tinggi', 'is_correct' => true],
+                            ['emoji' => '🏊', 'text' => 'Untuk menyelam di dasar laut', 'is_correct' => false],
+                            ['emoji' => '🕳️', 'text' => 'Untuk masuk ke dalam lubang tanah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan safari manakah yang memiliki motif loreng garis-garis indah di tubuhnya?',
+                        'audio' => 'Hewan safari manakah yang memiliki motif loreng garis garis indah di tubuhnya?',
+                        'emoji' => '🐯',
+                        'options' => [
+                            ['emoji' => '🐯', 'text' => 'Harimau Belang', 'is_correct' => true],
+                            ['emoji' => '🐘', 'text' => 'Gajah Besar', 'is_correct' => false],
+                            ['emoji' => '🐼', 'text' => 'Panda Gemas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan manakah yang memiliki dua telinga lebar yang dikipas-kipaskan saat kepanasan?',
+                        'audio' => 'Hewan manakah yang memiliki dua telinga lebar yang dikipas kipaskan saat kepanasan?',
+                        'emoji' => '🐘',
+                        'options' => [
+                            ['emoji' => '🐘', 'text' => 'Gajah Belalai Panjang', 'is_correct' => true],
+                            ['emoji' => '🐵', 'text' => 'Monyet Ceria', 'is_correct' => false],
+                            ['emoji' => '🦁', 'text' => 'Singa Gagah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Pasangan hewan rimba yang sama-sama memiliki cakar tajam dan auman gagah adalah...?',
+                        'audio' => 'Pasangan hewan rimba yang sama-sama memiliki cakar tajam dan auman gagah adalah apa?',
+                        'emoji' => '🦁',
+                        'options' => [
+                            ['emoji' => '🦁', 'text' => 'Singa & Harimau', 'is_correct' => true],
+                            ['emoji' => '🐘', 'text' => 'Gajah & Jerapah', 'is_correct' => false],
+                            ['emoji' => '🐼', 'text' => 'Panda & Monyet', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah hewan lucu berbulu hitam-putih yang suka makan batang bambu renyah?',
+                        'audio' => 'Manakah hewan lucu berbulu hitam putih yang suka makan batang bambu renyah?',
+                        'emoji' => '🐼',
+                        'options' => [
+                            ['emoji' => '🐼', 'text' => 'Panda Gemas', 'is_correct' => true],
+                            ['emoji' => '🦁', 'text' => 'Singa Si Raja Hutan', 'is_correct' => false],
+                            ['emoji' => '🐴', 'text' => 'Kuda Kencang', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (SATWA KUTUB, LAUT, UDARA & HABITAT) ---
+            [
+                'category_slug' => 'hewan',
+                'level_number' => 3,
+                'title' => 'Penguasa Samudra & Satwa Kutub Dingin',
+                'slug' => 'kuis-hewan-l3-penguasa-samudra-satwa-kutub',
+                'icon_emoji' => '🐬',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Mamalia laut ramah dan cerdas yang suka melompat gembira di atas ombak adalah...?',
+                        'audio' => 'Mamalia laut ramah dan cerdas yang suka melompat gembira di atas ombak adalah apa?',
+                        'emoji' => '🐬',
+                        'options' => [
+                            ['emoji' => '🐬', 'text' => 'Lumba-Lumba Cerdas', 'is_correct' => true],
+                            ['emoji' => '🐢', 'text' => 'Kura-Kura Tempurung', 'is_correct' => false],
+                            ['emoji' => '🦅', 'text' => 'Burung Elang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan terbesar di samudra yang dapat menyemburkan air dari kepalanya adalah...?',
+                        'audio' => 'Hewan terbesar di samudra yang dapat menyemburkan air dari kepalanya adalah apa?',
+                        'emoji' => '🐳',
+                        'options' => [
+                            ['emoji' => '🐳', 'text' => 'Paus Biru Raksasa', 'is_correct' => true],
+                            ['emoji' => '🐬', 'text' => 'Lumba-Lumba', 'is_correct' => false],
+                            ['emoji' => '🐠', 'text' => 'Ikan Mas', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Burung berjas hitam-putih yang hidup di kutub es dan pandai meluncur di salju adalah...?',
+                        'audio' => 'Burung berjas hitam putih yang hidup di kutub es dan pandai meluncur di salju adalah apa?',
+                        'emoji' => '🐧',
+                        'options' => [
+                            ['emoji' => '🐧', 'text' => 'Pinguin Salju Lucu', 'is_correct' => true],
+                            ['emoji' => '🦉', 'text' => 'Burung Hantu', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Bebek Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Penguasa angkasa bercakar tajam dengan penglihatan mata sangat tajam dari langit adalah...?',
+                        'audio' => 'Penguasa angkasa bercakar tajam dengan penglihatan mata sangat tajam dari langit adalah apa?',
+                        'emoji' => '🦅',
+                        'options' => [
+                            ['emoji' => '🦅', 'text' => 'Burung Elang Penjelajah', 'is_correct' => true],
+                            ['emoji' => '🐧', 'text' => 'Pinguin Salju', 'is_correct' => false],
+                            ['emoji' => '🐔', 'text' => 'Ayam Jago', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Burung bijak bermata bulat besar yang aktif terbang di malam hari adalah...?',
+                        'audio' => 'Burung bijak bermata bulat besar yang aktif terbang di malam hari adalah apa?',
+                        'emoji' => '🦉',
+                        'options' => [
+                            ['emoji' => '🦉', 'text' => 'Burung Hantu Penjaga Malam', 'is_correct' => true],
+                            ['emoji' => '🦅', 'text' => 'Burung Elang', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Bebek Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan lambat berumur panjang yang membawa rumah tempurung keras di punggungnya adalah...?',
+                        'audio' => 'Hewan lambat berumur panjang yang membawa rumah tempurung keras di punggungnya adalah apa?',
+                        'emoji' => '🐢',
+                        'options' => [
+                            ['emoji' => '🐢', 'text' => 'Kura-Kura Rumah Tempurung', 'is_correct' => true],
+                            ['emoji' => '🐬', 'text' => 'Lumba-Lumba', 'is_correct' => false],
+                            ['emoji' => '🐰', 'text' => 'Kelinci Putih', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa pinguin memiliki lapisan lemak tebal di bawah kulitnya?',
+                        'audio' => 'Mengapa pinguin memiliki lapisan lemak tebal di bawah kulitnya?',
+                        'emoji' => '🐧',
+                        'options' => [
+                            ['emoji' => '🐧', 'text' => 'Menjaga tubuh tetap hangat di kutub dingin', 'is_correct' => true],
+                            ['emoji' => '🏊', 'text' => 'Agar tidak bisa berenang di air', 'is_correct' => false],
+                            ['emoji' => '🪶', 'text' => 'Agar bisa terbang tinggi di awan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah hewan yang menggunakan tempurung keras sebagai pelindung saat merasa terancam?',
+                        'audio' => 'Manakah hewan yang menggunakan tempurung keras sebagai pelindung saat merasa terancam?',
+                        'emoji' => '🐢',
+                        'options' => [
+                            ['emoji' => '🐢', 'text' => 'Kura-Kura', 'is_correct' => true],
+                            ['emoji' => '🐳', 'text' => 'Paus Biru', 'is_correct' => false],
+                            ['emoji' => '🦉', 'text' => 'Burung Hantu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di manakah habitat tempat tinggal yang paling disukai oleh paus dan lumba-lumba?',
+                        'audio' => 'Di manakah habitat tempat tinggal yang paling disukai oleh paus dan lumba lumba?',
+                        'emoji' => '🌊',
+                        'options' => [
+                            ['emoji' => '🌊', 'text' => 'Lautan dan Samudra Luas', 'is_correct' => true],
+                            ['emoji' => '🌲', 'text' => 'Puncak Pohon Hutan Rimba', 'is_correct' => false],
+                            ['emoji' => '🏜️', 'text' => 'Padang Pasir Gersang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Burung pemangsa apakah yang terbang tinggi melayang dan menyambar mangsa dengan cakar kokoh?',
+                        'audio' => 'Burung pemangsa apakah yang terbang tinggi melayang dan menyambar mangsa dengan cakar kokoh?',
+                        'emoji' => '🦅',
+                        'options' => [
+                            ['emoji' => '🦅', 'text' => 'Burung Elang', 'is_correct' => true],
+                            ['emoji' => '🐧', 'text' => 'Pinguin', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Bebek', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hewan',
+                'level_number' => 3,
+                'title' => 'Cerdas Mengelompokkan Habitat & Makanan Satwa',
+                'slug' => 'kuis-hewan-l3-habitat-makanan-satwa',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Kelompok hewan manakah yang hidup dan berenang di dalam air?',
+                        'audio' => 'Kelompok hewan manakah yang hidup dan berenang di dalam air?',
+                        'emoji' => '🐬',
+                        'options' => [
+                            ['emoji' => '🐬', 'text' => 'Lumba-Lumba, Paus, Ikan Mas', 'is_correct' => true],
+                            ['emoji' => '🦁', 'text' => 'Singa, Harimau, Kuda', 'is_correct' => false],
+                            ['emoji' => '🐵', 'text' => 'Monyet, Jerapah, Gajah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelompok hewan manakah yang berkembang biak dengan cara bertelur?',
+                        'audio' => 'Kelompok hewan manakah yang berkembang biak dengan cara bertelur?',
+                        'emoji' => '🐔',
+                        'options' => [
+                            ['emoji' => '🐔', 'text' => 'Ayam, Bebek, Pinguin', 'is_correct' => true],
+                            ['emoji' => '🐮', 'text' => 'Sapi, Kucing, Domba', 'is_correct' => false],
+                            ['emoji' => '🐘', 'text' => 'Gajah, Kuda, Singa', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kelompok hewan manakah yang termasuk pemakan tumbuhan (Herbivora)?',
+                        'audio' => 'Kelompok hewan manakah yang termasuk pemakan tumbuhan?',
+                        'emoji' => '🐮',
+                        'options' => [
+                            ['emoji' => '🐮', 'text' => 'Sapi, Kelinci, Jerapah', 'is_correct' => true],
+                            ['emoji' => '🦁', 'text' => 'Singa, Harimau, Elang', 'is_correct' => false],
+                            ['emoji' => '🐬', 'text' => 'Lumba-Lumba, Burung Hantu, Kucing', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah hewan darat yang memiliki belalai serbaguna untuk minum dan mengambil makanan?',
+                        'audio' => 'Manakah hewan darat yang memiliki belalai serbaguna untuk minum dan mengambil makanan?',
                         'emoji' => '🐘',
                         'options' => [
                             ['emoji' => '🐘', 'text' => 'Gajah', 'is_correct' => true],
-                            ['emoji' => '🐱', 'text' => 'Kucing', 'is_correct' => false],
-                            ['emoji' => '🐸', 'text' => 'Katak', 'is_correct' => false],
+                            ['emoji' => '🦒', 'text' => 'Jerapah', 'is_correct' => false],
+                            ['emoji' => '🦁', 'text' => 'Singa', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Hewan apa yang dijuluki Raja Hutan dan memiliki surai gagah?',
-                        'audio' => 'Hewan apa yang dijuluki Raja Hutan dan memiliki surai gagah?',
+                        'text' => 'Manakah hewan yang menghasilkan bahan wol hangat dari bulu tebalnya?',
+                        'audio' => 'Manakah hewan yang menghasilkan bahan wol hangat dari bulu tebalnya?',
+                        'emoji' => '🐑',
+                        'options' => [
+                            ['emoji' => '🐑', 'text' => 'Domba Lembut', 'is_correct' => true],
+                            ['emoji' => '🐮', 'text' => 'Sapi Perah', 'is_correct' => false],
+                            ['emoji' => '🐴', 'text' => 'Kuda Kencang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah hewan yang menghasilkan minuman susu segar dan sehat untuk anak-anak?',
+                        'audio' => 'Manakah hewan yang menghasilkan minuman susu segar dan sehat untuk anak anak?',
+                        'emoji' => '🐮',
+                        'options' => [
+                            ['emoji' => '🐮', 'text' => 'Sapi Perah', 'is_correct' => true],
+                            ['emoji' => '🐱', 'text' => 'Kucing Persia', 'is_correct' => false],
+                            ['emoji' => '🐔', 'text' => 'Ayam Jago', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah hewan laut yang bernapas dengan paru-paru dan melompat di atas ombak?',
+                        'audio' => 'Manakah hewan laut yang bernapas dengan paru paru dan melompat di atas ombak?',
+                        'emoji' => '🐬',
+                        'options' => [
+                            ['emoji' => '🐬', 'text' => 'Lumba-Lumba Cerdas', 'is_correct' => true],
+                            ['emoji' => '🐠', 'text' => 'Ikan Mas Kolam', 'is_correct' => false],
+                            ['emoji' => '🐔', 'text' => 'Ayam Jago', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Satwa apakah yang dapat memutar kepalanya ke belakang untuk mengamati kegelapan malam?',
+                        'audio' => 'Satwa apakah yang dapat memutar kepalanya ke belakang untuk mengamati kegelapan malam?',
+                        'emoji' => '🦉',
+                        'options' => [
+                            ['emoji' => '🦉', 'text' => 'Burung Hantu', 'is_correct' => true],
+                            ['emoji' => '🦅', 'text' => 'Burung Elang', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Bebek Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah satwa yang terkenal sangat lambat di darat namun lincah saat berenang?',
+                        'audio' => 'Manakah satwa yang terkenal sangat lambat di darat namun lincah saat berenang?',
+                        'emoji' => '🐢',
+                        'options' => [
+                            ['emoji' => '🐢', 'text' => 'Kura-Kura', 'is_correct' => true],
+                            ['emoji' => '🐴', 'text' => 'Kuda', 'is_correct' => false],
+                            ['emoji' => '🐯', 'text' => 'Harimau', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah satwa hutan yang pandai menirukan gerakan dan hidup berkelompok di pepohonan?',
+                        'audio' => 'Manakah satwa hutan yang pandai menirukan gerakan dan hidup berkelompok di pepohonan?',
+                        'emoji' => '🐵',
+                        'options' => [
+                            ['emoji' => '🐵', 'text' => 'Monyet Ceria', 'is_correct' => true],
+                            ['emoji' => '🐼', 'text' => 'Panda Gemas', 'is_correct' => false],
+                            ['emoji' => '🐘', 'text' => 'Gajah Besar', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'hewan',
+                'level_number' => 3,
+                'title' => 'Grand Champion Penjaga Alam & Satwa Ceria',
+                'slug' => 'kuis-hewan-l3-grand-master-satwa-ceria',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Siapakah satwa gagah yang dijuluki sebagai Raja Hutan Rimba?',
+                        'audio' => 'Siapakah satwa gagah yang dijuluki sebagai Raja Hutan Rimba?',
                         'emoji' => '🦁',
                         'options' => [
-                            ['emoji' => '🐰', 'text' => 'Kelinci', 'is_correct' => false],
-                            ['emoji' => '🦁', 'text' => 'Singa', 'is_correct' => true],
-                            ['emoji' => '🐒', 'text' => 'Monyet', 'is_correct' => false],
+                            ['emoji' => '🦁', 'text' => 'Singa Si Raja Hutan', 'is_correct' => true],
+                            ['emoji' => '🐵', 'text' => 'Monyet Ceria', 'is_correct' => false],
+                            ['emoji' => '🐰', 'text' => 'Kelinci Putih', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Manakah hewan lucu bertelinga panjang yang suka makan wortel?',
-                        'audio' => 'Manakah hewan lucu bertelinga panjang yang suka makan wortel?',
+                        'text' => 'Hewan apakah yang memiliki leher paling panjang di antara semua hewan darat?',
+                        'audio' => 'Hewan apakah yang memiliki leher paling panjang di antara semua hewan darat?',
+                        'emoji' => '🦒',
+                        'options' => [
+                            ['emoji' => '🦒', 'text' => 'Jerapah Leher Tinggi', 'is_correct' => true],
+                            ['emoji' => '🐘', 'text' => 'Gajah Belalai', 'is_correct' => false],
+                            ['emoji' => '🐴', 'text' => 'Kuda Kencang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan raksasa apakah yang memiliki tubuh terbesar di planet bumi?',
+                        'audio' => 'Hewan raksasa apakah yang memiliki tubuh terbesar di planet bumi?',
+                        'emoji' => '🐳',
+                        'options' => [
+                            ['emoji' => '🐳', 'text' => 'Paus Biru Samudra', 'is_correct' => true],
+                            ['emoji' => '🐘', 'text' => 'Gajah Belalai', 'is_correct' => false],
+                            ['emoji' => '🦁', 'text' => 'Singa Raja Hutan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Makanan pokok apakah yang sangat digemari oleh panda lucu?',
+                        'audio' => 'Makanan pokok apakah yang sangat digemari oleh panda lucu?',
+                        'emoji' => '🐼',
+                        'options' => [
+                            ['emoji' => '🐼', 'text' => 'Batang dan Daun Bambu Segar', 'is_correct' => true],
+                            ['emoji' => '🥩', 'text' => 'Daging Segar', 'is_correct' => false],
+                            ['emoji' => '🍌', 'text' => 'Buah Pisang Manis', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bagaimana cara kita menyayangi hewan peliharaan di rumah seperti kucing dan kelinci?',
+                        'audio' => 'Bagaimana cara kita menyayangi hewan peliharaan di rumah seperti kucing dan kelinci?',
+                        'emoji' => '🐱',
+                        'options' => [
+                            ['emoji' => '🐱', 'text' => 'Memberi makan teratur dan merawatnya dengan kasih sayang', 'is_correct' => true],
+                            ['emoji' => '🏃', 'text' => 'Mengejar dan menakut-nakutinya sampai lari', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Membiarkannya kelaparan tanpa minum', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Suara kokok "Kukuruyuk!" di pagi hari adalah tanda dari unggas...?',
+                        'audio' => 'Suara kokok kukuruyuk di pagi hari adalah tanda dari unggas apa?',
+                        'emoji' => '🐔',
+                        'options' => [
+                            ['emoji' => '🐔', 'text' => 'Ayam Jago Berkokok', 'is_correct' => true],
+                            ['emoji' => '🦆', 'text' => 'Bebek Kuning', 'is_correct' => false],
+                            ['emoji' => '🦉', 'text' => 'Burung Hantu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan lucu apakah yang suka melompat-lompat dengan telinga panjang yang tegak?',
+                        'audio' => 'Hewan lucu apakah yang suka melompat lompat dengan telinga panjang yang tegak?',
                         'emoji' => '🐰',
                         'options' => [
-                            ['emoji' => '🐰', 'text' => 'Kelinci', 'is_correct' => true],
-                            ['emoji' => '🐻', 'text' => 'Beruang', 'is_correct' => false],
-                            ['emoji' => '🐢', 'text' => 'Kura-kura', 'is_correct' => false],
+                            ['emoji' => '🐰', 'text' => 'Kelinci Putih Melompat', 'is_correct' => true],
+                            ['emoji' => '🐢', 'text' => 'Kura-Kura Lambat', 'is_correct' => false],
+                            ['emoji' => '🐮', 'text' => 'Sapi Perah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Hewan bersirip yang bernapas menggunakan insang di dalam air adalah...?',
+                        'audio' => 'Hewan bersirip yang bernapas menggunakan insang di dalam air adalah apa?',
+                        'emoji' => '🐠',
+                        'options' => [
+                            ['emoji' => '🐠', 'text' => 'Ikan Mas Ceria', 'is_correct' => true],
+                            ['emoji' => '🐬', 'text' => 'Lumba-Lumba', 'is_correct' => false],
+                            ['emoji' => '🦆', 'text' => 'Bebek Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Satwa kutub apakah yang berjalan bergoyang-goyang lucu di atas hamparan es salju?',
+                        'audio' => 'Satwa kutub apakah yang berjalan bergoyang goyang lucu di atas hamparan es salju?',
+                        'emoji' => '🐧',
+                        'options' => [
+                            ['emoji' => '🐧', 'text' => 'Pinguin Salju Lucu', 'is_correct' => true],
+                            ['emoji' => '🦅', 'text' => 'Burung Elang', 'is_correct' => false],
+                            ['emoji' => '🦁', 'text' => 'Singa Gagah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar hebat apakah untuk anak pintar pecinta dan penyayang satwa ciptaan Tuhan?',
+                        'audio' => 'Gelar hebat apakah untuk anak pintar pecinta dan penyayang satwa ciptaan Tuhan?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Sahabat Satwa Hebat & Penjaga Alam!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Mengantuk dan Malas', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Hutan yang Diam', 'is_correct' => false],
                         ],
                     ],
                 ],

@@ -29,7 +29,7 @@ test('relasi model eloquent category, level, material, dan quiz berjalan dengan 
     $level1 = $hewan->levels->first();
     expect($level1->materials->count())->toBeGreaterThanOrEqual(3);
 
-    $quiz = Quiz::where('slug', 'tebak-hewan')->first();
+    $quiz = Quiz::where('slug', 'kuis-hewan-l1-suara-hewan-jinak')->first();
     expect($quiz)->not->toBeNull();
     expect($quiz->questions->count())->toBeGreaterThanOrEqual(3);
     expect($quiz->questions->first()->options->count())->toBeGreaterThanOrEqual(3);

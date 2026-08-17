@@ -80,10 +80,10 @@ test('halaman flashcard bergambar dapat diakses dengan data kategori', function 
 
 test('halaman arena kuis gambar interaktif dapat diakses dengan soal', function () {
     $student = User::where('username', 'alif_ceria')->first();
-    $response = $this->actingAs($student)->get(route('quiz', 'tebak-hewan'));
+    $response = $this->actingAs($student)->get(route('quiz', 'kuis-hewan-l1-suara-hewan-jinak'));
 
     $response->assertStatus(200);
-    $response->assertSee('Tebak Hewan Pintar');
+    $response->assertSee('Tebak Suara Hewan Jinak Ceria');
     $response->assertSee('Pertanyaan Soal');
     $response->assertSee('Ulangi Suara');
 });
