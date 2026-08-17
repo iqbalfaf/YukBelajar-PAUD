@@ -8,7 +8,9 @@
          activePillar: 'mengenal', // 'mengenal', 'membaca', 'menghitung'
          selectedCategory: null,
          categoryLevelFilter: 0, // 0: Semua Level, 1: Level 1, 2: Level 2, 3: Level 3
-         categoryViewTab: 'all', // 'all', 'materials', 'quizzes'
+         categoryViewTab: 'materials', // 'materials' (default awal), 'quizzes'
+         currentPage: 1,
+         cardsPerPage: 6,
          unlockedLevels: {{ Js::from($unlockedLevels ?? []) }},
          showSmartUnlockModal: false,
          unlockTarget: { slug: '', name: '', level: 3, reqStars: 25, question: '', options: [] },
@@ -18,6 +20,24 @@
 
          get filteredCategories() {
              return this.allCategories.filter(c => c.pillar === this.activePillar);
+         },
+
+         get currentTopicMaterials() {
+             if (!this.selectedCategory || !this.selectedCategory.all_materials) return [];
+             let mats = this.selectedCategory.all_materials;
+             if (this.categoryLevelFilter > 0) {
+                 mats = mats.filter(m => m.level === this.categoryLevelFilter);
+             }
+             return mats;
+         },
+
+         get totalMaterialPages() {
+             return Math.max(1, Math.ceil(this.currentTopicMaterials.length / this.cardsPerPage));
+         },
+
+         get paginatedMaterials() {
+             const start = (this.currentPage - 1) * this.cardsPerPage;
+             return this.currentTopicMaterials.slice(start, start + this.cardsPerPage);
          },
          
          speakGreeting() {
@@ -42,12 +62,48 @@
          selectCategory(cat) {
              this.selectedCategory = cat;
              this.categoryLevelFilter = 0;
-             this.categoryViewTab = 'all';
+             this.categoryViewTab = 'materials'; // Default ke Pengenalan Kartu!
+             this.currentPage = 1;
              if (window.soundEngine) {
                  window.soundEngine.playClick();
-                 window.soundEngine.speak('Bagus sekali! Sekarang kamu membuka ' + cat.name + '. Yuk pilih kartu materi atau kuisnya!');
+                 window.soundEngine.speak('Bagus sekali! Mari belajar kartu ' + cat.name + ' terlebih dahulu!');
              }
              window.scrollTo({ top: 0, behavior: 'smooth' });
+         },
+
+         changePage(p) {
+             if (p < 1 || p > this.totalMaterialPages) return;
+             this.currentPage = p;
+             if (window.soundEngine) window.soundEngine.playClick();
+             const el = document.getElementById('topic-tab-navigation');
+             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+         },
+
+         setCategoryLevelFilter(lvl) {
+             this.categoryLevelFilter = lvl;
+             this.currentPage = 1;
+             if (window.soundEngine) window.soundEngine.playClick();
+         },
+
+         switchToQuizzes() {
+             this.categoryViewTab = 'quizzes';
+             if (window.soundEngine) {
+                 window.soundEngine.playClick();
+                 window.soundEngine.speak('Ayo uji kemampuanmu di Arena Kuis!');
+             }
+             const el = document.getElementById('topic-tab-navigation');
+             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+         },
+
+         switchToMaterials() {
+             this.categoryViewTab = 'materials';
+             this.currentPage = 1;
+             if (window.soundEngine) {
+                 window.soundEngine.playClick();
+                 window.soundEngine.speak('Yuk pelajari kartu pengenalan terlebih dahulu!');
+             }
+             const el = document.getElementById('topic-tab-navigation');
+             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
          },
 
          backToCategories() {
@@ -405,107 +461,114 @@
                      :class="selectedCategory.bg_gradient"></div>
             </div>
 
-            <!-- IN-TOPIC CONTROLS: Filter Tingkatan Level & Tab Konten -->
-            <div class="bg-white/95 border-3 border-sky-200 rounded-3xl p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
-                
-                <!-- Level Selector (L1, L2, L3) -->
-                <div class="flex items-center gap-2 overflow-x-auto max-w-full pb-1 md:pb-0 w-full md:w-auto">
-                    <span class="text-xs font-black text-slate-700 uppercase tracking-wide shrink-0">Level:</span>
-                    
-                    <button @click="categoryLevelFilter = 0; if(window.soundEngine) window.soundEngine.playClick()"
-                            class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer whitespace-nowrap"
-                            :class="categoryLevelFilter === 0 ? 'bg-sky-600 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
-                        🌟 Semua Level
-                    </button>
-                    
-                    <button @click="categoryLevelFilter = 1; if(window.soundEngine) window.soundEngine.playClick()"
-                            class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1 whitespace-nowrap"
-                            :class="categoryLevelFilter === 1 ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
-                        <span>🌱 Level 1</span>
-                        <span class="text-[10px] opacity-80">(0 ⭐ 🔓)</span>
-                    </button>
+            <!-- 2 GRAND TOPIC TABS: FLASHCARD PENGENALAN & ARENA KUIS -->
+            <div id="topic-tab-navigation" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-2 bg-white rounded-3xl border-3 border-sky-200 shadow-xs">
+                <!-- Tab 1: Flashcards -->
+                <button type="button" @click="switchToMaterials()"
+                        class="p-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-3 transition-all cursor-pointer"
+                        :class="categoryViewTab === 'materials' 
+                            ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-md scale-[1.01]' 
+                            : 'bg-slate-50 hover:bg-slate-100 text-slate-700'">
+                    <span class="text-3xl">🃏</span>
+                    <div class="text-left leading-tight">
+                        <span>1. Kartu Pengenalan Belajar</span>
+                        <span class="block text-xs font-bold opacity-90" 
+                              x-text="`${selectedCategory.all_materials ? selectedCategory.all_materials.length : 0} Kartu Bergambar`"></span>
+                    </div>
+                </button>
 
-                    <button @click="categoryLevelFilter = 2; if(window.soundEngine) window.soundEngine.playClick()"
-                            class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1 whitespace-nowrap"
-                            :class="categoryLevelFilter === 2 ? 'bg-amber-500 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
-                        <span>⭐ Level 2</span>
-                        <span class="text-[10px] opacity-80">({{ $user['stars_count'] >= 10 ? '🔓' : '🔒 10⭐' }})</span>
-                    </button>
-
-                    <button @click="categoryLevelFilter = 3; if(window.soundEngine) window.soundEngine.playClick()"
-                            class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1 whitespace-nowrap"
-                            :class="categoryLevelFilter === 3 ? 'bg-purple-600 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
-                        <span>🚀 Level 3</span>
-                        <span class="text-[10px] opacity-80">({{ $user['stars_count'] >= 25 ? '🔓' : '🔒 25⭐' }})</span>
-                    </button>
-                </div>
-
-                <!-- Tab Konten: Semua / Flashcard / Kuis -->
-                <div class="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl shrink-0 w-full sm:w-auto justify-center">
-                    <button @click="categoryViewTab = 'all'; if(window.soundEngine) window.soundEngine.playClick()"
-                            class="px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer"
-                            :class="categoryViewTab === 'all' ? 'bg-white text-sky-700 shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'">
-                        Semua Konten
-                    </button>
-                    <button @click="categoryViewTab = 'materials'; if(window.soundEngine) window.soundEngine.playClick()"
-                            class="px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer"
-                            :class="categoryViewTab === 'materials' ? 'bg-white text-sky-700 shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'">
-                        🃏 Kartu Materi
-                    </button>
-                    <button @click="categoryViewTab = 'quizzes'; if(window.soundEngine) window.soundEngine.playClick()"
-                            class="px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer"
-                            :class="categoryViewTab === 'quizzes' ? 'bg-white text-sky-700 shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'">
-                        🎯 Kuis Soal
-                    </button>
-                </div>
-
+                <!-- Tab 2: Kuis -->
+                <button type="button" @click="switchToQuizzes()"
+                        class="p-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-3 transition-all cursor-pointer"
+                        :class="categoryViewTab === 'quizzes' 
+                            ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-yellow-950 shadow-md scale-[1.01]' 
+                            : 'bg-slate-50 hover:bg-slate-100 text-slate-700'">
+                    <span class="text-3xl">🎯</span>
+                    <div class="text-left leading-tight">
+                        <span>2. Arena Kuis & Tantangan</span>
+                        <span class="block text-xs font-bold opacity-90" 
+                              x-text="`${selectedCategory.quizzes_list ? selectedCategory.quizzes_list.length : selectedCategory.quizzes_count} Modul Kuis`"></span>
+                    </div>
+                </button>
             </div>
 
-            <!-- BAGIAN 1: DAFTAR KARTU MATERI FLASHCARD -->
-            <div x-show="categoryViewTab === 'all' || categoryViewTab === 'materials'" class="flex flex-col gap-4">
-                <div class="flex items-center justify-between px-1">
-                    <h3 class="text-xl sm:text-2xl font-black font-heading text-slate-800 flex items-center gap-2">
-                        <span>📚</span>
-                        <span>Daftar Kartu Flashcard Bergambar:</span>
-                    </h3>
+            <!-- ========================================================================= -->
+            <!-- TAB 1 CONTENT: KARTU PENGENALAN BELAJAR (FLASHCARD FIRST + PAGINATION)    -->
+            <!-- ========================================================================= -->
+            <div x-show="categoryViewTab === 'materials'" class="flex flex-col gap-6">
+                
+                <!-- Filter Tingkatan Level Sub-Bar -->
+                <div class="bg-white/95 border-2 border-slate-200 rounded-2xl p-3 sm:p-4 shadow-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                    <div class="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0">
+                        <span class="text-xs font-black text-slate-700 uppercase tracking-wide mr-1 shrink-0">Level:</span>
+                        
+                        <button type="button" @click="setCategoryLevelFilter(0)"
+                                class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer whitespace-nowrap"
+                                :class="categoryLevelFilter === 0 ? 'bg-sky-600 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                            🌟 Semua Level
+                        </button>
+                        
+                        <button type="button" @click="setCategoryLevelFilter(1)"
+                                class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1 whitespace-nowrap"
+                                :class="categoryLevelFilter === 1 ? 'bg-emerald-600 text-white shadow-xs font-black' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                            <span>🌱 Level 1 (0 ⭐ 🔓)</span>
+                        </button>
+
+                        <button type="button" @click="setCategoryLevelFilter(2)"
+                                class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1 whitespace-nowrap"
+                                :class="categoryLevelFilter === 2 ? 'bg-amber-500 text-white shadow-xs font-black' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                            <span>⭐ Level 2</span>
+                            <span class="text-[10px] opacity-80">({{ $user['stars_count'] >= 10 ? '🔓' : '🔒 10⭐' }})</span>
+                        </button>
+
+                        <button type="button" @click="setCategoryLevelFilter(3)"
+                                class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1 whitespace-nowrap"
+                                :class="categoryLevelFilter === 3 ? 'bg-purple-600 text-white shadow-xs font-black' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                            <span>🚀 Level 3</span>
+                            <span class="text-[10px] opacity-80">({{ $user['stars_count'] >= 25 ? '🔓' : '🔒 25⭐' }})</span>
+                        </button>
+                    </div>
+
+                    <span class="text-xs font-bold text-slate-500 shrink-0 text-right"
+                          x-text="`Menampilkan ${paginatedMaterials.length} dari ${currentTopicMaterials.length} Kartu`"></span>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                    <template x-for="m in selectedCategory.all_materials" :key="m.id">
-                        <div x-show="categoryLevelFilter === 0 || m.level === categoryLevelFilter"
-                             class="card-bubbly p-5 rounded-3xl flex flex-col justify-between border-3 bg-white shadow-xs relative group overflow-hidden"
+                <!-- Grid Kartu Flashcard (Maksimal 6 Kartu per Halaman) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <template x-for="m in paginatedMaterials" :key="m.id">
+                        <div class="card-bubbly p-5 sm:p-6 rounded-3xl flex flex-col justify-between border-4 bg-white shadow-xs relative group overflow-hidden transition-all hover:shadow-md"
                              :class="m.is_unlocked || userStars >= m.req_stars ? 'border-sky-300 hover:border-sky-400' : 'border-slate-300 bg-slate-50/80'">
                             
                             <div>
                                 <!-- Level & Status Badge -->
                                 <div class="flex items-center justify-between gap-2 mb-3">
-                                    <span class="px-2 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider"
-                                          :class="m.level === 1 ? 'bg-emerald-100 text-emerald-800' : (m.level === 2 ? 'bg-amber-100 text-amber-900' : 'bg-purple-100 text-purple-900')"
+                                    <span class="px-2.5 py-1 rounded-xl text-[10px] font-black uppercase tracking-wider shadow-2xs"
+                                          :class="m.level === 1 ? 'bg-emerald-100 text-emerald-900 border border-emerald-300' : (m.level === 2 ? 'bg-amber-100 text-amber-950 border border-amber-300' : 'bg-purple-100 text-purple-950 border border-purple-300')"
                                           x-text="`Level ${m.level} • ${m.target_age}`"></span>
 
                                     <template x-if="m.is_unlocked || userStars >= m.req_stars">
-                                        <span class="text-[11px] font-extrabold text-emerald-600 flex items-center gap-1">
+                                        <span class="text-[11px] font-extrabold text-emerald-700 flex items-center gap-1">
                                             <span>🔓</span>
                                             <span>Terbuka</span>
                                         </span>
                                     </template>
                                     <template x-if="!(m.is_unlocked || userStars >= m.req_stars)">
-                                        <span class="text-[11px] font-extrabold text-rose-600 flex items-center gap-1">
+                                        <span class="text-[11px] font-extrabold text-rose-700 flex items-center gap-1">
                                             <span>🔒</span>
                                             <span x-text="`Butuh ${m.req_stars} ⭐`"></span>
                                         </span>
                                     </template>
                                 </div>
 
-                                <!-- Big Emoji Icon -->
-                                <div class="w-20 h-20 mx-auto bg-slate-50 rounded-2xl flex items-center justify-center text-5xl mb-3 border-2 border-slate-100 group-hover:scale-110 transition-transform">
-                                    <span x-text="m.icon_emoji"></span>
+                                <!-- Big Emoji Icon with Twemoji Rendering -->
+                                <div class="w-24 h-24 mx-auto bg-slate-50 rounded-2xl flex items-center justify-center text-5xl sm:text-6xl mb-3 border-2 border-slate-100 group-hover:scale-110 transition-transform shadow-inner select-none">
+                                    <span x-html="window.twemojiParse(m.icon_emoji)"></span>
                                 </div>
 
                                 <!-- Title & Subtitle -->
                                 <div class="text-center mb-4">
-                                    <h4 class="text-lg font-extrabold font-heading text-slate-800" x-text="m.title"></h4>
-                                    <p class="text-xs font-bold text-slate-500 mt-0.5" x-text="m.subtitle"></p>
+                                    <h4 class="text-lg sm:text-xl font-black font-heading text-slate-800 leading-snug" x-text="m.title"></h4>
+                                    <p class="text-xs font-bold text-slate-500 mt-1" x-text="m.subtitle"></p>
                                 </div>
                             </div>
 
@@ -515,23 +578,23 @@
                                     <div class="flex flex-col gap-2">
                                         <button type="button" 
                                                 @click="speakMaterial(m)"
-                                                class="btn-3d btn-3d-yellow py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 text-xs font-extrabold cursor-pointer shadow-xs">
+                                                class="btn-3d btn-3d-yellow py-2.5 px-3 rounded-2xl flex items-center justify-center gap-2 text-xs font-black cursor-pointer shadow-xs">
                                             <span class="text-base">🔊</span>
                                             <span>Dengarkan Suara</span>
                                         </button>
 
-                                        <div class="grid grid-cols-2 gap-1.5">
+                                        <div class="grid grid-cols-2 gap-2">
                                             <button type="button" 
                                                     @click="playMaterialEffect(m.sound_effect)"
-                                                    class="py-1.5 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold flex items-center justify-center gap-1 cursor-pointer transition-colors">
+                                                    class="py-2 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center gap-1 cursor-pointer transition-colors">
                                                 <span>🗣️</span>
                                                 <span>Tirukan</span>
                                             </button>
 
                                             <button type="button" 
                                                     @click="markMaterialDone(m)"
-                                                    class="py-1.5 px-2 rounded-xl text-[11px] font-black flex items-center justify-center gap-1 cursor-pointer transition-colors"
-                                                    :class="completedMaterials[m.id] ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 hover:bg-amber-200 text-amber-900'">
+                                                    class="py-2 px-2 rounded-xl text-xs font-black flex items-center justify-center gap-1 cursor-pointer transition-colors shadow-2xs"
+                                                    :class="completedMaterials[m.id] ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300'">
                                                 <span>⭐</span>
                                                 <span x-text="completedMaterials[m.id] ? 'Sudah ⭐' : '+1 ⭐'"></span>
                                             </button>
@@ -542,7 +605,7 @@
                                 <template x-if="!(m.is_unlocked || userStars >= m.req_stars)">
                                     <button type="button" 
                                             @click="openSmartUnlock(selectedCategory)"
-                                            class="btn-3d btn-3d-purple py-2 px-3 rounded-xl flex items-center justify-center gap-1 text-xs font-extrabold text-white cursor-pointer shadow-xs">
+                                            class="btn-3d btn-3d-purple py-2.5 px-3 rounded-2xl flex items-center justify-center gap-1.5 text-xs font-black text-white cursor-pointer shadow-xs">
                                         <span>⚡</span>
                                         <span x-text="`Uji Cepat Buka L${m.level}`"></span>
                                     </button>
@@ -552,24 +615,95 @@
                         </div>
                     </template>
                 </div>
-            </div>
 
-            <!-- BAGIAN 2: DAFTAR KUIS & TANTANGAN -->
-            <div x-show="categoryViewTab === 'all' || categoryViewTab === 'quizzes'" class="flex flex-col gap-4 pt-4">
-                <div class="flex items-center justify-between px-1">
-                    <h3 class="text-xl sm:text-2xl font-black font-heading text-slate-800 flex items-center gap-2">
+                <!-- Pagination Ceria Khusus Anak PAUD (Kids-Friendly Pagination) -->
+                <template x-if="totalMaterialPages > 1">
+                    <div class="bg-white border-3 border-sky-200 rounded-3xl p-4 sm:p-5 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <button type="button" 
+                                @click="changePage(currentPage - 1)" 
+                                :disabled="currentPage === 1"
+                                class="btn-3d px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center gap-2 transition-all w-full sm:w-auto justify-center"
+                                :class="currentPage === 1 ? 'opacity-40 cursor-not-allowed bg-slate-100 text-slate-400' : 'btn-3d-yellow cursor-pointer shadow-xs'">
+                            <span>⬅️</span>
+                            <span>Halaman Sebelumnya</span>
+                        </button>
+
+                        <!-- Nomor Halaman Bulat Warna-Warni -->
+                        <div class="flex items-center gap-2">
+                            <template x-for="p in totalMaterialPages" :key="p">
+                                <button type="button" 
+                                        @click="changePage(p)"
+                                        class="w-10 h-10 rounded-2xl font-black text-sm transition-all cursor-pointer flex items-center justify-center shadow-2xs"
+                                        :class="currentPage === p 
+                                            ? 'bg-sky-600 text-white scale-110 shadow-md ring-3 ring-sky-300 font-black' 
+                                            : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                                    <span x-text="p"></span>
+                                </button>
+                            </template>
+                        </div>
+
+                        <button type="button" 
+                                @click="changePage(currentPage + 1)" 
+                                :disabled="currentPage === totalMaterialPages"
+                                class="btn-3d px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center gap-2 transition-all w-full sm:w-auto justify-center"
+                                :class="currentPage === totalMaterialPages ? 'opacity-40 cursor-not-allowed bg-slate-100 text-slate-400' : 'btn-3d-yellow cursor-pointer shadow-xs'">
+                            <span>Halaman Berikutnya</span>
+                            <span>➡️</span>
+                        </button>
+                    </div>
+                </template>
+
+                <!-- Jembatan Ajakan Bermain Kuis (Call-to-Action Banner) -->
+                <div class="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 border-4 border-amber-500 rounded-3xl p-5 sm:p-7 shadow-md flex flex-col md:flex-row items-center justify-between gap-5 text-center md:text-left">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-white/90 rounded-2xl flex items-center justify-center text-4xl shadow-inner shrink-0 animate-bounce-slow">
+                            🎯
+                        </div>
+                        <div>
+                            <span class="inline-block bg-amber-900/30 text-amber-950 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full mb-1">
+                                Siap Menguji Kemampuan?
+                            </span>
+                            <h4 class="text-lg sm:text-xl font-black text-amber-950 font-heading">Sudah Selesai Mempelajari Kartu di Atas?</h4>
+                            <p class="text-xs sm:text-sm font-bold text-amber-900 mt-0.5">Ayo mainkan kuis bergambar dan kumpulkan bintang emas sebanyak-banyaknya!</p>
+                        </div>
+                    </div>
+
+                    <button type="button" @click="switchToQuizzes()"
+                            class="btn-3d btn-3d-purple px-6 py-3.5 rounded-2xl font-black text-sm text-white flex items-center justify-center gap-2 shadow-md cursor-pointer shrink-0 hover:scale-105 transition-transform w-full md:w-auto">
                         <span>🎯</span>
-                        <span>Daftar Kuis & Tantangan Soal:</span>
-                    </h3>
+                        <span>Mainkan Kuis Sekarang ➔</span>
+                    </button>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            </div>
+
+            <!-- ========================================================================= -->
+            <!-- TAB 2 CONTENT: ARENA KUIS & TANTANGAN SOAL                                -->
+            <!-- ========================================================================= -->
+            <div x-show="categoryViewTab === 'quizzes'" class="flex flex-col gap-6">
+                <div class="flex items-center justify-between px-1">
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-black font-heading text-slate-800 flex items-center gap-2">
+                            <span>🎯</span>
+                            <span>Pilihan Kuis & Tantangan Soal:</span>
+                        </h3>
+                        <p class="text-xs font-bold text-slate-500">Pilih salah satu modul kuis untuk mulai bermain dan mengumpulkan bintang emas!</p>
+                    </div>
+
+                    <button type="button" @click="switchToMaterials()"
+                            class="btn-3d btn-3d-sky px-4 py-2 rounded-2xl text-xs font-black text-white flex items-center gap-1.5 cursor-pointer shadow-xs shrink-0">
+                        <span>🃏</span>
+                        <span>Lihat Flashcard</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <template x-for="q in selectedCategory.quizzes_list" :key="q.id">
-                        <div class="card-bubbly p-5 sm:p-6 rounded-3xl flex flex-col justify-between border-4 border-amber-300 bg-gradient-to-b from-amber-50/50 to-white shadow-xs hover:border-amber-400 transition-all">
+                        <div class="card-bubbly p-6 rounded-3xl flex flex-col justify-between border-4 border-amber-300 bg-gradient-to-b from-amber-50/50 to-white shadow-xs hover:border-amber-400 transition-all hover:shadow-md">
                             
                             <div>
                                 <div class="flex items-start justify-between gap-3 mb-3">
-                                    <span class="text-5xl group-hover:scale-110 transition-transform" x-text="q.icon_emoji"></span>
+                                    <span class="text-5xl group-hover:scale-110 transition-transform" x-html="window.twemojiParse(q.icon_emoji)"></span>
                                     
                                     <div class="flex flex-col items-end gap-1">
                                         <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-amber-200 text-amber-950 border border-amber-300 shadow-2xs"
@@ -581,7 +715,7 @@
 
                                 <h4 class="text-lg font-extrabold font-heading text-slate-800 mb-1" x-text="q.title"></h4>
                                 
-                                <div class="bg-amber-100/60 border border-amber-200 rounded-2xl p-2.5 my-3 flex items-center justify-between">
+                                <div class="bg-amber-100/60 border border-amber-200 rounded-2xl p-3 my-3 flex items-center justify-between">
                                     <span class="text-xs font-bold text-amber-900">Rekor Bintangmu:</span>
                                     <span class="text-xs font-black text-amber-700 flex items-center gap-1">
                                         <span>⭐</span>
@@ -605,9 +739,9 @@
             </div>
 
             <!-- Return to Pillars Button -->
-            <div class="flex items-center justify-center pt-6">
+            <div class="flex items-center justify-center pt-4">
                 <button type="button" @click="backToCategories()"
-                        class="btn-3d btn-3d-sky px-6 py-3.5 rounded-2xl font-extrabold text-base text-white flex items-center gap-2 shadow-sm cursor-pointer">
+                        class="btn-3d btn-3d-sky px-6 py-3.5 rounded-2xl font-extrabold text-base text-white flex items-center gap-2 shadow-sm cursor-pointer hover:scale-105 transition-transform">
                     <span>🏝️</span>
                     <span>Kembali ke Pilihan Topik Utama</span>
                 </button>
