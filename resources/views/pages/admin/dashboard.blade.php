@@ -6,6 +6,7 @@
 <div class="flex flex-col gap-6"
      x-data="{
          selectedCategoryTab: 'hewan',
+         scaffoldingPillar: 'all', // 'all', 'mengenal', 'membaca', 'menghitung'
          showAddMaterialModal: false,
          showExportModal: false,
          exportType: 'all_students',
@@ -19,7 +20,12 @@
          categorizedMaterials: {{ Js::from($adminData['categorized_materials']) }},
          chartAnalytics: {{ Js::from($adminData['chart_analytics']) }},
          systemHealth: {{ Js::from($adminData['system_health'] ?? []) }},
-         auditLogs: {{ Js::from($adminData['audit_logs'] ?? []) }}
+         auditLogs: {{ Js::from($adminData['audit_logs'] ?? []) }},
+
+         get currentScaffoldingCategories() {
+             if (this.scaffoldingPillar === 'all') return this.categories;
+             return this.categories.filter(c => c.pillar === this.scaffoldingPillar);
+         }
      }">
 
     <!-- Top Greeting Banner with Clean Structured Action Bar -->
@@ -339,31 +345,66 @@
     </div>
 
     <!-- CATEGORIZED MATERIAL & SCAFFOLDING LEVEL MANAGEMENT -->
-    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs flex flex-col gap-6">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs flex flex-col gap-5">
         
-        <!-- Section Header -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+        <!-- Section Header (Full Width Title - Never Squished) -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
             <div>
-                <h3 class="text-xl font-bold font-heading text-slate-800 flex items-center gap-2">
-                    <span>🗂️</span>
-                    <span>Pengkategorian Materi & Tingkatan Level (Scaffolding)</span>
-                </h3>
-                <p class="text-xs font-bold text-slate-400 mt-0.5">
-                    Struktur materi per kategori dipecah ke dalam Level 1 (Dasar), Level 2 (Menengah), dan Level 3 (Pra-SD).
+                <div class="flex items-center gap-2.5">
+                    <span class="text-2xl">🗂️</span>
+                    <h3 class="text-xl font-extrabold font-heading text-slate-800">
+                        Pengkategorian Materi & Tingkatan Level (Scaffolding)
+                    </h3>
+                </div>
+                <p class="text-xs font-bold text-slate-400 mt-1">
+                    Struktur materi 3 pilar kurikulum dipecah ke dalam Level 1 (Dasar), Level 2 (Menengah), dan Level 3 (Pra-SD).
                 </p>
             </div>
 
-            <!-- Category Switcher Tabs -->
-            <div class="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl overflow-x-auto max-w-full">
-                <template x-for="cat in categories" :key="cat.slug">
-                    <button type="button" @click="selectedCategoryTab = cat.slug"
-                            class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5"
-                            :class="selectedCategoryTab === cat.slug ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                        <span x-text="cat.icon_emoji"></span>
-                        <span x-text="cat.name"></span>
-                    </button>
-                </template>
-            </div>
+            <a href="{{ route('admin.materials') }}" 
+               class="px-4 py-2 bg-sky-50 hover:bg-sky-100 text-sky-700 font-extrabold text-xs rounded-xl transition-all border border-sky-200 flex items-center gap-1.5 self-start sm:self-auto shrink-0">
+                <span>📚 Kelola Flashcard Lengkap →</span>
+            </a>
+        </div>
+
+        <!-- Pillar Switcher Tabs (3 Grand Pillars) -->
+        <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-2xl overflow-x-auto">
+            <button type="button" @click="scaffoldingPillar = 'all'"
+                    class="px-4 py-2 rounded-xl text-xs font-black transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5"
+                    :class="scaffoldingPillar === 'all' ? 'bg-slate-800 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
+                <span>🌟</span>
+                <span>Semua Pilar (<span x-text="categories.length"></span> Topik)</span>
+            </button>
+            <button type="button" @click="scaffoldingPillar = 'mengenal'"
+                    class="px-4 py-2 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5"
+                    :class="scaffoldingPillar === 'mengenal' ? 'bg-emerald-600 text-white shadow-xs font-black' : 'text-slate-600 hover:bg-slate-200'">
+                <span>🌟</span>
+                <span>Pilar 1: Mengenal</span>
+            </button>
+            <button type="button" @click="scaffoldingPillar = 'membaca'"
+                    class="px-4 py-2 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5"
+                    :class="scaffoldingPillar === 'membaca' ? 'bg-sky-600 text-white shadow-xs font-black' : 'text-slate-600 hover:bg-slate-200'">
+                <span>📖</span>
+                <span>Pilar 2: Membaca</span>
+            </button>
+            <button type="button" @click="scaffoldingPillar = 'menghitung'"
+                    class="px-4 py-2 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5"
+                    :class="scaffoldingPillar === 'menghitung' ? 'bg-purple-600 text-white shadow-xs font-black' : 'text-slate-600 hover:bg-slate-200'">
+                <span>🧮</span>
+                <span>Pilar 3: Menghitung</span>
+            </button>
+        </div>
+
+        <!-- Topic Switcher Chips Grid (Wrapable, Full Width, Interactive) -->
+        <div class="flex items-center gap-2 flex-wrap">
+            <template x-for="cat in currentScaffoldingCategories" :key="cat.slug">
+                <button type="button" @click="selectedCategoryTab = cat.slug"
+                        class="px-3.5 py-2 rounded-xl text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-2 border"
+                        :class="selectedCategoryTab === cat.slug ? 'bg-sky-600 text-white border-sky-700 shadow-xs font-black ring-2 ring-sky-300' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 font-bold'">
+                    <span x-html="window.twemojiParse(cat.icon_emoji)"></span>
+                    <span x-text="cat.name"></span>
+                </button>
+            </template>
         </div>
 
         <!-- Level Sections for Selected Category -->
