@@ -41,16 +41,16 @@
             </div>
         </div>
 
-        <!-- Progress Counter Widget -->
+        <!-- Progress Counter Widget (Real Database Data) -->
         <div class="bg-white/90 text-purple-950 p-4 sm:p-5 rounded-3xl border-3 border-purple-300 shadow-sm text-center shrink-0 z-10 w-full md:w-auto min-w-[200px]">
             <span class="text-xs font-bold uppercase tracking-wider text-purple-700">Total Koleksi</span>
             <div class="text-3xl font-extrabold font-heading text-purple-900 my-0.5">
-                <span class="text-amber-500">7</span> / 12 Stiker
+                <span class="text-amber-500">{{ $stickersData['unlocked_count'] }}</span> / {{ $stickersData['total_count'] }} Stiker
             </div>
             <div class="w-full bg-purple-100 rounded-full h-3 overflow-hidden border border-purple-300">
-                <div class="bg-gradient-to-r from-amber-400 to-yellow-500 h-full rounded-full" style="width: 58%;"></div>
+                <div class="bg-gradient-to-r from-amber-400 to-yellow-500 h-full rounded-full transition-all duration-500" style="width: {{ $stickersData['progress_pct'] }}%;"></div>
             </div>
-            <span class="text-[11px] font-bold text-purple-800 mt-1 block">58% Terkumpul!</span>
+            <span class="text-[11px] font-bold text-purple-800 mt-1 block">{{ $stickersData['progress_pct'] }}% Terkumpul!</span>
         </div>
 
         <div class="absolute -right-10 -bottom-10 text-9xl opacity-20 pointer-events-none">✨</div>

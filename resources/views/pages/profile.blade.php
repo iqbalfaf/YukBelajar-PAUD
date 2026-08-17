@@ -19,8 +19,8 @@
          speechPitch: 1.2,
          confettiEnabled: true,
          soundFxEnabled: true,
-         showSuccessAlert: false,
-         alertMessage: '',
+         showSuccessAlert: {{ session('success') ? 'true' : 'false' }},
+         alertMessage: '{{ session('success') ?? '✨ Pengaturan profil & informasi akun berhasil disimpan!' }}',
 
          avatars: {{ Js::from($avatars) }},
          accessories: {{ Js::from($accessories) }},
@@ -33,17 +33,6 @@
          get selectedAccessoryIcon() {
              const acc = this.accessories.find(a => a.key === this.accessory);
              return (acc && acc.icon !== '❌') ? acc.icon : '';
-         },
-
-         saveProfile() {
-             this.alertMessage = '✨ Pengaturan profil & informasi akun berhasil disimpan!';
-             this.showSuccessAlert = true;
-             if (window.soundEngine) {
-                 window.soundEngine.playVictory();
-                 window.soundEngine.speak('Bagus sekali! Profil akun barumu sudah tersimpan!');
-             }
-             window.triggerConfetti(0.7);
-             setTimeout(() => this.showSuccessAlert = false, 4000);
          },
 
          testVoice() {
@@ -66,7 +55,7 @@
         </span>
     </div>
 
-    <!-- User Profile Header Card -->
+    <!-- User Profile Header Card (Real Data MySQL) -->
     <div class="bg-gradient-to-r from-amber-200 via-yellow-100 to-sky-100 border-4 border-amber-300 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden">
         
         <div class="flex items-center gap-5 z-10 text-center sm:text-left">
@@ -87,7 +76,7 @@
                     <span>•</span>
                     <span class="text-sky-800" x-text="'Usia ' + age + ' Tahun'"></span>
                     <span>•</span>
-                    <span class="text-emerald-700 font-extrabold">🏆 7 Stiker Karakter</span>
+                    <span class="text-emerald-700 font-extrabold">🏆 {{ $user['stickers_count'] }} Stiker Karakter</span>
                 </div>
             </div>
 
@@ -103,15 +92,25 @@
         <span class="absolute -right-6 -bottom-6 text-8xl opacity-20 pointer-events-none">👑</span>
     </div>
 
-    <!-- Alert Success Notification -->
-    <div x-show="showSuccessAlert" x-cloak
-         class="p-4 bg-emerald-100 border-3 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
+    <!-- Alert Success / Error Notification -->
+    @if(session('success'))
+    <div class="p-4 bg-emerald-100 border-3 border-emerald-400 text-emerald-950 font-extrabold text-sm rounded-2xl flex items-center justify-between shadow-xs animate-pop-star">
         <div class="flex items-center gap-3">
             <span class="text-2xl">✨</span>
-            <span x-text="alertMessage"></span>
+            <span>{{ session('success') }}</span>
         </div>
-        <button @click="showSuccessAlert = false" class="text-emerald-800 hover:text-emerald-950 font-black">✖</button>
     </div>
+    @endif
+
+    @if($errors->any())
+    <div class="p-4 bg-rose-100 border-3 border-rose-400 text-rose-950 font-bold text-sm rounded-2xl shadow-xs">
+        <ul class="list-disc list-inside">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
     <!-- Tab Navigation Selector -->
     <div class="bg-white p-2 rounded-2xl border-3 border-sky-200 shadow-xs flex items-center gap-1.5 overflow-x-auto">
@@ -140,14 +139,17 @@
     <!-- TAB 1: INFORMASI ANAK, AVATAR & AKSESORI -->
     <div x-show="activeTab === 'student_info'" class="bg-white rounded-3xl p-6 sm:p-8 border-3 border-slate-200 shadow-xs flex flex-col gap-6">
         
-        <form @submit.prevent="saveProfile()" class="flex flex-col gap-6">
-            
+        <form action="{{ route('profile.update') }}" method="POST" class="flex flex-col gap-6">
+            @csrf
+            <input type="hidden" name="avatar_icon" :value="avatar">
+            <input type="hidden" name="avatar_accessory" :value="accessory">
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
                         Nama Panggilan Anak
                     </label>
-                    <input type="text" x-model="name" required
+                    <input type="text" name="name" x-model="name" required
                            class="w-full p-3.5 text-base font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-2xl outline-none transition-all">
                 </div>
 
@@ -155,7 +157,7 @@
                     <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
                         Usia Belajar Anak
                     </label>
-                    <select x-model="age"
+                    <select name="age" x-model="age"
                             class="w-full p-3.5 text-base font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-2xl outline-none cursor-pointer">
                         <option :value="3">3 Tahun (Level 1: Dasar / Pemula)</option>
                         <option :value="4">4 Tahun (Level 2: Menengah / Eksplorasi)</option>
@@ -203,7 +205,7 @@
 
             <button type="submit"
                     class="btn-3d btn-3d-sky w-full py-4 rounded-2xl font-black text-base text-white mt-2">
-                Simpan Perubahan Profil Anak
+                Simpan Perubahan Profil Anak ke Database
             </button>
 
         </form>
@@ -213,8 +215,11 @@
     <!-- TAB 2: KEAMANAN, USERNAME & PIN ORANG TUA -->
     <div x-show="activeTab === 'parent_security'" class="bg-white rounded-3xl p-6 sm:p-8 border-3 border-slate-200 shadow-xs flex flex-col gap-6">
         
-        <form @submit.prevent="saveProfile()" class="flex flex-col gap-5">
-            
+        <form action="{{ route('profile.update') }}" method="POST" class="flex flex-col gap-5">
+            @csrf
+            <input type="hidden" name="name" :value="name">
+            <input type="hidden" name="age" :value="age">
+
             <div class="p-4 bg-amber-50 border-2 border-amber-300 rounded-2xl flex items-start gap-3">
                 <span class="text-2xl shrink-0">🔒</span>
                 <div>
@@ -229,10 +234,10 @@
 
             <div>
                 <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Username Login Akun
+                    Username Login Akun (Permanen)
                 </label>
-                <input type="text" x-model="username" required
-                       class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-2xl outline-none font-mono">
+                <input type="text" x-model="username" readonly disabled
+                       class="w-full p-3.5 text-sm font-bold bg-slate-100 border-2 border-slate-300 rounded-2xl font-mono text-slate-600 cursor-not-allowed">
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -240,7 +245,7 @@
                     <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
                         PIN Orang Tua (4 Digit Angka)
                     </label>
-                    <input type="password" maxlength="4" x-model="parentPin" required placeholder="1234"
+                    <input type="password" name="parent_pin" maxlength="4" x-model="parentPin" required placeholder="1234"
                            class="w-full p-3.5 text-center text-xl tracking-widest font-black bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-2xl outline-none font-mono">
                 </div>
 
@@ -248,14 +253,14 @@
                     <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
                         Kata Sandi Baru (Opsional)
                     </label>
-                    <input type="password" x-model="newPassword" placeholder="Biarkan kosong jika tidak diganti"
+                    <input type="password" name="password" x-model="newPassword" placeholder="Biarkan kosong jika tidak diganti"
                            class="w-full p-3.5 text-sm font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-2xl outline-none">
                 </div>
             </div>
 
             <button type="submit"
                     class="btn-3d btn-3d-yellow w-full py-4 rounded-2xl font-black text-base text-amber-950 mt-2">
-                Simpan Pengaturan Keamanan
+                Simpan Pengaturan Keamanan ke Database
             </button>
 
         </form>
@@ -265,7 +270,7 @@
     <!-- TAB 3: PREFERENSI AUDIO, TTS & ANIMASI -->
     <div x-show="activeTab === 'audio_preferences'" class="bg-white rounded-3xl p-6 sm:p-8 border-3 border-slate-200 shadow-xs flex flex-col gap-6">
         
-        <form @submit.prevent="saveProfile()" class="flex flex-col gap-5">
+        <div class="flex flex-col gap-5">
             
             <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border-2 border-slate-200">
                 <div class="flex items-center gap-3">
@@ -300,12 +305,12 @@
                 </div>
             </div>
 
-            <button type="submit"
+            <button type="button" @click="testVoice(); if(window.soundEngine) window.soundEngine.playVictory()"
                     class="btn-3d btn-3d-purple w-full py-4 rounded-2xl font-black text-base text-white mt-2">
-                Simpan Preferensi Suara
+                Uji & Aktifkan Pengaturan Suara
             </button>
 
-        </form>
+        </div>
 
     </div>
 

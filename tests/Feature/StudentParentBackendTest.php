@@ -68,3 +68,50 @@ test('halaman panggung sahabat petualang memuat daftar siswa nyata dari database
     expect(collect($friends)->pluck('id'))->toContain($student->id);
     expect(collect($friends)->firstWhere('id', $student->id)['name'])->toContain('Kamu');
 });
+
+test('halaman buku stiker memuat koleksi nyata dan kalkulasi progres dari database', function () {
+    $student = User::where('username', 'alif_ceria')->first();
+    $response = $this->actingAs($student)->get(route('stickers'));
+
+    $response->assertStatus(200);
+    $response->assertViewHas('stickers');
+    $response->assertViewHas('stickersData');
+
+    $stickersData = $response->viewData('stickersData');
+    expect($stickersData['total_count'])->toBeGreaterThan(0);
+    expect($stickersData['progress_pct'])->toBeGreaterThanOrEqual(0);
+});
+
+test('halaman ruang piala memuat lencana prestasi nyata dari database', function () {
+    $student = User::where('username', 'alif_ceria')->first();
+    $response = $this->actingAs($student)->get(route('achievements'));
+
+    $response->assertStatus(200);
+    $response->assertViewHas('achievementsData');
+
+    $achievementsData = $response->viewData('achievementsData');
+    expect($achievementsData['total_count'])->toBeGreaterThan(0);
+    expect($achievementsData['printable_certificates'])->not->toBeEmpty();
+});
+
+test('pengguna dapat memperbarui profil nama, usia, avatar, dan PIN ke database', function () {
+    $student = User::where('username', 'alif_ceria')->first();
+
+    $response = $this->actingAs($student)->post(route('profile.update'), [
+        'name' => 'Alif Bintang Terang',
+        'age' => 5,
+        'avatar_icon' => 'singa',
+        'avatar_accessory' => 'crown',
+        'parent_pin' => '9988',
+    ]);
+
+    $response->assertRedirect(route('profile'));
+    $response->assertSessionHas('success');
+
+    $student->refresh();
+    expect($student->name)->toBe('Alif Bintang Terang');
+    expect($student->age)->toBe(5);
+    expect($student->avatar_icon)->toBe('singa');
+    expect($student->avatar_accessory)->toBe('crown');
+    expect($student->parent_pin)->toBe('9988');
+});

@@ -91,7 +91,7 @@
         <div class="bg-white/95 p-4 rounded-2xl border-3 border-amber-300 shadow-xs text-center shrink-0 z-10 min-w-[170px]">
             <span class="text-xs font-bold text-slate-500 uppercase">Lencana Terbuka</span>
             <div class="text-3xl font-black font-heading text-amber-900 my-0.5">
-                <span class="text-emerald-600">4</span> / 6 Piala
+                <span class="text-emerald-600">{{ $achievementsData['unlocked_count'] }}</span> / {{ $achievementsData['total_count'] }} Piala
             </div>
             <span class="text-[11px] font-bold text-amber-800">Tingkat Master 🌟</span>
         </div>
@@ -126,7 +126,7 @@
                 <div class="flex items-center gap-6 text-center md:text-left">
                     <!-- Avatar Visual with Worn Accessory -->
                     <div class="relative w-28 h-28 bg-amber-100 border-4 border-amber-400 rounded-full flex items-center justify-center text-7xl shadow-md shrink-0 animate-bounce-slow">
-                        <span>🦖</span>
+                        <span>{{ $user['avatar_emoji'] }}</span>
                         <!-- Dynamic Accessory Floating Overlay -->
                         <template x-if="currentAccessory">
                             <span class="absolute -top-3 right-0 text-4xl animate-wiggle drop-shadow-md" x-text="currentAccessory"></span>

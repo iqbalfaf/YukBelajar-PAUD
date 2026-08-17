@@ -10,7 +10,10 @@ use App\Models\QuizAttempt;
 use App\Models\Sticker;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class FrontEndController extends Controller
 {
@@ -342,7 +345,10 @@ class FrontEndController extends Controller
         $authUser = Auth::user();
         $unlockedStickerIds = $authUser ? $authUser->stickers()->pluck('stickers.id')->toArray() : [1, 2, 3, 4, 5, 6, 7];
 
-        $stickers = Sticker::all()->map(function ($stk) use ($unlockedStickerIds) {
+        $allStickers = Sticker::all();
+        $totalStickersCount = $allStickers->count();
+
+        $stickersList = $allStickers->map(function ($stk) use ($unlockedStickerIds) {
             $isUnlocked = in_array($stk->id, $unlockedStickerIds);
 
             return [
@@ -357,7 +363,20 @@ class FrontEndController extends Controller
             ];
         })->toArray();
 
-        return view('pages.stickers', compact('user', 'stickers'));
+        $unlockedStickersCount = collect($stickersList)->where('is_unlocked', true)->count();
+        $progressPct = $totalStickersCount > 0 ? (int) (($unlockedStickersCount / $totalStickersCount) * 100) : 0;
+
+        $stickersData = [
+            'unlocked_count' => $unlockedStickersCount,
+            'total_count' => $totalStickersCount,
+            'progress_pct' => $progressPct,
+        ];
+
+        return view('pages.stickers', [
+            'user' => $user,
+            'stickers' => $stickersList,
+            'stickersData' => $stickersData,
+        ]);
     }
 
     /**
@@ -387,7 +406,7 @@ class FrontEndController extends Controller
                 'reward_icon' => '🏆',
                 'reward_type' => $ach->reward_type,
             ];
-        })->toArray();
+        });
 
         $parentAchievements = Achievement::where('target_type', 'parent')->get()->map(function ($ach) {
             return [
@@ -399,45 +418,31 @@ class FrontEndController extends Controller
                 'unlocked_at' => 'Minggu Ini',
                 'badge_label' => $ach->reward_value,
             ];
+        });
+
+        $categories = Category::all();
+        $certificates = $categories->take(3)->map(function ($cat) use ($user) {
+            return [
+                'id' => 'cert-'.$cat->slug,
+                'title' => 'Sertifikat Kelulusan '.$cat->name,
+                'island' => $cat->name,
+                'recipient' => $user['name'],
+                'date' => date('d F Y'),
+                'badge' => "🌟 Lulusan Terbaik {$cat->name}",
+                'border_color' => $cat->border_color,
+                'accent_bg' => 'from-amber-400 to-orange-500',
+            ];
         })->toArray();
 
-        $certificates = [
-            [
-                'id' => 'cert-hewan',
-                'title' => 'Sertifikat Kelulusan Pulau Hewan 🦁',
-                'island' => 'Pulau Hewan',
-                'recipient' => $user['name'],
-                'date' => date('d F Y'),
-                'badge' => '🌟 Sahabat Rimba Lulusan Terbaik',
-                'border_color' => '#f97316',
-                'accent_bg' => 'from-amber-400 to-orange-500',
-            ],
-            [
-                'id' => 'cert-angka',
-                'title' => 'Sertifikat Juara Berhitung Istana Angka 🔢',
-                'island' => 'Istana Angka',
-                'recipient' => $user['name'],
-                'date' => date('d F Y'),
-                'badge' => '⭐ Master Angka Cilik Cerdas',
-                'border_color' => '#0284c7',
-                'accent_bg' => 'from-sky-400 to-blue-500',
-            ],
-            [
-                'id' => 'cert-bintang',
-                'title' => 'Piagam Bintang Emas Prestasi PAUD ⭐',
-                'island' => 'Taman Petualangan',
-                'recipient' => $user['name'],
-                'date' => date('d F Y'),
-                'badge' => "🏆 Peraih {$user['stars_count']} Bintang Emas Ceria",
-                'border_color' => '#eab308',
-                'accent_bg' => 'from-yellow-400 to-amber-500',
-            ],
-        ];
+        $unlockedKidAchievementsCount = $kidAchievements->where('is_unlocked', true)->count();
+        $totalKidAchievementsCount = $kidAchievements->count();
 
         $achievementsData = [
-            'kid_achievements' => $kidAchievements,
-            'parent_achievements' => $parentAchievements,
+            'kid_achievements' => $kidAchievements->toArray(),
+            'parent_achievements' => $parentAchievements->toArray(),
             'printable_certificates' => $certificates,
+            'unlocked_count' => $unlockedKidAchievementsCount,
+            'total_count' => $totalKidAchievementsCount,
         ];
 
         $accessories = $this->getAvatarAccessories();
@@ -642,6 +647,48 @@ class FrontEndController extends Controller
         $accessories = $this->getAvatarAccessories();
 
         return view('pages.profile', compact('user', 'avatars', 'accessories'));
+    }
+
+    /**
+     * Simpan pembaruan profil pengguna ke database MySQL nyata.
+     */
+    public function updateProfile(Request $request): RedirectResponse
+    {
+        $authUser = Auth::user();
+
+        if (! $authUser) {
+            return redirect()->route('login');
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'age' => 'nullable|integer|min:3|max:10',
+            'avatar_icon' => 'nullable|string|in:dino,kucing,singa,kelinci,panda,beruang,gajah,koala',
+            'avatar_accessory' => 'nullable|string|in:none,crown,party,hat,glasses,superhero',
+            'parent_pin' => 'nullable|string|max:10',
+            'password' => 'nullable|string|min:4',
+        ]);
+
+        $authUser->name = $validated['name'];
+        if (isset($validated['age'])) {
+            $authUser->age = $validated['age'];
+        }
+        if (! empty($validated['avatar_icon'])) {
+            $authUser->avatar_icon = $validated['avatar_icon'];
+        }
+        if (isset($validated['avatar_accessory'])) {
+            $authUser->avatar_accessory = $validated['avatar_accessory'] === 'none' ? null : $validated['avatar_accessory'];
+        }
+        if (! empty($validated['parent_pin'])) {
+            $authUser->parent_pin = $validated['parent_pin'];
+        }
+        if (! empty($validated['password'])) {
+            $authUser->password = Hash::make($validated['password']);
+        }
+
+        $authUser->save();
+
+        return redirect()->route('profile')->with('success', '✨ Profil akun berhasil diperbarui di database!');
     }
 
     /**

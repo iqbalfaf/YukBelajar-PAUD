@@ -30,6 +30,7 @@ Route::match(['get', 'post'], '/logout', [AuthController::class, 'logout'])->nam
 Route::middleware('auth')->group(function () {
     Route::get('/petualangan', [FrontEndController::class, 'gameHub'])->name('home');
     Route::get('/profil', [FrontEndController::class, 'profile'])->name('profile');
+    Route::post('/profil', [FrontEndController::class, 'updateProfile'])->name('profile.update');
     Route::get('/materi/{category?}', [FrontEndController::class, 'materials'])->name('materials');
     Route::get('/kuis/{quiz?}', [FrontEndController::class, 'quiz'])->name('quiz');
     Route::get('/buku-stiker', [FrontEndController::class, 'stickers'])->name('stickers');
