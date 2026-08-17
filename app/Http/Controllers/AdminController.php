@@ -12,6 +12,7 @@ use App\Models\Quiz;
 use App\Models\QuizAttempt;
 use App\Models\Sticker;
 use App\Models\User;
+use App\Services\GeminiService;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -569,7 +570,7 @@ class AdminController extends Controller
     /**
      * 1-Click AI Generator Studio (Google Gemini AI Multi-Modal).
      */
-    public function aiGenerator(): View
+    public function aiGenerator(GeminiService $geminiService): View
     {
         $categoriesModel = Category::with('levels')->orderBy('sort_order')->get();
 
@@ -612,7 +613,11 @@ class AdminController extends Controller
             ],
         ];
 
+        $isGeminiConfigured = $geminiService->isConfigured();
+
         $adminData = [
+            'is_configured' => $isGeminiConfigured,
+            'default_model' => config('services.gemini.model', 'gemini-2.0-flash'),
             'sample_ai_preview' => [
                 'category_slug' => 'hewan',
                 'category_name' => 'Pulau Hewan 🦁',
@@ -645,13 +650,13 @@ class AdminController extends Controller
             ],
         ];
 
-        return view('pages.admin.ai-generator', compact('categories', 'aiModels', 'adminData'));
+        return view('pages.admin.ai-generator', compact('categories', 'aiModels', 'adminData', 'isGeminiConfigured'));
     }
 
     /**
      * Endpoint API Generasi AI Multi-Modal (Backend Engine).
      */
-    public function generateAiContent(Request $request): JsonResponse
+    public function generateAiContent(Request $request, GeminiService $geminiService): JsonResponse
     {
         $validated = $request->validate([
             'category_slug' => 'required|string|exists:categories,slug',
@@ -659,39 +664,40 @@ class AdminController extends Controller
             'theme' => 'required|string|max:100',
             'target_age' => 'nullable|string',
             'questions_count' => 'nullable|integer|min:1|max:10',
+            'ai_model' => 'nullable|string|max:50',
         ]);
 
         $category = Category::where('slug', $validated['category_slug'])->firstOrFail();
         $count = (int) ($validated['questions_count'] ?? 3);
         $theme = $validated['theme'];
+        $targetAge = $validated['target_age'] ?? '3-4';
+        $aiModel = $validated['ai_model'] ?? 'gemini-2.0-flash';
 
-        $items = [];
-        for ($i = 1; $i <= $count; $i++) {
-            $items[] = [
-                'question' => "Manakah gambar {$theme} yang paling tepat untuk butir ke-{$i}? {$category->icon_emoji}",
-                'voice_script' => "Halo anak pintar! Manakah gambar {$theme} nomor {$i}?",
-                'image_prompt' => "Cute 3D cartoon illustration of {$theme}, adorable big eyes, pastel colors for toddlers, clean white background",
-                'options' => [
-                    ['label' => "{$category->icon_emoji} {$theme} Ceria", 'is_correct' => true],
-                    ['label' => '🪨 Batu Kali', 'is_correct' => false],
-                    ['label' => '🌳 Pohon Hijau', 'is_correct' => false],
-                ],
-            ];
-        }
+        $generation = $geminiService->generateQuizContent(
+            $category->slug,
+            $category->name,
+            $validated['level_number'],
+            $theme,
+            $targetAge,
+            $count,
+            $aiModel
+        );
 
         AuditLog::create([
             'user_id' => Auth::id(),
             'action_type' => 'AI_GENERATE',
-            'description' => "Menjalankan AI Generator Multi-Modal untuk tema '{$theme}' ({$category->name} Level {$validated['level_number']})",
+            'description' => "Menjalankan AI Generator Multi-Modal ({$generation['source']}) untuk tema '{$theme}' ({$category->name} Level {$validated['level_number']})",
         ]);
 
         return response()->json([
             'success' => true,
+            'source' => $generation['source'],
+            'model' => $generation['model'],
             'category_slug' => $category->slug,
             'category_name' => $category->name,
             'level_number' => $validated['level_number'],
             'theme' => $theme,
-            'generated_items' => $items,
+            'generated_items' => $generation['items'],
         ]);
     }
 

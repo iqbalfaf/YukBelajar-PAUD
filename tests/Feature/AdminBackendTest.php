@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\Sticker;
 use App\Models\User;
+use App\Services\GeminiService;
 
 test('seeder berhasil menginisialisasi kategori, level, dan materi di database', function () {
     expect(Category::count())->toBeGreaterThanOrEqual(6);
@@ -506,4 +507,14 @@ test('admin dapat menghapus stiker dari database', function () {
     $response->assertSessionHas('success');
 
     expect(Sticker::find($stId))->toBeNull();
+});
+
+test('gemini service dapat menghasilkan paket kuis terstruktur ramah anak', function () {
+    $service = app(GeminiService::class);
+    $result = $service->generateQuizContent('hewan', 'Pulau Hewan 🦁', 1, 'Kucing Lucu', '3-4', 3);
+
+    expect($result)->toHaveKeys(['source', 'model', 'items']);
+    expect($result['items'])->toHaveCount(3);
+    expect($result['items'][0])->toHaveKeys(['question', 'voice_script', 'image_prompt', 'options']);
+    expect($result['items'][0]['options'])->toHaveCount(3);
 });

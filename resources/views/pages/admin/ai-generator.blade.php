@@ -7,6 +7,7 @@
      x-data="{
          selectedCategory: 'hewan',
          targetLevel: 1,
+         selectedModel: '{{ $adminData['default_model'] ?? 'gemini-2.0-flash' }}',
          theme: 'Mengenal Hewan Jinak Ceria 🐱',
          targetAge: '3-4',
          questionsCount: 3,
@@ -15,7 +16,9 @@
          hasGenerated: true,
          publishedSuccess: false,
          alertMessage: '',
+         isConfigured: {{ $isGeminiConfigured ? 'true' : 'false' }},
          categories: {{ Js::from($categories) }},
+         aiModels: {{ Js::from($aiModels) }},
          generatedData: {{ Js::from($adminData['sample_ai_preview']['generated_items']) }},
          
          updateThemeSuggestion() {
@@ -54,7 +57,8 @@
                          level_number: parseInt(this.targetLevel),
                          theme: this.theme,
                          target_age: this.targetAge,
-                         questions_count: parseInt(this.questionsCount)
+                         questions_count: parseInt(this.questionsCount),
+                         ai_model: this.selectedModel
                      })
                  });
 
@@ -122,18 +126,29 @@
                 </span>
             </div>
             <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">
-                1-Click AI Generator (Teks, Gambar & Suara)
+                1-Click AI Generator Studio (Teks, Gambar & Audio Narasi)
             </h2>
             <p class="text-sm text-purple-200 mt-1 max-w-2xl">
-                Pilih kategori dan tingkatan level sasaran. AI akan secara otomatis merancang butir kuis ramah anak PAUD, membuat prompt gambar kartun 3D, dan menyusun audio narasi ceria.
+                Pilih kategori dan tingkatan level sasaran. AI merancang butir kuis ramah anak PAUD, membuat prompt gambar kartun 3D, dan menyusun audio narasi ceria.
             </p>
         </div>
 
-        <div class="flex items-center gap-2 shrink-0">
-            <span class="px-3 py-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-xl text-xs font-bold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>Gemini 2.0 Ready</span>
-            </span>
+        <div class="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+            <template x-if="isConfigured">
+                <span class="px-3.5 py-2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded-2xl text-xs font-black flex items-center gap-2 shadow-xs">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Gemini AI API Aktif 🟢</span>
+                </span>
+            </template>
+            <template x-if="!isConfigured">
+                <div class="flex flex-col gap-1 items-end">
+                    <span class="px-3.5 py-2 bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded-2xl text-xs font-bold flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                        <span>Engine Siap (Cerdas & Cepat) ⚡</span>
+                    </span>
+                    <span class="text-[10px] text-purple-300">Masukkan GEMINI_API_KEY di .env untuk Cloud Live</span>
+                </div>
+            </template>
         </div>
     </div>
 
@@ -141,8 +156,31 @@
     <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs">
         <h3 class="text-lg font-extrabold font-heading text-slate-800 mb-4 flex items-center gap-2">
             <span>⚙️</span>
-            <span>Konfigurasi Kategori & Prompt AI Generator</span>
+            <span>Konfigurasi Model & Parameter AI Generator</span>
         </h3>
+
+        <!-- Model Selection Ribbon -->
+        <div class="mb-4 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+            <label class="block text-xs font-black uppercase text-slate-700 mb-2">
+                🤖 Pilih Model Google Gemini Engine:
+            </label>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <template x-for="m in aiModels" :key="m.id">
+                    <button type="button" @click="selectedModel = m.id"
+                            class="p-3.5 rounded-xl border-2 text-left transition-all cursor-pointer flex flex-col justify-between gap-1"
+                            :class="selectedModel === m.id ? 'border-purple-600 bg-purple-50 text-purple-950 font-bold shadow-xs' : 'border-slate-200 bg-white hover:bg-slate-50 text-slate-700'">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold" x-text="m.id"></span>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase"
+                                  :class="m.badge === 'Ultra Fast' ? 'bg-emerald-100 text-emerald-800' : (m.badge === 'Standard' ? 'bg-sky-100 text-sky-800' : 'bg-purple-100 text-purple-800')"
+                                  x-text="m.badge">
+                            </span>
+                        </div>
+                        <span class="text-[11px] text-slate-500 font-semibold" x-text="m.name"></span>
+                    </button>
+                </template>
+            </div>
+        </div>
 
         <!-- 1. Category & Level Target Selector -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 p-4 bg-purple-50/60 border border-purple-200 rounded-2xl">
@@ -213,7 +251,7 @@
             <template x-if="isGenerating">
                 <div class="flex items-center gap-2">
                     <span class="animate-spin text-2xl">⏳</span>
-                    <span>Sedang Meracik Soal Ramah Anak & Mengenerate Media via Backend...</span>
+                    <span>Sedang Meracik Soal Ramah Anak & Mengenerate Media via Backend Gemini...</span>
                 </div>
             </template>
         </button>
