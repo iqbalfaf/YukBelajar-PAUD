@@ -123,10 +123,16 @@
                     x-text="st.is_unlocked ? st.name : 'Stiker Rahasia'">
                 </h4>
 
-                <span class="text-xs font-bold mt-0.5 capitalize"
-                      :class="st.is_unlocked ? 'text-purple-600 font-extrabold' : 'text-slate-400'"
-                      x-text="st.category">
-                </span>
+                <div class="flex flex-col items-center gap-0.5 mt-0.5">
+                    <span class="text-xs font-bold capitalize"
+                          :class="st.is_unlocked ? 'text-purple-600 font-extrabold' : 'text-slate-400'"
+                          x-text="st.category">
+                    </span>
+                    <template x-if="!st.is_unlocked">
+                        <span class="px-2 py-0.5 bg-amber-50 border border-amber-300 text-amber-900 rounded-full text-[10px] font-black mt-0.5"
+                              x-text="`⭐ ${st.required_stars} Bintang`"></span>
+                    </template>
+                </div>
             </div>
         </template>
     </div>
@@ -160,22 +166,29 @@
                         x-text="selectedSticker.is_unlocked ? selectedSticker.name : 'Stiker Masih Terkunci'">
                     </h3>
 
-                    <span class="inline-block px-3 py-0.5 rounded-full text-xs font-bold text-purple-800 bg-purple-100 mb-3"
-                          x-text="selectedSticker.category">
-                    </span>
+                    <div class="flex items-center justify-center gap-1.5 mb-3 flex-wrap">
+                        <span class="inline-block px-3 py-0.5 rounded-full text-xs font-bold text-purple-800 bg-purple-100"
+                              x-text="selectedSticker.category">
+                        </span>
+                        <span class="inline-block px-3 py-0.5 rounded-full text-xs font-black bg-amber-100 text-amber-900 border border-amber-300"
+                              x-text="`⭐ ${selectedSticker.required_stars} Bintang`">
+                        </span>
+                    </div>
 
-                    <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 mb-6">
+                    <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 mb-6 text-left">
                         <template x-if="selectedSticker.is_unlocked">
                             <div>
                                 <p class="text-xs font-bold text-slate-500 mb-1">Karakter Istimewa:</p>
-                                <p class="text-sm font-extrabold text-purple-900">"Hore! Stiker ini sudah menjadi milikmu!"</p>
-                                <p class="text-[11px] text-purple-700 mt-2" x-text="`Dibuka: ${selectedSticker.unlocked_at}`"></p>
+                                <p class="text-sm font-extrabold text-purple-900" x-text="`&ldquo;${selectedSticker.hint}&rdquo;`"></p>
+                                <p class="text-[11px] text-purple-700 mt-2 font-bold">✨ Sudah menjadi koleksi pialamu!</p>
                             </div>
                         </template>
                         <template x-if="!selectedSticker.is_unlocked">
                             <div>
-                                <p class="text-xs font-bold text-amber-800 mb-1">🎯 Cara Membuka:</p>
-                                <p class="text-sm font-bold text-slate-700" x-text="selectedSticker.hint"></p>
+                                <p class="text-xs font-bold text-amber-800 mb-1">🎯 Syarat Membuka:</p>
+                                <p class="text-xs font-bold text-slate-700 mb-2" x-text="selectedSticker.hint"></p>
+                                <p class="text-xs font-extrabold text-amber-900 bg-amber-100/80 p-2 rounded-xl border border-amber-300"
+                                   x-text="`Ayo kumpulkan hingga ${selectedSticker.required_stars} ⭐ Bintang Emas untuk membuka stiker ini!`"></p>
                             </div>
                         </template>
                     </div>

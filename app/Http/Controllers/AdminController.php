@@ -569,6 +569,7 @@ class AdminController extends Controller
                     'category' => ucfirst($s->category),
                     'icon_emoji' => $s->emoji,
                     'rarity' => $s->rarity ?? 'common',
+                    'required_stars' => $s->required_stars ?? 5,
                     'is_special' => $s->rarity === 'legendary' || $s->rarity === 'rare',
                     'description' => $s->description,
                     'claimed_count' => $s->users_count,
@@ -590,6 +591,7 @@ class AdminController extends Controller
             'icon_emoji' => 'nullable|string|max:16',
             'emoji' => 'nullable|string|max:16',
             'rarity' => 'nullable|string|max:20',
+            'required_stars' => 'nullable|integer|min:0|max:1000',
             'description' => 'nullable|string|max:255',
             'is_special' => 'nullable|boolean',
         ]);
@@ -602,6 +604,7 @@ class AdminController extends Controller
             'category' => strtolower($validated['category']),
             'emoji' => $emoji,
             'rarity' => $rarity,
+            'required_stars' => $validated['required_stars'] ?? 10,
             'description' => $validated['description'] ?? "Stiker hadiah prestasi {$validated['name']}",
         ]);
 
@@ -627,6 +630,7 @@ class AdminController extends Controller
             'icon_emoji' => 'nullable|string|max:16',
             'emoji' => 'nullable|string|max:16',
             'rarity' => 'nullable|string|max:20',
+            'required_stars' => 'nullable|integer|min:0|max:1000',
             'description' => 'nullable|string|max:255',
             'is_special' => 'nullable|boolean',
         ]);
@@ -637,6 +641,9 @@ class AdminController extends Controller
             $sticker->emoji = $validated['icon_emoji'] ?? $validated['emoji'];
         }
         $sticker->rarity = ! empty($validated['is_special']) ? 'legendary' : ($validated['rarity'] ?? 'common');
+        if (isset($validated['required_stars'])) {
+            $sticker->required_stars = (int) $validated['required_stars'];
+        }
         $sticker->description = $validated['description'] ?? $sticker->description;
         $sticker->save();
 

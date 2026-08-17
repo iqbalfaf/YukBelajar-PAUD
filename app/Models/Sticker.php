@@ -15,7 +15,12 @@ class Sticker extends Model
         'emoji',
         'category',
         'rarity',
+        'required_stars',
         'description',
+    ];
+
+    protected $casts = [
+        'required_stars' => 'integer',
     ];
 
     public function users(): BelongsToMany

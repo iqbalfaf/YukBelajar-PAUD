@@ -508,9 +508,20 @@ class FrontEndController extends Controller
     {
         $user = $this->getCurrentUserData();
         $authUser = Auth::user();
-        $unlockedStickerIds = $authUser ? $authUser->stickers()->pluck('stickers.id')->toArray() : [1, 2, 3, 4, 5, 6, 7];
+        $userStars = $authUser ? $authUser->total_stars : $user['stars_count'];
 
-        $allStickers = Sticker::all();
+        // Otomatis sinkronkan dan buka stiker yang syarat bintangnya sudah dicapai oleh siswa
+        if ($authUser) {
+            $eligibleStickerIds = Sticker::where('required_stars', '<=', $authUser->total_stars)->pluck('id')->toArray();
+            if (! empty($eligibleStickerIds)) {
+                $authUser->stickers()->syncWithoutDetaching($eligibleStickerIds);
+            }
+            $unlockedStickerIds = $authUser->stickers()->pluck('stickers.id')->toArray();
+        } else {
+            $unlockedStickerIds = Sticker::where('required_stars', '<=', $userStars)->pluck('id')->toArray();
+        }
+
+        $allStickers = Sticker::orderBy('required_stars')->get();
         $totalStickersCount = $allStickers->count();
 
         $stickersList = $allStickers->map(function ($stk) use ($unlockedStickerIds) {
@@ -522,9 +533,10 @@ class FrontEndController extends Controller
                 'emoji' => $stk->emoji,
                 'category' => $stk->category,
                 'rarity' => $stk->rarity,
+                'required_stars' => $stk->required_stars ?? 5,
                 'is_unlocked' => $isUnlocked,
                 'unlocked_at' => $isUnlocked ? 'Terbuka' : null,
-                'hint' => $stk->description ?? 'Raih bintang dan tamatkan kuis untuk membuka!',
+                'hint' => $stk->description ?? "Kumpulkan {$stk->required_stars} bintang emas untuk membuka!",
             ];
         })->toArray();
 
