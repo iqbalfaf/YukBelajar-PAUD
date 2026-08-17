@@ -3369,33 +3369,665 @@ class QuizSeeder extends Seeder
                 ],
             ],
 
+            // =========================================================================
+            // PILAR 1 - TOPIK 7: JENIS KENDARAAN HEBAT (9 KUIS: 3 L1, 3 L2, 3 L3)
+            // =========================================================================
+
+            // --- LEVEL 1: 3 KUIS DENGAN 3 BUTIR SOAL (KENDARAAN SEHARI-HARI & DARAT POPULER) ---
             [
                 'category_slug' => 'kendaraan',
-                'title' => 'Tebak Kendaraan Hebat',
-                'slug' => 'tebak-kendaraan',
+                'level_number' => 1,
+                'title' => 'Sahabat Jalan Raya & Klakson Ceria',
+                'slug' => 'kuis-kendaraan-l1-jalan-raya-klakson',
                 'icon_emoji' => '🚗',
-                'target_age' => 4,
-                'total_questions' => 2,
+                'target_age' => 3,
+                'total_questions' => 3,
                 'stars_reward' => 3,
                 'questions' => [
                     [
-                        'text' => 'Kendaraan apakah yang terbang tinggi di angkasa dan memiliki sayap lebar?',
-                        'audio' => 'Kendaraan apakah yang terbang tinggi di angkasa dan memiliki sayap lebar?',
-                        'emoji' => '✈️',
+                        'text' => 'Kendaraan roda empat yang nyaman untuk bepergian bersama keluarga dengan bunyi tin-tin adalah...?',
+                        'audio' => 'Kendaraan roda empat yang nyaman untuk bepergian bersama keluarga dengan bunyi tin-tin adalah apa?',
+                        'emoji' => '🚗',
                         'options' => [
-                            ['emoji' => '✈️', 'text' => 'Pesawat Terbang', 'is_correct' => true],
-                            ['emoji' => '🚗', 'text' => 'Mobil', 'is_correct' => false],
-                            ['emoji' => '🚲', 'text' => 'Sepeda', 'is_correct' => false],
+                            ['emoji' => '🚗', 'text' => 'Mobil Keluarga Ceria', 'is_correct' => true],
+                            ['emoji' => '🚲', 'text' => 'Sepeda Roda Dua', 'is_correct' => false],
+                            ['emoji' => '🚆', 'text' => 'Kereta Api', 'is_correct' => false],
                         ],
                     ],
                     [
-                        'text' => 'Kendaraan panjang yang berjalan di atas rel besi dengan bunyi tut-tut adalah?',
-                        'audio' => 'Kendaraan panjang yang berjalan di atas rel besi dengan bunyi tut-tut adalah?',
+                        'text' => 'Kendaraan roda dua ramah lingkungan yang dikayuh dengan kaki dan berbel kring-kring adalah...?',
+                        'audio' => 'Kendaraan roda dua ramah lingkungan yang dikayuh dengan kaki dan berbel kring-kring adalah apa?',
+                        'emoji' => '🚲',
+                        'options' => [
+                            ['emoji' => '🚲', 'text' => 'Sepeda Roda Dua', 'is_correct' => true],
+                            ['emoji' => '🚗', 'text' => 'Mobil Keluarga', 'is_correct' => false],
+                            ['emoji' => '🚚', 'text' => 'Truk Besar', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan roda dua bermesin yang lincah melaju dengan bunyi ngeeng-ngeeng adalah...?',
+                        'audio' => 'Kendaraan roda dua bermesin yang lincah melaju dengan bunyi ngeeng-ngeeng adalah apa?',
+                        'emoji' => '🏍️',
+                        'options' => [
+                            ['emoji' => '🏍️', 'text' => 'Sepeda Motor Lincah', 'is_correct' => true],
+                            ['emoji' => '🚲', 'text' => 'Sepeda Gowes', 'is_correct' => false],
+                            ['emoji' => '🚌', 'text' => 'Bus Sekolah', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'kendaraan',
+                'level_number' => 1,
+                'title' => 'Kereta Rel Panjang & Bus Sekolah Ceria',
+                'slug' => 'kuis-kendaraan-l1-kereta-bus-sekolah',
+                'icon_emoji' => '🚆',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Kendaraan besar panjang yang mengangkut banyak siswa ke sekolah dengan gembira adalah...?',
+                        'audio' => 'Kendaraan besar panjang yang mengangkut banyak siswa ke sekolah dengan gembira adalah apa?',
+                        'emoji' => '🚌',
+                        'options' => [
+                            ['emoji' => '🚌', 'text' => 'Bus Sekolah Kuning', 'is_correct' => true],
+                            ['emoji' => '🚗', 'text' => 'Mobil Cilik', 'is_correct' => false],
+                            ['emoji' => '🏍️', 'text' => 'Sepeda Motor', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Rangkaian gerbong panjang yang melaju kencang di atas rel besi dengan bunyi tut-tut gujes-gujes adalah...?',
+                        'audio' => 'Rangkaian gerbong panjang yang melaju kencang di atas rel besi dengan bunyi tut-tut gujes-gujes adalah apa?',
                         'emoji' => '🚆',
                         'options' => [
+                            ['emoji' => '🚆', 'text' => 'Kereta Api Cepat', 'is_correct' => true],
+                            ['emoji' => '🚌', 'text' => 'Bus Sekolah', 'is_correct' => false],
+                            ['emoji' => '🚚', 'text' => 'Truk Barang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan besar dan kuat bertubuh kokoh yang digunakan untuk mengangkut barang muatan berat adalah...?',
+                        'audio' => 'Kendaraan besar dan kuat bertubuh kokoh yang digunakan untuk mengangkut barang muatan berat adalah apa?',
+                        'emoji' => '🚚',
+                        'options' => [
+                            ['emoji' => '🚚', 'text' => 'Truk Pengangkut Kuat', 'is_correct' => true],
+                            ['emoji' => '🚲', 'text' => 'Sepeda', 'is_correct' => false],
+                            ['emoji' => '🚗', 'text' => 'Mobil Mini', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'kendaraan',
+                'level_number' => 1,
+                'title' => 'Becak Tradisional & Sahabat Darat Cilik',
+                'slug' => 'kuis-kendaraan-l1-becak-sahabat-darat',
+                'icon_emoji' => '🛺',
+                'target_age' => 3,
+                'total_questions' => 3,
+                'stars_reward' => 3,
+                'questions' => [
+                    [
+                        'text' => 'Kendaraan roda tiga tradisional yang ramah dan digowes oleh bapak pengemudi adalah...?',
+                        'audio' => 'Kendaraan roda tiga tradisional yang ramah dan digowes oleh bapak pengemudi adalah apa?',
+                        'emoji' => '🛺',
+                        'options' => [
+                            ['emoji' => '🛺', 'text' => 'Becak Tradisional Unik', 'is_correct' => true],
+                            ['emoji' => '🚆', 'text' => 'Kereta Api', 'is_correct' => false],
+                            ['emoji' => '✈️', 'text' => 'Pesawat Terbang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Dimanakah mobil, motor, sepeda, dan bus biasanya melaju dan berjalan?',
+                        'audio' => 'Dimanakah mobil, motor, sepeda, dan bus biasanya melaju dan berjalan?',
+                        'emoji' => '🛣️',
+                        'options' => [
+                            ['emoji' => '🛣️', 'text' => 'Di jalan raya daratan', 'is_correct' => true],
+                            ['emoji' => '🌊', 'text' => 'Di dasar samudra laut', 'is_correct' => false],
+                            ['emoji' => '☁️', 'text' => 'Di langit awan tinggi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bunyi apakah yang dikeluarkan oleh bel sepeda saat dibunyikan di jalan?',
+                        'audio' => 'Bunyi apakah yang dikeluarkan oleh bel sepeda saat dibunyikan di jalan?',
+                        'emoji' => '🚲',
+                        'options' => [
+                            ['emoji' => '🚲', 'text' => 'Kring-kring suara bel gembira', 'is_correct' => true],
+                            ['emoji' => '🚢', 'text' => 'Tuuut klakson kapal laut', 'is_correct' => false],
+                            ['emoji' => '✈️', 'text' => 'Wuuush deru pesawat', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 2: 3 KUIS DENGAN 5 BUTIR SOAL (KENDARAAN PENOLONG & PETUALANG HEBAT) ---
+            [
+                'category_slug' => 'kendaraan',
+                'level_number' => 2,
+                'title' => 'Mobil Penolong & Pahlawan Siaga',
+                'slug' => 'kuis-kendaraan-l2-mobil-penolong-siaga',
+                'icon_emoji' => '🚒',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Mobil merah gagah bersirine wiu-wiu yang bertugas memadamkan kobaran api kebakaran adalah...?',
+                        'audio' => 'Mobil merah gagah bersirine wiu-wiu yang bertugas memadamkan kobaran api kebakaran adalah apa?',
+                        'emoji' => '🚒',
+                        'options' => [
+                            ['emoji' => '🚒', 'text' => 'Mobil Pemadam Kebakaran', 'is_correct' => true],
+                            ['emoji' => '🚑', 'text' => 'Mobil Ambulans', 'is_correct' => false],
+                            ['emoji' => '🚓', 'text' => 'Mobil Polisi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mobil medis bersirine ninu-ninu yang bertugas cepat mengantar orang sakit ke rumah sakit adalah...?',
+                        'audio' => 'Mobil medis bersirine ninu-ninu yang bertugas cepat mengantar orang sakit ke rumah sakit adalah apa?',
+                        'emoji' => '🚑',
+                        'options' => [
+                            ['emoji' => '🚑', 'text' => 'Mobil Ambulans Penolong', 'is_correct' => true],
+                            ['emoji' => '🚕', 'text' => 'Taksi Kota', 'is_correct' => false],
+                            ['emoji' => '🚜', 'text' => 'Traktor Sawah', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mobil patroli bersirine tet-tot yang digunakan petugas untuk menjaga keamanan kota adalah...?',
+                        'audio' => 'Mobil patroli bersirine tet-tot yang digunakan petugas untuk menjaga keamanan kota adalah apa?',
+                        'emoji' => '🚓',
+                        'options' => [
+                            ['emoji' => '🚓', 'text' => 'Mobil Polisi Penjaga Aman', 'is_correct' => true],
+                            ['emoji' => '🚒', 'text' => 'Mobil Pemadam', 'is_correct' => false],
+                            ['emoji' => '🚛', 'text' => 'Truk Molen', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan bermesin tangguh di pedesaan yang digunakan untuk membajak tanah sawah subur adalah...?',
+                        'audio' => 'Kendaraan bermesin tangguh di pedesaan yang digunakan untuk membajak tanah sawah subur adalah apa?',
+                        'emoji' => '🚜',
+                        'options' => [
+                            ['emoji' => '🚜', 'text' => 'Traktor Sawah Perkasa', 'is_correct' => true],
+                            ['emoji' => '🚕', 'text' => 'Taksi Kuning', 'is_correct' => false],
+                            ['emoji' => '🛴', 'text' => 'Skuter Otopet', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Truk khusus dengan tabung besar berputar untuk mencampur adonan semen bangunan adalah...?',
+                        'audio' => 'Truk khusus dengan tabung besar berputar untuk mencampur adonan semen bangunan adalah apa?',
+                        'emoji' => '🚛',
+                        'options' => [
+                            ['emoji' => '🚛', 'text' => 'Truk Molen Pengaduk Semen', 'is_correct' => true],
+                            ['emoji' => '🚒', 'text' => 'Mobil Pemadam', 'is_correct' => false],
+                            ['emoji' => '🚑', 'text' => 'Mobil Ambulans', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'kendaraan',
+                'level_number' => 2,
+                'title' => 'Taksi Kota & Skuter Lincah Bergaya',
+                'slug' => 'kuis-kendaraan-l2-taksi-kota-skuter-lincah',
+                'icon_emoji' => '🚕',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Mobil penumpang umum dengan lampu atap yang siap mengantar kita ke mana saja di kota adalah...?',
+                        'audio' => 'Mobil penumpang umum dengan lampu atap yang siap mengantar kita ke mana saja di kota adalah apa?',
+                        'emoji' => '🚕',
+                        'options' => [
+                            ['emoji' => '🚕', 'text' => 'Taksi Kuning Ramah', 'is_correct' => true],
+                            ['emoji' => '🚜', 'text' => 'Traktor Sawah', 'is_correct' => false],
+                            ['emoji' => '🚒', 'text' => 'Mobil Pemadam', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan beroda kecil dengan papan pijakan yang meluncur seru didorong kaki adalah...?',
+                        'audio' => 'Kendaraan beroda kecil dengan papan pijakan yang meluncur seru didorong kaki adalah apa?',
+                        'emoji' => '🛴',
+                        'options' => [
+                            ['emoji' => '🛴', 'text' => 'Skuter Otopet Lincah', 'is_correct' => true],
+                            ['emoji' => '🚛', 'text' => 'Truk Molen', 'is_correct' => false],
+                            ['emoji' => '🚜', 'text' => 'Traktor Perkasa', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Saat mendengar sirine mobil pemadam kebakaran atau ambulans berbunyi, apa yang harus dilakukan kendaraan lain?',
+                        'audio' => 'Saat mendengar sirine mobil pemadam kebakaran atau ambulans berbunyi apa yang harus dilakukan kendaraan lain?',
+                        'emoji' => '🛣️',
+                        'options' => [
+                            ['emoji' => '🛣️', 'text' => 'Memberi jalan ke tepi agar mobil penolong lewat cepat', 'is_correct' => true],
+                            ['emoji' => '🛑', 'text' => 'Menghalangi jalan di tengah', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Berhenti sembarangan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang harus selalu dipakai saat mengendarai sepeda motor demi melindungi keselamatan kepala?',
+                        'audio' => 'Apa yang harus selalu dipakai saat mengendarai sepeda motor demi melindungi keselamatan kepala?',
+                        'emoji' => '⛑️',
+                        'options' => [
+                            ['emoji' => '⛑️', 'text' => 'Helm Pengaman Kepala', 'is_correct' => true],
+                            ['emoji' => '🎩', 'text' => 'Topi Pesta Kertas', 'is_correct' => false],
+                            ['emoji' => '🕶️', 'text' => 'Kacamata Renang', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa roda kendaraan darat dibuat berbentuk lingkaran bulat?',
+                        'audio' => 'Mengapa roda kendaraan darat dibuat berbentuk lingkaran bulat?',
+                        'emoji' => '⭕',
+                        'options' => [
+                            ['emoji' => '⭕', 'text' => 'Agar mudah berputar dan menggelinding lancar', 'is_correct' => true],
+                            ['emoji' => '🔺', 'text' => 'Agar sulit bergerak maju', 'is_correct' => false],
+                            ['emoji' => '🟩', 'text' => 'Agar jalannya tersendat-sendat', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'kendaraan',
+                'level_number' => 2,
+                'title' => 'Eksplorasi Fungsi & Kehebatan Kendaraan Tugas',
+                'slug' => 'kuis-kendaraan-l2-fungsi-kendaraan-tugas',
+                'icon_emoji' => '🚜',
+                'target_age' => 4,
+                'total_questions' => 5,
+                'stars_reward' => 5,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok kendaraan yang termasuk mobil penolong darurat bersirine?',
+                        'audio' => 'Manakah kelompok kendaraan yang termasuk mobil penolong darurat bersirine?',
+                        'emoji' => '🚨',
+                        'options' => [
+                            ['emoji' => '🚒', 'text' => 'Pemadam Kebakaran, Ambulans, Mobil Polisi', 'is_correct' => true],
+                            ['emoji' => '🚕', 'text' => 'Taksi, Skuter, Traktor', 'is_correct' => false],
+                            ['emoji' => '🚲', 'text' => 'Sepeda, Becak, Mobil Pribadi', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Dimanakah kita biasanya melihat traktor bekerja membantu pak tani?',
+                        'audio' => 'Dimanakah kita biasanya melihat traktor bekerja membantu pak tani?',
+                        'emoji' => '🌾',
+                        'options' => [
+                            ['emoji' => '🌾', 'text' => 'Di area persawahan dan ladang pertanian', 'is_correct' => true],
+                            ['emoji' => '✈️', 'text' => 'Di landasan bandara udara', 'is_correct' => false],
+                            ['emoji' => '🚢', 'text' => 'Di tengah dermaga laut', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna lampu lalu lintas yang menandakan kendaraan harus BERHENTI adalah...?',
+                        'audio' => 'Warna lampu lalu lintas yang menandakan kendaraan harus BERHENTI adalah apa?',
+                        'emoji' => '🔴',
+                        'options' => [
+                            ['emoji' => '🔴', 'text' => 'Lampu Merah', 'is_correct' => true],
+                            ['emoji' => '🟢', 'text' => 'Lampu Hijau', 'is_correct' => false],
+                            ['emoji' => '🟡', 'text' => 'Lampu Kuning', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Warna lampu lalu lintas yang menandakan kendaraan boleh BERJALAN MAJU adalah...?',
+                        'audio' => 'Warna lampu lalu lintas yang menandakan kendaraan boleh BERJALAN MAJU adalah apa?',
+                        'emoji' => '🟢',
+                        'options' => [
+                            ['emoji' => '🟢', 'text' => 'Lampu Hijau', 'is_correct' => true],
+                            ['emoji' => '🔴', 'text' => 'Lampu Merah', 'is_correct' => false],
+                            ['emoji' => '🔵', 'text' => 'Lampu Biru', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Alat apa di dalam mobil yang diputar sopir untuk mengarahkan belok kanan atau kiri?',
+                        'audio' => 'Alat apa di dalam mobil yang diputar sopir untuk mengarahkan belok kanan atau kiri?',
+                        'emoji' => '🛞',
+                        'options' => [
+                            ['emoji' => '🛞', 'text' => 'Setir Kemudi Bundar', 'is_correct' => true],
+                            ['emoji' => '🪟', 'text' => 'Kaca Jendela Mobil', 'is_correct' => false],
+                            ['emoji' => '💡', 'text' => 'Lampu Depan', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            // --- LEVEL 3: 3 KUIS DENGAN 10 BUTIR SOAL (KENDARAAN SAMUDRA, UDARA & ANTARIKSA) ---
+            [
+                'category_slug' => 'kendaraan',
+                'level_number' => 3,
+                'title' => 'Penguasa Samudra, Udara & Antariksa',
+                'slug' => 'kuis-kendaraan-l3-samudra-udara-antariksa',
+                'icon_emoji' => '✈️',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Kendaraan bersayap lebar yang melaju cepat membawa penumpang melintasi awan di langit adalah...?',
+                        'audio' => 'Kendaraan bersayap lebar yang melaju cepat membawa penumpang melintasi awan di langit adalah apa?',
+                        'emoji' => '✈️',
+                        'options' => [
+                            ['emoji' => '✈️', 'text' => 'Pesawat Terbang Angkasa', 'is_correct' => true],
                             ['emoji' => '🚢', 'text' => 'Kapal Laut', 'is_correct' => false],
-                            ['emoji' => '🚆', 'text' => 'Kereta Api', 'is_correct' => true],
+                            ['emoji' => '🚆', 'text' => 'Kereta Api', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan udara yang memiliki baling-baling putar di atasnya dan bisa mendarat di atap gedung adalah...?',
+                        'audio' => 'Kendaraan udara yang memiliki baling-baling putar di atasnya dan bisa mendarat di atap gedung adalah apa?',
+                        'emoji' => '🚁',
+                        'options' => [
+                            ['emoji' => '🚁', 'text' => 'Helikopter Baling-Baling', 'is_correct' => true],
+                            ['emoji' => '✈️', 'text' => 'Pesawat Terbang', 'is_correct' => false],
+                            ['emoji' => '🚀', 'text' => 'Roket Antariksa', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan raksasa yang berlayar dan mengapung mengarungi ombak samudra luas adalah...?',
+                        'audio' => 'Kendaraan raksasa yang berlayar dan mengapung mengarungi ombak samudra luas adalah apa?',
+                        'emoji' => '🚢',
+                        'options' => [
+                            ['emoji' => '🚢', 'text' => 'Kapal Laut Samudra', 'is_correct' => true],
+                            ['emoji' => '🚆', 'text' => 'Kereta Api', 'is_correct' => false],
+                            ['emoji' => '🚗', 'text' => 'Mobil Keluarga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Perahu tradisional yang memanfaatkan hembusan tiupan angin pada kain layarnya untuk melaju adalah...?',
+                        'audio' => 'Perahu tradisional yang memanfaatkan hembusan tiupan angin pada kain layarnya untuk melaju adalah apa?',
+                        'emoji' => '⛵',
+                        'options' => [
+                            ['emoji' => '⛵', 'text' => 'Perahu Layar Nelayan', 'is_correct' => true],
+                            ['emoji' => '🚀', 'text' => 'Roket', 'is_correct' => false],
+                            ['emoji' => '✈️', 'text' => 'Pesawat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Perahu bermesin cepat yang mampu meluncur kencang membelah ombak di permukaan air laut adalah...?',
+                        'audio' => 'Perahu bermesin cepat yang mampu meluncur kencang membelah ombak di permukaan air laut adalah apa?',
+                        'emoji' => '🚤',
+                        'options' => [
+                            ['emoji' => '🚤', 'text' => 'Perahu Cepat Speedboat', 'is_correct' => true],
+                            ['emoji' => '🚲', 'text' => 'Sepeda', 'is_correct' => false],
                             ['emoji' => '🚁', 'text' => 'Helikopter', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Wahana luar angkasa bertenaga api dahsyat yang meluncur menembus atmosfer menuju bulan adalah...?',
+                        'audio' => 'Wahana luar angkasa bertenaga api dahsyat yang meluncur menembus atmosfer menuju bulan adalah apa?',
+                        'emoji' => '🚀',
+                        'options' => [
+                            ['emoji' => '🚀', 'text' => 'Roket Penjelajah Antariksa', 'is_correct' => true],
+                            ['emoji' => '✈️', 'text' => 'Pesawat Terbang', 'is_correct' => false],
+                            ['emoji' => '🚁', 'text' => 'Helikopter', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Tempat khusus yang sangat luas untuk pesawat terbang lepas landas dan mendarat disebut...?',
+                        'audio' => 'Tempat khusus yang sangat luas untuk pesawat terbang lepas landas dan mendarat disebut apa?',
+                        'emoji' => '🛫',
+                        'options' => [
+                            ['emoji' => '🛫', 'text' => 'Bandara Udara', 'is_correct' => true],
+                            ['emoji' => '⚓', 'text' => 'Pelabuhan Dermaga Laut', 'is_correct' => false],
+                            ['emoji' => '🚉', 'text' => 'Stasiun Rel Kereta', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Tempat bersandarnya kapal-kapal besar dan perahu di tepi laut disebut...?',
+                        'audio' => 'Tempat bersandarnya kapal-kapal besar dan perahu di tepi laut disebut apa?',
+                        'emoji' => '⚓',
+                        'options' => [
+                            ['emoji' => '⚓', 'text' => 'Pelabuhan Dermaga Laut', 'is_correct' => true],
+                            ['emoji' => '🛫', 'text' => 'Bandara Udara', 'is_correct' => false],
+                            ['emoji' => '🏁', 'text' => 'Terminal Bus Kota', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Siapakah sebutan untuk orang hebat yang bertugas mengemudikan pesawat terbang di angkasa?',
+                        'audio' => 'Siapakah sebutan untuk orang hebat yang bertugas mengemudikan pesawat terbang di angkasa?',
+                        'emoji' => '👨‍✈️',
+                        'options' => [
+                            ['emoji' => '👨‍✈️', 'text' => 'Pilot yang Hebat', 'is_correct' => true],
+                            ['emoji' => '🚢', 'text' => 'Nahkoda Kapal', 'is_correct' => false],
+                            ['emoji' => '🚂', 'text' => 'Masinis Kereta', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Siapakah sebutan untuk orang hebat yang bertugas memimpin dan mengemudikan kapal laut di samudra?',
+                        'audio' => 'Siapakah sebutan untuk orang hebat yang bertugas memimpin dan mengemudikan kapal laut di samudra?',
+                        'emoji' => '👨‍✈️',
+                        'options' => [
+                            ['emoji' => '👨‍✈️', 'text' => 'Nahkoda Kapal Laut', 'is_correct' => true],
+                            ['emoji' => '✈️', 'text' => 'Pilot Pesawat', 'is_correct' => false],
+                            ['emoji' => '🚂', 'text' => 'Masinis Kereta', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'kendaraan',
+                'level_number' => 3,
+                'title' => 'Cerdas Mengelompokkan Jalur Transportasi Hebat',
+                'slug' => 'kuis-kendaraan-l3-jalur-transportasi-hebat',
+                'icon_emoji' => '🧩',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Manakah kelompok kendaraan yang semuanya melaju dan berjalan di jalur DARAT?',
+                        'audio' => 'Manakah kelompok kendaraan yang semuanya melaju dan berjalan di jalur DARAT?',
+                        'emoji' => '🛣️',
+                        'options' => [
+                            ['emoji' => '🚗', 'text' => 'Mobil, Kereta Api, Bus Sekolah', 'is_correct' => true],
+                            ['emoji' => '✈️', 'text' => 'Pesawat, Helikopter, Roket', 'is_correct' => false],
+                            ['emoji' => '🚢', 'text' => 'Kapal Laut, Perahu, Speedboat', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok kendaraan yang semuanya berlayar di jalur LAUT/AIR?',
+                        'audio' => 'Manakah kelompok kendaraan yang semuanya berlayar di jalur LAUT/AIR?',
+                        'emoji' => '🌊',
+                        'options' => [
+                            ['emoji' => '🚢', 'text' => 'Kapal Laut, Perahu Layar, Speedboat', 'is_correct' => true],
+                            ['emoji' => '🚗', 'text' => 'Mobil, Motor, Sepeda', 'is_correct' => false],
+                            ['emoji' => '✈️', 'text' => 'Pesawat, Helikopter, Roket', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Manakah kelompok kendaraan yang semuanya terbang di jalur UDARA & ANGKASA?',
+                        'audio' => 'Manakah kelompok kendaraan yang semuanya terbang di jalur UDARA & ANGKASA?',
+                        'emoji' => '☁️',
+                        'options' => [
+                            ['emoji' => '✈️', 'text' => 'Pesawat, Helikopter, Roket Antariksa', 'is_correct' => true],
+                            ['emoji' => '🚌', 'text' => 'Bus, Truk, Becak', 'is_correct' => false],
+                            ['emoji' => '🚢', 'text' => 'Kapal Laut, Speedboat, Perahu', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Siapakah sebutan untuk pengemudi yang mengendalikan laju rangkaian kereta api?',
+                        'audio' => 'Siapakah sebutan untuk pengemudi yang mengendalikan laju rangkaian kereta api?',
+                        'emoji' => '🚂',
+                        'options' => [
+                            ['emoji' => '🚂', 'text' => 'Masinis Kereta Api', 'is_correct' => true],
+                            ['emoji' => '👨‍✈️', 'text' => 'Pilot Pesawat', 'is_correct' => false],
+                            ['emoji' => '🚢', 'text' => 'Nahkoda Kapal', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan apakah yang memiliki baling-baling putar dan bisa mendarat tegak lurus di helipad?',
+                        'audio' => 'Kendaraan apakah yang memiliki baling-baling putar dan bisa mendarat tegak lurus di helipad?',
+                        'emoji' => '🚁',
+                        'options' => [
+                            ['emoji' => '🚁', 'text' => 'Helikopter', 'is_correct' => true],
+                            ['emoji' => '✈️', 'text' => 'Pesawat Jumbo', 'is_correct' => false],
+                            ['emoji' => '🚆', 'text' => 'Kereta Api', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan apakah yang digunakan para antariksawan (astronot) untuk pergi menjelajah ke bulan?',
+                        'audio' => 'Kendaraan apakah yang digunakan para antariksawan untuk pergi menjelajah ke bulan?',
+                        'emoji' => '🚀',
+                        'options' => [
+                            ['emoji' => '🚀', 'text' => 'Roket Antariksa', 'is_correct' => true],
+                            ['emoji' => '🚤', 'text' => 'Speedboat', 'is_correct' => false],
+                            ['emoji' => '🚗', 'text' => 'Mobil Listrik', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa kapal laut yang terbuat dari besi berat tetap bisa mengapung di atas air laut?',
+                        'audio' => 'Mengapa kapal laut yang terbuat dari besi berat tetap bisa mengapung di atas air laut?',
+                        'emoji' => '🌊',
+                        'options' => [
+                            ['emoji' => '🌊', 'text' => 'Karena adanya gaya apung air dan lambung kapal yang berongga udara', 'is_correct' => true],
+                            ['emoji' => '🪨', 'text' => 'Karena bentuknya seperti batu tenggelam', 'is_correct' => false],
+                            ['emoji' => '🪽', 'text' => 'Karena memiliki sayap burung', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Sabuk pengaman (seatbelt) di dalam mobil dan pesawat terbang berfungsi untuk...?',
+                        'audio' => 'Sabuk pengaman di dalam mobil dan pesawat terbang berfungsi untuk apa?',
+                        'emoji' => '🛡️',
+                        'options' => [
+                            ['emoji' => '🛡️', 'text' => 'Melindungi tubuh penumpang agar tetap aman dan selamat', 'is_correct' => true],
+                            ['emoji' => '🎮', 'text' => 'Bermain game', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Mengikat barang belanjaan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Di manakah tempat yang tepat dan aman bagi kita untuk menyeberang jalan raya?',
+                        'audio' => 'Di manakah tempat yang tepat dan aman bagi kita untuk menyeberang jalan raya?',
+                        'emoji' => '🦓',
+                        'options' => [
+                            ['emoji' => '🦓', 'text' => 'Garis Zebra Cross atau Jembatan Penyeberangan Orang', 'is_correct' => true],
+                            ['emoji' => '🛣️', 'text' => 'Di tengah tikungan jalan raya yang ramai', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Di mana saja sembarangan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa alat transportasi dan kendaraan diciptakan oleh manusia?',
+                        'audio' => 'Mengapa alat transportasi dan kendaraan diciptakan oleh manusia?',
+                        'emoji' => '🌍',
+                        'options' => [
+                            ['emoji' => '🌍', 'text' => 'Untuk mempermudah manusia bepergian dan membawa barang ke tempat jauh', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Agar manusia malas bergerak', 'is_correct' => false],
+                            ['emoji' => '🚫', 'text' => 'Tidak memiliki manfaat apa pun', 'is_correct' => false],
+                        ],
+                    ],
+                ],
+            ],
+
+            [
+                'category_slug' => 'kendaraan',
+                'level_number' => 3,
+                'title' => 'Grand Champion Kapten Transportasi Ceria',
+                'slug' => 'kuis-kendaraan-l3-grand-master-transportasi',
+                'icon_emoji' => '🏆',
+                'target_age' => 5,
+                'total_questions' => 10,
+                'stars_reward' => 10,
+                'questions' => [
+                    [
+                        'text' => 'Kendaraan manakah yang meluncur paling cepat di antara seluruh ciptaan transportasi manusia?',
+                        'audio' => 'Kendaraan manakah yang meluncur paling cepat di antara seluruh ciptaan transportasi manusia?',
+                        'emoji' => '🚀',
+                        'options' => [
+                            ['emoji' => '🚀', 'text' => 'Roket Antariksa', 'is_correct' => true],
+                            ['emoji' => '🚲', 'text' => 'Sepeda Gowes', 'is_correct' => false],
+                            ['emoji' => '🛺', 'text' => 'Becak Roda Tiga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bunyi apakah yang paling terkenal dari sirine mobil pemadam kebakaran saat bergegas bertugas?',
+                        'audio' => 'Bunyi apakah yang paling terkenal dari sirine mobil pemadam kebakaran saat bergegas bertugas?',
+                        'emoji' => '🚒',
+                        'options' => [
+                            ['emoji' => '🚒', 'text' => 'Wiu-wiu nyaring pertanda bahaya', 'is_correct' => true],
+                            ['emoji' => '🚲', 'text' => 'Kring-kring suara bel sepeda', 'is_correct' => false],
+                            ['emoji' => '🚆', 'text' => 'Tut-tut peluit kereta api', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Bunyi apakah yang terkenal dari peluit ceria masinis saat kereta api melaju di atas rel?',
+                        'audio' => 'Bunyi apakah yang terkenal dari peluit ceria masinis saat kereta api melaju di atas rel?',
+                        'emoji' => '🚆',
+                        'options' => [
+                            ['emoji' => '🚆', 'text' => 'Tut-tut.. gujes-gujes..!', 'is_correct' => true],
+                            ['emoji' => '🚗', 'text' => 'Tin-tin..!', 'is_correct' => false],
+                            ['emoji' => '🚁', 'text' => 'Prok-prok..!', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan apakah yang digerakkan oleh kayuhan tenaga kaki kita sendiri sambil berolahraga?',
+                        'audio' => 'Kendaraan apakah yang digerakkan oleh kayuhan tenaga kaki kita sendiri sambil berolahraga?',
+                        'emoji' => '🚲',
+                        'options' => [
+                            ['emoji' => '🚲', 'text' => 'Sepeda Roda Dua', 'is_correct' => true],
+                            ['emoji' => '🏍️', 'text' => 'Sepeda Motor', 'is_correct' => false],
+                            ['emoji' => '🚗', 'text' => 'Mobil Keluarga', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Kendaraan laut manakah yang bergerak mengandalkan dorongan hembusan angin pada layarnya?',
+                        'audio' => 'Kendaraan laut manakah yang bergerak mengandalkan dorongan hembusan angin pada layarnya?',
+                        'emoji' => '⛵',
+                        'options' => [
+                            ['emoji' => '⛵', 'text' => 'Perahu Layar Nelayan', 'is_correct' => true],
+                            ['emoji' => '🚤', 'text' => 'Speedboat Cepat', 'is_correct' => false],
+                            ['emoji' => '🚢', 'text' => 'Kapal Feri Besar', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Truk apakah yang memiliki tabung molen besar berputar untuk bahan semen cor gedung tinggi?',
+                        'audio' => 'Truk apakah yang memiliki tabung molen besar berputar untuk bahan semen cor gedung tinggi?',
+                        'emoji' => '🚛',
+                        'options' => [
+                            ['emoji' => '🚛', 'text' => 'Truk Molen Pengaduk Semen', 'is_correct' => true],
+                            ['emoji' => '🚒', 'text' => 'Mobil Pemadam Kebakaran', 'is_correct' => false],
+                            ['emoji' => '🚑', 'text' => 'Mobil Ambulans', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Mengapa bus sekolah sangat membantu para siswa setiap pagi?',
+                        'audio' => 'Mengapa bus sekolah sangat membantu para siswa setiap pagi?',
+                        'emoji' => '🚌',
+                        'options' => [
+                            ['emoji' => '🚌', 'text' => 'Mengantar banyak anak sekolah bersama-sama secara aman dan tepat waktu', 'is_correct' => true],
+                            ['emoji' => '🍦', 'text' => 'Untuk menjual es krim keliling', 'is_correct' => false],
+                            ['emoji' => '😴', 'text' => 'Sebagai tempat tidur santai', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Apa yang harus kita lakukan saat berada di dalam mobil keluarga yang sedang melaju kencang?',
+                        'audio' => 'Apa yang harus kita lakukan saat berada di dalam mobil keluarga yang sedang melaju kencang?',
+                        'emoji' => '🪑',
+                        'options' => [
+                            ['emoji' => '🪑', 'text' => 'Duduk tertib, tenang, dan memakai sabuk pengaman', 'is_correct' => true],
+                            ['emoji' => '🏃‍♂️', 'text' => 'Berlari-lari di dalam mobil', 'is_correct' => false],
+                            ['emoji' => '🪟', 'text' => 'Membuka pintu saat mobil berjalan', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Siapakah pahlawan yang mengemudikan mobil ambulans untuk menyelamatkan pasien gawat darurat?',
+                        'audio' => 'Siapakah pahlawan yang mengemudikan mobil ambulans untuk menyelamatkan pasien gawat darurat?',
+                        'emoji' => '👨‍⚕️',
+                        'options' => [
+                            ['emoji' => '👨‍⚕️', 'text' => 'Sopir Ambulans & Tim Medis Penolong', 'is_correct' => true],
+                            ['emoji' => '👨‍🌾', 'text' => 'Petani Ladang', 'is_correct' => false],
+                            ['emoji' => '👨‍🍳', 'text' => 'Koki Dapur', 'is_correct' => false],
+                        ],
+                    ],
+                    [
+                        'text' => 'Gelar apakah yang pantas untuk anak pintar yang menguasai semua jenis kendaraan darat, laut, dan udara?',
+                        'audio' => 'Gelar apakah yang pantas untuk anak pintar yang menguasai semua jenis kendaraan darat laut dan udara?',
+                        'emoji' => '🏆',
+                        'options' => [
+                            ['emoji' => '🏆', 'text' => '🏆 Juara Cilik Kapten Transportasi Hebat Dunia!', 'is_correct' => true],
+                            ['emoji' => '😴', 'text' => 'Juara Mengantuk dan Malas', 'is_correct' => false],
+                            ['emoji' => '🪨', 'text' => 'Batu Dermaga yang Diam', 'is_correct' => false],
                         ],
                     ],
                 ],
