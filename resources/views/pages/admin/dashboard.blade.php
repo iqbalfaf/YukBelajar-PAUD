@@ -47,17 +47,17 @@
         </div>
 
         <!-- Quick Action Buttons Toolbar -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-white/20">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 pt-4 border-t border-white/20">
             <button @click="showAddMaterialModal = true"
-                    class="py-3 px-4 bg-white hover:bg-slate-50 text-slate-800 font-extrabold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer hover:shadow-md hover:-translate-y-0.5">
+                    class="py-3 px-4 bg-white hover:bg-slate-50 text-slate-900 font-extrabold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer hover:shadow-md hover:-translate-y-0.5">
                 <span class="text-sm">➕</span>
                 <span class="truncate">Tambah Materi Manual</span>
             </button>
 
             <a href="{{ route('admin.quizzes') }}"
-               class="py-3 px-4 bg-purple-500/90 hover:bg-purple-500 text-white font-extrabold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer hover:shadow-md hover:-translate-y-0.5 border border-purple-400/40">
+               class="py-3 px-4 bg-purple-500 hover:bg-purple-400 text-white font-extrabold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer hover:shadow-md hover:-translate-y-0.5 border border-purple-400/40">
                 <span class="text-sm">🎯</span>
-                <span class="truncate">Bank Soal & Input Manual</span>
+                <span class="truncate">Bank Soal & Kuis</span>
             </a>
 
             <button @click="showExportModal = true"
@@ -146,7 +146,7 @@
     </div>
 
     <!-- Quick Stats Grid (Real Database Counts & Uniform Cards) -->
-    <div class="grid grid-cols-2 lg:grid-cols-6 gap-3.5 sm:gap-4">
+    <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
         
         <!-- 1. Materi Aktif -->
         <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between h-36 hover:border-sky-300 hover:shadow-md transition-all">
