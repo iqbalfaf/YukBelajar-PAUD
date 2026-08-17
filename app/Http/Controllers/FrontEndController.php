@@ -224,6 +224,7 @@ class FrontEndController extends Controller
 
             return [
                 'id' => $cat->id,
+                'pillar' => $cat->pillar ?: 'mengenal',
                 'slug' => $cat->slug,
                 'name' => $cat->name,
                 'subtitle' => $cat->subtitle,
@@ -250,7 +251,7 @@ class FrontEndController extends Controller
     /**
      * Halaman Belajar Flashcard Bergambar & Bersuara (Real Data MySQL).
      */
-    public function materials(string $category = 'hewan'): View
+    public function materials(string $category = 'abjad'): View
     {
         $user = $this->getCurrentUserData();
         $authUser = Auth::user();
@@ -263,6 +264,7 @@ class FrontEndController extends Controller
         $allCategories = $allCategoriesModel->map(function ($c) {
             return [
                 'id' => $c->id,
+                'pillar' => $c->pillar ?: 'mengenal',
                 'slug' => $c->slug,
                 'name' => $c->name,
                 'icon_emoji' => $c->icon_emoji,

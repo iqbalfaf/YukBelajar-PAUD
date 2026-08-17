@@ -24,7 +24,7 @@ test('halaman materi flashcard memuat kartu materi nyata dan bank kuis dari data
     $response->assertViewHas('materialData');
 
     $materialData = $response->viewData('materialData');
-    expect($materialData['category_name'])->toBe('Pulau Hewan Ceria');
+    expect($materialData['category_name'])->toBe('Satwa & Hewan Lucu');
     expect($materialData['cards'])->not->toBeEmpty();
     expect($materialData['cards'][0])->toHaveKeys(['id', 'level', 'title', 'voice_text', 'sound_mimic', 'parent_note']);
 });

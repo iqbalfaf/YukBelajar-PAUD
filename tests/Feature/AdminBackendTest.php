@@ -511,10 +511,52 @@ test('admin dapat menghapus stiker dari database', function () {
 
 test('gemini service dapat menghasilkan paket kuis terstruktur ramah anak', function () {
     $service = app(GeminiService::class);
-    $result = $service->generateQuizContent('hewan', 'Pulau Hewan 🦁', 1, 'Kucing Lucu', '3-4', 3);
+    $result = $service->generateQuizContent('hewan', 'Satwa & Hewan Lucu 🦁', 1, 'Kucing Lucu', '3-4', 3);
 
     expect($result)->toHaveKeys(['source', 'model', 'items']);
     expect($result['items'])->toHaveCount(3);
     expect($result['items'][0])->toHaveKeys(['question', 'voice_script', 'image_prompt', 'options']);
     expect($result['items'][0]['options'])->toHaveCount(3);
+});
+
+test('admin dapat menambahkan, mengedit, dan menghapus topik pembelajaran baru 3 pilar', function () {
+    $admin = User::where('role', 'admin')->first();
+
+    // 1. Create Topic
+    $response = $this->actingAs($admin)->post(route('admin.topics.store'), [
+        'pillar' => 'mengenal',
+        'name' => 'Mengenal Profesi Impian',
+        'subtitle' => 'Mengenal dokter, pilot, dan guru hebat',
+        'icon_emoji' => '👨‍⚕️',
+        'color_theme' => 'emerald',
+        'recommended_age' => '4 - 6 Thn',
+    ]);
+
+    $response->assertRedirect();
+    $response->assertSessionHas('success');
+
+    $topic = Category::where('name', 'Mengenal Profesi Impian')->first();
+    expect($topic)->not->toBeNull();
+    expect($topic->pillar)->toBe('mengenal');
+    expect($topic->levels)->toHaveCount(3);
+
+    // 2. Update Topic
+    $updateResponse = $this->actingAs($admin)->put(route('admin.topics.update', $topic->id), [
+        'pillar' => 'mengenal',
+        'name' => 'Mengenal Aneka Profesi Cita-cita',
+        'subtitle' => 'Mengenal profesi mulia',
+        'icon_emoji' => '👩‍🚀',
+        'color_theme' => 'purple',
+        'recommended_age' => '4 - 6 Thn',
+    ]);
+
+    $updateResponse->assertRedirect();
+    $topic->refresh();
+    expect($topic->name)->toBe('Mengenal Aneka Profesi Cita-cita');
+    expect($topic->icon_emoji)->toBe('👩‍🚀');
+
+    // 3. Delete Topic
+    $delResponse = $this->actingAs($admin)->delete(route('admin.topics.delete', $topic->id));
+    $delResponse->assertRedirect();
+    expect(Category::find($topic->id))->toBeNull();
 });

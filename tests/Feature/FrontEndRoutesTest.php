@@ -37,11 +37,10 @@ test('halaman beranda taman petualangan game hub dapat diakses oleh pengguna ter
     $response->assertStatus(200);
     $response->assertSee('Taman Petualangan');
     $response->assertSee('Kiki si Kucing Pintar');
-    $response->assertSee('Pulau Hewan');
-    $response->assertSee('Istana Angka');
-    $response->assertSee('Filter Usia');
-    $response->assertSee('Tingkatan Belajar');
-    $response->assertSee('Uji Cepat');
+    $response->assertSee('Zona Mengenal');
+    $response->assertSee('Zona Membaca');
+    $response->assertSee('Zona Menghitung');
+    $response->assertSee('Tabungan Bintang');
 });
 
 test('halaman ruang piala dan sertifikat prestasi dapat diakses', function () {
@@ -71,7 +70,7 @@ test('halaman flashcard bergambar dapat diakses dengan data kategori', function 
     $response = $this->actingAs($student)->get(route('materials', 'hewan'));
 
     $response->assertStatus(200);
-    $response->assertSee('Pulau Hewan');
+    $response->assertSee('Satwa & Hewan Lucu');
     $response->assertSee('Katalog Materi');
     $response->assertSee('Bank Kuis & Soal', false);
     $response->assertSee('Dengar Pelafalan Suara');
@@ -126,7 +125,7 @@ test('halaman dashboard admin dan 1-click ai generator dapat diakses oleh admin'
     $aiResponse = $this->actingAs($admin)->get(route('admin.ai-generator'));
     $aiResponse->assertStatus(200);
     $aiResponse->assertSee('1-Click AI Generator');
-    $aiResponse->assertSee('Pilih Kategori Pembelajaran Sasaran');
+    $aiResponse->assertSee('Pilih Topik Pembelajaran');
     $aiResponse->assertSee('Tingkatan Level Belajar');
 
     $usersResponse = $this->actingAs($admin)->get(route('admin.users'));

@@ -1,15 +1,35 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Flashcard & Kurikulum Materi - YukBelajar Admin')
+@section('title', 'Manajemen Flashcard & Kurikulum 3 Pilar - YukBelajar Admin')
 
 @section('content')
 <div class="flex flex-col gap-6 pb-16"
      x-data="{
+         activePillar: 'mengenal', // 'mengenal', 'membaca', 'menghitung'
          selectedCat: 'all',
          searchQuery: '',
          showAddModal: false,
          showEditModal: false,
+         showAddTopicModal: false,
+         showEditTopicModal: false,
          categories: {{ Js::from($categories) }},
+         
+         get currentPillarCategories() {
+             return this.categories.filter(c => c.pillar === this.activePillar);
+         },
+
+         get currentFilteredCategories() {
+             let cats = this.currentPillarCategories;
+             if (this.selectedCat !== 'all') {
+                 cats = cats.filter(c => c.slug === this.selectedCat);
+             }
+             if (this.searchQuery.trim() !== '') {
+                 const q = this.searchQuery.toLowerCase();
+                 cats = cats.filter(c => c.name.toLowerCase().includes(q) || c.levels.some(lvl => lvl.items.some(it => it.title.toLowerCase().includes(q))));
+             }
+             return cats;
+         },
+
          editData: {
              id: null,
              title: '',
@@ -20,7 +40,7 @@
              parent_note: ''
          },
          newCard: {
-             category_slug: '{{ $categories[0]['slug'] ?? 'hewan' }}',
+             category_slug: '{{ $categories[0]['slug'] ?? 'abjad' }}',
              level_number: 1,
              title: '',
              subtitle: '',
@@ -28,6 +48,21 @@
              speech_text: '',
              sound_effect: 'Ceria',
              parent_note: ''
+         },
+         editTopicData: {
+             id: null,
+             pillar: 'mengenal',
+             name: '',
+             subtitle: '',
+             icon_emoji: '🌟',
+             color_theme: 'yellow',
+             recommended_age: '3 - 5 Thn',
+             description: ''
+         },
+
+         switchPillar(p) {
+             this.activePillar = p;
+             this.selectedCat = 'all';
          },
 
          openEdit(item) {
@@ -43,6 +78,25 @@
              this.showEditModal = true;
          },
 
+         openAddCardForCategory(catSlug) {
+             this.newCard.category_slug = catSlug;
+             this.showAddModal = true;
+         },
+
+         openEditTopic(cat) {
+             this.editTopicData = {
+                 id: cat.id,
+                 pillar: cat.pillar,
+                 name: cat.name,
+                 subtitle: cat.subtitle,
+                 icon_emoji: cat.icon_emoji,
+                 color_theme: cat.color_theme,
+                 recommended_age: cat.recommended_age,
+                 description: ''
+             };
+             this.showEditTopicModal = true;
+         },
+
          playSpeech(text) {
              if (window.soundEngine) {
                  window.soundEngine.speak(text);
@@ -53,22 +107,35 @@
     <!-- Top Banner -->
     <div class="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
-            <span class="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-xs font-bold uppercase tracking-wider mb-2">
-                Panel Kurator & Materi Pembelajaran
-            </span>
+            <div class="flex items-center gap-2 mb-2 flex-wrap">
+                <span class="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-xs font-bold uppercase tracking-wider">
+                    Panel Kurikulum 3 Pilar PAUD
+                </span>
+                <span class="inline-block px-3 py-1 bg-amber-400 text-amber-950 font-black rounded-full text-xs uppercase tracking-wider">
+                    20 Topik Terstruktur
+                </span>
+            </div>
             <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">
-                Manajemen Flashcard & Kartu Belajar PAUD
+                Manajemen Materi & Topik Pembelajaran
             </h2>
             <p class="text-sm text-sky-100 mt-1 max-w-xl">
-                Kelola kartu objek flashcard, audio pelafalan TTS, dan panduan orang tua berjenjang (Level 1 Dasar, Level 2 Menengah, Level 3 Pra-SD).
+                Kelola 3 Pilar Kurikulum Merdeka PAUD (Mengenal, Membaca, Menghitung), tambah topik baru secara dinamis, dan atur kartu flashcard berjenjang (Level 1, 2, 3).
             </p>
         </div>
 
-        <button @click="showAddModal = true"
-                class="px-6 py-4 bg-yellow-400 hover:bg-yellow-300 text-yellow-950 font-black rounded-2xl shadow-md transition-all flex items-center gap-2.5 shrink-0 hover:scale-105 cursor-pointer">
-            <span class="text-2xl">➕</span>
-            <span>Tambah Flashcard Baru</span>
-        </button>
+        <div class="flex items-center gap-3 shrink-0 flex-wrap">
+            <button @click="showAddTopicModal = true"
+                    class="px-5 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold rounded-2xl shadow-md transition-all flex items-center gap-2 hover:scale-105 cursor-pointer">
+                <span class="text-xl">➕</span>
+                <span>Tambah Topik Baru</span>
+            </button>
+
+            <button @click="showAddModal = true"
+                    class="px-5 py-3.5 bg-yellow-400 hover:bg-yellow-300 text-yellow-950 font-black rounded-2xl shadow-md transition-all flex items-center gap-2 hover:scale-105 cursor-pointer">
+                <span class="text-xl">🃏</span>
+                <span>Tambah Flashcard</span>
+            </button>
+        </div>
     </div>
 
     <!-- Alert Notifications -->
@@ -91,321 +158,470 @@
     </div>
     @endif
 
-    <!-- Metric Stats Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Total Kartu Flashcard</span>
-                <span class="text-2xl">📚</span>
-            </div>
-            <div class="text-3xl font-black font-heading text-slate-800">{{ $materialsData['stats']['total_materials'] }}</div>
-            <span class="text-xs font-semibold text-emerald-600">Seluruh Level Aktif</span>
-        </div>
+    <!-- 3 GRAND PILLAR TABS -->
+    <div class="bg-white border-2 border-slate-200 rounded-3xl p-3 shadow-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            
+            <!-- Tab Mengenal -->
+            <button type="button" 
+                    @click="switchPillar('mengenal')"
+                    class="p-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2.5 transition-all cursor-pointer"
+                    :class="activePillar === 'mengenal' ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'">
+                <span class="text-2xl">🌟</span>
+                <div class="text-left leading-tight">
+                    <span>Pilar 1: Mengenal</span>
+                    <span class="block text-[11px] font-semibold opacity-90" x-text="`${categories.filter(c => c.pillar === 'mengenal').length} Topik`"></span>
+                </div>
+            </button>
 
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Total Pulau Pembelajaran</span>
-                <span class="text-2xl">🏝️</span>
-            </div>
-            <div class="text-3xl font-black font-heading text-slate-800">{{ $materialsData['stats']['total_categories'] }}</div>
-            <span class="text-xs font-semibold text-sky-600">Kategori Tematik PAUD</span>
-        </div>
+            <!-- Tab Membaca -->
+            <button type="button" 
+                    @click="switchPillar('membaca')"
+                    class="p-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2.5 transition-all cursor-pointer"
+                    :class="activePillar === 'membaca' ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-md' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'">
+                <span class="text-2xl">📖</span>
+                <div class="text-left leading-tight">
+                    <span>Pilar 2: Membaca</span>
+                    <span class="block text-[11px] font-semibold opacity-90" x-text="`${categories.filter(c => c.pillar === 'membaca').length} Topik`"></span>
+                </div>
+            </button>
 
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Tingkatan Level Scaffolding</span>
-                <span class="text-2xl">📈</span>
-            </div>
-            <div class="text-3xl font-black font-heading text-slate-800">{{ $materialsData['stats']['total_levels'] }}</div>
-            <span class="text-xs font-semibold text-purple-600">Level 1, 2, dan 3</span>
+            <!-- Tab Menghitung -->
+            <button type="button" 
+                    @click="switchPillar('menghitung')"
+                    class="p-4 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2.5 transition-all cursor-pointer"
+                    :class="activePillar === 'menghitung' ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-md' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'">
+                <span class="text-2xl">🧮</span>
+                <div class="text-left leading-tight">
+                    <span>Pilar 3: Menghitung</span>
+                    <span class="block text-[11px] font-semibold opacity-90" x-text="`${categories.filter(c => c.pillar === 'menghitung').length} Topik`"></span>
+                </div>
+            </button>
+
         </div>
     </div>
 
-    <!-- Filter & Category Switcher Tabs -->
-    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-        <div class="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl overflow-x-auto max-w-full">
+    <!-- SUB-NAVIGATION: Topik Pills & Search Bar -->
+    <div class="bg-white p-4 sm:p-5 rounded-3xl border border-slate-200 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Category Pill Selector -->
+        <div class="flex items-center gap-2 overflow-x-auto max-w-full pb-2 md:pb-0 w-full md:w-auto">
             <button @click="selectedCat = 'all'"
-                    class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
-                    :class="selectedCat === 'all' ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                Semua Pulau ({{ $materialsData['stats']['total_materials'] }})
+                    class="px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap"
+                    :class="selectedCat === 'all' ? 'bg-slate-800 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
+                🌟 Semua Topik
             </button>
-            <template x-for="cat in categories" :key="cat.slug">
+
+            <template x-for="cat in currentPillarCategories" :key="cat.id">
                 <button @click="selectedCat = cat.slug"
-                        class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5"
-                        :class="selectedCat === cat.slug ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
+                        class="px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
+                        :class="selectedCat === cat.slug ? 'bg-sky-600 text-white shadow-xs font-black' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
                     <span x-text="cat.icon_emoji"></span>
                     <span x-text="cat.name"></span>
                 </button>
             </template>
         </div>
 
-        <div class="relative w-full md:w-64">
-            <input type="text" x-model="searchQuery"
-                   placeholder="Cari materi / objek..."
-                   class="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-xl text-xs font-bold outline-none">
-            <span class="absolute left-3 top-2.5 text-slate-400 text-sm">🔍</span>
+        <!-- Search Input -->
+        <div class="relative w-full md:w-72 shrink-0">
+            <input type="text" 
+                   x-model="searchQuery" 
+                   placeholder="Cari materi / kata kunci..."
+                   class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-xs font-bold text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-sky-500">
+            <span class="absolute right-3 top-2.5 text-xs text-slate-400">🔍</span>
         </div>
+
     </div>
 
-    <!-- Flashcards Grouped by Category & Level -->
-    <div class="flex flex-col gap-6">
-        <template x-for="cat in categories" :key="cat.slug">
-            <div x-show="selectedCat === 'all' || selectedCat === cat.slug"
-                 class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs flex flex-col gap-6">
+    <!-- MAIN CURRICULUM ACCORDION PER TOPIC -->
+    <div class="flex flex-col gap-8">
+        <template x-for="cat in currentFilteredCategories" :key="cat.id">
+            <div class="bg-white border-2 border-slate-200 rounded-3xl p-5 sm:p-6 shadow-xs flex flex-col gap-5">
                 
-                <!-- Category Title -->
-                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <!-- Category Top Header -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                     <div class="flex items-center gap-3">
-                        <span class="text-3xl" x-text="cat.icon_emoji"></span>
+                        <span class="text-4xl sm:text-5xl" x-text="cat.icon_emoji"></span>
                         <div>
-                            <h3 class="text-xl font-black font-heading text-slate-800" x-text="cat.name"></h3>
-                            <p class="text-xs font-bold text-slate-400" x-text="cat.levels.reduce((acc, l) => acc + l.cards_count, 0) + ' Kartu Pembelajaran'"></p>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h3 class="text-xl sm:text-2xl font-black font-heading text-slate-800" x-text="cat.name"></h3>
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-slate-100 text-slate-600 border border-slate-200"
+                                      x-text="`Usia ${cat.recommended_age}`"></span>
+                            </div>
+                            <p class="text-xs font-bold text-slate-500 mt-0.5" x-text="cat.subtitle"></p>
                         </div>
                     </div>
 
-                    <button @click="newCard.category_slug = cat.slug; showAddModal = true"
-                            class="px-4 py-2 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 font-bold text-xs rounded-xl transition-all flex items-center gap-1.5 cursor-pointer">
-                        <span>➕</span>
-                        <span>Tambah ke Pulau Ini</span>
-                    </button>
+                    <!-- Category Action Buttons (Add Card, Edit Topic, Delete Topic) -->
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <button @click="openAddCardForCategory(cat.slug)"
+                                class="px-3 py-1.5 bg-yellow-400 hover:bg-yellow-300 text-yellow-950 rounded-xl font-extrabold text-xs flex items-center gap-1 shadow-2xs cursor-pointer">
+                            <span>➕</span>
+                            <span>Tambah Kartu</span>
+                        </button>
+
+                        <button @click="openEditTopic(cat)"
+                                class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-1 cursor-pointer">
+                            <span>✏️</span>
+                            <span>Edit Topik</span>
+                        </button>
+
+                        <form :action="`{{ url('/admin/topics') }}/${cat.id}`" method="POST" 
+                              onsubmit="return confirm('Apakah Anda yakin ingin menghapus topik ini beserta seluruh materi dan kuisnya?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl font-bold text-xs cursor-pointer">
+                                🗑️
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
-                <!-- Levels Grid -->
-                <div class="flex flex-col gap-5">
-                    <template x-for="level in cat.levels" :key="level.id">
-                        <div class="border-2 border-slate-100 rounded-2xl p-5 bg-slate-50/50">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center gap-2">
-                                    <span class="px-2.5 py-1 rounded-xl text-xs font-black"
-                                          :class="level.level_num === 1 ? 'bg-emerald-100 text-emerald-800' : (level.level_num === 2 ? 'bg-amber-100 text-amber-800' : 'bg-purple-100 text-purple-800')"
-                                          x-text="'Level ' + level.level_num">
-                                    </span>
-                                    <h4 class="font-extrabold text-sm text-slate-800" x-text="level.level_title"></h4>
+                <!-- 3 Levels Container (Level 1, Level 2, Level 3) -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                    <template x-for="lvl in cat.levels" :key="lvl.id">
+                        <div class="bg-slate-50/80 border border-slate-200 rounded-2xl p-4 flex flex-col justify-between gap-4">
+                            
+                            <div>
+                                <!-- Level Title & Badge -->
+                                <div class="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-200">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="px-2 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider"
+                                              :class="lvl.level_num === 1 ? 'bg-emerald-100 text-emerald-800' : (lvl.level_num === 2 ? 'bg-amber-100 text-amber-900' : 'bg-purple-100 text-purple-900')"
+                                              x-text="`Level ${lvl.level_num}`"></span>
+                                        <h4 class="text-xs font-extrabold text-slate-800" x-text="lvl.level_title"></h4>
+                                    </div>
+                                    <span class="text-[11px] font-bold text-slate-500" x-text="`${lvl.cards_count} Kartu`"></span>
                                 </div>
-                                <span class="text-xs font-bold text-slate-500 bg-white px-2.5 py-1 rounded-lg border border-slate-200"
-                                      x-text="level.items.length + ' Kartu'"></span>
-                            </div>
 
-                            <!-- Cards in Level -->
-                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                                <template x-for="item in level.items.filter(i => !searchQuery || i.title.toLowerCase().includes(searchQuery.toLowerCase()))" :key="item.id">
-                                    <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 hover:border-sky-300 shadow-xs flex flex-col justify-between gap-3 transition-all">
-                                        <div class="flex items-start justify-between gap-2">
-                                            <div class="flex items-center gap-2.5">
-                                                <span class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-xl shrink-0"
-                                                      x-text="item.icon_emoji || '📄'">
-                                                </span>
-                                                <div>
-                                                    <h5 class="font-extrabold text-sm text-slate-900" x-text="item.title"></h5>
-                                                    <p class="text-[11px] font-semibold text-slate-500" x-text="item.subtitle"></p>
+                                <!-- Cards List in this Level -->
+                                <div class="flex flex-col gap-2.5">
+                                    <template x-for="item in lvl.items" :key="item.id">
+                                        <div class="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs flex items-center justify-between gap-2 hover:border-sky-300 transition-colors">
+                                            <div class="flex items-center gap-2.5 min-w-0">
+                                                <span class="text-2xl shrink-0" x-text="item.icon_emoji"></span>
+                                                <div class="min-w-0">
+                                                    <h5 class="text-xs font-black text-slate-800 truncate" x-text="item.title"></h5>
+                                                    <p class="text-[10px] font-semibold text-slate-400 truncate" x-text="item.subtitle"></p>
                                                 </div>
                                             </div>
 
                                             <div class="flex items-center gap-1 shrink-0">
-                                                <button type="button" @click="openEdit(item)" title="Edit Kartu"
-                                                        class="p-1.5 bg-slate-100 hover:bg-sky-100 text-slate-600 hover:text-sky-700 rounded-lg transition-all font-bold cursor-pointer">
+                                                <button @click="playSpeech(item.speech_text || item.title)" 
+                                                        title="Tes Suara TTS"
+                                                        class="w-7 h-7 bg-yellow-100 hover:bg-yellow-200 text-yellow-900 rounded-lg flex items-center justify-center text-xs cursor-pointer">
+                                                    🔊
+                                                </button>
+                                                <button @click="openEdit(item)" 
+                                                        title="Edit Kartu"
+                                                        class="w-7 h-7 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs cursor-pointer">
                                                     ✏️
                                                 </button>
-                                                <form :action="'{{ url('admin/materials') }}/' + item.id" method="POST"
-                                                      onsubmit="return confirm('Yakin ingin menghapus kartu materi ini?')" class="inline">
+                                                <form :action="`{{ url('/admin/materials') }}/${item.id}`" method="POST"
+                                                      onsubmit="return confirm('Hapus kartu materi ini?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" title="Hapus Kartu"
-                                                            class="p-1.5 bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-700 rounded-lg transition-all font-bold cursor-pointer">
+                                                            class="w-7 h-7 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-lg flex items-center justify-center text-xs cursor-pointer">
                                                         🗑️
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
+                                    </template>
 
-                                        <!-- Voice Script Box -->
-                                        <div class="p-2.5 bg-sky-50/70 border border-sky-200 rounded-xl text-xs flex items-center justify-between gap-2">
-                                            <div class="truncate">
-                                                <span class="text-[10px] font-bold text-sky-800 block">🎙️ Audio TTS:</span>
-                                                <p class="text-sky-950 font-semibold truncate text-[11px]" x-text="item.speech_text"></p>
-                                            </div>
-                                            <button type="button" @click="playSpeech(item.speech_text)" title="Uji Suara"
-                                                    class="px-2 py-1 bg-white border border-sky-300 text-sky-700 font-bold text-[10px] rounded-lg shrink-0 hover:bg-sky-100 cursor-pointer">
-                                                🔊 Uji
-                                            </button>
+                                    <template x-if="lvl.items.length === 0">
+                                        <div class="py-6 text-center text-slate-400 text-xs font-bold">
+                                            Belum ada kartu di level ini
                                         </div>
-
-                                        <!-- Parent Note -->
-                                        <template x-if="item.parent_note">
-                                            <p class="text-[11px] text-slate-400 font-medium italic border-t border-slate-100 pt-1.5">
-                                                💡 <span x-text="item.parent_note"></span>
-                                            </p>
-                                        </template>
-                                    </div>
-                                </template>
+                                    </template>
+                                </div>
                             </div>
+
                         </div>
                     </template>
                 </div>
+
             </div>
         </template>
     </div>
 
-    <!-- MODAL: TAMBAH FLASHCARD BARU (REAL DATABASE POST) -->
-    <div x-show="showAddModal" x-cloak
+    <!-- MODAL 1: TAMBAH TOPIK PEMBELAJARAN BARU -->
+    <div x-show="showAddTopicModal" x-cloak
          class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
-        
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-4 border-sky-400 shadow-2xl relative my-8"
-             @click.away="showAddModal = false">
-            
-            <button @click="showAddModal = false"
-                    class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-black text-xl cursor-pointer">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-2 border-slate-200 shadow-2xl relative my-8"
+             @click.away="showAddTopicModal = false">
+            <button @click="showAddTopicModal = false" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-bold text-xl cursor-pointer">
                 ✖
             </button>
-
-            <div class="flex items-center gap-3 mb-4">
-                <span class="text-3xl">➕</span>
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-3xl">🌟</span>
                 <div>
-                    <h3 class="text-xl font-black font-heading text-slate-800">Tambah Flashcard Baru</h3>
-                    <p class="text-xs font-bold text-slate-500">Buat materi kartu objek baru dan simpan ke database.</p>
+                    <h3 class="text-xl font-black font-heading text-slate-800">Tambah Topik Belajar Baru</h3>
+                    <p class="text-xs font-bold text-slate-500">Pilih pilar kurikulum dan isi informasi topik pembelajaran.</p>
+                </div>
+            </div>
+
+            <form action="{{ route('admin.topics.store') }}" method="POST" class="flex flex-col gap-4">
+                @csrf
+                <div>
+                    <label class="block text-xs font-black text-slate-700 uppercase mb-1">Pilar Kurikulum Merdeka *</label>
+                    <select name="pillar" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                        <option value="mengenal">🌟 Pilar 1: Mengenal</option>
+                        <option value="membaca">📖 Pilar 2: Membaca</option>
+                        <option value="menghitung">🧮 Pilar 3: Menghitung</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="col-span-2">
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Nama Topik *</label>
+                        <input type="text" name="name" required placeholder="e.g. Mengenal Bendera Dunia" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Ikon Emoji *</label>
+                        <input type="text" name="icon_emoji" required placeholder="e.g. 🇮🇩" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-center text-lg font-bold text-slate-800">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black text-slate-700 uppercase mb-1">Sub-judul / Penjelasan Singkat</label>
+                    <input type="text" name="subtitle" placeholder="e.g. Mengenal bendera negara Indonesia dan sahabat dunia" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Tema Warna</label>
+                        <select name="color_theme" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                            <option value="emerald">🟢 Emerald / Hijau</option>
+                            <option value="sky">🔵 Sky / Biru</option>
+                            <option value="yellow">🟡 Yellow / Kuning</option>
+                            <option value="purple">🟣 Purple / Ungu</option>
+                            <option value="rose">🔴 Rose / Merah</option>
+                            <option value="amber">🟠 Amber / Oranye</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Rekomendasi Usia</label>
+                        <input type="text" name="recommended_age" value="3 - 6 Thn" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <button type="button" @click="showAddTopicModal = false" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold cursor-pointer shadow-xs">
+                        Simpan Topik Baru
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: EDIT TOPIK PEMBELAJARAN -->
+    <div x-show="showEditTopicModal" x-cloak
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-2 border-slate-200 shadow-2xl relative my-8"
+             @click.away="showEditTopicModal = false">
+            <button @click="showEditTopicModal = false" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-bold text-xl cursor-pointer">
+                ✖
+            </button>
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-3xl">✏️</span>
+                <div>
+                    <h3 class="text-xl font-black font-heading text-slate-800">Edit Data Topik Pembelajaran</h3>
+                    <p class="text-xs font-bold text-slate-500">Perbarui nama, ikon, atau tema topik ini.</p>
+                </div>
+            </div>
+
+            <form :action="`{{ url('/admin/topics') }}/${editTopicData.id}`" method="POST" class="flex flex-col gap-4">
+                @csrf
+                @method('PUT')
+                <div>
+                    <label class="block text-xs font-black text-slate-700 uppercase mb-1">Pilar Kurikulum Merdeka *</label>
+                    <select name="pillar" x-model="editTopicData.pillar" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                        <option value="mengenal">🌟 Pilar 1: Mengenal</option>
+                        <option value="membaca">📖 Pilar 2: Membaca</option>
+                        <option value="menghitung">🧮 Pilar 3: Menghitung</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="col-span-2">
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Nama Topik *</label>
+                        <input type="text" name="name" x-model="editTopicData.name" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Ikon Emoji *</label>
+                        <input type="text" name="icon_emoji" x-model="editTopicData.icon_emoji" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-center text-lg font-bold text-slate-800">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black text-slate-700 uppercase mb-1">Sub-judul</label>
+                    <input type="text" name="subtitle" x-model="editTopicData.subtitle" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Tema Warna</label>
+                        <select name="color_theme" x-model="editTopicData.color_theme" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                            <option value="emerald">🟢 Emerald / Hijau</option>
+                            <option value="sky">🔵 Sky / Biru</option>
+                            <option value="yellow">🟡 Yellow / Kuning</option>
+                            <option value="purple">🟣 Purple / Ungu</option>
+                            <option value="rose">🔴 Rose / Merah</option>
+                            <option value="amber">🟠 Amber / Oranye</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Rekomendasi Usia</label>
+                        <input type="text" name="recommended_age" x-model="editTopicData.recommended_age" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <button type="button" @click="showEditTopicModal = false" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-extrabold cursor-pointer shadow-xs">
+                        Perbarui Topik
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: TAMBAH FLASHCARD BARU -->
+    <div x-show="showAddModal" x-cloak
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-2 border-slate-200 shadow-2xl relative my-8"
+             @click.away="showAddModal = false">
+            <button @click="showAddModal = false" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-bold text-xl cursor-pointer">
+                ✖
+            </button>
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-3xl">🃏</span>
+                <div>
+                    <h3 class="text-xl font-black font-heading text-slate-800">Tambah Kartu Flashcard</h3>
+                    <p class="text-xs font-bold text-slate-500">Tambahkan objek kartu baru dengan pelafalan suara TTS ramah anak.</p>
                 </div>
             </div>
 
             <form action="{{ route('admin.materials.store') }}" method="POST" class="flex flex-col gap-4">
                 @csrf
-                
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Pulau Sasaran</label>
-                        <select name="category_slug" x-model="newCard.category_slug"
-                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
-                            <template x-for="cat in categories" :key="cat.slug">
-                                <option :value="cat.slug" x-text="cat.icon_emoji + ' ' + cat.name"></option>
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Topik *</label>
+                        <select name="category_slug" x-model="newCard.category_slug" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                            <template x-for="cat in categories" :key="cat.id">
+                                <option :value="cat.slug" x-text="`${cat.icon_emoji} ${cat.name}`"></option>
                             </template>
                         </select>
                     </div>
-
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Tingkatan Level</label>
-                        <select name="level_number" x-model="newCard.level_number"
-                                class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 rounded-xl outline-none cursor-pointer">
-                            <option :value="1">Level 1 (Dasar / Usia 3-4)</option>
-                            <option :value="2">Level 2 (Menengah / Usia 4-5)</option>
-                            <option :value="3">Level 3 (Pra-SD / Usia 5-6)</option>
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Tingkatan Level *</label>
+                        <select name="level_number" x-model="newCard.level_number" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                            <option value="1">🌱 Level 1 (Dasar)</option>
+                            <option value="2">⭐ Level 2 (Menengah)</option>
+                            <option value="3">🚀 Level 3 (Pra-SD)</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-3 gap-3">
                     <div class="col-span-2">
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Judul Materi / Objek</label>
-                        <input type="text" name="title" x-model="newCard.title" required placeholder="Contoh: Kucing Persia Lucu"
-                               class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Judul / Nama Objek *</label>
+                        <input type="text" name="title" required placeholder="e.g. Apel Merah Manis" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Emoji Ikon</label>
-                        <input type="text" name="icon_emoji" x-model="newCard.icon_emoji" placeholder="🐱"
-                               class="w-full p-3 text-center text-sm bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Emoji *</label>
+                        <input type="text" name="icon_emoji" required placeholder="e.g. 🍎" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-center text-lg font-bold text-slate-800">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Subtitle (Penjelasan / Suku Kata)</label>
-                    <input type="text" name="subtitle" x-model="newCard.subtitle" placeholder="Contoh: Ku-cing (2 Suku Kata)"
-                           class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                    <label class="block text-xs font-black text-slate-700 uppercase mb-1">Sub-judul / Pemenggalan Suku Kata</label>
+                    <input type="text" name="subtitle" placeholder="e.g. A-pel (2 Suku Kata)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Naskah Pelafalan Suara (TTS)</label>
-                    <textarea name="speech_text" x-model="newCard.speech_text" rows="2" placeholder="Contoh: Kucing! Hewan berbulu halus yang suka mengeong."
-                              class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none"></textarea>
+                    <label class="block text-xs font-black text-slate-700 uppercase mb-1">Teks Pelafalan Suara (TTS Speech) *</label>
+                    <textarea name="speech_text" rows="2" placeholder="e.g. Apel! Buah merah manis yang kaya vitamin C." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800"></textarea>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Tips Interaksi untuk Orang Tua</label>
-                    <input type="text" name="parent_note" x-model="newCard.parent_note" placeholder="Ajak anak menirukan bunyi suara meong bersama."
-                           class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                    <label class="block text-xs font-black text-slate-700 uppercase mb-1">Catatan Panduan Orang Tua</label>
+                    <input type="text" name="parent_note" placeholder="e.g. Ajak ananda menyebutkan warna merah pada apel." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
                 </div>
 
-                <div class="flex gap-3 mt-2">
-                    <button type="button" @click="showAddModal = false"
-                            class="flex-1 py-3.5 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl cursor-pointer">
+                <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <button type="button" @click="showAddModal = false" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold cursor-pointer">
                         Batal
                     </button>
-                    <button type="submit"
-                            class="flex-1 py-3.5 bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-xs rounded-xl shadow-xs cursor-pointer">
-                        Simpan ke Database
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-yellow-950 text-xs font-black cursor-pointer shadow-xs">
+                        Simpan Flashcard
                     </button>
                 </div>
-
             </form>
-
         </div>
     </div>
 
-    <!-- MODAL: EDIT FLASHCARD (REAL DATABASE PUT) -->
+    <!-- MODAL 4: EDIT FLASHCARD -->
     <div x-show="showEditModal" x-cloak
          class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
-        
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-4 border-amber-400 shadow-2xl relative my-8"
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-2 border-slate-200 shadow-2xl relative my-8"
              @click.away="showEditModal = false">
-            
-            <button @click="showEditModal = false"
-                    class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-black text-xl cursor-pointer">
+            <button @click="showEditModal = false" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-bold text-xl cursor-pointer">
                 ✖
             </button>
-
-            <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center gap-3 mb-5">
                 <span class="text-3xl">✏️</span>
                 <div>
                     <h3 class="text-xl font-black font-heading text-slate-800">Edit Kartu Flashcard</h3>
-                    <p class="text-xs font-bold text-slate-500">Perbarui naskah suara dan tips interaksi.</p>
+                    <p class="text-xs font-bold text-slate-500">Perbarui informasi dan lafal suara kartu ini.</p>
                 </div>
             </div>
 
-            <form :action="'{{ url('admin/materials') }}/' + editData.id" method="POST" class="flex flex-col gap-4">
+            <form :action="`{{ url('/admin/materials') }}/${editData.id}`" method="POST" class="flex flex-col gap-4">
                 @csrf
                 @method('PUT')
-                
                 <div class="grid grid-cols-3 gap-3">
                     <div class="col-span-2">
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Judul Materi</label>
-                        <input type="text" name="title" x-model="editData.title" required
-                               class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Judul / Objek *</label>
+                        <input type="text" name="title" x-model="editData.title" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Emoji Ikon</label>
-                        <input type="text" name="icon_emoji" x-model="editData.icon_emoji"
-                               class="w-full p-3 text-center text-sm bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                        <label class="block text-xs font-black text-slate-700 uppercase mb-1">Emoji *</label>
+                        <input type="text" name="icon_emoji" x-model="editData.icon_emoji" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-center text-lg font-bold text-slate-800">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Subtitle (Penjelasan / Suku Kata)</label>
-                    <input type="text" name="subtitle" x-model="editData.subtitle"
-                           class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                    <label class="block text-xs font-black text-slate-700 uppercase mb-1">Sub-judul</label>
+                    <input type="text" name="subtitle" x-model="editData.subtitle" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Naskah Pelafalan Suara (TTS)</label>
-                    <textarea name="speech_text" x-model="editData.speech_text" rows="2"
-                              class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none"></textarea>
+                    <label class="block text-xs font-black text-slate-700 uppercase mb-1">Teks Pelafalan Suara (TTS Speech)</label>
+                    <textarea name="speech_text" x-model="editData.speech_text" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800"></textarea>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Tips Interaksi untuk Orang Tua</label>
-                    <input type="text" name="parent_note" x-model="editData.parent_note"
-                           class="w-full p-3 text-xs font-bold bg-slate-50 border-2 border-slate-300 focus:border-sky-500 rounded-xl outline-none">
+                    <label class="block text-xs font-black text-slate-700 uppercase mb-1">Catatan Panduan Orang Tua</label>
+                    <input type="text" name="parent_note" x-model="editData.parent_note" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
                 </div>
 
-                <div class="flex gap-3 mt-2">
-                    <button type="button" @click="showEditModal = false"
-                            class="flex-1 py-3.5 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 rounded-xl cursor-pointer">
+                <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <button type="button" @click="showEditModal = false" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold cursor-pointer">
                         Batal
                     </button>
-                    <button type="submit"
-                            class="flex-1 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs rounded-xl shadow-xs cursor-pointer">
-                        Simpan Perubahan
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-extrabold cursor-pointer shadow-xs">
+                        Perbarui Flashcard
                     </button>
                 </div>
-
             </form>
-
         </div>
     </div>
 

@@ -297,9 +297,13 @@ class AdminController extends Controller
         $categories = $categoriesModel->map(function ($cat) {
             return [
                 'id' => $cat->id,
+                'pillar' => $cat->pillar ?: 'mengenal',
                 'name' => $cat->name,
                 'slug' => $cat->slug,
                 'icon_emoji' => $cat->icon_emoji,
+                'color_theme' => $cat->color_theme,
+                'recommended_age' => $cat->recommended_age,
+                'subtitle' => $cat->subtitle,
                 'levels' => $cat->levels->map(function ($lvl) {
                     return [
                         'id' => $lvl->id,
@@ -336,6 +340,126 @@ class AdminController extends Controller
         ];
 
         return view('pages.admin.materials', compact('materialsData', 'categories'));
+    }
+
+    /**
+     * Tambah Topik Pembelajaran Baru (Database MySQL).
+     */
+    public function storeTopic(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'pillar' => 'required|string|in:mengenal,membaca,menghitung',
+            'name' => 'required|string|max:100',
+            'subtitle' => 'nullable|string|max:150',
+            'description' => 'nullable|string|max:255',
+            'icon_emoji' => 'required|string|max:16',
+            'color_theme' => 'nullable|string|max:20',
+            'recommended_age' => 'nullable|string|max:50',
+            'age_min' => 'nullable|integer|min:3|max:6',
+        ]);
+
+        $baseSlug = Str::slug($validated['name']);
+        $slug = $baseSlug;
+        $count = 1;
+        while (Category::where('slug', $slug)->exists()) {
+            $slug = "{$baseSlug}-{$count}";
+            $count++;
+        }
+
+        $colorTheme = $validated['color_theme'] ?? 'yellow';
+        $gradientMap = [
+            'yellow' => 'from-amber-400 to-yellow-500',
+            'sky' => 'from-sky-400 to-blue-500',
+            'emerald' => 'from-emerald-400 to-teal-500',
+            'purple' => 'from-purple-400 to-indigo-500',
+            'rose' => 'from-rose-400 to-red-500',
+            'indigo' => 'from-indigo-400 to-purple-500',
+            'amber' => 'from-amber-400 to-orange-500',
+        ];
+        $borderMap = [
+            'yellow' => '#f59e0b',
+            'sky' => '#0284c7',
+            'emerald' => '#10b981',
+            'purple' => '#8b5cf6',
+            'rose' => '#f43f5e',
+            'indigo' => '#6366f1',
+            'amber' => '#d97706',
+        ];
+
+        $category = Category::create([
+            'pillar' => $validated['pillar'],
+            'name' => $validated['name'],
+            'slug' => $slug,
+            'icon_emoji' => $validated['icon_emoji'],
+            'color_theme' => $colorTheme,
+            'bg_gradient' => $gradientMap[$colorTheme] ?? 'from-amber-400 to-yellow-500',
+            'border_color' => $borderMap[$colorTheme] ?? '#f59e0b',
+            'subtitle' => $validated['subtitle'] ?? 'Materi pembelajaran interaktif YukBelajar PAUD',
+            'description' => $validated['description'] ?? '',
+            'age_min' => $validated['age_min'] ?? 3,
+            'age_max' => 6,
+            'recommended_age' => $validated['recommended_age'] ?? '3 - 6 Thn',
+            'sort_order' => (Category::max('sort_order') ?? 0) + 1,
+        ]);
+
+        // Otomatis buat 3 Scaffolding Levels
+        LearningLevel::create(['category_id' => $category->id, 'level_number' => 1, 'title' => 'Level 1: Dasar / Pemula', 'target_age' => 3, 'unlock_stars_required' => 0]);
+        LearningLevel::create(['category_id' => $category->id, 'level_number' => 2, 'title' => 'Level 2: Menengah / Eksplorasi', 'target_age' => 4, 'unlock_stars_required' => 10]);
+        LearningLevel::create(['category_id' => $category->id, 'level_number' => 3, 'title' => 'Level 3: Pra-SD / Mahir', 'target_age' => 5, 'unlock_stars_required' => 25]);
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'CREATE_TOPIC',
+            'description' => "Menambahkan topik pembelajaran baru: {$category->name} ({$category->pillar})",
+        ]);
+
+        return back()->with('success', "Topik '{$category->name}' berhasil ditambahkan ke Pilar ".ucfirst($category->pillar).'!');
+    }
+
+    /**
+     * Perbarui Data Topik Pembelajaran (Database MySQL).
+     */
+    public function updateTopic(Request $request, int $id): RedirectResponse
+    {
+        $category = Category::findOrFail($id);
+
+        $validated = $request->validate([
+            'pillar' => 'required|string|in:mengenal,membaca,menghitung',
+            'name' => 'required|string|max:100',
+            'subtitle' => 'nullable|string|max:150',
+            'description' => 'nullable|string|max:255',
+            'icon_emoji' => 'required|string|max:16',
+            'color_theme' => 'nullable|string|max:20',
+            'recommended_age' => 'nullable|string|max:50',
+        ]);
+
+        $category->update($validated);
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'UPDATE_TOPIC',
+            'description' => "Memperbarui topik pembelajaran: {$category->name}",
+        ]);
+
+        return back()->with('success', "Topik '{$category->name}' berhasil diperbarui!");
+    }
+
+    /**
+     * Hapus Topik Pembelajaran (Database MySQL).
+     */
+    public function deleteTopic(int $id): RedirectResponse
+    {
+        $category = Category::findOrFail($id);
+        $name = $category->name;
+        $category->delete();
+
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'action_type' => 'DELETE_TOPIC',
+            'description' => "Menghapus topik pembelajaran: {$name}",
+        ]);
+
+        return back()->with('success', "Topik '{$name}' berhasil dihapus dari sistem!");
     }
 
     /**
@@ -595,6 +719,8 @@ class AdminController extends Controller
 
         $categories = $categoriesModel->map(function ($cat) {
             return [
+                'id' => $cat->id,
+                'pillar' => $cat->pillar ?: 'mengenal',
                 'name' => $cat->name,
                 'slug' => $cat->slug,
                 'icon_emoji' => $cat->icon_emoji,
@@ -817,9 +943,11 @@ class AdminController extends Controller
         $categories = $categoriesModel->map(function ($cat) {
             return [
                 'id' => $cat->id,
+                'pillar' => $cat->pillar ?: 'mengenal',
                 'name' => $cat->name,
                 'slug' => $cat->slug,
                 'icon_emoji' => $cat->icon_emoji,
+                'color_theme' => $cat->color_theme,
             ];
         })->toArray();
 
@@ -845,6 +973,7 @@ class AdminController extends Controller
                 'target_age' => $q->target_age,
                 'stars_reward' => $q->stars_reward,
                 'category_id' => $q->category_id,
+                'category_pillar' => $q->category?->pillar ?? 'mengenal',
                 'category_name' => $q->category ? $q->category->name : 'Umum',
                 'category_emoji' => $q->category ? $q->category->icon_emoji : '🎯',
                 'questions_count' => $q->questions->count(),

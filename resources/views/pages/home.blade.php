@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Taman Petualangan YukBelajar PAUD - Belajar & Kuis Ceria')
+@section('title', 'Taman Petualangan YukBelajar PAUD - Belajar 3 Pilar Ceria')
 
 @section('content')
 <div class="flex flex-col gap-6 max-w-7xl mx-auto pb-16" 
      x-data="{
+         activePillar: 'mengenal', // 'mengenal', 'membaca', 'menghitung'
          selectedCategory: null,
-         currentAgeFilter: '{{ $defaultAgeFilter ?? '3-4' }}', // 'all', '3-4', '4-5', '5-6'
          categoryLevelFilter: 0, // 0: Semua Level, 1: Level 1, 2: Level 2, 3: Level 3
          categoryViewTab: 'all', // 'all', 'materials', 'quizzes'
          unlockedLevels: {{ Js::from($unlockedLevels ?? []) }},
@@ -14,20 +14,29 @@
          unlockTarget: { slug: '', name: '', level: 3, reqStars: 25, question: '', options: [] },
          userStars: {{ (int) $user['stars_count'] }},
          completedMaterials: {},
+         allCategories: {{ Js::from($categories) }},
+
+         get filteredCategories() {
+             return this.allCategories.filter(c => c.pillar === this.activePillar);
+         },
          
          speakGreeting() {
              if (window.soundEngine) {
-                 window.soundEngine.speak('Halo {{ $user['name'] }}! Mau berpetualang dan belajar apa hari ini bersama Kiki? Yuk pilih pulau kesukaanmu!');
+                 window.soundEngine.speak('Halo {{ $user['name'] }}! Selamat datang di Taman Petualangan Tiga Pilar! Mau belajar Mengenal, Membaca, atau Menghitung hari ini bersama Kiki?');
                  window.soundEngine.playVictory();
              }
          },
 
-         filterByAge(catAgeMin) {
-             if (this.currentAgeFilter === 'all') return true;
-             if (this.currentAgeFilter === '3-4') return catAgeMin <= 3;
-             if (this.currentAgeFilter === '4-5') return catAgeMin <= 4;
-             if (this.currentAgeFilter === '5-6') return true;
-             return true;
+         switchPillar(pillarName) {
+             this.activePillar = pillarName;
+             this.selectedCategory = null;
+             if (window.soundEngine) {
+                 window.soundEngine.playClick();
+                 if (pillarName === 'mengenal') window.soundEngine.speak('Selamat datang di Zona Belajar Mengenal! Banyak hal seru untuk dieksplorasi!');
+                 if (pillarName === 'membaca') window.soundEngine.speak('Selamat datang di Zona Belajar Membaca! Mari merangkai kata dan membaca cerita!');
+                 if (pillarName === 'menghitung') window.soundEngine.speak('Selamat datang di Zona Belajar Menghitung! Ayo berhitung ceria bersama balon dan buah!');
+             }
+             window.scrollTo({ top: 0, behavior: 'smooth' });
          },
 
          selectCategory(cat) {
@@ -36,7 +45,7 @@
              this.categoryViewTab = 'all';
              if (window.soundEngine) {
                  window.soundEngine.playClick();
-                 window.soundEngine.speak('Selamat datang di ' + cat.name + '! Yuk pilih materi belajar atau kuis yang ingin kamu mainkan!');
+                 window.soundEngine.speak('Bagus sekali! Sekarang kamu membuka ' + cat.name + '. Yuk pilih kartu materi atau kuisnya!');
              }
              window.scrollTo({ top: 0, behavior: 'smooth' });
          },
@@ -143,7 +152,7 @@
                     "Halo <span class="text-sky-700 underline decoration-wavy">{{ $user['name'] }}</span>! (Usia {{ $user['age'] }} Tahun)"
                 </h2>
                 <p class="text-xs sm:text-sm font-bold text-amber-900 mt-0.5">
-                    Sentuh pulau petualangan untuk membuka seluruh kartu materi dan mainkan kuis bergambar! ⭐
+                    Pilih salah satu Zona Belajar di bawah ini dan kumpulkan bintang emas sebanyak-banyaknya! ⭐
                 </p>
             </div>
         </div>
@@ -178,50 +187,85 @@
     </section>
 
     <!-- ========================================================================= -->
-    <!-- TAMPILAN 1: GRID PILIHAN PULAU / KATEGORI (Saat Belum Memilih Kategori)    -->
+    <!-- 3 GRAND PILLARS / ZONA PEMBELAJARAN SELECTOR (Mengenal, Membaca, Menghitung) -->
+    <!-- ========================================================================= -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <!-- Pillar 1: Mengenal -->
+        <button type="button" 
+                @click="switchPillar('mengenal')"
+                class="card-bubbly p-4 sm:p-5 rounded-3xl border-4 flex items-center gap-4 transition-all cursor-pointer text-left relative overflow-hidden"
+                :class="activePillar === 'mengenal' ? 'border-emerald-400 bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md scale-[1.02]' : 'border-slate-200 bg-white hover:border-emerald-300 text-slate-800'">
+            <span class="text-5xl shrink-0 animate-bounce-slow">🌟</span>
+            <div>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide"
+                      :class="activePillar === 'mengenal' ? 'bg-white/20 text-white' : 'bg-emerald-100 text-emerald-800'">
+                    10 Topik Eksplorasi
+                </span>
+                <h3 class="text-lg sm:text-xl font-black font-heading leading-tight mt-1">Zona Mengenal</h3>
+                <p class="text-xs font-semibold opacity-90 line-clamp-1">Hewan, Buah, Bendera, Tubuh, dll.</p>
+            </div>
+            <div x-show="activePillar === 'mengenal'" class="absolute -right-4 -bottom-4 text-6xl opacity-15">⭐</div>
+        </button>
+
+        <!-- Pillar 2: Membaca -->
+        <button type="button" 
+                @click="switchPillar('membaca')"
+                class="card-bubbly p-4 sm:p-5 rounded-3xl border-4 flex items-center gap-4 transition-all cursor-pointer text-left relative overflow-hidden"
+                :class="activePillar === 'membaca' ? 'border-sky-400 bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-md scale-[1.02]' : 'border-slate-200 bg-white hover:border-sky-300 text-slate-800'">
+            <span class="text-5xl shrink-0 animate-bounce-slow">📖</span>
+            <div>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide"
+                      :class="activePillar === 'membaca' ? 'bg-white/20 text-white' : 'bg-sky-100 text-sky-800'">
+                    5 Topik Literasi
+                </span>
+                <h3 class="text-lg sm:text-xl font-black font-heading leading-tight mt-1">Zona Membaca</h3>
+                <p class="text-xs font-semibold opacity-90 line-clamp-1">Vokal, 2 Suku Kata, Cerita Pendek</p>
+            </div>
+            <div x-show="activePillar === 'membaca'" class="absolute -right-4 -bottom-4 text-6xl opacity-15">📚</div>
+        </button>
+
+        <!-- Pillar 3: Menghitung -->
+        <button type="button" 
+                @click="switchPillar('menghitung')"
+                class="card-bubbly p-4 sm:p-5 rounded-3xl border-4 flex items-center gap-4 transition-all cursor-pointer text-left relative overflow-hidden"
+                :class="activePillar === 'menghitung' ? 'border-purple-400 bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-md scale-[1.02]' : 'border-slate-200 bg-white hover:border-purple-300 text-slate-800'">
+            <span class="text-5xl shrink-0 animate-bounce-slow">🧮</span>
+            <div>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide"
+                      :class="activePillar === 'menghitung' ? 'bg-white/20 text-white' : 'bg-purple-100 text-purple-800'">
+                    5 Topik Numerasi
+                </span>
+                <h3 class="text-lg sm:text-xl font-black font-heading leading-tight mt-1">Zona Menghitung</h3>
+                <p class="text-xs font-semibold opacity-90 line-clamp-1">Membilang, Tambah, Kurang & Pola</p>
+            </div>
+            <div x-show="activePillar === 'menghitung'" class="absolute -right-4 -bottom-4 text-6xl opacity-15">🎈</div>
+        </button>
+
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- TAMPILAN 1: GRID PILIHAN TOPIK (Saat Belum Memilih Topik Tertentu)         -->
     <!-- ========================================================================= -->
     <template x-if="!selectedCategory">
         <div class="flex flex-col gap-6">
             
-            <!-- UNIFIED GAME MISSION & AGE FILTER BAR -->
-            <div class="bg-white border-3 border-sky-300 rounded-3xl p-4 sm:p-5 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-4">
-                
-                <!-- Left: Filter Buttons with Level Indicator -->
-                <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-                    <div class="flex items-center gap-2 shrink-0">
-                        <span class="text-2xl">🎯</span>
-                        <span class="font-black text-xs sm:text-sm text-slate-800 font-heading uppercase tracking-wide">Filter Usia & Tingkatan Belajar:</span>
-                    </div>
-                    
-                    <div class="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0 w-full sm:w-auto">
-                        <button @click="currentAgeFilter = 'all'; if(window.soundEngine) window.soundEngine.playClick()"
-                                class="px-3.5 py-2 rounded-2xl font-extrabold text-xs transition-all cursor-pointer whitespace-nowrap"
-                                :class="currentAgeFilter === 'all' ? 'bg-sky-600 text-white shadow-xs ring-2 ring-sky-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
-                            🌟 Semua Usia
-                        </button>
-                        <button @click="currentAgeFilter = '3-4'; if(window.soundEngine) window.soundEngine.playClick()"
-                                class="px-3.5 py-2 rounded-2xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
-                                :class="currentAgeFilter === '3-4' ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
-                            <span>🌱 3 - 4 Thn</span>
-                            <span class="px-1.5 py-0.2 rounded-full text-[10px]" :class="currentAgeFilter === '3-4' ? 'bg-white/25 text-white font-black' : 'bg-emerald-100 text-emerald-800 font-bold'">L1 🔓</span>
-                        </button>
-                        <button @click="currentAgeFilter = '4-5'; if(window.soundEngine) window.soundEngine.playClick()"
-                                class="px-3.5 py-2 rounded-2xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
-                                :class="currentAgeFilter === '4-5' ? 'bg-amber-500 text-white shadow-xs ring-2 ring-amber-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
-                            <span>⭐ 4 - 5 Thn</span>
-                            <span class="px-1.5 py-0.2 rounded-full text-[10px]" :class="currentAgeFilter === '4-5' ? 'bg-white/25 text-white font-black' : 'bg-amber-100 text-amber-900 font-bold'">L2 ({{ $user['stars_count'] >= 10 ? '🔓' : '🔒 10⭐' }})</span>
-                        </button>
-                        <button @click="currentAgeFilter = '5-6'; if(window.soundEngine) window.soundEngine.playClick()"
-                                class="px-3.5 py-2 rounded-2xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
-                                :class="currentAgeFilter === '5-6' ? 'bg-purple-600 text-white shadow-xs ring-2 ring-purple-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
-                            <span>🚀 5 - 6 Thn</span>
-                            <span class="px-1.5 py-0.2 rounded-full text-[10px]" :class="currentAgeFilter === '5-6' ? 'bg-white/25 text-white font-black' : 'bg-purple-100 text-purple-900 font-bold'">L3 ({{ $user['stars_count'] >= 25 ? '🔓' : '🔒 25⭐' }})</span>
-                        </button>
+            <!-- Pillar Header Info Banner -->
+            <div class="bg-white border-3 border-sky-300 rounded-3xl p-4 sm:p-5 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3 text-center sm:text-left">
+                    <span class="text-3xl" x-text="activePillar === 'mengenal' ? '🌟' : (activePillar === 'membaca' ? '📖' : '🧮')"></span>
+                    <div>
+                        <h4 class="font-black text-base sm:text-lg text-slate-800 font-heading">
+                            <span x-text="activePillar === 'mengenal' ? 'Topik Pembelajaran Zona Mengenal:' : (activePillar === 'membaca' ? 'Topik Pembelajaran Zona Belajar Membaca:' : 'Topik Pembelajaran Zona Belajar Menghitung:')"></span>
+                        </h4>
+                        <p class="text-xs text-slate-500 font-bold">
+                            Sentuh salah satu topik di bawah ini untuk membuka kartu bergambar dan pilihan kuisnya!
+                        </p>
                     </div>
                 </div>
 
-                <!-- Right: Star Milestone Info -->
-                <div class="flex items-center gap-2.5 bg-amber-50 border border-amber-200 px-3.5 py-2 rounded-2xl shrink-0 w-full sm:w-auto justify-center sm:justify-start">
+                <!-- Star Milestone Info -->
+                <div class="flex items-center gap-2.5 bg-amber-50 border border-amber-200 px-3.5 py-2 rounded-2xl shrink-0">
                     <span class="text-xl">🏆</span>
                     <div class="text-xs font-bold text-amber-950">
                         @if($user['stars_count'] < 10)
@@ -229,116 +273,94 @@
                         @elseif($user['stars_count'] < 25)
                             <span>Butuh <b class="text-purple-600 font-extrabold">{{ 25 - $user['stars_count'] }} ⭐ lagi</b> buka Level 3</span>
                         @else
-                            <span class="text-emerald-700 font-extrabold">🎉 Seluruh Level & Materi Terbuka Penuh!</span>
+                            <span class="text-emerald-700 font-extrabold">🎉 Seluruh Level Terbuka Penuh!</span>
                         @endif
                     </div>
                 </div>
-
             </div>
 
-            <!-- Island Section Title -->
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-1">
-                <div>
-                    <h3 class="text-2xl sm:text-3xl font-black font-heading text-slate-800 flex items-center gap-2">
-                        <span>🏝️</span>
-                        <span>Pilih Pulau Petualangan Belajar:</span>
-                    </h3>
-                    <p class="text-xs sm:text-sm font-bold text-slate-500">
-                        Sentuh salah satu pulau di bawah ini untuk melihat daftar lengkap seluruh materi dan kuisnya!
-                    </p>
-                </div>
-            </div>
-
-            <!-- Adventure Islands 3D Grid -->
+            <!-- Dynamic Topics Grid for Active Pillar -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($categories as $category)
-                <div x-show="filterByAge({{ $category['age_min'] }})"
-                     x-transition:enter="transition ease-out duration-200"
-                     x-transition:enter-start="opacity-0 scale-95"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     class="card-bubbly p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden group border-4 h-full shadow-xs cursor-pointer hover:shadow-lg transition-all"
-                     @click="selectCategory({{ Js::from($category) }})"
-                     style="border-color: {{ $category['border_color'] }}35; background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);">
-                    
-                    <!-- Top Content Area -->
-                    <div class="flex flex-col gap-3">
-                        <!-- Top Badges & Icon -->
-                        <div class="flex items-start justify-between gap-3">
-                            <span class="text-5xl sm:text-6xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 drop-shadow-xs inline-block">
-                                {{ $category['icon_emoji'] }}
-                            </span>
-                            
-                            <div class="flex flex-col items-end gap-1">
-                                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black text-white bg-gradient-to-r {{ $category['bg_gradient'] }} shadow-xs">
-                                    Usia {{ $category['recommended_age'] }}
-                                </span>
-                                <span class="text-[11px] font-bold text-slate-500">
-                                    {{ $category['materials_count'] }} Kartu • {{ $category['quizzes_count'] }} Kuis
-                                </span>
+                <template x-for="cat in filteredCategories" :key="cat.id">
+                    <div class="card-bubbly p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden group border-4 h-full shadow-xs cursor-pointer hover:shadow-lg transition-all"
+                         @click="selectCategory(cat)"
+                         :style="`border-color: ${cat.border_color}35; background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);`">
+                        
+                        <!-- Top Content Area -->
+                        <div class="flex flex-col gap-3">
+                            <!-- Top Badges & Icon -->
+                            <div class="flex items-start justify-between gap-3">
+                                <span class="text-5xl sm:text-6xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 drop-shadow-xs inline-block"
+                                      x-text="cat.icon_emoji"></span>
+                                
+                                <div class="flex flex-col items-end gap-1">
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black text-white bg-gradient-to-r shadow-xs"
+                                          :class="cat.bg_gradient"
+                                          x-text="`Usia ${cat.recommended_age}`"></span>
+                                    <span class="text-[11px] font-bold text-slate-500"
+                                          x-text="`${cat.all_materials ? cat.all_materials.length : cat.materials_count} Kartu • ${cat.quizzes_count} Kuis`"></span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xl sm:text-2xl font-extrabold font-heading text-slate-800 group-hover:text-sky-600 transition-colors"
+                                    x-text="cat.name"></h4>
+                                <p class="text-xs font-bold text-slate-500 line-clamp-2 mt-0.5"
+                                   x-text="cat.subtitle"></p>
+                            </div>
+
+                            <!-- Level Status Indicator Pills -->
+                            <div class="grid grid-cols-3 gap-1.5 text-center bg-slate-50 p-2 rounded-2xl border border-slate-200">
+                                <template x-for="lvl in cat.levels_progress" :key="lvl.level">
+                                    <div class="py-1 px-1 rounded-xl text-[10px] font-bold flex flex-col items-center justify-center"
+                                         :class="lvl.is_unlocked ? 'bg-emerald-100/70 border border-emerald-300 text-emerald-900' : 'bg-slate-100 border border-slate-200 text-slate-400'">
+                                        <span class="font-black" x-text="`L${lvl.level}`"></span>
+                                        <span class="text-[9px] font-semibold" x-text="lvl.is_unlocked ? '🔓 Terbuka' : (lvl.req_stars ? `🔒 ${lvl.req_stars}⭐` : '🔒')"></span>
+                                    </div>
+                                </template>
                             </div>
                         </div>
 
-                        <div>
-                            <h4 class="text-xl sm:text-2xl font-extrabold font-heading text-slate-800 group-hover:text-sky-600 transition-colors">
-                                {{ $category['name'] }}
-                            </h4>
-                            <p class="text-xs font-bold text-slate-500 line-clamp-2 mt-0.5">
-                                {{ $category['subtitle'] }}
-                            </p>
-                        </div>
-
-                        <!-- Level Status Indicator Pills -->
-                        <div class="grid grid-cols-3 gap-1.5 text-center bg-slate-50 p-2 rounded-2xl border border-slate-200">
-                            @foreach($category['levels_progress'] as $lvl)
-                            <div class="py-1 px-1 rounded-xl text-[10px] font-bold flex flex-col items-center justify-center {{ $lvl['is_unlocked'] ? 'bg-emerald-100/70 border border-emerald-300 text-emerald-900' : 'bg-slate-100 border border-slate-200 text-slate-400' }}">
-                                <span class="font-black">L{{ $lvl['level'] }}</span>
-                                <span class="text-[9px] font-semibold">{{ $lvl['is_unlocked'] ? '🔓 Terbuka' : ($lvl['req_stars'] ? "🔒 {$lvl['req_stars']}⭐" : '🔒') }}</span>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <!-- Bottom Action Buttons for Kids -->
-                    <div class="flex flex-col gap-2 pt-4 mt-3 border-t border-slate-100">
-                        <button type="button" 
-                                @click.stop="selectCategory({{ Js::from($category) }})"
-                                class="btn-3d btn-3d-{{ $category['color_theme'] }} py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm sm:text-base font-extrabold shadow-sm w-full">
-                            <span class="text-xl">🏝️</span>
-                            <span>Buka & Lihat Seluruh Materi ➔</span>
-                        </button>
-
-                        <div class="grid grid-cols-2 gap-2">
-                            <a href="{{ route('quiz', $category['quiz_id']) }}" 
-                               @click.stop="if(window.soundEngine) window.soundEngine.playClick()"
-                               class="btn-3d btn-3d-yellow py-2 px-2 rounded-2xl flex items-center justify-center gap-1 text-xs font-extrabold shadow-xs">
-                                <span>🎯</span>
-                                <span>Kuis Utama</span>
-                            </a>
-
-                            <button type="button" @click.stop="openSmartUnlock({{ Js::from($category) }})"
-                                    class="btn-3d btn-3d-purple py-2 px-2 rounded-2xl flex items-center justify-center gap-1 text-xs font-extrabold shadow-xs text-white">
-                                <span>⚡</span>
-                                <span>Uji Cepat</span>
+                        <!-- Bottom Action Buttons -->
+                        <div class="flex flex-col gap-2 pt-4 mt-3 border-t border-slate-100">
+                            <button type="button" 
+                                    @click.stop="selectCategory(cat)"
+                                    class="btn-3d py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm sm:text-base font-extrabold shadow-sm w-full"
+                                    :class="`btn-3d-${cat.color_theme}`">
+                                <span class="text-xl">🏝️</span>
+                                <span>Buka & Lihat Seluruh Materi ➔</span>
                             </button>
-                        </div>
-                    </div>
 
-                    <!-- Subtle background glow -->
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-gradient-to-br {{ $category['bg_gradient'] }} rounded-full opacity-10 pointer-events-none"></div>
-                </div>
-                @endforeach
+                            <div class="grid grid-cols-2 gap-2">
+                                <a :href="`{{ url('/kuis') }}/${cat.quiz_id}`" 
+                                   @click.stop="if(window.soundEngine) window.soundEngine.playClick()"
+                                   class="btn-3d btn-3d-yellow py-2 px-2 rounded-2xl flex items-center justify-center gap-1 text-xs font-extrabold shadow-xs">
+                                    <span>🎯</span>
+                                    <span>Kuis Cepat</span>
+                                </a>
+
+                                <button type="button" @click.stop="openSmartUnlock(cat)"
+                                        class="btn-3d btn-3d-purple py-2 px-2 rounded-2xl flex items-center justify-center gap-1 text-xs font-extrabold shadow-xs text-white">
+                                    <span>⚡</span>
+                                    <span>Uji Level</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </template>
             </div>
 
         </div>
     </template>
 
     <!-- ========================================================================= -->
-    <!-- TAMPILAN 2: DAFTAR LENGKAP MATERI & KUIS DI DALAM KATEGORI TERPILIH        -->
+    <!-- TAMPILAN 2: DAFTAR LENGKAP MATERI & KUIS DI TOPIK TERPILIH                 -->
     <!-- ========================================================================= -->
     <template x-if="selectedCategory">
         <div class="flex flex-col gap-6">
             
-            <!-- Category Navigation Header Banner -->
+            <!-- Topic Navigation Header Banner -->
             <div class="bg-white border-4 rounded-3xl p-5 sm:p-7 shadow-md relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-5"
                  :style="`border-color: ${selectedCategory.border_color}50;`">
                 
@@ -357,19 +379,19 @@
                     </div>
                 </div>
 
-                <!-- Back to Island Grid & Flashcard Mode Button -->
+                <!-- Back to Topic Grid & Flashcard Mode Button -->
                 <div class="flex items-center gap-2.5 z-10 flex-wrap w-full md:w-auto justify-start md:justify-end">
                     <button @click="backToCategories()"
                             class="btn-3d btn-3d-yellow px-4 py-2.5 rounded-2xl flex items-center gap-1.5 text-xs sm:text-sm font-extrabold cursor-pointer shadow-xs">
                         <span>⬅️</span>
-                        <span>Ganti Pulau Lain</span>
+                        <span>Ganti Topik Lain</span>
                     </button>
 
                     <a :href="`{{ url('/materi') }}/${selectedCategory.slug}`"
                        @click="if(window.soundEngine) window.soundEngine.playClick()"
                        class="btn-3d btn-3d-sky px-4 py-2.5 rounded-2xl flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-white shadow-xs">
                         <span>📖</span>
-                        <span>Mode Belajar Interaktif</span>
+                        <span>Mode Belajar Penuh</span>
                     </a>
                 </div>
 
@@ -377,7 +399,7 @@
                      :class="selectedCategory.bg_gradient"></div>
             </div>
 
-            <!-- IN-CATEGORY FILTER CONTROLS (Filter Tingkatan Level & Tab Konten) -->
+            <!-- IN-TOPIC CONTROLS: Filter Tingkatan Level & Tab Konten -->
             <div class="bg-white/95 border-3 border-sky-200 rounded-3xl p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
                 
                 <!-- Level Selector (L1, L2, L3) -->
@@ -394,21 +416,21 @@
                             class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1 whitespace-nowrap"
                             :class="categoryLevelFilter === 1 ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
                         <span>🌱 Level 1</span>
-                        <span class="text-[10px] opacity-80">(3-4 Thn 🔓)</span>
+                        <span class="text-[10px] opacity-80">(0 ⭐ 🔓)</span>
                     </button>
 
                     <button @click="categoryLevelFilter = 2; if(window.soundEngine) window.soundEngine.playClick()"
                             class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1 whitespace-nowrap"
                             :class="categoryLevelFilter === 2 ? 'bg-amber-500 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
                         <span>⭐ Level 2</span>
-                        <span class="text-[10px] opacity-80">(4-5 Thn {{ $user['stars_count'] >= 10 ? '🔓' : '🔒' }})</span>
+                        <span class="text-[10px] opacity-80">({{ $user['stars_count'] >= 10 ? '🔓' : '🔒 10⭐' }})</span>
                     </button>
 
                     <button @click="categoryLevelFilter = 3; if(window.soundEngine) window.soundEngine.playClick()"
                             class="px-3 py-1.5 rounded-xl font-extrabold text-xs transition-all cursor-pointer flex items-center gap-1 whitespace-nowrap"
                             :class="categoryLevelFilter === 3 ? 'bg-purple-600 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'">
                         <span>🚀 Level 3</span>
-                        <span class="text-[10px] opacity-80">(5-6 Thn {{ $user['stars_count'] >= 25 ? '🔓' : '🔒' }})</span>
+                        <span class="text-[10px] opacity-80">({{ $user['stars_count'] >= 25 ? '🔓' : '🔒 25⭐' }})</span>
                     </button>
                 </div>
 
@@ -433,12 +455,12 @@
 
             </div>
 
-            <!-- BAGIAN 1: DAFTAR SELURUH KARTU MATERI FLASHCARD -->
+            <!-- BAGIAN 1: DAFTAR KARTU MATERI FLASHCARD -->
             <div x-show="categoryViewTab === 'all' || categoryViewTab === 'materials'" class="flex flex-col gap-4">
                 <div class="flex items-center justify-between px-1">
                     <h3 class="text-xl sm:text-2xl font-black font-heading text-slate-800 flex items-center gap-2">
                         <span>📚</span>
-                        <span>Daftar Kartu Materi Bergambar & Bersuara:</span>
+                        <span>Daftar Kartu Flashcard Bergambar:</span>
                     </h3>
                 </div>
 
@@ -526,12 +548,12 @@
                 </div>
             </div>
 
-            <!-- BAGIAN 2: DAFTAR SELURUH PILIHAN KUIS DI PULAU INI -->
+            <!-- BAGIAN 2: DAFTAR KUIS & TANTANGAN -->
             <div x-show="categoryViewTab === 'all' || categoryViewTab === 'quizzes'" class="flex flex-col gap-4 pt-4">
                 <div class="flex items-center justify-between px-1">
                     <h3 class="text-xl sm:text-2xl font-black font-heading text-slate-800 flex items-center gap-2">
                         <span>🎯</span>
-                        <span>Daftar Kuis & Tantangan Soal (Semua Pilihan Kuis):</span>
+                        <span>Daftar Kuis & Tantangan Soal:</span>
                     </h3>
                 </div>
 
@@ -576,12 +598,12 @@
                 </div>
             </div>
 
-            <!-- Bottom Return to Island Selector Button -->
+            <!-- Return to Pillars Button -->
             <div class="flex items-center justify-center pt-6">
                 <button type="button" @click="backToCategories()"
                         class="btn-3d btn-3d-sky px-6 py-3.5 rounded-2xl font-extrabold text-base text-white flex items-center gap-2 shadow-sm cursor-pointer">
                     <span>🏝️</span>
-                    <span>Kembali ke Pilihan Pulau Utama</span>
+                    <span>Kembali ke Pilihan Topik Utama</span>
                 </button>
             </div>
 

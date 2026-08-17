@@ -49,6 +49,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', EnsureAdminOrTeacher
     Route::post('/materials', [AdminController::class, 'storeMaterial'])->name('materials.store');
     Route::put('/materials/{id}', [AdminController::class, 'updateMaterial'])->name('materials.update');
     Route::delete('/materials/{id}', [AdminController::class, 'deleteMaterial'])->name('materials.delete');
+    Route::post('/topics', [AdminController::class, 'storeTopic'])->name('topics.store');
+    Route::put('/topics/{id}', [AdminController::class, 'updateTopic'])->name('topics.update');
+    Route::delete('/topics/{id}', [AdminController::class, 'deleteTopic'])->name('topics.delete');
     Route::get('/stickers', [AdminController::class, 'stickers'])->name('stickers');
     Route::post('/stickers', [AdminController::class, 'storeSticker'])->name('stickers.store');
     Route::put('/stickers/{id}', [AdminController::class, 'updateSticker'])->name('stickers.update');

@@ -5,6 +5,7 @@
 @section('content')
 <div class="flex flex-col gap-6 pb-16"
      x-data="{
+         activePillar: 'all', // 'all', 'mengenal', 'membaca', 'menghitung'
          selectedCatFilter: 'all',
          searchQuery: '',
          showCreateQuizModal: false,
@@ -14,6 +15,26 @@
          categories: {{ Js::from($categories) }},
          quizzes: {{ Js::from($quizzesData['quizzes']) }},
          
+         get currentPillarCategories() {
+             if (this.activePillar === 'all') return this.categories;
+             return this.categories.filter(c => c.pillar === this.activePillar);
+         },
+
+         get filteredQuizzes() {
+             return this.quizzes.filter(q => {
+                 const matchPillar = this.activePillar === 'all' || q.category_pillar === this.activePillar;
+                 const matchCat = this.selectedCatFilter === 'all' || q.category_id == this.selectedCatFilter;
+                 const query = this.searchQuery.toLowerCase();
+                 const matchQuery = !query || q.title.toLowerCase().includes(query) || q.category_name.toLowerCase().includes(query);
+                 return matchPillar && matchCat && matchQuery;
+             });
+         },
+
+         switchPillar(p) {
+             this.activePillar = p;
+             this.selectedCatFilter = 'all';
+         },
+
          // Form Data Kuis Baru
          newQuiz: {
              category_id: {{ $categories[0]['id'] ?? 1 }},
@@ -54,15 +75,6 @@
              icon_emoji: '🦁',
              target_age: 4,
              stars_reward: 3
-         },
-
-         get filteredQuizzes() {
-             return this.quizzes.filter(q => {
-                 const matchCat = this.selectedCatFilter === 'all' || q.category_id == this.selectedCatFilter;
-                 const query = this.searchQuery.toLowerCase();
-                 const matchQuery = !query || q.title.toLowerCase().includes(query) || q.category_name.toLowerCase().includes(query);
-                 return matchCat && matchQuery;
-             });
          },
 
          addQuestionToNewQuiz() {
@@ -117,10 +129,10 @@
                 Panel Bank Soal & Kurator
             </span>
             <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">
-                Manajemen Bank Soal & Input Kuis Manual
+                Manajemen Bank Soal & Input Kuis 3 Pilar
             </h2>
             <p class="text-sm text-sky-100 mt-1 max-w-xl">
-                Buat modul kuis kustom, input butir soal bergambar dengan audio narasi, dan kelola bank soal untuk seluruh pulau belajar PAUD.
+                Kelola bank soal kuis untuk 3 Pilar PAUD (Mengenal, Membaca, Menghitung), input butir soal baru, dan atur reward bintang.
             </p>
         </div>
 
@@ -151,56 +163,60 @@
     </div>
     @endif
 
-    <!-- Metric Stats Grid -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Total Modul Kuis</span>
-                <span class="text-2xl">🎯</span>
-            </div>
-            <div class="text-3xl font-extrabold font-heading text-slate-800">{{ $quizzesData['stats']['total_quizzes'] }}</div>
-            <span class="text-xs font-semibold text-sky-600">Seluruh Pulau Belajar</span>
-        </div>
+    <!-- 3 GRAND PILLAR TABS -->
+    <div class="bg-white border-2 border-slate-200 rounded-3xl p-3 shadow-xs">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            
+            <!-- All -->
+            <button type="button" 
+                    @click="switchPillar('all')"
+                    class="p-3.5 rounded-2xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    :class="activePillar === 'all' ? 'bg-slate-800 text-white shadow-md' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'">
+                <span>🌟</span>
+                <span>Semua Pilar</span>
+            </button>
 
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Total Butir Pertanyaan</span>
-                <span class="text-2xl">❓</span>
-            </div>
-            <div class="text-3xl font-extrabold font-heading text-slate-800">{{ $quizzesData['stats']['total_questions'] }}</div>
-            <span class="text-xs font-semibold text-emerald-600">Soal Bergambar & Audio</span>
-        </div>
+            <!-- Tab Mengenal -->
+            <button type="button" 
+                    @click="switchPillar('mengenal')"
+                    class="p-3.5 rounded-2xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    :class="activePillar === 'mengenal' ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'">
+                <span>🌟</span>
+                <span>Pilar 1: Mengenal</span>
+            </button>
 
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Total Kuis Dikerjakan</span>
-                <span class="text-2xl">📝</span>
-            </div>
-            <div class="text-3xl font-extrabold font-heading text-slate-800">{{ $quizzesData['stats']['total_attempts'] }}</div>
-            <span class="text-xs font-semibold text-purple-600">Percobaan Siswa</span>
-        </div>
+            <!-- Tab Membaca -->
+            <button type="button" 
+                    @click="switchPillar('membaca')"
+                    class="p-3.5 rounded-2xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    :class="activePillar === 'membaca' ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-md' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'">
+                <span>📖</span>
+                <span>Pilar 2: Membaca</span>
+            </button>
 
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-500">Rerata Nilai Siswa</span>
-                <span class="text-2xl">⭐</span>
-            </div>
-            <div class="text-3xl font-extrabold font-heading text-slate-800">{{ $quizzesData['stats']['avg_score'] }}</div>
-            <span class="text-xs font-semibold text-amber-600">Tingkat Penguasaan Tinggi</span>
+            <!-- Tab Menghitung -->
+            <button type="button" 
+                    @click="switchPillar('menghitung')"
+                    class="p-3.5 rounded-2xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    :class="activePillar === 'menghitung' ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-md' : 'bg-slate-50 hover:bg-slate-100 text-slate-700'">
+                <span>🧮</span>
+                <span>Pilar 3: Menghitung</span>
+            </button>
+
         </div>
     </div>
 
     <!-- Filter & Controls Bar -->
-    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+    <div class="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
         
         <!-- Category Filter Tabs -->
         <div class="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl overflow-x-auto max-w-full">
             <button @click="selectedCatFilter = 'all'"
                     class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer"
                     :class="selectedCatFilter === 'all' ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
-                Semua Kategori ({{ count($quizzesData['quizzes']) }})
+                Semua Topik (<span x-text="filteredQuizzes.length"></span>)
             </button>
-            <template x-for="cat in categories" :key="cat.id">
+            <template x-for="cat in currentPillarCategories" :key="cat.id">
                 <button @click="selectedCatFilter = cat.id"
                         class="px-3.5 py-2 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5"
                         :class="selectedCatFilter == cat.id ? 'bg-sky-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'">
@@ -211,11 +227,11 @@
         </div>
 
         <!-- Search Bar -->
-        <div class="relative w-full md:w-64">
+        <div class="relative w-full md:w-64 shrink-0">
             <input type="text" x-model="searchQuery"
                    placeholder="Cari modul kuis..."
-                   class="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-xl text-xs font-bold outline-none">
-            <span class="absolute left-3 top-2.5 text-slate-400 text-sm">🔍</span>
+                   class="w-full pl-9 pr-3.5 py-2 bg-slate-50 border border-slate-200 focus:border-sky-500 rounded-xl text-xs font-bold outline-none">
+            <span class="absolute left-3 top-2 text-slate-400 text-sm">🔍</span>
         </div>
 
     </div>

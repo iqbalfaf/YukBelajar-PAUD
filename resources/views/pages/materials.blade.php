@@ -146,10 +146,10 @@
         </a>
 
         <!-- Category Horizontal Pills -->
-        <div class="flex items-center gap-2 overflow-x-auto max-w-full pb-1">
+        <div class="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1">
             @foreach($allCategories as $cat)
             <a href="{{ route('materials', $cat['slug']) }}" 
-               class="px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all border-2 {{ $cat['slug'] === $materialData['category_slug'] ? 'bg-sky-500 text-white border-sky-600 shadow-xs scale-105' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50' }}">
+               class="px-3 py-1.5 rounded-2xl text-xs font-extrabold whitespace-nowrap transition-all border-2 {{ $cat['slug'] === $materialData['category_slug'] ? 'bg-sky-600 text-white border-sky-700 shadow-xs scale-105' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50' }}">
                 <span>{{ $cat['icon_emoji'] }}</span>
                 <span>{{ $cat['name'] }}</span>
             </a>

@@ -14,6 +14,7 @@ return new class extends Migration
         // 1. Kategori Pulau Pembelajaran PAUD
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->enum('pillar', ['mengenal', 'membaca', 'menghitung'])->default('mengenal');
             $table->string('name'); // e.g. Pulau Hewan
             $table->string('slug')->unique(); // e.g. hewan
             $table->string('icon_emoji', 16); // e.g. 🦁

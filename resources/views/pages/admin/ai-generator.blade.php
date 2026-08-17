@@ -5,10 +5,11 @@
 @section('content')
 <div class="flex flex-col gap-6 pb-16"
      x-data="{
-         selectedCategory: 'hewan',
+         activePillar: 'mengenal', // 'mengenal', 'membaca', 'menghitung'
+         selectedCategory: 'abjad',
          targetLevel: 1,
          selectedModel: '{{ $adminData['default_model'] ?? 'gemini-2.0-flash' }}',
-         theme: 'Mengenal Hewan Jinak Ceria 🐱',
+         theme: 'Mengenal Huruf Vokal A I U E O 🔤',
          targetAge: '3-4',
          questionsCount: 3,
          isGenerating: false,
@@ -21,22 +22,50 @@
          aiModels: {{ Js::from($aiModels) }},
          generatedData: {{ Js::from($adminData['sample_ai_preview']['generated_items']) }},
          
+         get currentPillarCategories() {
+             return this.categories.filter(c => c.pillar === this.activePillar);
+         },
+
+         switchPillar(p) {
+             this.activePillar = p;
+             const firstCat = this.categories.find(c => c.pillar === p);
+             if (firstCat) {
+                 this.selectedCategory = firstCat.slug;
+             }
+             this.updateThemeSuggestion();
+         },
+
          updateThemeSuggestion() {
-             const catObj = this.categories.find(c => c.slug === this.selectedCategory);
-             if (catObj) {
-                 if (this.selectedCategory === 'hewan') {
-                     this.theme = this.targetLevel == 1 ? 'Hewan Peliharaan Jinak 🐱' : (this.targetLevel == 2 ? 'Hewan Rimba Gagah 🦁' : 'Mengenal Hewan Laut 🐬');
-                 } else if (this.selectedCategory === 'angka') {
-                     this.theme = this.targetLevel == 1 ? 'Berhitung Angka 1 sampai 5 🔢' : 'Berhitung Angka 6 sampai 10 ⭐';
-                 } else if (this.selectedCategory === 'abjad') {
-                     this.theme = this.targetLevel == 1 ? 'Huruf Vokal A I U E O 🔤' : 'Huruf Konsonan & Kata Benda 📖';
-                 } else if (this.selectedCategory === 'buah') {
-                     this.theme = 'Aneka Buah Manis & Segar 🍎';
-                 } else if (this.selectedCategory === 'warna') {
-                     this.theme = 'Mengenal Warna Dasar Cerah 🎨';
-                 } else if (this.selectedCategory === 'kendaraan') {
-                     this.theme = 'Kendaraan Darat, Air, dan Udara 🚗✈️';
-                 }
+             const cat = this.selectedCategory;
+             const lvl = this.targetLevel;
+             
+             const suggestions = {
+                 'abjad': lvl == 1 ? 'Mengenal Huruf Vokal A I U E O 🔤' : (lvl == 2 ? 'Mengenal Huruf B D P T 🔤' : 'Rangkaian Alfabet A-Z Lengkap 🔤'),
+                 'angka': lvl == 1 ? 'Berhitung Angka 1 sampai 5 🔢' : (lvl == 2 ? 'Mengenal Angka 6 sampai 10 🔢' : 'Berhitung Cerdas 11 sampai 20 🔢'),
+                 'hijaiyah': lvl == 1 ? 'Mengenal Huruf Alif, Ba, Ta 🌙' : (lvl == 2 ? 'Mengenal Huruf Tsa, Jim, Kha 🌙' : 'Mengenal Huruf Dal sampai Ya 🌙'),
+                 'hewan': lvl == 1 ? 'Hewan Peliharaan Jinak 🐱' : (lvl == 2 ? 'Hewan Rimba Gagah 🦁' : 'Mengenal Hewan Laut 🐬'),
+                 'buah': lvl == 1 ? 'Aneka Buah Manis & Segar 🍎' : (lvl == 2 ? 'Sayuran Sehat Bergizi 🥕' : 'Buah Tropis & Vitamin Otak 🥑'),
+                 'warna': lvl == 1 ? 'Mengenal Warna Dasar Cerah 🎨' : (lvl == 2 ? 'Bentuk Geometri Lingkaran & Segitiga ⭕' : 'Bintang & Bentuk Campuran ⭐'),
+                 'kendaraan': lvl == 1 ? 'Mobil & Sepeda Roda Dua 🚗' : (lvl == 2 ? 'Kereta Api & Kapal Laut 🚆' : 'Pesawat Terbang & Helikopter ✈️'),
+                 'benda': lvl == 1 ? 'Peralatan Sekolah & Belajar 📚' : (lvl == 2 ? 'Benda-benda di Rumah 🧸' : 'Peralatan Makan & Kebersihan 🪑'),
+                 'bendera': lvl == 1 ? 'Bendera Merah Putih Indonesia 🇮🇩' : (lvl == 2 ? 'Bendera Negara Sahabat Dunia 🇯🇵' : 'Mengenal Ragam Bendera Internasional 🇸🇦'),
+                 'tubuh': lvl == 1 ? 'Mengenal Mata, Hidung, & Telinga 👀' : (lvl == 2 ? 'Tangan Terampil & Kaki Kuat ✋' : 'Merawat Kebersihan Gigi & Tubuh 👄'),
+                 
+                 'huruf-vokal': lvl == 1 ? 'Membunyikan Vokal A I U E O 🅰️' : 'Kombinasi Vokal & Benda Ceria 🎵',
+                 'dua-suku-kata': lvl == 1 ? 'Membaca Kata Bo-la & Bu-ku 🗣️' : 'Membaca Kata Ku-da & Sa-pi 🐄',
+                 'tiga-suku-kata': lvl == 1 ? 'Membaca Kata Se-pe-da 🚲' : 'Membaca Kata Ke-la-pa & Se-pa-tu 🥥',
+                 'akhiran-konsonan': lvl == 1 ? 'Kata Berakhiran Rumah & Ayam 🏠' : 'Kata Berakhiran Ikan & Burung 🐟',
+                 'cerita-pendek': lvl == 1 ? 'Cerita Pendek: Budi Makan Apel 🍎' : 'Cerita Pendek: Kucing Minum Susu 🥛',
+
+                 'membilang': lvl == 1 ? 'Membilang 1 sampai 5 Balon 🎈' : 'Membilang 6 sampai 10 Bunga 🌸',
+                 'perbandingan': lvl == 1 ? 'Besar vs Kecil & Banyak vs Sedikit ⚖️' : 'Tinggi vs Pendek & Tebal vs Tipis 🦒',
+                 'penjumlahan': lvl == 1 ? 'Penjumlahan Bergambar 1 + 1 sampai 5 ➕' : 'Penjumlahan Buah & Donat sampai 10 ➕',
+                 'pengurangan': lvl == 1 ? 'Pengurangan Balon Lepas 1 sampai 5 ➖' : 'Pengurangan Kue Dimakan sampai 10 ➖',
+                 'pola-logika': lvl == 1 ? 'Pola Urutan Warna Merah-Biru 🔴' : 'Pola Urutan Bentuk Lingkaran-Kotak ⭕',
+             };
+
+             if (suggestions[cat]) {
+                 this.theme = suggestions[cat];
              }
          },
 
@@ -103,9 +132,12 @@
                  const result = await response.json();
                  if (result.success) {
                      this.publishedSuccess = true;
-                     this.alertMessage = result.message;
-                     if (window.soundEngine) window.soundEngine.playVictory();
-                     if (typeof window.triggerConfetti === 'function') window.triggerConfetti(0.5);
+                     this.alertMessage = result.message || 'Materi & Kuis AI berhasil diterbitkan ke siswa!';
+                     if (window.soundEngine) {
+                         window.soundEngine.playVictory();
+                         window.soundEngine.playStar();
+                     }
+                     if (typeof window.triggerConfetti === 'function') window.triggerConfetti(0.8);
                      setTimeout(() => this.publishedSuccess = false, 5000);
                  }
              } catch (err) {
@@ -126,10 +158,10 @@
                 </span>
             </div>
             <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">
-                1-Click AI Generator Studio (Teks, Gambar & Audio Narasi)
+                1-Click AI Generator Studio (3 Pilar Kurikulum PAUD)
             </h2>
             <p class="text-sm text-purple-200 mt-1 max-w-2xl">
-                Pilih kategori dan tingkatan level sasaran. AI merancang butir kuis ramah anak PAUD, membuat prompt gambar kartun 3D, dan menyusun audio narasi ceria.
+                Pilih Pilar, Topik Pembelajaran, dan Level sasaran. AI merancang butir kuis ramah anak PAUD, membuat prompt gambar kartun 3D, dan menyusun audio narasi ceria.
             </p>
         </div>
 
@@ -182,15 +214,42 @@
             </div>
         </div>
 
+        <!-- 3 GRAND PILLARS SELECTOR -->
+        <div class="mb-4 p-4 bg-purple-50/60 border border-purple-200 rounded-2xl">
+            <label class="block text-xs font-black uppercase text-purple-900 mb-2">
+                1. Pilih Pilar Kurikulum PAUD Sasaran:
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <button type="button" @click="switchPillar('mengenal')"
+                        class="p-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+                        :class="activePillar === 'mengenal' ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-xs' : 'bg-white hover:bg-emerald-50 text-slate-700 border border-purple-200'">
+                    <span>🌟</span>
+                    <span>Pilar 1: Mengenal</span>
+                </button>
+                <button type="button" @click="switchPillar('membaca')"
+                        class="p-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+                        :class="activePillar === 'membaca' ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-xs' : 'bg-white hover:bg-sky-50 text-slate-700 border border-purple-200'">
+                    <span>📖</span>
+                    <span>Pilar 2: Membaca</span>
+                </button>
+                <button type="button" @click="switchPillar('menghitung')"
+                        class="p-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+                        :class="activePillar === 'menghitung' ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-xs' : 'bg-white hover:bg-purple-50 text-slate-700 border border-purple-200'">
+                    <span>🧮</span>
+                    <span>Pilar 3: Menghitung</span>
+                </button>
+            </div>
+        </div>
+
         <!-- 1. Category & Level Target Selector -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 p-4 bg-purple-50/60 border border-purple-200 rounded-2xl">
             <div>
                 <label class="block text-xs font-black uppercase text-purple-900 mb-1.5">
-                    1. Pilih Kategori Pembelajaran Sasaran:
+                    2. Pilih Topik Pembelajaran:
                 </label>
                 <select x-model="selectedCategory" @change="updateThemeSuggestion()"
                         class="w-full p-3.5 bg-white border-2 border-purple-300 focus:border-purple-600 rounded-xl font-bold text-sm outline-none cursor-pointer">
-                    <template x-for="c in categories" :key="c.slug">
+                    <template x-for="c in currentPillarCategories" :key="c.slug">
                         <option :value="c.slug" x-text="c.icon_emoji + ' ' + c.name"></option>
                     </template>
                 </select>
@@ -198,7 +257,7 @@
 
             <div>
                 <label class="block text-xs font-black uppercase text-purple-900 mb-1.5">
-                    2. Tingkatan Level Belajar:
+                    3. Tingkatan Level Belajar:
                 </label>
                 <select x-model="targetLevel" @change="updateThemeSuggestion()"
                         class="w-full p-3.5 bg-white border-2 border-purple-300 focus:border-purple-600 rounded-xl font-bold text-sm outline-none cursor-pointer">
