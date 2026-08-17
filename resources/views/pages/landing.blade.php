@@ -14,9 +14,11 @@
          demoMaterials: {{ Js::from($demoMaterials) }},
          demoQuiz: {{ Js::from($demoQuiz) }},
 
-         get filteredCategories() {
-             if (this.activePillar === 'all') return this.categories;
-             return this.categories.filter(c => c.pillar === this.activePillar);
+         get displayedCategories() {
+             if (this.activePillar === 'all') {
+                 return this.categories.slice(0, 6);
+             }
+             return this.categories.filter(c => c.pillar === this.activePillar).slice(0, 4);
          },
 
          speakHero() {
@@ -288,7 +290,7 @@
     </section>
 
     <!-- ========================================================================= -->
-    <!-- 4. 3 GRAND PILLARS & 20 ADVENTURE ISLANDS EXPLORER                        -->
+    <!-- 4. 3 GRAND PILLARS & FEATURED ADVENTURE ISLANDS                           -->
     <!-- ========================================================================= -->
     <section class="flex flex-col gap-6">
         
@@ -297,10 +299,10 @@
                 🗺️ Kurikulum Merdeka PAUD 3 Pilar
             </span>
             <h2 class="text-2xl sm:text-4xl font-black font-heading text-slate-900 leading-tight">
-                Jelajahi 20 Pulau Petualangan Belajar Ceria
+                Pilihan Pulau Petualangan Belajar Ceria
             </h2>
             <p class="text-xs sm:text-base font-bold text-slate-600 mt-1">
-                Pilih pilar kesukaan buah hati dan temukan ratusan kartu materi bersuara dengan tingkatan level berjenjang (Level 1, 2, 3).
+                Eksplorasi topik pilihan dari 3 pilar kurikulum anak usia dini (Tersedia total 20 pulau di Taman Petualangan).
             </p>
         </div>
 
@@ -310,34 +312,34 @@
                     class="px-5 py-2.5 rounded-2xl font-black text-xs sm:text-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-2"
                     :class="activePillar === 'all' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'">
                 <span>🌟</span>
-                <span>Semua Pulau (<span x-text="categories.length"></span>)</span>
+                <span>Semua Pilar</span>
             </button>
 
             <button type="button" @click="activePillar = 'mengenal'"
                     class="px-5 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-2"
                     :class="activePillar === 'mengenal' ? 'bg-emerald-600 text-white shadow-sm font-black' : 'text-slate-600 hover:bg-slate-100'">
                 <span>🌟</span>
-                <span>Pilar 1: Mengenal (10)</span>
+                <span>Pilar 1: Mengenal</span>
             </button>
 
             <button type="button" @click="activePillar = 'membaca'"
                     class="px-5 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-2"
                     :class="activePillar === 'membaca' ? 'bg-sky-600 text-white shadow-sm font-black' : 'text-slate-600 hover:bg-slate-100'">
                 <span>📖</span>
-                <span>Pilar 2: Membaca (5)</span>
+                <span>Pilar 2: Membaca</span>
             </button>
 
             <button type="button" @click="activePillar = 'menghitung'"
                     class="px-5 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-2"
                     :class="activePillar === 'menghitung' ? 'bg-purple-600 text-white shadow-sm font-black' : 'text-slate-600 hover:bg-slate-100'">
                 <span>🧮</span>
-                <span>Pilar 3: Menghitung (5)</span>
+                <span>Pilar 3: Menghitung</span>
             </button>
         </div>
 
-        <!-- 20 Category Island Cards Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
-            <template x-for="cat in filteredCategories" :key="cat.id">
+        <!-- Featured Category Island Cards Grid (Curated Subset) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3.5 sm:gap-4">
+            <template x-for="cat in displayedCategories" :key="cat.id">
                 <a :href="`{{ url('/materi') }}/${cat.slug}`" 
                    class="card-bubbly p-4 sm:p-5 flex flex-col justify-between items-center text-center gap-2 border-3 hover:scale-105 transition-all group bg-white shadow-xs hover:shadow-md"
                    :style="`border-color: ${cat.border_color}50;`">
@@ -360,6 +362,15 @@
                     </div>
                 </a>
             </template>
+        </div>
+
+        <!-- View All 20 Islands Call to Action -->
+        <div class="text-center pt-2">
+            <a href="{{ route('home') }}" 
+               class="inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-black text-xs sm:text-sm rounded-2xl shadow-md transition-all hover:scale-105">
+                <span>🗺️</span>
+                <span>Buka & Jelajahi Seluruh 20 Pulau Belajar di Game ➔</span>
+            </a>
         </div>
 
     </section>
@@ -436,8 +447,8 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-            @foreach($stickers as $stk)
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+            @foreach(array_slice($stickers, 0, 5) as $stk)
             <div class="bg-white/10 backdrop-blur-sm border border-white/20 p-3.5 rounded-2xl flex flex-col items-center text-center gap-1.5 hover:scale-105 transition-transform">
                 <span class="text-3xl sm:text-4xl" x-html="window.twemojiParse('{{ $stk['emoji'] }}')"></span>
                 <span class="text-xs font-bold text-white line-clamp-1 mt-1">{{ $stk['name'] }}</span>
@@ -446,6 +457,14 @@
                 </span>
             </div>
             @endforeach
+
+            <!-- 6th Teaser Card -->
+            <a href="{{ route('stickers') }}" 
+               class="bg-yellow-400/20 hover:bg-yellow-400/30 border-2 border-dashed border-yellow-400/60 p-3.5 rounded-2xl flex flex-col items-center justify-center text-center gap-1 hover:scale-105 transition-all cursor-pointer">
+                <span class="text-3xl animate-bounce-slow">🎁</span>
+                <span class="text-xs font-black text-yellow-300 mt-0.5">+7 Stiker Lainnya</span>
+                <span class="text-[10px] text-yellow-200 font-bold">Lihat Semua ➔</span>
+            </a>
         </div>
     </section>
 
